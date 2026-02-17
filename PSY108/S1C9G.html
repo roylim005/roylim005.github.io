@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human Development - Visual Study Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #f5576c;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 1.1em;
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .tab {
+            padding: 12px 24px;
+            background: #f0f0f0;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        
+        .tab:hover {
+            background: #e0e0e0;
+            transform: translateY(-2px);
+        }
+        
+        .tab.active {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+        
+        .content {
+            display: none;
+        }
+        
+        .content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Timeline Styles */
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .timeline-item {
+            display: flex;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            flex-direction: row;
+        }
+        
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .timeline-content {
+            width: 45%;
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #f5576c;
+            position: relative;
+        }
+        
+        .timeline-marker {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background: #f5576c;
+            border-radius: 50%;
+            border: 5px solid white;
+            z-index: 1;
+        }
+        
+        .age-label {
+            font-weight: bold;
+            color: #f5576c;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        
+        .stage-name {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        /* Theory Cards */
+        .theory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .theory-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #ffd3e0 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #f5576c;
+            transition: all 0.3s;
+        }
+        
+        .theory-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        
+        .theory-name {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #f5576c;
+            margin-bottom: 10px;
+        }
+        
+        .theory-author {
+            color: #f093fb;
+            font-style: italic;
+            margin-bottom: 15px;
+            font-size: 0.95em;
+        }
+        
+        .theory-content {
+            color: #333;
+            line-height: 1.8;
+        }
+        
+        .theory-content ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        
+        /* Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table th {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .comparison-table tr:hover {
+            background: #fff5f8;
+        }
+        
+        /* Stage Cards */
+        .stage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .stage-card {
+            background: white;
+            border: 3px solid #f093fb;
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+        
+        .stage-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(245, 87, 108, 0.3);
+        }
+        
+        .stage-number {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        
+        .stage-title {
+            font-weight: bold;
+            color: #f5576c;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+        
+        .stage-age {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+        
+        .stage-description {
+            color: #333;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+        
+        .highlight-box {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        .highlight-box strong {
+            color: #856404;
+        }
+        
+        .parenting-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .parenting-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            border: 3px solid #e0e0e0;
+            transition: all 0.3s;
+        }
+        
+        .parenting-card:hover {
+            border-color: #f5576c;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .parenting-card.best {
+            border-color: #28a745;
+            background: #f0fff4;
+        }
+        
+        .parenting-card.worst {
+            border-color: #dc3545;
+            background: #fff5f5;
+        }
+        
+        .parenting-name {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .parenting-dimensions {
+            display: flex;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .dimension {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        
+        .high-warmth {
+            background: #ffd3e0;
+            color: #c41e3a;
+        }
+        
+        .low-warmth {
+            background: #e0e0e0;
+            color: #666;
+        }
+        
+        .high-control {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .low-control {
+            background: #e0e0e0;
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-content {
+                width: calc(100% - 60px);
+                margin-left: 60px;
+            }
+            
+            .timeline-item:nth-child(even) .timeline-content {
+                margin-left: 60px;
+            }
+            
+            .timeline-marker {
+                left: 20px;
+            }
+            
+            .parenting-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>👶 Human Development</h1>
+        <p class="subtitle">Visual Study Guide - Interactive Concept Maps & Timelines</p>
+        
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('overview')">📊 Overview</button>
+            <button class="tab" onclick="showTab('timeline')">⏱️ Lifespan Timeline</button>
+            <button class="tab" onclick="showTab('piaget')">🧠 Piaget's Stages</button>
+            <button class="tab" onclick="showTab('erikson')">👤 Erikson's Stages</button>
+            <button class="tab" onclick="showTab('parenting')">👪 Parenting Styles</button>
+            <button class="tab" onclick="showTab('theories')">📚 Theory Comparison</button>
+        </div>
+        
+        <!-- Overview -->
+        <div id="overview" class="content active">
+            <h2 style="color: #f5576c; margin-bottom: 20px;">Developmental Overview</h2>
+            
+            <div class="highlight-box">
+                <strong>Core Principle:</strong> Development = INTERACTION of Nature (biology/genes) and Nurture (environment/culture)<br>
+                Development involves changes in: Physical, Emotional, Social, and Cognitive domains across the entire lifespan
+            </div>
+            
+            <h3 style="color: #f5576c; margin: 30px 0 15px 0;">Major Theorists & Their Contributions</h3>
+            
+            <div class="theory-grid">
+                <div class="theory-card">
+                    <div class="theory-name">Cognitive Development</div>
+                    <div class="theory-author">Jean Piaget</div>
+                    <div class="theory-content">
+                        Four universal stages of thinking:<br>
+                        • Sensorimotor → Preoperational<br>
+                        • Concrete → Formal operations<br>
+                        • Learning through schemas (assimilation & accommodation)
+                    </div>
+                </div>
+                
+                <div class="theory-card">
+                    <div class="theory-name">Sociocultural Theory</div>
+                    <div class="theory-author">Lev Vygotsky</div>
+                    <div class="theory-content">
+                        Culture & social interaction drive development:<br>
+                        • Zone of Proximal Development (ZPD)<br>
+                        • Learning leads development<br>
+                        • Scaffolding from others
+                    </div>
+                </div>
+                
+                <div class="theory-card">
+                    <div class="theory-name">Moral Development</div>
+                    <div class="theory-author">Lawrence Kohlberg</div>
+                    <div class="theory-content">
+                        Three levels of moral reasoning:<br>
+                        • Preconventional (self-focus)<br>
+                        • Conventional (rules/approval)<br>
+                        • Postconventional (principles)
+                    </div>
+                </div>
+                
+                <div class="theory-card">
+                    <div class="theory-name">Psychosocial Development</div>
+                    <div class="theory-author">Erik Erikson</div>
+                    <div class="theory-content">
+                        Eight stages across lifespan:<br>
+                        • Each stage has a "crisis"<br>
+                        • Successful resolution = virtue<br>
+                        • Development continues through adulthood
+                    </div>
+                </div>
+                
+                <div class="theory-card">
+                    <div class="theory-name">Parenting Styles</div>
+                    <div class="theory-author">Diana Baumrind</div>
+                    <div class="theory-content">
+                        Four styles based on warmth & control:<br>
+                        • Authoritarian (strict, cold)<br>
+                        • <strong>Authoritative (firm, warm - BEST)</strong><br>
+                        • Permissive (indulgent or neglectful)
+                    </div>
+                </div>
+                
+                <div class="theory-card">
+                    <div class="theory-name">Grief & Dying</div>
+                    <div class="theory-author">Elizabeth Kübler-Ross</div>
+                    <div class="theory-content">
+                        Five stages (not always linear):<br>
+                        • Denial → Anger → Bargaining<br>
+                        • → Depression → Acceptance<br>
+                        • Applies to any major loss
+                    </div>
+                </div>
+            </div>
+            
+            <h3 style="color: #f5576c; margin: 30px 0 15px 0;">Prenatal Development</h3>
+            <div class="stage-grid">
+                <div class="stage-card">
+                    <div class="stage-number">1</div>
+                    <div class="stage-title">Germinal Stage</div>
+                    <div class="stage-age">0-14 days (2 weeks)</div>
+                    <div class="stage-description">
+                        Rapid cell division and duplication of the zygote. Implantation in uterine wall.
+                    </div>
+                </div>
+                
+                <div class="stage-card">
+                    <div class="stage-number">2</div>
+                    <div class="stage-title">Embryonic Stage</div>
+                    <div class="stage-age">3-8 weeks</div>
+                    <div class="stage-description">
+                        Major organs and organ systems form. Most vulnerable period to teratogens. Called an "embryo."
+                    </div>
+                </div>
+                
+                <div class="stage-card">
+                    <div class="stage-number">3</div>
+                    <div class="stage-title">Fetal Stage</div>
+                    <div class="stage-age">Week 9 to birth (~40 weeks)</div>
+                    <div class="stage-description">
+                        Body organs and systems more fully develop and grow. Called a "fetus." Continued development and maturation.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Lifespan Timeline -->
+        <div id="timeline" class="content">
+            <h2 style="color: #f5576c; text-align: center; margin-bottom: 30px;">Lifespan Development Timeline</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="age-label">0-2 Years: Infancy</div>
+                        <div class="stage-name">Physical: Reflexes, crawling, walking</div>
+                        <div class="stage-name">Cognitive: Sensorimotor stage (object permanence)</div>
+                        <div class="stage-name">Psychosocial: Trust vs. Mistrust</div>
+                        <p style="margin-top: 10px;">Brain is highly plastic. Rapid physical growth. Attachment forms with caregiver.</p>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="age-label">2-6 Years: Early Childhood</div>
+                        <div class="stage-name">Physical: Running, climbing, fine motor skills develop</div>
+                        <div class="stage-name">Cognitive: Preoperational (symbolic thought, egocentric)</div>
+                        <div class="stage-name">Psychosocial: Autonomy (2-3), Initiative (3-6)</div>
+                        <p style="margin-top: 10px;">Language explosion. Pretend play. Gender schema develop. No conservation yet.</p>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="age-label">6-12 Years: Middle Childhood</div>
+                        <div class="stage-name">Physical: Motor skills refined, steady growth</div>
+                        <div class="stage-name">Cognitive: Concrete operations (logical thinking)</div>
+                        <div class="stage-name">Psychosocial: Industry vs. Inferiority</div>
+                        <p style="margin-top: 10px;">School age. Understands conservation. Peer relationships important. Learns competence.</p>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="age-label">12-18 Years: Adolescence</div>
+                        <div class="stage-name">Physical: Puberty, sexual maturation, growth spurts</div>
+                        <div class="stage-name">Cognitive: Formal operations (abstract thinking)</div>
+                        <div class="stage-name">Psychosocial: Identity vs. Role Confusion</div>
+                        <p style="margin-top: 10px;">Adolescent egocentrism (imaginary audience). Identity formation. Peer influence peaks. Brain still developing.</p>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="age-label">20s-30s: Young Adulthood</div>
+                        <div class="stage-name">Physical: Peak physical condition</div>
+                        <div class="stage-name">Cognitive: Postformal thought (relativistic thinking)</div>
+                        <div class="stage-name">Psychosocial: Intimacy vs. Isolation</div>
+                        <p style="margin-top: 10px;">Career establishment. Close relationships. Possible marriage/children. Peak cognitive flexibility.</p>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="age-label">40s-60s: Middle Adulthood</div>
+                        <div class="stage-name">Physical: Gradual decline, menopause (~50 for women)</div>
+                        <div class="stage-name">Cognitive: Expertise peaks, crystallized intelligence high</div>
+                        <div class="stage-name">Psychosocial: Generativity vs. Stagnation</div>
+                        <p style="margin-top: 10px;">Career peak. Contributing to society. "Sandwich generation." Empty nest. Andropause begins (60+ for men).</p>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="age-label">65+ Years: Late Adulthood</div>
+                        <div class="stage-name">Physical: Continued decline, chronic conditions more common</div>
+                        <div class="stage-name">Cognitive: Wisdom, but processing may slow</div>
+                        <div class="stage-name">Psychosocial: Integrity vs. Despair</div>
+                        <p style="margin-top: 10px;">Retirement. Life review. Grandparenting. Reflecting on life's meaning. Facing mortality.</p>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Piaget's Stages -->
+        <div id="piaget" class="content">
+            <h2 style="color: #f5576c; text-align: center; margin-bottom: 20px;">Piaget's Cognitive Development Stages</h2>
+            
+            <div class="highlight-box">
+                <strong>Key Concepts:</strong><br>
+                • <strong>Schemas:</strong> Mental frameworks for understanding the world<br>
+                • <strong>Assimilation:</strong> Using existing schemas (fitting new info into old frameworks)<br>
+                • <strong>Accommodation:</strong> Changing schemas when they don't fit (creating new frameworks)
+            </div>
+            
+            <div class="stage-grid">
+                <div class="stage-card">
+                    <div class="stage-number">1</div>
+                    <div class="stage-title">Sensorimotor Stage</div>
+                    <div class="stage-age">Birth - 2 years</div>
+                    <div class="stage-description">
+                        <strong>Key Features:</strong><br>
+                        • Learning through senses and motor actions<br>
+                        • No mental representations initially<br>
+                        • <strong>Object permanence</strong> develops (knowing objects exist when not visible)<br>
+                        • Goal-directed behavior emerges
+                    </div>
+                </div>
+                
+                <div class="stage-card">
+                    <div class="stage-number">2</div>
+                    <div class="stage-title">Preoperational Stage</div>
+                    <div class="stage-age">2 - 7 years</div>
+                    <div class="stage-description">
+                        <strong>Key Features:</strong><br>
+                        • Symbolic thinking (language, pretend play)<br>
+                        • <strong>Egocentrism</strong> (can't see other perspectives)<br>
+                        • <strong>Centration</strong> (focus on one aspect)<br>
+                        • No <strong>conservation</strong> (can't understand that quantity remains same despite appearance changes)
+                    </div>
+                </div>
+                
+                <div class="stage-card">
+                    <div class="stage-number">3</div>
+                    <div class="stage-title">Concrete Operations</div>
+                    <div class="stage-age">7 - 11 years</div>
+                    <div class="stage-description">
+                        <strong>Key Features:</strong><br>
+                        • Logical thinking about <strong>concrete</strong> events<br>
+                        • Understands <strong>conservation</strong><br>
+                        • Can reverse mental operations<br>
+                        • Less egocentric<br>
+                        • Still can't think abstractly
+                    </div>
+                </div>
+                
+                <div class="stage-card">
+                    <div class="stage-number">4</div>
+                    <div class="stage-title">Formal Operations</div>
+                    <div class="stage-age">12+ years</div>
+                    <div class="stage-description">
+                        <strong>Key Features:</strong><br>
+                        • <strong>Abstract thinking</strong><br>
+                        • <strong>Hypothetical reasoning</strong> ("what if?")<br>
+                        • Scientific thinking<br>
+                        • Metacognition (thinking about thinking)<br>
+                        • Idealism
+                    </div>
+                </div>
+            </div>
+            
+            <div class="highlight-box" style="margin-top: 30px;">
+                <strong>Example of Conservation Task (Tests Concrete Operations):</strong><br>
+                Show child two identical glasses with same amount of liquid. Pour one into tall, thin glass.<br>
+                • <strong>Preoperational child:</strong> "The tall glass has more!" (focuses on height only)<br>
+                • <strong>Concrete operations child:</strong> "They're the same; you just poured it" (understands conservation)
+            </div>
+        </div>
+        
+        <!-- Erikson's Stages -->
+        <div id="erikson" class="content">
+            <h2 style="color: #f5576c; text-align: center; margin-bottom: 20px;">Erikson's 8 Psychosocial Stages</h2>
+            
+            <div class="highlight-box">
+                <strong>Core Principle:</strong> Each stage has a developmental "crisis" or challenge. Successful resolution leads to a psychological virtue/strength. Environment and individual responses shape personality across the entire lifespan.
+            </div>
+            
+            <table class="comparison-table">
+                <tr>
+                    <th>Stage</th>
+                    <th>Age</th>
+                    <th>Crisis</th>
+                    <th>Positive Outcome</th>
+                    <th>Key Question</th>
+                </tr>
+                <tr>
+                    <td><strong>1. Trust vs. Mistrust</strong></td>
+                    <td>0-1 year</td>
+                    <td>Can I trust the world?</td>
+                    <td>Hope, security</td>
+                    <td>"Will my needs be met?"</td>
+                </tr>
+                <tr>
+                    <td><strong>2. Autonomy vs. Shame & Doubt</strong></td>
+                    <td>1-3 years</td>
+                    <td>Can I do things myself?</td>
+                    <td>Will, independence</td>
+                    <td>"Can I control my body and actions?"</td>
+                </tr>
+                <tr>
+                    <td><strong>3. Initiative vs. Guilt</strong></td>
+                    <td>3-6 years</td>
+                    <td>Am I good or bad?</td>
+                    <td>Purpose, confidence</td>
+                    <td>"Is it okay for me to do, move, and act?"</td>
+                </tr>
+                <tr>
+                    <td><strong>4. Industry vs. Inferiority</strong></td>
+                    <td>6-12 years</td>
+                    <td>Am I competent or worthless?</td>
+                    <td>Competence</td>
+                    <td>"Can I make it in the world of people and things?"</td>
+                </tr>
+                <tr>
+                    <td><strong>5. Identity vs. Role Confusion</strong></td>
+                    <td>Adolescence</td>
+                    <td>Who am I?</td>
+                    <td>Fidelity, sense of self</td>
+                    <td>"Who am I? What can I be?"</td>
+                </tr>
+                <tr>
+                    <td><strong>6. Intimacy vs. Isolation</strong></td>
+                    <td>Young Adult</td>
+                    <td>Can I form close relationships?</td>
+                    <td>Love</td>
+                    <td>"Can I love and commit to another?"</td>
+                </tr>
+                <tr>
+                    <td><strong>7. Generativity vs. Stagnation</strong></td>
+                    <td>Middle Adult</td>
+                    <td>Am I contributing to society?</td>
+                    <td>Care, productivity</td>
+                    <td>"Can I make my life count?"</td>
+                </tr>
+                <tr>
+                    <td><strong>8. Integrity vs. Despair</strong></td>
+                    <td>Late Adult</td>
+                    <td>Did I live a meaningful life?</td>
+                    <td>Wisdom, acceptance</td>
+                    <td>"Is my life worth having lived?"</td>
+                </tr>
+            </table>
+            
+            <div class="highlight-box" style="margin-top: 30px;">
+                <strong>Mnemonic: "TAI³G²I"</strong><br>
+                Trust → Autonomy → Initiative → Industry → Identity → Intimacy → Generativity → Integrity
+            </div>
+        </div>
+        
+        <!-- Parenting Styles -->
+        <div id="parenting" class="content">
+            <h2 style="color: #f5576c; text-align: center; margin-bottom: 20px;">Baumrind's Parenting Styles</h2>
+            
+            <div class="highlight-box">
+                <strong>Two Dimensions:</strong><br>
+                1. <strong>Warmth/Responsiveness:</strong> How loving and supportive<br>
+                2. <strong>Control/Demandingness:</strong> How many rules and expectations
+            </div>
+            
+            <div class="parenting-grid">
+                <div class="parenting-card">
+                    <div class="parenting-name" style="color: #6c757d;">Authoritarian</div>
+                    <div class="parenting-dimensions">
+                        <span class="dimension low-warmth">LOW Warmth</span>
+                        <span class="dimension high-control">HIGH Control</span>
+                    </div>
+                    <div class="theory-content">
+                        <strong>Characteristics:</strong><br>
+                        • Strict rules, no flexibility<br>
+                        • "Because I said so" reasoning<br>
+                        • Punishment-focused<br>
+                        • High expectations, low warmth<br><br>
+                        <strong>Outcomes:</strong><br>
+                        • Obedient but unhappy<br>
+                        • Lower self-esteem<br>
+                        • Less socially competent<br>
+                        • May be anxious
+                    </div>
+                </div>
+                
+                <div class="parenting-card best">
+                    <div class="parenting-name" style="color: #28a745;">✓ Authoritative (BEST)</div>
+                    <div class="parenting-dimensions">
+                        <span class="dimension high-warmth">HIGH Warmth</span>
+                        <span class="dimension high-control">HIGH Control</span>
+                    </div>
+                    <div class="theory-content">
+                        <strong>Characteristics:</strong><br>
+                        • Clear expectations with explanations<br>
+                        • Firm but fair<br>
+                        • Warmth and support<br>
+                        • Democratic discipline<br><br>
+                        <strong>Outcomes:</strong><br>
+                        • <strong>Best outcomes overall</strong><br>
+                        • High self-esteem<br>
+                        • Self-reliant and responsible<br>
+                        • Socially competent<br>
+                        • Happy and successful
+                    </div>
+                </div>
+                
+                <div class="parenting-card">
+                    <div class="parenting-name" style="color: #f093fb;">Permissive-Indulgent</div>
+                    <div class="parenting-dimensions">
+                        <span class="dimension high-warmth">HIGH Warmth</span>
+                        <span class="dimension low-control">LOW Control</span>
+                    </div>
+                    <div class="theory-content">
+                        <strong>Characteristics:</strong><br>
+                        • Few rules or limits<br>
+                        • Very warm and accepting<br>
+                        • Child-centered<br>
+                        • Avoids confrontation<br><br>
+                        <strong>Outcomes:</strong><br>
+                        • Poor self-control<br>
+                        • May be entitled<br>
+                        • Difficulty with limits<br>
+                        • Immature behavior
+                    </div>
+                </div>
+                
+                <div class="parenting-card worst">
+                    <div class="parenting-name" style="color: #dc3545;">Permissive-Neglectful (WORST)</div>
+                    <div class="parenting-dimensions">
+                        <span class="dimension low-warmth">LOW Warmth</span>
+                        <span class="dimension low-control">LOW Control</span>
+                    </div>
+                    <div class="theory-content">
+                        <strong>Characteristics:</strong><br>
+                        • Uninvolved, detached<br>
+                        • Few rules or expectations<br>
+                        • Little emotional support<br>
+                        • May be neglectful<br><br>
+                        <strong>Outcomes:</strong><br>
+                        • <strong>Worst outcomes</strong><br>
+                        • Very poor self-control<br>
+                        • Low self-esteem<br>
+                        • Behavioral problems<br>
+                        • Higher risk for issues
+                    </div>
+                </div>
+            </div>
+            
+            <div class="highlight-box" style="margin-top: 30px;">
+                <strong>Remember:</strong> AuthoritaRIAN = Rigid (cold and strict). AuthoritaTIVE = The best (warm and structured).
+            </div>
+        </div>
+        
+        <!-- Theory Comparison -->
+        <div id="theories" class="content">
+            <h2 style="color: #f5576c; text-align: center; margin-bottom: 20px;">Key Theory Comparisons</h2>
+            
+            <h3 style="color: #f5576c; margin: 20px 0 15px 0;">Piaget vs. Vygotsky</h3>
+            <table class="comparison-table">
+                <tr>
+                    <th style="width: 30%;">Aspect</th>
+                    <th>Piaget</th>
+                    <th>Vygotsky</th>
+                </tr>
+                <tr>
+                    <td><strong>View of Development</strong></td>
+                    <td>Individual construction</td>
+                    <td>Social/cultural construction</td>
+                </tr>
+                <tr>
+                    <td><strong>Role of Social Interaction</strong></td>
+                    <td>Not central</td>
+                    <td>CRITICAL - drives development</td>
+                </tr>
+                <tr>
+                    <td><strong>Stages</strong></td>
+                    <td>Universal, fixed stages</td>
+                    <td>No fixed stages (cultural variation)</td>
+                </tr>
+                <tr>
+                    <td><strong>Learning vs. Development</strong></td>
+                    <td>Development leads learning</td>
+                    <td>Learning leads development</td>
+                </tr>
+                <tr>
+                    <td><strong>Key Concept</strong></td>
+                    <td>Schemas, assimilation, accommodation</td>
+                    <td>Zone of Proximal Development (ZPD), scaffolding</td>
+                </tr>
+            </table>
+            
+            <h3 style="color: #f5576c; margin: 30px 0 15px 0;">Kohlberg's Moral Development Levels</h3>
+            <div class="stage-grid">
+                <div class="stage-card">
+                    <div class="stage-number">1</div>
+                    <div class="stage-title">Preconventional</div>
+                    <div class="stage-age">Focus: SELF</div>
+                    <div class="stage-description">
+                        <strong>Stage 1:</strong> Obedience & punishment avoidance<br>
+                        <strong>Stage 2:</strong> Self-interest ("What's in it for me?")<br><br>
+                        <em>Young children: Right = avoiding punishment, getting rewards</em>
+                    </div>
+                </div>
+                
+                <div class="stage-card">
+                    <div class="stage-number">2</div>
+                    <div class="stage-title">Conventional</div>
+                    <div class="stage-age">Focus: OTHERS' APPROVAL</div>
+                    <div class="stage-description">
+                        <strong>Stage 3:</strong> Good interpersonal relationships (please others)<br>
+                        <strong>Stage 4:</strong> Authority & social order (obey laws)<br><br>
+                        <em>Adolescents/Adults: Right = following rules, maintaining order</em>
+                    </div>
+                </div>
+                
+                <div class="stage-card">
+                    <div class="stage-number">3</div>
+                    <div class="stage-title">Postconventional</div>
+                    <div class="stage-age">Focus: ABSTRACT PRINCIPLES</div>
+                    <div class="stage-description">
+                        <strong>Stage 5:</strong> Social contract (greatest good for society)<br>
+                        <strong>Stage 6:</strong> Universal ethical principles (conscience)<br><br>
+                        <em>Some adults: Right = based on abstract ethics and justice</em>
+                    </div>
+                </div>
+            </table>
+            
+            <h3 style="color: #f5576c; margin: 30px 0 15px 0;">Kübler-Ross: Five Stages of Grief</h3>
+            <div class="stage-grid">
+                <div class="stage-card">
+                    <div class="stage-number">1</div>
+                    <div class="stage-title">Denial</div>
+                    <div class="stage-description">"Not me, this can't be happening." Shock and disbelief protect from overwhelming reality.</div>
+                </div>
+                
+                <div class="stage-card">
+                    <div class="stage-number">2</div>
+                    <div class="stage-title">Anger</div>
+                    <div class="stage-description">"Why me? This isn't fair!" Frustration and resentment directed at situation, others, or self.</div>
+                </div>
+                
+                <div class="stage-card">
+                    <div class="stage-number">3</div>
+                    <div class="stage-title">Bargaining</div>
+                    <div class="stage-description">"Just let me live until..." Attempts to negotiate or postpone the inevitable. "If only..." thoughts.</div>
+                </div>
+                
+                <div class="stage-card">
+                    <div class="stage-number">4</div>
+                    <div class="stage-title">Depression</div>
+                    <div class="stage-description">Sadness, withdrawal, grieving losses. Preparing emotionally for what's coming. May feel hopeless.</div>
+                </div>
+                
+                <div class="stage-card">
+                    <div class="stage-number">5</div>
+                    <div class="stage-title">Acceptance</div>
+                    <div class="stage-description">Coming to terms with reality. Finding peace. Not "happy" but no longer fighting the situation.</div>
+                </div>
+            </div>
+            
+            <div class="highlight-box" style="margin-top: 20px;">
+                <strong>Important:</strong> Not everyone experiences all stages. Order can vary. People may cycle back and forth. Applies to any major loss, not just death. <strong>Mnemonic: DABDA</strong>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showTab(tabName) {
+            // Hide all content
+            const contents = document.querySelectorAll('.content');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            // Remove active from all tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Highlight selected tab
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning - Visual Study Guide</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 { color: #11998e; text-align: center; margin-bottom: 10px; font-size: 2.5em; }
+        h2 { color: #11998e; margin-bottom: 20px; }
+        h3 { color: #38ef7d; filter: brightness(0.7); margin: 20px 0 12px 0; }
+        .subtitle { text-align: center; color: #666; margin-bottom: 40px; font-size: 1.1em; }
+        .tabs { display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; justify-content: center; }
+        .tab {
+            padding: 12px 24px;
+            background: #f0f0f0;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        .tab:hover { background: #e0e0e0; transform: translateY(-2px); }
+        .tab.active { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); color: white; }
+        .content { display: none; }
+        .content.active { display: block; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Cards */
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 20px 0; }
+        .card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c8f7c5 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #11998e;
+            transition: all 0.3s;
+        }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+        .card-title { font-size: 1.2em; font-weight: bold; color: #11998e; margin-bottom: 10px; }
+        .card-author { color: #38ef7d; filter: brightness(0.7); font-style: italic; margin-bottom: 12px; }
+        .card-body { color: #333; line-height: 1.8; font-size: 0.95em; }
+
+        /* Tables */
+        .table { width: 100%; border-collapse: collapse; margin: 20px 0; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .table th { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); color: white; padding: 15px; text-align: left; font-weight: 600; }
+        .table td { padding: 14px 15px; border-bottom: 1px solid #e0e0e0; }
+        .table tr:hover { background: #f0fdf8; }
+        .table tr:last-child td { border-bottom: none; }
+
+        /* Highlight */
+        .highlight {
+            background: #fff9c4;
+            border-left: 5px solid #f9ca24;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .highlight strong { color: #856404; }
+
+        /* Flowchart */
+        .flow { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 20px; }
+        .flow-box {
+            background: white;
+            border: 3px solid #11998e;
+            padding: 18px 30px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .flow-box.before { background: #e8f5e9; border-color: #4caf50; }
+        .flow-box.during { background: #fff3e0; border-color: #ff9800; }
+        .flow-box.after { background: #e3f2fd; border-color: #2196f3; }
+        .flow-box.outcome { background: #f3e5f5; border-color: #9c27b0; }
+        .flow-arrow { color: #11998e; font-size: 2em; font-weight: bold; }
+        .flow-split { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; width: 100%; }
+        .flow-path { display: flex; flex-direction: column; align-items: center; gap: 12px; flex: 1; min-width: 180px; }
+
+        /* Operant Grid */
+        .operant-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; }
+        .operant-card {
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            border: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        .operant-card:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0,0,0,0.15); }
+        .pos-reinf { background: #d4edda; border-color: #28a745; }
+        .neg-reinf { background: #cce5ff; border-color: #004085; }
+        .pos-pun { background: #f8d7da; border-color: #dc3545; }
+        .neg-pun { background: #fff3cd; border-color: #856404; }
+        .operant-label { font-size: 1.15em; font-weight: bold; margin-bottom: 10px; }
+        .operant-def { font-size: 0.95em; color: #333; margin-bottom: 12px; }
+        .operant-ex { font-style: italic; font-size: 0.9em; color: #555; }
+
+        /* Schedule bars */
+        .sched-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin: 20px 0; }
+        .sched-card { background: white; border-radius: 12px; padding: 20px; border: 3px solid #e0e0e0; transition: all 0.3s; }
+        .sched-card:hover { border-color: #11998e; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .sched-name { font-weight: bold; color: #11998e; font-size: 1.05em; margin-bottom: 8px; }
+        .sched-bar { background: #e0e0e0; border-radius: 10px; height: 14px; margin: 10px 0; overflow: hidden; }
+        .sched-fill { height: 100%; border-radius: 10px; background: linear-gradient(90deg, #11998e, #38ef7d); }
+        .sched-label { font-size: 0.85em; color: #666; }
+
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            h1 { font-size: 1.8em; }
+            .operant-grid { grid-template-columns: 1fr; }
+            .flow-split { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>🧠 Learning</h1>
+    <p class="subtitle">Visual Study Guide — Classical, Operant & Observational</p>
+
+    <div class="tabs">
+        <button class="tab active" onclick="showTab('overview')">📊 Overview</button>
+        <button class="tab" onclick="showTab('classical')">🔔 Classical Conditioning</button>
+        <button class="tab" onclick="showTab('operant')">⚡ Operant Conditioning</button>
+        <button class="tab" onclick="showTab('schedules')">📅 Schedules</button>
+        <button class="tab" onclick="showTab('observational')">👀 Observational</button>
+        <button class="tab" onclick="showTab('compare')">⚖️ Key Comparisons</button>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div id="overview" class="content active">
+        <div class="highlight">
+            <strong>Definition:</strong> Learning = A <strong>relatively permanent</strong> change in behavior or the <strong>potential</strong> for behavior that results from <strong>experience</strong>.
+        </div>
+
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-title">🔁 Habituation</div>
+                <div class="card-body">
+                    <strong>Orienting Reflex:</strong> Response to unexpected stimuli<br><br>
+                    <strong>Habituation:</strong> Decreasing response to repeated stimuli ("tuning out")<br><br>
+                    <strong>Dishabituation:</strong> Re-responding when something changes
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title">🔔 Classical Conditioning</div>
+                <div class="card-author">Ivan Pavlov / Watson & Rayner</div>
+                <div class="card-body">
+                    Learning through <strong>association of stimuli</strong><br><br>
+                    Neutral stimulus paired with unconditioned stimulus → becomes conditioned stimulus<br><br>
+                    Key: Involuntary/reflexive responses
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title">⚡ Operant Conditioning</div>
+                <div class="card-author">Thorndike / B. F. Skinner</div>
+                <div class="card-body">
+                    Learning from <strong>consequences of behavior</strong><br><br>
+                    Reinforcement increases behavior<br>
+                    Punishment decreases behavior<br><br>
+                    Key: Voluntary behaviors
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title">👀 Observational Learning</div>
+                <div class="card-author">Albert Bandura</div>
+                <div class="card-body">
+                    Learning by <strong>watching others</strong><br><br>
+                    Bobo doll experiments: No direct reinforcement needed<br><br>
+                    Key: Attention, Retention, Reproduction, Motivation
+                </div>
+            </div>
+        </div>
+
+        <h3>Key Researchers at a Glance</h3>
+        <table class="table">
+            <tr><th>Researcher</th><th>Theory</th><th>Key Experiment</th><th>Core Concept</th></tr>
+            <tr><td><strong>Ivan Pavlov</strong></td><td>Classical Conditioning</td><td>Salivating Dogs</td><td>NS + US → CS/CR</td></tr>
+            <tr><td><strong>Watson & Rayner</strong></td><td>Classical Conditioning</td><td>Little Albert</td><td>Fear can be conditioned</td></tr>
+            <tr><td><strong>E. L. Thorndike</strong></td><td>Law of Effect</td><td>Cat in Puzzle Box</td><td>Consequences shape behavior</td></tr>
+            <tr><td><strong>B. F. Skinner</strong></td><td>Operant Conditioning</td><td>Skinner Box</td><td>Reinforcement schedules</td></tr>
+            <tr><td><strong>Albert Bandura</strong></td><td>Social Learning Theory</td><td>Bobo Doll</td><td>Learning through observation</td></tr>
+        </table>
+    </div>
+
+    <!-- CLASSICAL CONDITIONING -->
+    <div id="classical" class="content">
+        <h2>Classical Conditioning</h2>
+        <div class="highlight">
+            <strong>Core Idea:</strong> A neutral stimulus becomes a conditioned stimulus by being repeatedly paired with an unconditioned stimulus — learning through <em>association</em>.
+        </div>
+
+        <h3>The Conditioning Process (Pavlov's Dogs)</h3>
+        <div class="flow">
+            <div class="flow-box before">
+                <strong>BEFORE CONDITIONING</strong><br>
+                Bell (NS) → No response<br>
+                Food (US) → Salivation (UR)
+            </div>
+            <div class="flow-arrow">↓ Repeated Pairings</div>
+            <div class="flow-box during">
+                <strong>DURING CONDITIONING</strong><br>
+                Bell (NS) + Food (US) → Salivation (UR)
+            </div>
+            <div class="flow-arrow">↓ After enough pairings</div>
+            <div class="flow-box after">
+                <strong>AFTER CONDITIONING</strong><br>
+                Bell (CS) → Salivation (CR)
+            </div>
+            <div class="flow-arrow">↓ What happens next?</div>
+            <div class="flow-split">
+                <div class="flow-path">
+                    <div class="flow-box outcome">🔊 Stimulus Generalization<br><small>Similar bells also cause CR</small></div>
+                </div>
+                <div class="flow-path">
+                    <div class="flow-box outcome">🎯 Stimulus Discrimination<br><small>Only THIS bell causes CR</small></div>
+                </div>
+                <div class="flow-path">
+                    <div class="flow-box outcome">📉 Extinction<br><small>CS presented without US → CR fades</small></div>
+                </div>
+                <div class="flow-path">
+                    <div class="flow-box outcome">🔄 Counterconditioning<br><small>CS paired with new US → new CR</small></div>
+                </div>
+            </div>
+        </div>
+
+        <h3>Little Albert Experiment</h3>
+        <table class="table">
+            <tr><th>Phase</th><th>Stimulus</th><th>Response</th></tr>
+            <tr><td>Before</td><td>White rat (NS)</td><td>No fear</td></tr>
+            <tr><td>Before</td><td>Loud noise (US)</td><td>Fear (UR)</td></tr>
+            <tr><td>During</td><td>Rat + Loud noise</td><td>Fear (UR)</td></tr>
+            <tr><td>After</td><td>White rat (CS)</td><td>Fear (CR)</td></tr>
+            <tr><td>Generalization</td><td>Rabbit, Santa beard, fur coat</td><td>Fear (stimulus generalization)</td></tr>
+        </table>
+
+        <h3>Key Conditions for Classical Conditioning</h3>
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-title">⏱️ Contiguity</div>
+                <div class="card-body">NS/CS and US must be <strong>close together in time</strong>. Brief delay is best. Too long a gap breaks the association.</div>
+            </div>
+            <div class="card">
+                <div class="card-title">🔗 Contingency</div>
+                <div class="card-body">NS/CS must <strong>reliably predict</strong> the US. If CS sometimes appears without US, conditioning weakens.</div>
+            </div>
+            <div class="card">
+                <div class="card-title">🌿 Taste Aversion</div>
+                <div class="card-body">Food (CS) paired with illness/nausea (US) → food becomes CS for nausea (CR). Can occur after ONE pairing. Even hours-long delay can work!</div>
+            </div>
+        </div>
+
+        <div class="highlight">
+            <strong>Mnemonic for Terms:</strong> <em>NS → CS</em> (neutral becomes conditioned) | <em>UR → CR</em> (same response, different name)<br>
+            "The stimulus CHANGES name; the response gets the 'C' label after learning."
+        </div>
+    </div>
+
+    <!-- OPERANT CONDITIONING -->
+    <div id="operant" class="content">
+        <h2>Operant Conditioning</h2>
+        <div class="highlight">
+            <strong>Core Idea:</strong> Behavior is shaped by its consequences. Reinforcement increases behavior; punishment decreases behavior. The key question: are you ADDING or REMOVING something?
+        </div>
+
+        <h3>The Four Consequences</h3>
+        <div class="operant-grid">
+            <div class="operant-card pos-reinf">
+                <div class="operant-label" style="color:#155724;">✅ POSITIVE REINFORCEMENT</div>
+                <div class="operant-def"><strong>ADD</strong> something desirable → behavior <strong>INCREASES</strong></div>
+                <div class="operant-ex">Give child candy for tidying room → tidying increases</div>
+            </div>
+            <div class="operant-card neg-reinf">
+                <div class="operant-label" style="color:#004085;">🔵 NEGATIVE REINFORCEMENT</div>
+                <div class="operant-def"><strong>REMOVE</strong> something undesirable → behavior <strong>INCREASES</strong></div>
+                <div class="operant-ex">Buckle seatbelt → annoying beeping stops → buckling increases</div>
+            </div>
+            <div class="operant-card pos-pun">
+                <div class="operant-label" style="color:#721c24;">🚫 POSITIVE PUNISHMENT</div>
+                <div class="operant-def"><strong>ADD</strong> something undesirable → behavior <strong>DECREASES</strong></div>
+                <div class="operant-ex">Speed → get speeding ticket → speeding decreases</div>
+            </div>
+            <div class="operant-card neg-pun">
+                <div class="operant-label" style="color:#533f03;">⚠️ NEGATIVE PUNISHMENT</div>
+                <div class="operant-def"><strong>REMOVE</strong> something desirable → behavior <strong>DECREASES</strong></div>
+                <div class="operant-ex">Teen breaks curfew → phone taken away → curfew-breaking decreases</div>
+            </div>
+        </div>
+
+        <div class="highlight">
+            <strong>⚠️ Critical Distinction:</strong> Negative Reinforcement ≠ Punishment!<br>
+            <strong>Negative Reinforcement INCREASES behavior</strong> by removing something BAD.<br>
+            <strong>Both types of Reinforcement INCREASE behavior. Both types of Punishment DECREASE behavior.</strong>
+        </div>
+
+        <h3>Key Operant Concepts</h3>
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-title">🪜 Shaping</div>
+                <div class="card-body">Reinforcing <strong>successive approximations</strong> toward a desired final behavior. Used to teach novel behaviors that the subject can't perform spontaneously. Example: Teaching a dog to roll over step by step.</div>
+            </div>
+            <div class="card">
+                <div class="card-title">🏅 Primary vs. Secondary Reinforcers</div>
+                <div class="card-body"><strong>Primary:</strong> Inherently satisfying (food, water, warmth, sex)<br><br><strong>Secondary:</strong> Learned value through association with primary (money, praise, grades, tokens)</div>
+            </div>
+            <div class="card">
+                <div class="card-title">🪙 Token Economy</div>
+                <div class="card-body">System using tokens (secondary reinforcers) exchangeable for primary reinforcers. Also teaches <strong>delay of gratification</strong> — waiting for a larger, later reward.</div>
+            </div>
+            <div class="card">
+                <div class="card-title">🐾 Instinctive Drift</div>
+                <div class="card-body">Conditioned behaviors gradually replaced by <strong>instinctive behaviors</strong> of the species. Shows limits of operant conditioning — biology can override learning.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCHEDULES -->
+    <div id="schedules" class="content">
+        <h2>Schedules of Reinforcement</h2>
+        <div class="highlight">
+            <strong>Key Principle:</strong> HOW you deliver reinforcement shapes the pattern and durability of behavior. Variable schedules create the most persistent behavior.
+        </div>
+
+        <div class="sched-grid">
+            <div class="sched-card">
+                <div class="sched-name">Continuous</div>
+                <div class="sched-label">Pattern: Every response reinforced</div>
+                <div class="sched-bar"><div class="sched-fill" style="width:50%"></div></div>
+                <div class="sched-label">Response rate: Moderate<br>Extinction: <strong>FASTEST</strong> 💀<br>Best for: Teaching NEW behaviors<br><em>Example: Every time you put money in, gumball comes out</em></div>
+            </div>
+            <div class="sched-card">
+                <div class="sched-name">Fixed Ratio (FR)</div>
+                <div class="sched-label">Pattern: After fixed # of responses</div>
+                <div class="sched-bar"><div class="sched-fill" style="width:75%"></div></div>
+                <div class="sched-label">Response rate: High, with pause after reward<br>Extinction: Moderate<br><em>Example: FR5 = reward after every 5 responses. Piece-rate pay.</em></div>
+            </div>
+            <div class="sched-card" style="border-color:#11998e; background:#f0fdf8;">
+                <div class="sched-name" style="color:#11998e;">⭐ Variable Ratio (VR)</div>
+                <div class="sched-label">Pattern: After unpredictable # of responses</div>
+                <div class="sched-bar"><div class="sched-fill" style="width:100%"></div></div>
+                <div class="sched-label">Response rate: <strong>HIGHEST</strong> 🚀<br>Extinction: <strong>SLOWEST</strong> (most resistant)<br><em>Example: Slot machines, gambling, fishing</em></div>
+            </div>
+            <div class="sched-card">
+                <div class="sched-name">Fixed Interval (FI)</div>
+                <div class="sched-label">Pattern: First response after fixed TIME</div>
+                <div class="sched-bar"><div class="sched-fill" style="width:40%"></div></div>
+                <div class="sched-label">Response rate: Low, scallop pattern (burst before deadline)<br><em>Example: Weekly paycheck, studying before exam</em></div>
+            </div>
+            <div class="sched-card">
+                <div class="sched-name">Variable Interval (VI)</div>
+                <div class="sched-label">Pattern: First response after unpredictable TIME</div>
+                <div class="sched-bar"><div class="sched-fill" style="width:65%"></div></div>
+                <div class="sched-label">Response rate: Moderate, very steady<br>Extinction: High resistance<br><em>Example: Checking email, social media, pop quizzes</em></div>
+            </div>
+        </div>
+
+        <table class="table" style="margin-top:30px;">
+            <tr><th>Schedule</th><th>Based On</th><th>Response Rate</th><th>Extinction</th><th>Real Example</th></tr>
+            <tr><td>Continuous</td><td>Every response</td><td>Moderate</td><td>Fastest</td><td>Vending machine</td></tr>
+            <tr><td>Fixed Ratio</td><td># Responses (fixed)</td><td>High (with pauses)</td><td>Moderate</td><td>Piece-work pay</td></tr>
+            <tr><td><strong>Variable Ratio</strong></td><td># Responses (variable)</td><td><strong>Highest</strong></td><td><strong>Slowest</strong></td><td>Slot machines</td></tr>
+            <tr><td>Fixed Interval</td><td>Time (fixed)</td><td>Low (scallop)</td><td>Low</td><td>Weekly paycheck</td></tr>
+            <tr><td>Variable Interval</td><td>Time (variable)</td><td>Moderate, steady</td><td>High</td><td>Checking social media</td></tr>
+        </table>
+
+        <div class="highlight">
+            <strong>Why Variable Ratio wins:</strong> You never know when the next reward comes, so you never stop responding. This is the psychology behind gambling addiction — "just one more try!"
+        </div>
+    </div>
+
+    <!-- OBSERVATIONAL -->
+    <div id="observational" class="content">
+        <h2>Observational Learning (Bandura)</h2>
+        <div class="highlight">
+            <strong>Core Idea:</strong> Learning can occur by watching others — no direct experience or reinforcement needed. Cognition matters in learning.
+        </div>
+
+        <h3>Bobo Doll Experiment</h3>
+        <div class="flow">
+            <div class="flow-box before"><strong>Children watch adult model</strong> punch, kick, yell at Bobo doll</div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-box during"><strong>Children placed in room</strong> with Bobo doll (slightly frustrated first)</div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-box after"><strong>Children imitate</strong> the same aggressive behaviors, even inventing new ones</div>
+            <div class="flow-arrow">↓ Key finding</div>
+            <div class="flow-box outcome">
+                Learning happened through <strong>observation alone</strong><br>
+                No direct reinforcement required<br>
+                Learning can be <strong>latent</strong> — stored and expressed later
+            </div>
+        </div>
+
+        <h3>Bandura's 4 Conditions for Observational Learning</h3>
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-title">👁️ 1. Attention</div>
+                <div class="card-body">Must <strong>notice and focus</strong> on the model's behavior. We pay more attention to models who are similar to us, attractive, or high status.</div>
+            </div>
+            <div class="card">
+                <div class="card-title">🧠 2. Retention</div>
+                <div class="card-body">Must <strong>remember</strong> the observed behavior. Memory, mental imagery, and rehearsal all help retain what we've observed.</div>
+            </div>
+            <div class="card">
+                <div class="card-title">💪 3. Reproduction</div>
+                <div class="card-body">Must be <strong>physically capable</strong> of performing the behavior. Watching a gymnast doesn't mean you can do it — physical ability matters.</div>
+            </div>
+            <div class="card">
+                <div class="card-title">🎯 4. Motivation</div>
+                <div class="card-body">Must <strong>want to perform</strong> the behavior. Vicarious reinforcement (seeing others rewarded) increases motivation. Vicarious punishment decreases it.</div>
+            </div>
+        </div>
+
+        <h3>Bandura vs. Skinner</h3>
+        <table class="table">
+            <tr><th>Aspect</th><th>Skinner (Behaviorism)</th><th>Bandura (Social Learning)</th></tr>
+            <tr><td>How we learn</td><td>Direct reinforcement/punishment</td><td>Observation + direct experience</td></tr>
+            <tr><td>Role of cognition</td><td>Irrelevant ("black box")</td><td>Critical (attention, retention)</td></tr>
+            <tr><td>Latent learning</td><td>Not possible</td><td>Yes — learning can be stored, expressed later</td></tr>
+            <tr><td>Requires reinforcement?</td><td>Yes</td><td>No (vicarious is enough)</td></tr>
+        </table>
+    </div>
+
+    <!-- COMPARE -->
+    <div id="compare" class="content">
+        <h2>Key Comparisons</h2>
+
+        <h3>Classical vs. Operant Conditioning</h3>
+        <table class="table">
+            <tr><th>Feature</th><th>Classical Conditioning</th><th>Operant Conditioning</th></tr>
+            <tr><td>Theorist</td><td>Pavlov; Watson & Rayner</td><td>Thorndike; Skinner</td></tr>
+            <tr><td>Behavior type</td><td>Involuntary / reflexive</td><td>Voluntary / deliberate</td></tr>
+            <tr><td>What is learned</td><td>Stimulus-stimulus association</td><td>Behavior-consequence association</td></tr>
+            <tr><td>Role of learner</td><td>Passive (response is elicited)</td><td>Active (response is emitted)</td></tr>
+            <tr><td>Key mechanism</td><td>Pairing of NS with US</td><td>Reinforcement or punishment</td></tr>
+            <tr><td>Extinction</td><td>CS presented without US</td><td>Behavior no longer reinforced</td></tr>
+            <tr><td>Example</td><td>Fearing dentist's drill sound</td><td>Studying to earn good grades</td></tr>
+        </table>
+
+        <h3>Reinforcement vs. Punishment Summary</h3>
+        <table class="table">
+            <tr><th>Type</th><th>What Happens</th><th>Effect on Behavior</th><th>Example</th></tr>
+            <tr><td><strong>Positive Reinforcement</strong></td><td>Add something pleasant</td><td>Behavior INCREASES ↑</td><td>Praise for good work</td></tr>
+            <tr><td><strong>Negative Reinforcement</strong></td><td>Remove something unpleasant</td><td>Behavior INCREASES ↑</td><td>Seatbelt stops beeping</td></tr>
+            <tr><td><strong>Positive Punishment</strong></td><td>Add something unpleasant</td><td>Behavior DECREASES ↓</td><td>Speeding ticket</td></tr>
+            <tr><td><strong>Negative Punishment</strong></td><td>Remove something pleasant</td><td>Behavior DECREASES ↓</td><td>Take away phone</td></tr>
+        </table>
+
+        <h3>All Three Types of Learning</h3>
+        <table class="table">
+            <tr><th>Type</th><th>Theorist</th><th>Requires Direct Experience?</th><th>Role of Cognition</th></tr>
+            <tr><td>Classical Conditioning</td><td>Pavlov</td><td>Yes (direct pairing)</td><td>Minimal</td></tr>
+            <tr><td>Operant Conditioning</td><td>Skinner</td><td>Yes (direct consequence)</td><td>Minimal (behaviorist)</td></tr>
+            <tr><td>Observational Learning</td><td>Bandura</td><td>No (watching is enough)</td><td>Critical (ARRM)</td></tr>
+        </table>
+
+        <div class="highlight">
+            <strong>Key Mnemonics:</strong><br>
+            • <strong>Classical</strong> = <strong>C</strong>onditioned by <strong>C</strong>lues (stimuli signal each other)<br>
+            • <strong>Operant</strong> = <strong>O</strong>perate on environment for consequences<br>
+            • <strong>ARRM</strong> (Bandura) = <strong>A</strong>ttention, <strong>R</strong>etention, <strong>R</strong>eproduction, <strong>M</strong>otivation<br>
+            • <strong>Positive = Plus (adding)</strong> | <strong>Negative = kNifing out (removing)</strong><br>
+            • <strong>VR = Vegas Rule</strong> — most persistent, hardest to extinguish
+        </div>
+    </div>
+</div>
+
+<script>
+    function showTab(name) {
+        document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.getElementById(name).classList.add('active');
+        event.target.classList.add('active');
+    }
+</script>
+</body>
+</html>
