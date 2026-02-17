@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning - Interactive Flashcards</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .header { text-align: center; color: white; margin-bottom: 30px; }
+        .header h1 { font-size: 2.5em; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .controls { background: white; border-radius: 15px; padding: 25px; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .set-selector { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 20px; }
+        .set-btn { padding: 11px; border: 2px solid #11998e; background: white; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s; font-size: 0.88em; }
+        .set-btn:hover { background: #f0fdf8; transform: translateY(-2px); }
+        .set-btn.active { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); color: white; }
+        .options { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+        .option-btn { padding: 10px 18px; border: none; background: #11998e; color: white; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s; }
+        .option-btn:hover { background: #38ef7d; color: #111; transform: translateY(-2px); }
+        .progress-bar { background: #e0e0e0; border-radius: 10px; height: 20px; overflow: hidden; margin-top: 15px; }
+        .progress-fill { background: linear-gradient(90deg, #11998e, #38ef7d); height: 100%; transition: width 0.3s; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8em; font-weight: bold; }
+        .stats { display: flex; justify-content: space-around; margin-top: 15px; padding-top: 15px; border-top: 2px solid #e0e0e0; }
+        .stat { text-align: center; }
+        .stat-value { font-size: 1.8em; font-weight: bold; color: #11998e; }
+        .stat-label { font-size: 0.9em; color: #666; margin-top: 5px; }
+        .card-container { perspective: 1000px; margin-bottom: 20px; animation: slideIn 0.4s ease-out; }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+        .flashcard { background: white; border-radius: 15px; padding: 40px; min-height: 340px; display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; transition: transform 0.6s; transform-style: preserve-3d; box-shadow: 0 10px 30px rgba(0,0,0,0.3); position: relative; }
+        .flashcard.flipped { transform: rotateY(180deg); }
+        .card-face { backface-visibility: hidden; position: absolute; width: 100%; padding: 40px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        .card-back { transform: rotateY(180deg); }
+        .card-label { position: absolute; top: 20px; left: 20px; background: #11998e; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.9em; font-weight: 600; }
+        .card-number { position: absolute; top: 20px; right: 20px; background: #38ef7d; color: #111; padding: 5px 15px; border-radius: 20px; font-size: 0.9em; font-weight: 600; }
+        .card-content { font-size: 1.25em; line-height: 1.6; color: #333; margin-top: 40px; }
+        .card-hint { position: absolute; bottom: 20px; color: #aaa; font-size: 0.85em; font-style: italic; }
+        .navigation { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .nav-btn { padding: 14px 26px; border: none; border-radius: 10px; font-size: 1em; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .nav-btn:hover:not(:disabled) { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .nav-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .prev-btn { background: #6c757d; color: white; }
+        .next-btn { background: #28a745; color: white; }
+        .know-btn { background: #28a745; color: white; }
+        .review-btn { background: #ffc107; color: #333; }
+        .completion-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); justify-content: center; align-items: center; z-index: 1000; }
+        .completion-modal.show { display: flex; }
+        .modal-content { background: white; padding: 40px; border-radius: 20px; text-align: center; max-width: 480px; }
+        .modal-content h2 { color: #11998e; font-size: 2em; margin-bottom: 20px; }
+        .modal-btn { padding: 14px 26px; border: none; background: #11998e; color: white; border-radius: 10px; font-size: 1em; font-weight: 600; cursor: pointer; margin: 5px; }
+        .modal-btn:hover { background: #38ef7d; color: #111; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>🧠 Learning</h1>
+        <p>Interactive Flashcards — 120 Cards Total</p>
+    </div>
+    <div class="controls">
+        <h3 style="margin-bottom:15px; color:#11998e;">Select Card Set:</h3>
+        <div class="set-selector">
+            <button class="set-btn active" onclick="selectSet('all')">All Cards (120)</button>
+            <button class="set-btn" onclick="selectSet(1)">Core Defs (15)</button>
+            <button class="set-btn" onclick="selectSet(2)">Classical (25)</button>
+            <button class="set-btn" onclick="selectSet(3)">Operant (30)</button>
+            <button class="set-btn" onclick="selectSet(4)">Schedules (15)</button>
+            <button class="set-btn" onclick="selectSet(5)">Observational (15)</button>
+            <button class="set-btn" onclick="selectSet(6)">Comparisons (12)</button>
+            <button class="set-btn" onclick="selectSet(7)">Applications (8)</button>
+        </div>
+        <div class="options">
+            <button class="option-btn" onclick="shuffleCards()">🔀 Shuffle</button>
+            <button class="option-btn" onclick="resetProgress()">🔄 Reset</button>
+            <button class="option-btn" onclick="reviewMarked()">⭐ Review Marked</button>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="progressBar">0%</div></div>
+        <div class="stats">
+            <div class="stat"><div class="stat-value" id="currentCard">1</div><div class="stat-label">Current</div></div>
+            <div class="stat"><div class="stat-value" id="totalCards">120</div><div class="stat-label">Total</div></div>
+            <div class="stat"><div class="stat-value" id="knownCards">0</div><div class="stat-label">Known</div></div>
+            <div class="stat"><div class="stat-value" id="markedCards">0</div><div class="stat-label">Review</div></div>
+        </div>
+    </div>
+    <div class="card-container">
+        <div class="flashcard" id="flashcard" onclick="flipCard()">
+            <div class="card-face card-front">
+                <div class="card-label">QUESTION</div>
+                <div class="card-number" id="cardNumber">1/120</div>
+                <div class="card-content" id="frontContent">Click to start!</div>
+                <div class="card-hint">Click card to flip</div>
+            </div>
+            <div class="card-face card-back">
+                <div class="card-label">ANSWER</div>
+                <div class="card-number" id="cardNumberBack">1/120</div>
+                <div class="card-content" id="backContent">Answer appears here</div>
+                <div class="card-hint">Click card to flip back</div>
+            </div>
+        </div>
+    </div>
+    <div class="navigation">
+        <button class="nav-btn prev-btn" onclick="previousCard()" id="prevBtn">⬅️ Previous</button>
+        <button class="nav-btn review-btn" onclick="markForReview()">⭐ Mark Review</button>
+        <button class="nav-btn know-btn" onclick="markKnown()">✅ I Know This</button>
+        <button class="nav-btn next-btn" onclick="nextCard()" id="nextBtn">Next ➡️</button>
+    </div>
+</div>
+<div class="completion-modal" id="completionModal">
+    <div class="modal-content">
+        <h2>🎉 Set Complete!</h2>
+        <p>Great work reviewing these cards!</p>
+        <div id="completionStats"></div>
+        <button class="modal-btn" onclick="resetAndContinue()">Start Over</button>
+        <button class="modal-btn" onclick="closeModal()">Close</button>
+    </div>
+</div>
+<script>
+const flashcards = [
+    // SET 1: CORE DEFINITIONS (15)
+    {set:1, front:"What is the definition of learning?", back:"A relatively permanent change in behavior or the potential for behavior that results from experience."},
+    {set:1, front:"What does 'relatively permanent' mean in the definition of learning?", back:"It is not temporary (like fatigue or drug effects); the change persists over time."},
+    {set:1, front:"What is habituation?", back:"A decrease in response to a stimulus that is repeated over and over (tuning it out)."},
+    {set:1, front:"What is an orienting reflex?", back:"An automatic response to unexpected or novel stimuli."},
+    {set:1, front:"What is dishabituation?", back:"Re-responding to a stimulus to which you were previously habituated (when something changes)."},
+    {set:1, front:"What is classical conditioning?", back:"Learning through the association of stimuli — a neutral stimulus becomes a conditioned stimulus by pairing with an unconditioned stimulus."},
+    {set:1, front:"What is operant conditioning?", back:"Learning from the consequences of behavior — reinforcement increases behavior; punishment decreases behavior."},
+    {set:1, front:"What is observational learning?", back:"Learning that occurs by watching others and modeling their behavior, without direct experience."},
+    {set:1, front:"What is behavior modification?", back:"The use of learning principles (classical, operant, social learning) to purposely change behavior."},
+    {set:1, front:"What is latent learning?", back:"Learning that occurs but is not immediately expressed in behavior (stored for later use)."},
+    {set:1, front:"What is contiguity?", back:"NS/CS and US must be close together in time for classical conditioning to work best."},
+    {set:1, front:"What is contingency?", back:"The NS/CS must reliably predict the US for classical conditioning to be most effective."},
+    {set:1, front:"What is the law of effect (Thorndike)?", back:"Behaviors followed by positive consequences are strengthened; behaviors followed by negative consequences are weakened."},
+    {set:1, front:"What is shaping?", back:"Reinforcing successive approximations toward a desired final behavior to condition a novel behavior."},
+    {set:1, front:"What is instinctive drift?", back:"Conditioned responses gradually replaced by the species' more natural, instinctive behaviors."},
+
+    // SET 2: CLASSICAL CONDITIONING (25)
+    {set:2, front:"Who discovered classical conditioning?", back:"Ivan Pavlov, while studying salivation in dogs."},
+    {set:2, front:"What is a Neutral Stimulus (NS)?", back:"A stimulus that initially causes no particular response relevant to the experiment."},
+    {set:2, front:"What is an Unconditioned Stimulus (US)?", back:"A stimulus that naturally and automatically triggers a response without learning."},
+    {set:2, front:"What is an Unconditioned Response (UR)?", back:"The natural, unlearned reaction to the unconditioned stimulus."},
+    {set:2, front:"What is a Conditioned Stimulus (CS)?", back:"A previously neutral stimulus that now triggers a response after being paired with the US."},
+    {set:2, front:"What is a Conditioned Response (CR)?", back:"The learned response to the conditioned stimulus."},
+    {set:2, front:"In Pavlov's experiment, what was the US, UR, CS, and CR?", back:"US = food; UR = salivation to food; CS = bell; CR = salivation to bell."},
+    {set:2, front:"What is stimulus generalization?", back:"Responding to stimuli similar to the CS with the same conditioned response."},
+    {set:2, front:"What is stimulus discrimination?", back:"The conditioned response is only elicited by the specific CS, not similar stimuli."},
+    {set:2, front:"What is extinction (classical)?", back:"CS is repeatedly presented without the US, causing the CR to weaken and disappear."},
+    {set:2, front:"What is counterconditioning?", back:"Replacing a conditioned response with a new incompatible response by pairing the CS with a new US."},
+    {set:2, front:"What is taste aversion?", back:"Food becomes a CS for nausea after being associated with illness — can form after ONE pairing."},
+    {set:2, front:"What did the Little Albert experiment demonstrate?", back:"Fear and emotional responses can be classically conditioned in humans; stimulus generalization also occurs."},
+    {set:2, front:"In Little Albert, what was the US, UR, CS, and CR?", back:"US = loud noise; UR = fear to noise; CS = white rat; CR = fear to rat."},
+    {set:2, front:"Who conducted the Little Albert experiment?", back:"John B. Watson and Rosalie Rayner."},
+    {set:2, front:"What stimulus generalization occurred in Little Albert?", back:"Albert feared other similar white fluffy objects — rabbit, fur coat, Santa Claus beard."},
+    {set:2, front:"How does counterconditioning differ from extinction?", back:"Extinction: CS without US (response fades). Counterconditioning: CS paired with new US to build incompatible response."},
+    {set:2, front:"Why is taste aversion unique among classical conditioning examples?", back:"It can form after ONE pairing and survive even a long delay between CS and US (hours)."},
+    {set:2, front:"What kind of behaviors does classical conditioning produce?", back:"Involuntary, reflexive responses (not voluntary)."},
+    {set:2, front:"What is the NS before conditioning begins?", back:"Any stimulus that produces no relevant response — it hasn't yet been paired with the US."},
+    {set:2, front:"What changes NS to CS?", back:"Repeated pairing with the unconditioned stimulus (US)."},
+    {set:2, front:"How does counterconditioning work for Little Albert?", back:"Associate the rat (CS) with candy or something pleasant (new US) instead of the loud noise."},
+    {set:2, front:"What does the CR usually look like compared to the UR?", back:"CR is often weaker (smaller magnitude) than the UR."},
+    {set:2, front:"Example: You feel anxious when you hear a dental drill. What is the CS?", back:"The dental drill sound (previously neutral, now conditioned through association with pain)."},
+    {set:2, front:"What two conditions make classical conditioning most effective?", back:"Contiguity (close in time) and Contingency (reliable prediction)."},
+
+    // SET 3: OPERANT CONDITIONING (30)
+    {set:3, front:"Who coined the term 'operant conditioning'?", back:"B. F. Skinner."},
+    {set:3, front:"Who developed the Law of Effect?", back:"E. L. Thorndike."},
+    {set:3, front:"What is reinforcement?", back:"Any consequence that INCREASES the frequency of a behavior."},
+    {set:3, front:"What is punishment?", back:"Any consequence that DECREASES the frequency of a behavior."},
+    {set:3, front:"What does 'positive' mean in operant conditioning?", back:"Adding something to the environment (+)."},
+    {set:3, front:"What does 'negative' mean in operant conditioning?", back:"Removing something from the environment (−)."},
+    {set:3, front:"What is positive reinforcement?", back:"Adding something desirable → behavior INCREASES. Example: praise, treats, money."},
+    {set:3, front:"What is negative reinforcement?", back:"Removing something undesirable → behavior INCREASES. Example: buckling seatbelt stops beeping."},
+    {set:3, front:"What is positive punishment?", back:"Adding something undesirable → behavior DECREASES. Example: speeding ticket, extra chores."},
+    {set:3, front:"What is negative punishment?", back:"Removing something desirable → behavior DECREASES. Example: taking away phone, losing recess."},
+    {set:3, front:"Negative reinforcement vs. positive punishment — what's the key difference?", back:"Negative reinforcement INCREASES behavior (removes bad thing). Positive punishment DECREASES behavior (adds bad thing)."},
+    {set:3, front:"What is a primary reinforcer?", back:"A reinforcer that is inherently satisfying (food, water, warmth, sex) — no learning required."},
+    {set:3, front:"What is a secondary reinforcer?", back:"A reinforcer that has learned value through association with primary reinforcers (money, grades, tokens, praise)."},
+    {set:3, front:"What is a token economy?", back:"A system using secondary reinforcers (tokens) exchangeable for primary reinforcers; also teaches delay of gratification."},
+    {set:3, front:"What is delay of gratification?", back:"The ability to forego immediate reinforcement in favor of waiting for a later, sometimes larger reward."},
+    {set:3, front:"What is a Skinner box?", back:"A chamber used to study operant conditioning in animals systematically."},
+    {set:3, front:"What is shaping?", back:"Conditioning a novel behavior by reinforcing successive approximations of the final desired behavior."},
+    {set:3, front:"What are successive approximations?", back:"Steps progressively closer to the target behavior, each one reinforced in shaping."},
+    {set:3, front:"What is instinctive drift?", back:"Conditioned behaviors gradually replaced by instinctive species-typical behaviors — limits of operant conditioning."},
+    {set:3, front:"Is punishment or reinforcement more effective for changing behavior?", back:"Reinforcement is generally more effective. Punishment (especially harsh/physical) has unintended negative consequences."},
+    {set:3, front:"What are unintended consequences of harsh punishment?", back:"Can produce fear, aggression, avoidance of the punisher, and doesn't teach the desired behavior."},
+    {set:3, front:"Example: Dog sits → gets treat. What type of consequence?", back:"Positive reinforcement (adding treat → sitting increases)."},
+    {set:3, front:"Example: Take aspirin → headache goes away. What type of consequence?", back:"Negative reinforcement (removing pain → aspirin-taking increases)."},
+    {set:3, front:"Example: Child misbehaves → gets extra chores. What type of consequence?", back:"Positive punishment (adding chores → misbehavior decreases)."},
+    {set:3, front:"Example: Teen breaks curfew → loses phone. What type of consequence?", back:"Negative punishment (removing phone → curfew-breaking decreases)."},
+    {set:3, front:"What does the operant conditioning grid show?", back:"4 quadrants: +/− on environment × Increase/Decrease behavior = Positive Reinforcement, Negative Reinforcement, Positive Punishment, Negative Punishment."},
+    {set:3, front:"What kind of behaviors does operant conditioning address?", back:"Voluntary, deliberate behaviors (the organism 'operates' on the environment)."},
+    {set:3, front:"What was Thorndike's puzzle box experiment?", back:"Cats learned to escape boxes through trial and error — successful behaviors were 'stamped in' (Law of Effect)."},
+    {set:3, front:"What is behavior modification?", back:"Using learning principles (classical, operant, social learning) to purposely and systematically change behavior."},
+    {set:3, front:"What is the difference between a primary and secondary reinforcer? Give an example.", back:"Primary = inherently satisfying (food). Secondary = learned value (money is just paper, but can buy food)."},
+
+    // SET 4: SCHEDULES OF REINFORCEMENT (15)
+    {set:4, front:"What is continuous reinforcement?", back:"Reinforcement is delivered after EVERY response. Best for teaching new behaviors; extinguishes fastest."},
+    {set:4, front:"What is a fixed ratio (FR) schedule?", back:"Reinforcement after a FIXED NUMBER of responses. Produces high response rate with a pause after each reward."},
+    {set:4, front:"What is a variable ratio (VR) schedule?", back:"Reinforcement after an UNPREDICTABLE number of responses. Produces highest response rate; most resistant to extinction."},
+    {set:4, front:"What is a fixed interval (FI) schedule?", back:"Reinforcement for first response after a FIXED TIME period. Produces scallop pattern — burst of activity near deadline."},
+    {set:4, front:"What is a variable interval (VI) schedule?", back:"Reinforcement for first response after an UNPREDICTABLE TIME period. Produces steady, moderate response rate."},
+    {set:4, front:"Which schedule is most resistant to extinction?", back:"Variable Ratio (VR) — you never know when the next reward comes, so you keep responding."},
+    {set:4, front:"Which schedule extinguishes fastest?", back:"Continuous reinforcement — when rewards stop completely, the change is obvious and extinction is rapid."},
+    {set:4, front:"What is the 'scallop pattern' in fixed interval schedules?", back:"Low response rate after reinforcement, then increasing burst of activity just before the next scheduled reward."},
+    {set:4, front:"Which schedule does a slot machine use?", back:"Variable Ratio — unpredictable number of pulls before winning."},
+    {set:4, front:"Which schedule does a weekly paycheck follow?", back:"Fixed Interval — reinforcement (pay) after a fixed time period (one week)."},
+    {set:4, front:"Which schedule does checking social media follow?", back:"Variable Interval — reinforcement (new posts/likes) comes after unpredictable time intervals."},
+    {set:4, front:"Ratio vs. Interval schedules — what's the difference?", back:"Ratio = based on NUMBER of responses. Interval = based on TIME elapsed."},
+    {set:4, front:"Fixed vs. Variable schedules — what's the key difference?", back:"Fixed = predictable (pausing after reward). Variable = unpredictable (no pausing, highest persistence)."},
+    {set:4, front:"Why is variable ratio so resistant to extinction?", back:"Because the subject can never predict when the next reward will come — 'maybe THIS response will be the one!'"},
+    {set:4, front:"What schedule is best for establishing a new behavior?", back:"Continuous reinforcement — rewards every response to build the behavior quickly."},
+
+    // SET 5: OBSERVATIONAL LEARNING (15)
+    {set:5, front:"Who proposed social learning theory?", back:"Albert Bandura."},
+    {set:5, front:"What is observational learning?", back:"Learning by watching others and modeling their behavior — no direct experience or reinforcement required."},
+    {set:5, front:"What is modeling?", back:"Imitating a behavior that was observed in someone else."},
+    {set:5, front:"What did the Bobo doll experiments demonstrate?", back:"Children imitated aggressive behavior without direct reinforcement — learning can occur through observation alone."},
+    {set:5, front:"What is latent learning?", back:"Learning that occurs but is not immediately expressed in behavior; stored and expressed later when motivated."},
+    {set:5, front:"What are Bandura's four conditions for observational learning?", back:"Attention, Retention, Reproduction, Motivation (ARRM)."},
+    {set:5, front:"What is Attention in observational learning?", back:"Observer must notice and focus on the model's behavior."},
+    {set:5, front:"What is Retention in observational learning?", back:"Observer must remember the behavior."},
+    {set:5, front:"What is Reproduction in observational learning?", back:"Observer must be physically capable of performing the behavior."},
+    {set:5, front:"What is Motivation in observational learning?", back:"Observer must want to perform the behavior; vicarious reinforcement can provide this."},
+    {set:5, front:"How does Bandura's view differ from Skinner's on learning?", back:"Skinner: direct reinforcement required. Bandura: observation alone is sufficient; cognition plays a critical role."},
+    {set:5, front:"What is vicarious reinforcement?", back:"Seeing someone else receive reinforcement for a behavior, which increases your own motivation to perform it."},
+    {set:5, front:"What is vicarious punishment?", back:"Seeing someone else punished for a behavior, which decreases your motivation to imitate it."},
+    {set:5, front:"What role does cognition play in observational learning?", back:"Critical role — attention and retention involve mental processes that Skinner's behaviorism ignored."},
+    {set:5, front:"Example: You watch a coworker get promoted for staying late and start doing the same. What type of learning?", back:"Observational learning (modeling behavior seen in others, motivated by vicarious reinforcement)."},
+
+    // SET 6: COMPARISONS (12)
+    {set:6, front:"Classical vs. Operant: Which involves involuntary behavior?", back:"Classical conditioning (reflexive, elicited responses like salivation or fear)."},
+    {set:6, front:"Classical vs. Operant: Which involves voluntary behavior?", back:"Operant conditioning (deliberate behaviors that operate on the environment)."},
+    {set:6, front:"Classical vs. Operant: What is learned?", back:"Classical: stimulus-stimulus association. Operant: behavior-consequence association."},
+    {set:6, front:"Classical vs. Operant: How does extinction work?", back:"Classical: CS without US. Operant: behavior no longer reinforced."},
+    {set:6, front:"Positive Reinforcement vs. Negative Reinforcement: How are they alike?", back:"Both INCREASE behavior — that's what makes them both 'reinforcement.'"},
+    {set:6, front:"Positive Punishment vs. Negative Punishment: How are they alike?", back:"Both DECREASE behavior — that's what makes them both 'punishment.'"},
+    {set:6, front:"Fixed Ratio vs. Variable Ratio: Which is more resistant to extinction?", back:"Variable Ratio — unpredictability prevents extinction."},
+    {set:6, front:"Skinner vs. Bandura: Key difference?", back:"Skinner: direct reinforcement required. Bandura: observation sufficient; cognition matters."},
+    {set:6, front:"Pavlov vs. Skinner: Key difference?", back:"Pavlov: involuntary stimulus-stimulus learning. Skinner: voluntary behavior-consequence learning."},
+    {set:6, front:"Primary vs. Secondary reinforcer: Key difference?", back:"Primary: inherently satisfying. Secondary: value learned through association with primary."},
+    {set:6, front:"Extinction vs. Counterconditioning: Key difference?", back:"Extinction fades CR by removing US. Counterconditioning replaces CR with new response via new US."},
+    {set:6, front:"Continuous vs. Variable Ratio: Which builds behavior faster? Which lasts longer?", back:"Continuous builds faster; Variable Ratio lasts longer (most resistant to extinction)."},
+
+    // SET 7: APPLICATIONS (8)
+    {set:7, front:"Example: You feel anxious when you pass your old school (where you were bullied). What type of learning?", back:"Classical conditioning (school = CS, anxiety = CR, bullying = original US)."},
+    {set:7, front:"Example: A student studies hard and earns an A. They study hard again next exam. What type?", back:"Positive reinforcement (adding the A increases studying behavior)."},
+    {set:7, front:"Example: A child cries until parent buys candy. Parent gives candy. Whose behavior is reinforced?", back:"Both: Child's crying (positively reinforced by candy) and parent's giving (negatively reinforced by crying stopping)."},
+    {set:7, front:"Example: A pigeon pecks a lever at unpredictable times for food. What schedule?", back:"Variable ratio — food delivered after an unpredictable number of pecks."},
+    {set:7, front:"Example: A child earns gold stars (for primary rewards later). What is this system?", back:"Token economy (stars = secondary reinforcers exchangeable for primary reinforcers)."},
+    {set:7, front:"Example: A trainer teaches a dolphin to jump through a hoop step by step. What technique?", back:"Shaping — reinforcing successive approximations toward the final target behavior."},
+    {set:7, front:"Example: After watching action movies, children act more aggressively. What theory?", back:"Observational learning / Social Learning Theory (Bandura — learning from media models)."},
+    {set:7, front:"Example: You ate bad shrimp once and now can't stand the smell. What type of learning?", back:"Taste aversion — a type of classical conditioning (shrimp = CS, nausea = CR). Often one-trial learning."}
+];
+
+let currentIndex = 0, isFlipped = false;
+let activeCards = [...flashcards];
+let knownCards = new Set(), markedCards = new Set();
+
+function selectSet(setNumber) {
+    document.querySelectorAll('.set-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+    activeCards = setNumber === 'all' ? [...flashcards] : flashcards.filter(c => c.set === setNumber);
+    currentIndex = 0; isFlipped = false;
+    updateCard(); updateStats();
+}
+function shuffleCards() {
+    for (let i = activeCards.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [activeCards[i], activeCards[j]] = [activeCards[j], activeCards[i]];
+    }
+    currentIndex = 0; isFlipped = false; updateCard();
+}
+function flipCard() {
+    document.getElementById('flashcard').classList.toggle('flipped');
+    isFlipped = !isFlipped;
+}
+function nextCard() {
+    if (currentIndex < activeCards.length - 1) { currentIndex++; if (isFlipped) flipCard(); updateCard(); }
+    else showCompletionModal();
+}
+function previousCard() {
+    if (currentIndex > 0) { currentIndex--; if (isFlipped) flipCard(); updateCard(); }
+}
+function markKnown() { knownCards.add(currentIndex); updateStats(); nextCard(); }
+function markForReview() {
+    if (markedCards.has(currentIndex)) markedCards.delete(currentIndex);
+    else markedCards.add(currentIndex);
+    updateStats();
+}
+function reviewMarked() {
+    if (markedCards.size === 0) { alert('No cards marked for review!'); return; }
+    activeCards = flashcards.filter((_, i) => markedCards.has(i));
+    currentIndex = 0; isFlipped = false; updateCard(); updateStats();
+}
+function resetProgress() {
+    if (confirm('Reset all progress?')) { knownCards.clear(); markedCards.clear(); updateStats(); }
+}
+function updateCard() {
+    const card = activeCards[currentIndex];
+    document.getElementById('frontContent').textContent = card.front;
+    document.getElementById('backContent').textContent = card.back;
+    document.getElementById('cardNumber').textContent = `${currentIndex + 1}/${activeCards.length}`;
+    document.getElementById('cardNumberBack').textContent = `${currentIndex + 1}/${activeCards.length}`;
+    document.getElementById('currentCard').textContent = currentIndex + 1;
+    document.getElementById('prevBtn').disabled = currentIndex === 0;
+    document.getElementById('nextBtn').disabled = currentIndex === activeCards.length - 1;
+    updateStats();
+}
+function updateStats() {
+    const progress = ((currentIndex + 1) / activeCards.length) * 100;
+    document.getElementById('progressBar').style.width = `${progress}%`;
+    document.getElementById('progressBar').textContent = `${Math.round(progress)}%`;
+    document.getElementById('totalCards').textContent = activeCards.length;
+    document.getElementById('knownCards').textContent = knownCards.size;
+    document.getElementById('markedCards').textContent = markedCards.size;
+}
+function showCompletionModal() {
+    document.getElementById('completionStats').innerHTML = `<p><strong>Known:</strong> ${knownCards.size} | <strong>Review:</strong> ${markedCards.size}</p>`;
+    document.getElementById('completionModal').classList.add('show');
+}
+function closeModal() { document.getElementById('completionModal').classList.remove('show'); }
+function resetAndContinue() { currentIndex = 0; isFlipped = false; closeModal(); updateCard(); }
+updateCard();
+</script>
+</body>
+</html>
