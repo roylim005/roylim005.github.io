@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thinking & Intelligence - Interactive Flashcards</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .controls {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .set-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .set-btn {
+            padding: 12px;
+            border: 2px solid #667eea;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 0.9em;
+        }
+        
+        .set-btn:hover {
+            background: #f0f0f0;
+            transform: translateY(-2px);
+        }
+        
+        .set-btn.active {
+            background: #667eea;
+            color: white;
+        }
+        
+        .options {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .option-btn {
+            padding: 10px 20px;
+            border: none;
+            background: #764ba2;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .option-btn:hover {
+            background: #8b5ab8;
+            transform: translateY(-2px);
+        }
+        
+        .progress-bar {
+            background: #e0e0e0;
+            border-radius: 10px;
+            height: 20px;
+            overflow: hidden;
+            margin-top: 15px;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            height: 100%;
+            transition: width 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #e0e0e0;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .card-container {
+            perspective: 1000px;
+            margin-bottom: 20px;
+        }
+        
+        .flashcard {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            min-height: 350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        
+        .flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+        
+        .card-face {
+            backface-visibility: hidden;
+            position: absolute;
+            width: 100%;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .card-back {
+            transform: rotateY(180deg);
+        }
+        
+        .card-label {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+        
+        .card-number {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #764ba2;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+        
+        .card-content {
+            font-size: 1.3em;
+            line-height: 1.6;
+            color: #333;
+            margin-top: 40px;
+        }
+        
+        .card-hint {
+            position: absolute;
+            bottom: 20px;
+            color: #999;
+            font-size: 0.9em;
+            font-style: italic;
+        }
+        
+        .navigation {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .nav-btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .nav-btn:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .prev-btn {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .next-btn {
+            background: #28a745;
+            color: white;
+        }
+        
+        .know-btn {
+            background: #28a745;
+            color: white;
+        }
+        
+        .review-btn {
+            background: #ffc107;
+            color: #333;
+        }
+        
+        .shuffle-btn {
+            background: #17a2b8;
+            color: white;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .card-container {
+            animation: slideIn 0.4s ease-out;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .flashcard {
+                padding: 30px;
+                min-height: 300px;
+            }
+            
+            .card-content {
+                font-size: 1.1em;
+            }
+            
+            .nav-btn {
+                padding: 12px 20px;
+                font-size: 1em;
+            }
+        }
+        
+        .completion-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .completion-modal.show {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        
+        .modal-content h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        
+        .modal-content p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        
+        .modal-btn {
+            padding: 15px 30px;
+            border: none;
+            background: #667eea;
+            color: white;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 5px;
+        }
+        
+        .modal-btn:hover {
+            background: #764ba2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧠 Thinking & Intelligence</h1>
+            <p>Interactive Flashcards - 135 Cards Total</p>
+        </div>
+        
+        <div class="controls">
+            <h3 style="margin-bottom: 15px; color: #667eea;">Select Card Set:</h3>
+            <div class="set-selector">
+                <button class="set-btn active" onclick="selectSet('all')">All Cards (135)</button>
+                <button class="set-btn" onclick="selectSet(1)">Definitions (30)</button>
+                <button class="set-btn" onclick="selectSet(2)">Language (15)</button>
+                <button class="set-btn" onclick="selectSet(3)">Intelligence (25)</button>
+                <button class="set-btn" onclick="selectSet(4)">Comparisons (20)</button>
+                <button class="set-btn" onclick="selectSet(5)">Examples (25)</button>
+                <button class="set-btn" onclick="selectSet(6)">Theorists (15)</button>
+                <button class="set-btn" onclick="selectSet(7)">Mnemonics (5)</button>
+            </div>
+            
+            <div class="options">
+                <button class="option-btn shuffle-btn" onclick="shuffleCards()">🔀 Shuffle</button>
+                <button class="option-btn" onclick="resetProgress()">🔄 Reset Progress</button>
+                <button class="option-btn" onclick="reviewMarked()">⭐ Review Marked</button>
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar">0%</div>
+            </div>
+            
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value" id="currentCard">1</div>
+                    <div class="stat-label">Current</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="totalCards">135</div>
+                    <div class="stat-label">Total</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="knownCards">0</div>
+                    <div class="stat-label">Known</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="markedCards">0</div>
+                    <div class="stat-label">Review</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card-container">
+            <div class="flashcard" id="flashcard" onclick="flipCard()">
+                <div class="card-face card-front">
+                    <div class="card-label">QUESTION</div>
+                    <div class="card-number" id="cardNumber">1/135</div>
+                    <div class="card-content" id="frontContent">Click to start!</div>
+                    <div class="card-hint">Click card to flip</div>
+                </div>
+                <div class="card-face card-back">
+                    <div class="card-label">ANSWER</div>
+                    <div class="card-number" id="cardNumberBack">1/135</div>
+                    <div class="card-content" id="backContent">Answer appears here</div>
+                    <div class="card-hint">Click card to flip back</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="navigation">
+            <button class="nav-btn prev-btn" onclick="previousCard()" id="prevBtn">
+                ⬅️ Previous
+            </button>
+            <button class="nav-btn review-btn" onclick="markForReview()">
+                ⭐ Mark for Review
+            </button>
+            <button class="nav-btn know-btn" onclick="markKnown()">
+                ✅ I Know This
+            </button>
+            <button class="nav-btn next-btn" onclick="nextCard()" id="nextBtn">
+                Next ➡️
+            </button>
+        </div>
+    </div>
+    
+    <div class="completion-modal" id="completionModal">
+        <div class="modal-content">
+            <h2>🎉 Great Work!</h2>
+            <p>You've reviewed all cards in this set!</p>
+            <div id="completionStats"></div>
+            <button class="modal-btn" onclick="resetAndContinue()">Start Over</button>
+            <button class="modal-btn" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+    
+    <script>
+        const flashcards = [
+            // SET 1: BASIC DEFINITIONS (30 cards)
+            { set: 1, front: "What is knowledge (in cognitive psychology)?", back: "Mental representations of the world that we have stored in long-term memory." },
+            { set: 1, front: "What is thinking?", back: "The use of knowledge to accomplish a goal." },
+            { set: 1, front: "What are visual images in cognitive terms?", back: "Powerful mental representations that allow us to remember faces, maps, and spatial information." },
+            { set: 1, front: "What are concepts?", back: "Mental categories that contain related bits of knowledge and are organized around the meaning of the information they represent." },
+            { set: 1, front: "What is a superordinate category?", back: "The general, broad level of categorization (e.g., 'furniture' or 'vehicle')." },
+            { set: 1, front: "What is a basic level category?", back: "The middle level of categorization, most commonly used in everyday language (e.g., 'chair' or 'car')." },
+            { set: 1, front: "What is a subordinate category?", back: "The most specific level of categorization (e.g., 'rocking chair' or 'sports car')." },
+            { set: 1, front: "What are formal concepts?", back: "Concepts acquired through learning rigid rules that define certain categories (e.g., mathematical definitions, scientific classifications)." },
+            { set: 1, front: "What are natural concepts?", back: "Concepts that develop naturally as we live our lives and experience the world (e.g., 'good weather,' 'comfortable')." },
+            { set: 1, front: "What is a prototype?", back: "Our concept of the most typical member of a category—essentially a mental summary of all members of that category." },
+            { set: 1, front: "What are exemplars?", back: "Stored representations of actual category members we have personally experienced." },
+            { set: 1, front: "What is an algorithm?", back: "A method of solving a well-structured problem that always leads to the correct solution." },
+            { set: 1, front: "What is a heuristic?", back: "A shortcut or rule of thumb that may or may not lead to the solution of a problem." },
+            { set: 1, front: "What are well-structured problems?", back: "Problems with clear paths to solution that can be solved using algorithms." },
+            { set: 1, front: "What are ill-structured problems?", back: "Problems without clear solution paths that must be solved using heuristics." },
+            { set: 1, front: "What is insight?", back: "A sudden realization or 'Aha!' moment that leads to problem solution." },
+            { set: 1, front: "What is incubation in problem solving?", back: "The process where stepping away from a problem allows unconscious processing, often leading to solutions." },
+            { set: 1, front: "What is creativity?", back: "The ability to generate novel and useful solutions to problems." },
+            { set: 1, front: "What is functional fixedness?", back: "The inability to see alternative uses for objects beyond their typical function—a common obstacle to problem solving." },
+            { set: 1, front: "What is a mental set?", back: "The tendency to use familiar problem-solving strategies even when they're not working—another obstacle to problem solving." },
+            { set: 1, front: "What is reasoning?", back: "Drawing conclusions that are based on certain assumptions about the world." },
+            { set: 1, front: "What is deductive reasoning?", back: "Reasoning from the general to the specific. If premises are true, the conclusion must be true." },
+            { set: 1, front: "What is inductive reasoning?", back: "Reasoning from the specific to the general. Conclusions are probabilistic and can be wrong." },
+            { set: 1, front: "What is dialectical reasoning?", back: "A type of reasoning in which contradictions are reconciled or accepted." },
+            { set: 1, front: "What is decision making?", back: "The process of choosing among several alternatives, often part of problem solving." },
+            { set: 1, front: "What is framing?", back: "How possible courses of action are presented; can significantly affect our decisions." },
+            { set: 1, front: "What is the availability heuristic?", back: "Judging the likelihood of events based on how easily examples come to mind." },
+            { set: 1, front: "What is the representativeness heuristic?", back: "Judging the likelihood of something by how similar it is to a prototype or typical example." },
+            { set: 1, front: "What is the affective heuristic?", back: "Making decisions based on emotional responses rather than careful analysis." },
+            { set: 1, front: "What is human language?", back: "A well-developed, syntactical, verbal system for representing the world." },
+            
+            // SET 2: LANGUAGE DEVELOPMENT (15 cards)
+            { set: 2, front: "What are biolinguistic theories?", back: "Theories arguing that humans have evolved linguistic abilities and are born with innate language capacity." },
+            { set: 2, front: "What is the Language Acquisition Device (LAD)?", back: "An innate, programmed capacity for language that humans are born with (according to biolinguistic theory)." },
+            { set: 2, front: "What are usage-based theories of language?", back: "Theories arguing that language develops out of social interactions and general cognitive abilities, rather than being innate." },
+            { set: 2, front: "What is cooing in language development?", back: "The earliest stage of language development involving vowel sounds (around 2-4 months)." },
+            { set: 2, front: "What is babbling?", back: "The language development stage involving consonant-vowel combinations (around 6-9 months)." },
+            { set: 2, front: "What are morphemes?", back: "The smallest meaningful units of language (e.g., 'un-' 'happy' '-ness')." },
+            { set: 2, front: "What is telegraphic speech?", back: "Two-word phrases used by children around age 2 (e.g., 'want cookie,' 'mama go')." },
+            { set: 2, front: "What is syntax?", back: "The rules governing how words are combined into sentences." },
+            { set: 2, front: "What is grammar?", back: "The rules that govern the structure and use of language." },
+            { set: 2, front: "What are pragmatics?", back: "The social rules for using language appropriately in different contexts." },
+            { set: 2, front: "What is the Whorfian hypothesis (linguistic relativity)?", back: "The theory that one's language determines one's thoughts and perceptions of the world." },
+            { set: 2, front: "What is the current view on language and thought?", back: "Language influences (rather than determines) our thoughts—a weaker version of the Whorfian hypothesis." },
+            { set: 2, front: "What is the typical sequence of language development?", back: "Cooing → Babbling → Morphemes → Telegraphic speech → Grammar & Pragmatics." },
+            { set: 2, front: "At what age do children typically begin telegraphic speech?", back: "Around age 2." },
+            { set: 2, front: "Do animals have language according to most researchers?", back: "Hotly debated. Animals clearly communicate, but whether they have true language (with syntax and generativity) is controversial." },
+            
+            // SET 3: INTELLIGENCE CONCEPTS (25 cards)
+            { set: 3, front: "How do modern psychologists broadly define intelligence?", back: "Those abilities that allow you to adapt to your environment and behave in a goal-oriented way." },
+            { set: 3, front: "What is mental age?", back: "A child's intellectual level compared to the average abilities of children at a specific chronological age." },
+            { set: 3, front: "Who established the concept of mental age?", back: "Alfred Binet." },
+            { set: 3, front: "What is IQ (intelligence quotient)?", back: "A score obtained by dividing mental age by chronological age and multiplying by 100: (MA/CA) × 100." },
+            { set: 3, front: "Who introduced the IQ formula?", back: "Lewis Terman (at Stanford University)." },
+            { set: 3, front: "What does the WAIS-IV measure?", back: "The Wechsler Adult Intelligence Scale yields several separate index scores and an overall IQ score." },
+            { set: 3, front: "Who created the WAIS intelligence test?", back: "David Wechsler." },
+            { set: 3, front: "What is cultural bias in intelligence testing?", back: "When intelligence tests favor certain cultural backgrounds over others, potentially making the test unfair." },
+            { set: 3, front: "What is Raven's Progressive Matrices?", back: "A nonverbal intelligence test that may be less culturally biased because it relies less on language." },
+            { set: 3, front: "What is general intelligence (g)?", back: "The idea that mental ability is a single, unitary factor underlying all cognitive performance." },
+            { set: 3, front: "Who proposed the concept of general intelligence (g)?", back: "Charles Spearman." },
+            { set: 3, front: "What is crystallized intelligence?", back: "Our accumulation of knowledge, facts, and skills acquired through experience and education." },
+            { set: 3, front: "What is fluid intelligence?", back: "The speed and efficiency with which we learn new information and solve novel problems." },
+            { set: 3, front: "How does crystallized intelligence change with age?", back: "It generally increases with age as we accumulate more knowledge." },
+            { set: 3, front: "How does fluid intelligence change with age?", back: "It peaks in young adulthood and gradually declines with age." },
+            { set: 3, front: "What is Sternberg's triarchic theory of intelligence?", back: "Theory proposing three independent types of intelligence: analytical, creative, and practical." },
+            { set: 3, front: "What are the three components of Sternberg's triarchic theory?", back: "1) Analytical (academic problem-solving), 2) Creative (novel situations), 3) Practical (everyday 'street smarts')." },
+            { set: 3, front: "Who proposed the theory of multiple intelligences?", back: "Howard Gardner." },
+            { set: 3, front: "Name at least 5 of Gardner's multiple intelligences.", back: "Linguistic, logical-mathematical, spatial, musical, bodily-kinesthetic, interpersonal, intrapersonal, naturalistic." },
+            { set: 3, front: "What is emotional intelligence?", back: "The ability to perceive, understand, manage, and use emotions effectively—proposed by Daniel Goleman as important for success." },
+            { set: 3, front: "What are the five components of emotional intelligence?", back: "Self-awareness, self-regulation, motivation, empathy, and social skills." },
+            { set: 3, front: "Who proposed the theory of emotional intelligence?", back: "Daniel Goleman (popularized it; others contributed to the concept)." },
+            { set: 3, front: "What is the nature vs. nurture debate in intelligence?", back: "The question of whether intelligence is primarily inherited (nature) or shaped by environment (nurture)." },
+            { set: 3, front: "What is the current scientific consensus on nature vs. nurture in intelligence?", back: "Intelligence results from an interaction of both heredity (nature) and environment (nurture)." },
+            { set: 3, front: "What is the Flynn Effect?", back: "The phenomenon that average IQ scores have increased over the past century, suggesting environmental factors play a major role in intelligence." },
+            
+            // SET 4: COMPARE & CONTRAST (20 cards)
+            { set: 4, front: "Algorithm vs. Heuristic - Which guarantees a solution?", back: "Algorithm guarantees a solution; heuristic may or may not lead to a solution." },
+            { set: 4, front: "Algorithm vs. Heuristic - Which is faster?", back: "Heuristic is faster; algorithm is slower and more methodical." },
+            { set: 4, front: "Algorithm vs. Heuristic - Which is used for ill-structured problems?", back: "Heuristic (algorithms only work for well-structured problems)." },
+            { set: 4, front: "Prototype vs. Exemplar - Which is an average representation?", back: "Prototype is the average/ideal; exemplar is a specific remembered instance." },
+            { set: 4, front: "Prototype vs. Exemplar - How many do you have per category?", back: "One prototype per category; multiple exemplars per category." },
+            { set: 4, front: "Deductive vs. Inductive - Which goes from general to specific?", back: "Deductive reasoning goes general → specific." },
+            { set: 4, front: "Deductive vs. Inductive - Which provides certainty?", back: "Deductive provides certainty (if premises are true); inductive is probabilistic." },
+            { set: 4, front: "Deductive vs. Inductive - Which can be disproven by counterexamples?", back: "Inductive reasoning (e.g., 'all swans are white' disproven by black swans)." },
+            { set: 4, front: "Crystallized vs. Fluid - Which increases with age?", back: "Crystallized intelligence increases; fluid intelligence decreases." },
+            { set: 4, front: "Crystallized vs. Fluid - Which involves accumulated knowledge?", back: "Crystallized intelligence is accumulated knowledge." },
+            { set: 4, front: "Crystallized vs. Fluid - Which involves processing speed?", back: "Fluid intelligence involves speed and efficiency of learning." },
+            { set: 4, front: "Biolinguistic vs. Usage-based - Which says language is innate?", back: "Biolinguistic theory argues language is innate." },
+            { set: 4, front: "Biolinguistic vs. Usage-based - Which emphasizes social interaction?", back: "Usage-based theory emphasizes social interaction in language development." },
+            { set: 4, front: "Formal vs. Natural Concepts - Which follows rigid rules?", back: "Formal concepts follow rigid definitional rules." },
+            { set: 4, front: "Formal vs. Natural Concepts - Which develops through experience?", back: "Natural concepts develop naturally through life experience." },
+            { set: 4, front: "Functional Fixedness vs. Mental Set - Which involves objects?", back: "Functional fixedness involves seeing objects only in their typical use." },
+            { set: 4, front: "Functional Fixedness vs. Mental Set - Which involves strategies?", back: "Mental set involves being stuck using familiar problem-solving strategies." },
+            { set: 4, front: "Spearman's g vs. Gardner's theory - Which proposes multiple intelligences?", back: "Gardner proposes multiple separate intelligences; Spearman proposes single general intelligence." },
+            { set: 4, front: "Sternberg vs. Gardner - How many intelligences does each propose?", back: "Sternberg proposes 3 (triarchic); Gardner proposes 8+ separate intelligences." },
+            { set: 4, front: "Well-structured vs. Ill-structured problems - Which requires heuristics?", back: "Ill-structured problems require heuristics (well-structured can use algorithms)." },
+            
+            // SET 5: APPLICATION & EXAMPLES (25 cards)
+            { set: 5, front: "Example: Trying every possible combination to open a lock. Algorithm or Heuristic?", back: "Algorithm - systematic method that guarantees finding the solution." },
+            { set: 5, front: "Example: 'Try numbers that are meaningful to me' to open a lock. Algorithm or Heuristic?", back: "Heuristic - shortcut that may or may not work." },
+            { set: 5, front: "Example: All dogs are animals → My pet is a dog → My pet is an animal. What type of reasoning?", back: "Deductive reasoning (general → specific, certain conclusion)." },
+            { set: 5, front: "Example: I've seen 50 crows and all were black → All crows are black. What type of reasoning?", back: "Inductive reasoning (specific observations → general conclusion, could be wrong)." },
+            { set: 5, front: "Example: After seeing plane crash news, you think flying is very dangerous. Which heuristic?", back: "Availability heuristic (judging by ease of recall)." },
+            { set: 5, front: "Example: Assuming the quiet person with glasses is a librarian. Which heuristic?", back: "Representativeness heuristic (judging by similarity to stereotype/prototype)." },
+            { set: 5, front: "Example: Avoiding a technology because it 'feels' dangerous despite safety data. Which heuristic?", back: "Affective heuristic (decision based on emotional response)." },
+            { set: 5, front: "Example: Can't see that a shoe could be used as a hammer. What obstacle?", back: "Functional fixedness." },
+            { set: 5, front: "Example: Keep trying the same failed approach to fix your computer. What obstacle?", back: "Mental set." },
+            { set: 5, front: "Example: Your mental image of an 'average bird.' Prototype or Exemplar?", back: "Prototype (idealized/average representation)." },
+            { set: 5, front: "Example: Remembering your childhood pet parakeet when thinking of birds. Prototype or Exemplar?", back: "Exemplar (specific remembered instance)." },
+            { set: 5, front: "Example: 'Vehicle' in the hierarchy vehicle→car→sedan. What level?", back: "Superordinate category (most general)." },
+            { set: 5, front: "Example: 'Car' in the hierarchy vehicle→car→sedan. What level?", back: "Basic level category (middle level, most commonly used)." },
+            { set: 5, front: "Example: 'Sedan' in the hierarchy vehicle→car→sedan. What level?", back: "Subordinate category (most specific)." },
+            { set: 5, front: "Example: A triangle has three sides (learned definition). Formal or Natural concept?", back: "Formal concept (rigid rule-based definition)." },
+            { set: 5, front: "Example: Your understanding of 'comfort' or 'fairness.' Formal or Natural concept?", back: "Natural concept (developed through experience)." },
+            { set: 5, front: "Example: Knowing state capitals and vocabulary. Crystallized or Fluid?", back: "Crystallized intelligence (accumulated knowledge)." },
+            { set: 5, front: "Example: Quickly learning to use new software. Crystallized or Fluid?", back: "Fluid intelligence (speed of learning new things)." },
+            { set: 5, front: "Example: A baby saying 'oooh' and 'ahhh.' What language stage?", back: "Cooing (vowel sounds)." },
+            { set: 5, front: "Example: A baby saying 'bababa' and 'dadada.' What language stage?", back: "Babbling (consonant-vowel combinations)." },
+            { set: 5, front: "Example: A toddler saying 'want cookie' or 'daddy go.' What language stage?", back: "Telegraphic speech (2-word phrases around age 2)." },
+            { set: 5, front: "Example: Solving calculus problems. Which of Sternberg's intelligences?", back: "Analytical intelligence (academic problem-solving)." },
+            { set: 5, front: "Example: Figuring out how to fix your car without instructions. Which of Sternberg's intelligences?", back: "Practical intelligence (everyday problem-solving/street smarts)." },
+            { set: 5, front: "Example: Coming up with a novel solution no one's tried before. Which of Sternberg's intelligences?", back: "Creative intelligence (novel situations)." },
+            { set: 5, front: "Example: IQ scores rising over the past 100 years. What phenomenon?", back: "The Flynn Effect." },
+            
+            // SET 6: THEORISTS & KEY FIGURES (15 cards)
+            { set: 6, front: "Who developed the concept of mental age?", back: "Alfred Binet." },
+            { set: 6, front: "Who introduced the IQ formula (MA/CA × 100)?", back: "Lewis Terman." },
+            { set: 6, front: "Who created the WAIS adult intelligence test?", back: "David Wechsler." },
+            { set: 6, front: "Who proposed general intelligence (g)?", back: "Charles Spearman." },
+            { set: 6, front: "Who proposed the triarchic theory of intelligence?", back: "Robert Sternberg." },
+            { set: 6, front: "Who proposed the theory of multiple intelligences?", back: "Howard Gardner." },
+            { set: 6, front: "Who popularized the theory of emotional intelligence?", back: "Daniel Goleman." },
+            { set: 6, front: "Who proposed the linguistic relativity hypothesis (Whorfian hypothesis)?", back: "Benjamin Whorf (implied by 'Whorfian hypothesis')." },
+            { set: 6, front: "What test is associated with reduced cultural bias?", back: "Raven's Progressive Matrices." },
+            { set: 6, front: "Whose theory includes analytical, creative, and practical intelligence?", back: "Robert Sternberg (triarchic theory)." },
+            { set: 6, front: "Whose theory includes linguistic, musical, and bodily-kinesthetic intelligence?", back: "Howard Gardner (multiple intelligences)." },
+            { set: 6, front: "Who proposed the Language Acquisition Device (LAD)?", back: "Noam Chomsky (implied by biolinguistic theory)." },
+            { set: 6, front: "What intelligence test did Lewis Terman develop?", back: "The Stanford-Binet Intelligence Test (revision of Binet's work)." },
+            { set: 6, front: "What phenomenon was discovered showing IQ increases over time?", back: "The Flynn Effect (named after James Flynn)." },
+            { set: 6, front: "Who distinguished between crystallized and fluid intelligence?", back: "Raymond Cattell." },
+            
+            // SET 7: MNEMONICS (5 cards)
+            { set: 7, front: "What does 'SuperBaSub' help you remember?", back: "The three levels of categorization: Superordinate, Basic, Subordinate." },
+            { set: 7, front: "What does 'CAP' help you remember about Sternberg?", back: "Sternberg's three intelligences: Creative, Analytical, Practical." },
+            { set: 7, front: "What does 'AAR' help you remember about decision heuristics?", back: "The three heuristics: Availability, Affective, Representativeness." },
+            { set: 7, front: "What does 'CB-M-TP' help you remember?", back: "Language development stages: Cooing, Babbling, Morphemes, Telegraphic speech, Pragmatics/grammar." },
+            { set: 7, front: "What's a memory trick to distinguish deductive from inductive?", back: "DEductive goes DOWN (general to specific); INductive goes IN/UP (specific to general)." }
+        ];
+        
+        let currentIndex = 0;
+        let isFlipped = false;
+        let activeCards = [...flashcards];
+        let knownCards = new Set();
+        let markedCards = new Set();
+        
+        function selectSet(setNumber) {
+            // Update active button
+            document.querySelectorAll('.set-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Filter cards
+            if (setNumber === 'all') {
+                activeCards = [...flashcards];
+            } else {
+                activeCards = flashcards.filter(card => card.set === setNumber);
+            }
+            
+            // Reset to first card
+            currentIndex = 0;
+            isFlipped = false;
+            updateCard();
+            updateStats();
+        }
+        
+        function shuffleCards() {
+            for (let i = activeCards.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [activeCards[i], activeCards[j]] = [activeCards[j], activeCards[i]];
+            }
+            currentIndex = 0;
+            isFlipped = false;
+            updateCard();
+        }
+        
+        function flipCard() {
+            const card = document.getElementById('flashcard');
+            card.classList.toggle('flipped');
+            isFlipped = !isFlipped;
+        }
+        
+        function nextCard() {
+            if (currentIndex < activeCards.length - 1) {
+                currentIndex++;
+                if (isFlipped) flipCard();
+                updateCard();
+            } else {
+                showCompletionModal();
+            }
+        }
+        
+        function previousCard() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                if (isFlipped) flipCard();
+                updateCard();
+            }
+        }
+        
+        function markKnown() {
+            const cardId = currentIndex;
+            knownCards.add(cardId);
+            updateStats();
+            nextCard();
+        }
+        
+        function markForReview() {
+            const cardId = currentIndex;
+            if (markedCards.has(cardId)) {
+                markedCards.delete(cardId);
+            } else {
+                markedCards.add(cardId);
+            }
+            updateStats();
+        }
+        
+        function reviewMarked() {
+            if (markedCards.size === 0) {
+                alert('No cards marked for review!');
+                return;
+            }
+            
+            activeCards = flashcards.filter((_, index) => markedCards.has(index));
+            currentIndex = 0;
+            isFlipped = false;
+            updateCard();
+            updateStats();
+        }
+        
+        function resetProgress() {
+            if (confirm('Reset all progress? This will clear known and marked cards.')) {
+                knownCards.clear();
+                markedCards.clear();
+                updateStats();
+            }
+        }
+        
+        function updateCard() {
+            const card = activeCards[currentIndex];
+            document.getElementById('frontContent').textContent = card.front;
+            document.getElementById('backContent').textContent = card.back;
+            document.getElementById('cardNumber').textContent = `${currentIndex + 1}/${activeCards.length}`;
+            document.getElementById('cardNumberBack').textContent = `${currentIndex + 1}/${activeCards.length}`;
+            document.getElementById('currentCard').textContent = currentIndex + 1;
+            
+            // Update navigation buttons
+            document.getElementById('prevBtn').disabled = currentIndex === 0;
+            document.getElementById('nextBtn').disabled = currentIndex === activeCards.length - 1;
+            
+            updateStats();
+        }
+        
+        function updateStats() {
+            const progress = ((currentIndex + 1) / activeCards.length) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+            document.getElementById('progressBar').textContent = `${Math.round(progress)}%`;
+            
+            document.getElementById('totalCards').textContent = activeCards.length;
+            document.getElementById('knownCards').textContent = knownCards.size;
+            document.getElementById('markedCards').textContent = markedCards.size;
+        }
+        
+        function showCompletionModal() {
+            const modal = document.getElementById('completionModal');
+            const stats = document.getElementById('completionStats');
+            
+            stats.innerHTML = `
+                <p><strong>Known:</strong> ${knownCards.size} cards</p>
+                <p><strong>Marked for Review:</strong> ${markedCards.size} cards</p>
+                <p><strong>Completion:</strong> ${Math.round((knownCards.size / activeCards.length) * 100)}%</p>
+            `;
+            
+            modal.classList.add('show');
+        }
+        
+        function closeModal() {
+            document.getElementById('completionModal').classList.remove('show');
+        }
+        
+        function resetAndContinue() {
+            currentIndex = 0;
+            isFlipped = false;
+            closeModal();
+            updateCard();
+        }
+        
+        // Initialize
+        updateCard();
+    </script>
+</body>
+</html>
