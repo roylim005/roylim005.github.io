@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neuroscience - Practice Exam</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; background: white; border-radius: 20px; padding: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        h1 { color: #fa709a; text-align: center; margin-bottom: 10px; font-size: 2.5em; }
+        .subtitle { text-align: center; color: #666; margin-bottom: 30px; font-size: 1.1em; }
+        .section-select { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 30px; }
+        .section-btn { padding: 20px; border: 3px solid #fa709a; background: white; border-radius: 12px; cursor: pointer; transition: all 0.3s; font-weight: 600; font-size: 1em; }
+        .section-btn:hover { background: #fff5f8; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(250,112,154,0.3); }
+        .section-btn.active { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: white; }
+        .progress-container { background: #f0f0f0; border-radius: 10px; padding: 20px; margin-bottom: 30px; }
+        .progress-bar { background: #e0e0e0; border-radius: 10px; height: 25px; overflow: hidden; margin-bottom: 15px; }
+        .progress-fill { background: linear-gradient(90deg, #fa709a, #fee140); height: 100%; transition: width 0.3s; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; text-align: center; }
+        .stat { background: white; padding: 10px; border-radius: 8px; }
+        .stat-value { font-size: 1.8em; font-weight: bold; color: #fa709a; }
+        .stat-label { font-size: 0.9em; color: #666; margin-top: 5px; }
+        .question-card { background: #fff5f8; border-left: 5px solid #fa709a; padding: 25px; margin-bottom: 25px; border-radius: 10px; }
+        .question-number { color: #fa709a; font-weight: bold; font-size: 1.1em; margin-bottom: 15px; }
+        .question-text { font-size: 1.1em; line-height: 1.6; margin-bottom: 20px; color: #333; }
+        .options { display: flex; flex-direction: column; gap: 10px; }
+        .option { padding: 15px; border: 2px solid #ddd; border-radius: 8px; cursor: pointer; transition: all 0.3s; background: white; }
+        .option:hover { border-color: #fa709a; background: #fff5f8; }
+        .option.selected { border-color: #fa709a; background: #ffe6f0; }
+        .option.correct { border-color: #28a745; background: #d4edda; }
+        .option.incorrect { border-color: #dc3545; background: #f8d7da; }
+        .feedback { margin-top: 15px; padding: 15px; border-radius: 8px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct { background: #d4edda; border-left: 5px solid #28a745; color: #155724; }
+        .feedback.incorrect { background: #f8d7da; border-left: 5px solid #dc3545; color: #721c24; }
+        .navigation { display: flex; gap: 15px; justify-content: space-between; margin-top: 30px; }
+        .nav-btn { padding: 15px 28px; border: none; border-radius: 10px; font-size: 1.05em; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .nav-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .nav-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .prev-btn { background: #6c757d; color: white; }
+        .submit-btn { background: #28a745; color: white; }
+        .next-btn { background: #fa709a; color: white; }
+        .results-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); justify-content: center; align-items: center; z-index: 1000; }
+        .results-modal.show { display: flex; }
+        .modal-content { background: white; padding: 40px; border-radius: 20px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; }
+        .modal-content h2 { color: #fa709a; margin-bottom: 20px; text-align: center; }
+        .grade-display { text-align: center; margin: 30px 0; }
+        .grade-circle { width: 150px; height: 150px; border-radius: 50%; background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: white; font-size: 3em; font-weight: bold; }
+        .breakdown-item { display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #e0e0e0; }
+        .modal-btn { padding: 15px 28px; border: none; background: #fa709a; color: white; border-radius: 10px; font-size: 1em; font-weight: 600; cursor: pointer; margin: 8px; }
+        .modal-btn:hover { background: #fee140; color: #333; }
+        @media (max-width: 768px) { .container { padding: 20px; } h1 { font-size: 1.8em; } .stats-grid { grid-template-columns: repeat(2,1fr); } }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>🧠 Practice Exam</h1>
+    <p class="subtitle">Neuroscience — Interactive Assessment</p>
+    <div class="section-select">
+        <button class="section-btn active" onclick="selectSection('mc')">Multiple Choice<br><small>(30 questions)</small></button>
+        <button class="section-btn" onclick="selectSection('tf')">True / False<br><small>(15 questions)</small></button>
+        <button class="section-btn" onclick="selectSection('mixed')">Mixed Review<br><small>(45 questions)</small></button>
+    </div>
+    <div class="progress-container">
+        <div class="progress-bar"><div class="progress-fill" id="progressBar">0%</div></div>
+        <div class="stats-grid">
+            <div class="stat"><div class="stat-value" id="currentQ">1</div><div class="stat-label">Current</div></div>
+            <div class="stat"><div class="stat-value" id="totalQ">30</div><div class="stat-label">Total</div></div>
+            <div class="stat"><div class="stat-value" id="correctCount">0</div><div class="stat-label">Correct</div></div>
+            <div class="stat"><div class="stat-value" id="percentScore">0%</div><div class="stat-label">Score</div></div>
+        </div>
+    </div>
+    <div id="questionContainer"></div>
+    <div class="navigation">
+        <button class="nav-btn prev-btn" onclick="previousQuestion()" id="prevBtn">⬅️ Previous</button>
+        <button class="nav-btn submit-btn" onclick="checkAnswer()" id="submitBtn">✓ Check Answer</button>
+        <button class="nav-btn next-btn" onclick="nextQuestion()" id="nextBtn">Next ➡️</button>
+    </div>
+</div>
+<div class="results-modal" id="resultsModal">
+    <div class="modal-content">
+        <h2>📊 Exam Results</h2>
+        <div class="grade-display">
+            <div class="grade-circle" id="gradeCircle">A</div>
+            <h3 id="scoreText">Excellent Work!</h3>
+        </div>
+        <div id="breakdown"></div>
+        <div style="text-align:center;">
+            <button class="modal-btn" onclick="reviewMissed()">Review Questions</button>
+            <button class="modal-btn" onclick="restartExam()">Start Over</button>
+        </div>
+    </div>
+</div>
+<script>
+const questions = [
+    // MULTIPLE CHOICE (30)
+    {type:'mc', question:"What is the resting potential of a neuron?", options:["−55 mv","−70 mv","0 mv","+40 mv"], correct:1, explanation:"Resting potential is −70 mv (negative inside). Threshold is −55 mv."},
+    {type:'mc', question:"What is the threshold of excitation?", options:["−70 mv","−55 mv","0 mv","+40 mv"], correct:1, explanation:"Threshold is −55 mv. Once reached, action potential fires (all-or-none)."},
+    {type:'mc', question:"What does the all-or-none principle mean?", options:["Neuron fires halfway","Neuron fires completely or not at all","Neuron fires slowly","Neuron fires multiple times"], correct:1, explanation:"All-or-none: Neuron either fires completely or doesn't fire at all. No partial firing."},
+    {type:'mc', question:"Which neurotransmitter is the main INHIBITORY one?", options:["Glutamate","Dopamine","GABA","Serotonin"], correct:2, explanation:"GABA is the main inhibitory neurotransmitter (reduces neural activity, calming)."},
+    {type:'mc', question:"Which neurotransmitter is the main EXCITATORY one?", options:["GABA","Glutamate","Dopamine","Acetylcholine"], correct:1, explanation:"Glutamate is the main excitatory neurotransmitter (increases neural activity, learning)."},
+    {type:'mc', question:"Too little dopamine causes:", options:["Alzheimer's","Parkinson's disease","Depression","Schizophrenia"], correct:1, explanation:"Too little dopamine → Parkinson's (tremors, rigid movement). Too much → Schizophrenia."},
+    {type:'mc', question:"SSRIs are used to treat:", options:["Parkinson's","Depression","Alzheimer's","Schizophrenia"], correct:1, explanation:"SSRIs (Selective Serotonin Reuptake Inhibitors) block serotonin reuptake to treat depression."},
+    {type:'mc', question:"How do SSRIs work?", options:["Increase dopamine","Block serotonin reuptake","Increase GABA","Block glutamate"], correct:1, explanation:"SSRIs block reuptake of serotonin, leaving more in synapse to improve mood."},
+    {type:'mc', question:"The Central Nervous System consists of:", options:["Brain only","Spinal cord only","Brain + spinal cord","All nerves in body"], correct:2, explanation:"CNS = Brain + Spinal Cord (central processing)."},
+    {type:'mc', question:"The sympathetic nervous system is responsible for:", options:["Rest and digest","Fight or flight","Voluntary movement","Sensory input"], correct:1, explanation:"Sympathetic = Fight or flight (arousal, increases heart rate, prepares for action)."},
+    {type:'mc', question:"The parasympathetic nervous system:", options:["Increases heart rate","Decreases heart rate","Has no effect on heart","Stops the heart"], correct:1, explanation:"Parasympathetic = Rest and digest (calms down, decreases heart rate)."},
+    {type:'mc', question:"Which structure is CRITICAL for survival (damage causes death)?", options:["Cerebellum","Medulla","Hippocampus","Amygdala"], correct:1, explanation:"Medulla controls breathing and heart rate. Damage = death (critical for survival)."},
+    {type:'mc', question:"The cerebellum is responsible for:", options:["Memory formation","Balance and coordination","Vision","Language"], correct:1, explanation:"Cerebellum = balance, coordination, motor learning. Damage → jerky movements."},
+    {type:'mc', question:"The hippocampus is responsible for:", options:["Fear","Balance","Memory formation","Vision"], correct:2, explanation:"Hippocampus = memory formation (especially spatial). Damage → can't form new memories (H.M. case)."},
+    {type:'mc', question:"The amygdala is responsible for:", options:["Memory","Emotion, especially fear","Balance","Language"], correct:1, explanation:"Amygdala = emotion, especially fear and aggression. Damage → no fear response."},
+    {type:'mc', question:"The hypothalamus controls:", options:["Vision","Hearing","Homeostasis (hunger, thirst, temperature)","Balance"], correct:2, explanation:"Hypothalamus = homeostasis (hunger, thirst, temperature), links nervous to endocrine system."},
+    {type:'mc', question:"The frontal lobe is responsible for:", options:["Vision","Hearing","Movement and planning","Touch"], correct:2, explanation:"Frontal lobe = motor cortex (movement), planning, decision-making, personality, Broca's area."},
+    {type:'mc', question:"The occipital lobe is responsible for:", options:["Vision","Hearing","Touch","Movement"], correct:0, explanation:"Occipital lobe = visual cortex (processes ALL visual information). Vision ONLY."},
+    {type:'mc', question:"The temporal lobe is responsible for:", options:["Vision","Hearing and memory","Touch","Movement"], correct:1, explanation:"Temporal lobe = auditory cortex (hearing), Wernicke's area, memory, face recognition."},
+    {type:'mc', question:"The parietal lobe is responsible for:", options:["Vision","Hearing","Touch and sensation","Movement"], correct:2, explanation:"Parietal lobe = somatosensory cortex (touch, pain, temperature), spatial processing."},
+    {type:'mc', question:"Broca's area is responsible for:", options:["Speech production","Language comprehension","Vision","Hearing"], correct:0, explanation:"Broca's area (frontal lobe) = speech PRODUCTION. Damage = can understand but can't speak fluently."},
+    {type:'mc', question:"Wernicke's area is responsible for:", options:["Speech production","Language comprehension","Vision","Hearing"], correct:1, explanation:"Wernicke's area (temporal lobe) = language COMPREHENSION. Damage = speak fluently but nonsense."},
+    {type:'mc', question:"Broca's aphasia results in:", options:["Can't understand language","Can't produce fluent speech","Can't see","Can't hear"], correct:1, explanation:"Broca's aphasia = can understand but can't speak fluently ('Want water' telegraphic speech)."},
+    {type:'mc', question:"Wernicke's aphasia results in:", options:["Can't produce speech","Speak fluently but nonsense, can't understand","Can't see","Can't move"], correct:1, explanation:"Wernicke's aphasia = speak fluently but nonsense (word salad), can't understand language."},
+    {type:'mc', question:"The left hemisphere generally controls:", options:["Left side of body","Right side of body","Both sides equally","Neither side"], correct:1, explanation:"Left hemisphere controls RIGHT side of body (contralateral control). Right controls left."},
+    {type:'mc', question:"The left hemisphere is typically specialized for:", options:["Spatial abilities","Language","Face recognition","Music"], correct:1, explanation:"Left hemisphere = language, logic, math (for most people). Right = spatial, creativity."},
+    {type:'mc', question:"Which technology shows brain STRUCTURE?", options:["fMRI","PET scan","MRI","EEG"], correct:2, explanation:"MRI shows detailed brain STRUCTURE (anatomy). fMRI, PET, EEG show FUNCTION (activity)."},
+    {type:'mc', question:"Which technology shows brain ACTIVITY in real-time?", options:["CAT scan","MRI","fMRI","X-ray"], correct:2, explanation:"fMRI (functional MRI) shows brain ACTIVITY by tracking blood flow in real-time."},
+    {type:'mc', question:"EEG is best for detecting:", options:["Brain structure","Seizures and brain waves","Broken bones","Blood clots"], correct:1, explanation:"EEG measures electrical brain waves. Best for seizures, sleep stages, brain death."},
+    {type:'mc', question:"What connects the left and right hemispheres?", options:["Medulla","Corpus callosum","Hippocampus","Amygdala"], correct:1, explanation:"Corpus callosum = bundle of fibers connecting left and right hemispheres."},
+
+    // TRUE/FALSE (15)
+    {type:'tf', question:"Resting potential is −55 mv.", correct:false, explanation:"FALSE. Resting potential is −70 mv. Threshold of excitation is −55 mv."},
+    {type:'tf', question:"The all-or-none principle means a neuron either fires completely or doesn't fire at all.", correct:true, explanation:"TRUE. No partial firing — like a gun trigger. Either fires completely or not at all."},
+    {type:'tf', question:"Dopamine is associated with pleasure and reward.", correct:true, explanation:"TRUE. Dopamine = pleasure, reward, movement, motivation."},
+    {type:'tf', question:"GABA is an excitatory neurotransmitter.", correct:false, explanation:"FALSE. GABA is INHIBITORY (reduces activity, calming). Glutamate is excitatory."},
+    {type:'tf', question:"SSRIs increase dopamine levels.", correct:false, explanation:"FALSE. SSRIs block SEROTONIN reuptake (not dopamine). Increase serotonin to treat depression."},
+    {type:'tf', question:"The sympathetic nervous system activates 'fight or flight' response.", correct:true, explanation:"TRUE. Sympathetic = fight/flight (increases heart rate, arousal, prepares for action)."},
+    {type:'tf', question:"The parasympathetic system increases heart rate.", correct:false, explanation:"FALSE. Parasympathetic DECREASES heart rate (rest and digest, calming). Sympathetic increases it."},
+    {type:'tf', question:"The CNS includes the brain and spinal cord.", correct:true, explanation:"TRUE. CNS = Central Nervous System = Brain + Spinal Cord."},
+    {type:'tf', question:"The medulla controls breathing and heart rate.", correct:true, explanation:"TRUE. Medulla (hindbrain) controls breathing and heart rate. Critical for survival."},
+    {type:'tf', question:"The hippocampus is responsible for fear.", correct:false, explanation:"FALSE. Hippocampus = memory formation. AMYGDALA = fear and emotion."},
+    {type:'tf', question:"The frontal lobe is responsible for vision.", correct:false, explanation:"FALSE. OCCIPITAL lobe = vision. Frontal lobe = movement, planning, personality."},
+    {type:'tf', question:"Broca's area is for language comprehension.", correct:false, explanation:"FALSE. Broca's = speech PRODUCTION (frontal). Wernicke's = comprehension (temporal)."},
+    {type:'tf', question:"The left hemisphere controls the right side of the body.", correct:true, explanation:"TRUE. Contralateral control: Left hemisphere → right side. Right hemisphere → left side."},
+    {type:'tf', question:"MRI shows brain function (activity).", correct:false, explanation:"FALSE. MRI shows brain STRUCTURE (anatomy). fMRI shows FUNCTION (activity/blood flow)."},
+    {type:'tf', question:"The corpus callosum connects the two hemispheres.", correct:true, explanation:"TRUE. Corpus callosum = bundle of fibers connecting left and right hemispheres."}
+];
+
+let currentSection = 'mc', currentIndex = 0;
+let activeQuestions = [], userAnswers = [], answeredQuestions = new Set();
+
+function selectSection(section) {
+    currentSection = section; currentIndex = 0;
+    userAnswers = []; answeredQuestions.clear();
+    document.querySelectorAll('.section-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+    if (section === 'mixed') { activeQuestions = [...questions]; shuffleArray(activeQuestions); }
+    else { activeQuestions = questions.filter(q => q.type === section); }
+    updateDisplay();
+}
+function shuffleArray(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+}
+function updateDisplay() {
+    const q = activeQuestions[currentIndex];
+    let optHTML = q.type === 'mc'
+        ? q.options.map((o, i) => `<div class="option" onclick="selectOption(${i})" id="option${i}">${String.fromCharCode(65+i)}. ${o}</div>`).join('')
+        : `<div class="option" onclick="selectOption(0)" id="option0">True</div><div class="option" onclick="selectOption(1)" id="option1">False</div>`;
+    document.getElementById('questionContainer').innerHTML = `
+        <div class="question-card">
+            <div class="question-number">Question ${currentIndex + 1} of ${activeQuestions.length}</div>
+            <div class="question-text">${q.question}</div>
+            <div class="options">${optHTML}</div>
+            <div class="feedback" id="feedback"></div>
+        </div>`;
+    if (userAnswers[currentIndex] !== undefined)
+        document.getElementById(`option${userAnswers[currentIndex]}`).classList.add('selected');
+    updateStats(); updateNavigation();
+}
+function selectOption(index) {
+    document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+    document.getElementById(`option${index}`).classList.add('selected');
+    userAnswers[currentIndex] = index;
+    document.getElementById('submitBtn').disabled = false;
+}
+function checkAnswer() {
+    const q = activeQuestions[currentIndex];
+    const ua = userAnswers[currentIndex];
+    if (ua === undefined) { alert('Please select an answer!'); return; }
+    const fb = document.getElementById('feedback');
+    const isCorrect = q.type === 'tf'
+        ? (ua === 0 && q.correct === true) || (ua === 1 && q.correct === false)
+        : ua === q.correct;
+    if (isCorrect) {
+        fb.className = 'feedback show correct';
+        fb.innerHTML = `<strong>✓ Correct!</strong><br>${q.explanation}`;
+        document.getElementById(`option${ua}`).classList.add('correct');
+        if (!answeredQuestions.has(currentIndex)) answeredQuestions.add(currentIndex);
+    } else {
+        fb.className = 'feedback show incorrect';
+        const ca = q.type === 'tf' ? (q.correct ? 'True' : 'False') : q.options[q.correct];
+        fb.innerHTML = `<strong>✗ Incorrect</strong><br>Correct answer: ${ca}<br>${q.explanation}`;
+        document.getElementById(`option${ua}`).classList.add('incorrect');
+        if (q.type === 'mc') document.getElementById(`option${q.correct}`).classList.add('correct');
+        else document.getElementById(`option${q.correct ? 0 : 1}`).classList.add('correct');
+    }
+    document.getElementById('submitBtn').disabled = true;
+    updateStats();
+}
+function nextQuestion() {
+    if (currentIndex < activeQuestions.length - 1) { currentIndex++; updateDisplay(); }
+    else showResults();
+}
+function previousQuestion() {
+    if (currentIndex > 0) { currentIndex--; updateDisplay(); }
+}
+function updateStats() {
+    const p = ((currentIndex + 1) / activeQuestions.length) * 100;
+    document.getElementById('progressBar').style.width = `${p}%`;
+    document.getElementById('progressBar').textContent = `${Math.round(p)}%`;
+    document.getElementById('currentQ').textContent = currentIndex + 1;
+    document.getElementById('totalQ').textContent = activeQuestions.length;
+    document.getElementById('correctCount').textContent = answeredQuestions.size;
+    document.getElementById('percentScore').textContent = `${Math.round((answeredQuestions.size / activeQuestions.length) * 100)}%`;
+}
+function updateNavigation() {
+    document.getElementById('prevBtn').disabled = currentIndex === 0;
+    document.getElementById('nextBtn').textContent = currentIndex === activeQuestions.length - 1 ? 'Finish ✓' : 'Next ➡️';
+}
+function showResults() {
+    const total = activeQuestions.length, correct = answeredQuestions.size;
+    const pct = Math.round((correct / total) * 100);
+    let grade, msg;
+    if (pct >= 90) { grade = 'A'; msg = 'Excellent!'; }
+    else if (pct >= 80) { grade = 'B'; msg = 'Great job!'; }
+    else if (pct >= 70) { grade = 'C'; msg = 'Good effort!'; }
+    else if (pct >= 60) { grade = 'D'; msg = 'Keep studying!'; }
+    else { grade = 'F'; msg = 'Review the material'; }
+    document.getElementById('gradeCircle').textContent = grade;
+    document.getElementById('scoreText').textContent = msg;
+    document.getElementById('breakdown').innerHTML = `
+        <div class="breakdown-item"><span>Total Questions:</span><strong>${total}</strong></div>
+        <div class="breakdown-item"><span>Correct Answers:</span><strong style="color:#28a745;">${correct}</strong></div>
+        <div class="breakdown-item"><span>Incorrect Answers:</span><strong style="color:#dc3545;">${total - correct}</strong></div>
+        <div class="breakdown-item"><span>Percentage:</span><strong>${pct}%</strong></div>`;
+    document.getElementById('resultsModal').classList.add('show');
+}
+function reviewMissed() { document.getElementById('resultsModal').classList.remove('show'); currentIndex = 0; updateDisplay(); }
+function restartExam() {
+    document.getElementById('resultsModal').classList.remove('show');
+    currentIndex = 0; userAnswers = []; answeredQuestions.clear(); updateDisplay();
+}
+selectSection('mc');
+activeQuestions = questions.filter(q => q.type === 'mc');
+updateDisplay();
+</script>
+</body>
+</html>

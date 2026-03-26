@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neuroscience - Interactive Flashcards</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .header { text-align: center; color: white; margin-bottom: 30px; }
+        .header h1 { font-size: 2.5em; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .controls { background: white; border-radius: 15px; padding: 25px; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .set-selector { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin-bottom: 20px; }
+        .set-btn { padding: 11px; border: 2px solid #fa709a; background: white; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s; font-size: 0.88em; }
+        .set-btn:hover { background: #fff5f8; transform: translateY(-2px); }
+        .set-btn.active { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: white; }
+        .options { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+        .option-btn { padding: 10px 18px; border: none; background: #fa709a; color: white; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s; }
+        .option-btn:hover { background: #fee140; color: #333; transform: translateY(-2px); }
+        .progress-bar { background: #e0e0e0; border-radius: 10px; height: 20px; overflow: hidden; margin-top: 15px; }
+        .progress-fill { background: linear-gradient(90deg, #fa709a, #fee140); height: 100%; transition: width 0.3s; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8em; font-weight: bold; }
+        .stats { display: flex; justify-content: space-around; margin-top: 15px; padding-top: 15px; border-top: 2px solid #e0e0e0; }
+        .stat { text-align: center; }
+        .stat-value { font-size: 1.8em; font-weight: bold; color: #fa709a; }
+        .stat-label { font-size: 0.9em; color: #666; margin-top: 5px; }
+        .card-container { perspective: 1000px; margin-bottom: 20px; animation: slideIn 0.4s ease-out; }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+        .flashcard { background: white; border-radius: 15px; padding: 40px; min-height: 340px; display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; transition: transform 0.6s; transform-style: preserve-3d; box-shadow: 0 10px 30px rgba(0,0,0,0.3); position: relative; }
+        .flashcard.flipped { transform: rotateY(180deg); }
+        .card-face { backface-visibility: hidden; position: absolute; width: 100%; padding: 40px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        .card-back { transform: rotateY(180deg); }
+        .card-label { position: absolute; top: 20px; left: 20px; background: #fa709a; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.9em; font-weight: 600; }
+        .card-number { position: absolute; top: 20px; right: 20px; background: #fee140; color: #333; padding: 5px 15px; border-radius: 20px; font-size: 0.9em; font-weight: 600; }
+        .card-content { font-size: 1.25em; line-height: 1.6; color: #333; margin-top: 40px; }
+        .card-hint { position: absolute; bottom: 20px; color: #aaa; font-size: 0.85em; font-style: italic; }
+        .navigation { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .nav-btn { padding: 14px 26px; border: none; border-radius: 10px; font-size: 1em; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .nav-btn:hover:not(:disabled) { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .nav-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .prev-btn { background: #6c757d; color: white; }
+        .next-btn { background: #28a745; color: white; }
+        .know-btn { background: #28a745; color: white; }
+        .review-btn { background: #ffc107; color: #333; }
+        .completion-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); justify-content: center; align-items: center; z-index: 1000; }
+        .completion-modal.show { display: flex; }
+        .modal-content { background: white; padding: 40px; border-radius: 20px; text-align: center; max-width: 480px; }
+        .modal-content h2 { color: #fa709a; font-size: 2em; margin-bottom: 20px; }
+        .modal-btn { padding: 14px 26px; border: none; background: #fa709a; color: white; border-radius: 10px; font-size: 1em; font-weight: 600; cursor: pointer; margin: 5px; }
+        .modal-btn:hover { background: #fee140; color: #333; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>🧠 Neuroscience</h1>
+        <p>Interactive Flashcards — 120 Cards Total</p>
+    </div>
+    <div class="controls">
+        <h3 style="margin-bottom:15px; color:#fa709a;">Select Card Set:</h3>
+        <div class="set-selector">
+            <button class="set-btn active" onclick="selectSet('all')">All Cards (120)</button>
+            <button class="set-btn" onclick="selectSet(1)">Neuron Basics (15)</button>
+            <button class="set-btn" onclick="selectSet(2)">Action Potential (15)</button>
+            <button class="set-btn" onclick="selectSet(3)">Neurotransmitters (21)</button>
+            <button class="set-btn" onclick="selectSet(4)">Nervous System (18)</button>
+            <button class="set-btn" onclick="selectSet(5)">Brain Structures (21)</button>
+            <button class="set-btn" onclick="selectSet(6)">Four Lobes (15)</button>
+            <button class="set-btn" onclick="selectSet(7)">Brain Imaging (10)</button>
+            <button class="set-btn" onclick="selectSet(8)">Comparisons (5)</button>
+        </div>
+        <div class="options">
+            <button class="option-btn" onclick="shuffleCards()">🔀 Shuffle</button>
+            <button class="option-btn" onclick="resetProgress()">🔄 Reset</button>
+            <button class="option-btn" onclick="reviewMarked()">⭐ Review Marked</button>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="progressBar">0%</div></div>
+        <div class="stats">
+            <div class="stat"><div class="stat-value" id="currentCard">1</div><div class="stat-label">Current</div></div>
+            <div class="stat"><div class="stat-value" id="totalCards">120</div><div class="stat-label">Total</div></div>
+            <div class="stat"><div class="stat-value" id="knownCards">0</div><div class="stat-label">Known</div></div>
+            <div class="stat"><div class="stat-value" id="markedCards">0</div><div class="stat-label">Review</div></div>
+        </div>
+    </div>
+    <div class="card-container">
+        <div class="flashcard" id="flashcard" onclick="flipCard()">
+            <div class="card-face card-front">
+                <div class="card-label">QUESTION</div>
+                <div class="card-number" id="cardNumber">1/120</div>
+                <div class="card-content" id="frontContent">Click to start!</div>
+                <div class="card-hint">Click card to flip</div>
+            </div>
+            <div class="card-face card-back">
+                <div class="card-label">ANSWER</div>
+                <div class="card-number" id="cardNumberBack">1/120</div>
+                <div class="card-content" id="backContent">Answer appears here</div>
+                <div class="card-hint">Click card to flip back</div>
+            </div>
+        </div>
+    </div>
+    <div class="navigation">
+        <button class="nav-btn prev-btn" onclick="previousCard()" id="prevBtn">⬅️ Previous</button>
+        <button class="nav-btn review-btn" onclick="markForReview()">⭐ Mark Review</button>
+        <button class="nav-btn know-btn" onclick="markKnown()">✅ I Know This</button>
+        <button class="nav-btn next-btn" onclick="nextCard()" id="nextBtn">Next ➡️</button>
+    </div>
+</div>
+<div class="completion-modal" id="completionModal">
+    <div class="modal-content">
+        <h2>🎉 Set Complete!</h2>
+        <p>Great work reviewing these cards!</p>
+        <div id="completionStats"></div>
+        <button class="modal-btn" onclick="resetAndContinue()">Start Over</button>
+        <button class="modal-btn" onclick="closeModal()">Close</button>
+    </div>
+</div>
+<script>
+const flashcards = [
+    // SET 1: NEURON BASICS (15)
+    {set:1, front:"What is a neuron?", back:"The basic unit of the nervous system; a nerve cell that transmits information."},
+    {set:1, front:"What are dendrites?", back:"Branch-like structures that receive signals from other neurons (INPUT)."},
+    {set:1, front:"What is the soma?", back:"The cell body of the neuron; contains the nucleus and keeps the cell alive."},
+    {set:1, front:"What is the axon?", back:"Long fiber that sends signals away from the soma to other neurons (OUTPUT)."},
+    {set:1, front:"What are terminal buttons (axon terminals)?", back:"End of the axon where neurotransmitters are released into the synapse."},
+    {set:1, front:"What is the myelin sheath?", back:"Fatty coating around the axon that speeds up neural transmission."},
+    {set:1, front:"What are nodes of Ranvier?", back:"Gaps in the myelin sheath where the action potential 'jumps' (saltatory conduction)."},
+    {set:1, front:"What is a synapse?", back:"The gap between two neurons where communication occurs."},
+    {set:1, front:"What is the synaptic cleft?", back:"The space/gap in the synapse between two neurons."},
+    {set:1, front:"What is a neurotransmitter?", back:"Chemical messenger that carries signals across the synapse from one neuron to another."},
+    {set:1, front:"What is reuptake?", back:"The process where neurotransmitters are reabsorbed by the sending neuron to clear the synapse."},
+    {set:1, front:"Describe the signal flow through a neuron.", back:"DENDRITES (receive) → SOMA (process) → AXON (send) → TERMINALS (release neurotransmitters)."},
+    {set:1, front:"What does 'electrochemical' mean in neural communication?", back:"Electrical signals travel within the neuron (action potential); chemical signals (neurotransmitters) cross between neurons."},
+    {set:1, front:"Why is the myelin sheath important?", back:"Speeds up neural transmission and insulates the axon; damage causes slower/disrupted signals."},
+    {set:1, front:"What happens at the synapse?", back:"Neurotransmitters are released from terminal buttons, cross synaptic cleft, and bind to receptors on next neuron."},
+
+    // SET 2: ACTION POTENTIAL (15)
+    {set:2, front:"What is resting potential?", back:"The electrical charge of a neuron at rest: −70 millivolts (mv). Negative inside, positive outside."},
+    {set:2, front:"What is the threshold of excitation?", back:"−55 mv. The point at which an action potential is triggered; neuron must reach this to fire."},
+    {set:2, front:"What is an action potential?", back:"The neural signal; an electrochemical impulse that travels down the axon when threshold is reached."},
+    {set:2, front:"What is depolarization?", back:"When the inside of the neuron becomes less negative (more positive); part of action potential process."},
+    {set:2, front:"What is the all-or-none principle?", back:"A neuron either fires completely or doesn't fire at all; there is no partial firing (like a gun trigger)."},
+    {set:2, front:"What happens when a neuron is stimulated?", back:"Dendrites receive signals. If strong enough, depolarization begins toward threshold (−55mv)."},
+    {set:2, front:"What happens when threshold (−55mv) is reached?", back:"Action potential fires; signal travels down the axon. All-or-none — fires completely or not at all."},
+    {set:2, front:"How does the action potential travel down the axon?", back:"As an electrical signal. The myelin sheath speeds it up by allowing it to 'jump' at nodes of Ranvier."},
+    {set:2, front:"What is saltatory conduction?", back:"The 'jumping' of the action potential from node to node along the myelinated axon; speeds transmission."},
+    {set:2, front:"What happens when action potential reaches the terminals?", back:"Triggers the release of neurotransmitters into the synapse."},
+    {set:2, front:"What is the refractory period?", back:"Brief recovery time after firing when the neuron cannot fire again; it returns to resting potential (−70mv)."},
+    {set:2, front:"Can a neuron fire halfway?", back:"No. All-or-none principle — it either fires completely or doesn't fire at all."},
+    {set:2, front:"What must happen for a neuron to fire?", back:"Must be depolarized enough to reach threshold of excitation (−55mv)."},
+    {set:2, front:"Why is −55mv called the 'threshold'?", back:"It's the point of no return. Once reached, action potential fires automatically (all-or-none)."},
+    {set:2, front:"What is the sequence: resting → threshold → action potential?", back:"Resting (−70mv) → Stimulation/depolarization → Threshold (−55mv) → Action potential fires → Travels down axon."},
+
+    // SET 3: NEUROTRANSMITTERS (21)
+    {set:3, front:"What is acetylcholine (ACh)?", back:"Neurotransmitter for muscle movement, memory, and learning."},
+    {set:3, front:"What happens with too little acetylcholine?", back:"Alzheimer's disease, muscle paralysis."},
+    {set:3, front:"What is dopamine?", back:"Neurotransmitter for pleasure, reward, movement, and motivation."},
+    {set:3, front:"What happens with too little dopamine?", back:"Parkinson's disease (tremors, rigid movement)."},
+    {set:3, front:"What happens with too much dopamine?", back:"Schizophrenia (hallucinations, delusions)."},
+    {set:3, front:"What is serotonin?", back:"Neurotransmitter for mood regulation, sleep, and appetite."},
+    {set:3, front:"What happens with too little serotonin?", back:"Depression, anxiety, insomnia."},
+    {set:3, front:"What are SSRIs?", back:"Selective Serotonin Reuptake Inhibitors. Drugs (like Prozac, Zoloft) that block serotonin reuptake to treat depression."},
+    {set:3, front:"How do SSRIs work?", back:"Block reuptake of serotonin, leaving more serotonin in the synapse to improve mood."},
+    {set:3, front:"What is norepinephrine (NOR)?", back:"Neurotransmitter for alertness, arousal, and fight-or-flight response."},
+    {set:3, front:"What happens with too little norepinephrine?", back:"Depression, fatigue."},
+    {set:3, front:"What is GABA?", back:"Gamma-Aminobutyric Acid. Main INHIBITORY neurotransmitter; reduces neural activity, calming effect."},
+    {set:3, front:"What happens with too little GABA?", back:"Anxiety, seizures, insomnia."},
+    {set:3, front:"What is glutamate?", back:"Main EXCITATORY neurotransmitter; increases neural activity, important for learning and memory."},
+    {set:3, front:"What happens with too much glutamate?", back:"Seizures, neurotoxicity (can kill neurons)."},
+    {set:3, front:"What are endorphins?", back:"Natural painkillers; neuromodulators that produce pleasure and 'runner's high'. Similar to morphine."},
+    {set:3, front:"What's the difference between excitatory and inhibitory neurotransmitters?", back:"Excitatory (glutamate) = INCREASE likelihood of firing. Inhibitory (GABA) = DECREASE likelihood of firing."},
+    {set:3, front:"Mnemonic for 7 neurotransmitters?", back:"ADSNGE: Acetylcholine, Dopamine, Serotonin, Norepinephrine, GABA, Glutamate, Endorphins."},
+    {set:3, front:"Which neurotransmitter is linked to Alzheimer's?", back:"Acetylcholine (ACh) — too little causes memory problems."},
+    {set:3, front:"Which neurotransmitter is linked to Parkinson's?", back:"Dopamine — too little causes movement problems (tremors, rigidity)."},
+    {set:3, front:"What are neuromodulators?", back:"Chemicals (like endorphins) that indirectly affect neural signaling by influencing release of other neurotransmitters."},
+
+    // SET 4: NERVOUS SYSTEM (18)
+    {set:4, front:"What is the Central Nervous System (CNS)?", back:"Brain + Spinal Cord. Central processing center."},
+    {set:4, front:"What is the Peripheral Nervous System (PNS)?", back:"All nerves outside the CNS. Connects CNS to the rest of the body."},
+    {set:4, front:"What is the somatic nervous system?", back:"Part of PNS; controls voluntary muscle movements and carries sensory information."},
+    {set:4, front:"What is the autonomic nervous system?", back:"Part of PNS; controls involuntary functions (heart rate, digestion, breathing)."},
+    {set:4, front:"What is the sympathetic nervous system?", back:"'Fight or Flight' system. Prepares body for action during stress/danger. Part of autonomic."},
+    {set:4, front:"What is the parasympathetic nervous system?", back:"'Rest and Digest' system. Calms body down, promotes recovery. Part of autonomic."},
+    {set:4, front:"What does the sympathetic system do to heart rate?", back:"INCREASES heart rate (prepares for action)."},
+    {set:4, front:"What does the parasympathetic system do to heart rate?", back:"DECREASES heart rate (calms down)."},
+    {set:4, front:"What does the sympathetic system do to digestion?", back:"SLOWS digestion (blood goes to muscles instead)."},
+    {set:4, front:"What does the parasympathetic system do to digestion?", back:"INCREASES digestion (rest and digest)."},
+    {set:4, front:"What does the sympathetic system do to pupils?", back:"DILATES pupils (widen to see better in danger)."},
+    {set:4, front:"What does the parasympathetic system do to pupils?", back:"CONSTRICTS pupils (narrow when calm)."},
+    {set:4, front:"When is the sympathetic system activated?", back:"During stress, danger, excitement — anytime you need energy for action."},
+    {set:4, front:"When is the parasympathetic system activated?", back:"During calm, relaxed, safe situations — recovery and maintenance."},
+    {set:4, front:"Nervous system hierarchy from top?", back:"Nervous System → CNS/PNS → PNS splits into Somatic/Autonomic → Autonomic splits into Sympathetic/Parasympathetic."},
+    {set:4, front:"What's the difference between voluntary and involuntary?", back:"Voluntary (somatic) = conscious control (moving arm). Involuntary (autonomic) = automatic (heart beating)."},
+    {set:4, front:"Which system releases adrenaline?", back:"Sympathetic nervous system (fight or flight)."},
+    {set:4, front:"Sympathetic vs. Parasympathetic — which is arousal?", back:"Sympathetic = arousal, energy OUT. Parasympathetic = calming, energy IN."},
+
+    // SET 5: BRAIN STRUCTURES (21)
+    {set:5, front:"What does the hindbrain control?", back:"Basic life-sustaining functions: breathing, heart rate, balance, coordination."},
+    {set:5, front:"What is the medulla?", back:"Part of hindbrain; controls breathing and heart rate. CRITICAL for survival — damage = death."},
+    {set:5, front:"What is the pons?", back:"Part of hindbrain; involved in sleep, arousal, and breathing."},
+    {set:5, front:"What is the cerebellum?", back:"Part of hindbrain; controls balance, coordination, and motor learning ('little brain')."},
+    {set:5, front:"What happens with damage to the cerebellum?", back:"Loss of balance, jerky movements, difficulty with coordination."},
+    {set:5, front:"What is the reticular formation?", back:"Part of hindbrain; controls arousal, attention, and sleep-wake cycle."},
+    {set:5, front:"What does the midbrain do?", back:"Connects hindbrain to forebrain; vision/hearing reflexes, movement, dopamine production."},
+    {set:5, front:"What does the forebrain control?", back:"Higher-order processing: thinking, emotions, decision-making, language."},
+    {set:5, front:"What is the thalamus?", back:"Sensory relay station in forebrain. ALL sensory info (except smell) passes through here."},
+    {set:5, front:"What is the hypothalamus?", back:"Controls homeostasis (hunger, thirst, temperature), links nervous system to endocrine system. Below thalamus."},
+    {set:5, front:"What is the limbic system?", back:"Group of structures involved in emotion, memory, and motivation. Includes hippocampus, amygdala, hypothalamus."},
+    {set:5, front:"What is the hippocampus?", back:"Memory formation, especially spatial and explicit memories. Damage = can't form new memories (H.M. case)."},
+    {set:5, front:"What is the amygdala?", back:"Emotion, especially fear and aggression. Damage = no fear response."},
+    {set:5, front:"What are the basal ganglia?", back:"Movement control and habit formation. Damaged in Parkinson's disease."},
+    {set:5, front:"What is the cerebral cortex?", back:"Thin wrinkled outer layer of brain. Responsible for cognition, language, decision-making — most uniquely human."},
+    {set:5, front:"What are cerebral hemispheres?", back:"Left and right halves of the brain. Connected by corpus callosum."},
+    {set:5, front:"What is the corpus callosum?", back:"Bundle of nerve fibers connecting left and right hemispheres; allows communication between them."},
+    {set:5, front:"Mnemonic for hindbrain structures?", back:"MPC-R: Medulla, Pons, Cerebellum, Reticular formation."},
+    {set:5, front:"Mnemonic for limbic system?", back:"HAH-B: Hippocampus (memory), Amygdala (fear), Hypothalamus (homeostasis), Basal ganglia (movement)."},
+    {set:5, front:"Which brain structure is the 'sensory switchboard'?", back:"Thalamus — relays sensory info (except smell) to cortex."},
+    {set:5, front:"Which brain structure controls hunger and thirst?", back:"Hypothalamus — homeostasis functions."},
+
+    // SET 6: FOUR LOBES (15)
+    {set:6, front:"What are the four lobes of the cerebral cortex?", back:"Frontal, Parietal, Occipital, Temporal. Mnemonic: FPOT 'Frontal Pilots Over Terrain'."},
+    {set:6, front:"What does the frontal lobe do?", back:"Motor cortex (movement), planning, decision-making, personality, impulse control, speech production (Broca's area)."},
+    {set:6, front:"Where is the frontal lobe?", back:"Behind the forehead (front of brain)."},
+    {set:6, front:"What happens with damage to frontal lobe?", back:"Personality changes, impulsivity, difficulty planning. Famous case: Phineas Gage."},
+    {set:6, front:"What does the parietal lobe do?", back:"Somatosensory cortex (touch, pain, temperature), spatial processing, integrating sensory information."},
+    {set:6, front:"Where is the parietal lobe?", back:"Top-back of brain (behind frontal, above occipital)."},
+    {set:6, front:"What does the occipital lobe do?", back:"Visual cortex — processes ALL visual information. Vision ONLY."},
+    {set:6, front:"Where is the occipital lobe?", back:"Very back of the head."},
+    {set:6, front:"What happens with damage to occipital lobe?", back:"Blindness or visual impairments, even with healthy eyes."},
+    {set:6, front:"What does the temporal lobe do?", back:"Auditory cortex (hearing), language comprehension (Wernicke's area), memory, face recognition."},
+    {set:6, front:"Where is the temporal lobe?", back:"Sides of brain (near temples/ears)."},
+    {set:6, front:"What is Broca's area?", back:"Speech PRODUCTION area in frontal lobe (left hemisphere). Damage = can understand but can't speak fluently."},
+    {set:6, front:"What is Wernicke's area?", back:"Language COMPREHENSION area in temporal lobe (left hemisphere). Damage = speak fluently but nonsense, can't understand."},
+    {set:6, front:"Broca's vs. Wernicke's aphasia?", back:"Broca's = Broken speech (production problem). Wernicke's = Wordy but Wrong (comprehension problem)."},
+    {set:6, front:"Which lobe for: Movement? Touch? Vision? Hearing?", back:"Movement = Frontal. Touch = Parietal. Vision = Occipital. Hearing = Temporal."},
+
+    // SET 7: BRAIN IMAGING (10)
+    {set:7, front:"What does a CAT/CT scan show?", back:"Brain STRUCTURE using X-ray images. Good for detecting injuries, tumors, structural damage."},
+    {set:7, front:"What does an MRI show?", back:"Brain STRUCTURE using magnetic imaging. Very detailed anatomy, better resolution than CT."},
+    {set:7, front:"What does an fMRI show?", back:"Brain FUNCTION (activity) by tracking blood flow in real-time. Shows which areas active during tasks."},
+    {set:7, front:"What does a PET scan show?", back:"Brain FUNCTION by tracking glucose metabolism. Good for Alzheimer's, activity patterns."},
+    {set:7, front:"What does an EEG show?", back:"Brain FUNCTION by measuring electrical brain waves. Good for seizures, sleep stages, brain death."},
+    {set:7, front:"Structure vs. Function imaging?", back:"Structure (anatomy) = CAT, MRI. Function (activity) = fMRI, PET, EEG."},
+    {set:7, front:"Which imaging shows real-time brain activity?", back:"fMRI — tracks blood flow to show which areas are active during tasks."},
+    {set:7, front:"Which imaging is best for seizures?", back:"EEG — measures electrical activity, can detect abnormal brain waves."},
+    {set:7, front:"What is brain stimulation used for?", back:"Treatment (TMS for depression, DBS for Parkinson's) and research (stimulate area → observe causal effect)."},
+    {set:7, front:"What's the main difference between MRI and fMRI?", back:"MRI = structure (static anatomy). fMRI = function (activity/blood flow)."},
+
+    // SET 8: COMPARISONS (5)
+    {set:8, front:"CNS vs. PNS?", back:"CNS = Brain + spinal cord (central processing). PNS = All other nerves (connects CNS to body)."},
+    {set:8, front:"Sympathetic vs. Parasympathetic?", back:"Sympathetic = Fight/flight (arousal, energy out). Parasympathetic = Rest/digest (calming, energy in)."},
+    {set:8, front:"Excitatory vs. Inhibitory neurotransmitters?", back:"Excitatory (glutamate) = INCREASE firing likelihood. Inhibitory (GABA) = DECREASE firing likelihood."},
+    {set:8, front:"Broca's vs. Wernicke's area?", back:"Broca's = Speech PRODUCTION (frontal). Wernicke's = Language COMPREHENSION (temporal)."},
+    {set:8, front:"Left vs. Right hemisphere specialization?", back:"Left = Language, logic, math (for most people). Right = Spatial, creativity, face recognition, emotion."}
+];
+
+let currentIndex = 0, isFlipped = false;
+let activeCards = [...flashcards];
+let knownCards = new Set(), markedCards = new Set();
+
+function selectSet(setNumber) {
+    document.querySelectorAll('.set-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+    activeCards = setNumber === 'all' ? [...flashcards] : flashcards.filter(c => c.set === setNumber);
+    currentIndex = 0; isFlipped = false;
+    updateCard(); updateStats();
+}
+function shuffleCards() {
+    for (let i = activeCards.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [activeCards[i], activeCards[j]] = [activeCards[j], activeCards[i]];
+    }
+    currentIndex = 0; isFlipped = false; updateCard();
+}
+function flipCard() {
+    document.getElementById('flashcard').classList.toggle('flipped');
+    isFlipped = !isFlipped;
+}
+function nextCard() {
+    if (currentIndex < activeCards.length - 1) { currentIndex++; if (isFlipped) flipCard(); updateCard(); }
+    else showCompletionModal();
+}
+function previousCard() {
+    if (currentIndex > 0) { currentIndex--; if (isFlipped) flipCard(); updateCard(); }
+}
+function markKnown() { knownCards.add(currentIndex); updateStats(); nextCard(); }
+function markForReview() {
+    if (markedCards.has(currentIndex)) markedCards.delete(currentIndex);
+    else markedCards.add(currentIndex);
+    updateStats();
+}
+function reviewMarked() {
+    if (markedCards.size === 0) { alert('No cards marked for review!'); return; }
+    activeCards = flashcards.filter((_, i) => markedCards.has(i));
+    currentIndex = 0; isFlipped = false; updateCard(); updateStats();
+}
+function resetProgress() {
+    if (confirm('Reset all progress?')) { knownCards.clear(); markedCards.clear(); updateStats(); }
+}
+function updateCard() {
+    const card = activeCards[currentIndex];
+    document.getElementById('frontContent').textContent = card.front;
+    document.getElementById('backContent').textContent = card.back;
+    document.getElementById('cardNumber').textContent = `${currentIndex + 1}/${activeCards.length}`;
+    document.getElementById('cardNumberBack').textContent = `${currentIndex + 1}/${activeCards.length}`;
+    document.getElementById('currentCard').textContent = currentIndex + 1;
+    document.getElementById('prevBtn').disabled = currentIndex === 0;
+    document.getElementById('nextBtn').disabled = currentIndex === activeCards.length - 1;
+    updateStats();
+}
+function updateStats() {
+    const progress = ((currentIndex + 1) / activeCards.length) * 100;
+    document.getElementById('progressBar').style.width = `${progress}%`;
+    document.getElementById('progressBar').textContent = `${Math.round(progress)}%`;
+    document.getElementById('totalCards').textContent = activeCards.length;
+    document.getElementById('knownCards').textContent = knownCards.size;
+    document.getElementById('markedCards').textContent = markedCards.size;
+}
+function showCompletionModal() {
+    document.getElementById('completionStats').innerHTML = `<p><strong>Known:</strong> ${knownCards.size} | <strong>Review:</strong> ${markedCards.size}</p>`;
+    document.getElementById('completionModal').classList.add('show');
+}
+function closeModal() { document.getElementById('completionModal').classList.remove('show'); }
+function resetAndContinue() { currentIndex = 0; isFlipped = false; closeModal(); updateCard(); }
+updateCard();
+</script>
+</body>
+</html>
