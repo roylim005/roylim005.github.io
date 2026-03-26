@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Science of Psychology - Practice Exam</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; background: white; border-radius: 20px; padding: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        h1 { color: #667eea; text-align: center; margin-bottom: 10px; font-size: 2.5em; }
+        .subtitle { text-align: center; color: #666; margin-bottom: 30px; font-size: 1.1em; }
+        .section-select { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 30px; }
+        .section-btn { padding: 20px; border: 3px solid #667eea; background: white; border-radius: 12px; cursor: pointer; transition: all 0.3s; font-weight: 600; font-size: 1em; }
+        .section-btn:hover { background: #f5f5ff; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(102,126,234,0.3); }
+        .section-btn.active { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .progress-container { background: #f0f0f0; border-radius: 10px; padding: 20px; margin-bottom: 30px; }
+        .progress-bar { background: #e0e0e0; border-radius: 10px; height: 25px; overflow: hidden; margin-bottom: 15px; }
+        .progress-fill { background: linear-gradient(90deg, #667eea, #764ba2); height: 100%; transition: width 0.3s; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; text-align: center; }
+        .stat { background: white; padding: 10px; border-radius: 8px; }
+        .stat-value { font-size: 1.8em; font-weight: bold; color: #667eea; }
+        .stat-label { font-size: 0.9em; color: #666; margin-top: 5px; }
+        .question-card { background: #f5f5ff; border-left: 5px solid #667eea; padding: 25px; margin-bottom: 25px; border-radius: 10px; }
+        .question-number { color: #667eea; font-weight: bold; font-size: 1.1em; margin-bottom: 15px; }
+        .question-text { font-size: 1.1em; line-height: 1.6; margin-bottom: 20px; color: #333; }
+        .options { display: flex; flex-direction: column; gap: 10px; }
+        .option { padding: 15px; border: 2px solid #ddd; border-radius: 8px; cursor: pointer; transition: all 0.3s; background: white; }
+        .option:hover { border-color: #667eea; background: #f5f5ff; }
+        .option.selected { border-color: #667eea; background: #e8eaf6; }
+        .option.correct { border-color: #28a745; background: #d4edda; }
+        .option.incorrect { border-color: #dc3545; background: #f8d7da; }
+        .feedback { margin-top: 15px; padding: 15px; border-radius: 8px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct { background: #d4edda; border-left: 5px solid #28a745; color: #155724; }
+        .feedback.incorrect { background: #f8d7da; border-left: 5px solid #dc3545; color: #721c24; }
+        .navigation { display: flex; gap: 15px; justify-content: space-between; margin-top: 30px; }
+        .nav-btn { padding: 15px 28px; border: none; border-radius: 10px; font-size: 1.05em; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .nav-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .nav-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .prev-btn { background: #6c757d; color: white; }
+        .submit-btn { background: #28a745; color: white; }
+        .next-btn { background: #667eea; color: white; }
+        .results-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); justify-content: center; align-items: center; z-index: 1000; }
+        .results-modal.show { display: flex; }
+        .modal-content { background: white; padding: 40px; border-radius: 20px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; }
+        .modal-content h2 { color: #667eea; margin-bottom: 20px; text-align: center; }
+        .grade-display { text-align: center; margin: 30px 0; }
+        .grade-circle { width: 150px; height: 150px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: white; font-size: 3em; font-weight: bold; }
+        .breakdown-item { display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #e0e0e0; }
+        .modal-btn { padding: 15px 28px; border: none; background: #667eea; color: white; border-radius: 10px; font-size: 1em; font-weight: 600; cursor: pointer; margin: 8px; }
+        .modal-btn:hover { background: #764ba2; }
+        @media (max-width: 768px) { .container { padding: 20px; } h1 { font-size: 1.8em; } .stats-grid { grid-template-columns: repeat(2,1fr); } }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>🔬 Practice Exam</h1>
+    <p class="subtitle">The Science of Psychology — Interactive Assessment</p>
+    <div class="section-select">
+        <button class="section-btn active" onclick="selectSection('mc')">Multiple Choice<br><small>(25 questions)</small></button>
+        <button class="section-btn" onclick="selectSection('tf')">True / False<br><small>(15 questions)</small></button>
+        <button class="section-btn" onclick="selectSection('mixed')">Mixed Review<br><small>(40 questions)</small></button>
+    </div>
+    <div class="progress-container">
+        <div class="progress-bar"><div class="progress-fill" id="progressBar">0%</div></div>
+        <div class="stats-grid">
+            <div class="stat"><div class="stat-value" id="currentQ">1</div><div class="stat-label">Current</div></div>
+            <div class="stat"><div class="stat-value" id="totalQ">25</div><div class="stat-label">Total</div></div>
+            <div class="stat"><div class="stat-value" id="correctCount">0</div><div class="stat-label">Correct</div></div>
+            <div class="stat"><div class="stat-value" id="percentScore">0%</div><div class="stat-label">Score</div></div>
+        </div>
+    </div>
+    <div id="questionContainer"></div>
+    <div class="navigation">
+        <button class="nav-btn prev-btn" onclick="previousQuestion()" id="prevBtn">⬅️ Previous</button>
+        <button class="nav-btn submit-btn" onclick="checkAnswer()" id="submitBtn">✓ Check Answer</button>
+        <button class="nav-btn next-btn" onclick="nextQuestion()" id="nextBtn">Next ➡️</button>
+    </div>
+</div>
+<div class="results-modal" id="resultsModal">
+    <div class="modal-content">
+        <h2>📊 Exam Results</h2>
+        <div class="grade-display">
+            <div class="grade-circle" id="gradeCircle">A</div>
+            <h3 id="scoreText">Excellent Work!</h3>
+        </div>
+        <div id="breakdown"></div>
+        <div style="text-align:center;">
+            <button class="modal-btn" onclick="reviewMissed()">Review Questions</button>
+            <button class="modal-btn" onclick="restartExam()">Start Over</button>
+        </div>
+    </div>
+</div>
+<script>
+const questions = [
+    // MULTIPLE CHOICE (25)
+    {type:'mc', question:"What are the four goals of psychology?", options:["Describe, Predict, Explain, Control","Observe, Test, Analyze, Report","Define, Measure, Compare, Conclude","Study, Learn, Teach, Apply"], correct:0, explanation:"The four goals are: Describe, Predict, Explain, Control/Change. Mnemonic: DPEC."},
+    {type:'mc', question:"Which research method is the ONLY one that can establish causation?", options:["Naturalistic observation","Survey","Correlational study","Experiment"], correct:3, explanation:"Only EXPERIMENTS (with random assignment and IV manipulation) can establish causation."},
+    {type:'mc', question:"What does correlation NOT equal?", options:["Prediction","Relationship","Causation","Association"], correct:2, explanation:"Correlation does NOT equal causation. Related variables don't prove one causes the other."},
+    {type:'mc', question:"In an experiment, what is the independent variable (IV)?", options:["What you measure","What you manipulate","What you observe","What you control"], correct:1, explanation:"IV = Independent Variable = what you MANIPULATE (the cause). DV = what you measure (effect)."},
+    {type:'mc', question:"What does the control group receive in an experiment?", options:["The treatment","The manipulation","No treatment/placebo","Extra treatment"], correct:2, explanation:"Control group does NOT receive treatment (baseline for comparison). Experimental group gets treatment."},
+    {type:'mc', question:"What is random assignment?", options:["Selecting participants from population","Placing participants into groups randomly","Choosing which groups get treatment","Measuring variables randomly"], correct:1, explanation:"Random assignment = randomly placing participants into experimental/control groups (ensures equivalence)."},
+    {type:'mc', question:"Which is a predictive hypothesis tested by?", options:["Experiments only","Observational/correlational methods","Control groups","Random assignment"], correct:1, explanation:"Predictive hypotheses (correlation) tested by observational/correlational methods. Causal hypotheses need experiments."},
+    {type:'mc', question:"What are the three possible explanations for any correlation?", options:["A causes B only","B causes A only","Random chance only","A causes B, B causes A, or third variable C"], correct:3, explanation:"Three explanations: (1) A causes B, (2) B causes A (reverse), (3) Third variable C causes both."},
+    {type:'mc', question:"What is informed consent?", options:["Keeping data private","Telling participants about study and getting agreement","Debriefing after study","Protecting from harm"], correct:1, explanation:"Informed consent = telling participants about study procedures/risks and getting voluntary agreement before starting."},
+    {type:'mc', question:"Which ethical principle involves explaining the study after completion?", options:["Informed consent","Confidentiality","Protection from harm","Debriefing"], correct:3, explanation:"Debriefing = explaining purpose after study, revealing deception, answering questions."},
+    {type:'mc', question:"The biological/neuroscience perspective focuses on:", options:["Unconscious mind","Observable behavior","Brain and genetics","Cultural context"], correct:2, explanation:"Biological/neuroscience perspective = brain, nervous system, genetics, hormones."},
+    {type:'mc', question:"The behavioral perspective focuses on:", options:["Mental processes","Observable behavior and environment","Unconscious conflicts","Free will"], correct:1, explanation:"Behavioral perspective (Watson, Skinner) = observable behavior, environmental influences, learning."},
+    {type:'mc', question:"The cognitive perspective focuses on:", options:["Emotions","Mental processes and thinking","Unconscious mind","Genetics"], correct:1, explanation:"Cognitive perspective = mental processes, thinking, memory, decision-making."},
+    {type:'mc', question:"The psychodynamic perspective was developed by:", options:["Watson","Skinner","Freud","Wundt"], correct:2, explanation:"Sigmund Freud developed psychodynamic/psychoanalytic perspective (unconscious mind, childhood)."},
+    {type:'mc', question:"Who is considered the 'father of psychology'?", options:["Sigmund Freud","William James","Wilhelm Wundt","B.F. Skinner"], correct:2, explanation:"Wilhelm Wundt established first psychology lab in 1879 — birth of psychology as science."},
+    {type:'mc', question:"Functionalism, promoted by William James, focuses on:", options:["Structure of consciousness","How behavior helps adaptation","Unconscious mind","Observable behavior only"], correct:1, explanation:"Functionalism (James) = how behavior helps people adapt to environment (function of behavior)."},
+    {type:'mc', question:"What is the eclectic approach?", options:["Using only one perspective","Integrating multiple perspectives","Rejecting all perspectives","Creating new perspectives"], correct:1, explanation:"Eclectic approach = integrating multiple perspectives. Modern standard in psychology."},
+    {type:'mc', question:"A case study is best described as:", options:["Large survey of many people","In-depth study of one individual","Controlled experiment","Statistical analysis"], correct:1, explanation:"Case study = in-depth study of one individual or small group. Rich detail but can't generalize."},
+    {type:'mc', question:"What is a quasi-experiment?", options:["Perfect experiment","Experiment without random assignment","Correlational study","Naturalistic observation"], correct:1, explanation:"Quasi-experiment = like experiment but NO random assignment. Suggests but doesn't prove causation."},
+    {type:'mc', question:"The humanistic perspective emphasizes:", options:["Unconscious conflicts","Observable behavior","Free will and personal growth","Biological processes"], correct:2, explanation:"Humanistic perspective (Rogers, Maslow) = free will, personal growth, self-actualization, choice."},
+    {type:'mc', question:"In the DRY MIX mnemonic, what does DRY stand for?", options:["Data, Research, Years","Dependent, Responding, Y-axis","Design, Results, Yield","Describe, Research, Yield"], correct:1, explanation:"DRY = Dependent variable, Responding variable, Y-axis (what you measure/effect)."},
+    {type:'mc', question:"What is a confounding variable?", options:["The IV","The DV","Unwanted factor affecting results","The control group"], correct:2, explanation:"Confounding variable = unwanted factor that affects results, makes it hard to determine causation."},
+    {type:'mc', question:"Naturalistic observation can establish:", options:["Causation","Description only","Prediction and causation","Experimental control"], correct:1, explanation:"Naturalistic observation can only DESCRIBE behavior (no control, can't predict or prove causation)."},
+    {type:'mc', question:"The evolutionary perspective focuses on:", options:["Cultural differences","Behaviors that aided survival","Brain chemistry","Learning from environment"], correct:1, explanation:"Evolutionary perspective = behaviors that helped ancestors survive and reproduce (adaptive behaviors)."},
+    {type:'mc', question:"What does it mean to 'think like a psychologist'?", options:["Accept all explanations","Be skeptical of explanations","Reject all theories","Only use experiments"], correct:1, explanation:"Think like psychologist = be SKEPTICAL about explanations rather than simply accepting them."},
+
+    // TRUE/FALSE (15)
+    {type:'tf', question:"Psychology is just common sense.", correct:false, explanation:"FALSE. Scientific findings often CONTRADICT common sense. Psychology is a science, not just common sense."},
+    {type:'tf', question:"Only experiments can establish causation.", correct:true, explanation:"TRUE. Experiments (with random assignment and IV manipulation) are the ONLY method that can prove causation."},
+    {type:'tf', question:"Correlation equals causation.", correct:false, explanation:"FALSE. Correlation does NOT equal causation. Related variables don't prove one causes the other."},
+    {type:'tf', question:"The independent variable is what you measure in an experiment.", correct:false, explanation:"FALSE. IV = what you MANIPULATE (cause). DV = what you MEASURE (effect)."},
+    {type:'tf', question:"Random assignment is the same as random sampling.", correct:false, explanation:"FALSE. Random assignment = placing into groups. Random sampling = selecting participants from population."},
+    {type:'tf', question:"The control group receives the treatment in an experiment.", correct:false, explanation:"FALSE. EXPERIMENTAL group receives treatment. CONTROL group does NOT (baseline for comparison)."},
+    {type:'tf', question:"Debriefing explains the study purpose after completion.", correct:true, explanation:"TRUE. Debriefing = explaining purpose after study, revealing deception, answering questions."},
+    {type:'tf', question:"Wilhelm Wundt established the first psychology lab in 1879.", correct:true, explanation:"TRUE. Wundt opened first psychology lab in 1879 in Germany — birth of psychology as science."},
+    {type:'tf', question:"The behavioral perspective focuses on the unconscious mind.", correct:false, explanation:"FALSE. Behavioral perspective = observable behavior and environment. PSYCHODYNAMIC focuses on unconscious."},
+    {type:'tf', question:"Sigmund Freud developed the psychodynamic perspective.", correct:true, explanation:"TRUE. Freud developed psychoanalysis/psychodynamic perspective (unconscious mind, childhood conflicts)."},
+    {type:'tf', question:"Case studies allow researchers to generalize to large populations.", correct:false, explanation:"FALSE. Case studies = in-depth study of one person. Rich detail but CAN'T generalize to others."},
+    {type:'tf', question:"The eclectic approach integrates multiple perspectives.", correct:true, explanation:"TRUE. Eclectic approach = combining multiple perspectives. Modern standard in psychology."},
+    {type:'tf', question:"A positive correlation means one variable causes the other.", correct:false, explanation:"FALSE. Correlation (positive or negative) does NOT prove causation. Could be reverse or third variable."},
+    {type:'tf', question:"Participants can withdraw from a study at any time.", correct:true, explanation:"TRUE. Participation is always voluntary. Participants can withdraw at any time without penalty."},
+    {type:'tf', question:"Naturalistic observation can establish causation.", correct:false, explanation:"FALSE. Naturalistic observation can only DESCRIBE behavior (no manipulation or control for causation)."}
+];
+
+let currentSection = 'mc', currentIndex = 0;
+let activeQuestions = [], userAnswers = [], answeredQuestions = new Set();
+
+function selectSection(section) {
+    currentSection = section; currentIndex = 0;
+    userAnswers = []; answeredQuestions.clear();
+    document.querySelectorAll('.section-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+    if (section === 'mixed') { activeQuestions = [...questions]; shuffleArray(activeQuestions); }
+    else { activeQuestions = questions.filter(q => q.type === section); }
+    updateDisplay();
+}
+function shuffleArray(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+}
+function updateDisplay() {
+    const q = activeQuestions[currentIndex];
+    let optHTML = q.type === 'mc'
+        ? q.options.map((o, i) => `<div class="option" onclick="selectOption(${i})" id="option${i}">${String.fromCharCode(65+i)}. ${o}</div>`).join('')
+        : `<div class="option" onclick="selectOption(0)" id="option0">True</div><div class="option" onclick="selectOption(1)" id="option1">False</div>`;
+    document.getElementById('questionContainer').innerHTML = `
+        <div class="question-card">
+            <div class="question-number">Question ${currentIndex + 1} of ${activeQuestions.length}</div>
+            <div class="question-text">${q.question}</div>
+            <div class="options">${optHTML}</div>
+            <div class="feedback" id="feedback"></div>
+        </div>`;
+    if (userAnswers[currentIndex] !== undefined)
+        document.getElementById(`option${userAnswers[currentIndex]}`).classList.add('selected');
+    updateStats(); updateNavigation();
+}
+function selectOption(index) {
+    document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+    document.getElementById(`option${index}`).classList.add('selected');
+    userAnswers[currentIndex] = index;
+    document.getElementById('submitBtn').disabled = false;
+}
+function checkAnswer() {
+    const q = activeQuestions[currentIndex];
+    const ua = userAnswers[currentIndex];
+    if (ua === undefined) { alert('Please select an answer!'); return; }
+    const fb = document.getElementById('feedback');
+    const isCorrect = q.type === 'tf'
+        ? (ua === 0 && q.correct === true) || (ua === 1 && q.correct === false)
+        : ua === q.correct;
+    if (isCorrect) {
+        fb.className = 'feedback show correct';
+        fb.innerHTML = `<strong>✓ Correct!</strong><br>${q.explanation}`;
+        document.getElementById(`option${ua}`).classList.add('correct');
+        if (!answeredQuestions.has(currentIndex)) answeredQuestions.add(currentIndex);
+    } else {
+        fb.className = 'feedback show incorrect';
+        const ca = q.type === 'tf' ? (q.correct ? 'True' : 'False') : q.options[q.correct];
+        fb.innerHTML = `<strong>✗ Incorrect</strong><br>Correct answer: ${ca}<br>${q.explanation}`;
+        document.getElementById(`option${ua}`).classList.add('incorrect');
+        if (q.type === 'mc') document.getElementById(`option${q.correct}`).classList.add('correct');
+        else document.getElementById(`option${q.correct ? 0 : 1}`).classList.add('correct');
+    }
+    document.getElementById('submitBtn').disabled = true;
+    updateStats();
+}
+function nextQuestion() {
+    if (currentIndex < activeQuestions.length - 1) { currentIndex++; updateDisplay(); }
+    else showResults();
+}
+function previousQuestion() {
+    if (currentIndex > 0) { currentIndex--; updateDisplay(); }
+}
+function updateStats() {
+    const p = ((currentIndex + 1) / activeQuestions.length) * 100;
+    document.getElementById('progressBar').style.width = `${p}%`;
+    document.getElementById('progressBar').textContent = `${Math.round(p)}%`;
+    document.getElementById('currentQ').textContent = currentIndex + 1;
+    document.getElementById('totalQ').textContent = activeQuestions.length;
+    document.getElementById('correctCount').textContent = answeredQuestions.size;
+    document.getElementById('percentScore').textContent = `${Math.round((answeredQuestions.size / activeQuestions.length) * 100)}%`;
+}
+function updateNavigation() {
+    document.getElementById('prevBtn').disabled = currentIndex === 0;
+    document.getElementById('nextBtn').textContent = currentIndex === activeQuestions.length - 1 ? 'Finish ✓' : 'Next ➡️';
+}
+function showResults() {
+    const total = activeQuestions.length, correct = answeredQuestions.size;
+    const pct = Math.round((correct / total) * 100);
+    let grade, msg;
+    if (pct >= 90) { grade = 'A'; msg = 'Excellent!'; }
+    else if (pct >= 80) { grade = 'B'; msg = 'Great job!'; }
+    else if (pct >= 70) { grade = 'C'; msg = 'Good effort!'; }
+    else if (pct >= 60) { grade = 'D'; msg = 'Keep studying!'; }
+    else { grade = 'F'; msg = 'Review the material'; }
+    document.getElementById('gradeCircle').textContent = grade;
+    document.getElementById('scoreText').textContent = msg;
+    document.getElementById('breakdown').innerHTML = `
+        <div class="breakdown-item"><span>Total Questions:</span><strong>${total}</strong></div>
+        <div class="breakdown-item"><span>Correct Answers:</span><strong style="color:#28a745;">${correct}</strong></div>
+        <div class="breakdown-item"><span>Incorrect Answers:</span><strong style="color:#dc3545;">${total - correct}</strong></div>
+        <div class="breakdown-item"><span>Percentage:</span><strong>${pct}%</strong></div>`;
+    document.getElementById('resultsModal').classList.add('show');
+}
+function reviewMissed() { document.getElementById('resultsModal').classList.remove('show'); currentIndex = 0; updateDisplay(); }
+function restartExam() {
+    document.getElementById('resultsModal').classList.remove('show');
+    currentIndex = 0; userAnswers = []; answeredQuestions.clear(); updateDisplay();
+}
+selectSection('mc');
+activeQuestions = questions.filter(q => q.type === 'mc');
+updateDisplay();
+</script>
+</body>
+</html>
