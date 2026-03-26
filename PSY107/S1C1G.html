@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Science of Psychology - Visual Guide</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 { color: #764ba2; text-align: center; margin-bottom: 10px; font-size: 2.5em; }
+        h2 { color: #667eea; margin-bottom: 20px; }
+        h3 { color: #764ba2; margin: 20px 0 12px 0; }
+        .subtitle { text-align: center; color: #666; margin-bottom: 40px; font-size: 1.1em; }
+        .tabs { display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; justify-content: center; }
+        .tab {
+            padding: 12px 24px;
+            background: #f0f0f0;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        .tab:hover { background: #e0e0e0; transform: translateY(-2px); }
+        .tab.active { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .content { display: none; }
+        .content.active { display: block; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 20px 0; }
+        .card {
+            background: linear-gradient(135deg, #e8eaf6 0%, #c5cae9 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+            transition: all 0.3s;
+        }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+        .card-title { font-size: 1.2em; font-weight: bold; color: #667eea; margin-bottom: 10px; }
+        .card-author { color: #764ba2; font-style: italic; margin-bottom: 12px; font-size: 0.95em; }
+        .card-body { color: #333; line-height: 1.8; font-size: 0.95em; }
+
+        .table { width: 100%; border-collapse: collapse; margin: 20px 0; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .table th { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px; text-align: left; font-weight: 600; }
+        .table td { padding: 14px 15px; border-bottom: 1px solid #e0e0e0; }
+        .table tr:hover { background: #e8eaf6; }
+
+        .highlight {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .highlight strong { color: #856404; }
+
+        .method-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0; }
+        .method-card {
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            border: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        .method-card:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0,0,0,0.15); }
+        .naturalistic { background: #e8f5e9; border-color: #4caf50; }
+        .case-study { background: #fff3e0; border-color: #ff9800; }
+        .survey { background: #e3f2fd; border-color: #2196f3; }
+        .correlational { background: #f3e5f5; border-color: #9c27b0; }
+        .experiment { background: #ffebee; border-color: #f44336; }
+        .quasi { background: #fce4ec; border-color: #e91e63; }
+        .method-name { font-size: 1.2em; font-weight: bold; margin-bottom: 10px; }
+        .method-desc { font-size: 0.95em; color: #333; line-height: 1.8; text-align: left; }
+
+        .flow { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 20px; }
+        .flow-box {
+            background: white;
+            border: 3px solid #667eea;
+            padding: 18px 30px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .flow-arrow { color: #667eea; font-size: 2em; font-weight: bold; }
+
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            h1 { font-size: 1.8em; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>🔬 The Science of Psychology</h1>
+    <p class="subtitle">Visual Study Guide — Foundation of Scientific Psychology</p>
+
+    <div class="tabs">
+        <button class="tab active" onclick="showTab('overview')">📊 Overview</button>
+        <button class="tab" onclick="showTab('goals')">🎯 Four Goals</button>
+        <button class="tab" onclick="showTab('methods')">🔍 Research Methods</button>
+        <button class="tab" onclick="showTab('correlation')">📈 Correlation vs. Causation</button>
+        <button class="tab" onclick="showTab('experiment')">🧪 Experiments</button>
+        <button class="tab" onclick="showTab('ethics')">⚖️ Ethics</button>
+        <button class="tab" onclick="showTab('perspectives')">🧠 Perspectives</button>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div id="overview" class="content active">
+        <div class="highlight">
+            <strong>Psychology</strong> = The scientific study of behavior and mental processes.<br><br>
+            <strong>Think Like a Psychologist:</strong> Be <strong>skeptical</strong> about explanations of behavior rather than simply accepting them.
+        </div>
+
+        <h3>What Psychology IS NOT</h3>
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-title">❌ NOT Just Advice</div>
+                <div class="card-body">Psychology is a <strong>science</strong>, not just counseling or giving opinions. Uses scientific method and research.</div>
+            </div>
+            <div class="card">
+                <div class="card-title">❌ NOT Common Sense</div>
+                <div class="card-body">Scientific findings often <strong>contradict</strong> common sense. Research reveals surprising truths.</div>
+            </div>
+            <div class="card">
+                <div class="card-title">❌ NOT Just Mental Health</div>
+                <div class="card-body">Studies <strong>all aspects</strong> of behavior and cognition — memory, learning, social influence, development, etc.</div>
+            </div>
+        </div>
+
+        <h3>Key Concepts</h3>
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-title">🎯 Four Goals</div>
+                <div class="card-body">Describe, Predict, Explain, Control/Change behavior</div>
+            </div>
+            <div class="card">
+                <div class="card-title">🔍 Research Methods</div>
+                <div class="card-body">Naturalistic observation, case studies, surveys, correlational studies, experiments, quasi-experiments</div>
+            </div>
+            <div class="card">
+                <div class="card-title">⚖️ Ethics</div>
+                <div class="card-body">Informed consent, confidentiality, protection from harm, debriefing</div>
+            </div>
+            <div class="card">
+                <div class="card-title">🧠 Perspectives</div>
+                <div class="card-body">Biological, Evolutionary, Psychodynamic, Behavioral, Cognitive, Sociocultural, Humanistic, Eclectic</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOUR GOALS -->
+    <div id="goals" class="content">
+        <h2>Four Goals of Psychology</h2>
+
+        <div class="flow">
+            <div class="flow-box" style="background: #e8f5e9; border-color: #4caf50;">
+                <strong>1. DESCRIBE</strong><br>
+                What is happening?<br>
+                <small>Observe and record behavior systematically</small>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-box" style="background: #fff3e0; border-color: #ff9800;">
+                <strong>2. PREDICT</strong><br>
+                When will it happen?<br>
+                <small>Identify relationships between variables</small>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-box" style="background: #e3f2fd; border-color: #2196f3;">
+                <strong>3. EXPLAIN</strong><br>
+                Why is it happening?<br>
+                <small>Understand causes and mechanisms</small>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-box" style="background: #f3e5f5; border-color: #9c27b0;">
+                <strong>4. CONTROL/CHANGE</strong><br>
+                How can we make it happen (or stop it)?<br>
+                <small>Apply knowledge to influence behavior</small>
+            </div>
+        </div>
+
+        <div class="highlight">
+            <strong>Mnemonic: DPEC</strong><br>
+            <strong>D</strong>escribe → <strong>P</strong>redict → <strong>E</strong>xplain → <strong>C</strong>ontrol/Change
+        </div>
+
+        <h3>Examples of Each Goal</h3>
+        <table class="table">
+            <tr><th>Goal</th><th>Question</th><th>Example</th></tr>
+            <tr><td><strong>Describe</strong></td><td>"What happens?"</td><td>Children spend average 3 hours/day on screens</td></tr>
+            <tr><td><strong>Predict</strong></td><td>"When/who?"</td><td>More screen time predicts lower grades</td></tr>
+            <tr><td><strong>Explain</strong></td><td>"Why?"</td><td>Screen time reduces study time, disrupts sleep</td></tr>
+            <tr><td><strong>Control</strong></td><td>"How to change?"</td><td>Limit screens to improve academic performance</td></tr>
+        </table>
+    </div>
+
+    <!-- RESEARCH METHODS -->
+    <div id="methods" class="content">
+        <h2>Research Methods</h2>
+
+        <div class="method-grid">
+            <div class="method-card naturalistic">
+                <div class="method-name" style="color: #2e7d32;">Naturalistic Observation</div>
+                <div class="method-desc">
+                    <strong>What:</strong> Observe behavior in natural setting<br>
+                    <strong>Can establish:</strong> Description<br>
+                    <strong>Strength:</strong> Realistic<br>
+                    <strong>Weakness:</strong> No control<br>
+                    <strong>Example:</strong> Watching playground behavior
+                </div>
+            </div>
+            <div class="method-card case-study">
+                <div class="method-name" style="color: #e65100;">Case Study</div>
+                <div class="method-desc">
+                    <strong>What:</strong> In-depth study of one person/group<br>
+                    <strong>Can establish:</strong> Description<br>
+                    <strong>Strength:</strong> Rich detail<br>
+                    <strong>Weakness:</strong> Can't generalize<br>
+                    <strong>Example:</strong> Phineas Gage brain injury
+                </div>
+            </div>
+            <div class="method-card survey">
+                <div class="method-name" style="color: #1565c0;">Survey</div>
+                <div class="method-desc">
+                    <strong>What:</strong> Questionnaires/interviews<br>
+                    <strong>Can establish:</strong> Description, Prediction<br>
+                    <strong>Strength:</strong> Lots of data quickly<br>
+                    <strong>Weakness:</strong> Self-report bias<br>
+                    <strong>Example:</strong> Political polls
+                </div>
+            </div>
+            <div class="method-card correlational">
+                <div class="method-name" style="color: #6a1b9a;">Correlational Study</div>
+                <div class="method-desc">
+                    <strong>What:</strong> Measure relationship between variables<br>
+                    <strong>Can establish:</strong> Prediction (correlation)<br>
+                    <strong>Strength:</strong> Can predict<br>
+                    <strong>Weakness:</strong> <strong>Can NOT establish causation</strong><br>
+                    <strong>Example:</strong> Exercise and mood
+                </div>
+            </div>
+            <div class="method-card experiment">
+                <div class="method-name" style="color: #c62828;">Experiment ⭐</div>
+                <div class="method-desc">
+                    <strong>What:</strong> Manipulate IV, measure DV, random assignment<br>
+                    <strong>Can establish:</strong> <strong>CAUSATION</strong><br>
+                    <strong>Strength:</strong> ONLY method that proves cause<br>
+                    <strong>Weakness:</strong> May be artificial<br>
+                    <strong>Example:</strong> Caffeine → memory test
+                </div>
+            </div>
+            <div class="method-card quasi">
+                <div class="method-name" style="color: #c2185b;">Quasi-Experiment</div>
+                <div class="method-desc">
+                    <strong>What:</strong> Like experiment but NO random assignment<br>
+                    <strong>Can establish:</strong> Suggests causation (not definitive)<br>
+                    <strong>Strength:</strong> Can study age, gender, etc.<br>
+                    <strong>Weakness:</strong> Can't prove causation<br>
+                    <strong>Example:</strong> Young vs. old memory
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight">
+            <strong>⭐ KEY POINT:</strong> Only <strong>EXPERIMENTS</strong> can establish causation. All other methods show description or correlation only.
+        </div>
+    </div>
+
+    <!-- CORRELATION VS CAUSATION -->
+    <div id="correlation" class="content">
+        <h2>Correlation vs. Causation</h2>
+
+        <div class="highlight">
+            <strong>🚨 CRITICAL PRINCIPLE:</strong> <strong>CORRELATION DOES NOT EQUAL CAUSATION</strong>
+        </div>
+
+        <h3>Three Possible Explanations for ANY Correlation</h3>
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-title">1️⃣ A Causes B</div>
+                <div class="card-body">Variable A directly causes changes in Variable B</div>
+            </div>
+            <div class="card">
+                <div class="card-title">2️⃣ B Causes A</div>
+                <div class="card-body">Variable B directly causes changes in Variable A (reverse direction)</div>
+            </div>
+            <div class="card">
+                <div class="card-title">3️⃣ Third Variable C</div>
+                <div class="card-body">Some other variable C causes BOTH A and B (third variable problem)</div>
+            </div>
+        </div>
+
+        <h3>Classic Example: Ice Cream and Drowning</h3>
+        <table class="table">
+            <tr><th>Observation</th><th>Possible Explanation</th><th>Correct?</th></tr>
+            <tr><td rowspan="3">Ice cream sales correlate with drowning deaths</td><td>Ice cream causes drowning</td><td>❌ NO</td></tr>
+            <tr><td>Drowning causes ice cream sales</td><td>❌ NO</td></tr>
+            <tr><td><strong>Hot weather</strong> causes BOTH ice cream sales AND more swimming (drowning risk)</td><td>✅ YES</td></tr>
+        </table>
+
+        <h3>Types of Correlation</h3>
+        <table class="table">
+            <tr><th>Type</th><th>Relationship</th><th>Example</th></tr>
+            <tr><td><strong>Positive (+)</strong></td><td>Both variables increase together</td><td>Study time and grades</td></tr>
+            <tr><td><strong>Negative (−)</strong></td><td>As one increases, other decreases</td><td>Absences and grades</td></tr>
+            <tr><td><strong>Zero (0)</strong></td><td>No relationship</td><td>Shoe size and intelligence</td></tr>
+        </table>
+
+        <div class="highlight">
+            <strong>To Prove Causation, You MUST:</strong><br>
+            1. Use experimental method<br>
+            2. Have random assignment<br>
+            3. Manipulate the IV<br>
+            4. Control confounding variables<br>
+            5. Measure the DV
+        </div>
+    </div>
+
+    <!-- EXPERIMENTS -->
+    <div id="experiment" class="content">
+        <h2>Experimental Design</h2>
+
+        <h3>Key Components</h3>
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-title">🎛️ Independent Variable (IV)</div>
+                <div class="card-body">
+                    What experimenter <strong>MANIPULATES</strong><br>
+                    The presumed <strong>CAUSE</strong><br>
+                    What you change or assign<br><br>
+                    <strong>Example:</strong> Type of drug given
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title">📊 Dependent Variable (DV)</div>
+                <div class="card-body">
+                    What experimenter <strong>MEASURES</strong><br>
+                    The presumed <strong>EFFECT</strong><br>
+                    What you observe or record<br><br>
+                    <strong>Example:</strong> Symptom severity
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title">🧪 Experimental Group</div>
+                <div class="card-body">
+                    Receives the <strong>TREATMENT</strong><br>
+                    Exposed to the IV<br><br>
+                    <strong>Example:</strong> Group that takes new drug
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title">📋 Control Group</div>
+                <div class="card-body">
+                    Does <strong>NOT</strong> receive treatment<br>
+                    Provides baseline for comparison<br>
+                    May receive placebo<br><br>
+                    <strong>Example:</strong> Group that takes sugar pill
+                </div>
+            </div>
+        </div>
+
+        <h3>DRY MIX Mnemonic</h3>
+        <table class="table">
+            <tr><th>Letter</th><th>Meaning</th><th>Description</th></tr>
+            <tr><td><strong>D</strong></td><td><strong>D</strong>ependent</td><td rowspan="3">The variable you MEASURE (effect)</td></tr>
+            <tr><td><strong>R</strong></td><td><strong>R</strong>esponding</td></tr>
+            <tr><td><strong>Y</strong></td><td><strong>Y</strong>-axis</td></tr>
+            <tr><td><strong>M</strong></td><td><strong>M</strong>anipulated</td><td rowspan="3">The variable you CHANGE (cause)</td></tr>
+            <tr><td><strong>I</strong></td><td><strong>I</strong>ndependent</td></tr>
+            <tr><td><strong>X</strong></td><td><strong>X</strong>-axis</td></tr>
+        </table>
+
+        <h3>Random Assignment vs. Random Sampling</h3>
+        <table class="table">
+            <tr><th>Random Assignment</th><th>Random Sampling</th></tr>
+            <tr><td>Randomly placing participants into groups</td><td>Randomly selecting participants from population</td></tr>
+            <tr><td>Ensures groups equivalent at start</td><td>Ensures sample represents population</td></tr>
+            <tr><td>Critical for establishing CAUSATION</td><td>Critical for GENERALIZATION</td></tr>
+            <tr><td>Internal validity</td><td>External validity</td></tr>
+        </table>
+    </div>
+
+    <!-- ETHICS -->
+    <div id="ethics" class="content">
+        <h2>Ethical Principles</h2>
+
+        <h3>Five Key Ethical Principles (ICP-DD)</h3>
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-title">📝 Informed Consent</div>
+                <div class="card-body">
+                    • Tell participants about study<br>
+                    • Explain procedures and risks<br>
+                    • Must agree voluntarily<br>
+                    • Can withdraw anytime
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title">🔒 Confidentiality</div>
+                <div class="card-body">
+                    • Keep data private<br>
+                    • Use ID numbers, not names<br>
+                    • Secure storage<br>
+                    • Only share with authorized people
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title">🛡️ Protection from Harm</div>
+                <div class="card-body">
+                    • Minimize physical risks<br>
+                    • Minimize psychological risks<br>
+                    • Benefits must outweigh risks<br>
+                    • Monitor for distress
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title">🎭 Deception (minimal)</div>
+                <div class="card-body">
+                    • Only if necessary<br>
+                    • Must not cause harm<br>
+                    • No alternative method<br>
+                    • Must debrief afterward
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title">💬 Debriefing</div>
+                <div class="card-body">
+                    • Explain purpose after study<br>
+                    • Reveal any deception<br>
+                    • Answer questions<br>
+                    • Ensure participants OK
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight">
+            <strong>APA Guidelines:</strong> American Psychological Association has strict ethical code all researchers must follow.
+        </div>
+    </div>
+
+    <!-- PERSPECTIVES -->
+    <div id="perspectives" class="content">
+        <h2>Eight Psychological Perspectives</h2>
+
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-title">🧬 Neuroscience/Biological</div>
+                <div class="card-author">Roots: Medicine, Physiology</div>
+                <div class="card-body">
+                    <strong>Focus:</strong> Brain, nervous system, genetics, hormones<br>
+                    <strong>Question:</strong> How do biological processes influence behavior?<br>
+                    <strong>Example:</strong> Depression linked to neurotransmitters
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title">🦎 Evolutionary</div>
+                <div class="card-author">Key Figure: Charles Darwin</div>
+                <div class="card-body">
+                    <strong>Focus:</strong> Behaviors that aided survival/reproduction<br>
+                    <strong>Question:</strong> How did this help ancestors survive?<br>
+                    <strong>Example:</strong> Fear of snakes as adaptive
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title">🛋️ Psychodynamic</div>
+                <div class="card-author">Key Figure: Sigmund Freud</div>
+                <div class="card-body">
+                    <strong>Focus:</strong> Unconscious processes, childhood conflicts<br>
+                    <strong>Question:</strong> What unconscious motives drive this?<br>
+                    <strong>Example:</strong> Defense mechanisms, Freudian slips
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title">📊 Behavioral</div>
+                <div class="card-author">Key Figures: Watson, Skinner</div>
+                <div class="card-body">
+                    <strong>Focus:</strong> Observable behavior, environmental influences<br>
+                    <strong>Question:</strong> What external factors shaped this?<br>
+                    <strong>Example:</strong> Classical conditioning, reinforcement
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title">🧠 Cognitive</div>
+                <div class="card-author">Related: Positive Psychology</div>
+                <div class="card-body">
+                    <strong>Focus:</strong> Mental processes, thinking, memory<br>
+                    <strong>Question:</strong> How do thoughts influence behavior?<br>
+                    <strong>Example:</strong> Cognitive therapy, decision-making
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title">🌍 Sociocultural</div>
+                <div class="card-author">Focus: Context Matters</div>
+                <div class="card-body">
+                    <strong>Focus:</strong> Culture, ethnicity, gender, social class<br>
+                    <strong>Question:</strong> How does social context shape behavior?<br>
+                    <strong>Example:</strong> Cultural differences in parenting
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title">🌟 Humanistic</div>
+                <div class="card-author">Key Figures: Rogers, Maslow</div>
+                <div class="card-body">
+                    <strong>Focus:</strong> Free will, personal growth, self-actualization<br>
+                    <strong>Question:</strong> How can people reach full potential?<br>
+                    <strong>Example:</strong> Client-centered therapy
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title">🎨 Eclectic</div>
+                <div class="card-author">Modern Standard</div>
+                <div class="card-body">
+                    <strong>Focus:</strong> Integrating multiple perspectives<br>
+                    <strong>Principle:</strong> No single perspective explains everything<br>
+                    <strong>Example:</strong> Understanding depression through bio + cognitive + social
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight">
+            <strong>Mnemonic:</strong> "New Elephants Behave Cautiously; Some Have Purple Ears"<br>
+            <strong>N</strong>euroscience, <strong>E</strong>volutionary, <strong>B</strong>ehavioral, <strong>C</strong>ognitive, <strong>S</strong>ociocultural, <strong>H</strong>umanistic, <strong>P</strong>sychodynamic, <strong>E</strong>clectic
+        </div>
+    </div>
+</div>
+
+<script>
+    function showTab(name) {
+        document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.getElementById(name).classList.add('active');
+        event.target.classList.add('active');
+    }
+</script>
+</body>
+</html>
