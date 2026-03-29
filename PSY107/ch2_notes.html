@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 2 — Neuroscience & Behaviour | Reference Notes</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Source+Sans+3:wght@300;400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0f1924;
+    --navy-mid: #162333;
+    --navy-light: #1e3045;
+    --amber: #e8a048;
+    --amber-dim: #c4813a;
+    --amber-glow: rgba(232,160,72,0.12);
+    --teal: #4ecdc4;
+    --rose: #e07070;
+    --sage: #6db88a;
+    --text: #d4dde8;
+    --text-dim: #8fa3b8;
+    --text-bright: #eef3f8;
+    --border: rgba(232,160,72,0.2);
+    --border-light: rgba(212,221,232,0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--navy);
+    color: var(--text);
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 300;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  /* ─── HEADER ─── */
+  header {
+    background: linear-gradient(135deg, #0a1018 0%, var(--navy-mid) 60%, #1a2a1a 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 3rem 2rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: 50%; transform: translateX(-50%);
+    width: 400px; height: 200px;
+    background: radial-gradient(ellipse, rgba(232,160,72,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .chapter-tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--amber);
+    border: 1px solid var(--border);
+    padding: 0.3rem 0.8rem;
+    border-radius: 2px;
+    margin-bottom: 1rem;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 4vw, 2.6rem);
+    font-weight: 700;
+    color: var(--text-bright);
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+  }
+  header h1 em {
+    color: var(--amber);
+    font-style: italic;
+    font-weight: 400;
+  }
+  .source-line {
+    margin-top: 0.8rem;
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    font-style: italic;
+  }
+
+  /* ─── PROGRESS / TOC ─── */
+  .toc-bar {
+    background: var(--navy-mid);
+    border-bottom: 1px solid var(--border-light);
+    padding: 1rem 2rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .toc-pill {
+    font-size: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-dim);
+    background: var(--navy-light);
+    border: 1px solid var(--border-light);
+    padding: 0.25rem 0.65rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  .toc-pill:hover {
+    color: var(--amber);
+    border-color: var(--amber);
+    background: var(--amber-glow);
+  }
+
+  /* ─── MAIN LAYOUT ─── */
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+  }
+
+  /* ─── SECTIONS ─── */
+  .section {
+    margin-bottom: 1.2rem;
+    border: 1px solid var(--border-light);
+    border-radius: 6px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .section:hover { border-color: var(--border); }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.1rem 1.4rem;
+    background: var(--navy-mid);
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
+  }
+  .section-header:hover { background: var(--navy-light); }
+
+  .sec-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--amber);
+    min-width: 2.5rem;
+  }
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-bright);
+    flex: 1;
+  }
+  .sec-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--text-dim);
+    transition: background 0.2s, transform 0.2s;
+    flex-shrink: 0;
+  }
+  .section.open .sec-dot {
+    background: var(--amber);
+    transform: scale(1.3);
+  }
+
+  .section-body {
+    display: none;
+    padding: 0 1.4rem 1.4rem;
+    background: rgba(15,25,36,0.6);
+  }
+  .section.open .section-body { display: block; }
+
+  /* ─── SUBSECTION ─── */
+  .subsection {
+    margin-top: 1.2rem;
+    border-left: 2px solid var(--border);
+    padding-left: 1rem;
+  }
+  .subsection h3 {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 600;
+    font-size: 0.88rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--amber);
+    margin-bottom: 0.6rem;
+  }
+
+  /* ─── CONTENT ELEMENTS ─── */
+  p {
+    font-size: 0.9rem;
+    color: var(--text);
+    margin-bottom: 0.6rem;
+  }
+
+  .key-point {
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+    margin-bottom: 0.45rem;
+    font-size: 0.88rem;
+  }
+  .key-point::before {
+    content: '▸';
+    color: var(--amber);
+    font-size: 0.7rem;
+    margin-top: 0.3rem;
+    flex-shrink: 0;
+  }
+
+  .term {
+    display: inline;
+    color: var(--teal);
+    font-weight: 600;
+  }
+
+  .highlight-box {
+    background: var(--amber-glow);
+    border: 1px solid rgba(232,160,72,0.3);
+    border-radius: 4px;
+    padding: 0.8rem 1rem;
+    margin: 0.8rem 0;
+    font-size: 0.86rem;
+  }
+  .highlight-box .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--amber);
+    margin-bottom: 0.3rem;
+  }
+
+  .disorder-box {
+    background: rgba(224,112,112,0.08);
+    border: 1px solid rgba(224,112,112,0.25);
+    border-radius: 4px;
+    padding: 0.75rem 1rem;
+    margin: 0.5rem 0;
+    font-size: 0.86rem;
+  }
+  .disorder-box .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--rose);
+    margin-bottom: 0.3rem;
+  }
+
+  .case-box {
+    background: rgba(78,205,196,0.07);
+    border: 1px solid rgba(78,205,196,0.22);
+    border-radius: 4px;
+    padding: 0.75rem 1rem;
+    margin: 0.5rem 0;
+    font-size: 0.86rem;
+  }
+  .case-box .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--teal);
+    margin-bottom: 0.3rem;
+  }
+
+  /* ─── NT TABLE ─── */
+  .nt-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+    margin-top: 0.8rem;
+  }
+  @media (max-width: 600px) { .nt-grid { grid-template-columns: 1fr; } }
+  .nt-card {
+    background: var(--navy-light);
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+    padding: 0.75rem;
+  }
+  .nt-card .nt-name {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--sage);
+    margin-bottom: 0.3rem;
+  }
+  .nt-card .nt-role {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+  }
+  .nt-card .nt-disorder {
+    font-size: 0.78rem;
+    color: var(--rose);
+    margin-top: 0.25rem;
+  }
+
+  /* ─── ANS TABLE ─── */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.8rem;
+    font-size: 0.83rem;
+  }
+  .compare-table th {
+    background: var(--navy-light);
+    color: var(--amber);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.55rem 0.8rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .compare-table td {
+    padding: 0.5rem 0.8rem;
+    border-bottom: 1px solid var(--border-light);
+    color: var(--text);
+    vertical-align: top;
+  }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table td:first-child { color: var(--teal); font-weight: 600; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-dim);
+    font-size: 0.78rem;
+    border-top: 1px solid var(--border-light);
+  }
+
+  /* ─── MNEMONIC ─── */
+  .mnemonic {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    background: rgba(109,184,138,0.1);
+    border: 1px solid rgba(109,184,138,0.25);
+    border-radius: 4px;
+    padding: 0.6rem 0.9rem;
+    color: var(--sage);
+    margin: 0.6rem 0;
+  }
+  .mnemonic .m-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--sage);
+    opacity: 0.7;
+    margin-bottom: 0.2rem;
+  }
+
+  /* open-all toggle */
+  .controls {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  .ctrl-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: transparent;
+    border: 1px solid var(--border-light);
+    color: var(--text-dim);
+    padding: 0.3rem 0.7rem;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .ctrl-btn:hover { color: var(--amber); border-color: var(--border); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="chapter-tag">Chapter 2 · Reference Notes</div>
+  <h1>Neuroscience &amp; <em>Behaviour</em></h1>
+  <div class="source-line">Doyle-Portillo &amp; Pastorino · <em>What is Psychology? Foundations, Applications &amp; Integration</em></div>
+</header>
+
+<nav class="toc-bar">
+  <a class="toc-pill" href="#s1">2.1 Neuron Anatomy</a>
+  <a class="toc-pill" href="#s2">2.1.2 Action Potentials</a>
+  <a class="toc-pill" href="#s3">2.1.3 Synaptic Transmission</a>
+  <a class="toc-pill" href="#s4">2.2 Neurotransmitters</a>
+  <a class="toc-pill" href="#s5">2.3 Nervous System</a>
+  <a class="toc-pill" href="#s6">2.4 Brain Structures</a>
+  <a class="toc-pill" href="#s7">2.5 Brain Tech</a>
+  <a class="toc-pill" href="#s8">2.6 Endocrine System</a>
+</nav>
+
+<main>
+
+  <div class="controls">
+    <button class="ctrl-btn" onclick="toggleAll(true)">Expand All</button>
+    <button class="ctrl-btn" onclick="toggleAll(false)">Collapse All</button>
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- SECTION 2.1 -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="section open" id="s1">
+    <div class="section-header" onclick="toggle(this)">
+      <span class="sec-num">2.1</span>
+      <h2>Billions of Neurons — Communication in the Brain</h2>
+      <span class="sec-dot"></span>
+    </div>
+    <div class="section-body">
+
+      <div class="subsection">
+        <h3>Key Numbers</h3>
+        <div class="key-point">Brain contains ~<span class="term">86 billion neurons</span> (revised down from the old estimate of 100B).</div>
+        <div class="key-point">Similar number of <span class="term">glia cells</span> — once thought only supportive, now known to assist neural signalling and network formation.</div>
+        <div class="key-point">Glia cells form <span class="term">myelin</span> — the whitish fatty sheath that insulates axons and speeds up signal transmission.</div>
+      </div>
+
+      <div class="disorder-box">
+        <div class="label">Clinical Link — Multiple Sclerosis (MS)</div>
+        MS destroys the myelin sheath → neural signals slow or stop entirely → progressive loss of motor control and sensory function (e.g. numbness, vision loss).
+      </div>
+
+      <div class="subsection">
+        <h3>Anatomy of a Neuron</h3>
+        <div class="key-point"><span class="term">Cell body (soma)</span> — contains nucleus with DNA.</div>
+        <div class="key-point"><span class="term">Dendrites</span> — branch-like structures that receive incoming signals. ("Head" end.)</div>
+        <div class="key-point"><span class="term">Axon</span> — long tail that carries signals away from cell body. Covered by myelin sheath in segments. ("Tail" end.)</div>
+        <div class="key-point"><span class="term">Axon bulb / terminal buttons</span> — contain vesicles packed with neurotransmitters.</div>
+        <div class="key-point"><span class="term">Synapse</span> — junction between two neurons. Includes the synaptic gap (physical space between pre- and postsynaptic neurons).</div>
+        <div class="highlight-box">
+          <div class="label">Scale fact</div>
+          ~100 trillion synapses but only ~86 billion neurons — because each neuron can synapse with up to <strong>10,000</strong> other neurons.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- SECTION 2.1.2 -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="section open" id="s2">
+    <div class="section-header" onclick="toggle(this)">
+      <span class="sec-num">2.1.2</span>
+      <h2>How Neurons Fire — Action Potentials</h2>
+      <span class="sec-dot"></span>
+    </div>
+    <div class="section-body">
+
+      <div class="subsection">
+        <h3>Resting Potential</h3>
+        <div class="key-point">At rest: inside of neuron is <strong>more negative</strong> than outside.</div>
+        <div class="key-point">Resting potential = <span class="term">−70 mV</span> (mammalian neurons).</div>
+        <div class="key-point">Ion channels at rest block Na⁺ from entering → maintains the negative charge inside.</div>
+      </div>
+
+      <div class="subsection">
+        <h3>Firing an Action Potential</h3>
+        <div class="key-point">Incoming excitatory signals raise the internal charge toward the <span class="term">threshold of excitation (~−55 mV)</span>.</div>
+        <div class="key-point">At threshold → Na⁺ ion channels open → Na⁺ floods in → inside becomes rapidly positive → <span class="term">action potential</span> fires.</div>
+        <div class="highlight-box">
+          <div class="label">All-or-None Law</div>
+          Action potentials are either full strength or nothing — like a light switch. Once threshold is reached, the impulse travels the full length of the axon to the synapse.
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3>Refractory Period (Returning to Rest)</h3>
+        <div class="key-point">As action potential travels, K⁺ (potassium) is pumped OUT → restores negative charge inside.</div>
+        <div class="key-point">Brief period of <span class="term">refractory</span> (a few milliseconds) during which the neuron cannot fire again.</div>
+        <div class="key-point">Resting potential (−70 mV) is then restored, ready for the next signal.</div>
+      </div>
+
+      <div class="mnemonic">
+        <div class="m-label">Memory sequence</div>
+        REST (−70mV) → EXCITE → THRESHOLD (−55mV) → Na⁺ IN → FIRE → K⁺ OUT → REST
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- SECTION 2.1.3–2.1.4 -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="section open" id="s3">
+    <div class="section-header" onclick="toggle(this)">
+      <span class="sec-num">2.1.3–4</span>
+      <h2>Synaptic Transmission &amp; Reuptake</h2>
+      <span class="sec-dot"></span>
+    </div>
+    <div class="section-body">
+
+      <div class="subsection">
+        <h3>Jumping the Synapse</h3>
+        <div class="key-point">Action potential reaches axon bulb → neurotransmitters released into synaptic gap.</div>
+        <div class="key-point">NT molecules drift across gap → bind to <span class="term">receptor sites</span> on postsynaptic dendrites (lock-and-key model).</div>
+        <div class="key-point"><span class="term">Excitation</span> — NT makes postsynaptic cell more positive → more likely to fire.</div>
+        <div class="key-point"><span class="term">Inhibition</span> — NT makes postsynaptic cell more negative → less likely to fire.</div>
+        <div class="key-point">Postsynaptic axon <em>sums</em> all incoming excitatory &amp; inhibitory signals. Fires only if net sum reaches threshold.</div>
+      </div>
+
+      <div class="subsection">
+        <h3>Reuptake</h3>
+        <div class="key-point"><span class="term">Reuptake</span> = leftover NTs in synapse are reabsorbed by the presynaptic neuron.</div>
+        <div class="key-point">Purpose 1: Replenishes NT supply for next signal.</div>
+        <div class="key-point">Purpose 2: Clears synapse — prevents runaway excitation/inhibition.</div>
+        <div class="highlight-box">
+          <div class="label">Drug relevance</div>
+          SSRIs (e.g. Prozac) <strong>block serotonin reuptake</strong>, keeping more serotonin active in the synapse → antidepressant effect.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- SECTION 2.2 -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="section open" id="s4">
+    <div class="section-header" onclick="toggle(this)">
+      <span class="sec-num">2.2</span>
+      <h2>Neurotransmitters &amp; Neuromodulators</h2>
+      <span class="sec-dot"></span>
+    </div>
+    <div class="section-body">
+
+      <p>100+ identified neurotransmitters. <span class="term">Neuromodulators</span> affect neural signalling indirectly (e.g. protecting neurons, modulating NT release) without directly changing resting potential.</p>
+
+      <div class="nt-grid">
+        <div class="nt-card">
+          <div class="nt-name">Acetylcholine (ACh)</div>
+          <div class="nt-role">Memory, consciousness, muscle excitation, heart inhibition. First NT discovered.</div>
+          <div class="nt-disorder">↓ ACh → Alzheimer's disease (memory loss)</div>
+        </div>
+        <div class="nt-card">
+          <div class="nt-name">Dopamine</div>
+          <div class="nt-role">Movement, learning, attention, motivation, reward/pleasure.</div>
+          <div class="nt-disorder">↓ Dopamine → Parkinson's disease &nbsp;|&nbsp; ↑ Dopamine → Schizophrenia</div>
+        </div>
+        <div class="nt-card">
+          <div class="nt-name">Serotonin</div>
+          <div class="nt-role">Sleep, mood, arousal, eating, pain perception.</div>
+          <div class="nt-disorder">↓ Serotonin → Depression, anxiety, eating disorders. Treated by SSRIs.</div>
+        </div>
+        <div class="nt-card">
+          <div class="nt-name">Norepinephrine (NOR)</div>
+          <div class="nt-role">Sleep, arousal, mood regulation. Synapse development in childhood. Recovery after TBI.</div>
+          <div class="nt-disorder">Implicated in depression; also functions as endocrine hormone (adrenaline-related).</div>
+        </div>
+        <div class="nt-card">
+          <div class="nt-name">GABA</div>
+          <div class="nt-role">Chief <em>inhibitory</em> NT. Regulates arousal. ~⅓ of all synapses.</div>
+          <div class="nt-disorder">↓ GABA → Seizures, anxiety. Increased by benzodiazepines, alcohol, barbiturates.</div>
+        </div>
+        <div class="nt-card">
+          <div class="nt-name">Glutamate</div>
+          <div class="nt-role">Chief <em>excitatory</em> NT. >50% of synapses. Essential for nearly all brain processes.</div>
+          <div class="nt-disorder">Excess release after brain injury → excitotoxicity (neurons fire to death).</div>
+        </div>
+        <div class="nt-card">
+          <div class="nt-name">Endorphins</div>
+          <div class="nt-role">Natural painkillers. Released during stress/exertion. Bind opioid receptors → reduce pain + mild euphoria.</div>
+          <div class="nt-disorder">Released ~15 min after eating fat; triggered by exercise. Mimicked by opioid drugs (heroin, morphine).</div>
+        </div>
+      </div>
+
+      <div class="mnemonic">
+        <div class="m-label">Mnemonic — major NTs</div>
+        <strong>A</strong>ce <strong>D</strong>oesn't <strong>S</strong>leep — <strong>N</strong>or <strong>G</strong>oes <strong>G</strong>lutamate <strong>E</strong>asily &nbsp;→&nbsp; ACh · Dopamine · Serotonin · NOR · GABA · Glutamate · Endorphins
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- SECTION 2.3 -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggle(this)">
+      <span class="sec-num">2.3</span>
+      <h2>Structure of the Nervous System</h2>
+      <span class="sec-dot"></span>
+    </div>
+    <div class="section-body">
+
+      <div class="subsection">
+        <h3>CNS vs PNS</h3>
+        <div class="key-point"><span class="term">Central Nervous System (CNS)</span> — brain + spinal cord.</div>
+        <div class="key-point"><span class="term">Peripheral Nervous System (PNS)</span> — all other neurons. Two roles: (1) sensory input to CNS via sensory neurons; (2) motor output from CNS via motor neurons.</div>
+        <div class="key-point"><span class="term">Interneurons</span> — carry signals within CNS during processing.</div>
+      </div>
+
+      <div class="subsection">
+        <h3>Somatic vs Autonomic</h3>
+        <table class="compare-table">
+          <tr>
+            <th>Branch</th>
+            <th>Controls</th>
+            <th>Key Feature</th>
+          </tr>
+          <tr>
+            <td>Somatic NS</td>
+            <td>Skeletal muscles</td>
+            <td>Voluntary movement</td>
+          </tr>
+          <tr>
+            <td>Autonomic NS</td>
+            <td>Smooth muscles, heart, glands</td>
+            <td>Involuntary / automatic</td>
+          </tr>
+          <tr>
+            <td>↳ Parasympathetic</td>
+            <td>Internal organs at rest</td>
+            <td>"Rest and digest" — normal HR, BP, digestion active</td>
+          </tr>
+          <tr>
+            <td>↳ Sympathetic</td>
+            <td>Fight-or-flight response</td>
+            <td>↑ HR, BP, breathing; ↓ digestion; dilated pupils; blood to muscles</td>
+          </tr>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- SECTION 2.4 -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggle(this)">
+      <span class="sec-num">2.4</span>
+      <h2>The Brain &amp; Spinal Cord — CNS Structures</h2>
+      <span class="sec-dot"></span>
+    </div>
+    <div class="section-body">
+
+      <div class="subsection">
+        <h3>Three Regions Overview</h3>
+        <div class="key-point"><span class="term">Hindbrain</span> — base of brain above spinal cord. Most "primitive." Life-sustaining functions.</div>
+        <div class="key-point"><span class="term">Midbrain</span> — connects hindbrain ↔ forebrain. Keeps forebrain active via reticular formation.</div>
+        <div class="key-point"><span class="term">Forebrain</span> — largest region. Complex cognition, emotion, motivation, language.</div>
+      </div>
+
+      <div class="subsection">
+        <h3>Hindbrain Structures</h3>
+        <div class="key-point"><span class="term">Medulla oblongata</span> — heartbeat, respiration, sneezing, coughing, vomiting. Even minor damage = death.</div>
+        <div class="key-point"><span class="term">Pons</span> — "bridge" for sensory signals between hemispheres. Respiration, sleep, dreaming, facial movement, consciousness.</div>
+        <div class="key-point"><span class="term">Cerebellum</span> — balance, muscle tone, motor skills, motor learning. Contains ~80% of cerebral neurons but only 10% of brain mass. Also implicated in memory, emotion, depression, ADHD.</div>
+        <div class="disorder-box">
+          <div class="label">Alcohol &amp; Cerebellum</div>
+          Alcohol impairs cerebellum → staggering, clumsiness, slowed reaction time.
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3>Midbrain — Reticular Formation</h3>
+        <div class="key-point">Network running from hindbrain through midbrain into forebrain.</div>
+        <div class="key-point">Regulates arousal, attention, sleep, consciousness, cardiovascular activity, body movement.</div>
+      </div>
+
+      <div class="subsection">
+        <h3>Forebrain — Limbic System</h3>
+        <div class="key-point"><span class="term">Amygdala</span> (almond-shaped, behind temples) — fear and aggression, perception of emotional facial expressions. Damage → inability to feel or recognise fear.</div>
+        <div class="key-point"><span class="term">Hippocampus</span> — learning and memory (especially forming new long-term memories). Neuroplasticity: expands with spatial memory use (e.g. London taxi drivers). Damaged by chronic stress hormones. Meditation linked to larger hippocampus.</div>
+
+        <div class="case-box">
+          <div class="label">Case Study — H.M.</div>
+          Hippocampus surgically removed (to control epilepsy) → <strong>anterograde amnesia</strong>: could not form new declarative memories. Could still learn new motor skills but had no memory of learning them. Foundational evidence for hippocampus in memory formation.
+        </div>
+        <div class="case-box">
+          <div class="label">Case Study — S.M.</div>
+          Amygdala destroyed by disease → completely unable to experience fear from external stimuli. Could still feel fear from internal bodily sensations (e.g. feeling unable to breathe) — suggests amygdala is only involved in external fear processing.
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3>Forebrain — Thalamus &amp; Hypothalamus</h3>
+        <div class="key-point"><span class="term">Thalamus</span> — relay station for sensory information to cortex. Also involved in attention and certain sleep stages (REM).</div>
+        <div class="key-point"><span class="term">Hypothalamus</span> — maintains homeostasis (temperature, hunger, thirst, sleep, sexual/reproductive functions, hormone levels). Connects nervous system to endocrine system via the pituitary gland.</div>
+      </div>
+
+      <div class="subsection">
+        <h3>The Cortex</h3>
+        <div class="key-point">Thin (~2mm) wrinkled layer covering cerebral hemispheres. Highest-level processing: cognition, language, planning, decision-making. Most developed in humans of all species.</div>
+        <div class="key-point">75% = <span class="term">association cortex</span> (higher cognition). 25% = motor/sensory functions.</div>
+        <div class="key-point">Divided into 4 <span class="term">lobes</span> (each duplicated L &amp; R).</div>
+      </div>
+
+      <div class="subsection">
+        <h3>The Four Lobes</h3>
+        <table class="compare-table">
+          <tr><th>Lobe</th><th>Location</th><th>Key Functions</th></tr>
+          <tr>
+            <td>Frontal</td>
+            <td>Front / forehead</td>
+            <td>Primary motor cortex (voluntary movement). Broca's area (speech production). Prefrontal: personality, judgment, planning, emotion regulation. Phineas Gage case.</td>
+          </tr>
+          <tr>
+            <td>Parietal</td>
+            <td>Top, behind frontal</td>
+            <td>Primary somatosensory area (touch, pressure, pain). Body mapping (somatosensory homunculus).</td>
+          </tr>
+          <tr>
+            <td>Occipital</td>
+            <td>Back of skull</td>
+            <td>Primary visual area — processes visual input. Damage → functional blindness.</td>
+          </tr>
+          <tr>
+            <td>Temporal</td>
+            <td>Sides, behind ears</td>
+            <td>Auditory cortex (hearing). Wernicke's area (speech comprehension). Damage to Wernicke's → receptive aphasia.</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="subsection">
+        <h3>Lateralisation &amp; the Corpus Callosum</h3>
+        <div class="key-point">Brain is wired <span class="term">contralaterally</span> — right brain controls left body, and vice versa.</div>
+        <div class="key-point">Language mostly in <span class="term">left hemisphere</span>. Spatial processing more in right hemisphere.</div>
+        <div class="key-point"><span class="term">Corpus callosum</span> — dense band connecting L &amp; R hemispheres so they share information.</div>
+        <div class="key-point">Women tend to have larger corpus callosa, possibly enabling more integrated (less lateralised) brain function.</div>
+        <div class="case-box">
+          <div class="label">Split-Brain Research (Gazzaniga)</div>
+          Corpus callosum cut to control severe epilepsy → right and left hemispheres operate independently. Object seen in left visual field (processed by right brain) cannot be named — but can be pointed to with left hand. Confirmed left hemisphere handles speech production.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- SECTION 2.5 -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggle(this)">
+      <span class="sec-num">2.5</span>
+      <h2>Technologies for Studying the Brain</h2>
+      <span class="sec-dot"></span>
+    </div>
+    <div class="section-body">
+
+      <table class="compare-table">
+        <tr><th>Technology</th><th>What It Shows</th><th>Key Use</th></tr>
+        <tr><td>CT / CAT Scan</td><td>Brain structure (X-ray based)</td><td>Detecting lesions, tumours, structural damage</td></tr>
+        <tr><td>MRI</td><td>Detailed brain structure (magnetic)</td><td>High-resolution structural imaging</td></tr>
+        <tr><td>fMRI</td><td>Brain activity (blood flow)</td><td>Identifies active regions during tasks in real time</td></tr>
+        <tr><td>PET Scan</td><td>Metabolic activity (radioactive tracer)</td><td>Shows which areas consume most energy</td></tr>
+        <tr><td>EEG</td><td>Electrical activity (surface electrodes)</td><td>Sleep studies, seizure monitoring; fast but low spatial detail</td></tr>
+        <tr><td>Brain Stimulation (TMS)</td><td>Temporarily disrupts/stimulates areas</td><td>Identifies causal roles of specific brain regions</td></tr>
+      </table>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- SECTION 2.6 -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggle(this)">
+      <span class="sec-num">2.6</span>
+      <h2>The Endocrine System</h2>
+      <span class="sec-dot"></span>
+    </div>
+    <div class="section-body">
+
+      <div class="subsection">
+        <h3>Overview</h3>
+        <div class="key-point">Chemical communication system using <span class="term">hormones</span> released by endocrine glands into the bloodstream.</div>
+        <div class="key-point"><em>Slower</em> than the nervous system (travels via blood) but produces <em>longer-lasting</em> effects.</div>
+        <div class="key-point">Governs: sexual activity, eating, sleeping, arousal, growth.</div>
+        <div class="key-point">Hypothalamus → Pituitary gland → other endocrine glands → target organs. (The "master" control chain.)</div>
+      </div>
+
+      <div class="subsection">
+        <h3>Key Glands</h3>
+        <table class="compare-table">
+          <tr><th>Gland</th><th>Location</th><th>Secretes / Controls</th></tr>
+          <tr><td>Pituitary</td><td>Under hypothalamus</td><td>"Master gland" — regulates all other endocrine glands via hormones</td></tr>
+          <tr><td>Gonads (Ovaries / Testes)</td><td>Abdominal / testicles</td><td>Estrogens (F) &amp; Androgens (M) — sexual development &amp; reproduction</td></tr>
+          <tr><td>Adrenal glands</td><td>Above kidneys</td><td>Medulla: epinephrine (adrenaline) &amp; norepinephrine → fight-or-flight. Cortex: adrenal androgens, immune interaction.</td></tr>
+          <tr><td>Thyroid</td><td>Neck</td><td>Regulates energy use (metabolism)</td></tr>
+          <tr><td>Pancreas</td><td>Abdomen</td><td>Insulin — regulates blood sugar</td></tr>
+          <tr><td>Pineal gland</td><td>Brain</td><td>May influence sexual maturation</td></tr>
+        </table>
+      </div>
+
+      <div class="highlight-box">
+        <div class="label">Nervous System vs Endocrine System</div>
+        Nervous system = <strong>fast, short-lived signals</strong> (electrochemical, milliseconds). Endocrine system = <strong>slow, long-lasting signals</strong> (hormones via blood, seconds to hours). Both regulated by the hypothalamus.
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  Chapter 2 Reference Notes · <em>What is Psychology? Foundations, Applications &amp; Integration</em> · Doyle-Portillo &amp; Pastorino
+</footer>
+
+<script>
+  function toggle(header) {
+    const section = header.closest('.section');
+    section.classList.toggle('open');
+  }
+  function toggleAll(open) {
+    document.querySelectorAll('.section').forEach(s => {
+      open ? s.classList.add('open') : s.classList.remove('open');
+    });
+  }
+</script>
+</body>
+</html>
