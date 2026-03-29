@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 1 — Reference Notes | What Is Psychology?</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f0e8;
+    --surface: #fffdf8;
+    --ink: #1a1208;
+    --muted: #6b5e4a;
+    --accent: #c0392b;
+    --accent2: #2c6e8a;
+    --accent3: #5a7a3a;
+    --accent4: #8e44ad;
+    --accent5: #d35400;
+    --accent6: #1a5276;
+    --accent7: #196f3d;
+    --border: #d9cdb8;
+    --highlight: #fef9c3;
+    --shadow: rgba(26,18,8,0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 3.5rem 2rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 20px,
+      rgba(255,255,255,0.02) 20px,
+      rgba(255,255,255,0.02) 40px
+    );
+  }
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+    position: relative;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    line-height: 1.15;
+    position: relative;
+    margin-bottom: 0.5rem;
+  }
+  .hero-sub {
+    font-size: 0.9rem;
+    color: rgba(245,240,232,0.55);
+    position: relative;
+    margin-top: 0.5rem;
+  }
+  .hero-meta {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1.8rem;
+    position: relative;
+    flex-wrap: wrap;
+  }
+  .hero-meta span {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: rgba(245,240,232,0.45);
+    border: 1px solid rgba(245,240,232,0.15);
+    padding: 0.3rem 0.8rem;
+    border-radius: 2px;
+  }
+
+  /* ── LAYOUT ── */
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 5rem;
+  }
+
+  /* ── TOC ── */
+  .toc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    padding: 1.5rem 2rem;
+    margin-bottom: 3rem;
+    border-radius: 2px;
+  }
+  .toc-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+  .toc ol {
+    padding-left: 1.2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.25rem 2rem;
+  }
+  @media(max-width:600px){ .toc ol { grid-template-columns: 1fr; } }
+  .toc a {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 400;
+    transition: color 0.2s;
+  }
+  .toc a:hover { color: var(--accent); }
+
+  /* ── SECTION ── */
+  .section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    box-shadow: 0 2px 12px var(--shadow);
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.2rem 1.8rem;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
+  }
+  .section-header:hover { background: rgba(192,57,43,0.04); }
+  .section-number {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    width: 2.2rem;
+    height: 2.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    flex-shrink: 0;
+    color: #fff;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    flex: 1;
+  }
+  .toggle-icon {
+    font-size: 1.1rem;
+    color: var(--muted);
+    transition: transform 0.3s;
+    flex-shrink: 0;
+  }
+  .section-body {
+    padding: 1.6rem 1.8rem;
+    display: none;
+  }
+  .section.open .section-body { display: block; }
+  .section.open .toggle-icon { transform: rotate(180deg); }
+
+  /* ── CONTENT ELEMENTS ── */
+  .definition-block {
+    border-left: 3px solid currentColor;
+    padding: 0.8rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 2px 2px 0;
+    background: rgba(0,0,0,0.025);
+  }
+  .definition-block .term {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+  .definition-block p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+
+  .key-point {
+    background: var(--highlight);
+    border: 1px solid #f0e080;
+    padding: 0.8rem 1.1rem;
+    border-radius: 2px;
+    font-size: 0.88rem;
+    margin: 1rem 0;
+  }
+  .key-point::before {
+    content: '★ ';
+    color: #c0a000;
+    font-size: 0.75rem;
+  }
+
+  .comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+    margin: 1rem 0;
+  }
+  @media(max-width:560px){ .comparison-grid { grid-template-columns: 1fr; } }
+  .comparison-card {
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 0.9rem 1rem;
+    font-size: 0.85rem;
+  }
+  .comparison-card .label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+    font-weight: 500;
+  }
+
+  .method-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.83rem;
+    margin: 1rem 0;
+  }
+  .method-table th {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 0.55rem 0.8rem;
+    text-align: left;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .method-table td {
+    padding: 0.55rem 0.8rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .method-table tr:nth-child(even) td { background: rgba(0,0,0,0.02); }
+  .method-table tr:last-child td { border-bottom: none; }
+
+  .perspectives-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.75rem;
+    margin: 1rem 0;
+  }
+  .perspective-card {
+    border: 1px solid var(--border);
+    border-top: 3px solid currentColor;
+    border-radius: 2px;
+    padding: 1rem;
+    font-size: 0.83rem;
+    line-height: 1.5;
+  }
+  .perspective-card .p-name {
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+  }
+  .perspective-card .p-key {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.67rem;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+
+  .steps-list {
+    counter-reset: step;
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+  }
+  .steps-list li {
+    counter-increment: step;
+    display: flex;
+    gap: 0.9rem;
+    margin-bottom: 0.75rem;
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+  .steps-list li::before {
+    content: counter(step);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    min-width: 1.6rem;
+    height: 1.6rem;
+    background: var(--ink);
+    color: var(--bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .pill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0.8rem 0;
+  }
+  .pill {
+    background: var(--ink);
+    color: var(--bg);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    padding: 0.25rem 0.7rem;
+    border-radius: 100px;
+  }
+
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 1.4rem 0 0.5rem;
+    color: var(--ink);
+  }
+  h3:first-child { margin-top: 0; }
+  p { font-size: 0.9rem; margin-bottom: 0.7rem; }
+  p:last-child { margin-bottom: 0; }
+
+  .cite {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    vertical-align: super;
+  }
+
+  .callout {
+    background: rgba(44,110,138,0.07);
+    border: 1px solid rgba(44,110,138,0.2);
+    border-radius: 2px;
+    padding: 0.9rem 1.1rem;
+    font-size: 0.85rem;
+    margin: 1rem 0;
+    line-height: 1.6;
+  }
+  .callout strong { color: var(--accent2); }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 1.2rem 0;
+  }
+
+  /* ── COLOUR THEME PER SECTION ── */
+  .s1 .section-number { background: var(--accent); }
+  .s1 .section-header { border-left: 4px solid var(--accent); }
+  .s2 .section-number { background: var(--accent2); }
+  .s2 .section-header { border-left: 4px solid var(--accent2); }
+  .s3 .section-number { background: var(--accent3); }
+  .s3 .section-header { border-left: 4px solid var(--accent3); }
+  .s4 .section-number { background: var(--accent4); }
+  .s4 .section-header { border-left: 4px solid var(--accent4); }
+  .s5 .section-number { background: var(--accent5); }
+  .s5 .section-header { border-left: 4px solid var(--accent5); }
+  .s6 .section-number { background: var(--accent6); }
+  .s6 .section-header { border-left: 4px solid var(--accent6); }
+  .s7 .section-number { background: var(--accent7); }
+  .s7 .section-header { border-left: 4px solid var(--accent7); }
+
+  .s1 .definition-block { color: var(--accent); }
+  .s2 .definition-block { color: var(--accent2); }
+  .s3 .definition-block { color: var(--accent3); }
+  .s4 .definition-block { color: var(--accent4); }
+  .s5 .definition-block { color: var(--accent5); }
+  .s6 .definition-block { color: var(--accent6); }
+  .s7 .definition-block { color: var(--accent7); }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    padding: 2rem 1rem 3rem;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Reference Notes</div>
+  <h1>Chapter 1: What Is Psychology?</h1>
+  <div class="hero-sub">Pastorino &amp; Doyle-Portillo — <em>What Is Psychology? Foundations, Applications, and Integration</em></div>
+  <div class="hero-meta">
+    <span>4 MAIN SECTIONS</span>
+    <span>7 PERSPECTIVES</span>
+    <span>6 RESEARCH METHODS</span>
+    <span>CLICK TO EXPAND</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- TOC -->
+  <div class="toc">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#s1">1.1 — What Is Psychology?</a></li>
+      <li><a href="#s2">1.2 — The Science of Psychology</a></li>
+      <li><a href="#s3">1.3 — Research Methods</a></li>
+      <li><a href="#s4">1.4 — Ethics in Research</a></li>
+      <li><a href="#s5">1.5 — History &amp; Perspectives</a></li>
+      <li><a href="#s6">1.6 — Modern Perspectives</a></li>
+      <li><a href="#s7">1.7 — Gender, Ethnicity &amp; Milestones</a></li>
+    </ol>
+  </div>
+
+  <!-- ══════════ SECTION 1 ══════════ -->
+  <div class="section s1 open" id="s1">
+    <div class="section-header" onclick="toggle(this)">
+      <div class="section-number">1.1</div>
+      <div class="section-title">What Is Psychology?</div>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="section-body">
+
+      <div class="definition-block">
+        <div class="term">Psychology</div>
+        <p>The <strong>scientific study of behavior and mental processes</strong>. Behavior includes actions, feelings, and biological states (e.g. sleep). Mental processes include problem solving, intelligence, and memory.</p>
+      </div>
+
+      <h3>Misconceptions</h3>
+      <p>Popular media focuses heavily on therapy and mental health — but psychology is a <em>broad science</em>. Most doctoral-level psychologists complete rigorous scientific training alongside clinical work.</p>
+
+      <div class="key-point">Psychology is research-based. Every idea in the field is subject to scientific study and peer-reviewed scrutiny.</div>
+
+      <h3>Confirmation Bias (watch out for this!)</h3>
+      <p>We tend to interpret behaviour in ways that <em>confirm</em> our existing beliefs — overlooking disconfirming evidence. Psychologists use systematic methods to guard against this.</p>
+
+      <h3>Scope of the Field</h3>
+      <div class="pill-list">
+        <span class="pill">Neuroscience</span>
+        <span class="pill">Learning & Memory</span>
+        <span class="pill">Development</span>
+        <span class="pill">Motivation & Emotion</span>
+        <span class="pill">Gender</span>
+        <span class="pill">Criminal Behaviour</span>
+        <span class="pill">Aging</span>
+        <span class="pill">Sports Psychology</span>
+        <span class="pill">Clinical Practice</span>
+        <span class="pill">Education</span>
+      </div>
+
+      <h3>Pseudopsychology vs. Psychology</h3>
+      <div class="comparison-grid">
+        <div class="comparison-card" style="border-top: 3px solid var(--accent3);">
+          <div class="label" style="color:var(--accent3);">✓ Psychology</div>
+          Grounded in scientific method; conclusions limited to data; subject to replication and peer review.
+        </div>
+        <div class="comparison-card" style="border-top: 3px solid var(--accent);">
+          <div class="label" style="color:var(--accent);">✗ Pseudopsychology</div>
+          Sounds persuasive but lacks scientific basis. Example: <em>"We only use 10% of our brain"</em> — false and debunked.
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>Critical Thinking</strong> — Analysing and evaluating information and applying it to other situations. Being a skeptical, not merely accepting, consumer of information.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ SECTION 2 ══════════ -->
+  <div class="section s2" id="s2">
+    <div class="section-header" onclick="toggle(this)">
+      <div class="section-number">1.2</div>
+      <div class="section-title">The Science of Psychology: Goals, Hypotheses & Methods</div>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="section-body">
+
+      <h3>4 Goals of Psychology</h3>
+      <div class="comparison-grid">
+        <div class="comparison-card" style="border-top:3px solid var(--accent2);">
+          <div class="label" style="color:var(--accent2);">1. Describe</div>
+          Observe and record events. Understanding how events relate to one another.
+        </div>
+        <div class="comparison-card" style="border-top:3px solid var(--accent2);">
+          <div class="label" style="color:var(--accent2);">2. Predict</div>
+          If two events co-occur reliably, we can anticipate future occurrences.
+        </div>
+        <div class="comparison-card" style="border-top:3px solid var(--accent2);">
+          <div class="label" style="color:var(--accent2);">3. Explain</div>
+          Understand the <em>causes</em> of behaviour, usually via theories.
+        </div>
+        <div class="comparison-card" style="border-top:3px solid var(--accent2);">
+          <div class="label" style="color:var(--accent2);">4. Control/Change</div>
+          Apply understanding to modify behaviour for better outcomes.
+        </div>
+      </div>
+
+      <div class="definition-block">
+        <div class="term">Theory</div>
+        <p>An explanation of <em>why and how</em> a behaviour occurs. Provides general guidelines, not universal rules. Subject to revision.</p>
+      </div>
+
+      <h3>The Scientific Method — 5 Steps</h3>
+      <ol class="steps-list">
+        <li><strong>Define the issue.</strong> Review prior literature; formulate a question about behaviour.</li>
+        <li><strong>Form a testable hypothesis.</strong> Operationally define variables so the study can be replicated.</li>
+        <li><strong>Choose a research strategy.</strong> Select participants, setting, and method.</li>
+        <li><strong>Conduct the study.</strong> Collect data systematically.</li>
+        <li><strong>Analyse & conclude.</strong> Use statistics to support or reject the hypothesis; replicate.</li>
+      </ol>
+
+      <h3>Types of Hypotheses</h3>
+      <div class="comparison-grid">
+        <div class="comparison-card">
+          <div class="label">Predictive Hypothesis</div>
+          States expected relationships between variables. Cannot establish cause-and-effect. Used with descriptive/correlational methods.
+        </div>
+        <div class="comparison-card">
+          <div class="label">Causal Hypothesis</div>
+          States how one variable <em>causes</em> change in another. Requires experimental control and random assignment.
+        </div>
+      </div>
+
+      <h3>Replication & the Replication Crisis</h3>
+      <p>Only ⅓ to ½ of psychological studies produce similar results in large-scale replication projects. Causes include confirmation bias, small samples, and questionable research practices. <strong>Meta-analyses</strong> (combining findings from multiple studies) help establish reliability.</p>
+    </div>
+  </div>
+
+  <!-- ══════════ SECTION 3 ══════════ -->
+  <div class="section s3" id="s3">
+    <div class="section-header" onclick="toggle(this)">
+      <div class="section-number">1.3</div>
+      <div class="section-title">Research Methods & Sampling</div>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="section-body">
+
+      <h3>Selecting Participants</h3>
+      <div class="definition-block">
+        <div class="term">Population vs. Sample</div>
+        <p><strong>Population of interest</strong> — everyone the researcher wants to study.<br>
+        <strong>Sample</strong> — the subset actually tested; should be <em>representative</em>.<br>
+        <strong>Random sample</strong> — every member has an equal chance of selection; minimises sampling bias.</p>
+      </div>
+      <div class="key-point">Samples of convenience (e.g. college students) limit generalisability. The more representative the sample, the more generalisable the findings.</div>
+
+      <h3>Research Methods at a Glance</h3>
+      <table class="method-table">
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>What it does</th>
+            <th>Strength</th>
+            <th>Limitation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Naturalistic Observation</strong></td>
+            <td>Observe behaviour in its natural setting</td>
+            <td>High ecological validity</td>
+            <td>Reactivity; no cause-effect</td>
+          </tr>
+          <tr>
+            <td><strong>Case Study</strong></td>
+            <td>In-depth study of 1 or few participants</td>
+            <td>Rich detail on rare conditions</td>
+            <td>Poor generalisability</td>
+          </tr>
+          <tr>
+            <td><strong>Survey</strong></td>
+            <td>Questionnaire with large groups</td>
+            <td>Fast, broad data collection</td>
+            <td>Wording bias; self-report honesty</td>
+          </tr>
+          <tr>
+            <td><strong>Correlational</strong></td>
+            <td>Measure relationship between ≥2 variables</td>
+            <td>Enables prediction</td>
+            <td>Cannot establish causation (3rd-variable problem)</td>
+          </tr>
+          <tr>
+            <td><strong>Experiment</strong></td>
+            <td>Manipulate IV; randomly assign participants</td>
+            <td><em>Only</em> method for cause-effect</td>
+            <td>Artificial lab settings; ethical limits</td>
+          </tr>
+          <tr>
+            <td><strong>Quasi-Experiment</strong></td>
+            <td>Manipulate IV but no random assignment</td>
+            <td>Useful when randomisation is unethical</td>
+            <td>Confounds reduce causal confidence</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Key Experimental Vocabulary</h3>
+      <div class="definition-block">
+        <div class="term">Independent Variable (IV)</div>
+        <p>The variable the experimenter <strong>manipulates</strong> — the presumed <em>cause</em>.</p>
+      </div>
+      <div class="definition-block">
+        <div class="term">Dependent Variable (DV)</div>
+        <p>The variable that is <strong>measured</strong> — the presumed <em>effect</em>.</p>
+      </div>
+      <div class="definition-block">
+        <div class="term">Confounding Variable</div>
+        <p>Any variable (other than the IV) that could explain changes in the DV. Must be controlled.</p>
+      </div>
+      <div class="definition-block">
+        <div class="term">Placebo Effect</div>
+        <p>Participants show change simply because they <em>believe</em> a treatment is working. Controlled by double-blind designs.</p>
+      </div>
+
+      <h3>Correlation Coefficients</h3>
+      <div class="callout">
+        Range: <strong>−1.00 to +1.00</strong>. Closer to ±1.00 = stronger relationship. Closer to 0 = weaker.<br><br>
+        <strong>Positive correlation</strong>: variables move in the <em>same</em> direction (e.g. perceived stress ↑ → blood pressure ↑).<br>
+        <strong>Negative correlation</strong>: variables move in <em>opposite</em> directions (e.g. video game time ↑ → school performance ↓).<br><br>
+        ⚠️ <strong>Correlation ≠ causation.</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ SECTION 4 ══════════ -->
+  <div class="section s4" id="s4">
+    <div class="section-header" onclick="toggle(this)">
+      <div class="section-number">1.4</div>
+      <div class="section-title">Ethical Principles of Research</div>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="section-body">
+
+      <h3>Oversight Bodies</h3>
+      <div class="comparison-grid">
+        <div class="comparison-card">
+          <div class="label">IRB / HREC</div>
+          Reviews research proposals using human participants to ensure ethical compliance.
+        </div>
+        <div class="comparison-card">
+          <div class="label">IACUC</div>
+          Reviews research using non-human animal subjects.
+        </div>
+      </div>
+
+      <h3>Core Ethical Principles (APA, 2002)</h3>
+      <ol class="steps-list">
+        <li><strong>Participant welfare</strong> — protect from harm; researcher must correct any negative effects.</li>
+        <li><strong>Informed consent</strong> — participants must be clearly told the study's purpose, risks, compensation, and right to withdraw.</li>
+        <li><strong>Confidentiality</strong> — personal data cannot be shared without consent or legal order.</li>
+        <li><strong>Deception</strong> — only permitted when necessary and when no non-deceptive alternative exists; must be justified by research value.</li>
+        <li><strong>Debriefing</strong> — after any deception, researchers must fully disclose the true purpose and correct misconceptions.</li>
+        <li><strong>No coercion</strong> — participation must be fully voluntary; withdrawal must be permitted at any time.</li>
+      </ol>
+
+      <div class="key-point">Milgram (1963) — classic example of ethical violation. 65% of participants shocked to maximum levels. Would NOT be approved today due to psychological harm.</div>
+
+      <h3>Animal Research Guidelines</h3>
+      <p>Animals must be treated humanely. Discomfort, illness, and pain must be minimised and justified by expected knowledge gains. Researchers are responsible for daily care.</p>
+
+      <h3>Online/Digital Research — Special Challenges</h3>
+      <p>Collecting data via smartphones or social media raises unique consent and privacy issues. Researchers must ensure data security and adequately inform participants — even when data is collected passively.</p>
+    </div>
+  </div>
+
+  <!-- ══════════ SECTION 5 ══════════ -->
+  <div class="section s5" id="s5">
+    <div class="section-header" onclick="toggle(this)">
+      <div class="section-number">1.5</div>
+      <div class="section-title">History of Psychology</div>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="section-body">
+
+      <div class="callout">
+        "Psychology has a <strong>long past but only a short history</strong>" — Ebbinghaus (1910). Formal beginning: Wilhelm Wundt's laboratory, University of Leipzig, <strong>1879</strong>.
+      </div>
+
+      <h3>Early Schools of Thought</h3>
+      <div class="comparison-grid">
+        <div class="comparison-card" style="border-top:3px solid var(--accent5);">
+          <div class="label" style="color:var(--accent5);">Structuralism — Wundt & Titchener</div>
+          Used <strong>introspection</strong> (trained self-observation) to identify 3 elements of consciousness: <em>sensations, images, and feelings</em>. First formal school of psychology.
+        </div>
+        <div class="comparison-card" style="border-top:3px solid var(--accent5);">
+          <div class="label" style="color:var(--accent5);">Functionalism — William James</div>
+          Focused on <em>how</em> mental processes operate and help organisms <strong>adapt</strong> to their environment. Linked to Darwin's natural selection. Forerunner of evolutionary psychology.
+        </div>
+        <div class="comparison-card" style="border-top:3px solid var(--accent5);">
+          <div class="label" style="color:var(--accent5);">Behaviourism — Watson & Skinner</div>
+          Only <strong>observable behaviour</strong> is valid data. Stimuli → Responses → Consequences. Dominant force in American psychology until the 1960s.
+        </div>
+        <div class="comparison-card" style="border-top:3px solid var(--accent5);">
+          <div class="label" style="color:var(--accent5);">Psychoanalysis — Freud</div>
+          The <strong>unconscious</strong> (impulses, desires we're unaware of) drives behaviour. Conflict between conscious reasoning and unconscious instincts. Led to psychodynamic perspective.
+        </div>
+      </div>
+
+      <h3>Little Albert (Watson & Rayner)</h3>
+      <p>Conditioned a 9-month-old to fear a white rat by pairing it with a loud noise. Demonstrated that observable stimuli and responses are the appropriate focus of psychology — but this study would be considered deeply unethical today.</p>
+    </div>
+  </div>
+
+  <!-- ══════════ SECTION 6 ══════════ -->
+  <div class="section s6" id="s6">
+    <div class="section-header" onclick="toggle(this)">
+      <div class="section-number">1.6</div>
+      <div class="section-title">Modern Psychological Perspectives</div>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="section-body">
+
+      <p>Most modern psychologists take an <strong>eclectic approach</strong> — combining multiple perspectives for a fuller understanding of behaviour.</p>
+
+      <div class="perspectives-grid">
+        <div class="perspective-card" style="color: var(--accent);">
+          <div class="p-name">Biological</div>
+          <div class="p-key">Genes · Brain · Neuroscience</div>
+          Looks for physical/neurological causes. Includes brain imaging (EEG), genetics, and biochemistry.
+        </div>
+        <div class="perspective-card" style="color: var(--accent2);">
+          <div class="p-name">Evolutionary</div>
+          <div class="p-key">Natural Selection · Adaptation</div>
+          Behaviours that increase survival are selected. Asks: what is the survival <em>function</em> of this behaviour?
+        </div>
+        <div class="perspective-card" style="color: var(--accent4);">
+          <div class="p-name">Psychodynamic</div>
+          <div class="p-key">Unconscious · Childhood · Conflict</div>
+          Internal, often unconscious motives and early experiences drive behaviour. Rooted in Freud, modified by successors.
+        </div>
+        <div class="perspective-card" style="color: var(--accent3);">
+          <div class="p-name">Behavioural</div>
+          <div class="p-key">Stimuli · Responses · Reinforcement</div>
+          Behaviour is learned through environmental stimuli and consequences (rewards/punishment).
+        </div>
+        <div class="perspective-card" style="color: var(--accent6);">
+          <div class="p-name">Sociocultural</div>
+          <div class="p-key">Culture · Gender · Ethnicity</div>
+          Cannot fully explain behaviour without understanding culture, gender identity, ethnicity, and social context.
+        </div>
+        <div class="perspective-card" style="color: var(--accent5);">
+          <div class="p-name">Humanistic</div>
+          <div class="p-key">Free Will · Self-concept · Growth</div>
+          Behaviour stems from individual choices shaped by self-concept and self-esteem. Maslow, Rogers. Emphasises inner resources.
+        </div>
+        <div class="perspective-card" style="color: var(--accent7);">
+          <div class="p-name">Cognitive</div>
+          <div class="p-key">Thoughts · Memory · Decision-making</div>
+          Behaviour explained through how people process information — beliefs, expectations, problem solving.
+        </div>
+      </div>
+
+      <hr>
+
+      <h3>Positive Psychology</h3>
+      <p>Grew from the cognitive emphasis on thinking patterns. Led by <strong>Seligman</strong> and <strong>Diener</strong>. Scientifically studies happiness, well-being, and human flourishing to help individuals, families, and communities thrive.</p>
+
+      <div class="key-point">Eclectic approach — most real-world psychologists integrate multiple perspectives rather than adhering rigidly to one.</div>
+    </div>
+  </div>
+
+  <!-- ══════════ SECTION 7 ══════════ -->
+  <div class="section s7" id="s7">
+    <div class="section-header" onclick="toggle(this)">
+      <div class="section-number">1.7</div>
+      <div class="section-title">Gender, Ethnicity &amp; Milestones in Psychology</div>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="section-body">
+
+      <h3>Pioneer Women</h3>
+      <table class="method-table">
+        <thead><tr><th>Name</th><th>Milestone</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Margaret Washburn</strong> (1871–1939)</td><td>First woman to earn a doctorate in psychology (1894, under Titchener). Research on animal behaviour and motor-mind connections.</td></tr>
+          <tr><td><strong>Mary Calkins</strong> (1863–1930)</td><td>First female APA President, 1905. Memory research. Studied under William James at Harvard.</td></tr>
+          <tr><td><strong>Christine Ladd-Franklin</strong> (1847–1930)</td><td>Research on colour vision in the early 1900s.</td></tr>
+          <tr><td><strong>Karen Horney</strong> (1885–1952)</td><td>Environmental and cultural factors in personality development; challenged Freudian assumptions.</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Pioneer Minority Figures</h3>
+      <table class="method-table">
+        <thead><tr><th>Name</th><th>Milestone</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Gilbert Haven Jones</strong> (1881–1966)</td><td>First African American to earn a PhD in psychology — Germany, 1909.</td></tr>
+          <tr><td><strong>Francis Sumner</strong> (1895–1954)</td><td>First African American PhD in psychology from a US university (1920). "Father of African American psychology." Founded psychology department at Howard University.</td></tr>
+          <tr><td><strong>Kenneth Clark</strong> (1914–2005) &amp; <strong>Mamie Phipps Clark</strong> (1917–1983)</td><td>Doll experiments showing Black children's self-perceptions. Cited in landmark <em>Brown v. Board of Education</em> (1954).</td></tr>
+          <tr><td><strong>Inez Prosser</strong> (1897–1934)</td><td>First African American woman to earn a psychology PhD (1933). Researched self-esteem in Black children at segregated vs. integrated schools.</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Current State (approximate figures)</h3>
+      <div class="callout">
+        Women now earn ~<strong>73% of psychology doctorates</strong> — but female psychologists still earn less than male counterparts after controlling for age, race, hours, and education.<br><br>
+        Minorities make up ~39% of the US population but ~16% of active psychologists. Graduate representation has grown from 8% (1976–93) to nearly 20% today, though underrepresentation persists.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Reference notes compiled from Chapter 1 · Pastorino &amp; Doyle-Portillo · <em>What Is Psychology? Foundations, Applications, and Integration</em>
+</div>
+
+<script>
+  function toggle(header) {
+    const section = header.closest('.section');
+    section.classList.toggle('open');
+  }
+  // Open first section by default (already done via class)
+</script>
+</body>
+</html>
