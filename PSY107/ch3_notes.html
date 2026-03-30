@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 3 — Sensation & Perception | Reference Notes</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #181c27;
+    --card: #1e2336;
+    --border: #2a3050;
+    --accent: #6c8cff;
+    --accent2: #f0a500;
+    --accent3: #52d9b0;
+    --accent4: #ff7eb3;
+    --accent5: #a78bfa;
+    --text: #e8ecf4;
+    --muted: #7a85a3;
+    --highlight: rgba(108,140,255,0.10);
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'IBM Plex Sans', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-weight: 300;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  header {
+    background: linear-gradient(135deg, #0f1117 0%, #1a1f35 60%, #101420 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 3rem 2rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(108,140,255,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 10%;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,165,0,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
+  .chapter-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+    display: inline-block;
+    border: 1px solid rgba(108,140,255,0.3);
+    padding: 0.2rem 0.7rem;
+    border-radius: 2px;
+  }
+  header h1 {
+    font-family: var(--font-display);
+    font-size: clamp(1.9rem, 4vw, 2.9rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--text);
+  }
+  header h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .subtitle {
+    margin-top: 0.5rem;
+    color: var(--muted);
+    font-size: 0.88rem;
+    font-style: italic;
+    font-family: var(--font-display);
+  }
+
+  nav {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-inner::-webkit-scrollbar { display: none; }
+  .nav-btn {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 0.85rem 1.1rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .nav-btn:hover { color: var(--text); }
+  .nav-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 5rem;
+  }
+
+  .section { display: none; animation: fadeIn 0.3s ease; }
+  .section.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  .section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-icon {
+    width: 46px; height: 46px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+  .section-header h2 {
+    font-family: var(--font-display);
+    font-size: 1.55rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.25;
+  }
+  .section-header p {
+    font-size: 0.83rem;
+    color: var(--muted);
+    margin-top: 0.25rem;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.4rem 1.6rem;
+    margin-bottom: 1.2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    border-radius: 10px 0 0 10px;
+  }
+  .card.blue::before   { background: var(--accent); }
+  .card.gold::before   { background: var(--accent2); }
+  .card.teal::before   { background: var(--accent3); }
+  .card.pink::before   { background: var(--accent4); }
+  .card.purple::before { background: var(--accent5); }
+
+  .card h3 {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+    color: var(--text);
+  }
+  .card h3 .tag {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+    font-weight: 400;
+  }
+  .tag-blue   { background: rgba(108,140,255,0.15); color: var(--accent); }
+  .tag-gold   { background: rgba(240,165,0,0.15);   color: var(--accent2); }
+  .tag-teal   { background: rgba(82,217,176,0.15);  color: var(--accent3); }
+  .tag-pink   { background: rgba(255,126,179,0.15); color: var(--accent4); }
+  .tag-purple { background: rgba(167,139,250,0.15); color: var(--accent5); }
+
+  .card p { font-size: 0.88rem; color: #b0baca; line-height: 1.65; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.2rem; }
+  @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+
+  .compare-table { width: 100%; border-collapse: collapse; margin-bottom: 0.8rem; font-size: 0.85rem; }
+  .compare-table th {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+    background: var(--surface);
+  }
+  .compare-table td {
+    padding: 0.7rem 1rem;
+    border-bottom: 1px solid var(--border);
+    color: #b0baca;
+    vertical-align: top;
+    line-height: 1.55;
+  }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table tr:hover td { background: var(--highlight); }
+
+  .callout {
+    border-left: 3px solid var(--accent2);
+    background: rgba(240,165,0,0.06);
+    padding: 0.9rem 1.2rem;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 1.2rem;
+    font-size: 0.86rem;
+    color: #c8af7a;
+  }
+  .callout strong { color: var(--accent2); }
+
+  .ref-list { list-style: none; padding: 0; }
+  .ref-list li {
+    padding: 0.55rem 0.55rem 0.55rem 1.5rem;
+    position: relative;
+    font-size: 0.86rem;
+    color: #b0baca;
+    border-bottom: 1px solid rgba(42,48,80,0.5);
+    line-height: 1.55;
+  }
+  .ref-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent3);
+    font-size: 0.75rem;
+    top: 0.58rem;
+  }
+  .ref-list li:last-child { border-bottom: none; }
+  .ref-list li strong { color: var(--text); }
+
+  .divider-label {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 1.8rem 0 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .divider-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--muted);
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    border-top: 1px solid var(--border);
+    letter-spacing: 0.04em;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <span class="chapter-label">Chapter 3 — Reference Notes</span>
+    <h1>Sensation &amp; <em>Perception</em></h1>
+    <p class="subtitle">What is Psychology? — Pastorino &amp; Doyle-Portillo</p>
+  </div>
+</header>
+
+<nav>
+  <div class="nav-inner">
+    <button class="nav-btn active" onclick="show('psychophysics', this)">3.1 Psychophysics</button>
+    <button class="nav-btn" onclick="show('vision', this)">3.2 Vision</button>
+    <button class="nav-btn" onclick="show('hearing', this)">3.3 Hearing</button>
+    <button class="nav-btn" onclick="show('other', this)">3.4 Other Senses</button>
+    <button class="nav-btn" onclick="show('perception', this)">3.5 Perception</button>
+    <button class="nav-btn" onclick="show('accuracy', this)">3.6 Accuracy</button>
+    <button class="nav-btn" onclick="show('glossary', this)">Key Terms</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- 3.1 PSYCHOPHYSICS -->
+<section id="psychophysics" class="section active">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(108,140,255,0.12);">🔬</div>
+    <div>
+      <h2>3.1 Measuring Sensation — Psychophysics</h2>
+      <p>How psychologists measure the limits of human sensory experience</p>
+    </div>
+  </div>
+
+  <div class="card blue">
+    <h3>Absolute Threshold <span class="tag tag-blue">Core Concept</span></h3>
+    <p>The <strong>minimum intensity</strong> of a stimulus detectable <strong>50% of the time</strong>. The 50% benchmark is used because detection varies trial-to-trial and person-to-person. Classic examples: a candle flame 30 miles away (vision); a watch ticking 20 ft away in silence (hearing); one teaspoon of sugar in 2 gallons of water (taste).</p>
+  </div>
+
+  <div class="card gold">
+    <h3>Signal Detection Theory <span class="tag tag-gold">Theory</span></h3>
+    <p>Our ability to detect stimuli is affected by more than intensity. <strong>Attention, motivation, and fatigue</strong> all play a role. A fatigued air traffic controller may miss an alarm; an anxious one may falsely detect it — even though the alarm's volume is unchanged. Explains why thresholds are defined probabilistically (50%) rather than as fixed points.</p>
+  </div>
+
+  <div class="card teal">
+    <h3>Just Noticeable Difference (JND) &amp; Weber's Law <span class="tag tag-teal">Law</span></h3>
+    <p>The <strong>difference threshold</strong> is the minimum change in stimulus intensity detectable 50% of the time. <strong>Weber's Law</strong>: the amount of change required for a JND is proportional to the <em>starting intensity</em> of the stimulus. One teaspoon of salt in bland soup = noticeable. Same teaspoon in already-salty soup = unnoticeable.</p>
+  </div>
+
+  <div class="card pink">
+    <h3>Subliminal Perception <span class="tag tag-pink">Concept</span></h3>
+    <p>Unconscious processing of stimuli below awareness threshold. <strong>James Vicary's 1957 "Eat Popcorn" experiment</strong> was fraudulent — admitted in 1962. Modern research shows subliminal persuasion can occur when: (1) messages match product dimensions being evaluated, (2) messages align with personality traits + situational factors. Subliminally perceived <strong>angry faces inhibit impulsive responses</strong>. Infants at 7 months detect trustworthiness in subliminal faces — suggesting evolutionary origins.</p>
+  </div>
+
+  <div class="card purple">
+    <h3>Extrasensory Perception (ESP) <span class="tag tag-purple">Evidence</span></h3>
+    <p>Not supported by scientific evidence. The standard test (<strong>Ganzfeld procedure</strong>) shows receivers guess correctly ~50% of the time — no better than chance. Moulton &amp; Kosslyn (2008) fMRI study found <em>no brain activation differences</em> between correct and incorrect trials, providing strong evidence against ESP.</p>
+  </div>
+</section>
+
+<!-- 3.2 VISION -->
+<section id="vision" class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(82,217,176,0.12);">👁️</div>
+    <div>
+      <h2>3.2 Vision: Seeing the World</h2>
+      <p>Light properties, eye anatomy, retinal processing, and color vision theories</p>
+    </div>
+  </div>
+
+  <div class="divider-label">Properties of Light</div>
+  <div class="two-col">
+    <div class="card teal">
+      <h3>Wavelength → Hue</h3>
+      <p>Distance between wave peaks (nm). Short wavelengths = cool colors (blues/purples). Long wavelengths = warm colors (yellows/reds). Visible spectrum: <strong>360–750 nm</strong>.</p>
+    </div>
+    <div class="card teal">
+      <h3>Amplitude → Brightness</h3>
+      <p>Height of wave peak. Higher amplitude = brighter perceived color.</p>
+    </div>
+    <div class="card teal">
+      <h3>Saturation → Richness</h3>
+      <p>Purity of light. Single wavelength = richest color. Mixed wavelengths = less saturated (e.g., blue + white light = washed-out blue).</p>
+    </div>
+    <div class="card teal">
+      <h3>Electromagnetic Spectrum</h3>
+      <p>Humans see only a narrow band (360–750 nm). Snakes detect infrared; spiders, butterflies, and rats detect UV light.</p>
+    </div>
+  </div>
+
+  <div class="divider-label">Anatomy of the Eye</div>
+  <div class="card blue">
+    <h3>Outer Eye Structures — Path of Light</h3>
+    <ul class="ref-list">
+      <li><strong>Cornea:</strong> Clear bulging outer surface; protects eye and begins focusing by bending light</li>
+      <li><strong>Pupil:</strong> Aperture (opening) in the iris that admits light</li>
+      <li><strong>Iris:</strong> Colored muscle ring; dilates pupil in dim light, constricts in bright light</li>
+      <li><strong>Lens:</strong> Flexible structure attached by ciliary muscles; undergoes <em>accommodation</em> (shape change) to focus image on retina</li>
+      <li><strong>Sclera:</strong> White protective structure; light cannot pass through it</li>
+    </ul>
+  </div>
+
+  <div class="divider-label">Retina and Photoreceptors</div>
+  <div class="card gold">
+    <h3>Retinal Layers (surface → back)</h3>
+    <p style="margin-bottom:0.7rem;">Ganglion cells → Amacrine → Bipolar → Horizontal → <strong>Rods &amp; Cones</strong>. Light must pass through all layers before reaching photoreceptors. Signals then travel back out to ganglion cells.</p>
+    <table class="compare-table">
+      <tr><th>Feature</th><th>Rods (~100M/eye)</th><th>Cones (~5M/eye)</th></tr>
+      <tr><td>Function</td><td>Achromatic (black &amp; white); detects shape/form</td><td>Color vision</td></tr>
+      <tr><td>Light needed</td><td>Very sensitive; works in dim light</td><td>Requires bright light</td></tr>
+      <tr><td>Distribution</td><td>Highest at peripheral edges of retina</td><td>Concentrated at fovea (up to 247,000/mm²)</td></tr>
+    </table>
+  </div>
+
+  <div class="card blue">
+    <h3>Fovea, Blindspot &amp; Optic Nerve</h3>
+    <p><strong>Fovea:</strong> Central point of sharpest vision; directly behind the pupil; highest cone density. <strong>Blindspot:</strong> Point where the optic nerve exits the retina — no rods or cones here. Located at the side of the visual field (not at fovea). Compensated for by using both eyes together. <strong>Optic nerve:</strong> Axons of ganglion cells bundled together; carries visual info to the brain.</p>
+  </div>
+
+  <div class="card pink">
+    <h3>Photopigments — Transduction of Light</h3>
+    <p>Rods and cones contain <strong>photopigments</strong> (light-sensitive chemicals). Light energy splits these molecules apart, triggering a chain of chemical reactions that changes the rate of action potential firing. The brain interprets these firing patterns as visual information. Photopigments also regulate <em>sleep</em> and <em>pupillary reflexes</em>.</p>
+  </div>
+
+  <div class="divider-label">Light and Dark Adaptation</div>
+  <div class="two-col">
+    <div class="card teal">
+      <h3>Dark Adaptation (~30–45 min)</h3>
+      <p>In darkness, photopigments <strong>build up</strong> since they aren't being broken down by light. Eyes become progressively more sensitive. Entering a dark theater: wait for photopigments to accumulate before you can see clearly.</p>
+    </div>
+    <div class="card teal">
+      <h3>Light Adaptation (~1 min)</h3>
+      <p>In bright light, large stored photopigment reserves are quickly broken down. Waking to sudden bright light = brief pain/flash as oversupply of photopigments is overwhelmed.</p>
+    </div>
+  </div>
+
+  <div class="divider-label">Color Vision Theories</div>
+  <div class="card blue">
+    <h3>Trichromatic Theory <span class="tag tag-blue">Helmholtz, mid-1800s</span></h3>
+    <p>Three cone types sensitive to <strong>long (red)</strong>, <strong>medium (green)</strong>, and <strong>short (blue)</strong> wavelengths — corresponding to the three primary colors of light. Brain reads the ratio of cone activation to determine color. Explains color blindness. <em>Limitation: does not explain negative afterimages.</em></p>
+  </div>
+  <div class="card gold">
+    <h3>Opponent-Process Theory <span class="tag tag-gold">Hering</span></h3>
+    <p>Three types of opponent-process cells: <strong>red/green</strong>, <strong>yellow/blue</strong>, <strong>black/white</strong>. Each cell signals only one of its pair at a time — the colors "oppose" each other. Explains <strong>negative afterimages</strong>: staring at red exhausts red receptors → looking at white paper activates only the green side → you see green. Also explains why you cannot perceive red-green simultaneously.</p>
+  </div>
+  <div class="callout">
+    <strong>Integration:</strong> Both theories are correct at different processing levels. Trichromatic theory describes the <strong>rods and cones</strong>. Opponent-process theory describes processing beyond — at the <strong>ganglion cells, amacrine/horizontal/bipolar cells, and visual cortex</strong>.
+  </div>
+
+  <div class="divider-label">Color Blindness</div>
+  <div class="card purple">
+    <h3>Red-Green Color Blindness</h3>
+    <p>Affects ~8% of U.S. males. Caused by absent or abnormally insensitive red or green cones. Rates vary across populations (higher in Turkey and Greenland, lower in Colombia, Spain, Italy), confirming a <strong>sex-linked genetic basis</strong>. Individuals distinguish stoplight status by position, not color.</p>
+  </div>
+
+  <div class="divider-label">Visual Pathway to the Brain</div>
+  <div class="card teal">
+    <h3>From Retina to Visual Cortex</h3>
+    <p>Rods/Cones → Bipolar/Horizontal/Amacrine cells → <strong>Ganglion cells</strong> → <strong>Optic nerve</strong> → <strong>Optic chiasm</strong> (visual information crosses: right visual field → left hemisphere; left → right) → <strong>Thalamus</strong> → <strong>Visual cortex</strong> (occipital lobe) where meaning is interpreted.</p>
+  </div>
+</section>
+
+<!-- 3.3 HEARING -->
+<section id="hearing" class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(240,165,0,0.12);">👂</div>
+    <div>
+      <h2>3.3 Hearing: Listening to the World</h2>
+      <p>Sound wave properties, ear anatomy, and pitch perception theories</p>
+    </div>
+  </div>
+
+  <div class="divider-label">Properties of Sound</div>
+  <div class="two-col">
+    <div class="card gold">
+      <h3>Frequency → Pitch</h3>
+      <p>Measured in <strong>Hz</strong> (cycles/sec). Human range: <strong>20–20,000 Hz</strong>. High-frequency hearing declines with age. Tones above 16,000 Hz are inaudible to people as young as 24. "Mosquito" ringtones exploit this.</p>
+    </div>
+    <div class="card gold">
+      <h3>Amplitude → Loudness</h3>
+      <p>Measured in <strong>decibels (dB)</strong>. Any sound <strong>over 85 dB</strong> risks hearing damage with prolonged exposure. Rock concert (~120 dB): damage in 15 min. Firearms: 150+ dB.</p>
+    </div>
+  </div>
+  <div class="callout">
+    <strong>60–60 Rule:</strong> To protect hearing, listen to personal listening devices at no more than 60% of maximum volume for no more than 60 minutes per day.
+  </div>
+
+  <div class="divider-label">Anatomy of the Ear</div>
+  <div class="card blue">
+    <h3>Path of Sound through the Ear</h3>
+    <ul class="ref-list">
+      <li><strong>Pinna:</strong> Outer ear; funnels sound waves into the auditory canal</li>
+      <li><strong>Auditory canal:</strong> Amplifies sound before it reaches the eardrum</li>
+      <li><strong>Eardrum (tympanic membrane):</strong> Thin membrane that vibrates in response to sound waves</li>
+      <li><strong>Hammer, Anvil, Stirrup (ossicles):</strong> Three tiny middle-ear bones; mechanically amplify vibrations</li>
+      <li><strong>Oval window:</strong> Connection point between middle ear and cochlea</li>
+      <li><strong>Cochlea:</strong> Coiled, fluid-filled tube (~1.4 in); hair cells on the basilar membrane convert pressure waves to neural impulses</li>
+      <li><strong>Auditory nerve:</strong> Bundles neural impulses from hair cells and relays to brain; information reaches <em>both</em> hemispheres after leaving brainstem</li>
+    </ul>
+  </div>
+
+  <div class="divider-label">Pitch Perception Theories</div>
+  <div class="card teal">
+    <h3>Place Theory <span class="tag tag-teal">Helmholtz / Békésy</span></h3>
+    <p>Different pitches excite hair cells at <strong>different locations</strong> on the basilar membrane. High frequencies activate the <em>front</em> (near oval window); low frequencies activate the <em>far end</em>. Hair cells at the front are most vulnerable — explains why high-pitch hearing deteriorates first with age. <em>Limitation: explains pure tones well but not complex, multi-frequency sounds.</em></p>
+  </div>
+  <div class="card pink">
+    <h3>Frequency Theory <span class="tag tag-pink">Rutherford</span></h3>
+    <p>Hair cells fire at a <strong>rate matching the incoming sound frequency</strong> (phase locking). Brain decodes pitch from firing rate. <em>Limitation: hair cells max out at 1,000 Hz action potentials/sec, yet we hear up to 20,000 Hz.</em></p>
+  </div>
+  <div class="card purple">
+    <h3>Volley Theory <span class="tag tag-purple">Wever</span></h3>
+    <p>"Teams" of hair cells fire in <strong>alternating volleys</strong> to represent frequencies above 1,000 Hz. Example: three cells each firing at 1,000 Hz collectively encode a 3,000 Hz tone. Extends frequency theory beyond its 1,000 Hz ceiling.</p>
+  </div>
+  <div class="callout">
+    <strong>Integration:</strong> Current consensus is a <strong>dual mechanism</strong> — volley theory + place theory work together. Both the <em>rate of neural firing</em> AND the <em>location of basilar membrane activation</em> contribute to pitch perception.
+  </div>
+</section>
+
+<!-- 3.4 OTHER SENSES -->
+<section id="other" class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(255,126,179,0.12);">🌿</div>
+    <div>
+      <h2>3.4 Taste, Smell, Touch &amp; Body Senses</h2>
+      <p>Chemical senses, skin sense, and body orientation</p>
+    </div>
+  </div>
+
+  <div class="divider-label">Taste (Gustation)</div>
+  <div class="card pink">
+    <h3>Five Basic Tastes</h3>
+    <table class="compare-table">
+      <tr><th>Taste</th><th>Substance</th><th>Survival Function</th></tr>
+      <tr><td>Sweet</td><td>Sugars</td><td>Signals edible, energy-rich foods</td></tr>
+      <tr><td>Salty</td><td>Sodium</td><td>Detects sodium critical for nerve function</td></tr>
+      <tr><td>Sour</td><td>Acids</td><td>Warns of fermentation/spoilage</td></tr>
+      <tr><td>Bitter</td><td>Alkaloids</td><td>Warns of poisons</td></tr>
+      <tr><td><strong>Umami</strong></td><td>L-glutamic acid / MSG</td><td>Stimulates appetite; may reduce overeating in women</td></tr>
+    </table>
+    <p style="margin-top:0.5rem;">Umami and salty flavors activate the same brain areas on fMRI — may share a processing system.</p>
+  </div>
+  <div class="card blue">
+    <h3>Tongue Anatomy &amp; Pathway</h3>
+    <p><strong>Papillae</strong> = visible bumps on tongue. <strong>Taste buds</strong> reside in the <em>pits between</em> papillae (2,000–5,000 total; can regenerate). Center of tongue lacks taste buds = "taste blindspot." Lowering then rewarming tongue temperature increases taste sensitivity. Pathway: taste nerves → medulla/pons → thalamus → <strong>somatosensory cortex</strong> (parietal lobe) + some to limbic system.</p>
+  </div>
+
+  <div class="divider-label">Smell (Olfaction)</div>
+  <div class="card gold">
+    <h3>Olfactory System</h3>
+    <p>Chemical sense requiring airborne molecules to contact the <strong>olfactory epithelium</strong> (lining top of nasal cavity). ~400 receptor types detect 400,000+ distinct odors. Olfaction is the least understood of the senses. Pathway: olfactory nerve → <strong>olfactory bulb</strong> → <em>bypasses thalamus</em> → primary smell cortex (temporal lobe) and limbic system. Direct limbic connection explains <strong>strong emotional/memory links to odors</strong>. Women detect odors slightly better than men (hormonal basis).</p>
+  </div>
+  <div class="card teal">
+    <h3>Pheromones &amp; Vomeronasal Sense</h3>
+    <p>Airborne <strong>chemosignals</strong> that influence social and sexual behavior. Documented effects: menstrual synchrony among women; male cooperation increases near ovulating females; women's tears contain chemosignals that reduce male testosterone and sexual arousal (Gelstein et al., 2011); men exposed to fertile-phase sweat report higher sexual arousal. Presence of human vomeronasal organs debated (~27% incidence in one study of 966 patients).</p>
+  </div>
+
+  <div class="divider-label">Touch (Skin Sense)</div>
+  <div class="card purple">
+    <h3>Skin Structure &amp; Neural Pathway</h3>
+    <p><strong>Epidermis</strong> (outer layer): contains touch receptors, especially at fingertips. <strong>Dermis</strong> (inner layer): contains most touch receptors. Separate receptor types for touch, temperature, and pain. Pathway: receptors → spinal cord → thalamus → <strong>somatosensory cortex</strong> (parietal lobe). Threatening stimuli also route to <strong>limbic system</strong>.</p>
+  </div>
+  <div class="card pink">
+    <h3>Gate Control Theory of Pain <span class="tag tag-pink">Melzack &amp; Wall, 1965</span></h3>
+    <p>Neural networks in the spinal cord can block ("close the gate" on) pain signals when stimulated by intense tactile input — e.g., rubbing an injured area. Basis for <strong>TENS units</strong> (transcutaneous electrical nerve stimulation) used in chronic pain management.</p>
+  </div>
+
+  <div class="divider-label">Body Senses</div>
+  <div class="two-col">
+    <div class="card blue">
+      <h3>Kinesthesis</h3>
+      <p>Sense of <strong>body position and movement</strong> in space. Uses input from muscles, tendons, skin, and joints. Processed in somatosensory cortex and <strong>cerebellum</strong>. Critical for athletes, gymnasts, and divers.</p>
+    </div>
+    <div class="card blue">
+      <h3>Vestibular Sense</h3>
+      <p>Sense of <strong>balance and body orientation</strong>. Uses fluid-filled <strong>semicircular canals</strong> and vestibular sacs in the inner ear — hair cells bend as fluid moves when the head moves. May also contribute to <em>body ownership</em> (awareness that your body belongs to you). Overstimulation causes dizziness and nausea.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 3.5 PERCEPTION -->
+<section id="perception" class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(108,140,255,0.12);">🧠</div>
+    <div>
+      <h2>3.5 Perception: Interpreting Your World</h2>
+      <p>How the brain constructs meaning from sensory data</p>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="card blue">
+      <h3>Top-Down Processing</h3>
+      <p>Uses <strong>prior knowledge, expectations, and context</strong> to interpret stimuli. Allows filling in missing details. Can create <strong>perceptual sets</strong>. Risk: can produce errors, e.g., eyewitness misidentifications (majority of false convictions involve mistaken eyewitness ID — Wells &amp; Olson, 2003).</p>
+    </div>
+    <div class="card gold">
+      <h3>Bottom-Up Processing</h3>
+      <p>Builds perception purely from <strong>properties of the stimulus</strong> itself, without relying on stored knowledge. Used for ambiguous or novel stimuli. Both processes operate continually and interactively in daily life.</p>
+    </div>
+  </div>
+
+  <div class="divider-label">Perceptual Constancy</div>
+  <div class="card teal">
+    <h3>Types of Perceptual Constancy</h3>
+    <p>Despite changes in the retinal image, the brain maintains stable perceptions of the world:</p>
+    <ul class="ref-list">
+      <li><strong>Size constancy:</strong> A person looks the same height at 3 ft and 6 ft, even though retinal image size halves</li>
+      <li><strong>Shape constancy:</strong> A door appears rectangular even when viewed at an angle</li>
+      <li><strong>Brightness constancy:</strong> Coal appears black in both dim and bright light</li>
+      <li><strong>Color constancy:</strong> Colors appear stable despite shifts in ambient lighting</li>
+    </ul>
+  </div>
+
+  <div class="divider-label">Depth Perception</div>
+  <div class="two-col">
+    <div class="card pink">
+      <h3>Binocular Cues</h3>
+      <p><strong>Retinal disparity:</strong> Two eyes see slightly different images; disparity is greatest for near objects, least for distant ones. Brain calculates depth from the degree of disparity. Requires both eyes.</p>
+    </div>
+    <div class="card pink">
+      <h3>Monocular Cues</h3>
+      <p>Relative size, interposition, linear perspective, height on horizon, texture gradient, light and shadow. Allow depth perception with one eye — used in art and photography. Artists with misaligned eyes (impaired binocular cues) may exploit monocular cues more skillfully.</p>
+    </div>
+  </div>
+
+  <div class="divider-label">Gestalt Principles of Form Perception</div>
+  <div class="card purple">
+    <h3>Gestalt Laws — "The whole is greater than the sum of its parts"</h3>
+    <ul class="ref-list">
+      <li><strong>Figure-Ground:</strong> Perceptual separation of objects (figures) from their backgrounds</li>
+      <li><strong>Closure:</strong> We mentally complete incomplete shapes (e.g., gap-filled triangles)</li>
+      <li><strong>Proximity:</strong> Nearby stimuli are grouped together — allows word boundaries to be perceived while reading</li>
+      <li><strong>Similarity:</strong> Similar stimuli are grouped together</li>
+      <li><strong>Good Continuation:</strong> We prefer to perceive stimuli as part of a continuing pattern — basis of camouflage</li>
+    </ul>
+  </div>
+
+  <div class="divider-label">Feature Detection Theory</div>
+  <div class="card blue">
+    <h3>Feature Detectors &amp; Higher Processing</h3>
+    <p>Specialized cells in the visual cortex fire only in response to specific visual features (shape, color, angle, movement). Multiple feature detectors combine to create coherent perception. <strong>Fusiform face area</strong> (temporal lobe): specialized for face processing, enlarges during childhood. Other dedicated areas process body parts and indoor/outdoor scenes. Simple feature detection does not fully account for the richness of human visual perception.</p>
+  </div>
+</section>
+
+<!-- 3.6 ACCURACY -->
+<section id="accuracy" class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(240,165,0,0.12);">⚠️</div>
+    <div>
+      <h2>3.6 The Accuracy of Perception</h2>
+      <p>Why and how our perceptions go wrong</p>
+    </div>
+  </div>
+
+  <div class="card gold">
+    <h3>Errors from Top-Down Processing</h3>
+    <p>We perceive what we <strong>expect</strong> to perceive. The Georgia bear example: student assumed mature pine trees (as expected in Georgia mountains) → incorrectly scaled the bear. It wasn't until he drove back for a closer look that he realized his expectations had overridden his raw sensation. Perceptual sets and cultural expectations silently shape perception.</p>
+  </div>
+
+  <div class="divider-label">Perceptual Illusions — When Constancy Backfires</div>
+  <div class="card blue">
+    <h3>The Moon Illusion</h3>
+    <p>Moon appears larger on the horizon than overhead, despite projecting the <em>same retinal image size</em> in both positions. <strong>Apparent distance theory:</strong> interposition cues on the horizon (trees, buildings) signal the moon as far away → brain inflates perceived size to maintain size constancy. Overhead moon has no such cues → no correction. <em>Tip:</em> view the moon between your legs — the brain stops compensating and the illusion vanishes.</p>
+  </div>
+  <div class="card teal">
+    <h3>The Ponzo Illusion</h3>
+    <p>Two equal-length horizontal lines placed across converging lines appear unequal. Linear perspective signals the upper line as farther away. Same retinal size + greater apparent distance → brain inflates the upper line's perceived length to maintain size constancy.</p>
+  </div>
+  <div class="card pink">
+    <h3>The Müller-Lyer Illusion</h3>
+    <p>Vertical lines with outward-pointing arrows appear longer than identical lines with inward-pointing arrows. Arrows serve as depth cues analogous to the inside vs. outside corners of a building — triggering size-constancy compensation, creating the illusion.</p>
+  </div>
+
+  <div class="divider-label">Cultural Influences on Perception</div>
+  <div class="card purple">
+    <h3>Culture &amp; the Carpentered World Hypothesis</h3>
+    <p>People in rectangular-building environments are <strong>more susceptible</strong> to the Müller-Lyer illusion because they have more experience with the angular depth cues it exploits. The <strong>Bashi people</strong> of Africa (round dwellings) and <strong>traditional Navajos</strong> in round hogans are measurably less susceptible than Europeans. <em>Perception is not culturally neutral — environment and culture shape perceptual expectations.</em></p>
+  </div>
+</section>
+
+<!-- GLOSSARY -->
+<section id="glossary" class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(167,139,250,0.12);">📖</div>
+    <div>
+      <h2>Key Terms Glossary</h2>
+      <p>All major terms from Chapter 3 at a glance</p>
+    </div>
+  </div>
+
+  <div class="divider-label">Psychophysics (3.1)</div>
+  <div class="card purple">
+    <ul class="ref-list">
+      <li><strong>Psychophysics</strong> — Branch of psychology studying the relationship between physical stimuli and psychological experience</li>
+      <li><strong>Absolute threshold</strong> — Minimum stimulus intensity detectable 50% of the time</li>
+      <li><strong>Signal detection theory</strong> — Detection depends on stimulus intensity AND psychological state (attention, fatigue, motivation)</li>
+      <li><strong>Difference threshold / JND</strong> — Minimum change in stimulus intensity detectable 50% of the time</li>
+      <li><strong>Weber's Law</strong> — The JND is proportional to the initial intensity of the stimulus</li>
+      <li><strong>Subliminal perception</strong> — Unconscious processing of stimuli below the awareness threshold</li>
+      <li><strong>ESP / Psi</strong> — Claimed ability to acquire information without known senses; not supported by science</li>
+      <li><strong>Ganzfeld procedure</strong> — Standard scientific test for telepathy</li>
+    </ul>
+  </div>
+
+  <div class="divider-label">Vision (3.2)</div>
+  <div class="card blue">
+    <ul class="ref-list">
+      <li><strong>Wavelength</strong> — Distance between light wave peaks; determines hue/color</li>
+      <li><strong>Amplitude</strong> — Height of light wave; determines brightness</li>
+      <li><strong>Saturation</strong> — Purity of light; determines richness of color</li>
+      <li><strong>Cornea</strong> — Clear outer surface; begins focusing light</li>
+      <li><strong>Pupil</strong> — Aperture in iris; controls light entry</li>
+      <li><strong>Iris</strong> — Colored muscle ring; regulates pupil size</li>
+      <li><strong>Lens</strong> — Focuses light on retina via accommodation</li>
+      <li><strong>Accommodation</strong> — Lens shape change to focus images at different distances</li>
+      <li><strong>Retina</strong> — Light-sensitive inner layer of eye; contains rods and cones</li>
+      <li><strong>Rods</strong> — Black-and-white photoreceptors; ~100M/eye; concentrated peripherally</li>
+      <li><strong>Cones</strong> — Color photoreceptors; ~5M/eye; concentrated at fovea</li>
+      <li><strong>Fovea</strong> — Central point of sharpest, most detailed color vision</li>
+      <li><strong>Blindspot</strong> — Region with no photoreceptors; where optic nerve exits</li>
+      <li><strong>Photopigments</strong> — Light-sensitive chemicals in photoreceptors; trigger transduction</li>
+      <li><strong>Dark adaptation</strong> — Photopigment build-up in low light (~30–45 min)</li>
+      <li><strong>Light adaptation</strong> — Photopigment depletion in bright light (~1 min)</li>
+      <li><strong>Trichromatic theory</strong> — Three cone types (red/green/blue) explain color vision at receptor level</li>
+      <li><strong>Opponent-process theory</strong> — Three opponent-cell pairs explain color processing beyond receptors; accounts for afterimages</li>
+      <li><strong>Optic chiasm</strong> — Crossover point: right visual field → left hemisphere; left → right</li>
+    </ul>
+  </div>
+
+  <div class="divider-label">Hearing (3.3)</div>
+  <div class="card gold">
+    <ul class="ref-list">
+      <li><strong>Frequency</strong> — Cycles/sec (Hz); determines pitch</li>
+      <li><strong>Decibels (dB)</strong> — Unit of sound loudness; &gt;85 dB causes hearing damage</li>
+      <li><strong>Pinna</strong> — Outer ear; funnels sound</li>
+      <li><strong>Tympanic membrane</strong> — Eardrum; vibrates with sound waves</li>
+      <li><strong>Ossicles</strong> — Three middle-ear bones (hammer, anvil, stirrup); amplify vibrations</li>
+      <li><strong>Cochlea</strong> — Fluid-filled coiled structure; hair cells on basilar membrane convert sound to impulses</li>
+      <li><strong>Basilar membrane</strong> — Floor of cochlear duct; lined with hair cells</li>
+      <li><strong>Place theory</strong> — Pitch encoded by location of activation on basilar membrane</li>
+      <li><strong>Frequency theory</strong> — Pitch encoded by rate of hair cell firing (limited to 1,000 Hz)</li>
+      <li><strong>Volley theory</strong> — Teams of hair cells fire alternately to encode pitches above 1,000 Hz</li>
+    </ul>
+  </div>
+
+  <div class="divider-label">Other Senses, Perception &amp; Accuracy (3.4–3.6)</div>
+  <div class="card teal">
+    <ul class="ref-list">
+      <li><strong>Gustation</strong> — Sense of taste (chemical sense)</li>
+      <li><strong>Umami</strong> — Fifth basic taste; meaty/brothy; triggered by L-glutamic acid</li>
+      <li><strong>Papillae</strong> — Visible bumps on tongue; taste buds reside between them</li>
+      <li><strong>Olfaction</strong> — Sense of smell (chemical sense); bypasses thalamus</li>
+      <li><strong>Olfactory epithelium</strong> — Skin lining nasal cavity; ~400 receptor types</li>
+      <li><strong>Pheromones</strong> — Airborne chemosignals affecting social/sexual behavior</li>
+      <li><strong>Gate control theory</strong> — Spinal cord networks can block pain signals via intense tactile stimulation</li>
+      <li><strong>Kinesthesis</strong> — Sense of body position and movement in space</li>
+      <li><strong>Vestibular sense</strong> — Sense of balance; uses semicircular canals in inner ear</li>
+      <li><strong>Top-down processing</strong> — Using prior knowledge and expectations to interpret stimuli</li>
+      <li><strong>Bottom-up processing</strong> — Building perception from raw stimulus properties</li>
+      <li><strong>Perceptual constancy</strong> — Stable perception despite varying sensory input (size, shape, brightness, color)</li>
+      <li><strong>Retinal disparity</strong> — Difference between each eye's image; basis of binocular depth cues</li>
+      <li><strong>Gestalt principles</strong> — Figure-ground, closure, proximity, similarity, good continuation</li>
+      <li><strong>Feature detection theory</strong> — Specialized cortical cells respond to specific visual features</li>
+      <li><strong>Fusiform face area</strong> — Temporal lobe region selectively processes faces</li>
+      <li><strong>Moon illusion</strong> — Moon appears larger on horizon; caused by apparent distance theory + size constancy</li>
+      <li><strong>Ponzo illusion</strong> — Equal lines appear unequal due to linear perspective depth cues</li>
+      <li><strong>Müller-Lyer illusion</strong> — Arrow direction alters perceived line length via depth cue processing</li>
+      <li><strong>Perceptual set</strong> — Readiness to perceive stimuli in a particular way based on expectations</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  Chapter 3 — What is Psychology? Foundations, Applications and Integration &nbsp;·&nbsp; Pastorino &amp; Doyle-Portillo &nbsp;·&nbsp; Reference Notes
+</footer>
+
+<script>
+  function show(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
