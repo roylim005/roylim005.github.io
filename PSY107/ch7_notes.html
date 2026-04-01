@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 7 — Memory | What Is Psychology?</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --paper: #faf8f3;
+    --cream: #f0ece0;
+    --accent: #c8553d;
+    --accent2: #3d7fbf;
+    --accent3: #4a8c6a;
+    --muted: #8a8577;
+    --border: #d4cfc0;
+    --highlight: #fff3cd;
+    --tag-bg: #e8f0fb;
+    --tag-color: #2c5f9e;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--ink);
+    color: #fff;
+    padding: 48px 40px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(200,85,61,.35) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 30%;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(61,127,191,.25) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -.02em;
+    margin-bottom: 12px;
+  }
+  header p {
+    color: rgba(255,255,255,.65);
+    font-size: 13px;
+    font-weight: 300;
+  }
+
+  /* ── STICKY NAV ── */
+  nav.toc {
+    background: var(--cream);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  nav.toc::-webkit-scrollbar { display: none; }
+  nav.toc a {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: .04em;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 14px 16px;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color .2s, border-color .2s;
+  }
+  nav.toc a:hover { color: var(--ink); border-bottom-color: var(--accent); }
+
+  /* ── LAYOUT ── */
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 48px 40px 80px;
+  }
+
+  /* ── SECTION ── */
+  .section {
+    margin-bottom: 56px;
+    animation: fadeUp .5s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--border);
+  }
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    font-weight: 500;
+    letter-spacing: .08em;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  /* ── SUBSECTION ── */
+  .subsection {
+    margin: 24px 0;
+  }
+  .subsection-title {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .subsection-title::before {
+    content: '';
+    display: inline-block;
+    width: 18px;
+    height: 2px;
+    background: var(--accent2);
+    flex-shrink: 0;
+  }
+
+  /* ── CARDS ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 12px;
+    margin: 14px 0;
+  }
+  .card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    position: relative;
+    transition: box-shadow .2s, transform .2s;
+  }
+  .card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.08); transform: translateY(-2px); }
+  .card-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .card h4 {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: var(--ink);
+  }
+  .card p {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+  .card.accent-red  { border-left: 3px solid var(--accent); }
+  .card.accent-blue { border-left: 3px solid var(--accent2); }
+  .card.accent-green{ border-left: 3px solid var(--accent3); }
+
+  /* ── KEY CONCEPT CALLOUT ── */
+  .callout {
+    background: var(--highlight);
+    border-left: 4px solid #e6b800;
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    margin: 16px 0;
+    font-size: 13.5px;
+  }
+  .callout strong { color: var(--ink); }
+
+  /* ── DEFINITION BLOCKS ── */
+  .def-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 12px 0;
+  }
+  .def-item {
+    display: grid;
+    grid-template-columns: 190px 1fr;
+    gap: 12px;
+    align-items: start;
+    padding: 10px 14px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 13.5px;
+    transition: background .15s;
+  }
+  .def-item:hover { background: var(--cream); }
+  .def-term {
+    font-weight: 500;
+    color: var(--ink);
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    padding-top: 2px;
+  }
+  .def-body { color: #444; font-weight: 300; }
+
+  /* ── PROCESS FLOW ── */
+  .flow {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
+    margin: 16px 0;
+  }
+  .flow-step {
+    background: #fff;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    text-align: center;
+    min-width: 120px;
+  }
+  .flow-arrow {
+    font-size: 18px;
+    color: var(--muted);
+    padding: 0 6px;
+  }
+  .flow-step.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+  /* ── COMPARISON TABLE ── */
+  table.compare {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin: 14px 0;
+  }
+  table.compare th {
+    background: var(--ink);
+    color: #fff;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: .05em;
+  }
+  table.compare td {
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    font-weight: 300;
+    color: #444;
+  }
+  table.compare tr:nth-child(even) td { background: var(--cream); }
+  table.compare tr:hover td { background: #e8f0fb; }
+
+  /* ── KEY TERMS ── */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 14px 0;
+  }
+  .tag {
+    background: var(--tag-bg);
+    color: var(--tag-color);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 11px;
+    border-radius: 20px;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: .02em;
+    transition: background .15s, color .15s;
+    cursor: default;
+  }
+  .tag:hover { background: var(--accent2); color: #fff; }
+
+  /* ── NUMBERS HIGHLIGHT ── */
+  .stat {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 4px;
+    margin: 0 2px;
+  }
+
+  /* ── QUOTE ── */
+  blockquote {
+    border-left: 3px solid var(--accent3);
+    padding: 10px 18px;
+    margin: 14px 0;
+    font-style: italic;
+    color: #555;
+    font-size: 13.5px;
+    font-weight: 300;
+    background: #f3f9f5;
+    border-radius: 0 6px 6px 0;
+  }
+
+  /* ── DIVIDER ── */
+  hr {
+    border: none;
+    border-top: 1px dashed var(--border);
+    margin: 40px 0;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    padding: 24px 40px;
+    border-top: 1px solid var(--border);
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    header, nav.toc, .container { padding-left: 20px; padding-right: 20px; }
+    .def-item { grid-template-columns: 1fr; gap: 4px; }
+    .flow { flex-direction: column; }
+    .flow-arrow { transform: rotate(90deg); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-label">What Is Psychology? — Pastorino &amp; Doyle-Portillo</div>
+  <h1>Chapter 7<br>Memory</h1>
+  <p>Reference Notes · Encoding · Storage · Retrieval · Forgetting · Biology of Memory</p>
+</header>
+
+<nav class="toc">
+  <a href="#s1">7.1 Functions</a>
+  <a href="#s2">7.2 New Memories</a>
+  <a href="#s3">7.3 Long-Term Memory</a>
+  <a href="#s4">7.4 Retrieval &amp; Forgetting</a>
+  <a href="#s5">7.5 Accuracy</a>
+  <a href="#s6">7.6 Biology</a>
+  <a href="#keyterms">Key Terms</a>
+</nav>
+
+<div class="container">
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- SECTION 7.1 -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="section" id="s1">
+    <div class="section-header">
+      <span class="section-num">7.1</span>
+      <span class="section-title">The Functions of Memory</span>
+    </div>
+
+    <div class="subsection-title">Core Process</div>
+    <div class="flow">
+      <div class="flow-step active">Encoding<br><small style="font-weight:300;font-size:11px">input info</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">Storage<br><small style="font-weight:300;font-size:11px">hold info</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">Retrieval<br><small style="font-weight:300;font-size:11px">recall info</small></div>
+    </div>
+
+    <div class="subsection-title">Explicit vs. Implicit Memory</div>
+    <div class="card-grid">
+      <div class="card accent-red">
+        <div class="card-label">Explicit Memory</div>
+        <h4>Conscious Use of Memory</h4>
+        <p>Intentional, effortful search for stored information. Relies heavily on <em>language</em> and verbal recall (e.g., recalling the occipital lobe processes vision).</p>
+      </div>
+      <div class="card accent-blue">
+        <div class="card-label">Implicit Memory</div>
+        <h4>Unconscious Use of Memory</h4>
+        <p>Memory used without awareness. Typically <em>non-verbal</em>. Examples: driving a familiar route, riding a bike, motor skills, classical conditioning, priming.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Why implicit memory matters:</strong> Without it, we could not walk and think simultaneously — our conscious (explicit) cognitive resources are simply too limited to handle every automatic behaviour.
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- SECTION 7.2 -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="section" id="s2">
+    <div class="section-header">
+      <span class="section-num">7.2</span>
+      <span class="section-title">The Development of New Memories</span>
+    </div>
+
+    <!-- 7.2.1 Three-Stages Model -->
+    <div class="subsection-title">7.2.1 Three-Stages Model (Atkinson &amp; Shiffrin, 1968)</div>
+    <div class="flow">
+      <div class="flow-step">Sensory Memory<br><small style="font-size:11px;font-weight:300">fraction of a sec</small></div>
+      <div class="flow-arrow">→ attention →</div>
+      <div class="flow-step active">Short-Term Memory<br><small style="font-size:11px;font-weight:300">~30 sec · 7±2 items</small></div>
+      <div class="flow-arrow">→ rehearsal →</div>
+      <div class="flow-step">Long-Term Memory<br><small style="font-size:11px;font-weight:300">permanent</small></div>
+    </div>
+
+    <div class="subsection-title" style="margin-top:22px">Sensory Memory</div>
+    <div class="card-grid">
+      <div class="card accent-red">
+        <div class="card-label">Iconic Memory</div>
+        <h4>Visual Sensory Store</h4>
+        <p>Lasts a fraction of a second. Emotional images (especially negative) are retained longer and prioritised — possible survival value.</p>
+      </div>
+      <div class="card accent-blue">
+        <div class="card-label">Echoic Memory</div>
+        <h4>Auditory Sensory Store</h4>
+        <p>Duration varies across situations. Transfer to STM = pay attention. If not attended to → decays forever.</p>
+      </div>
+    </div>
+
+    <div class="subsection-title">Short-Term Memory (STM)</div>
+    <div class="def-list">
+      <div class="def-item">
+        <span class="def-term">Capacity</span>
+        <span class="def-body"><span class="stat">7 ± 2</span> items (Miller, 1956); with chunking, closer to <span class="stat">4 ± 1</span> chunks (Cowan, 2001).</span>
+      </div>
+      <div class="def-item">
+        <span class="def-term">Duration</span>
+        <span class="def-body">~30 seconds without rehearsal (Brown, 1958; Peterson &amp; Peterson, 1959).</span>
+      </div>
+      <div class="def-item">
+        <span class="def-term">Chunking</span>
+        <span class="def-body">Compressing info into meaningful units — extends effective capacity (e.g., 1-2-3 as one chunk vs. 8-1-5 as three).</span>
+      </div>
+      <div class="def-item">
+        <span class="def-term">Maintenance Rehearsal</span>
+        <span class="def-body">Repeating info to keep it in STM. <em>Weak</em> transfer to LTM — ~75% of info lost in 2 days (forgetting curve).</span>
+      </div>
+    </div>
+
+    <div class="subsection-title">7.2.4 Elaborative Rehearsal — Making Memories Stick</div>
+    <div class="card accent-green card" style="max-width:100%;margin:0 0 14px 0">
+      <div class="card-label">Best Strategy for Long-Term Encoding</div>
+      <h4>Form Associations with Existing Knowledge</h4>
+      <p>Connect new material to what you already know in LTM. More effort = deeper processing = stronger memory. Includes the <strong>self-reference effect (SRE)</strong> — personally relevant examples encode especially well.</p>
+    </div>
+
+    <div class="subsection-title">7.2.5 Levels-of-Processing Model (Craik &amp; Lockhart, 1972)</div>
+    <table class="compare">
+      <tr><th>Level</th><th>Strategy</th><th>LTM Transfer</th></tr>
+      <tr><td>Shallow</td><td>Maintenance rehearsal (repetition)</td><td>Weak — easily forgotten</td></tr>
+      <tr><td>Deep</td><td>Elaborative rehearsal (associations, SRE)</td><td>Strong — best for exams</td></tr>
+    </table>
+    <div class="callout">
+      <strong>Key figure:</strong> Nine times more maintenance rehearsal → only 1.5% more recall (Glenberg et al., 1977). Elaboration beats repetition every time.
+    </div>
+
+    <div class="subsection-title">Serial Position Curve</div>
+    <div class="card-grid">
+      <div class="card accent-red">
+        <div class="card-label">Primacy Effect</div>
+        <h4>Words at the Beginning</h4>
+        <p>Better recalled because they were transferred to <em>LTM</em> via rehearsal. Diminished primacy = risk indicator for Alzheimer's / MCI.</p>
+      </div>
+      <div class="card accent-blue">
+        <div class="card-label">Recency Effect</div>
+        <h4>Words at the End</h4>
+        <p>Still in <em>STM</em> at recall. Most affected by normal aging — but strategic restudying in older adults can compensate.</p>
+      </div>
+    </div>
+
+    <div class="subsection-title">7.2.7 Working Memory Model (Baddeley, 1974/2012)</div>
+    <p style="font-size:13.5px;font-weight:300;margin-bottom:14px">Replaces the rigid serial STM with a flexible, <em>parallel</em> processing system. Information flows in multiple directions simultaneously.</p>
+    <div class="card-grid">
+      <div class="card accent-red">
+        <div class="card-label">Central Executive</div>
+        <h4>Attention Controller</h4>
+        <p>Coordinates all subordinate systems. Impaired in ADHD, Alzheimer's, anxiety. Motivation affects its efficiency.</p>
+      </div>
+      <div class="card accent-blue">
+        <div class="card-label">Phonological Loop</div>
+        <h4>Verbal / Auditory</h4>
+        <p>Processes and temporarily stores sounds and spoken language.</p>
+      </div>
+      <div class="card accent-green">
+        <div class="card-label">Visuospatial Sketchpad</div>
+        <h4>Visual / Spatial</h4>
+        <p>Processes and stores visual images and spatial information.</p>
+      </div>
+      <div class="card" style="border-left:3px solid #9b59b6">
+        <div class="card-label">Episodic Buffer</div>
+        <h4>Integrator</h4>
+        <p>Links working memory to LTM; integrates information from different sources.</p>
+      </div>
+    </div>
+    <blockquote>Why working memory beats the three-stages model: it explains simultaneous processing (e.g., accessing LTM pronunciation while holding STM items) and accounts for cases like K.F., who had tiny STM capacity yet normal LTM performance.</blockquote>
+  </div>
+
+  <hr>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- SECTION 7.3 -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="section" id="s3">
+    <div class="section-header">
+      <span class="section-num">7.3</span>
+      <span class="section-title">Long-Term Memory: Permanent Storage</span>
+    </div>
+
+    <div class="def-list">
+      <div class="def-item">
+        <span class="def-term">Capacity</span>
+        <span class="def-body">Effectively <strong>unlimited</strong> — psychologists have found no evidence of a ceiling on LTM storage.</span>
+      </div>
+      <div class="def-item">
+        <span class="def-term">Primary Encoding</span>
+        <span class="def-body"><strong>Semantic encoding</strong> — stores the <em>gist/meaning</em> rather than sensory details. Most useful for practical application.</span>
+      </div>
+      <div class="def-item">
+        <span class="def-term">Organisation</span>
+        <span class="def-body">Schemas — knowledge frameworks with category slots and default values (e.g., schemas for objects, people, events/scripts).</span>
+      </div>
+    </div>
+
+    <div class="subsection-title">7.3.4 Types of Long-Term Memory</div>
+    <table class="compare">
+      <tr><th>Type</th><th>Subtype</th><th>Characteristics</th><th>Example</th></tr>
+      <tr>
+        <td rowspan="2"><strong>Declarative</strong><br><small>(Explicit)</small></td>
+        <td>Semantic</td>
+        <td>Conceptual knowledge; lacks detail; grows throughout life</td>
+        <td>Knowing what an icicle is</td>
+      </tr>
+      <tr>
+        <td>Episodic</td>
+        <td>Personal life events; self-awareness; integrates into autobiographical memory</td>
+        <td>Remembering a birthday party</td>
+      </tr>
+      <tr>
+        <td><strong>Procedural</strong><br><small>(Implicit)</small></td>
+        <td>—</td>
+        <td>Skills and habits; non-verbal; largely developed by age 10; very durable ("like riding a bike")</td>
+        <td>Driving, writing, typing</td>
+      </tr>
+    </table>
+
+    <div class="callout">
+      <strong>Gender &amp; Autobiographical Memory (Davis, 1999):</strong> Women tend to recall emotional childhood memories in more categories than men — attributed to greater socialised elaborative processing of emotion-laden memories, not inherent difference in memory capacity.
+    </div>
+
+    <div class="subsection-title">7.3.5 Amnesia</div>
+    <div class="card-grid">
+      <div class="card accent-red">
+        <div class="card-label">Retrograde Amnesia</div>
+        <h4>Can't Recall the Past</h4>
+        <p>Inability to retrieve <em>previously stored</em> declarative memories.</p>
+      </div>
+      <div class="card accent-blue">
+        <div class="card-label">Anterograde Amnesia</div>
+        <h4>Can't Form New Memories</h4>
+        <p>Inability to store <em>new</em> declarative memories. Case study: H.M. (Henry Molaison) — hippocampi removed. Could still learn new <em>procedural</em> skills, proving declarative &amp; procedural memory are separate systems.</p>
+      </div>
+    </div>
+    <div class="callout">
+      <strong>CTE note:</strong> Repeated brain trauma (e.g., NFL players) → buildup of tau protein → cognitive difficulties, depression. 223 of 266 donated brains showed CTE signs (Mez et al., 2020).
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- SECTION 7.4 -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="section" id="s4">
+    <div class="section-header">
+      <span class="section-num">7.4</span>
+      <span class="section-title">Retrieval and Forgetting in Long-Term Memory</span>
+    </div>
+
+    <div class="subsection-title">Recall vs. Recognition</div>
+    <div class="card-grid">
+      <div class="card accent-red">
+        <div class="card-label">Recall</div>
+        <h4>Weak Probe (Essay Exam)</h4>
+        <p>Must generate the answer from memory. Harder — requires deeper elaboration to succeed.</p>
+      </div>
+      <div class="card accent-blue">
+        <div class="card-label">Recognition</div>
+        <h4>Strong Probe (Multiple Choice)</h4>
+        <p>Answer is part of the cue. Easier due to overlap between probe and memory trace (Tulving, 1983). <em>Tip: Always study as if it's an essay exam.</em></p>
+      </div>
+    </div>
+
+    <div class="subsection-title">Theories of Forgetting</div>
+    <div class="def-list">
+      <div class="def-item">
+        <span class="def-term">Decay Theory</span>
+        <span class="def-body">Memory traces weaken and disappear if not periodically activated. Limitation: some memories survive decades without rehearsal (Bahrick, 1984 — Spanish vocabulary study).</span>
+      </div>
+      <div class="def-item">
+        <span class="def-term">Proactive Interference</span>
+        <span class="def-body"><em>Old</em> info blocks retrieval of <em>new</em> info. Example: always mispronouncing a name the old way despite corrections.</span>
+      </div>
+      <div class="def-item">
+        <span class="def-term">Retroactive Interference</span>
+        <span class="def-body"><em>New</em> info blocks retrieval of <em>old</em> info. Example: memorising a new address makes you forget the old one.</span>
+      </div>
+      <div class="def-item">
+        <span class="def-term">Cue-Dependent Forgetting</span>
+        <span class="def-body">Wrong retrieval cue → memory inaccessible (not gone). Based on encoding specificity principle (Tulving). Classic study: divers recalled words better in same environment they learned them (Godden &amp; Baddeley, 1975).</span>
+      </div>
+      <div class="def-item">
+        <span class="def-term">Repression / Motivated Forgetting</span>
+        <span class="def-body">Freud: emotionally threatening memories pushed to the unconscious. Modern: "motivated forgetting" — intentional blocking of unwanted memories from working memory. Remains controversial (no direct experimental proof of Freud's version).</span>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Tip-of-the-tongue phenomenon:</strong> You <em>know</em> you know it — the memory is available but temporarily inaccessible, usually due to interference.
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- SECTION 7.5 -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="section" id="s5">
+    <div class="section-header">
+      <span class="section-num">7.5</span>
+      <span class="section-title">The Accuracy of Memory</span>
+    </div>
+
+    <div class="def-list">
+      <div class="def-item">
+        <span class="def-term">Flashbulb Memories</span>
+        <span class="def-body">Unusually vivid, detailed memories of emotionally charged events. Despite their vividness, they are <strong>not reliably accurate</strong> (e.g., 9/11 WTC study — avg. reported 62 min for towers to fall; actual time ~2 hrs).</span>
+      </div>
+      <div class="def-item">
+        <span class="def-term">Memory is Constructive</span>
+        <span class="def-body">Memory ≠ video camera. Schemas fill in missing details → memory is partly reconstructive (based on events) and partly <em>constructive</em> (filled in by knowledge and expectations).</span>
+      </div>
+      <div class="def-item">
+        <span class="def-term">Misinformation Effect</span>
+        <span class="def-body">Post-event misleading information distorts the original memory. Classic study by Loftus &amp; Palmer (1974): the word "smashed" vs. "hit" changed participants' speed estimates of a car crash.</span>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Eyewitness memory (Loftus):</strong> Even a subtle word choice ("the broken headlight" vs. "a broken headlight") significantly increased false reports — 17% vs. 7% reported seeing a headlight that did not exist. Money incentives did not reduce this distortion.
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- SECTION 7.6 -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="section" id="s6">
+    <div class="section-header">
+      <span class="section-num">7.6</span>
+      <span class="section-title">The Biology of Memory</span>
+    </div>
+
+    <div class="subsection-title">Brain Structures &amp; Their Roles</div>
+    <table class="compare">
+      <tr><th>Structure</th><th>Role in Memory</th><th>Evidence</th></tr>
+      <tr>
+        <td><strong>Hippocampus</strong></td>
+        <td>Declarative memory consolidation; autobiographical recall; scene formation</td>
+        <td>H.M. — hippocampi removed → anterograde amnesia for declarative memories. London taxi drivers have larger hippocampi (Maguire et al., 2006).</td>
+      </tr>
+      <tr>
+        <td><strong>Frontal Lobe (Left)</strong></td>
+        <td>Verbal processing; semantic recognition; deeper encoding correlates with more activation</td>
+        <td>PET scans: more left frontal lobe activation → better recall (Kapur et al., 1994). Broca's area is here.</td>
+      </tr>
+      <tr>
+        <td><strong>Amygdala</strong></td>
+        <td>Emotional memory; fear conditioning; stress hormone-triggered LTM storage</td>
+        <td>Stress hormones activate amygdala during emotional events → initiates LTM storage but may create memory gaps for preceding moments.</td>
+      </tr>
+      <tr>
+        <td><strong>Cerebellum</strong></td>
+        <td>Motor skill (procedural) memory</td>
+        <td>Kim Peek: cerebellar damage → poor motor learning despite exceptional declarative memory.</td>
+      </tr>
+      <tr>
+        <td><strong>Striatum</strong></td>
+        <td>Habit formation; procedural memory</td>
+        <td>Implicit memory tasks show blood flow changes outside the hippocampus (Schacter et al., 1996).</td>
+      </tr>
+    </table>
+
+    <div class="subsection-title">Memory Consolidation</div>
+    <p style="font-size:13.5px;font-weight:300;margin:10px 0 16px">
+      <strong>Long-term potentiation (LTP):</strong> Biochemical changes at synapses increase the sensitivity of postsynaptic neurons, making certain neural pathways easier to activate — the biological basis of storing LTMs. Disruption of LTP may also explain how memories decay.
+    </p>
+
+    <div class="callout">
+      <strong>Neuroplasticity in action:</strong> 3D video games (e.g., Super Mario) improve performance on hippocampus-dependent memory tasks in both young and older adults (Clemenson &amp; Stark, 2015). Use it or lose it — memory use may literally shape your hippocampus.
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- KEY TERMS -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="section" id="keyterms">
+    <div class="section-header">
+      <span class="section-num">★</span>
+      <span class="section-title">Key Terms — Chapter 7</span>
+    </div>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:14px">Hover over any term to highlight it.</p>
+    <div class="tags">
+      <span class="tag">anterograde amnesia</span>
+      <span class="tag">attention</span>
+      <span class="tag">autobiographical memory</span>
+      <span class="tag">central executive</span>
+      <span class="tag">chunking</span>
+      <span class="tag">coding system</span>
+      <span class="tag">consciousness</span>
+      <span class="tag">constructive memory</span>
+      <span class="tag">cue-dependent forgetting</span>
+      <span class="tag">decay theory</span>
+      <span class="tag">declarative memory</span>
+      <span class="tag">elaborative rehearsal</span>
+      <span class="tag">encoding</span>
+      <span class="tag">episodic memory</span>
+      <span class="tag">explicit memory</span>
+      <span class="tag">flashbulb memory</span>
+      <span class="tag">forgetting curve</span>
+      <span class="tag">implicit memory</span>
+      <span class="tag">levels-of-processing model</span>
+      <span class="tag">long-term memory (LTM)</span>
+      <span class="tag">maintenance rehearsal</span>
+      <span class="tag">memory consolidation</span>
+      <span class="tag">memory traces</span>
+      <span class="tag">misinformation effect</span>
+      <span class="tag">primacy effect</span>
+      <span class="tag">proactive interference</span>
+      <span class="tag">procedural memory</span>
+      <span class="tag">recall</span>
+      <span class="tag">recency effect</span>
+      <span class="tag">recognition</span>
+      <span class="tag">reconstructive memory</span>
+      <span class="tag">repression</span>
+      <span class="tag">retrieval</span>
+      <span class="tag">retroactive interference</span>
+      <span class="tag">retrograde amnesia</span>
+      <span class="tag">schema</span>
+      <span class="tag">semantic encoding</span>
+      <span class="tag">semantic memory</span>
+      <span class="tag">sensory memory</span>
+      <span class="tag">short-term memory (STM)</span>
+      <span class="tag">storage</span>
+      <span class="tag">tip of the tongue phenomenon</span>
+      <span class="tag">working memory</span>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Reference Notes · What Is Psychology? Foundations, Applications and Integration · Pastorino &amp; Doyle-Portillo · Chapter 7
+</footer>
+
+</body>
+</html>
