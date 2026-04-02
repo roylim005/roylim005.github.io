@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 8 — Cognition, Language & Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1410;
+    --paper: #f7f3ee;
+    --cream: #ede8e0;
+    --accent: #b5452a;
+    --accent-light: #e8c4b8;
+    --gold: #c9932b;
+    --muted: #7a6e65;
+    --border: #d4cdc4;
+    --section-bg: #ffffff;
+    --tag-bg: #f0ebe4;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 3rem 2rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(181,69,42,0.25) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  header::after {
+    content: 'VIII';
+    position: absolute;
+    bottom: -20px; right: 2rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 9rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.04);
+    line-height: 1;
+    pointer-events: none;
+  }
+  .header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .chapter-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    margin-bottom: 0.75rem;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.9rem, 4vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+  }
+  header h1 em {
+    color: var(--accent-light);
+    font-style: italic;
+  }
+  .header-sub {
+    font-size: 0.85rem;
+    color: rgba(247,243,238,0.55);
+    font-weight: 300;
+  }
+
+  /* ── SEARCH / FILTER BAR ── */
+  .toolbar {
+    background: var(--cream);
+    border-bottom: 1px solid var(--border);
+    padding: 0.9rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .toolbar-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .search-wrap {
+    position: relative;
+    flex: 1;
+    min-width: 180px;
+  }
+  .search-wrap input {
+    width: 100%;
+    padding: 0.5rem 0.75rem 0.5rem 2rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .search-wrap input:focus { border-color: var(--accent); }
+  .search-icon {
+    position: absolute;
+    left: 0.6rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+    font-size: 0.8rem;
+    pointer-events: none;
+  }
+  .filter-btns {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+  .filter-btn {
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    cursor: pointer;
+    color: var(--muted);
+    transition: all 0.18s;
+    white-space: nowrap;
+  }
+  .filter-btn:hover, .filter-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+  }
+
+  /* ── MAIN ── */
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  /* ── TOC ── */
+  .toc {
+    background: white;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .toc h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.03em;
+  }
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.35rem;
+  }
+  .toc a {
+    font-size: 0.82rem;
+    color: var(--ink);
+    text-decoration: none;
+    padding: 0.2rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: color 0.15s;
+  }
+  .toc a:hover { color: var(--accent); }
+  .toc-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--gold);
+    min-width: 2rem;
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  .section:hover { box-shadow: 0 4px 20px rgba(26,20,16,0.08); }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    user-select: none;
+    background: var(--section-bg);
+    border-bottom: 1px solid transparent;
+    transition: background 0.15s;
+  }
+  .section-header:hover { background: #faf8f5; }
+  .section-header.open { border-bottom-color: var(--border); }
+
+  .sec-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--gold);
+    background: #fef5e4;
+    border: 1px solid #f0d898;
+    border-radius: 4px;
+    padding: 0.1rem 0.4rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .sec-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    flex: 1;
+  }
+  .sec-tags {
+    display: flex;
+    gap: 0.3rem;
+    flex-wrap: wrap;
+  }
+  .tag {
+    font-size: 0.68rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    background: var(--tag-bg);
+    color: var(--muted);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+  .tag.thinking { background: #e8f0fe; color: #3b5bdb; }
+  .tag.problem  { background: #e6fcf5; color: #087f5b; }
+  .tag.reasoning{ background: #fff3bf; color: #8a6c00; }
+  .tag.language { background: #f3f0ff; color: #7048e8; }
+  .tag.intel    { background: #fff0f0; color: #c0392b; }
+
+  .chevron {
+    font-size: 0.75rem;
+    color: var(--muted);
+    transition: transform 0.25s;
+    flex-shrink: 0;
+  }
+  .section-header.open .chevron { transform: rotate(180deg); }
+
+  .section-body {
+    display: none;
+    padding: 1.25rem 1.5rem 1.5rem;
+  }
+  .section-body.open { display: block; }
+
+  /* ── CONTENT BLOCKS ── */
+  .summary-block {
+    background: #faf8f5;
+    border-left: 3px solid var(--accent);
+    padding: 0.75rem 1rem;
+    border-radius: 0 6px 6px 0;
+    margin-bottom: 1.25rem;
+    font-size: 0.9rem;
+    color: #3a312a;
+    font-style: italic;
+  }
+
+  .subsection {
+    margin-bottom: 1.5rem;
+  }
+  .subsection:last-child { margin-bottom: 0; }
+  .sub-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .sub-title::before {
+    content: '';
+    display: inline-block;
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── TERM CARDS ── */
+  .terms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 0.6rem;
+    margin-top: 0.75rem;
+  }
+  .term-card {
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 0.65rem 0.85rem;
+    background: white;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .term-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 2px 8px rgba(181,69,42,0.1);
+  }
+  .term-name {
+    font-weight: 500;
+    font-size: 0.83rem;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+  }
+  .term-def {
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ── THEORIST CARDS ── */
+  .theorists {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-top: 0.75rem;
+  }
+  .theorist-card {
+    display: flex;
+    gap: 0.9rem;
+    align-items: flex-start;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 0.75rem 1rem;
+    background: white;
+    transition: border-color 0.2s;
+  }
+  .theorist-card:hover { border-color: var(--gold); }
+  .theorist-avatar {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-light), var(--gold));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: white;
+    flex-shrink: 0;
+  }
+  .theorist-info .name {
+    font-weight: 500;
+    font-size: 0.85rem;
+    color: var(--ink);
+  }
+  .theorist-info .years {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--gold);
+  }
+  .theorist-info .contribution {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-top: 0.2rem;
+    line-height: 1.45;
+  }
+
+  /* ── KEY DISTINCTIONS ── */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+    margin-top: 0.75rem;
+  }
+  .compare-table th {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+    font-weight: 500;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+  }
+  .compare-table td {
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    color: var(--ink);
+  }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table tr:nth-child(even) td { background: #faf8f5; }
+
+  /* ── CALLOUT BOXES ── */
+  .callout {
+    border-radius: 7px;
+    padding: 0.8rem 1rem;
+    margin-top: 0.75rem;
+    font-size: 0.83rem;
+    line-height: 1.55;
+  }
+  .callout.note {
+    background: #e8f4fd;
+    border-left: 3px solid #3b82f6;
+    color: #1e3a5f;
+  }
+  .callout.warning {
+    background: #fff8e1;
+    border-left: 3px solid var(--gold);
+    color: #5a4000;
+  }
+  .callout.exam {
+    background: #fef2f0;
+    border-left: 3px solid var(--accent);
+    color: #6b1a0e;
+  }
+  .callout strong { font-weight: 600; }
+
+  /* ── KEYWORD GLOSSARY ── */
+  #glossary-section .terms-grid {
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  }
+
+  /* ── PROGRESS ── */
+  .progress-bar-wrap {
+    background: var(--cream);
+    border-top: 1px solid var(--border);
+    padding: 0.6rem 2rem;
+    position: sticky;
+    bottom: 0;
+    z-index: 99;
+  }
+  .progress-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+  .bar-track {
+    flex: 1;
+    height: 4px;
+    background: var(--border);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--gold));
+    width: 0%;
+    transition: width 0.4s ease;
+    border-radius: 999px;
+  }
+
+  /* ── PRINT / MISC ── */
+  .no-results {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--muted);
+    font-style: italic;
+    display: none;
+  }
+
+  @media (max-width: 600px) {
+    .terms-grid { grid-template-columns: 1fr; }
+    .toc-grid { grid-template-columns: 1fr; }
+  }
+
+  /* highlight search */
+  mark {
+    background: #ffe066;
+    border-radius: 2px;
+    padding: 0 1px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="chapter-label">Chapter 8 · What Is Psychology? · Pastorino & Doyle-Portillo</div>
+    <h1>Cognition, Language<br>& <em>Intelligence</em></h1>
+    <div class="header-sub">Reference notes — Sections 8.1 through 8.5 · Key terms, theorists & comparisons</div>
+  </div>
+</header>
+
+<div class="toolbar">
+  <div class="toolbar-inner">
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Search terms, theorists, concepts…">
+    </div>
+    <div class="filter-btns">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="thinking">Thinking</button>
+      <button class="filter-btn" data-filter="problem">Problem Solving</button>
+      <button class="filter-btn" data-filter="reasoning">Reasoning</button>
+      <button class="filter-btn" data-filter="language">Language</button>
+      <button class="filter-btn" data-filter="intel">Intelligence</button>
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <!-- TOC -->
+  <nav class="toc">
+    <h3>📋 Contents</h3>
+    <div class="toc-grid">
+      <a href="#sec-8-1"><span class="toc-num">8.1</span>Thinking & Mental Representations</a>
+      <a href="#sec-8-2"><span class="toc-num">8.2</span>Problem Solving</a>
+      <a href="#sec-8-3"><span class="toc-num">8.3</span>Reasoning, Decisions & Judgment</a>
+      <a href="#sec-8-4"><span class="toc-num">8.4</span>Language</a>
+      <a href="#sec-8-5a"><span class="toc-num">8.5a</span>Measuring Intelligence</a>
+      <a href="#sec-8-5b"><span class="toc-num">8.5b</span>Theories of Intelligence</a>
+      <a href="#sec-8-5c"><span class="toc-num">8.5c</span>Nature, Nurture & IQ</a>
+      <a href="#glossary-section"><span class="toc-num">★</span>Full Key Terms Glossary</a>
+    </div>
+  </nav>
+
+  <!-- SECTION 8.1 -->
+  <div class="section" id="sec-8-1" data-tags="thinking">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="sec-num">8.1</span>
+      <span class="sec-title">Thinking & Mental Representations</span>
+      <div class="sec-tags"><span class="tag thinking">Thinking</span></div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="summary-block">Thinking = using stored knowledge (mental representations) to achieve goals — perceiving the world, communicating, and solving problems.</div>
+
+      <div class="subsection">
+        <div class="sub-title">Core Definitions</div>
+        <div class="terms-grid">
+          <div class="term-card">
+            <div class="term-name">Cognition</div>
+            <div class="term-def">The mental processes of thinking, knowing, and understanding — covers perception, problem solving, language, and decision making.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Thinking</div>
+            <div class="term-def">The use of knowledge stored in long-term memory to accomplish a goal.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Mental Representations</div>
+            <div class="term-def">Bits of memory representing objects, events, or people not currently present. Come in two forms: sensory (images) and meaning-based (words/concepts).</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Knowledge</div>
+            <div class="term-def">Information stored in long-term memory; the raw material for all thinking.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="sub-title">8.1.1 Visual Images</div>
+        <p style="font-size:0.85rem;color:var(--muted);margin-bottom:0.6rem;">Research (Kosslyn et al.) shows visual images preserve <strong>spatial properties</strong> of real stimuli — mental scanning time increases proportionally with actual distance on a map.</p>
+        <div class="callout note"><strong>Key finding:</strong> We don't store photographic copies. Instead, Kosslyn (1994) argues we store a mix of <em>pictorial pieces</em> and <em>verbal descriptions</em> that we reconstruct. Brain imaging confirms overlapping neural activity during actual perception and mental imagery.</div>
+      </div>
+
+      <div class="subsection">
+        <div class="sub-title">8.1.2 Concepts & Categorisation</div>
+        <div class="terms-grid">
+          <div class="term-card">
+            <div class="term-name">Concepts</div>
+            <div class="term-def">Mental categories containing related knowledge, organised around meaning.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Superordinate Category</div>
+            <div class="term-def">Broadest, most general level (e.g., Fruit).</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Basic Level Category</div>
+            <div class="term-def">Intermediate, most commonly used level (e.g., Orange). First acquired by children; fastest to name → <em>basic level effect</em>.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Subordinate Category</div>
+            <div class="term-def">Most specific, detailed level (e.g., Naval Orange).</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Formal Concepts</div>
+            <div class="term-def">Defined by clear, rigid rules (e.g., "female" — must be able to produce offspring/eggs).</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Natural Concepts</div>
+            <div class="term-def">Develop from everyday experience; have fuzzy boundaries (e.g., "fruit" vs "vegetable" for a tomato).</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Prototypes</div>
+            <div class="term-def">Our concept of the <em>most typical</em> member of a category. We compare new items to the prototype to judge membership.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Exemplars</div>
+            <div class="term-def">Actual specific examples stored in memory. Alternative to prototypes — we may compare a new instance to remembered real cases.</div>
+          </div>
+        </div>
+        <div class="callout exam" style="margin-top:0.75rem;"><strong>Exam note:</strong> The prototype vs. exemplar debate is unresolved — some researchers argue we use both, or even idealized representations.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 8.2 -->
+  <div class="section" id="sec-8-2" data-tags="problem">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="sec-num">8.2</span>
+      <span class="sec-title">Problem Solving</span>
+      <div class="sec-tags"><span class="tag problem">Problem Solving</span></div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="summary-block">Problem solving proceeds through six stages (Hayes, 1989): identify the problem → define it → explore strategies → act → monitor progress → evaluate.</div>
+
+      <div class="subsection">
+        <div class="sub-title">Well-Structured vs. Ill-Structured Problems</div>
+        <table class="compare-table">
+          <tr><th>Type</th><th>Definition</th><th>Strategies</th><th>Example</th></tr>
+          <tr><td><strong>Well-Structured</strong></td><td>Clear pathway to solution exists</td><td>Algorithm or heuristic</td><td>Learning a new phone; finding cheapest hotel</td></tr>
+          <tr><td><strong>Ill-Structured</strong></td><td>No known algorithm</td><td>Heuristics, intuition, insight</td><td>Ending global warming; world peace</td></tr>
+        </table>
+      </div>
+
+      <div class="subsection">
+        <div class="sub-title">Strategies: Algorithms vs. Heuristics</div>
+        <div class="terms-grid">
+          <div class="term-card">
+            <div class="term-name">Algorithm</div>
+            <div class="term-def">Step-by-step method that <em>always</em> leads to the correct solution. Reliable but slow/effortful.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Heuristic</div>
+            <div class="term-def">Shortcut / rule of thumb. Quick but may not always work. Includes trial-and-error, guessing, intuition.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Intuition</div>
+            <div class="term-def">Believing something is true independent of any reasoning process; a "hunch." Common for ill-structured problems, but frequently wrong.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Insight ("Aha!" moment)</div>
+            <div class="term-def">A new way of seeing the problem that suddenly reveals the solution. Despite feeling sudden, research shows it follows extended, gradual thought.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="sub-title">Obstacles to Problem Solving</div>
+        <div class="terms-grid">
+          <div class="term-card">
+            <div class="term-name">Functional Fixedness</div>
+            <div class="term-def">Inability to see an object used in any way beyond its familiar function, blocking creative solutions.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Mental Set</div>
+            <div class="term-def">Tendency to use past strategies that have worked before, even when they're no longer effective.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Incubation</div>
+            <div class="term-def">Stepping away from a problem allows unproductive strategies to fade; often enables a fresh perspective on return. More effective when returning in a <em>new context</em>.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="sub-title">8.2.2 Creativity</div>
+        <p style="font-size:0.85rem;color:var(--muted);margin-bottom:0.6rem;"><strong>Creativity</strong> = combining mental elements in <em>new and useful</em> ways (Sternberg, 1999).</p>
+        <div class="terms-grid">
+          <div class="term-card">
+            <div class="term-name">Divergent Thinking</div>
+            <div class="term-def">Ability to quickly generate <em>many different ideas</em> from a single prompt. Key cognitive trait underlying creativity. Reduces functional fixedness and mental sets.</div>
+          </div>
+        </div>
+        <div class="callout note" style="margin-top:0.6rem;"><strong>Boosting creativity (Epstein & Phan, 2012):</strong> Capture new ideas, challenge yourself with difficult tasks, broaden skills through learning, surround yourself with stimulating environments.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 8.3 -->
+  <div class="section" id="sec-8-3" data-tags="reasoning">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="sec-num">8.3</span>
+      <span class="sec-title">Reasoning, Decision Making & Judgment</span>
+      <div class="sec-tags"><span class="tag reasoning">Reasoning</span></div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="summary-block">Reasoning = drawing conclusions from assumptions. Decision making = choosing among options. Judgment = estimating the probability of events.</div>
+
+      <div class="subsection">
+        <div class="sub-title">Types of Reasoning</div>
+        <table class="compare-table">
+          <tr><th>Type</th><th>Direction</th><th>Description</th><th>Example</th></tr>
+          <tr><td><strong>Deductive</strong></td><td>General → Specific</td><td>Apply a general rule to a specific case</td><td>"Studying → good grades; my friend studies → they get good grades."</td></tr>
+          <tr><td><strong>Inductive</strong></td><td>Specific → General</td><td>Use specific instances to find a general rule</td><td>Observing that many high-GPA friends study hard → conclude studying helps grades.</td></tr>
+          <tr><td><strong>Dialectical</strong></td><td>Bidirectional synthesis</td><td>Hold two contradictory views simultaneously; seek truth in both. Mature reasoning skill (Basseches, 1980)</td><td>Accepting that both human activity AND natural forces may be causing climate change.</td></tr>
+        </table>
+        <div class="callout note" style="margin-top:0.6rem;"><strong>Cultural note (Peng & Nisbett, 1999):</strong> Western reasoning tends toward dichotomy (true/false); Eastern reasoning more tolerant of contradiction (dialectical). Both cultures are <em>capable</em> of dialectical thinking.</div>
+      </div>
+
+      <div class="subsection">
+        <div class="sub-title">Decision Making</div>
+        <div class="terms-grid">
+          <div class="term-card">
+            <div class="term-name">Decision Making</div>
+            <div class="term-def">Choosing among several alternatives. Influenced by: perceived outcomes, probability of outcomes, and how options are framed.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Framing Effect</div>
+            <div class="term-def">The same information presented positively vs. negatively influences choice. E.g., "60% chance of passing" vs. "40% chance of failing" — same odds, different appeal.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Loss Aversion</div>
+            <div class="term-def">Focus on what a decision could <em>cost</em> in terms of potential gain.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Risk Aversion</div>
+            <div class="term-def">Concern over losing what we <em>already have</em>.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="sub-title">Judgment Heuristics</div>
+        <div class="terms-grid">
+          <div class="term-card">
+            <div class="term-name">Availability Heuristic</div>
+            <div class="term-def">Estimating frequency of events based on how easily examples come to mind. → We overestimate dramatic/media-covered events (e.g., plane crashes vs. car crashes).</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Representativeness Heuristic</div>
+            <div class="term-def">Judging category membership by how much something resembles our prototype. We ignore <em>base rates</em> (actual probabilities) — Kahneman & Tversky's engineer/lawyer study.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Affective Heuristic</div>
+            <div class="term-def">Making quick judgments based on immediate positive or negative emotional reactions to a person or thing (Slovic et al., 2002).</div>
+          </div>
+        </div>
+        <div class="callout warning"><strong>Note:</strong> Heuristics can cause errors (stereotypes, prejudice) but also sometimes lead to correct judgments. Whether we reason algorithmically or heuristically depends on the situation and individual thinking style.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 8.4 -->
+  <div class="section" id="sec-8-4" data-tags="language">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="sec-num">8.4</span>
+      <span class="sec-title">Language</span>
+      <div class="sec-tags"><span class="tag language">Language</span></div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="summary-block">Language is a syntactical verbal/gestural system unique to humans. It is essential for cognition, cultural transmission, and shaping perception.</div>
+
+      <div class="subsection">
+        <div class="sub-title">Language Acquisition Debate</div>
+        <table class="compare-table">
+          <tr><th>Theory</th><th>Position</th><th>Key Evidence</th></tr>
+          <tr><td><strong>Biolinguistic / Nativist</strong><br><em>(Chomsky)</em></td><td>Language is <em>innate</em>; we are born with a Language Acquisition Device (LAD) providing built-in syntactical knowledge. "Poverty of stimulus" argument.</td><td>Nicaraguan Sign Language (NSL) — deaf children spontaneously created a full language. Cross-cultural universality of developmental stages.</td></tr>
+          <tr><td><strong>Usage-Based</strong></td><td>Language is <em>learned</em> via general cognitive abilities and social interaction; rejects innate module.</td><td>Argues nativists underestimate children's actual exposure to language.</td></tr>
+          <tr><td><strong>Interactionist</strong></td><td>Biology <em>prepares</em> us; environment activates and shapes language.</td><td>Bilingual homes → near-native proficiency in both languages. Social interaction essential even for innateness theorists.</td></tr>
+        </table>
+      </div>
+
+      <div class="subsection">
+        <div class="sub-title">Stages of Language Development</div>
+        <table class="compare-table">
+          <tr><th>Age</th><th>Stage</th><th>Description</th></tr>
+          <tr><td>0–2 months</td><td>Cooing</td><td>Vowel sounds ("ooo", "ah")</td></tr>
+          <tr><td>4 months+</td><td>Babbling</td><td>Consonant + vowel sounds ("ka, ka"). Initially universal; by 7 months tunes to native language sounds.</td></tr>
+          <tr><td>~12 months</td><td>First words / Gestures</td><td>Names of familiar objects & people. Preverbal gestures (pointing). Morphemes emerge.</td></tr>
+          <tr><td>12–18 months</td><td>One-word stage (Holophrases)</td><td>Single words carry full meaning. Overextension and underextension common.</td></tr>
+          <tr><td>20–26 months</td><td>Telegraphic speech</td><td>Two-word sentences, often ungrammatical ("Doggie bad").</td></tr>
+          <tr><td>2–3 years</td><td>Full sentences</td><td>Rapid grammar & vocabulary growth. Subject-verb-object.</td></tr>
+          <tr><td>By age 6</td><td>Competent language user</td><td>~10,000 words; near-adult grammar; learns pragmatics.</td></tr>
+        </table>
+      </div>
+
+      <div class="subsection">
+        <div class="sub-title">Key Language Terms</div>
+        <div class="terms-grid">
+          <div class="term-card">
+            <div class="term-name">Phonemes</div>
+            <div class="term-def">The smallest units of sound in a language.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Morphemes</div>
+            <div class="term-def">Smallest units of sound that carry meaning.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Grammar</div>
+            <div class="term-def">Rules governing sentence structure — word order, verb tenses, etc.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Pragmatics</div>
+            <div class="term-def">Rules of conversation within a culture — turn-taking, tone, eye contact.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Overextension</div>
+            <div class="term-def">Using one word for many similar things (e.g., "dog" for all animals).</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Underextension</div>
+            <div class="term-def">Restricting a word too narrowly (e.g., "dog" = only the family pet).</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="sub-title">Whorfian / Linguistic Relativity Hypothesis</div>
+        <div class="terms-grid">
+          <div class="term-card">
+            <div class="term-name">Strong Form (Whorf)</div>
+            <div class="term-def">Language <em>determines</em> thought — you can only think in terms of your language. NOT supported by evidence.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Weak Form</div>
+            <div class="term-def">Language <em>influences</em> thought and perception. Supported — e.g., ease of labelling colours in a language affects memory for those colours.</div>
+          </div>
+        </div>
+        <div class="callout note"><strong>Vygotsky's Sociocultural Theory:</strong> Language is the mechanism by which cultural values and knowledge are passed from generation to generation through storytelling and conversation.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 8.5a -->
+  <div class="section" id="sec-8-5a" data-tags="intel">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="sec-num">8.5a</span>
+      <span class="sec-title">Measuring Intelligence</span>
+      <div class="sec-tags"><span class="tag intel">Intelligence</span></div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="summary-block">Intelligence broadly = abilities that allow adaptation to the environment and goal-directed behaviour.</div>
+
+      <div class="subsection">
+        <div class="sub-title">Key Figures in Intelligence Testing</div>
+        <div class="theorists">
+          <div class="theorist-card">
+            <div class="theorist-avatar">FB</div>
+            <div class="theorist-info">
+              <div class="name">Francis Galton <span class="years">(1822–1911)</span></div>
+              <div class="contribution">Proposed intelligence is inherited and measurable via physical abilities (reaction time, eyesight). Early studies found little support; ideas fell out of favour.</div>
+            </div>
+          </div>
+          <div class="theorist-card">
+            <div class="theorist-avatar">AB</div>
+            <div class="theorist-info">
+              <div class="name">Alfred Binet <span class="years">(1857–1911)</span></div>
+              <div class="contribution">Created the first practical intelligence test with Théodore Simon (1905). Introduced the concept of <em>mental age (MA)</em> — the age that reflects a child's mental abilities compared to average. 30-task test arranged in difficulty order.</div>
+            </div>
+          </div>
+          <div class="theorist-card">
+            <div class="theorist-avatar">LT</div>
+            <div class="theorist-info">
+              <div class="name">Lewis Terman <span class="years">(1877–1956)</span></div>
+              <div class="contribution">Developed the Stanford-Binet (1916). Popularised the IQ formula: <strong>IQ = (MA ÷ CA) × 100</strong>. Average IQ = 100 (MA equals CA). Standardised the test on a large US sample.</div>
+            </div>
+          </div>
+          <div class="theorist-card">
+            <div class="theorist-avatar">DW</div>
+            <div class="theorist-info">
+              <div class="name">David Wechsler <span class="years">(1896–1981)</span></div>
+              <div class="contribution">Objected to single-score IQ and mental age concept for adults. Created tests yielding <em>subscale scores</em>. IQ compared to population average (mean=100). Three tests: WPPSI-IV (2½–7), WISC-V (6–16), WAIS-IV (16–90). WAIS-IV measures verbal comprehension, perceptual reasoning, working memory, processing speed.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="sub-title">Test Quality: Reliability & Validity</div>
+        <div class="terms-grid">
+          <div class="term-card">
+            <div class="term-name">Reliability</div>
+            <div class="term-def">The test yields <em>consistent measurements over time</em>. Same person tested 6 months apart should score similarly.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Validity</div>
+            <div class="term-def">The test <em>measures what it claims to measure</em>. E.g., a valid IQ test should correlate with GPA if intelligence → academic success.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Standardised Test</div>
+            <div class="term-def">Uses uniform questions, procedures, and scoring for all test takers. Normed against a representative sample.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Cultural Bias</div>
+            <div class="term-def">When a test's content reflects one culture's knowledge/norms, disadvantaging those from different cultural backgrounds.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 8.5b -->
+  <div class="section" id="sec-8-5b" data-tags="intel">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="sec-num">8.5b</span>
+      <span class="sec-title">Theories of Intelligence</span>
+      <div class="sec-tags"><span class="tag intel">Intelligence</span></div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="summary-block">From a single "g" to multiple intelligences — how researchers conceptualise the nature of intelligence.</div>
+
+      <div class="subsection">
+        <div class="sub-title">Theorists at a Glance</div>
+        <div class="theorists">
+          <div class="theorist-card">
+            <div class="theorist-avatar">CS</div>
+            <div class="theorist-info">
+              <div class="name">Charles Spearman <span class="years">(1863–1945)</span></div>
+              <div class="contribution"><strong>General Intelligence (g)</strong> — because scores on separate mental abilities correlate, there must be one underlying general intelligence that drives all cognitive performance.</div>
+            </div>
+          </div>
+          <div class="theorist-card">
+            <div class="theorist-avatar">LT</div>
+            <div class="theorist-info">
+              <div class="name">L.L. Thurstone <span class="years">(1938)</span></div>
+              <div class="contribution">Rejected g; proposed <strong>7 distinct primary mental abilities</strong>: reasoning, associative memory, spatial visualisation, numerical fluency, verbal comprehension, perceptual speed, word fluency.</div>
+            </div>
+          </div>
+          <div class="theorist-card">
+            <div class="theorist-avatar">RC</div>
+            <div class="theorist-info">
+              <div class="name">Raymond Cattell <span class="years">(1963)</span></div>
+              <div class="contribution">Revived g but split it: <strong>Crystallised Intelligence (Gc)</strong> = accumulated knowledge (grows throughout life) + <strong>Fluid Intelligence (Gf)</strong> = speed/efficiency of processing new information (declines across adulthood).</div>
+            </div>
+          </div>
+          <div class="theorist-card">
+            <div class="theorist-avatar">HG</div>
+            <div class="theorist-info">
+              <div class="name">Howard Gardner <span class="years">(b. 1943)</span></div>
+              <div class="contribution"><strong>Theory of Multiple Intelligences</strong> — 9 intelligences (linguistic, logical-mathematical, spatial, musical, bodily-kinaesthetic, interpersonal, intrapersonal, naturalistic, existential). Intelligence = biopsychological potential activated within culture. Values intelligence <em>profiles</em>, not a single score.</div>
+            </div>
+          </div>
+          <div class="theorist-card">
+            <div class="theorist-avatar">RS</div>
+            <div class="theorist-info">
+              <div class="name">Robert Sternberg <span class="years">(b. 1949)</span></div>
+              <div class="contribution"><strong>Triarchic Theory</strong> — successful intelligence = three abilities: <em>Analytical</em> (logic, problem solving), <em>Practical</em> (common sense, adapting to environment), <em>Creative</em> (using knowledge in novel situations).</div>
+            </div>
+          </div>
+          <div class="theorist-card">
+            <div class="theorist-avatar">DG</div>
+            <div class="theorist-info">
+              <div class="name">Daniel Goleman <span class="years">(b. 1946)</span></div>
+              <div class="contribution"><strong>Emotional Intelligence (EI)</strong> — awareness of own emotions, self-control, trustworthiness, adaptability, motivation, empathy, social skills. Better predictor of life success and resilience than IQ in some contexts. Can be <em>taught</em>.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="sub-title">Quick Comparison: Fluid vs. Crystallised Intelligence</div>
+        <table class="compare-table">
+          <tr><th>Dimension</th><th>Fluid Intelligence (Gf)</th><th>Crystallised Intelligence (Gc)</th></tr>
+          <tr><td>Definition</td><td>Speed & efficiency of learning/solving new problems</td><td>Accumulated knowledge & learned skills</td></tr>
+          <tr><td>Lifespan trend</td><td>Peaks in young adulthood; declines with age</td><td>Can continue growing well into late adulthood</td></tr>
+          <tr><td>Influences</td><td>Physical health, cardiovascular health, lifestyle (yoga/meditation linked to slower decline)</td><td>Education, reading, formal learning</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 8.5c -->
+  <div class="section" id="sec-8-5c" data-tags="intel">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="sec-num">8.5c</span>
+      <span class="sec-title">Nature, Nurture & IQ</span>
+      <div class="sec-tags"><span class="tag intel">Intelligence</span></div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="summary-block">The dominant view is <strong>interactionism</strong> — genes and environment interact to produce intelligence.</div>
+
+      <div class="subsection">
+        <div class="sub-title">Key Concepts</div>
+        <div class="terms-grid">
+          <div class="term-card">
+            <div class="term-name">Genes</div>
+            <div class="term-def">DNA strands in cell nuclei directing development. ~30,000 in the human genome (Human Genome Project, 2003).</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Genotype</div>
+            <div class="term-def">The genetic code inherited for a particular trait.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Phenotype</div>
+            <div class="term-def">The actual trait that develops — product of genotype <em>and</em> environment.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Natural Selection</div>
+            <div class="term-def">Adaptive traits that aid survival/reproduction are passed on; maladaptive ones die out (Darwin, 1859).</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Heritability</div>
+            <div class="term-def">Proportion of trait variability explained by genetics. For intelligence: 0.4 to 0.8 range across studies. Higher in upper-SES children.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Interactionism</div>
+            <div class="term-def">Today's dominant view: genes <em>interact</em> with environment to produce traits. Neither alone is sufficient.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="sub-title">Research Methods for Nature vs. Nurture</div>
+        <div class="terms-grid">
+          <div class="term-card">
+            <div class="term-name">Twin Studies</div>
+            <div class="term-def">Compare identical (100% shared genes) vs. fraternal twins. Greater similarity in identical twins → genetic basis. Identical twins raised apart vs. together isolates environmental effects.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Genetic / DNA Studies</div>
+            <div class="term-def">Correlate specific genes/genetic markers with IQ scores. Intelligence is <em>polygenetic</em> (based on many genes). Scottish study: identified markers accounted for 40% of Gc variance and 51% of Gf variance.</div>
+          </div>
+          <div class="term-card">
+            <div class="term-name">Adoption Studies</div>
+            <div class="term-def">Children adopted into higher-SES families show 12–18 point IQ increases (Nisbett et al., 2012) → strong environmental effect.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="sub-title">Environmental Predictors of Higher IQ</div>
+        <div class="callout note">
+          <strong>Parent verbal behaviour</strong> (using many words, positive tone, relational language, asking rather than telling) is a stronger predictor of child IQ than family wealth alone.<br><br>
+          <strong>Other positive factors:</strong> Breastfeeding (Omega-3 fatty acids), interactive reading, musical training, quality schooling, preschool access, adoption into higher-SES family.<br><br>
+          <strong>Negative factors:</strong> Prenatal fluoride / phthalate exposure, low-quality schooling, poverty-related stressors.
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="sub-title">The Flynn Effect</div>
+        <div class="callout exam">
+          <strong>Flynn Effect:</strong> Average IQ scores have risen ~3 points per decade across the 20th–21st century in many countries. The Black-White IQ gap has narrowed by 5.5+ points since the 1970s. Rapid environmental change (education, nutrition, exposure to abstract thinking) is the most likely explanation — genetic change is too slow to account for this shift.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FULL GLOSSARY -->
+  <div class="section" id="glossary-section" data-tags="all">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="sec-num">★</span>
+      <span class="sec-title">Full Key Terms Glossary</span>
+      <div class="sec-tags"><span class="tag">All Sections</span></div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="terms-grid" id="glossaryGrid">
+        <!-- populated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <div class="no-results" id="noResults">No matching terms found. Try a different search.</div>
+
+</main>
+
+<div class="progress-bar-wrap">
+  <div class="progress-inner">
+    <span id="progressLabel">0 / 7 sections open</span>
+    <div class="bar-track"><div class="bar-fill" id="barFill"></div></div>
+    <span style="font-size:0.7rem; color:var(--accent);" id="scrollPct"></span>
+  </div>
+</div>
+
+<script>
+// ── GLOSSARY DATA ──
+const glossaryTerms = [
+  ["Affective Heuristic","Judging people/things based on immediate positive or negative emotional reactions."],
+  ["Algorithm","A method that always leads to the correct solution; reliable but slow."],
+  ["Availability Heuristic","Estimating event frequency by how easily examples come to mind."],
+  ["Babbling","Stage (~4 months) adding consonant sounds; tunes to native language by 7 months."],
+  ["Basic Level Category","Intermediate category level; most commonly used; first acquired by children."],
+  ["Cognition","Mental processes of thinking, knowing, and understanding."],
+  ["Concepts","Mental categories containing related knowledge, organised around meaning."],
+  ["Cooing","Early (~2 months) vowel sounds ('ooo', 'ah')."],
+  ["Creativity","Ability to combine mental elements in new and useful ways."],
+  ["Crystallised Intelligence (Gc)","Accumulated knowledge; can grow throughout life."],
+  ["Cultural Bias","When test content reflects one culture, disadvantaging others."],
+  ["Decision Making","Choosing among alternatives based on perceived outcomes and probabilities."],
+  ["Deductive Reasoning","Reasoning from general rules to specific cases."],
+  ["Dialectical Reasoning","Advanced reasoning that tolerates contradiction and seeks synthesis from opposing views."],
+  ["Exemplars","Stored memories of actual specific examples of a category; alternative to prototypes."],
+  ["Fluid Intelligence (Gf)","Speed and efficiency of processing new information; declines across adulthood."],
+  ["Formal Concepts","Categories defined by clear, rigid rules."],
+  ["Functional Fixedness","Inability to see an object beyond its usual function."],
+  ["General Intelligence (g)","Spearman's concept of one underlying intelligence driving all cognitive tasks."],
+  ["Genes","DNA strands in cell nuclei directing development (~30,000 in humans)."],
+  ["Genotype","The inherited genetic code for a particular trait."],
+  ["Grammar","Rules governing sentence structure in a language."],
+  ["Heuristic","A mental shortcut or rule of thumb; quick but not always correct."],
+  ["Ill-Structured Problems","Problems with no known algorithm; require heuristics/intuition."],
+  ["Incubation","Stepping away from a problem to allow fresh perspective on return."],
+  ["Inductive Reasoning","Reasoning from specific observations to a general rule."],
+  ["Insight","Sudden new understanding of a problem solution ('Aha!' moment); follows extended thought."],
+  ["Intelligence","Abilities that allow adaptation to the environment and goal-directed behaviour."],
+  ["Intelligence Quotient (IQ)","IQ = (MA ÷ CA) × 100; average = 100."],
+  ["Interactionism","Dominant view: genes and environment interact to produce traits."],
+  ["Intuition","Believing something without formal reasoning; common for ill-structured problems."],
+  ["Judgment","Estimating the probability of events."],
+  ["Knowledge","Information stored in long-term memory; raw material of thinking."],
+  ["Language","A syntactical verbal/gestural system for representing and communicating about the world."],
+  ["Mental Age (MA)","Age that reflects a child's mental abilities relative to average for that age."],
+  ["Mental Representations","Memory bits representing objects/people not currently present."],
+  ["Mental Set","Tendency to use past problem-solving strategies even when ineffective."],
+  ["Morphemes","Smallest sounds in a language that carry meaning."],
+  ["Multiple Intelligences","Gardner's theory: 9 distinct intelligences (linguistic, logical, spatial, musical, etc.)."],
+  ["Natural Concepts","Develop from everyday experience; have fuzzy boundaries."],
+  ["Natural Selection","Adaptive traits aiding survival are passed on; maladaptive ones die out."],
+  ["Nature-Nurture Debate","Debate over whether traits come from genes (nature) or environment (nurture)."],
+  ["Overextension","Using one word to cover many similar instances (e.g., 'dog' for all animals)."],
+  ["Phenotype","The actual trait that develops — product of genotype and environment."],
+  ["Phonemes","Smallest units of sound in a language."],
+  ["Pragmatics","Cultural rules of conversation (turn-taking, tone, eye contact)."],
+  ["Prototypes","Concept of the most typical member of a category; used to judge membership."],
+  ["Reasoning","Drawing conclusions based on assumptions about the world."],
+  ["Reliability","A test consistently yields similar measurements over time."],
+  ["Representativeness Heuristic","Judging category membership by resemblance to prototype, ignoring base rates."],
+  ["Standardised Test","Uniform questions, procedures, and scoring for all test-takers; normed against a sample."],
+  ["Subordinate Category","Most specific, detailed category level (e.g., Naval Orange)."],
+  ["Superordinate Category","Broadest, most general category level (e.g., Fruit)."],
+  ["Telegraphic Speech","Two-word sentences (20–26 months); ungrammatical but meaningful."],
+  ["Thinking","Using stored knowledge to accomplish a goal."],
+  ["Triarchic Theory","Sternberg's theory: intelligence = analytical + practical + creative abilities."],
+  ["Underextension","Restricting a word too narrowly to one case."],
+  ["Validity","A test measures what it was designed to measure."],
+  ["Well-Structured Problems","Problems with a clear pathway to solution; use algorithm or heuristic."],
+  ["Whorfian / Linguistic Relativity Hypothesis","Strong form: language determines thought (not supported). Weak form: language influences thought (supported)."],
+];
+
+const grid = document.getElementById('glossaryGrid');
+glossaryTerms.sort((a,b)=>a[0].localeCompare(b[0])).forEach(([term, def]) => {
+  const card = document.createElement('div');
+  card.className = 'term-card';
+  card.dataset.term = term.toLowerCase();
+  card.innerHTML = `<div class="term-name">${term}</div><div class="term-def">${def}</div>`;
+  grid.appendChild(card);
+});
+
+// ── TOGGLE SECTIONS ──
+function toggleSection(header) {
+  header.classList.toggle('open');
+  const body = header.nextElementSibling;
+  body.classList.toggle('open');
+  updateProgress();
+}
+
+// ── FILTER ──
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('.section').forEach(sec => {
+      const tags = sec.dataset.tags || '';
+      sec.style.display = (filter === 'all' || tags.includes(filter)) ? '' : 'none';
+    });
+  });
+});
+
+// ── SEARCH ──
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('input', () => {
+  const q = searchInput.value.toLowerCase().trim();
+  let anyVisible = false;
+  document.querySelectorAll('.section').forEach(sec => {
+    const text = sec.innerText.toLowerCase();
+    const visible = !q || text.includes(q);
+    sec.style.display = visible ? '' : 'none';
+    if (visible) anyVisible = true;
+  });
+  document.getElementById('noResults').style.display = (q && !anyVisible) ? 'block' : 'none';
+  // reset filter buttons
+  if (q) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector('[data-filter="all"]').classList.add('active');
+  }
+});
+
+// ── PROGRESS ──
+function updateProgress() {
+  const openSections = document.querySelectorAll('.section-body.open').length;
+  const totalSections = document.querySelectorAll('.section-body').length;
+  document.getElementById('progressLabel').textContent = `${openSections} / ${totalSections} sections open`;
+  document.getElementById('barFill').style.width = (openSections / totalSections * 100) + '%';
+}
+
+// scroll percentage
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = docHeight > 0 ? Math.round(scrollTop / docHeight * 100) : 0;
+  document.getElementById('scrollPct').textContent = pct + '%';
+});
+
+updateProgress();
+</script>
+</body>
+</html>
