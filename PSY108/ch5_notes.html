@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 5 — Motivation & Emotion</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0e17;
+    --surface: #1a1828;
+    --surface2: #221f35;
+    --border: #2e2a45;
+    --accent1: #e8c547;
+    --accent2: #ff6b6b;
+    --accent3: #6bceff;
+    --accent4: #a8e6cf;
+    --accent5: #d4a5ff;
+    --text: #e8e6f0;
+    --text-muted: #8b87a8;
+    --text-dim: #5a5675;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* Subtle grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ─── HEADER ─── */
+  header {
+    position: relative;
+    padding: 60px 40px 40px;
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+    background: linear-gradient(135deg, #1a1828 0%, #0f0e17 60%);
+  }
+
+  header::after {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(232,197,71,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .chapter-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent1);
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--accent1);
+  }
+
+  .subtitle {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 10px;
+    font-style: italic;
+  }
+
+  /* ─── NAV PILLS ─── */
+  .nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(15,14,23,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 40px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .nav-pill {
+    font-size: 11.5px;
+    font-weight: 500;
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    background: none;
+    font-family: 'DM Sans', sans-serif;
+    white-space: nowrap;
+  }
+  .nav-pill:hover, .nav-pill.active {
+    border-color: var(--accent1);
+    color: var(--accent1);
+    background: rgba(232,197,71,0.07);
+  }
+
+  /* ─── LAYOUT ─── */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px 80px;
+  }
+
+  /* ─── SECTIONS ─── */
+  .section {
+    margin-top: 60px;
+    animation: fadeUp 0.4s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent1);
+    letter-spacing: 2px;
+    flex-shrink: 0;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--accent3);
+    margin: 28px 0 12px;
+  }
+
+  /* ─── CARDS ─── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    margin: 20px 0;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .card:hover {
+    border-color: var(--accent5);
+    transform: translateY(-2px);
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 12px 12px 0 0;
+  }
+  .card.yellow::before { background: var(--accent1); }
+  .card.red::before    { background: var(--accent2); }
+  .card.blue::before   { background: var(--accent3); }
+  .card.green::before  { background: var(--accent4); }
+  .card.purple::before { background: var(--accent5); }
+
+  .card-title {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+  .card-body {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+
+  /* ─── DEFINITION BOX ─── */
+  .def-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent1);
+    border-radius: 0 10px 10px 0;
+    padding: 16px 20px;
+    margin: 16px 0;
+  }
+  .def-box .term {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--accent1);
+    margin-bottom: 4px;
+  }
+  .def-box .definition {
+    font-size: 13.5px;
+    color: var(--text-muted);
+  }
+
+  /* ─── CALLOUT / HIGHLIGHT ─── */
+  .callout {
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 20px 0;
+    font-size: 13.5px;
+    line-height: 1.65;
+  }
+  .callout.info   { background: rgba(107,206,255,0.08); border: 1px solid rgba(107,206,255,0.2); color: #b0dff5; }
+  .callout.warn   { background: rgba(255,107,107,0.08); border: 1px solid rgba(255,107,107,0.2); color: #f5b0b0; }
+  .callout.tip    { background: rgba(168,230,207,0.08); border: 1px solid rgba(168,230,207,0.2); color: #b0f5d4; }
+  .callout.note   { background: rgba(212,165,255,0.08); border: 1px solid rgba(212,165,255,0.2); color: #d8b0f5; }
+  .callout-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.7;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  /* ─── THEORY COMPARISON TABLE ─── */
+  .theory-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 13.5px;
+  }
+  .theory-table th {
+    background: var(--surface2);
+    color: var(--accent1);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .theory-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-muted);
+    vertical-align: top;
+  }
+  .theory-table tr:last-child td { border-bottom: none; }
+  .theory-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .theory-table .th-name { color: var(--text); font-weight: 500; }
+
+  /* ─── PYRAMID ─── */
+  .pyramid-wrapper {
+    margin: 24px 0;
+  }
+
+  /* ─── ACCORDION ─── */
+  .accordion {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 16px 0;
+  }
+  .accordion-item {
+    border-bottom: 1px solid var(--border);
+  }
+  .accordion-item:last-child { border-bottom: none; }
+  .accordion-btn {
+    width: 100%;
+    background: var(--surface);
+    border: none;
+    padding: 15px 20px;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+  .accordion-btn:hover { background: var(--surface2); }
+  .accordion-btn .chevron {
+    font-size: 10px;
+    color: var(--text-dim);
+    transition: transform 0.3s;
+  }
+  .accordion-btn.open .chevron { transform: rotate(180deg); }
+  .accordion-body {
+    display: none;
+    padding: 16px 20px;
+    background: var(--bg);
+    font-size: 13.5px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+  .accordion-body.open { display: block; }
+
+  /* ─── KEY TERMS GRID ─── */
+  .terms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 10px;
+    margin: 20px 0;
+  }
+  .term-chip {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .term-chip:hover {
+    border-color: var(--accent5);
+    background: rgba(212,165,255,0.07);
+  }
+  .term-chip .t-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .term-chip .t-def {
+    font-size: 12px;
+    color: var(--text-muted);
+    display: none;
+    line-height: 1.55;
+  }
+  .term-chip.expanded .t-def { display: block; }
+  .term-chip.expanded { border-color: var(--accent5); background: rgba(212,165,255,0.07); }
+
+  /* ─── PROCESS FLOW ─── */
+  .flow {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    margin: 20px 0;
+    flex-wrap: wrap;
+  }
+  .flow-step {
+    flex: 1;
+    min-width: 120px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 14px 16px;
+    position: relative;
+    font-size: 13px;
+  }
+  .flow-step:first-child { border-radius: 10px 0 0 10px; }
+  .flow-step:last-child  { border-radius: 0 10px 10px 0; }
+  .flow-step::after {
+    content: '→';
+    position: absolute;
+    right: -12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent1);
+    font-size: 16px;
+    z-index: 1;
+  }
+  .flow-step:last-child::after { display: none; }
+  .flow-step .fs-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--accent1);
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  .flow-step .fs-label {
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+  .flow-step .fs-desc {
+    color: var(--text-muted);
+    font-size: 12px;
+  }
+
+  /* ─── BADGE ─── */
+  .badge {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    vertical-align: middle;
+  }
+  .badge.bio { background: rgba(107,206,255,0.15); color: var(--accent3); }
+  .badge.psy { background: rgba(212,165,255,0.15); color: var(--accent5); }
+  .badge.soc { background: rgba(168,230,207,0.15); color: var(--accent4); }
+
+  /* ─── PROGRESS BAR ─── */
+  .reading-progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px;
+    background: var(--accent1);
+    z-index: 9999;
+    width: 0%;
+    transition: width 0.1s;
+  }
+
+  /* ─── SECTION VISIBILITY ─── */
+  .section { display: block; }
+  .section.hidden { display: none; }
+
+  p { margin-bottom: 12px; color: var(--text-muted); font-size: 13.5px; }
+  ul, ol { padding-left: 20px; margin-bottom: 12px; }
+  li { color: var(--text-muted); font-size: 13.5px; margin-bottom: 5px; }
+  strong { color: var(--text); font-weight: 600; }
+
+  .highlight { color: var(--accent1); font-weight: 600; }
+  .highlight-blue { color: var(--accent3); font-weight: 600; }
+  .highlight-green { color: var(--accent4); font-weight: 600; }
+  .highlight-red { color: var(--accent2); }
+  .highlight-purple { color: var(--accent5); }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    header, .nav-bar, .container { padding-left: 20px; padding-right: 20px; }
+    .flow { flex-direction: column; }
+    .flow-step { border-radius: 0 !important; }
+    .flow-step:first-child { border-radius: 10px 10px 0 0 !important; }
+    .flow-step:last-child  { border-radius: 0 0 10px 10px !important; }
+    .flow-step::after { content: '↓'; right: 50%; top: auto; bottom: -14px; transform: translateX(50%); }
+  }
+</style>
+</head>
+<body>
+
+<div class="reading-progress" id="progress"></div>
+
+<header>
+  <div class="chapter-label">Chapter 5 · Pastorino & Doyle-Portillo</div>
+  <h1>Motivation <em>&</em> Emotion</h1>
+  <div class="subtitle">What Is Psychology? Foundations, Applications and Integration</div>
+</header>
+
+<nav class="nav-bar" id="navbar">
+  <button class="nav-pill active" onclick="showSection('all')">Overview</button>
+  <button class="nav-pill" onclick="showSection('s51')">5.1 Motivation Theories</button>
+  <button class="nav-pill" onclick="showSection('s52')">5.2 Hunger & Eating</button>
+  <button class="nav-pill" onclick="showSection('s53')">5.3 Sexual Motivation</button>
+  <button class="nav-pill" onclick="showSection('s54')">5.4 Emotion Theories</button>
+  <button class="nav-pill" onclick="showSection('sterms')">Key Terms</button>
+</nav>
+
+<div class="container">
+
+  <!-- ══════════ OVERVIEW ══════════ -->
+  <div class="section" id="s-overview">
+    <div class="section-header">
+      <span class="section-num">OVERVIEW</span>
+      <h2>Chapter at a Glance</h2>
+    </div>
+
+    <div class="callout info">
+      <span class="callout-label">Core Idea</span>
+      Motivation directs and energises behaviour; emotion signals our reactions to experiences. Both are shaped by biology, cognition, culture, and learning.
+    </div>
+
+    <div class="card-grid">
+      <div class="card yellow">
+        <div class="card-title">5.1 Theories of Motivation</div>
+        <div class="card-body">Instinct → Drive Reduction → Arousal → Self-Determination → Maslow's Hierarchy</div>
+      </div>
+      <div class="card blue">
+        <div class="card-title">5.2 Hunger & Eating</div>
+        <div class="card-body">Homeostasis, ghrelin, leptin, hypothalamus, obesity, eating disorders</div>
+      </div>
+      <div class="card green">
+        <div class="card-title">5.3 Sexual Motivation</div>
+        <div class="card-body">Hormones, sexual response cycle, orientation and its biological roots</div>
+      </div>
+      <div class="card purple">
+        <div class="card-title">5.4 Theories of Emotion</div>
+        <div class="card-body">James-Lange → Cannon-Bard → Two-Factor → Cognitive-Mediational</div>
+      </div>
+    </div>
+
+    <div class="def-box">
+      <div class="term">Motive</div>
+      <div class="definition">The tendency to desire and seek out positive incentives or rewards and to avoid negative outcomes (Atkinson, 1958/1983; McClelland, 1987).</div>
+    </div>
+    <div class="def-box">
+      <div class="term">Emotion</div>
+      <div class="definition">A complex reaction to some internal or external event involving physiological reactions, behavioural reactions, facial expressions, cognition, and affective responses (Lazarus, 1991).</div>
+    </div>
+  </div>
+
+  <!-- ══════════ 5.1 MOTIVATION THEORIES ══════════ -->
+  <div class="section" id="s51">
+    <div class="section-header">
+      <span class="section-num">5.1</span>
+      <h2>Theories of Motivation</h2>
+    </div>
+
+    <p>No single theory explains all motivation. Each has strengths and weaknesses.</p>
+
+    <table class="theory-table">
+      <thead>
+        <tr>
+          <th>Theory</th>
+          <th>Core Claim</th>
+          <th>Key Strength</th>
+          <th>Key Weakness</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="th-name">Instinct (James, 1890)</td>
+          <td>Motives are genetically determined instincts that evolved to support survival/procreation</td>
+          <td>Explains innate behaviours</td>
+          <td>Endless list; impossible to verify; many "instincts" may be learned</td>
+        </tr>
+        <tr>
+          <td class="th-name">Drive Reduction (Hull, 1943)</td>
+          <td>Motivation stems from reducing uncomfortable internal states (drives) caused by unmet needs</td>
+          <td>Explains basic biological drives and homeostasis</td>
+          <td>Cannot explain overeating, thrill-seeking, or arousal-increasing behaviours</td>
+        </tr>
+        <tr>
+          <td class="th-name">Arousal Theory (Yerkes-Dodson, 1908)</td>
+          <td>We perform best at moderate arousal; we seek/reduce arousal to stay at our optimal level</td>
+          <td>Explains individual differences in sensation-seeking</td>
+          <td>Optimal arousal level varies by person and task complexity</td>
+        </tr>
+        <tr>
+          <td class="th-name">Self-Determination Theory (Deci & Ryan, 2008)</td>
+          <td>Humans need competence, autonomy, and relatedness; motivation can be autonomous or controlled</td>
+          <td>Distinguishes intrinsic vs extrinsic motivation</td>
+          <td>Hard to measure autonomy and relatedness precisely</td>
+        </tr>
+        <tr>
+          <td class="th-name">Maslow's Hierarchy (1970)</td>
+          <td>Needs form a pyramid; lower needs must be met before higher ones motivate behaviour</td>
+          <td>Intuitive; widely applied in business</td>
+          <td>Research support is weak; people often skip levels</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Drive Reduction: Primary vs Secondary</h3>
+    <div class="card-grid">
+      <div class="card blue">
+        <div class="card-title">Primary Drives</div>
+        <div class="card-body">Biological needs: hunger, thirst, warmth. Regulated by negative feedback loops maintaining <strong>homeostasis</strong>.</div>
+      </div>
+      <div class="card purple">
+        <div class="card-title">Secondary Drives</div>
+        <div class="card-body">Learned through experience: need for achievement, affiliation, understanding (Murray, 1938). Vary across individuals.</div>
+      </div>
+    </div>
+
+    <h3>Yerkes-Dodson Curve</h3>
+    <div class="callout info">
+      <span class="callout-label">Key Principle</span>
+      <strong>Too little arousal</strong> (sleepy) → poor performance. <strong>Moderate arousal</strong> (alert, calm) → best performance. <strong>Too much arousal</strong> (test anxiety) → poor performance again. Task complexity matters: high-complexity tasks need lower arousal; simple tasks tolerate higher arousal.
+    </div>
+
+    <h3>Intrinsic vs Extrinsic Motivation</h3>
+    <div class="card-grid">
+      <div class="card green">
+        <div class="card-title">Intrinsic Motivation</div>
+        <div class="card-body">Incentives from <em>within</em> — enjoyment, pride, sense of accomplishment. Predicts academic success, less drug use, less cheating, better exercise adherence.</div>
+      </div>
+      <div class="card red">
+        <div class="card-title">Extrinsic Motivation</div>
+        <div class="card-body">Incentives from <em>outside</em> — grades, money, peer approval. Can undermine intrinsic motivation if overused.</div>
+      </div>
+    </div>
+
+    <h3>Maslow's Hierarchy of Needs</h3>
+    <div class="accordion">
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+          <span>① Physiological (Base)</span><span class="chevron">▼</span>
+        </button>
+        <div class="accordion-body">Hunger, thirst, warmth, sleep — must be satisfied first. Without these, higher needs cannot motivate behaviour.</div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+          <span>② Safety Needs</span><span class="chevron">▼</span>
+        </button>
+        <div class="accordion-body">Safe housing, physical security, stability. Activated once physiological needs are met.</div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+          <span>③ Belongingness & Love</span><span class="chevron">▼</span>
+        </button>
+        <div class="accordion-body">Motivation to be with others, to be loved and appreciated. Social belonging.</div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+          <span>④ Esteem, Cognitive & Aesthetic Needs</span><span class="chevron">▼</span>
+        </button>
+        <div class="accordion-body">Self-esteem, achievement, knowledge, beauty and order. Ladder of psychological growth.</div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+          <span>⑤ Self-Actualisation & Transcendence (Peak)</span><span class="chevron">▼</span>
+        </button>
+        <div class="accordion-body">Reaching full potential; spiritual fulfilment. Maslow believed few people reach this level.</div>
+      </div>
+    </div>
+    <div class="callout warn">
+      <span class="callout-label">Critical Evaluation</span>
+      Research support is limited. People frequently skip levels — e.g., skipping lunch to study (esteem without physiological satisfaction). The hierarchy is culturally biased toward individualist values.
+    </div>
+  </div>
+
+  <!-- ══════════ 5.2 HUNGER & EATING ══════════ -->
+  <div class="section" id="s52">
+    <div class="section-header">
+      <span class="section-num">5.2</span>
+      <h2>Hunger and Eating</h2>
+    </div>
+
+    <h3>Origins of Hunger: A Multi-Source Feedback System</h3>
+    <p>Hunger does not have a single on/off switch. It results from a <strong>complex network of signals</strong> from multiple body sources to the brain.</p>
+
+    <div class="card-grid">
+      <div class="card yellow">
+        <div class="card-title">Stomach <span class="badge bio">BIO</span></div>
+        <div class="card-body"><strong>Contractions</strong> signal emptiness. Releases <strong>ghrelin</strong> (hunger hormone). <strong>Distension</strong> signals fullness. Ghrelin drops when stomach fills with nutrients (not just volume).</div>
+      </div>
+      <div class="card blue">
+        <div class="card-title">Liver <span class="badge bio">BIO</span></div>
+        <div class="card-body">Monitors <strong>glucose</strong> (energy burned) and <strong>glycogen</strong> (energy stored). Converts excess glucose → glycogen (off signal). Converts glycogen back → glucose when reserves low (on signal).</div>
+      </div>
+      <div class="card green">
+        <div class="card-title">Endocrine System <span class="badge bio">BIO</span></div>
+        <div class="card-body"><strong>Insulin</strong> (pancreas): moves glucose into cells → blood sugar drops → hunger. <strong>CCK</strong> (small intestine): released after eating; shuts off urge to eat. <strong>Leptin</strong> (fat cells): signals fat reserves are full → reduces hunger.</div>
+      </div>
+      <div class="card purple">
+        <div class="card-title">Hypothalamus <span class="badge bio">BIO</span></div>
+        <div class="card-body"><strong>LH</strong> (lateral): "on switch" for hunger — destroyed LH → rat stops eating and dies. <strong>VMH</strong> (ventromedial): contributes to satiety — destroyed VMH → rat overeats massively.</div>
+      </div>
+    </div>
+
+    <div class="def-box">
+      <div class="term">Set Point</div>
+      <div class="definition">The weight the body naturally tries to maintain through homeostatic regulation. When weight drops below set point, hunger increases, making dieting very hard.</div>
+    </div>
+
+    <h3>Key Hormones at a Glance</h3>
+    <table class="theory-table">
+      <thead>
+        <tr><th>Hormone</th><th>Source</th><th>Effect on Hunger</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="th-name">Ghrelin</td><td>Stomach</td><td>↑ Hunger (powerful stimulant; drops after nutritive meal)</td></tr>
+        <tr><td class="th-name">Insulin</td><td>Pancreas</td><td>↑ Hunger indirectly (lowers blood glucose)</td></tr>
+        <tr><td class="th-name">CCK</td><td>Small intestine</td><td>↓ Hunger (post-meal satiety signal)</td></tr>
+        <tr><td class="th-name">Leptin</td><td>Fat cells</td><td>↓ Hunger (signals fat stores are adequate)</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Intuitive vs Non-Intuitive Eating</h3>
+    <div class="card-grid">
+      <div class="card green">
+        <div class="card-title">Intuitive Eating</div>
+        <div class="card-body">Driven by physiological hunger and satiety cues. Associated with lower BMI, healthier outcomes.</div>
+      </div>
+      <div class="card red">
+        <div class="card-title">Non-Intuitive Eating</div>
+        <div class="card-body">Driven by emotional, cultural, or situational cues unrelated to energy needs. Linked to weight gain and disordered eating.</div>
+      </div>
+    </div>
+
+    <h3>Why Dieting Fails</h3>
+    <div class="callout warn">
+      <span class="callout-label">Biological Resistance</span>
+      <ol>
+        <li>Calorie deficit triggers increased hunger (body fights starvation)</li>
+        <li><strong>Metabolic adaptation</strong>: resting metabolic rate drops to conserve fat reserves</li>
+        <li>Set point pulls weight back up once deficit ends</li>
+      </ol>
+    </div>
+    <div class="callout note">
+      <span class="callout-label">Psychological Resistance</span>
+      Dietary restraint leads to <strong>bingeing</strong>. When dieters feel they've "ruined" their diet, they overconsume ("all or nothing" thinking). Emotional distress amplifies this. Solution: permanent eating habit changes + exercise (preserves muscle mass, combats metabolic adaptation).
+    </div>
+
+    <h3>5.2.5 Eating Disorders</h3>
+    <div class="accordion">
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+          <span>Bulimia Nervosa</span><span class="chevron">▼</span>
+        </button>
+        <div class="accordion-body">
+          <strong>Definition:</strong> Alternating bouts of bingeing + compensatory behaviours (purging, fasting, excessive exercise).<br><br>
+          <strong>Profile:</strong> Typically young female, average–slightly above average weight. ~1–1.5% of young females in a 12-month period. 10× more female than male.<br><br>
+          <strong>Causes/correlates:</strong> Low self-esteem, depression, perfectionism, troubled family background. Bingeing/purging used to cope with anxiety and loss of control.<br><br>
+          <strong>Health risks:</strong> Dehydration, electrolyte imbalance, cardiac problems, oesophageal damage. 2.33× higher mortality risk vs control group.
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+          <span>Anorexia Nervosa</span><span class="chevron">▼</span>
+        </button>
+        <div class="accordion-body">
+          <strong>Definition:</strong> Self-starvation, intense fear of weight gain, distorted body image. Client must be <em>significantly below normal weight</em>.<br><br>
+          <strong>Profile:</strong> ~0.4% of females in a 12-month period; lifetime risk ≥1.42%. Predominantly middle/upper-class industrialised countries. 10× more female than male.<br><br>
+          <strong>Causes/correlates:</strong> Perfectionism, low self-esteem, depression, faulty thinking, genetic predisposition (higher concordance in identical twins). Societal pressure for extreme thinness.<br><br>
+          <strong>Health risks:</strong> 5–10% die from the disorder. BMI, alcohol use, and social adjustment affect prognosis.
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+          <span>Binge Eating Disorder (BED)</span><span class="chevron">▼</span>
+        </button>
+        <div class="accordion-body">
+          <strong>Definition:</strong> Recurrent binge eating WITHOUT compensatory behaviours (no purging/fasting). Most common eating disorder.<br><br>
+          <strong>Profile:</strong> Lifetime risk ~1.25–2.6%. 1.6% of adult females, 0.8% of adult males in 12-month period.<br><br>
+          <strong>Causes/correlates:</strong> Higher impulsivity, motivational ambivalence about food, rumination triggers bingeing, poor emotional regulation. Bingeing as maladaptive coping.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ 5.3 SEXUAL MOTIVATION ══════════ -->
+  <div class="section" id="s53">
+    <div class="section-header">
+      <span class="section-num">5.3</span>
+      <h2>Sexual Motivation</h2>
+    </div>
+
+    <div class="def-box">
+      <div class="term">Sexual Desire</div>
+      <div class="definition">Motivation and interest in engaging in sexual activity; the first step toward sexual arousal. Influenced by biology, learning, and culture.</div>
+    </div>
+
+    <h3>Biological Factors</h3>
+    <div class="card-grid">
+      <div class="card yellow">
+        <div class="card-title">Testosterone</div>
+        <div class="card-body">Key hormone regulating libido in <em>both sexes</em>. Produced by testes (male) and adrenal glands (female). Low levels → disinterest in sex.</div>
+      </div>
+      <div class="card blue">
+        <div class="card-title">Estrogen</div>
+        <div class="card-body">Regulates female estrus in most mammals. In humans, estrogen is <strong>not closely tied to libido</strong> — women can desire sex at any point in the cycle.</div>
+      </div>
+      <div class="card green">
+        <div class="card-title">Oxytocin & Dopamine</div>
+        <div class="card-body"><strong>Oxytocin:</strong> released during sex; promotes feelings of closeness. <strong>Dopamine:</strong> pleasure/reward neurotransmitter; influences desire.</div>
+      </div>
+    </div>
+
+    <div class="callout info">
+      <span class="callout-label">Important Note</span>
+      Sexual desire is <strong>not merely chemical</strong>. Senses (visual cues, smell, touch, erogenous zones), personal thoughts, and cultural expectations all shape desire. Visual stimulation tends to have greater effect on men; olfactory cues are meaningful for both sexes.
+    </div>
+
+    <h3>Sexual Response Cycle (Masters & Johnson, 1966)</h3>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="fs-num">01</div>
+        <div class="fs-label">Excitement</div>
+        <div class="fs-desc">↑ heart rate & BP. Genital engorgement, vaginal lubrication, penile erection.</div>
+      </div>
+      <div class="flow-step">
+        <div class="fs-num">02</div>
+        <div class="fs-label">Plateau</div>
+        <div class="fs-desc">Arousal peaks & steadies. Rapid breathing. Full erection/vaginal expansion.</div>
+      </div>
+      <div class="flow-step">
+        <div class="fs-num">03</div>
+        <div class="fs-label">Orgasm</div>
+        <div class="fs-desc">Peak BP/HR. Pelvic contractions. Ejaculation in males. Subjective experience similar in both sexes.</div>
+      </div>
+      <div class="flow-step">
+        <div class="fs-num">04</div>
+        <div class="fs-label">Resolution</div>
+        <div class="fs-desc">Body returns to baseline. Males: <strong>refractory period</strong>. Females: can be re-aroused immediately.</div>
+      </div>
+    </div>
+    <div class="callout tip">
+      <span class="callout-label">Gender Difference</span>
+      The <strong>refractory period</strong> (inability to re-orgasm) is unique to males and increases with age. Females lack this, enabling multiple orgasms.
+    </div>
+
+    <h3>Sexual Orientation</h3>
+    <div class="def-box">
+      <div class="term">Sexual Orientation</div>
+      <div class="definition">One's sexual attraction for members of the same and/or other sex. Exists on a <strong>continuum</strong> (Kinsey scale), not discrete categories. Can change over time, especially in women.</div>
+    </div>
+    <div class="callout note">
+      <span class="callout-label">Causes of Sexual Orientation</span>
+      <strong>Genetics:</strong> Higher concordance in identical vs fraternal twins. <strong>Prenatal factors:</strong> Fraternal birth order effect; maternal immune hypothesis; left-handedness link. <strong>Gender-nonconforming childhood behaviour</strong> correlates with homosexuality (but not deterministically). Sexual orientation likely results from interaction of biological, psychological, and environmental factors.
+    </div>
+  </div>
+
+  <!-- ══════════ 5.4 EMOTION THEORIES ══════════ -->
+  <div class="section" id="s54">
+    <div class="section-header">
+      <span class="section-num">5.4</span>
+      <h2>Theories and Expression of Emotion</h2>
+    </div>
+
+    <div class="callout info">
+      <span class="callout-label">Components of Emotion</span>
+      Physiological reactions · Behavioural reactions · Facial expressions · Cognition · Affective (subjective feeling) responses
+    </div>
+
+    <h3>Theory Comparison</h3>
+    <table class="theory-table">
+      <thead>
+        <tr><th>Theory</th><th>Sequence</th><th>Core Claim</th><th>Key Critique</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="th-name">James-Lange (1884)</td>
+          <td>Stimulus → Physiological response → Emotion</td>
+          <td>Emotion <em>is</em> the pattern of physiological arousal</td>
+          <td>Different emotions have very similar physiological profiles (Cannon); arousal sometimes follows emotion awareness</td>
+        </tr>
+        <tr>
+          <td class="th-name">Cannon-Bard</td>
+          <td>Stimulus → Brain → Emotion & Physiology simultaneously</td>
+          <td>Emotion originates in the brain, not the body; physiological responses can precede or follow emotional awareness</td>
+          <td>Doesn't fully account for body-emotion interaction shown in later research</td>
+        </tr>
+        <tr>
+          <td class="th-name">Facial Feedback Hypothesis (McIntosh, 1996)</td>
+          <td>Facial expression → Brain feedback → Emotion modified</td>
+          <td>Smiling makes you happier; frowning makes you feel worse — via blood flow affecting brain temperature</td>
+          <td>Effect sizes are debated; meta-analysis (138 studies) supports modest effect</td>
+        </tr>
+        <tr>
+          <td class="th-name">Two-Factor / Schachter-Singer (1962)</td>
+          <td>Stimulus → Undifferentiated arousal → Cognitive label → Emotion</td>
+          <td>Emotion = arousal + cognitive interpretation of context</td>
+          <td>Subsequent research found little support; people still feel emotion when arousal is pharmacologically blocked</td>
+        </tr>
+        <tr>
+          <td class="th-name">Cognitive-Mediational / Lazarus (1995)</td>
+          <td>Stimulus → Cognitive appraisal → Emotion</td>
+          <td>Our <em>appraisal</em> of a situation determines which emotion we feel. Reappraisal can regulate emotion.</td>
+          <td>Zajonc's mere exposure effect shows emotion without cognition is possible</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Facial Feedback — Key Points</h3>
+    <div class="card-grid">
+      <div class="card yellow">
+        <div class="card-title">Mechanism</div>
+        <div class="card-body">Facial muscle configuration → changes blood flow → alters brain temperature → affects neurotransmitter release → influences mood.</div>
+      </div>
+      <div class="card green">
+        <div class="card-title">Evidence</div>
+        <div class="card-body">Smiling while smelling → rates smells more positively. Frowning in sun → increased aggression. Meta-analysis of 138 studies supports the effect.</div>
+      </div>
+    </div>
+
+    <h3>Schachter-Singer Classic Study</h3>
+    <div class="callout tip">
+      <span class="callout-label">Epinephrine Experiment (1962)</span>
+      Participants injected with epinephrine (stimulant). <strong>Informed</strong> group: knew the cause of arousal → mood not influenced by confederate. <strong>Uninformed</strong> group: no explanation for arousal → used context to label emotion → matched confederate's mood (angry or happy). Supports that cognitive labelling of unexplained arousal shapes emotional experience.
+    </div>
+
+    <h3>Lazarus — Cognitive-Mediational Theory</h3>
+    <div class="callout note">
+      <span class="callout-label">Practical Application</span>
+      Same event → different appraisals → different emotions. Reappraisal (seeing an event as a challenge rather than a threat) is a key emotion regulation strategy. Both males and females can successfully regulate emotions through reappraisal, though brain regions engaged differ (McRae et al., 2008).
+    </div>
+
+    <h3>Zajonc — Mere Exposure Effect</h3>
+    <div class="def-box">
+      <div class="term">Mere Exposure Effect</div>
+      <div class="definition">We tend to prefer stimuli we have encountered more frequently — even without knowing what they are. Suggests emotion can occur independently of conscious cognition.</div>
+    </div>
+
+    <h3>Culture and Emotional Expression</h3>
+    <div class="card-grid">
+      <div class="card blue">
+        <div class="card-title">Universal Aspects</div>
+        <div class="card-body">Ekman (1973): basic emotions (happiness, sadness, anger, fear, disgust, surprise) recognisable across cultures. Happiness easiest to identify; fear/anger most confused.</div>
+      </div>
+      <div class="card red">
+        <div class="card-title">Cultural Display Rules</div>
+        <div class="card-body">Each culture has norms about when/how to express emotions. E.g., displaying fear in a US business meeting is inappropriate. Arab culture requires anger response to insult. People may regulate appraisals to avoid violating display rules.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ KEY TERMS ══════════ -->
+  <div class="section" id="sterms">
+    <div class="section-header">
+      <span class="section-num">TERMS</span>
+      <h2>Key Terms</h2>
+    </div>
+    <p style="font-size:13px; margin-bottom:16px; color:var(--text-dim)">Click any term to reveal its definition.</p>
+    <div class="terms-grid" id="terms-grid"></div>
+  </div>
+
+</div><!-- /container -->
+
+<script>
+// ── READING PROGRESS ──
+window.addEventListener('scroll', () => {
+  const el = document.getElementById('progress');
+  const doc = document.documentElement;
+  const pct = (doc.scrollTop / (doc.scrollHeight - doc.clientHeight)) * 100;
+  el.style.width = pct + '%';
+});
+
+// ── ACCORDION ──
+function toggleAccordion(btn) {
+  btn.classList.toggle('open');
+  const body = btn.nextElementSibling;
+  body.classList.toggle('open');
+}
+
+// ── SECTION FILTER ──
+const sectionMap = {
+  's51': ['s51'],
+  's52': ['s52'],
+  's53': ['s53'],
+  's54': ['s54'],
+  'sterms': ['sterms'],
+  'all': ['s-overview','s51','s52','s53','s54','sterms']
+};
+
+function showSection(key) {
+  document.querySelectorAll('.nav-pill').forEach(p => p.classList.remove('active'));
+  event.target.classList.add('active');
+
+  const show = sectionMap[key] || sectionMap['all'];
+  document.querySelectorAll('.section').forEach(s => {
+    s.classList.toggle('hidden', !show.includes(s.id));
+  });
+}
+
+// ── TERMS DATA ──
+const terms = [
+  { name: "Motive", def: "Tendency to desire and seek positive incentives and avoid negative outcomes." },
+  { name: "Drive", def: "An uncomfortable internal state resulting from unmet needs, motivating action to restore homeostasis." },
+  { name: "Homeostasis", def: "The body's maintenance of a balanced internal state (e.g., temperature, blood sugar)." },
+  { name: "Negative Feedback Loop", def: "An information system that monitors and adjusts a bodily process up or down to maintain homeostasis." },
+  { name: "Primary Drives", def: "Biologically based drives (hunger, thirst, warmth) that maintain homeostasis." },
+  { name: "Secondary Drives", def: "Learned drives not tied directly to biological needs (e.g., need for achievement, affiliation)." },
+  { name: "Hierarchy of Needs", def: "Maslow's model of motivation arranged in priority order from physiological (base) to transcendence (peak)." },
+  { name: "Intrinsic Motivation", def: "Motivation driven by internal rewards such as enjoyment and pride." },
+  { name: "Extrinsic Motivation", def: "Motivation driven by external rewards such as money, grades, or approval." },
+  { name: "Self-Determination Theory", def: "Humans need competence, autonomy, and relatedness; motivation ranges from autonomous to controlled." },
+  { name: "Incentives", def: "Goals or desires — either intrinsic or extrinsic — that direct and energise behaviour." },
+  { name: "Set Point", def: "The weight the body attempts to maintain through homeostatic regulation." },
+  { name: "Ghrelin", def: "Hunger-stimulating hormone released by the stomach; drops after nutritive meals." },
+  { name: "Glucose", def: "Form of sugar the body burns for energy." },
+  { name: "Glycogen", def: "Stored form of starch; converted to/from glucose based on energy needs." },
+  { name: "Insulin", def: "Pancreatic hormone that moves glucose into cells, indirectly increasing hunger when blood sugar drops." },
+  { name: "Cholecystokinin (CCK)", def: "Hormone from the small intestine that signals satiety and shuts off eating." },
+  { name: "Leptin", def: "Hormone from fat cells signalling fat reserve levels; high leptin may reduce hunger." },
+  { name: "Lateral Hypothalamus (LH)", def: "Brain region acting as an 'on switch' for hunger; destruction stops eating." },
+  { name: "Ventromedial Hypothalamus (VMH)", def: "Brain region involved in satiety; destruction leads to hyperphagia and obesity." },
+  { name: "Neuropeptide Y", def: "Powerful hunger stimulant; strongest effect outside the LH." },
+  { name: "Bulimia Nervosa", def: "Eating disorder: binge eating + compensatory behaviours (purging, fasting, excessive exercise)." },
+  { name: "Anorexia Nervosa", def: "Eating disorder: self-starvation, intense fear of weight gain, distorted body image; significantly below normal weight." },
+  { name: "Binge Eating Disorder", def: "Recurrent bingeing WITHOUT compensatory behaviours; most common eating disorder." },
+  { name: "Resting Metabolic Rate", def: "The rate at which the body burns energy at rest; varies between individuals." },
+  { name: "Sexual Desire", def: "Motivation and interest in engaging in sexual activity; first step toward arousal." },
+  { name: "Libido", def: "Physical desire for sex; regulated by hypothalamus, testosterone, and other hormones." },
+  { name: "Estrogens", def: "Female sex hormones; regulate estrus in animals; less closely tied to libido in humans." },
+  { name: "Testosterone", def: "Key hormone for libido in both sexes; produced by testes (male) and adrenal glands (female)." },
+  { name: "Estrus", def: "Period of heightened sexual receptivity in female mammals, coinciding with ovulation." },
+  { name: "Refractory Period", def: "Post-orgasm period in males during which re-arousal is physically impossible; increases with age." },
+  { name: "Sexual Orientation", def: "One's pattern of sexual attraction — exists on a continuum from exclusively heterosexual to exclusively homosexual." },
+  { name: "Homophobia", def: "Prejudice against homosexuals." },
+  { name: "Emotion", def: "Complex reaction involving physiological, behavioural, cognitive, facial, and affective components." },
+  { name: "James-Lange Theory", def: "Emotion equals the pattern of physiological arousal experienced in response to a stimulus." },
+  { name: "Cannon-Bard Theory", def: "Emotion originates in the brain; physiological response and subjective experience occur simultaneously." },
+  { name: "Facial Feedback Hypothesis", def: "Feedback from facial muscles influences emotional experience (smiling → happier; frowning → worse mood)." },
+  { name: "Two-Factor Theory", def: "Schachter & Singer: emotion = undifferentiated arousal + cognitive label based on context." },
+  { name: "Cognitive-Mediational Theory", def: "Lazarus: initial cognitive appraisal of a situation determines which emotion is felt." },
+  { name: "Mere Exposure Effect", def: "Zajonc: preference for stimuli encountered more frequently, even without awareness — suggests emotion without cognition." },
+  { name: "Display Rules", def: "Cultural norms governing when and how it is appropriate to express certain emotions." },
+  { name: "Affective Component", def: "The subjective 'feeling' quality of an emotion that fills consciousness during emotional experience." },
+  { name: "Erogenous Zones", def: "Body areas particularly sensitive to sexual touch (genitals, breasts, inner thighs, etc.)." },
+  { name: "Basic Emotions", def: "Emotions (happiness, sadness, fear, anger, disgust, surprise) argued to be universally recognised across cultures." },
+];
+
+const grid = document.getElementById('terms-grid');
+terms.forEach(t => {
+  const div = document.createElement('div');
+  div.className = 'term-chip';
+  div.innerHTML = `<div class="t-name">${t.name}</div><div class="t-def">${t.def}</div>`;
+  div.onclick = () => div.classList.toggle('expanded');
+  grid.appendChild(div);
+});
+</script>
+</body>
+</html>
