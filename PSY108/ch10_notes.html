@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 10 — Social Psychology | Reference Notes</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #171b26;
+    --card: #1e2335;
+    --border: #2a3050;
+    --accent1: #6c8eff;
+    --accent2: #ff7eb3;
+    --accent3: #56d9b0;
+    --accent4: #ffb347;
+    --accent5: #c084fc;
+    --text: #e8eaf6;
+    --muted: #8892b0;
+    --highlight: #2a3560;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 300;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #0d1024 0%, #151d3b 50%, #0f1117 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 60px 40px 50px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 360px; height: 360px;
+    background: radial-gradient(circle, rgba(108,142,255,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: 40%;
+    width: 280px; height: 280px;
+    background: radial-gradient(circle, rgba(86,217,176,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    color: var(--accent3);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    opacity: 0.85;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 10px;
+    color: #fff;
+  }
+  .hero h1 span { color: var(--accent1); }
+  .hero-sub {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin-top: 10px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 24px;
+    margin-top: 28px;
+    flex-wrap: wrap;
+  }
+  .hero-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    padding: 5px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+  }
+  .badge-blue  { background: rgba(108,142,255,0.15); color: var(--accent1); border: 1px solid rgba(108,142,255,0.3); }
+  .badge-pink  { background: rgba(255,126,179,0.12); color: var(--accent2); border: 1px solid rgba(255,126,179,0.28); }
+  .badge-teal  { background: rgba(86,217,176,0.12);  color: var(--accent3); border: 1px solid rgba(86,217,176,0.28); }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 960px; margin: 0 auto; padding: 40px 24px 80px; }
+
+  /* ── TOC ── */
+  .toc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-bottom: 48px;
+    position: relative;
+  }
+  .toc::before {
+    content: 'TABLE OF CONTENTS';
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--accent1);
+    display: block;
+    margin-bottom: 16px;
+  }
+  .toc ol {
+    list-style: none;
+    counter-reset: toc-counter;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 32px;
+  }
+  @media (max-width: 600px) { .toc ol { grid-template-columns: 1fr; } }
+  .toc li { counter-increment: toc-counter; }
+  .toc a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+  .toc a::before {
+    content: counter(toc-counter, decimal-leading-zero);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--accent1);
+    opacity: 0.6;
+    min-width: 22px;
+  }
+  .toc a:hover { color: var(--text); }
+
+  /* ── SECTION ── */
+  .section {
+    margin-bottom: 52px;
+    animation: fadeUp 0.4s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 22px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent1);
+    background: rgba(108,142,255,0.1);
+    border: 1px solid rgba(108,142,255,0.25);
+    padding: 3px 9px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  /* ── CARDS ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .card:hover { border-color: var(--accent1); transform: translateY(-2px); }
+  .card-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .card p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+  .card strong { color: var(--text); font-weight: 600; }
+
+  .c-blue   { border-top: 3px solid var(--accent1); } .c-blue   .card-title { color: var(--accent1); }
+  .c-pink   { border-top: 3px solid var(--accent2); } .c-pink   .card-title { color: var(--accent2); }
+  .c-teal   { border-top: 3px solid var(--accent3); } .c-teal   .card-title { color: var(--accent3); }
+  .c-amber  { border-top: 3px solid var(--accent4); } .c-amber  .card-title { color: var(--accent4); }
+  .c-purple { border-top: 3px solid var(--accent5); } .c-purple .card-title { color: var(--accent5); }
+
+  /* ── KEY CONCEPT ── */
+  .concept {
+    background: var(--card);
+    border-left: 4px solid var(--accent1);
+    border-radius: 0 10px 10px 0;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    font-size: 0.92rem;
+  }
+  .concept .term {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--accent1);
+    font-weight: 500;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .concept.pink   { border-left-color: var(--accent2); } .concept.pink   .term { color: var(--accent2); }
+  .concept.teal   { border-left-color: var(--accent3); } .concept.teal   .term { color: var(--accent3); }
+  .concept.amber  { border-left-color: var(--accent4); } .concept.amber  .term { color: var(--accent4); }
+  .concept.purple { border-left-color: var(--accent5); } .concept.purple .term { color: var(--accent5); }
+
+  /* ── CALLOUT ── */
+  .callout {
+    background: rgba(108,142,255,0.07);
+    border: 1px solid rgba(108,142,255,0.2);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin: 18px 0;
+    font-size: 0.9rem;
+  }
+  .callout-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--accent1);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+  .callout.pink   { background: rgba(255,126,179,0.06); border-color: rgba(255,126,179,0.2); }
+  .callout.pink   .callout-label { color: var(--accent2); }
+  .callout.teal   { background: rgba(86,217,176,0.06);  border-color: rgba(86,217,176,0.2);  }
+  .callout.teal   .callout-label { color: var(--accent3); }
+  .callout.amber  { background: rgba(255,179,71,0.06);  border-color: rgba(255,179,71,0.2);  }
+  .callout.amber  .callout-label { color: var(--accent4); }
+
+  /* ── LIST ── */
+  ul.notes { padding-left: 0; list-style: none; }
+  ul.notes li {
+    padding: 7px 0 7px 20px;
+    position: relative;
+    font-size: 0.9rem;
+    color: var(--muted);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  ul.notes li::before {
+    content: '▸';
+    position: absolute; left: 0;
+    color: var(--accent1);
+    font-size: 0.75rem;
+    top: 9px;
+  }
+  ul.notes li strong { color: var(--text); }
+
+  /* ── STUDY STUDY TABLE ── */
+  .study-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.87rem;
+    margin: 16px 0;
+  }
+  .study-table th {
+    background: var(--highlight);
+    color: var(--accent1);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .study-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    color: var(--muted);
+    vertical-align: top;
+  }
+  .study-table td:first-child { color: var(--text); font-weight: 600; font-size: 0.82rem; }
+  .study-table tr:hover td { background: rgba(108,142,255,0.04); }
+
+  /* ── KEY TERMS ── */
+  .terms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 8px;
+    margin-top: 16px;
+  }
+  .term-pill {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 0.82rem;
+    color: var(--muted);
+    transition: all 0.2s;
+    cursor: default;
+  }
+  .term-pill:hover {
+    border-color: var(--accent1);
+    color: var(--text);
+    background: var(--highlight);
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 40px 0;
+  }
+
+  /* ── SCROLL TO TOP ── */
+  .back-top {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 48px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    text-decoration: none;
+    font-family: 'JetBrains Mono', monospace;
+    transition: color 0.2s;
+  }
+  .back-top:hover { color: var(--accent1); }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero" id="top">
+  <div class="hero-label">Pastorino &amp; Doyle-Portillo · What Is Psychology?</div>
+  <h1>Chapter 10<br><span>Social Psychology</span></h1>
+  <p class="hero-sub">Reference Notes · Foundations, Applications &amp; Integration</p>
+  <div class="hero-meta">
+    <span class="hero-badge badge-blue">8 Major Sections</span>
+    <span class="hero-badge badge-pink">Key Studies &amp; Experiments</span>
+    <span class="hero-badge badge-teal">50+ Key Terms</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- TOC -->
+  <nav class="toc">
+    <ol>
+      <li><a href="#s1">10.1 Attitudes</a></li>
+      <li><a href="#s2">10.2 Impression Formation &amp; Attribution</a></li>
+      <li><a href="#s3">10.3 Prejudice &amp; Stereotypes</a></li>
+      <li><a href="#s4">10.4 Attraction</a></li>
+      <li><a href="#s5">10.5 Group Influence</a></li>
+      <li><a href="#s6">10.6 Compliance &amp; Obedience</a></li>
+      <li><a href="#s7">10.7 Aggression</a></li>
+      <li><a href="#s8">10.8 Prosocial Behaviour</a></li>
+    </ol>
+  </nav>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- 10.1 ATTITUDES -->
+  <!-- ══════════════════════════════════════════ -->
+  <section class="section" id="s1">
+    <div class="section-header">
+      <span class="section-num">10.1</span>
+      <h2>Evaluating the World: Attitudes</h2>
+    </div>
+
+    <div class="concept">
+      <div class="term">Definition</div>
+      <strong>Social Psychology</strong> — the study of how we think and behave in social situations.<br>
+      <strong>Attitudes</strong> — evaluative beliefs we hold about people, places, and things (our liking or disliking).
+    </div>
+
+    <h3 style="color:var(--accent1);font-family:'JetBrains Mono',monospace;font-size:0.8rem;letter-spacing:0.1em;margin:20px 0 10px;text-transform:uppercase;">How Attitudes Are Acquired (Learning Theory)</h3>
+    <div class="card-grid">
+      <div class="card c-blue">
+        <div class="card-title">Classical Conditioning</div>
+        <p>Emotional/physiological responses attached to stimuli shape attitudes. E.g., a child's face paired with a smiley emoji → more positive feelings toward that child.</p>
+      </div>
+      <div class="card c-pink">
+        <div class="card-title">Operant Conditioning</div>
+        <p>Rewarded attitudes strengthen; punished attitudes weaken. E.g., friends applauding pro-green behaviour → stronger eco attitude.</p>
+      </div>
+      <div class="card c-teal">
+        <div class="card-title">Observational Learning</div>
+        <p>We model attitudes of those around us. Research shows our attitudes closely resemble our parents' and peers' attitudes.</p>
+      </div>
+    </div>
+
+    <h3 style="color:var(--accent1);font-family:'JetBrains Mono',monospace;font-size:0.8rem;letter-spacing:0.1em;margin:20px 0 10px;text-transform:uppercase;">Attitude–Behaviour Consistency</h3>
+    <ul class="notes">
+      <li>We often behave inconsistently with our attitudes, especially under social pressure.</li>
+      <li>Consistency is higher when: the attitude is strong &amp; accessible, behaviour is specific to the attitude, and social pressure is low.</li>
+    </ul>
+
+    <h3 style="color:var(--accent1);font-family:'JetBrains Mono',monospace;font-size:0.8rem;letter-spacing:0.1em;margin:20px 0 10px;text-transform:uppercase;">Attitude Change</h3>
+    <div class="concept">
+      <div class="term">Cognitive Consistency</div>
+      We are motivated to avoid contradictions in our attitudes and between attitudes and behaviour.
+    </div>
+    <div class="concept pink">
+      <div class="term">Cognitive Dissonance Theory (Festinger, 1957)</div>
+      Inconsistency among attitudes (or attitude vs. behaviour) creates an unpleasant state — <em>dissonance</em>. We reduce it by: (1) changing behaviour, (2) changing attitude, or (3) adding new beliefs.
+      <br><br><em>Applied example:</em> SBIP eating-disorder program — repeatedly criticising ultra-thin ideals created dissonance → women reduced endorsement of those ideals.
+    </div>
+
+    <h3 style="color:var(--accent1);font-family:'JetBrains Mono',monospace;font-size:0.8rem;letter-spacing:0.1em;margin:20px 0 10px;text-transform:uppercase;">Persuasion &amp; Routes to Attitude Change</h3>
+    <div class="card-grid">
+      <div class="card c-blue">
+        <div class="card-title">Central Route</div>
+        <p>Careful, critical evaluation of argument logic. Leads to <strong>durable attitude change</strong>. Used when motivated &amp; cognitively able.</p>
+      </div>
+      <div class="card c-pink">
+        <div class="card-title">Peripheral Route</div>
+        <p>Persuaded by superficial cues: communicator attractiveness, ad aesthetics, ease of navigation. Used when uninvolved or cognitively depleted.</p>
+      </div>
+    </div>
+
+    <table class="study-table">
+      <thead><tr><th>Variable Type</th><th>Key Factors That Increase Persuasion</th></tr></thead>
+      <tbody>
+        <tr><td>Communicator</td><td>Attractive, credible, expert, not obviously trying to persuade (unless attractive)</td></tr>
+        <tr><td>Message</td><td>Strong logic (central route); two-sided arguments that address objections; ease of peripheral cues</td></tr>
+        <tr><td>Audience</td><td>Peripheral processing, mood, self-esteem, self-monitoring, intelligence — all interact in complex ways</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- 10.2 IMPRESSION FORMATION -->
+  <!-- ══════════════════════════════════════════ -->
+  <section class="section" id="s2">
+    <div class="section-header">
+      <span class="section-num">10.2</span>
+      <h2>Forming Impressions of Others</h2>
+    </div>
+
+    <div class="concept teal">
+      <div class="term">Impression Formation</div>
+      How we understand and make judgments about others. We observe behaviour → assign a cause (attribution) → form an impression.
+    </div>
+
+    <h3 style="color:var(--accent3);font-family:'JetBrains Mono',monospace;font-size:0.8rem;letter-spacing:0.1em;margin:20px 0 10px;text-transform:uppercase;">Attribution Types</h3>
+    <div class="card-grid">
+      <div class="card c-teal">
+        <div class="card-title">Trait Attribution</div>
+        <p>Behaviour attributed to a person's <strong>internal traits, abilities, or characteristics</strong>.<br>"She yelled because she's aggressive."</p>
+      </div>
+      <div class="card c-amber">
+        <div class="card-title">Situational Attribution</div>
+        <p>Behaviour attributed to <strong>environmental/situational factors</strong>.<br>"She yelled because the server spilled coffee on her."</p>
+      </div>
+    </div>
+
+    <h3 style="color:var(--accent3);font-family:'JetBrains Mono',monospace;font-size:0.8rem;letter-spacing:0.1em;margin:20px 0 10px;text-transform:uppercase;">Attribution Biases (Heuristics)</h3>
+
+    <div class="concept">
+      <div class="term">Fundamental Attribution Error (FAE)</div>
+      Over-attributing others' behaviour to <strong>traits</strong> while under-weighting situational factors.<br>
+      <em>Note:</em> More common in <strong>individualistic</strong> cultures (Western) than <strong>collectivistic</strong> cultures (India, Japan). Education &amp; mindfulness can reduce FAE.
+    </div>
+
+    <div class="concept pink">
+      <div class="term">Actor / Observer Bias</div>
+      As <strong>actors</strong> (ourselves), we favour situational attributions for our own behaviour.<br>
+      As <strong>observers</strong>, we favour trait attributions for others' behaviour.<br>
+      <em>Why?</em> We can't see our own behaviour — attention is on the environment when we act; on the person when we observe.
+    </div>
+
+    <div class="concept teal">
+      <div class="term">Self-Serving Bias</div>
+      We make <strong>trait attributions for successes</strong> ("I'm smart") and <strong>situational attributions for failures</strong> ("The exam was unfair").<br>
+      Protects self-esteem. Universal across cultures. Reduced in major depressive disorder.
+      <br><em>Downside:</em> Excess self-serving bias → narcissism, relationship difficulties.
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- 10.3 PREJUDICE -->
+  <!-- ══════════════════════════════════════════ -->
+  <section class="section" id="s3">
+    <div class="section-header">
+      <span class="section-num">10.3</span>
+      <h2>Prejudice: Why Can't We All Just Get Along?</h2>
+    </div>
+
+    <div class="card-grid">
+      <div class="card c-pink">
+        <div class="card-title">Stereotype</div>
+        <p>A <strong>schema for a group of people</strong> stored in memory. The <em>cognitive</em> component of an attitude about a group. Helpful in general; problematic when applied rigidly.</p>
+      </div>
+      <div class="card c-amber">
+        <div class="card-title">Prejudice</div>
+        <p>A stereotype gone awry — biased, negative stereotype <strong>+ negative emotion</strong> toward all members of a group, regardless of individual qualities.</p>
+      </div>
+      <div class="card c-purple">
+        <div class="card-title">Discrimination</div>
+        <p>The <strong>behavioural expression</strong> of a prejudice. E.g., refusing to hire a qualified person because of gender.</p>
+      </div>
+    </div>
+
+    <div class="callout pink">
+      <div class="callout-label">Modern Racism</div>
+      <strong>Aversive Racism</strong> (Gaertner &amp; Dovidio): Europeans who outwardly support equality may still feel unconscious negative emotions toward minorities — motivating subtle discrimination and avoidance. More likely under stress.
+    </div>
+
+    <div class="concept purple">
+      <div class="term">Stereotype Threat (Steele)</div>
+      Fear that others will judge you by prejudicial stereotypes about your group → anxiety → impaired performance (a self-fulfilling prophecy).<br>
+      <em>Examples:</em> Women on maths tasks when outnumbered by men; African Americans in academic settings.<br>
+      <em>Interventions:</em> Self-affirmation programmes; reducing situational cues of stereotyping.
+    </div>
+
+    <h3 style="color:var(--accent5);font-family:'JetBrains Mono',monospace;font-size:0.8rem;letter-spacing:0.1em;margin:20px 0 10px;text-transform:uppercase;">How Prejudice Develops</h3>
+    <ul class="notes">
+      <li><strong>Classical conditioning:</strong> Seeing negative non-verbal cues toward a group → conditioned negative feeling.</li>
+      <li><strong>Operant conditioning:</strong> Peers reinforcing or punishing prejudicial attitudes.</li>
+      <li><strong>Observational learning:</strong> Modelling parents and authority figures (Jane Elliot classroom study).</li>
+      <li><strong>In-group bias:</strong> We favour our own group; out-group members seen as homogenous (out-group homogeneity bias).</li>
+      <li><strong>Realistic-conflict theory:</strong> Competition for resources fuels prejudice; minority out-groups become scapegoats.</li>
+    </ul>
+
+    <div class="callout teal">
+      <div class="callout-label">Classic Study — Robber's Cave (Sherif, 1961)</div>
+      Boys at summer camp split into Eagles &amp; Rattlers → competition → strong prejudice &amp; hostility. Resolution: <strong>superordinate goals</strong> (shared goals requiring cooperation) dissolved prejudice. Basis of the <em>jigsaw classroom</em>.
+    </div>
+
+    <h3 style="color:var(--accent5);font-family:'JetBrains Mono',monospace;font-size:0.8rem;letter-spacing:0.1em;margin:20px 0 10px;text-transform:uppercase;">Reducing Prejudice — Optimal Contact Conditions</h3>
+    <ul class="notes">
+      <li>Groups <strong>need</strong> each other (mutual interdependence).</li>
+      <li>Common <strong>superordinate goal</strong> requiring joint effort.</li>
+      <li>Equal-status cooperation ("shoulder to shoulder").</li>
+      <li>Contact is hospitable, informal, and emotionally positive.</li>
+      <li>Sustained over time; norms promote harmony and respect.</li>
+    </ul>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- 10.4 ATTRACTION -->
+  <!-- ══════════════════════════════════════════ -->
+  <section class="section" id="s4">
+    <div class="section-header">
+      <span class="section-num">10.4</span>
+      <h2>Being Drawn to Others: The Nature of Attraction</h2>
+    </div>
+
+    <div class="card-grid">
+      <div class="card c-blue">
+        <div class="card-title">Proximity &amp; Mere Exposure Effect</div>
+        <p>The more we encounter someone, the more we tend to like them. Physical closeness → more exposure → greater attraction. Holds across cultures.</p>
+      </div>
+      <div class="card c-teal">
+        <div class="card-title">Similarity</div>
+        <p><em>"Birds of a feather flock together."</em> We gravitate toward similar age, status, intelligence, race, religion, attitudes, and attractiveness. Reduces cognitive dissonance; boosts self-esteem.</p>
+      </div>
+      <div class="card c-pink">
+        <div class="card-title">Physical Attractiveness</div>
+        <p>Strongest predictor of a second date (Walster et al., 1966). Induces the <strong>halo effect</strong> — attractive people perceived as kinder, smarter, more sociable. Preference may be partly innate (2-month-old infants prefer attractive faces).</p>
+      </div>
+      <div class="card c-amber">
+        <div class="card-title">Matching Hypothesis</div>
+        <p>We tend to form relationships with people whose attractiveness level is <strong>comparable to our own</strong>. True for both romantic and friendship pairs.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-label">The "Chemistry" of Love</div>
+      Three emotional systems with distinct neurochemistry:<br>
+      <strong>Sex drive</strong> → governed by oestrogens &amp; androgens<br>
+      <strong>Romantic attraction</strong> → ↑ dopamine &amp; norepinephrine, ↓ serotonin<br>
+      <strong>Attachment / companionate love</strong> → oxytocin, vasopressin, neuropeptides
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- 10.5 GROUP INFLUENCE -->
+  <!-- ══════════════════════════════════════════ -->
+  <section class="section" id="s5">
+    <div class="section-header">
+      <span class="section-num">10.5</span>
+      <h2>Group Influence</h2>
+    </div>
+
+    <div class="card-grid">
+      <div class="card c-blue">
+        <div class="card-title">Group Norms</div>
+        <p>Rules (explicit or unwritten) guiding group members' behaviour. Breaking norms risks ridicule, persuasion, or ostracism.</p>
+      </div>
+      <div class="card c-teal">
+        <div class="card-title">Cohesiveness</div>
+        <p>Degree to which members want to maintain group membership. <strong>High cohesiveness → high conformity pressure.</strong></p>
+      </div>
+    </div>
+
+    <h3 style="color:var(--accent1);font-family:'JetBrains Mono',monospace;font-size:0.8rem;letter-spacing:0.1em;margin:20px 0 10px;text-transform:uppercase;">Conformity — Asch (1951)</h3>
+    <div class="callout">
+      <div class="callout-label">Classic Study</div>
+      Participants matched line lengths; confederates deliberately chose the wrong line. <strong>74% conformed at least once.</strong> Conformity peaked with only 3 confederates. <em>Individualistic cultures</em> conform less; <em>collectivistic cultures</em> conform more (in face-to-face settings).
+    </div>
+
+    <div class="card-grid">
+      <div class="card c-pink">
+        <div class="card-title">Normative Conformity</div>
+        <p>Change behaviour to fit the norm — <strong>no real attitude change</strong>. Motivated by desire to be liked.</p>
+      </div>
+      <div class="card c-purple">
+        <div class="card-title">Informational Conformity</div>
+        <p>Behaviour <em>and</em> attitude change — genuinely persuaded by the majority. More likely when <strong>uncertain or lacking confidence</strong>.</p>
+      </div>
+    </div>
+
+    <div class="concept amber">
+      <div class="term">Deindividuation (Stanford Prison Experiment — Zimbardo, 1971)</div>
+      When people are in roles, wear uniforms, or are anonymous, behaviour is controlled more by <strong>external situational norms</strong> than by internal values. Guards became abusive; prisoners became submissive — within days. Experiment cancelled early.
+    </div>
+
+    <h3 style="color:var(--accent1);font-family:'JetBrains Mono',monospace;font-size:0.8rem;letter-spacing:0.1em;margin:20px 0 10px;text-transform:uppercase;">Group Performance</h3>
+    <div class="card-grid">
+      <div class="card c-teal">
+        <div class="card-title">Social Facilitation</div>
+        <p>Presence of others <strong>enhances performance on familiar/easy tasks</strong>; impairs it on complex or unfamiliar tasks (e.g., public speaking).</p>
+      </div>
+      <div class="card c-pink">
+        <div class="card-title">Social Loafing</div>
+        <p>Group members work <strong>less hard</strong> when individual effort is not evaluated. Reduced by rewarding individual contribution and fostering prosocial traits.</p>
+      </div>
+      <div class="card c-amber">
+        <div class="card-title">Groupthink (Janis, 1982)</div>
+        <p>Group fixates on one decision without examining alternatives. Promoted by: <strong>isolation, high cohesiveness, dictatorial leadership, stress.</strong> → Poor decisions.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- 10.6 COMPLIANCE & OBEDIENCE -->
+  <!-- ══════════════════════════════════════════ -->
+  <section class="section" id="s6">
+    <div class="section-header">
+      <span class="section-num">10.6</span>
+      <h2>Requests &amp; Demands: Compliance and Obedience</h2>
+    </div>
+
+    <h3 style="color:var(--accent2);font-family:'JetBrains Mono',monospace;font-size:0.8rem;letter-spacing:0.1em;margin:0 0 12px;text-transform:uppercase;">Compliance Techniques</h3>
+
+    <table class="study-table">
+      <thead>
+        <tr><th>Technique</th><th>How It Works</th><th>Why It Works</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Foot-in-the-Door</td>
+          <td>Small request first → then larger request</td>
+          <td>Self-image shifts to "I'm someone who complies"; avoiding dissonance with new self-image</td>
+        </tr>
+        <tr>
+          <td>Door-in-the-Face</td>
+          <td>Very large request first (rejected) → smaller target request</td>
+          <td>Perceptual contrast; norm of reciprocity (they conceded, so we concede); guilt reduction</td>
+        </tr>
+        <tr>
+          <td>Low-Balling</td>
+          <td>Agree to a deal → terms change unfavourably</td>
+          <td>Commitment to original agreement; perceptual contrast; don't want to break promise</td>
+        </tr>
+        <tr>
+          <td>That's-Not-All</td>
+          <td>Original offer sweetened with extras</td>
+          <td>Norm of reciprocity — seller does something nice, buyer feels obligated to say yes</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="color:var(--accent2);font-family:'JetBrains Mono',monospace;font-size:0.8rem;letter-spacing:0.1em;margin:24px 0 12px;text-transform:uppercase;">Obedience — Milgram (1963)</h3>
+
+    <div class="callout pink">
+      <div class="callout-label">Classic Study</div>
+      Participants ("teachers") instructed to deliver shocks up to 450 V to a "learner" (confederate). Authority figure (experimenter in lab coat) prodded them calmly to continue.<br><br>
+      <strong>Result: 65% of participants delivered the maximum 450 V.</strong> No participant refused before 300 V. Replicated with women, different cities, other Western cultures.
+    </div>
+
+    <h3 style="color:var(--accent2);font-family:'JetBrains Mono',monospace;font-size:0.8rem;letter-spacing:0.1em;margin:20px 0 10px;text-transform:uppercase;">Factors That Increased Obedience</h3>
+    <ul class="notes">
+      <li><strong>Authority figure present</strong> — relieves personal responsibility; intimidates.</li>
+      <li><strong>Physical proximity</strong> of authority — obedience dropped from 65% → 27.5% when experimenter gave orders by phone.</li>
+      <li><strong>Incremental escalation</strong> — foot-in-the-door logic; each small step makes the next harder to refuse ("slippery slope").</li>
+      <li><strong>Psychological distance</strong> from victim — couldn't see the "learner"; holding victim's hand → only 30% went to max.</li>
+      <li><strong>Time pressure</strong> — orders began immediately, leaving little time to reflect.</li>
+      <li><strong>Low sense of personal responsibility</strong> — those who disobeyed expressed stronger personal responsibility and concern for the learner.</li>
+    </ul>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- 10.7 AGGRESSION -->
+  <!-- ══════════════════════════════════════════ -->
+  <section class="section" id="s7">
+    <div class="section-header">
+      <span class="section-num">10.7</span>
+      <h2>Aggression: Hurting Others</h2>
+    </div>
+
+    <div class="concept amber">
+      <div class="term">Definition</div>
+      An action <strong>intended to cause harm</strong> to another person who does not want to be harmed.
+    </div>
+
+    <div class="card-grid">
+      <div class="card c-amber">
+        <div class="card-title">Instrumental Aggression</div>
+        <p>Aimed at achieving a <strong>goal</strong> (e.g., hitting a sibling to grab a toy).</p>
+      </div>
+      <div class="card c-pink">
+        <div class="card-title">Hostile Aggression</div>
+        <p>Motivated solely by the <strong>desire to hurt</strong> (e.g., bullying for its own sake).</p>
+      </div>
+    </div>
+
+    <h3 style="color:var(--accent4);font-family:'JetBrains Mono',monospace;font-size:0.8rem;letter-spacing:0.1em;margin:20px 0 10px;text-transform:uppercase;">Biological Explanations</h3>
+    <ul class="notes">
+      <li><strong>Testosterone:</strong> Weak correlation with aggression in males; not consistently causal. Physical size may be the mediating variable.</li>
+      <li><strong>Serotonin:</strong> Low levels associated with difficulty controlling aggressive impulses (and self-harm/suicide). SSRIs increase empathy and reduce aggression in some studies.</li>
+      <li><strong>Childhood abuse &amp; brain damage:</strong> Abuse → structural abnormalities in amygdala, frontal lobe, hippocampus → increased aggression risk.</li>
+    </ul>
+
+    <h3 style="color:var(--accent4);font-family:'JetBrains Mono',monospace;font-size:0.8rem;letter-spacing:0.1em;margin:20px 0 10px;text-transform:uppercase;">Learning Explanations</h3>
+    <ul class="notes">
+      <li><strong>Observational learning (Bandura):</strong> Bobo doll study — children mimic aggressive models. ~70% of prime-time TV contains violence.</li>
+      <li><strong>Cognitive neoassociation theory:</strong> Cues (e.g., guns) become associated in memory with aggression → seeing those cues primes aggressive thoughts.</li>
+      <li><strong>Hostile attribution bias:</strong> Maltreated children perceive others as hostile → more easily angered → more aggression.</li>
+    </ul>
+
+    <div class="concept pink">
+      <div class="term">Frustration–Aggression Hypothesis (Dollard et al., 1939)</div>
+      Frustration activates a motive to harm. Likely directed at the perceived source of frustration. High-stress situations (e.g., poverty) with poor coping skills → greatest risk of abuse.
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- 10.8 PROSOCIAL BEHAVIOUR -->
+  <!-- ══════════════════════════════════════════ -->
+  <section class="section" id="s8">
+    <div class="section-header">
+      <span class="section-num">10.8</span>
+      <h2>Choosing to Help Others: Prosocial Behaviour</h2>
+    </div>
+
+    <div class="card-grid">
+      <div class="card c-teal">
+        <div class="card-title">Prosocial Behaviour</div>
+        <p>Behaviour that <strong>helps others</strong>. May include personal benefit.</p>
+      </div>
+      <div class="card c-blue">
+        <div class="card-title">Altruism</div>
+        <p>Helping others <strong>without considering personal benefit</strong>.</p>
+      </div>
+    </div>
+
+    <div class="callout teal">
+      <div class="callout-label">Kitty Genovese Case (1964) — Context</div>
+      Murder reportedly witnessed by 38 neighbours, none of whom helped in time. This apparent apathy prompted Latané &amp; Darley to study helping behaviour scientifically.
+    </div>
+
+    <h3 style="color:var(--accent3);font-family:'JetBrains Mono',monospace;font-size:0.8rem;letter-spacing:0.1em;margin:20px 0 10px;text-transform:uppercase;">Latané &amp; Darley's 5 Steps to Helping</h3>
+    <ul class="notes">
+      <li><strong>1. Notice</strong> that something unusual is happening.</li>
+      <li><strong>2. Interpret</strong> it correctly as an emergency requiring help.</li>
+      <li><strong>3. Feel responsible</strong> to intervene.</li>
+      <li><strong>4. Know how</strong> to help.</li>
+      <li><strong>5. Implement</strong> the helping strategy.</li>
+    </ul>
+
+    <div class="concept teal">
+      <div class="term">Bystander Effect (Latané &amp; Darley)</div>
+      As the <strong>number of bystanders increases</strong>, the probability any one person will help <strong>decreases</strong>.
+    </div>
+
+    <div class="card-grid">
+      <div class="card c-blue">
+        <div class="card-title">Diffusion of Responsibility</div>
+        <p>Each bystander shares responsibility equally → each individual bears less. <strong>Fix:</strong> Single out one bystander by name/description to assign full responsibility.</p>
+      </div>
+      <div class="card c-pink">
+        <div class="card-title">Pluralistic Ignorance</div>
+        <p>Seeing others do nothing → each person concludes there is <strong>no emergency</strong> → nobody acts.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- KEY TERMS -->
+  <!-- ══════════════════════════════════════════ -->
+  <section class="section" id="terms">
+    <div class="section-header">
+      <span class="section-num" style="background:rgba(86,217,176,0.1);color:var(--accent3);border-color:rgba(86,217,176,0.25);">TERMS</span>
+      <h2>Key Terms Glossary</h2>
+    </div>
+    <div class="terms-grid">
+      <div class="term-pill">Actor/observer bias</div>
+      <div class="term-pill">Aggression</div>
+      <div class="term-pill">Altruism</div>
+      <div class="term-pill">Attitudes</div>
+      <div class="term-pill">Attribution</div>
+      <div class="term-pill">Aversive racism</div>
+      <div class="term-pill">Bystander effect</div>
+      <div class="term-pill">Central route to persuasion</div>
+      <div class="term-pill">Cognitive consistency</div>
+      <div class="term-pill">Cognitive dissonance theory</div>
+      <div class="term-pill">Cognitive neoassociation theory</div>
+      <div class="term-pill">Cohesiveness</div>
+      <div class="term-pill">Collectivistic cultures</div>
+      <div class="term-pill">Compliance</div>
+      <div class="term-pill">Conformity</div>
+      <div class="term-pill">Contact hypothesis</div>
+      <div class="term-pill">Deindividuation</div>
+      <div class="term-pill">Destructive obedience</div>
+      <div class="term-pill">Diffusion of responsibility</div>
+      <div class="term-pill">Discrimination</div>
+      <div class="term-pill">Door-in-the-face compliance</div>
+      <div class="term-pill">Foot-in-the-door compliance</div>
+      <div class="term-pill">Frustration–aggression hypothesis</div>
+      <div class="term-pill">Fundamental attribution error</div>
+      <div class="term-pill">Groupthink</div>
+      <div class="term-pill">Helping behaviour</div>
+      <div class="term-pill">Hostile aggression</div>
+      <div class="term-pill">Impression formation</div>
+      <div class="term-pill">Individualistic cultures</div>
+      <div class="term-pill">Informational conformity</div>
+      <div class="term-pill">In-group bias</div>
+      <div class="term-pill">Instrumental aggression</div>
+      <div class="term-pill">Low-balling</div>
+      <div class="term-pill">Matching hypothesis</div>
+      <div class="term-pill">Mere exposure effect</div>
+      <div class="term-pill">Normative conformity</div>
+      <div class="term-pill">Norms</div>
+      <div class="term-pill">Obedience</div>
+      <div class="term-pill">Out-group homogeneity bias</div>
+      <div class="term-pill">Peripheral route to persuasion</div>
+      <div class="term-pill">Persuasion</div>
+      <div class="term-pill">Pluralistic ignorance</div>
+      <div class="term-pill">Prejudice</div>
+      <div class="term-pill">Prosocial behaviour</div>
+      <div class="term-pill">Proximity</div>
+      <div class="term-pill">Psychological distance</div>
+      <div class="term-pill">Realistic-conflict theory</div>
+      <div class="term-pill">Reciprocity</div>
+      <div class="term-pill">Scapegoat</div>
+      <div class="term-pill">Self-serving bias</div>
+      <div class="term-pill">Situational attribution</div>
+      <div class="term-pill">Social cognition</div>
+      <div class="term-pill">Social facilitation</div>
+      <div class="term-pill">Social loafing</div>
+      <div class="term-pill">Social psychology</div>
+      <div class="term-pill">Stereotype</div>
+      <div class="term-pill">Stereotype threat</div>
+      <div class="term-pill">Superordinate goal</div>
+      <div class="term-pill">That's-not-all technique</div>
+      <div class="term-pill">Trait attribution</div>
+    </div>
+  </section>
+
+  <a href="#top" class="back-top">↑ back to top</a>
+
+</div><!-- /container -->
+</body>
+</html>
