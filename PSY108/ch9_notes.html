@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chapter 9 — Human Development | What is Psychology?</title>
+<title>Chapter 9 — Human Development | Exam Guide</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -17,384 +17,75 @@
     --light-muted: #b5ada2;
     --border: #d4cdc4;
     --highlight: #fff3cd;
-    --section-bg: #faf7f2;
     --card-bg: #ffffff;
   }
-
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Source Serif 4', Georgia, serif;
-    font-weight: 300;
-    background: var(--paper);
-    color: var(--ink);
-    line-height: 1.75;
-    font-size: 16px;
-  }
-
-  /* ── HEADER ─────────────────────────────────────────────── */
-  header {
-    background: var(--ink);
-    color: var(--paper);
-    padding: 3rem 2rem 2.5rem;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  header::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 40px,
-      rgba(255,255,255,0.015) 40px,
-      rgba(255,255,255,0.015) 41px
-    );
-  }
-  .header-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.18em;
-    color: var(--light-muted);
-    text-transform: uppercase;
-    margin-bottom: 0.75rem;
-  }
-  header h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 5vw, 3.2rem);
-    font-weight: 900;
-    letter-spacing: -0.01em;
-    line-height: 1.15;
-    margin-bottom: 0.5rem;
-  }
-  header h1 em {
-    color: var(--gold);
-    font-style: italic;
-  }
-  .header-sub {
-    font-size: 0.88rem;
-    color: var(--light-muted);
-    font-style: italic;
-  }
-
-  /* ── STICKY NAV ──────────────────────────────────────────── */
-  nav {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: var(--ink);
-    border-bottom: 2px solid var(--rust);
-    padding: 0 1rem;
-    overflow-x: auto;
-    white-space: nowrap;
-    scrollbar-width: none;
-  }
+  body { font-family: 'Source Serif 4', Georgia, serif; font-weight: 300; background: var(--paper); color: var(--ink); line-height: 1.75; font-size: 16px; }
+  header { background: var(--ink); color: var(--paper); padding: 3rem 2rem 2.5rem; text-align: center; position: relative; overflow: hidden; }
+  header::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(255,255,255,0.015) 40px, rgba(255,255,255,0.015) 41px); }
+  .header-label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.18em; color: var(--light-muted); text-transform: uppercase; margin-bottom: 0.75rem; }
+  header h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 900; line-height: 1.15; margin-bottom: 0.5rem; }
+  header h1 em { color: var(--gold); font-style: italic; }
+  .header-sub { font-size: 0.88rem; color: var(--light-muted); font-style: italic; }
+  nav { position: sticky; top: 0; z-index: 100; background: var(--ink); border-bottom: 2px solid var(--rust); padding: 0 1rem; overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
   nav::-webkit-scrollbar { display: none; }
-  nav ul {
-    list-style: none;
-    display: inline-flex;
-    gap: 0;
-  }
-  nav ul li a {
-    display: inline-block;
-    padding: 0.7rem 1rem;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--light-muted);
-    text-decoration: none;
-    border-bottom: 2px solid transparent;
-    transition: color 0.2s, border-color 0.2s;
-    margin-bottom: -2px;
-  }
-  nav ul li a:hover {
-    color: var(--gold);
-    border-bottom-color: var(--gold);
-  }
-
-  /* ── LAYOUT ──────────────────────────────────────────────── */
-  .container {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 0 1.5rem 4rem;
-  }
-
-  /* ── SECTION HEADERS ─────────────────────────────────────── */
-  .section-header {
-    display: flex;
-    align-items: baseline;
-    gap: 1rem;
-    margin-top: 3.5rem;
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.6rem;
-    border-bottom: 1.5px solid var(--border);
-  }
-  .section-num {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--rust);
-    letter-spacing: 0.1em;
-    flex-shrink: 0;
-  }
-  .section-header h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.45rem;
-    font-weight: 700;
-    color: var(--ink);
-    line-height: 1.2;
-  }
-
-  .subsection-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--teal);
-    margin: 2rem 0 0.75rem;
-    padding-left: 0.75rem;
-    border-left: 3px solid var(--teal);
-  }
-
-  p {
-    margin-bottom: 0.85rem;
-    color: #2a2520;
-  }
-
-  /* ── KEY TERM ─────────────────────────────────────────────── */
-  .term {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.82em;
-    font-weight: 500;
-    color: var(--rust);
-    background: rgba(184,92,56,0.07);
-    padding: 0.05em 0.35em;
-    border-radius: 3px;
-  }
-
-  /* ── CONCEPT CARDS ───────────────────────────────────────── */
-  .card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 1rem;
-    margin: 1.25rem 0;
-  }
-  .card {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 1rem 1.1rem;
-    position: relative;
-    transition: box-shadow 0.2s;
-  }
+  nav ul { list-style: none; display: inline-flex; }
+  nav ul li a { display: inline-block; padding: 0.7rem 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--light-muted); text-decoration: none; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s; margin-bottom: -2px; }
+  nav ul li a:hover { color: var(--gold); border-bottom-color: var(--gold); }
+  .container { max-width: 860px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+  .section-header { display: flex; align-items: baseline; gap: 1rem; margin-top: 3.5rem; margin-bottom: 1.5rem; padding-bottom: 0.6rem; border-bottom: 1.5px solid var(--border); }
+  .section-num { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--rust); letter-spacing: 0.1em; flex-shrink: 0; }
+  .section-header h2 { font-family: 'Playfair Display', serif; font-size: 1.45rem; font-weight: 700; color: var(--ink); line-height: 1.2; }
+  .subsection-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--teal); margin: 2rem 0 0.75rem; padding-left: 0.75rem; border-left: 3px solid var(--teal); }
+  p { margin-bottom: 0.85rem; color: #2a2520; }
+  .term { font-family: 'JetBrains Mono', monospace; font-size: 0.82em; font-weight: 500; color: var(--rust); background: rgba(184,92,56,0.07); padding: 0.05em 0.35em; border-radius: 3px; }
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 1rem; margin: 1.25rem 0; }
+  .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.1rem; transition: box-shadow 0.2s; }
   .card:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.08); }
-  .card-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--light-muted);
-    margin-bottom: 0.35rem;
-  }
-  .card h4 {
-    font-family: 'Playfair Display', serif;
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--ink);
-    margin-bottom: 0.4rem;
-  }
-  .card p {
-    font-size: 0.84rem;
-    line-height: 1.55;
-    margin: 0;
-    color: var(--muted);
-  }
+  .card-label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--light-muted); margin-bottom: 0.35rem; }
+  .card h4 { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; color: var(--ink); margin-bottom: 0.4rem; }
+  .card p { font-size: 0.84rem; line-height: 1.55; margin: 0; color: var(--muted); }
   .card-accent-rust { border-top: 3px solid var(--rust); }
   .card-accent-teal { border-top: 3px solid var(--teal); }
   .card-accent-gold { border-top: 3px solid var(--gold); }
-
-  /* ── STAGE TABLES ────────────────────────────────────────── */
-  .stage-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 1.25rem 0;
-    font-size: 0.88rem;
-  }
-  .stage-table thead tr {
-    background: var(--ink);
-    color: var(--paper);
-  }
-  .stage-table thead th {
-    padding: 0.65rem 0.9rem;
-    text-align: left;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
-    font-weight: 500;
-  }
+  .stage-table { width: 100%; border-collapse: collapse; margin: 1.25rem 0; font-size: 0.88rem; }
+  .stage-table thead tr { background: var(--ink); color: var(--paper); }
+  .stage-table thead th { padding: 0.65rem 0.9rem; text-align: left; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.08em; font-weight: 500; }
   .stage-table tbody tr:nth-child(even) { background: var(--cream); }
   .stage-table tbody tr:hover { background: rgba(201,148,58,0.1); }
-  .stage-table td {
-    padding: 0.6rem 0.9rem;
-    border-bottom: 1px solid var(--border);
-    vertical-align: top;
-    line-height: 1.5;
-  }
-  .stage-table td:first-child {
-    font-weight: 600;
-    color: var(--rust);
-    white-space: nowrap;
-  }
-
-  /* ── CALLOUT BOXES ───────────────────────────────────────── */
-  .callout {
-    border-radius: 6px;
-    padding: 1rem 1.25rem;
-    margin: 1.25rem 0;
-    font-size: 0.9rem;
-    line-height: 1.65;
-  }
-  .callout p { margin: 0; color: inherit; }
-  .callout-nature {
-    background: rgba(45,110,110,0.08);
-    border-left: 4px solid var(--teal);
-    color: #1d4a4a;
-  }
-  .callout-nurture {
-    background: rgba(201,148,58,0.1);
-    border-left: 4px solid var(--gold);
-    color: #5a3e10;
-  }
-  .callout-key {
-    background: rgba(184,92,56,0.07);
-    border-left: 4px solid var(--rust);
-  }
-  .callout strong {
-    font-weight: 600;
-    color: var(--ink);
-  }
-
-  /* ── COMPARE BOXES ───────────────────────────────────────── */
-  .compare {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    margin: 1.25rem 0;
-  }
-  .compare-box {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 1rem;
-  }
-  .compare-box h5 {
-    font-family: 'Playfair Display', serif;
-    font-size: 0.92rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-  }
-  .compare-box ul {
-    padding-left: 1.2rem;
-    font-size: 0.84rem;
-    color: var(--muted);
-    line-height: 1.6;
-  }
+  .stage-table td { padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.5; }
+  .stage-table td:first-child { font-weight: 600; color: var(--rust); }
+  .callout { border-radius: 6px; padding: 1rem 1.25rem; margin: 1.25rem 0; font-size: 0.9rem; line-height: 1.65; }
+  .callout p { margin: 0 0 0.5rem; color: inherit; }
+  .callout p:last-child { margin-bottom: 0; }
+  .callout-nature { background: rgba(45,110,110,0.08); border-left: 4px solid var(--teal); color: #1d4a4a; }
+  .callout-nurture { background: rgba(201,148,58,0.1); border-left: 4px solid var(--gold); color: #5a3e10; }
+  .callout-key { background: rgba(184,92,56,0.07); border-left: 4px solid var(--rust); }
+  .callout strong { font-weight: 600; color: var(--ink); }
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.25rem 0; }
+  .compare-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; }
+  .compare-box h5 { font-family: 'Playfair Display', serif; font-size: 0.92rem; font-weight: 700; margin-bottom: 0.5rem; padding-bottom: 0.4rem; }
+  .compare-box ul { padding-left: 1.2rem; font-size: 0.84rem; color: var(--muted); line-height: 1.6; }
   .compare-box ul li { margin-bottom: 0.3rem; }
-  .box-teal h5 { color: var(--teal); border-bottom: 2px solid var(--teal); padding-bottom: 0.4rem; }
-  .box-rust h5 { color: var(--rust); border-bottom: 2px solid var(--rust); padding-bottom: 0.4rem; }
-  .box-gold h5 { color: var(--gold); border-bottom: 2px solid var(--gold); padding-bottom: 0.4rem; }
-  .box-ink h5 { color: var(--ink); border-bottom: 2px solid var(--ink); padding-bottom: 0.4rem; }
-
-  @media (max-width: 560px) {
-    .compare { grid-template-columns: 1fr; }
-    .card-grid { grid-template-columns: 1fr; }
-  }
-
-  /* ── KEY TERMS GLOSSARY ──────────────────────────────────── */
-  .glossary {
-    columns: 2;
-    column-gap: 2rem;
-    margin: 1rem 0;
-  }
-  @media (max-width: 560px) { .glossary { columns: 1; } }
-  .glossary-item {
-    break-inside: avoid;
-    margin-bottom: 0.85rem;
-    font-size: 0.85rem;
-  }
-  .glossary-item dt {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.78rem;
-    font-weight: 500;
-    color: var(--rust);
-  }
-  .glossary-item dd {
-    color: var(--muted);
-    line-height: 1.5;
-    margin-left: 0;
-    padding-left: 0.75rem;
-    border-left: 2px solid var(--border);
-  }
-
-  /* ── MNEMONIC BADGE ──────────────────────────────────────── */
-  .mnemonic {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: var(--highlight);
-    border: 1px solid #f0d060;
-    border-radius: 4px;
-    padding: 0.4rem 0.75rem;
-    font-size: 0.82rem;
-    margin: 0.5rem 0;
-  }
-  .mnemonic::before { content: '💡'; }
-
-  /* ── QUICK REFERENCE STRIP ───────────────────────────────── */
-  .quick-ref {
-    background: var(--ink);
-    color: var(--paper);
-    border-radius: 6px;
-    padding: 1.1rem 1.5rem;
-    margin: 1.5rem 0;
-    font-size: 0.86rem;
-  }
-  .quick-ref h4 {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 0.6rem;
-  }
+  .box-teal h5 { color: var(--teal); border-bottom: 2px solid var(--teal); }
+  .box-rust h5 { color: var(--rust); border-bottom: 2px solid var(--rust); }
+  .box-gold h5 { color: var(--gold); border-bottom: 2px solid var(--gold); }
+  .box-ink h5 { color: var(--ink); border-bottom: 2px solid var(--ink); }
+  @media (max-width: 560px) { .compare { grid-template-columns: 1fr; } .card-grid { grid-template-columns: 1fr; } }
+  .quick-ref { background: var(--ink); color: var(--paper); border-radius: 6px; padding: 1.1rem 1.5rem; margin: 1.5rem 0; font-size: 0.86rem; }
+  .quick-ref h4 { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem; }
   .quick-ref ul { padding-left: 1.2rem; }
   .quick-ref li { margin-bottom: 0.3rem; line-height: 1.55; }
-
-  /* ── FOOTER ──────────────────────────────────────────────── */
-  footer {
-    text-align: center;
-    padding: 2rem 1rem;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.08em;
-    color: var(--light-muted);
-    border-top: 1px solid var(--border);
-    margin-top: 3rem;
-  }
-
-  /* ── PROGRESS BAR ────────────────────────────────────────── */
-  .progress-bar {
-    position: fixed;
-    top: 0; left: 0;
-    height: 3px;
-    background: var(--rust);
-    z-index: 999;
-    width: 0%;
-    transition: width 0.1s;
-  }
+  .mnemonic { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--highlight); border: 1px solid #f0d060; border-radius: 4px; padding: 0.4rem 0.75rem; font-size: 0.82rem; margin: 0.5rem 0; }
+  .mnemonic::before { content: '💡'; }
+  .glossary { columns: 2; column-gap: 2rem; margin: 1rem 0; }
+  @media (max-width: 560px) { .glossary { columns: 1; } }
+  .glossary-item { break-inside: avoid; margin-bottom: 0.85rem; font-size: 0.85rem; }
+  .glossary-item dt { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; font-weight: 500; color: var(--rust); }
+  .glossary-item dd { color: var(--muted); line-height: 1.5; margin-left: 0; padding-left: 0.75rem; border-left: 2px solid var(--border); }
+  .progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: var(--rust); z-index: 999; width: 0%; transition: width 0.1s; }
+  footer { text-align: center; padding: 2rem 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.08em; color: var(--light-muted); border-top: 1px solid var(--border); margin-top: 3rem; }
 </style>
 </head>
 <body>
@@ -402,185 +93,185 @@
 <div class="progress-bar" id="progress"></div>
 
 <header>
-  <div class="header-label">What is Psychology? · Pastorino &amp; Doyle-Portillo</div>
+  <div class="header-label">Exam Guide · Seminar Slides + Study Unit SU1 · PSY108</div>
   <h1>Chapter 9 — <em>Human Development</em></h1>
-  <div class="header-sub">Reference Notes · Physical · Cognitive · Psychosocial</div>
+  <div class="header-sub">Exam-scoped · Physical · Cognitive · Psychosocial · Research Methods</div>
 </header>
 
 <nav>
   <ul>
-    <li><a href="#s9-1">9.1 Beginnings</a></li>
-    <li><a href="#s9-2">9.2 Physical (Child)</a></li>
-    <li><a href="#s9-3">9.3 Cognitive (Child)</a></li>
-    <li><a href="#s9-4">9.4 Psychosocial (Child)</a></li>
-    <li><a href="#s9-5">9.5 Physical (Adol/Adult)</a></li>
-    <li><a href="#s9-6">9.6 Cognitive (Adol/Adult)</a></li>
-    <li><a href="#s9-7">9.7 Psychosocial (Adol/Adult)</a></li>
-    <li><a href="#s9-8">9.8 Death &amp; Dying</a></li>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#infancy">Infancy</a></li>
+    <li><a href="#childhood">Childhood</a></li>
+    <li><a href="#adolescence">Adolescence</a></li>
+    <li><a href="#adulthood">Adulthood</a></li>
+    <li><a href="#death">Death &amp; Dying</a></li>
+    <li><a href="#research">Research Methods</a></li>
     <li><a href="#glossary">Glossary</a></li>
   </ul>
 </nav>
 
 <div class="container">
 
-  <!-- ── OVERVIEW ────────────────────────────────────────── -->
-  <div class="section-header" style="margin-top:2.5rem;">
+  <!-- OVERVIEW -->
+  <div class="section-header" id="overview" style="margin-top:2.5rem;">
     <span class="section-num">OVERVIEW</span>
-    <h2>What Is Development?</h2>
-  </div>
-  <p><span class="term">Development</span> = changes in behaviour and abilities across the entire lifespan. It integrates <em>physical, cognitive, and social</em> dimensions simultaneously.</p>
-  <div class="callout callout-key">
-    <p><strong>Central tension:</strong> <span class="term">Nature vs. Nurture</span> — not an either/or. Genes and environment <em>interact</em> to shape who we become. Gene expression can be altered by environment; environment's effect can be moderated by genes.</p>
+    <h2>Developmental Psychology</h2>
   </div>
 
-  <!-- ═══════════════════════════════════════════════════════
-       9.1 HOW DOES IT ALL BEGIN
-  ════════════════════════════════════════════════════════ -->
-  <div class="section-header" id="s9-1">
-    <span class="section-num">9.1</span>
-    <h2>Human Development: How Does It All Begin?</h2>
-  </div>
-
-  <div class="subsection-title">Prenatal Stages</div>
-  <p>At conception: sperm (23 chromosomes) + ovum (23 chromosomes) = <span class="term">zygote</span> (23 pairs). Gestation ≈ 38–40 weeks, divided into three stages:</p>
-
-  <table class="stage-table">
-    <thead>
-      <tr>
-        <th>Stage</th>
-        <th>Timing</th>
-        <th>Key Feature</th>
-        <th>Critical Notes</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Germinal</td>
-        <td>Days 1–14</td>
-        <td>Rapid cell division; zygote → blastocyst (≈100 cells)</td>
-        <td>Blastocyst implants in uterine wall ~day 9</td>
-      </tr>
-      <tr>
-        <td>Embryonic</td>
-        <td>Weeks 3–8</td>
-        <td>Formation of major organs &amp; biological systems</td>
-        <td><strong>Most precarious</strong>; most miscarriages &amp; genetic defects here; most sensitive to teratogens</td>
-      </tr>
-      <tr>
-        <td>Fetal</td>
-        <td>Week 9 → birth</td>
-        <td>Growth &amp; maturation; movement begins by week 14</td>
-        <td>Viability at ~24 weeks; responsive to sound, light, touch in last trimester</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="subsection-title">Teratogens &amp; Prenatal Environment</div>
-  <p><span class="term">Teratogen</span> = any environmental agent that can harm the developing embryo (drugs, alcohol, disease, chemicals). <em>Timing is critical</em> — most severe effects during embryonic stage.</p>
-
-  <div class="card-grid">
-    <div class="card card-accent-rust">
-      <div class="card-label">Teratogen</div>
-      <h4>Alcohol / FAS</h4>
-      <p>Fetal Alcohol Syndrome: low birth weight, brain abnormalities, reduced intellectual functioning, facial/limb deformities</p>
-    </div>
-    <div class="card card-accent-rust">
-      <div class="card-label">Teratogen</div>
-      <h4>Smoking</h4>
-      <p>Reduces oxygen to fetus → lower birth weight, respiratory problems, irritability</p>
-    </div>
-    <div class="card card-accent-rust">
-      <div class="card-label">Teratogen</div>
-      <h4>Cocaine / Crack</h4>
-      <p>Premature birth, underweight, irritable, poor feeding; long-term impulsivity &amp; behavioural problems</p>
-    </div>
-    <div class="card card-accent-gold">
-      <div class="card-label">Other Factor</div>
-      <h4>Maternal Stress</h4>
-      <p>High cortisol → preterm birth risk, autism spectrum symptoms (males), behavioural/emotional problems in childhood</p>
-    </div>
-    <div class="card card-accent-teal">
-      <div class="card-label">Chromosomal</div>
-      <h4>Down Syndrome</h4>
-      <p>Extra 21st chromosome; distinct facial features, heart defects, intellectual disability — detectable prenatally</p>
-    </div>
-  </div>
-
-  <!-- ═══════════════════════════════════════════════════════
-       9.2 PHYSICAL DEVELOPMENT: INFANCY & CHILDHOOD
-  ════════════════════════════════════════════════════════ -->
-  <div class="section-header" id="s9-2">
-    <span class="section-num">9.2</span>
-    <h2>Physical Development in Infancy &amp; Childhood</h2>
-  </div>
-
-  <div class="subsection-title">Brain Development</div>
-  <p>At birth, billions of neurons exist but connections are limited and myelination is incomplete. Experience + learning drive rapid neural growth. Key principles:</p>
-  <div class="callout callout-key">
-    <p><strong>Use it or lose it:</strong> Neural pathways used repeatedly become permanent; unused ones are <em>pruned</em>. Stimulating environments strengthen connections; impoverished ones weaken them.</p>
-  </div>
-  <p><strong>Plasticity</strong> — young brains are highly adaptable; damaged areas can be compensated by other regions. Plasticity gradually decreases with age but persists throughout adulthood.</p>
-
-  <div class="subsection-title">Reflexes &amp; Motor Development</div>
-  <table class="stage-table">
-    <thead><tr><th>Reflex</th><th>Stimulus</th><th>Response</th><th>Later Function</th></tr></thead>
-    <tbody>
-      <tr><td>Sucking</td><td>Object touches lips</td><td>Automatic sucking</td><td>Feeding</td></tr>
-      <tr><td>Rooting</td><td>Touch on cheek</td><td>Turns toward touch, opens mouth</td><td>Finding food</td></tr>
-      <tr><td>Grasping</td><td>Object on palm</td><td>Grips object</td><td>Prehension — writing, playing instruments</td></tr>
-      <tr><td>Crying</td><td>Distress</td><td>Automatic cry</td><td>Communication, seeking caretaker</td></tr>
-      <tr><td>Smiling</td><td>Pleasure</td><td>Smiles at everyone (2 months) → discriminating (6 months)</td><td>Social bonding</td></tr>
-    </tbody>
-  </table>
+  <p><span class="term">Developmental psychology</span> studies <strong>growth, change, and consistency</strong> across the lifespan from four perspectives: <em>physical, emotional, cognitive, and sociocultural.</em></p>
 
   <div class="compare">
-    <div class="compare-box box-teal">
-      <h5>Gross Motor Skills</h5>
-      <ul>
-        <li>Large muscle groups (biceps, quads)</li>
-        <li>Running, walking, jumping, hopping</li>
-        <li>Toddler → preschooler → 8-year-old: increasing coordination and speed</li>
-      </ul>
-    </div>
     <div class="compare-box box-rust">
-      <h5>Fine Motor Skills</h5>
+      <h5>Empiricists (e.g. Locke)</h5>
       <ul>
-        <li>Small muscle groups</li>
-        <li>Writing, utensils, instruments</li>
-        <li>Proficiency increases markedly approaching school age</li>
+        <li>We arrive as blank slates (tabula rasa)</li>
+        <li>All development comes from experience and environment</li>
+        <li>Nurture is primary</li>
+      </ul>
+    </div>
+    <div class="compare-box box-teal">
+      <h5>Nativists (e.g. Rousseau)</h5>
+      <ul>
+        <li>What we bring at birth matters most</li>
+        <li>Development driven by inborn traits</li>
+        <li>Nature is primary</li>
       </ul>
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════════════
-       9.3 COGNITIVE DEVELOPMENT: INFANCY & CHILDHOOD
-  ════════════════════════════════════════════════════════ -->
-  <div class="section-header" id="s9-3">
-    <span class="section-num">9.3</span>
-    <h2>Cognitive Development in Infancy &amp; Childhood</h2>
+  <div class="callout callout-key">
+    <p><strong>Today's view — interaction, not either/or:</strong> Heredity and experience interact throughout the lifespan. Even inherited tendencies can be modified by environment. Shy baby monkeys placed with nurturant foster mothers showed reduced shyness — demonstrating that both nature and nurture shape even inborn traits (Suomi et al., 1985).</p>
   </div>
 
-  <div class="subsection-title">Perceptual Development</div>
+  <p>The lifespan is studied in overlapping stages: <strong>Prenatal → Neonatal (birth–1 month) → Infancy (1–18 months) → Childhood → Adolescence → Adulthood.</strong></p>
+
+  <!-- INFANCY -->
+  <div class="section-header" id="infancy">
+    <span class="section-num">INFANCY</span>
+    <h2>Prenatal, Neonatal &amp; Infancy</h2>
+  </div>
+
+  <div class="subsection-title">Prenatal Factors &amp; Teratogens</div>
+  <p>Physical development in the womb can be disrupted by <span class="term">teratogens</span> — any environmental agent that harms the developing organism. These include infectious agents (rubella, malaria), prescription and OTC drugs, caffeine, alcohol, and smoking.</p>
+
+  <div class="callout callout-key">
+    <p><strong>Most vulnerable period:</strong> The embryonic stage (weeks 3–8) when major organs form. Most miscarriages and genetic defects surface here. A woman may not yet know she is pregnant, making unknowing exposure a real risk.</p>
+    <p><strong>Down syndrome</strong> — extra 21st chromosome; detectable prenatally. Associated with distinct facial features, heart defects, and varying degrees of intellectual disability.</p>
+  </div>
+
+  <div class="subsection-title">Neural Development in Infancy</div>
+  <p>Infancy is the <strong>most fertile time</strong> for language and emotional (EQ) development due to <span class="term">sensitive periods</span> — windows when the brain needs sufficient stimulation for normal development. Missing these windows makes skills like new language acquisition much harder later (hence why adults struggle to learn new languages compared to children).</p>
+  <p><span class="term">Synaptic pruning</span> — experience and exposure determine which neural connections are strengthened and which are discarded. By around age 11, the ultimate mass of the brain is largely established. This is a <em>nurture</em> process: what you experience shapes your brain's architecture.</p>
+
+  <div class="subsection-title">Neonatal Reflexes</div>
+  <p>At birth, newborns are tested for reflexes to confirm normal neurological development. These automatic, inborn responses also form the foundation for later voluntary skills.</p>
+
+  <table class="stage-table">
+    <thead><tr><th>Reflex</th><th>Stimulus</th><th>Response &amp; Significance</th></tr></thead>
+    <tbody>
+      <tr><td>Grasping</td><td>Object placed on palm</td><td>Hand grasps tightly — foundation for prehension: writing, playing instruments, giving hugs</td></tr>
+      <tr><td>Sucking</td><td>Object touches lips</td><td>Automatic sucking — foundation for feeding</td></tr>
+      <tr><td>Rooting</td><td>Touch on cheek</td><td>Head turns toward touch, mouth opens — helps infant locate food</td></tr>
+      <tr><td>Moro</td><td>Baby startled</td><td>Arms and legs extend then draw back in a clasping motion — protective startle response</td></tr>
+      <tr><td>Walking</td><td>Held upright</td><td>Takes small stepping movements — foundation for locomotion</td></tr>
+      <tr><td>Babinski</td><td>Bottom of foot stroked</td><td>Toes spread out — neurological health indicator; disappears as brain matures</td></tr>
+    </tbody>
+  </table>
+
+  <div class="subsection-title">Neonatal Preferences (Innate Abilities)</div>
+  <p>Newborns arrive with built-in sensory preferences that help them survive and bond with caregivers. Advances in measurement (tracking gaze duration, sucking intensity, brain electrical responses) allow researchers to detect these abilities even when infants cannot speak.</p>
+
   <div class="card-grid">
     <div class="card card-accent-teal">
-      <div class="card-label">Sense</div>
-      <h4>Vision</h4>
-      <p>Nearsighted at birth; prefer complex, high-contrast stimuli; faces preferred; depth perception (visual cliff) by ~6 months; own-race face recognition by 3 months</p>
+      <div class="card-label">Sight</div>
+      <h4>Faces Over Parts</h4>
+      <p>Prefers whole, organised faces over jumbled face arrangements (Fantz, 1985). Innate ability to recognise facial patterns — maximises chance of bonding with caregiver. Nearsighted at birth; visual convergence develops as nervous system matures.</p>
     </div>
     <div class="card card-accent-teal">
-      <div class="card-label">Sense</div>
-      <h4>Hearing</h4>
-      <p>Responds to sound in utero (~week 20); recognises mother's voice shortly after birth; prefers "motherese" (baby talk); can discriminate consonants</p>
+      <div class="card-label">Hearing</div>
+      <h4>Voices &amp; Motherese</h4>
+      <p>Prefers human voices and recognises mother's voice shortly after birth (heard in womb from ~week 20). Responds best to "motherese" — drawn-out vowels, exaggerated syllables, rhythmic inflection. Prefers soft, rhythmic sounds.</p>
     </div>
     <div class="card card-accent-teal">
-      <div class="card-label">Sense</div>
-      <h4>Touch &amp; Smell</h4>
-      <p>Breastfed infants distinguish mother's smell at 3 days; massage accelerates neurological development and weight gain in premature infants</p>
+      <div class="card-label">Smell</div>
+      <h4>Mother's Scent</h4>
+      <p>Breastfed infants distinguish their own mother's smell from a stranger's at just 3 days old. Preference for banana-like smells. Helps locate caregiver and nourishment.</p>
     </div>
     <div class="card card-accent-gold">
-      <div class="card-label">Sense</div>
-      <h4>Taste</h4>
-      <p>Functional at birth; infants prefer sweet tastes</p>
+      <div class="card-label">Taste</div>
+      <h4>Sweet Preference</h4>
+      <p>Taste buds functional at birth; strongly prefer sweet tastes. Adaptive — breast milk is sweet, steering infant toward nourishment.</p>
+    </div>
+  </div>
+
+  <div class="subsection-title">Motor Development Milestones</div>
+  <p>Physical development follows ordered stages — readiness of the body and nervous system determines timing. Each stage builds on the previous one. Notably, crawling develops peripheral vision which then enables depth perception — once infants can crawl, they hesitate at the "visual cliff" (Gibson &amp; Walk, 1960).</p>
+
+  <table class="stage-table">
+    <thead><tr><th>Age</th><th>Key Milestones</th></tr></thead>
+    <tbody>
+      <tr><td>1 month</td><td>Responds to sound; becomes quiet when picked up; vocalises occasionally</td></tr>
+      <tr><td>2 months</td><td>Smiles socially; recognises mother; rolls from side to back</td></tr>
+      <tr><td>3 months</td><td>Lifts and holds head steady; vocalises to adult smiles and talk</td></tr>
+      <tr><td>5 months</td><td>Discriminates strangers from familiar people; turns from back to side</td></tr>
+      <tr><td>6–7 months</td><td>Reaches for small objects; smiles at mirror image; sits alone steadily; crawls</td></tr>
+      <tr><td>8 months</td><td>Vocalises syllables (da-da, me, no); listens to familiar words; pulls to stand</td></tr>
+      <tr><td>11 months</td><td>Stands alone</td></tr>
+      <tr><td>1 year</td><td>Walks alone</td></tr>
+      <tr><td>2 years</td><td>Drinks from straw; feeds self with spoon; tosses a ball</td></tr>
+      <tr><td>3–5 years</td><td>Puts on shoes; hops; dresses self with help; runs/jumps/skips; cuts with scissors; rides bicycle with training wheels</td></tr>
+    </tbody>
+  </table>
+
+  <div class="subsection-title">Attachment</div>
+
+  <div class="callout callout-key">
+    <p><strong>Attachment</strong> = the emotional bond between the child and the primary caregiver (1 month to ~18 months). It lays the foundation for all close relationships that follow. Early attachment quality affects: aggression, quality of friendships, job satisfaction, relationship choices, and intimacy experiences in adulthood.</p>
+    <p><strong>Harlow's key finding:</strong> Attachment is built on <em>contact comfort</em>, not feeding. Baby monkeys spent time with the cloth surrogate (warm, soft) not the wire one with food. Closeness and warmth — not nourishment — drive bonding.</p>
+  </div>
+
+  <p>Two hallmark signs of attachment in the first year:</p>
+  <p><span class="term">Separation anxiety</span> — distress when separated from the primary caretaker. Appears ~6–7 months; peaks 14–18 months; gradually fades through preschool years.<br>
+  <span class="term">Stranger anxiety</span> — distress when approached by unfamiliar people. Appears ~8–10 months; subsides over the second year.</p>
+
+  <p><strong>Ainsworth's Strange Situation</strong> — observes how infants behave when caregiver leaves and returns, revealing four distinct attachment patterns:</p>
+
+  <table class="stage-table">
+    <thead><tr><th>Style</th><th>Behaviour</th><th>Long-Term Implications</th></tr></thead>
+    <tbody>
+      <tr><td>Secure</td><td>Explores confidently with parent present; mild distress at separation; quickly soothed on return</td><td>Curious, resilient, better social skills, stronger academic performance, healthier adult relationships</td></tr>
+      <tr><td>Avoidant</td><td>Ignores parent; no distress at separation; no emotional reaction at return</td><td>Difficulty with closeness; emotional distance in adult relationships ("I don't like it when someone wants to know all about me")</td></tr>
+      <tr><td>Resistant / Anxious-Ambivalent</td><td>Clingy; intense distress at separation; angry and hard to soothe at return</td><td>Hypervigilant about abandonment; intense neediness can push partners away ("my desire to be close sometimes scares people away")</td></tr>
+      <tr><td>Disorganised / Disoriented</td><td>Confused; looks away while being comforted; blank expression after being calmed</td><td>Most at-risk for emotional and behavioural difficulties in later life</td></tr>
+    </tbody>
+  </table>
+
+  <!-- CHILDHOOD -->
+  <div class="section-header" id="childhood">
+    <span class="section-num">CHILDHOOD</span>
+    <h2>Childhood Development</h2>
+  </div>
+
+  <p>The three developmental tasks of childhood build sequentially on each other: <strong>Language Acquisition → Cognitive Development (thinking, perceiving, remembering) → Social Relationships.</strong></p>
+
+  <div class="subsection-title">How Children Acquire Language</div>
+
+  <div class="card-grid">
+    <div class="card card-accent-rust">
+      <div class="card-label">Nature Perspective</div>
+      <h4>Built-In Mental Structures</h4>
+      <p>Language structures are wired into the brain. These enable comprehension and sound production. Children worldwide follow the same sequence: cooing → babbling → single words → two-word sentences. The universal sequence suggests a biological developmental timetable — both brain maturation and muscle development in the mouth and tongue are involved.</p>
+    </div>
+    <div class="card card-accent-teal">
+      <div class="card-label">Nurture Perspective</div>
+      <h4>Imitation &amp; Environment</h4>
+      <p>Language is learned through imitation. The dominant language in the child's environment by the 6th month shapes which sounds develop. Note: children say "drawed" not "drew" — they've internalised grammatical rules and overapply them. This shows <em>active learning</em>, not mere copying.</p>
+    </div>
+    <div class="card card-accent-gold">
+      <div class="card-label">Interaction Perspective</div>
+      <h4>Critical Period + Environment</h4>
+      <p>Both biology and environment work together. There is a <em>critical period</em> for language development. When biology is ready <em>and</em> the environment is conducive (rich exposure), the child excels. Neither alone is sufficient.</p>
     </div>
   </div>
 
@@ -588,484 +279,486 @@
 
   <div class="callout callout-key">
     <p><strong>Three Core Concepts:</strong></p>
-    <p><span class="term">Schema</span> — any mental concept or framework<br>
-    <span class="term">Assimilation</span> — fitting new info into existing schema (e.g., calling a cow a "doggy")<br>
-    <span class="term">Accommodation</span> — modifying existing schema to fit new info (creating "cow" category)</p>
-    <p><em>Disequilibrium</em> drives accommodation — discomfort motivates us to restore mental harmony.</p>
+    <p><span class="term">Schema</span> — any mental concept or framework (e.g., a mental folder called "dogs")<br>
+    <span class="term">Assimilation</span> — fitting new info into an existing schema. Seeing a cow and calling it a "doggy" — the new animal gets stuffed into the existing folder.<br>
+    <span class="term">Accommodation</span> — modifying or creating a schema to fit new experience. The cow moos — not a dog sound. Brain creates a new "cow" folder.</p>
+    <p><em>Disequilibrium</em> = mental discomfort when experience doesn't match schema. It's the engine that forces accommodation — the brain is wired to resolve this discomfort.</p>
+  </div>
+
+  <div class="callout callout-nature">
+    <p><strong>The Island Test — what Piaget gets right:</strong> A child raised completely alone would still develop object permanence and basic symbolic thinking through their own biological engine. Piaget is describing real, inborn cognitive hardware.</p>
+    <p><strong>But the ceiling is low without others:</strong> Without cultural tools — language, numbers, writing — the island child can never reach formal operational thinking. They'd reinvent everything from scratch every generation. This is Vygotsky's challenge to Piaget.</p>
   </div>
 
   <table class="stage-table">
-    <thead>
-      <tr>
-        <th>Stage</th>
-        <th>Age</th>
-        <th>Key Ability</th>
-        <th>Key Limitations</th>
-      </tr>
-    </thead>
+    <thead><tr><th>Stage</th><th>Age</th><th>Key Ability</th><th>Key Limitation</th></tr></thead>
     <tbody>
       <tr>
         <td>Sensorimotor</td>
-        <td>0–2 yrs</td>
-        <td>Learning through senses &amp; actions; develops <strong>object permanence</strong> (~8 months); then symbolic thinking</td>
-        <td>"Out of sight, out of mind" (before 8 months)</td>
+        <td>Birth–2 yrs</td>
+        <td>"Very little thinking." Relies on innate motor responses to stimuli. Major achievement at ~8 months: <strong>object permanence</strong> — objects exist even when hidden. Leads to goal-directed behaviour and then symbolic thinking.</td>
+        <td>"Out of sight, out of mind" before 8 months. Cannot represent absent objects mentally.</td>
       </tr>
       <tr>
         <td>Preoperational</td>
         <td>2–7 yrs</td>
-        <td>Rapid language &amp; symbol use; pretend play; ~10,000-word vocabulary by age 6</td>
-        <td><strong>Centration, egocentrism, lack of conservation</strong>; illogical thinking</td>
+        <td>Rapid symbol use and language (~10,000 words by age 6); pretend play. Egocentrism: cannot take another's perspective (three mountains task — child thinks everyone sees what they see). Trial-and-error thinking.</td>
+        <td>Centration: focuses on one feature only. No conservation: tall glass looks like "more." Cannot distinguish appearance from reality.</td>
       </tr>
       <tr>
-        <td>Concrete Operations</td>
+        <td>Concrete Operational</td>
         <td>7–11 yrs</td>
-        <td>Logical thinking; conservation mastered; reduced egocentrism; empathy grows</td>
-        <td>Limited to concrete, observable situations — abstract reasoning still difficult</td>
+        <td>Logical thinking; masters conservation; mental operations; thinks before acting; less impulsive. Can consider others' perspectives — empathy and humour grow.</td>
+        <td>Still limited to concrete, observable situations. Cannot reason abstractly — hence hands-on activities are essential in primary school.</td>
       </tr>
       <tr>
-        <td>Formal Operations</td>
-        <td>12+ yrs</td>
-        <td>Abstract reasoning; hypothetical thinking; scientific/mathematical concepts; identity exploration</td>
-        <td>Return of egocentrism (imaginary audience, personal fable)</td>
+        <td>Formal Operational</td>
+        <td>11+ yrs</td>
+        <td>Abstract thought appears. Can reason about hypotheticals, handle science and maths. Can build and debate arguments effectively. Explores identity.</td>
+        <td>Return of egocentrism (imaginary audience, personal fable). Not all adolescents reach this — depends on education and culture.</td>
       </tr>
     </tbody>
   </table>
 
-  <div class="card-grid">
-    <div class="card card-accent-rust">
-      <div class="card-label">Preoperational Limitation</div>
-      <h4>Centration</h4>
-      <p>Focus on one feature only. Poured liquid looks like "more" in a tall glass → fails conservation test</p>
-    </div>
-    <div class="card card-accent-rust">
-      <div class="card-label">Preoperational Limitation</div>
-      <h4>Egocentrism</h4>
-      <p>"If I can't see you, you can't see me." Cannot take another's perspective</p>
-    </div>
-    <div class="card card-accent-rust">
-      <div class="card-label">Preoperational Limitation</div>
-      <h4>Lack of Conservation</h4>
-      <p>Cannot understand that quantity remains the same despite change in appearance</p>
-    </div>
-  </div>
-
-  <div class="mnemonic">Piaget's stages in order: <strong>S</strong>ensorimotor → <strong>P</strong>reoperational → <strong>C</strong>oncrete → <strong>F</strong>ormal — <em>"Small People Can Fly"</em></div>
+  <div class="mnemonic">Piaget's stages: <strong>S</strong>ensorimotor → <strong>P</strong>reoperational → <strong>C</strong>oncrete → <strong>F</strong>ormal — <em>"Small People Can Fly"</em></div>
 
   <div class="subsection-title">Vygotsky's Sociocultural Theory</div>
+
   <div class="compare">
     <div class="compare-box box-teal">
-      <h5>Piaget (Internal)</h5>
+      <h5>Piaget — The Lone Scientist 🔬</h5>
       <ul>
         <li>Cognition develops through internal schemas</li>
-        <li>Universal stages; fixed sequence</li>
-        <li>Child as independent discoverer</li>
-        <li>Biology-focused</li>
+        <li>Universal stages; fixed biological sequence</li>
+        <li>Child discovers the world independently</li>
+        <li>Think: <em>self-updating app</em> — the brain rewires through solo experience</li>
+        <li>Other people helpful but not essential</li>
       </ul>
     </div>
     <div class="compare-box box-rust">
-      <h5>Vygotsky (Social/Cultural)</h5>
+      <h5>Vygotsky — The Apprentice 🛠</h5>
       <ul>
-        <li>Mental processes begin externally via social interaction</li>
-        <li>Culture shapes the direction of development</li>
+        <li>Mental processes begin <em>outside</em> in social interaction, then move inward</li>
+        <li>Culture shapes direction and ceiling of development</li>
         <li>Child guided by more capable others</li>
-        <li>ZPD + Scaffolding model</li>
+        <li>Think: <em>you need WiFi</em> — without people, the hardware barely runs</li>
+        <li>Other people absolutely essential</li>
       </ul>
     </div>
   </div>
 
-  <div class="callout callout-nature">
-    <p><strong>Zone of Proximal Development (ZPD)</strong> — the gap between what a child can do alone and what they can do with help.<br>
-    <strong>Scaffolding</strong> — adult gradually reduces support as the child gains competence.<br>
-    <strong>Private speech</strong> — self-talk that guides thinking; peaks at 5–7 years; internalises by ~9 years; returns in adults during problem-solving.</p>
-  </div>
-
-  <div class="subsection-title">Moral Reasoning</div>
-  <table class="stage-table">
-    <thead><tr><th>Level (Kohlberg)</th><th>Basis for Decisions</th><th>Typical Age</th></tr></thead>
-    <tbody>
-      <tr><td>Preconventional</td><td>Avoid punishment / gain rewards; egocentric</td><td>Children</td></tr>
-      <tr><td>Conventional</td><td>Social rules, approval of others, laws; rigid application</td><td>Older children – adults</td></tr>
-      <tr><td>Postconventional</td><td>Universal ethical principles; considers circumstances; internal standards</td><td>Some adults (rare)</td></tr>
-    </tbody>
-  </table>
   <div class="callout callout-nurture">
-    <p><strong>Gilligan's critique:</strong> Kohlberg's model reflects male perspective. She proposed women prioritise <em>care and relationships</em> vs. men's <em>justice and fairness</em>. However, research has not consistently supported clear gender differences — both males and females use justice and care reasoning.</p>
+    <p><strong>Vygotsky's deeper point:</strong> You cannot think thoughts your culture hasn't given you tools to think. A 16-year-old today can grasp calculus not because they're smarter than Newton — but because centuries of human thinking have been packaged into textbooks, teachers, and language. You're not reinventing the wheel. You're downloading it through scaffolding.</p>
   </div>
 
-  <!-- ═══════════════════════════════════════════════════════
-       9.4 PSYCHOSOCIAL DEVELOPMENT: INFANCY & CHILDHOOD
-  ════════════════════════════════════════════════════════ -->
-  <div class="section-header" id="s9-4">
-    <span class="section-num">9.4</span>
-    <h2>Psychosocial Development in Infancy &amp; Childhood</h2>
-  </div>
-
-  <div class="subsection-title">Temperament (Chess &amp; Thomas)</div>
-  <div class="card-grid">
-    <div class="card card-accent-teal">
-      <div class="card-label">Type</div>
-      <h4>Easy (~40%)</h4>
-      <p>Good mood, regular eating/sleeping, adaptable, approaches new stimuli readily</p>
-    </div>
-    <div class="card card-accent-rust">
-      <div class="card-label">Type</div>
-      <h4>Difficult (~10%)</h4>
-      <p>Intense negative emotions, irregular schedule, withdraws from new situations</p>
-    </div>
-    <div class="card card-accent-gold">
-      <div class="card-label">Type</div>
-      <h4>Slow-to-Warm-Up (~15%)</h4>
-      <p>Between easy and difficult; needs time to adapt to new situations</p>
-    </div>
-  </div>
-  <p>Temperament is biologically based. <em>Goodness of fit</em> between child's temperament and parental responses influences attachment and development.</p>
-
-  <div class="subsection-title">Attachment (Harlow → Ainsworth)</div>
-  <div class="callout callout-key">
-    <p><strong>Harlow's finding:</strong> Attachment is built on <em>contact comfort</em>, not feeding. Baby monkeys preferred cloth surrogate over wire surrogate with food.</p>
-    <p>Signs of attachment: <span class="term">Separation anxiety</span> (~6–7 months; peaks 14–18 months) and <span class="term">Stranger anxiety</span> (~8–10 months).</p>
-  </div>
-
-  <table class="stage-table">
-    <thead><tr><th>Ainsworth's Style</th><th>Behaviour in Strange Situation</th><th>Later Outcomes</th></tr></thead>
-    <tbody>
-      <tr><td>Secure</td><td>Explores confidently; mild distress at separation; quickly soothed on return</td><td>Curious, resilient, better social skills, academic success</td></tr>
-      <tr><td>Avoidant</td><td>Ignores parent; no distress at separation; no joy at reunion</td><td>Variable</td></tr>
-      <tr><td>Resistant</td><td>Clingy; extreme distress at separation; angry at reunion; hard to soothe</td><td>Variable</td></tr>
-      <tr><td>Disorganised</td><td>Confused; looks away while being comforted; blank expression</td><td>Most at-risk for difficulties</td></tr>
-    </tbody>
-  </table>
-
-  <div class="subsection-title">Parenting Styles (Baumrind)</div>
-  <table class="stage-table">
-    <thead><tr><th>Style</th><th>Control</th><th>Warmth</th><th>Child Outcomes</th></tr></thead>
-    <tbody>
-      <tr><td>Authoritarian</td><td>High</td><td>Low</td><td>Anxious, withdrawn, conforming; more externalising problems</td></tr>
-      <tr><td>Authoritative</td><td>Moderate (democratic)</td><td>High</td><td>Competent, happy, self-confident — <strong>most effective</strong></td></tr>
-      <tr><td>Permissive-Indulgent</td><td>Low</td><td>High</td><td>Impulsive, disobedient; emotionally secure</td></tr>
-      <tr><td>Permissive-Neglectful</td><td>Low</td><td>Low</td><td>Poorest outcomes: low self-esteem, poor social skills, low academic achievement</td></tr>
-    </tbody>
-  </table>
-  <p style="font-size:0.84rem; color:var(--muted);">Note: These are correlations. Child's temperament also influences parenting behaviour — causation cannot be assumed.</p>
-
-  <div class="subsection-title">Erikson's Childhood Psychosocial Stages</div>
-  <table class="stage-table">
-    <thead><tr><th>Stage</th><th>Age</th><th>Healthy Resolution</th><th>Unhealthy Resolution</th></tr></thead>
-    <tbody>
-      <tr><td>Trust vs. Mistrust</td><td>0–1 yr</td><td>Trust in others; secure attachment</td><td>Mistrust, insecurity</td></tr>
-      <tr><td>Autonomy vs. Shame &amp; Doubt</td><td>1–3 yrs</td><td>Independence, self-control</td><td>Shame, self-doubt</td></tr>
-      <tr><td>Initiative vs. Guilt</td><td>3–6 yrs</td><td>Ambition, motivation to act</td><td>Guilt when actions conflict with expectations</td></tr>
-      <tr><td>Industry vs. Inferiority</td><td>6–12 yrs</td><td>Competence, sense of mastery</td><td>Feelings of inferiority vs. peers</td></tr>
-    </tbody>
-  </table>
-
-  <div class="subsection-title">Gender-Role Development</div>
-  <p><span class="term">Gender permanence (constancy)</span> — understanding gender won't change; typically not grasped before age 6. Yet children are already rigid in gender stereotyping from around age 3.</p>
   <div class="callout callout-nature">
-    <p><strong>Bem's Gender-Schema Theory</strong> combines <em>social learning</em> (modelling + reinforcement) with <em>cognitive development</em>: children observe which behaviours are reinforced for each sex, then build schemas that guide their own behaviour. These schemas are culturally defined and vary by society.</p>
-  </div>
-  <div class="quick-ref">
-    <h4>Nature + Nurture on Gender</h4>
-    <ul>
-      <li><strong>Nature:</strong> Prenatal hormones influence gender-typed play; male rhesus monkeys prefer wheeled toys; female hormonal exposure increases male-typical behaviour</li>
-      <li><strong>Nurture:</strong> Parents assign gender-specific toys &amp; chores; teachers give more attention to boys in class; peer groups reinforce gender norms; media perpetuates stereotypes</li>
-    </ul>
+    <p><strong>Zone of Proximal Development (ZPD)</strong> — the gap between what a child can do alone and what they can do with help. Best teaching targets this gap — not too easy (boring) and not too hard (impossible).<br><br>
+    <strong>Scaffolding</strong> — adult holds the bike seat, runs alongside, then gradually lets go. Skill moves from shared → owned.<br><br>
+    <strong>Private speech</strong> — "okay, first I do this, carry the one..." That inner voice during hard tasks was once someone else's voice (parent, teacher) that got internalised. Peaks 5–7 years; internalises by ~9; returns during difficult problem-solving at any age.</p>
   </div>
 
-  <!-- ═══════════════════════════════════════════════════════
-       9.5 PHYSICAL CHANGES: ADOLESCENCE & ADULTHOOD
-  ════════════════════════════════════════════════════════ -->
-  <div class="section-header" id="s9-5">
-    <span class="section-num">9.5</span>
-    <h2>Physical Changes in Adolescence &amp; Adulthood</h2>
-  </div>
-
-  <div class="subsection-title">Puberty</div>
-  <p><span class="term">Puberty</span> = sexual maturation process. Females: avg onset ~10 yrs; Males: ~12 yrs (females ≈ 2 years earlier). Growth spurt adds ~10 inches and ~40 lbs. First menstruation = <span class="term">menarche</span>.</p>
-
-  <div class="callout callout-nurture">
-    <p><strong>Early maturation effects:</strong><br>
-    <em>Females:</em> Higher depression/anxiety, disordered eating, lower school performance, greater sexual victimisation risk<br>
-    <em>Males:</em> More delinquency, alcohol/tobacco use, sexual activity<br>
-    Supportive family = protective factor; deviant peers = risk amplifier</p>
-  </div>
-
-  <div class="subsection-title">Brain Changes in Adolescence</div>
-  <div class="card-grid">
-    <div class="card card-accent-teal">
-      <div class="card-label">Brain Region</div>
-      <h4>Cerebellum</h4>
-      <p>Neurons &amp; connections increase → improved balance &amp; motor coordination (explains early teen awkwardness)</p>
-    </div>
-    <div class="card card-accent-rust">
-      <div class="card-label">Brain Region</div>
-      <h4>Amygdala</h4>
-      <p>More active in teens than adults; larger in males. Regulates emotional reactions → heightened emotional responses</p>
-    </div>
-    <div class="card card-accent-gold">
-      <div class="card-label">Brain Region</div>
-      <h4>Prefrontal Cortex</h4>
-      <p>Last to mature (early 20s!); second wave of gray matter then pruning. Controls judgment, impulse control, planning → explains poor teen decision-making</p>
-    </div>
-  </div>
-
-  <div class="subsection-title">Physical Changes: Early → Later Adulthood</div>
-  <table class="stage-table">
-    <thead><tr><th>Period</th><th>Key Physical Changes</th></tr></thead>
-    <tbody>
-      <tr><td>Early adulthood (20s–30s)</td><td>Biological prime; peak strength, stamina, coordination; visual acuity peaks early 20s</td></tr>
-      <tr><td>Middle adulthood (40s–50s)</td><td>Skin wrinkles; hair thins/grays; weight gain as metabolism slows; reading glasses needed (presbyopia)</td></tr>
-      <tr><td>Later adulthood (60s+)</td><td>Muscle/weight loss; skin sagging; height loss (vertebral compression); age-related hearing loss</td></tr>
-    </tbody>
-  </table>
-
-  <p><span class="term">Menopause</span> (~age 50): end of female reproductive years; declining estrogen; ovulation/menstruation stop.<br>
-  <span class="term">Andropause</span> (after ~60 in males): gradual hormone decline, reduced sperm concentration — but males can remain fertile into their 70s–90s.</p>
-
-  <!-- ═══════════════════════════════════════════════════════
-       9.6 COGNITIVE CHANGES: ADOLESCENCE & ADULTHOOD
-  ════════════════════════════════════════════════════════ -->
-  <div class="section-header" id="s9-6">
-    <span class="section-num">9.6</span>
-    <h2>Cognitive Changes in Adolescence &amp; Adulthood</h2>
-  </div>
-
-  <div class="subsection-title">Adolescent Thinking: Formal Operations Revisited</div>
-  <div class="card-grid">
-    <div class="card card-accent-gold">
-      <div class="card-label">Adolescent Cognition</div>
-      <h4>Idealism of Youth</h4>
-      <p>Abstract reasoning → belief they can solve world problems; heightened sensitivity to what's "right"</p>
-    </div>
-    <div class="card card-accent-rust">
-      <div class="card-label">Adolescent Cognition</div>
-      <h4>Imaginary Audience</h4>
-      <p>Belief that others are constantly watching and judging them → self-consciousness peaks; performing for a perceived audience</p>
-    </div>
-    <div class="card card-accent-rust">
-      <div class="card-label">Adolescent Cognition</div>
-      <h4>Personal Fable</h4>
-      <p>Belief that one is unique and invincible; "it won't happen to me" → fuels risk-taking behaviour (unprotected sex, drugs)</p>
-    </div>
-  </div>
-
-  <div class="subsection-title">Postformal Thought (Adult Reasoning)</div>
   <div class="compare">
     <div class="compare-box box-ink">
-      <h5>Adolescent: Dualistic Thinking</h5>
+      <h5>Where Piaget fights back</h5>
       <ul>
-        <li>Black-or-white, right-or-wrong</li>
-        <li>One correct solution exists</li>
-        <li>Rules applied rigidly</li>
+        <li>Why do students in the same classroom develop so differently?</li>
+        <li>Biological readiness matters — you can't scaffold algebra to a brain not yet ready for abstract reasoning</li>
+        <li>Vygotsky underestimated the hardware stage</li>
+      </ul>
+    </div>
+    <div class="compare-box box-gold">
+      <h5>The Synthesis</h5>
+      <ul>
+        <li><strong>Piaget = hardware</strong> — biological stages of readiness</li>
+        <li><strong>Vygotsky = software</strong> — cultural tools and social input that run on the hardware</li>
+        <li>Key question: is the bottleneck the child's readiness, or the quality of scaffolding?</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="subsection-title">Parenting Styles (Baumrind)</div>
+
+  <table class="stage-table">
+    <thead><tr><th>Style</th><th>Parenting Behaviour</th><th>Child Personality</th></tr></thead>
+    <tbody>
+      <tr><td>Authoritarian</td><td>Demands conformity and obedience; little tolerance for discussion of rules; enforces with threats and punishment</td><td>Anxious, insecure, withdrawn, conforming</td></tr>
+      <tr><td>Authoritative</td><td>High expectations + warmth + respect; listens to child's views and feelings; democratic; uses reasoning and explains consequences</td><td>Confident, self-reliant, enthusiastic, happy, more successful, less trouble — <strong>best outcomes</strong></td></tr>
+      <tr><td>Permissive-Indulgent</td><td>Few rules; caring and communicative; allows child to make decisions even when not ready to; warm but low demands</td><td>More independent, less mature</td></tr>
+      <tr><td>Permissive-Uninvolved (Neglectful)</td><td>Indifferent; shows no interest; neglectful or abusive; stress-filled lives with no energy or time for parenting</td><td>More impulsive, demanding, more trouble — <strong>worst outcomes</strong></td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:0.84rem;color:var(--muted);">Important: These are correlations, not causes. A child's temperament also influences how parents respond — the relationship goes both ways.</p>
+
+  <div class="subsection-title">Kohlberg's Moral Reasoning</div>
+
+  <div class="callout callout-key">
+    <p><strong>The key distinguishing question across all three levels:</strong> <em>Who are you trying to please, and why does their opinion matter to you?</em></p>
+  </div>
+
+  <table class="stage-table">
+    <thead><tr><th>Level</th><th>Driving Question</th><th>Basis for Moral Decision</th><th>Typical For</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Preconventional</td>
+        <td>"What happens to ME?"</td>
+        <td>Avoid punishment / gain rewards. Pure self-interest. No genuine moral values. Would steal every time if zero consequences — same logic as training a dog. Two sub-stages: (1) obedience/punishment orientation; (2) naively egocentric self-interest orientation.</td>
+        <td>Most children</td>
+      </tr>
+      <tr>
+        <td>Conventional</td>
+        <td>"What will people think of ME?"</td>
+        <td>Social approval ("good boy/good girl"), avoid disapproval, uphold laws. Cares about reputation and belonging. Follows rules even when nobody watches — because shame is real. Two sub-stages: (1) good boy/girl orientation; (2) law and order orientation.</td>
+        <td>Most adolescents and adults</td>
+      </tr>
+      <tr>
+        <td>Postconventional</td>
+        <td>"What is actually RIGHT?"</td>
+        <td>Social contract and universal ethical principles. Willing to defy laws or social pressure when principles demand it. Internal moral compass overrides external opinion. Two sub-stages: (1) contractual/legalistic; (2) universal principal orientation — personal ethics.</td>
+        <td>Some but not all adults</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout-key">
+    <p><strong>Why pre-conventional and conventional are NOT the same:</strong><br>
+    Pre-conventional avoids <em>physical consequences to self</em> — scolding, loss of privileges. Other people's feelings don't exist in this calculation.<br>
+    Conventional avoids <em>social consequences</em> — shame, disapproval, loss of belonging. The person has joined a moral community and their identity is tied to it.<br><br>
+    Same outward behaviour (not stealing), completely different internal engine.</p>
+  </div>
+
+  <div class="compare">
+    <div class="compare-box box-rust">
+      <h5>Pre-conventional example</h5>
+      <ul>
+        <li>Find $500 wallet, no cameras, no witnesses → <strong>Keep it.</strong> Zero consequences to me.</li>
+        <li>Morality = consequences to my body, freedom, stuff</li>
       </ul>
     </div>
     <div class="compare-box box-teal">
-      <h5>Adult: Relativistic / Postformal</h5>
+      <h5>Conventional example</h5>
       <ul>
-        <li>Multiple valid solutions may coexist</li>
-        <li>Context and circumstances matter</li>
-        <li>Pragmatic, experience-driven reasoning</li>
+        <li>Same wallet → <strong>Return it.</strong> "I'm not a thief. What if someone found out?"</li>
+        <li>Morality = consequences to my reputation and relationships</li>
       </ul>
     </div>
   </div>
 
-  <div class="subsection-title">Fluid vs. Crystallised Intelligence Across Adulthood</div>
+  <div class="callout callout-nurture">
+    <p><strong>Post-conventional in action:</strong> Citizens in Nazi-occupied Europe who hid Jewish families risked death and defied their entire society's approval. No pre-conventional logic (gained nothing, risked everything). No conventional logic (society said don't). They acted from a pure internal principle: <em>this is wrong and I will not participate.</em></p>
+  </div>
+
+  <div class="mnemonic">Three levels: <strong>Pre</strong> = "What do I lose?" · <strong>Con</strong> = "What will they think?" · <strong>Post</strong> = "What is right?"</div>
+
+  <div class="callout callout-nurture">
+    <p><strong>Gilligan's critique:</strong> Kohlberg's model is biased toward the male perspective — emphasising justice and individual rights. Women, Gilligan argued, more often reason from care and relationships. However research has not consistently supported clear gender differences — both males and females use both justice and care reasoning. Also criticised for Western cultural bias: postconventional reasoning emphasises individual rights, which fits Western cultures more than collectivist ones.</p>
+  </div>
+
+  <div class="subsection-title">Erikson's Childhood Psychosocial Stages</div>
+  <p>Each stage is a developmental crisis. Healthy resolution strengthens capacity for the next stage. Unhealthy resolution can echo throughout life — but damage can sometimes be repaired later.</p>
+
   <table class="stage-table">
-    <thead><tr><th>Type</th><th>What It Is</th><th>Nature/Nurture</th><th>Trajectory</th></tr></thead>
+    <thead><tr><th>Stage</th><th>Age</th><th>What Produces Healthy Resolution</th><th>Healthy → Unhealthy</th></tr></thead>
     <tbody>
       <tr>
-        <td>Fluid Intelligence</td>
-        <td>Processing speed, attention, working memory, reaction time</td>
-        <td>Primarily nature/biology</td>
-        <td>Peaks with brain maturity; perceptual speed declines late 20s–30s; spatial/inductive reasoning declines after 50s</td>
+        <td>Trust vs. Mistrust</td>
+        <td>0–1½ yrs</td>
+        <td>Caregiver consistently meets needs → child develops trust in the world. Also lays foundation for secure attachment.</td>
+        <td>Trust → Mistrust and insecurity</td>
       </tr>
       <tr>
-        <td>Crystallised Intelligence</td>
-        <td>Knowledge, vocabulary, expertise, social judgment</td>
-        <td>Primarily nurture/experience</td>
-        <td>Increases into adulthood; mild decline after 70s</td>
+        <td>Autonomy vs. Shame &amp; Doubt</td>
+        <td>1½–3 yrs</td>
+        <td>Freedom + encouragement to do things independently → autonomy. Restriction, criticism, harsh demands → shame, no perseverance when mastering new tasks.</td>
+        <td>Autonomy → Shame and self-doubt</td>
+      </tr>
+      <tr>
+        <td>Initiative vs. Guilt</td>
+        <td>3–6 yrs</td>
+        <td>Encouraged to be independent and make decisions → initiative, ambition. Overcontrolled, discouraged → feeling of guilt, inadequacy, and less confidence.</td>
+        <td>Initiative → Guilt and inadequacy</td>
+      </tr>
+      <tr>
+        <td>Industry vs. Inferiority</td>
+        <td>6 yrs–puberty</td>
+        <td>School, sports, and peer interactions provide feedback. Success in these arenas → sense of competence. Repeated failure and negative feedback → feelings of inferiority.</td>
+        <td>Competence and industry → Inferiority</td>
       </tr>
     </tbody>
   </table>
-  <div class="mnemonic"><strong>Fluid</strong> = flows fast but depletes early · <strong>Crystallised</strong> = grows richer with time</div>
 
-  <!-- ═══════════════════════════════════════════════════════
-       9.7 PSYCHOSOCIAL CHANGES: ADOLESCENCE & ADULTHOOD
-  ════════════════════════════════════════════════════════ -->
-  <div class="section-header" id="s9-7">
-    <span class="section-num">9.7</span>
-    <h2>Psychosocial Changes in Adolescence &amp; Adulthood</h2>
+  <!-- ADOLESCENCE -->
+  <div class="section-header" id="adolescence">
+    <span class="section-num">ADOLESCENCE</span>
+    <h2>Adolescence</h2>
   </div>
 
-  <div class="subsection-title">Erikson's Adolescent &amp; Adult Psychosocial Stages</div>
+  <p>Adolescence brings three simultaneous challenges: <strong>Physical changes → Cognitive changes → Socioemotional pressures.</strong></p>
+
+  <div class="subsection-title">Physical Changes: Puberty &amp; Brain Development</div>
+  <p><span class="term">Puberty</span> = process of sexual maturation. Average onset: females ~10 yrs, males ~12 yrs. Growth spurt adds ~10 inches and ~40 lbs. First menstruation = <span class="term">menarche</span>.</p>
+  <p>Brain development continues into adulthood. The <strong>frontal lobe</strong> — responsible for judgment, impulse control, and planning — is still maturing in adolescence. This explains impulsive teenage behaviour. The <strong>amygdala</strong> (emotional reactions) is more active and larger in teens than adults, contributing to emotional intensity.</p>
+
+  <div class="subsection-title">Cognitive Changes: Formal Operations &amp; Adolescent Thinking</div>
+  <p>Abstract thought enables teenagers to reason about hypotheticals, tackle complex subjects, and debate effectively. But it also brings a return of egocentrism:</p>
+
+  <div class="card-grid">
+    <div class="card card-accent-gold">
+      <div class="card-label">Feature</div>
+      <h4>Idealism of Youth</h4>
+      <p>Abstract reasoning creates a sense of having discovered answers to the world's problems. Heightened sensitivity to injustice and what "could be" vs. what "is."</p>
+    </div>
+    <div class="card card-accent-rust">
+      <div class="card-label">Feature</div>
+      <h4>Imaginary Audience</h4>
+      <p>Belief that others are constantly watching and evaluating them. "Everyone noticed my pimple." Self-consciousness peaks. Performing for a mostly imaginary audience — hiding in class to avoid being called on.</p>
+    </div>
+    <div class="card card-accent-rust">
+      <div class="card-label">Feature</div>
+      <h4>Personal Fable</h4>
+      <p>Belief in one's own uniqueness and invincibility. "It won't happen to me." Drives risk-taking — unprotected sex, drug use — because addiction and consequences "happen to other people."</p>
+    </div>
+  </div>
+
+  <div class="subsection-title">Socioemotional Challenge: Identity vs. Role Confusion (Erikson)</div>
+
+  <div class="callout callout-key">
+    <p><strong>Identity vs. Role Confusion</strong> — the defining crisis of adolescence. Teenagers must form a stable sense of who they are across: occupation, gender role, sexual behaviour, religion, and peer relationships. Those who cannot settle on a stable identity experience <em>role confusion</em> — constantly shifting, never grounded. Identity formed here is not permanent — it continues to be refined through adult roles and responsibilities.</p>
+  </div>
+
+  <!-- ADULTHOOD -->
+  <div class="section-header" id="adulthood">
+    <span class="section-num">ADULTHOOD</span>
+    <h2>Adulthood</h2>
+  </div>
+
+  <p>Adulthood is where life stabilises. Physical and cognitive abilities peak. The three major tasks are: <strong>Advanced Education → Career → Intimate Relationship.</strong></p>
+
+  <div class="subsection-title">Levinson's Stages of Adulthood</div>
+
   <table class="stage-table">
-    <thead><tr><th>Stage</th><th>Period</th><th>Healthy Resolution</th><th>Unhealthy Resolution</th></tr></thead>
+    <thead><tr><th>Stage</th><th>Age</th><th>Focus</th></tr></thead>
+    <tbody>
+      <tr><td>Escape from dominance</td><td>16–18 yrs</td><td>Breaking free from parental control; first steps toward independence</td></tr>
+      <tr><td>Leaving the family</td><td>18–22 yrs</td><td>Physical and psychological separation from family; entering college or work</td></tr>
+      <tr><td>Building a workable life</td><td>22–28 yrs</td><td>Establishing career, relationships, and lifestyle — the "Dream" phase; optimistic and energetic</td></tr>
+      <tr><td>Crisis of question</td><td>29–34 yrs</td><td>Questioning choices made so far; first doubts about direction in life</td></tr>
+      <tr><td>Crisis of urgency</td><td>35–43 yrs</td><td>Midlife awareness of mortality and limited time; urgency to achieve or change</td></tr>
+      <tr><td>Attaining stability</td><td>43–50 yrs</td><td>Settling into a more stable structure; generativity focus; mentoring younger generations</td></tr>
+      <tr><td>Mellowing</td><td>50+ yrs</td><td>Reduced urgency; acceptance; moving toward late adulthood reflection</td></tr>
+    </tbody>
+  </table>
+
+  <div class="subsection-title">Erikson's Adult Psychosocial Stages</div>
+
+  <table class="stage-table">
+    <thead><tr><th>Stage</th><th>Period</th><th>What It Means</th><th>Healthy → Unhealthy</th></tr></thead>
     <tbody>
       <tr>
         <td>Identity vs. Role Confusion</td>
         <td>Adolescence</td>
-        <td>Clear personal identity, values, direction</td>
-        <td>Role confusion; constantly shifting identity</td>
+        <td>Form clear sense of self across occupation, gender role, sexual behaviour, religion, peer relationships</td>
+        <td>Clear identity → Role confusion</td>
       </tr>
       <tr>
         <td>Intimacy vs. Isolation</td>
-        <td>Young adulthood</td>
-        <td>Deep relationships; cooperation, tolerance, accepting differences</td>
-        <td>Isolation; fear of commitment; defensiveness</td>
+        <td>Early adulthood</td>
+        <td>Develop deep, intimate relationships — romantic, friendship, or work. Requires cooperation, tolerance, and acceptance of differences. Young adults must develop love relationships or risk feelings of isolation.</td>
+        <td>Intimacy → Isolation and defensiveness</td>
       </tr>
       <tr>
         <td>Generativity vs. Stagnation</td>
         <td>Middle adulthood</td>
-        <td>Meaningful contribution to society (parenting, career, community)</td>
-        <td>Stagnation; sense of failure; lack of purpose</td>
+        <td>Must contribute meaningfully beyond self — parenting, work, community, society, future generations. Virtue developed: <em>care</em>. Increases life satisfaction.</td>
+        <td>Generativity → Stagnation, empty nest syndrome, self-indulgence, midlife crisis</td>
       </tr>
       <tr>
-        <td>Integrity vs. Despair</td>
+        <td>Ego-Integrity vs. Despair</td>
         <td>Late adulthood</td>
-        <td>Life review is positive → accept death without fear</td>
-        <td>Regret; despair; fear of death</td>
+        <td>Review life and accept it — appreciate what went well, accept what didn't. Arrive at serenity, wholeness, contentment. Face death without fear.</td>
+        <td>Ego-integrity → Despair, bitterness, contempt, fear of death</td>
       </tr>
     </tbody>
   </table>
 
-  <div class="subsection-title">Emerging Adulthood</div>
-  <p>In developed nations, a transitional phase from late teens to mid-20s (<span class="term">emerging adulthood</span>) — marked by extended education, delayed marriage, career exploration. Not universal: absent in many non-Western cultures and among economically disadvantaged youth in Western nations.</p>
+  <div class="subsection-title">Midlife in Detail: Generativity vs. Stagnation</div>
 
-  <div class="subsection-title">Relationships &amp; Social Development</div>
-  <div class="quick-ref">
-    <h4>Key Relationship Facts</h4>
-    <ul>
-      <li><strong>Marriage satisfaction predictors:</strong> Similar backgrounds, marrying in mid-to-late 20s, warm family history, supportive partner, financial stability, positive partner perception</li>
-      <li><strong>Marriage dissatisfaction predictors:</strong> Boredom, contempt, defensiveness, criticism, negativity</li>
-      <li><strong>Divorce risk factors:</strong> No children, lower education, young marriage age, parents' divorce, lower income</li>
-      <li><strong>Parenthood:</strong> Correlates with lower marital satisfaction but higher meaning and happiness; life satisfaction decreases with baby's arrival but children enrich lives overall</li>
-      <li><strong>Empty nest:</strong> Marital satisfaction increases; women report improved well-being</li>
-    </ul>
+  <div class="compare">
+    <div class="compare-box box-teal">
+      <h5>Generativity ✓</h5>
+      <ul>
+        <li>Focus beyond self — raising children, volunteering, mentoring</li>
+        <li>Making meaningful, lasting contributions to family, work, society, future generations</li>
+        <li>Virtue of "care" developed</li>
+        <li>Increased life satisfaction</li>
+        <li>Skills cultivated: reflection, analysis, stress coping, problem-solving, healthy lifestyle, social support, sense of well-being</li>
+      </ul>
+    </div>
+    <div class="compare-box box-rust">
+      <h5>Stagnation ✗</h5>
+      <ul>
+        <li>"Empty nest syndrome" — feeling purposeless when children leave</li>
+        <li>Questioning and regretting past choices</li>
+        <li>Self-indulgent focus — absorbed in own comfort and needs only</li>
+        <li>Midlife crisis — dramatic attempts to reclaim youth</li>
+      </ul>
+    </div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════════════
-       9.8 DEATH AND DYING
-  ════════════════════════════════════════════════════════ -->
-  <div class="section-header" id="s9-8">
-    <span class="section-num">9.8</span>
-    <h2>Death &amp; Dying</h2>
+  <div class="subsection-title">Late Adulthood in Detail: Ego-Integrity vs. Despair</div>
+
+  <div class="compare">
+    <div class="compare-box box-teal">
+      <h5>Ego-Integrity ✓</h5>
+      <ul>
+        <li>Look back on life <strong>without regrets</strong> — sense of wholeness</li>
+        <li>Appreciate things that turned out well</li>
+        <li>Accept things that did not turn out well</li>
+        <li>Feel whole, complete, satisfied with achievements</li>
+        <li>Serenity and contentment — associated with psychosocial maturity</li>
+        <li>Preceded by: well-developed identity, meaningful close relationships, sense of contribution to the next generation</li>
+      </ul>
+    </div>
+    <div class="compare-box box-rust">
+      <h5>Despair ✗</h5>
+      <ul>
+        <li>Feel many decisions were wrong — but time is too short to change</li>
+        <li>Bitter and unaccepting of coming death</li>
+        <li>Expressed as anger and contempt for others</li>
+      </ul>
+    </div>
   </div>
 
-  <div class="subsection-title">Kübler-Ross's Five Stages</div>
+  <!-- DEATH & DYING -->
+  <div class="section-header" id="death">
+    <span class="section-num">DEATH &amp; DYING</span>
+    <h2>Death &amp; Dying — Kübler-Ross</h2>
+  </div>
+
+  <p>Kübler-Ross interviewed 200+ terminally ill patients and identified five emotional reactions to impending death. These are <em>not</em> a fixed sequence — not everyone experiences all stages, nor in this order. The same reactions can also apply to other major losses (divorce, job loss, loss of a loved one).</p>
+
   <div class="card-grid">
     <div class="card card-accent-gold">
       <div class="card-label">Stage 1</div>
       <h4>Denial</h4>
-      <p>Behaves as though diagnosis wasn't received; seeks second opinions; allows time to adjust</p>
+      <p>Behaves as if diagnosis wasn't received. Seeks second opinions. Continues life normally. Adaptive — creates time to adjust.</p>
     </div>
     <div class="card card-accent-rust">
       <div class="card-label">Stage 2</div>
       <h4>Anger</h4>
-      <p>"Why me?" Lashing out at loved ones, medical staff; seeking to blame</p>
+      <p>"Why me?" Lashes out at loved ones and medical staff. Blames others. Expressing the unfairness and injustice of death.</p>
     </div>
     <div class="card card-accent-gold">
       <div class="card-label">Stage 3</div>
       <h4>Bargaining</h4>
-      <p>Attempting to negotiate more time with doctors, a deity, or the universe; often unrealistic goals</p>
+      <p>Tries to negotiate more time — with doctors, God, the universe. "Let me live to see my child graduate." Often unrealistic. A way of holding on.</p>
     </div>
     <div class="card card-accent-teal">
       <div class="card-label">Stage 4</div>
       <h4>Depression</h4>
-      <p>Sadness, withdrawal, loss of interest — mourning one's own impending death</p>
+      <p>Deep sadness, withdrawal, loss of interest in activities. Mourning one's own impending death before it happens.</p>
     </div>
     <div class="card card-accent-teal">
       <div class="card-label">Stage 5</div>
       <h4>Acceptance</h4>
-      <p>Peace and calm; withdrawal from most relationships; approaching death with equanimity</p>
+      <p>Peace and calm. Withdrawing from most relationships except the very close. Approaches death with equanimity. Terminal patients' words tend to become more positive as death approaches (Goranson et al., 2017).</p>
     </div>
   </div>
-  <p style="font-size:0.84rem; color:var(--muted);">⚠ Not all dying people experience all stages, nor in this order. Personality, support systems, and illness type all shape the process.</p>
 
   <div class="mnemonic">DABDA — <strong>D</strong>enial · <strong>A</strong>nger · <strong>B</strong>argaining · <strong>D</strong>epression · <strong>A</strong>cceptance</div>
 
-  <div class="subsection-title">Bereavement &amp; Grief</div>
-  <p><span class="term">Bereavement</span> = the experience of loss. <span class="term">Grief</span> = emotional reaction to loss.</p>
+  <!-- RESEARCH METHODS -->
+  <div class="section-header" id="research">
+    <span class="section-num">RESEARCH METHODS</span>
+    <h2>Cross-Sectional vs. Longitudinal Research</h2>
+  </div>
+
+  <p>Developmental psychologists use two main methods to study change over time. Choosing between them involves trade-offs of time, cost, and data quality.</p>
+
   <table class="stage-table">
-    <thead><tr><th>Phase</th><th>Experience</th></tr></thead>
+    <thead><tr><th></th><th>Longitudinal</th><th>Cross-Sectional</th></tr></thead>
     <tbody>
-      <tr><td>Impact / Shock</td><td>Disbelief, numbness, operating "in a fog" — adaptive dulling of pain; especially intense if death was sudden</td></tr>
-      <tr><td>Confrontation</td><td>Deep despair, weeping, anxiety, guilt, anger; difficulty concentrating, sleeping, eating; realising the loss is real</td></tr>
-      <tr><td>Accommodation / Acceptance</td><td>Reengage with life; memories internalised; refocus emotional energy on living; grief subsides (though timeline varies greatly)</td></tr>
+      <tr>
+        <td>What it is</td>
+        <td>Same group of individuals tracked over a long time period (e.g., teenagers from age 13 tracked until age 35)</td>
+        <td>Different age groups studied at the same point in time (e.g., group 1: teens 13–18 yrs; group 2: young adults 21–25 yrs; group 3: adults 35–40 yrs — all tested simultaneously)</td>
+      </tr>
+      <tr>
+        <td>Advantages</td>
+        <td>Tracks individual patterns over time; provides the best data on continuity/discontinuity of behaviour; rich, detailed data</td>
+        <td>Cost-effective; completed quickly; no drop-out problem</td>
+      </tr>
+      <tr>
+        <td>Disadvantages</td>
+        <td>Very time-consuming and expensive; high drop-out rate (participants move, die, withdraw); participants may "wise up" to the study (contamination of results)</td>
+        <td>Less rich data; highly susceptible to cohort effects</td>
+      </tr>
+      <tr>
+        <td>Cohort concern</td>
+        <td>The tracked group may share unusual characteristics not typical of that age group (e.g., tracked group lived through a war)</td>
+        <td>Differences between age groups may reflect their different cultural/historical upbringing rather than true developmental change</td>
+      </tr>
     </tbody>
   </table>
 
-  <!-- ═══════════════════════════════════════════════════════
-       GLOSSARY
-  ════════════════════════════════════════════════════════ -->
+  <div class="callout callout-key">
+    <p><span class="term">Cohort effects</span> — differences between age groups that stem from growing up in different social, cultural, or historical conditions, rather than from developmental change itself. A cohort is a generation or age group (e.g., baby boomers, those who grew up during a war, the digital-native generation). Always ask: are these differences due to development, or just different life experiences across generations?</p>
+  </div>
+
+  <!-- GLOSSARY -->
   <div class="section-header" id="glossary">
     <span class="section-num">KEY TERMS</span>
     <h2>Glossary</h2>
   </div>
 
   <dl class="glossary">
-    <div class="glossary-item"><dt>accommodation</dt><dd>Modifying or creating a schema to fit new experience</dd></div>
-    <div class="glossary-item"><dt>assimilation</dt><dd>Applying an existing schema to interpret new experience</dd></div>
-    <div class="glossary-item"><dt>attachment</dt><dd>Emotional bond between infant and primary caretaker, firm by 8–9 months</dd></div>
-    <div class="glossary-item"><dt>authoritarian parent</dt><dd>High control, low warmth; "my way or the highway"</dd></div>
-    <div class="glossary-item"><dt>authoritative parent</dt><dd>Moderate control, high warmth; democratic rules; most effective style</dd></div>
-    <div class="glossary-item"><dt>bereavement</dt><dd>Experience of losing a loved one</dd></div>
-    <div class="glossary-item"><dt>centration</dt><dd>Focusing on only one feature of an object or situation</dd></div>
-    <div class="glossary-item"><dt>concrete operations</dt><dd>Piaget's stage (7–11 yrs): logical thinking about concrete objects</dd></div>
-    <div class="glossary-item"><dt>conservation</dt><dd>Understanding that quantity remains constant despite changes in appearance</dd></div>
-    <div class="glossary-item"><dt>crystallised intelligence</dt><dd>Knowledge and expertise gained through experience; stable into late adulthood</dd></div>
-    <div class="glossary-item"><dt>development</dt><dd>Changes in behaviour and abilities across the lifespan</dd></div>
-    <div class="glossary-item"><dt>Down syndrome</dt><dd>Extra 21st chromosome; intellectual disability, heart defects, distinct facial features</dd></div>
-    <div class="glossary-item"><dt>dualistic thinking</dt><dd>Adolescent black-or-white reasoning; belief in one correct answer</dd></div>
-    <div class="glossary-item"><dt>egocentrism</dt><dd>Belief that others see/think as you do; cannot take another's perspective</dd></div>
-    <div class="glossary-item"><dt>embryonic stage</dt><dd>Weeks 3–8; major organ formation; most vulnerable to teratogens</dd></div>
-    <div class="glossary-item"><dt>emerging adulthood</dt><dd>Transitional phase late teens to mid-20s in developed nations</dd></div>
-    <div class="glossary-item"><dt>fetal alcohol syndrome (FAS)</dt><dd>Severe effects of prenatal alcohol: low birth weight, brain abnormalities, intellectual disability, physical deformities</dd></div>
-    <div class="glossary-item"><dt>fetal stage</dt><dd>Week 9 to birth; growth and maturation; viability at ~24 weeks</dd></div>
-    <div class="glossary-item"><dt>fine motor skills</dt><dd>Small muscle activities: writing, playing instruments</dd></div>
-    <div class="glossary-item"><dt>fluid intelligence</dt><dd>Processing speed and working memory; peaks with brain maturity, declines earlier</dd></div>
-    <div class="glossary-item"><dt>formal operations</dt><dd>Piaget's final stage (12+): abstract, hypothetical reasoning</dd></div>
-    <div class="glossary-item"><dt>gender permanence</dt><dd>Understanding that one's gender will not change; not grasped before ~age 6</dd></div>
-    <div class="glossary-item"><dt>gender roles</dt><dd>Society's expectations for how males and females should behave</dd></div>
-    <div class="glossary-item"><dt>gender-schema theory</dt><dd>Bem: modelling + reinforcement + cognitive development shape gender schemas</dd></div>
-    <div class="glossary-item"><dt>germinal stage</dt><dd>First 14 days after conception; cell division; zygote → blastocyst</dd></div>
-    <div class="glossary-item"><dt>grief</dt><dd>Emotional reaction to bereavement/loss</dd></div>
-    <div class="glossary-item"><dt>gross motor skills</dt><dd>Large muscle activities: walking, running, jumping</dd></div>
-    <div class="glossary-item"><dt>imaginary audience</dt><dd>Teen belief that others are constantly watching and focused on them</dd></div>
-    <div class="glossary-item"><dt>menarche</dt><dd>First menstrual cycle; a sign of female puberty</dd></div>
-    <div class="glossary-item"><dt>menopause</dt><dd>End of female reproductive years (~age 50); declining estrogen</dd></div>
-    <div class="glossary-item"><dt>moral reasoning</dt><dd>How one distinguishes right from wrong (Kohlberg's framework)</dd></div>
-    <div class="glossary-item"><dt>nature-nurture issue</dt><dd>Debate over relative contribution of biology vs. environment to development</dd></div>
-    <div class="glossary-item"><dt>neonate</dt><dd>Newborn up to 28 days old</dd></div>
-    <div class="glossary-item"><dt>object permanence</dt><dd>Understanding objects exist even when not visible; develops ~8 months</dd></div>
-    <div class="glossary-item"><dt>permissive parent</dt><dd>Low control; indulgent (high warmth) or neglectful (low warmth)</dd></div>
-    <div class="glossary-item"><dt>personal fable</dt><dd>Teen belief in their unique invincibility; fuels risk-taking</dd></div>
-    <div class="glossary-item"><dt>postformal thought</dt><dd>Adult relativistic thinking; appreciates multiple valid solutions</dd></div>
-    <div class="glossary-item"><dt>preoperational stage</dt><dd>Piaget's stage (2–7 yrs): symbolic thinking; centration; egocentrism</dd></div>
-    <div class="glossary-item"><dt>private speech</dt><dd>Vygotsky: self-talk that guides thinking; peaks 5–7 yrs; internalises by ~9</dd></div>
-    <div class="glossary-item"><dt>puberty</dt><dd>Process of sexual maturation; females ~10, males ~12 on average</dd></div>
-    <div class="glossary-item"><dt>reflex</dt><dd>Automatic response to a stimulus; foundation for voluntary motor behaviours</dd></div>
-    <div class="glossary-item"><dt>relativistic thinking</dt><dd>Adult understanding that correct answers can vary by situation</dd></div>
-    <div class="glossary-item"><dt>scaffolding</dt><dd>Vygotsky: adult gradually reduces support as child gains competence</dd></div>
-    <div class="glossary-item"><dt>schema</dt><dd>Any mental concept, idea, or framework used to understand the world</dd></div>
-    <div class="glossary-item"><dt>sensitive periods</dt><dd>Times when certain teratogens have their most severe effects</dd></div>
-    <div class="glossary-item"><dt>sensorimotor stage</dt><dd>Piaget's stage (0–2 yrs): learning through senses and motor action</dd></div>
-    <div class="glossary-item"><dt>separation anxiety</dt><dd>Distress when separated from primary caretaker; peaks 14–18 months</dd></div>
-    <div class="glossary-item"><dt>stranger anxiety</dt><dd>Distress with unfamiliar people; appears 8–10 months</dd></div>
-    <div class="glossary-item"><dt>symbolic thinking</dt><dd>Representing objects with symbols/language; propels to preoperational stage</dd></div>
-    <div class="glossary-item"><dt>temperament</dt><dd>Biologically-based differences in behavioural style present from birth</dd></div>
-    <div class="glossary-item"><dt>teratogen</dt><dd>Any environmental agent that can harm the developing embryo</dd></div>
-    <div class="glossary-item"><dt>zone of proximal development (ZPD)</dt><dd>Vygotsky: gap between what a child can do alone vs. with help</dd></div>
-    <div class="glossary-item"><dt>zygote</dt><dd>Fertilised egg; 23 chromosome pairs; first stage of prenatal development</dd></div>
+    <div class="glossary-item"><dt>accommodation</dt><dd>Modifying or creating a schema to fit new experience that doesn't match existing understanding</dd></div>
+    <div class="glossary-item"><dt>assimilation</dt><dd>Fitting new information into an existing schema (e.g., calling a cow a "doggy")</dd></div>
+    <div class="glossary-item"><dt>attachment</dt><dd>Emotional bond between infant and primary caretaker; foundation for all later close relationships; affects aggression, friendships, job satisfaction, and intimacy in adulthood</dd></div>
+    <div class="glossary-item"><dt>authoritarian parent</dt><dd>High control, low warmth; demands conformity; enforces with punishment; "my way or the highway" → anxious, insecure children</dd></div>
+    <div class="glossary-item"><dt>authoritative parent</dt><dd>High expectations + warmth + democratic discussion + explains consequences → most effective; confident, happy children</dd></div>
+    <div class="glossary-item"><dt>centration</dt><dd>Preoperational limitation: focusing on only one feature of an object/situation (e.g., tall glass = more liquid)</dd></div>
+    <div class="glossary-item"><dt>cohort effects</dt><dd>Differences between age groups due to different cultural/historical conditions they grew up in, not development itself</dd></div>
+    <div class="glossary-item"><dt>concrete operations</dt><dd>Piaget's stage (7–11 yrs): logical thinking; conservation mastered; can consider others' perspectives; still limited to observable situations</dd></div>
+    <div class="glossary-item"><dt>conservation</dt><dd>Understanding that quantity remains constant despite changes in appearance; mastered in concrete operations stage</dd></div>
+    <div class="glossary-item"><dt>cross-sectional study</dt><dd>Compares different age groups at the same time; quick and cheap but susceptible to cohort effects</dd></div>
+    <div class="glossary-item"><dt>developmental psychology</dt><dd>Study of growth, change, and consistency across the lifespan from physical, emotional, cognitive, and sociocultural perspectives</dd></div>
+    <div class="glossary-item"><dt>Down syndrome</dt><dd>Extra 21st chromosome; intellectual disability, heart defects, distinct facial features; detectable prenatally</dd></div>
+    <div class="glossary-item"><dt>egocentrism</dt><dd>Belief that others see/think as you do; cannot take another's perspective; present in preoperational stage and returns in adolescence</dd></div>
+    <div class="glossary-item"><dt>embryonic stage</dt><dd>Weeks 3–8; major organ formation; most vulnerable to teratogens; most miscarriages occur here</dd></div>
+    <div class="glossary-item"><dt>formal operations</dt><dd>Piaget's final stage (11+ yrs): abstract thought; hypothetical reasoning; identity exploration; not universal</dd></div>
+    <div class="glossary-item"><dt>generativity</dt><dd>Erikson's midlife virtue; making meaningful contributions beyond self to family, society, and future generations; virtue of care</dd></div>
+    <div class="glossary-item"><dt>identity crisis</dt><dd>Erikson's term for adolescent confusion about sense of self across occupation, gender role, sexual behaviour, and religion</dd></div>
+    <div class="glossary-item"><dt>imaginary audience</dt><dd>Adolescent belief that others are constantly watching and evaluating them; self-consciousness peaks</dd></div>
+    <div class="glossary-item"><dt>longitudinal study</dt><dd>Same individuals tracked over a long time period; richest data on development but expensive and prone to drop-out</dd></div>
+    <div class="glossary-item"><dt>menarche</dt><dd>First menstrual cycle; sign of female puberty onset</dd></div>
+    <div class="glossary-item"><dt>moral reasoning</dt><dd>How one distinguishes right from wrong; Kohlberg's three levels reflect increasingly complex motivations</dd></div>
+    <div class="glossary-item"><dt>nature vs. nurture</dt><dd>Debate about relative contribution of biology vs. environment; today viewed as interacting forces, not opposites</dd></div>
+    <div class="glossary-item"><dt>object permanence</dt><dd>Understanding objects exist even when not visible; major achievement of sensorimotor stage at ~8 months</dd></div>
+    <div class="glossary-item"><dt>permissive parent</dt><dd>Low control; indulgent (warm, few rules) or uninvolved/neglectful (indifferent, no energy) → worst outcomes for neglectful type</dd></div>
+    <div class="glossary-item"><dt>personal fable</dt><dd>Adolescent belief in own uniqueness and invincibility; fuels risk-taking ("it won't happen to me")</dd></div>
+    <div class="glossary-item"><dt>preoperational stage</dt><dd>Piaget's stage (2–7 yrs): symbol use and language; but centration, egocentrism, no conservation</dd></div>
+    <div class="glossary-item"><dt>private speech</dt><dd>Vygotsky: inner self-talk that guides thinking; peaks 5–7 yrs; internalises by ~9; returns during problem-solving</dd></div>
+    <div class="glossary-item"><dt>puberty</dt><dd>Process of sexual maturation; females ~10 yrs, males ~12 yrs on average; frontal lobe still maturing throughout</dd></div>
+    <div class="glossary-item"><dt>reflex</dt><dd>Automatic inborn response to a stimulus; forms foundation for later voluntary skills (grasping → writing; sucking → feeding)</dd></div>
+    <div class="glossary-item"><dt>scaffolding</dt><dd>Vygotsky: adult gradually reduces support as child gains competence; skill transfers from shared to independently owned</dd></div>
+    <div class="glossary-item"><dt>schema</dt><dd>Any mental concept or framework used to understand the world; building block of Piaget's cognitive theory</dd></div>
+    <div class="glossary-item"><dt>sensitive periods</dt><dd>Windows in infancy when the brain is most fertile for language and EQ development; needs adequate stimulation</dd></div>
+    <div class="glossary-item"><dt>sensorimotor stage</dt><dd>Piaget's stage (0–2 yrs): learns through senses and motor responses; "very little thinking"; achieves object permanence at ~8 months</dd></div>
+    <div class="glossary-item"><dt>separation anxiety</dt><dd>Distress when separated from primary caretaker; appears ~6–7 months; peaks 14–18 months</dd></div>
+    <div class="glossary-item"><dt>stranger anxiety</dt><dd>Distress with unfamiliar people; appears ~8–10 months; subsides over second year</dd></div>
+    <div class="glossary-item"><dt>synaptic pruning</dt><dd>Experience determines which neural connections survive; unused connections discarded; ultimate brain mass achieved ~age 11</dd></div>
+    <div class="glossary-item"><dt>temperament</dt><dd>Biologically-based differences in behavioural style from birth: easy, difficult, slow-to-warm-up</dd></div>
+    <div class="glossary-item"><dt>teratogen</dt><dd>Any environmental agent that harms the developing embryo; most damaging during embryonic stage (weeks 3–8)</dd></div>
+    <div class="glossary-item"><dt>zone of proximal development (ZPD)</dt><dd>Vygotsky: gap between what a child can do alone and what they can do with help; optimal target for teaching</dd></div>
   </dl>
 
-</div><!-- /container -->
+</div>
 
 <footer>
-  Chapter 9 Reference Notes · <em>What is Psychology?</em> by Pastorino &amp; Doyle-Portillo · Compiled for study purposes
+  Exam Guide · Chapter 9 Human Development · Aligned to Seminar Slides + Study Unit SU1 · PSY108
 </footer>
 
 <script>
-  // Reading progress bar
   const bar = document.getElementById('progress');
   window.addEventListener('scroll', () => {
     const max = document.body.scrollHeight - window.innerHeight;
