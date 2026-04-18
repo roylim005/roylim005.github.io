@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Health & Stress — Exam Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&display=swap');
+
+  :root {
+    --ink: #1a1a2e;
+    --cream: #f5f0e8;
+    --warm: #e8dfd0;
+    --rust: #c0392b;
+    --teal: #1a6b6b;
+    --gold: #b8860b;
+    --pale-teal: #e8f4f4;
+    --pale-rust: #fdf0ee;
+    --border: #c5b99a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 15px;
+    line-height: 1.75;
+    padding: 0 0 60px 0;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 48px 40px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      -45deg, transparent, transparent 20px,
+      rgba(255,255,255,.03) 20px, rgba(255,255,255,.03) 21px
+    );
+  }
+  header .label {
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 10px; font-family: 'Source Serif 4', serif;
+    font-weight: 300; position: relative;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 4vw, 44px);
+    font-weight: 900; line-height: 1.1;
+    position: relative;
+  }
+  header h1 span { color: var(--gold); }
+  header .subtitle {
+    margin-top: 10px; font-size: 13px; color: #aaa;
+    font-style: italic; position: relative;
+  }
+  .nav-pills {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-top: 24px; position: relative;
+  }
+  .nav-pills a {
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.15);
+    color: #ccc; text-decoration: none;
+    padding: 5px 14px; border-radius: 20px;
+    font-size: 12px; letter-spacing: .5px;
+    transition: all .2s;
+  }
+  .nav-pills a:hover { background: var(--teal); color: #fff; border-color: var(--teal); }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+  /* ── SECTION HEADINGS ── */
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 700;
+    color: var(--ink); margin: 48px 0 20px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--ink);
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-title .num {
+    background: var(--ink); color: var(--cream);
+    font-size: 12px; font-weight: 700;
+    width: 26px; height: 26px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .sub-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px; font-weight: 700;
+    color: var(--teal); margin: 28px 0 10px;
+  }
+
+  /* ── CARDS ── */
+  .card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+  .card-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px; margin-bottom: 16px;
+  }
+  .card-sm {
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 4px; padding: 16px 18px;
+  }
+  .card-sm .card-label {
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--rust); font-weight: 700; margin-bottom: 6px;
+  }
+  .card-sm h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+
+  /* ── TINTED BLOCKS ── */
+  .teal-block {
+    background: var(--pale-teal);
+    border-left: 4px solid var(--teal);
+    padding: 16px 20px; border-radius: 0 4px 4px 0;
+    margin-bottom: 16px;
+  }
+  .rust-block {
+    background: var(--pale-rust);
+    border-left: 4px solid var(--rust);
+    padding: 16px 20px; border-radius: 0 4px 4px 0;
+    margin-bottom: 16px;
+  }
+  .gold-block {
+    background: #fdf9ee;
+    border-left: 4px solid var(--gold);
+    padding: 16px 20px; border-radius: 0 4px 4px 0;
+    margin-bottom: 16px;
+  }
+  .block-title {
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    font-weight: 700; margin-bottom: 8px;
+  }
+  .teal-block .block-title { color: var(--teal); }
+  .rust-block .block-title { color: var(--rust); }
+  .gold-block .block-title { color: var(--gold); }
+
+  /* ── TABLE ── */
+  table {
+    width: 100%; border-collapse: collapse;
+    font-size: 13.5px; margin-bottom: 16px;
+  }
+  th {
+    background: var(--ink); color: var(--cream);
+    padding: 9px 14px; text-align: left;
+    font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+    font-weight: 600;
+  }
+  td { padding: 9px 14px; border-bottom: 1px solid var(--border); }
+  tr:nth-child(even) td { background: var(--warm); }
+  tr:last-child td { border-bottom: none; }
+
+  /* ── FLOW DIAGRAM ── */
+  .flow {
+    display: flex; align-items: center; flex-wrap: wrap; gap: 0;
+    margin: 16px 0;
+  }
+  .flow-box {
+    background: var(--ink); color: var(--cream);
+    padding: 10px 18px; border-radius: 4px;
+    font-size: 13px; font-weight: 600; text-align: center;
+  }
+  .flow-box.alt { background: var(--teal); }
+  .flow-box.accent { background: var(--rust); }
+  .flow-arrow {
+    font-size: 20px; color: var(--border); padding: 0 8px;
+  }
+
+  /* ── TYPE GRID ── */
+  .type-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 12px; margin-bottom: 16px;
+  }
+  @media (min-width: 600px) {
+    .type-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  .type-card {
+    border: 2px solid var(--border); border-radius: 4px;
+    padding: 14px; text-align: center;
+  }
+  .type-card .type-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; font-weight: 900; line-height: 1;
+    margin-bottom: 8px;
+  }
+  .type-card.a { border-color: var(--rust); }
+  .type-card.a .type-label { color: var(--rust); }
+  .type-card.b { border-color: var(--teal); }
+  .type-card.b .type-label { color: var(--teal); }
+  .type-card.c { border-color: var(--gold); }
+  .type-card.c .type-label { color: var(--gold); }
+  .type-card.d { border-color: #666; }
+  .type-card.d .type-label { color: #666; }
+  .type-card ul { text-align: left; font-size: 12px; padding-left: 14px; }
+  .type-card li { margin-bottom: 2px; }
+
+  /* ── GAS STAGES ── */
+  .gas-row {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 12px; margin-bottom: 16px;
+  }
+  .gas-stage {
+    padding: 18px 16px; border-radius: 4px; text-align: center;
+  }
+  .gas-stage.alarm { background: #fff3cd; border: 2px solid #e6a817; }
+  .gas-stage.resist { background: #d4edda; border: 2px solid #28a745; }
+  .gas-stage.exhaust { background: #f8d7da; border: 2px solid var(--rust); }
+  .gas-stage h4 { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+
+  /* ── OCEAN TRAITS ── */
+  .ocean-row {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    gap: 10px; margin-bottom: 16px;
+  }
+  @media (max-width: 640px) {
+    .ocean-row { grid-template-columns: repeat(2, 1fr); }
+    .gas-row { grid-template-columns: 1fr; }
+    .type-grid { grid-template-columns: repeat(2, 1fr); }
+    .flow { flex-direction: column; }
+  }
+  .ocean-card {
+    background: var(--ink); color: var(--cream);
+    padding: 14px 12px; border-radius: 4px; text-align: center;
+  }
+  .ocean-card .letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px; font-weight: 900; color: var(--gold);
+    line-height: 1; margin-bottom: 6px;
+  }
+  .ocean-card .word { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+  .ocean-card p { font-size: 11px; color: #ccc; line-height: 1.4; }
+
+  /* ── COPING TABLE ── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+  @media (max-width: 540px) { .two-col { grid-template-columns: 1fr; } }
+  .col-card { background: #fff; border: 1px solid var(--border); border-radius: 4px; padding: 18px; }
+  .col-card .col-head {
+    font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    font-weight: 700; padding: 6px 12px; border-radius: 20px;
+    margin-bottom: 12px; display: inline-block;
+  }
+  .col-card.problem .col-head { background: var(--teal); color: #fff; }
+  .col-card.emotion .col-head { background: var(--rust); color: #fff; }
+  .col-card ul { padding-left: 16px; font-size: 13.5px; }
+  .col-card li { margin-bottom: 5px; }
+
+  /* ── MODERATORS ── */
+  .mod-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 16px; }
+  @media (max-width: 600px) { .mod-grid { grid-template-columns: 1fr; } }
+  .mod-card { background: #fff; border: 1px solid var(--border); border-radius: 4px; padding: 18px; }
+  .mod-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 8px; color: var(--teal); }
+
+  /* ── DIVIDER ── */
+  hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+
+  /* ── EXAM TIP ── */
+  .exam-tip {
+    background: var(--ink); color: var(--cream);
+    border-radius: 4px; padding: 18px 22px; margin: 20px 0;
+    font-size: 13.5px;
+  }
+  .exam-tip strong { color: var(--gold); }
+
+  p { margin-bottom: 10px; }
+  ul, ol { padding-left: 20px; margin-bottom: 10px; }
+  li { margin-bottom: 4px; }
+  strong { font-weight: 700; }
+  em { font-style: italic; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="label">PSY107 / PSY108 · Seminar 6 · Study Unit 3</div>
+    <h1>Health &amp; <span>Stress</span></h1>
+    <div class="subtitle">Exam-focused guide — topics drawn only from seminar slides and study unit notes</div>
+    <nav class="nav-pills">
+      <a href="#what-is-stress">What Is Stress?</a>
+      <a href="#gas">Stress Response (GAS)</a>
+      <a href="#model">Model of Stress</a>
+      <a href="#moderators">Moderators</a>
+      <a href="#coping">Coping Strategies</a>
+      <a href="#lifestyle">Lifestyle Choices</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- ══════════════════════════════════════════ STRESS ══ -->
+  <h2 class="section-title" id="what-is-stress"><span class="num">1</span>What Is Stress?</h2>
+
+  <div class="card">
+    <p><strong>Stress</strong> is the psychological and bodily response to a stimulus (<em>stressor</em>) that you perceive as challenging or threatening — it alters your body's equilibrium (homeostasis). Crucially, stress is <em>subjective</em>: the same event can be stressful for one person and not for another. As the slides put it, <em>"it's not the problem that's the problem, but how we see the problem."</em></p>
+    <p>The stress response has <strong>three dimensions</strong>: (1) stressors we encounter, (2) physiological &amp; behavioural reactions, and (3) coping — successfully or not.</p>
+  </div>
+
+  <div class="sub-title">Types of Stressors</div>
+  <table>
+    <thead><tr><th>Type</th><th>Effect</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Acute</strong></td><td>Short-term</td><td>Surprise quiz from your lecturer</td></tr>
+      <tr><td><strong>Chronic</strong></td><td>Long-term</td><td>Constant work deadlines; crowded living conditions</td></tr>
+      <tr><td><strong>Physical</strong></td><td>Affects most people</td><td>Natural disasters, war, terrorist attacks</td></tr>
+      <tr><td><strong>Psychological</strong></td><td>Subjective — varies by person</td><td>A nightclub is fun for an extrovert; a nightmare for a shy person</td></tr>
+      <tr><td><strong>Traumatic Events</strong></td><td>Acute &amp; severe</td><td>Death of a loved one, disasters, grief</td></tr>
+      <tr><td><strong>Major Life Events</strong></td><td>Require adjustment</td><td>Marriage, job loss, moving house</td></tr>
+      <tr><td><strong>Daily Hassles</strong></td><td>Accumulate over time</td><td>Traffic, losing your wallet, arguments</td></tr>
+    </tbody>
+  </table>
+
+  <div class="gold-block">
+    <div class="block-title">Key Insight from the Slides</div>
+    <p>Our response to a stressor depends on our <strong>perception</strong> of it, not just the stressor itself — stressors are "in the eyes of the beholder." This is why cognitive appraisal matters so much.</p>
+  </div>
+
+  <div class="sub-title">Internal Conflicts as Stressors</div>
+  <p>Conflicts — having to choose between competing needs — are also a source of stress. The study unit identifies four types:</p>
+  <div class="card-grid">
+    <div class="card-sm">
+      <div class="card-label">Approach–Approach</div>
+      <h4>Two appealing options</h4>
+      <p style="font-size:13px">Least stressful. E.g., Paris or Rome for holiday?</p>
+    </div>
+    <div class="card-sm">
+      <div class="card-label">Avoidance–Avoidance</div>
+      <h4>Two unpleasant options</h4>
+      <p style="font-size:13px">More stressful — people often freeze. E.g., mop floor or do dishes?</p>
+    </div>
+    <div class="card-sm">
+      <div class="card-label">Approach–Avoidance</div>
+      <h4>One option, mixed feelings</h4>
+      <p style="font-size:13px">Drawn to it but also repelled. E.g., save your pet from a burning building?</p>
+    </div>
+    <div class="card-sm">
+      <div class="card-label">Multiple Conflicts</div>
+      <h4>Several options, each with pros &amp; cons</h4>
+      <p style="font-size:13px">Highest complexity. E.g., choosing which university to attend</p>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════ GAS ══ -->
+  <h2 class="section-title" id="gas"><span class="num">2</span>The Stress Response — General Adaptation Syndrome (GAS)</h2>
+
+  <div class="card">
+    <p>Proposed by <strong>Selye</strong>, the GAS describes the body's physical response pattern to any serious, chronic stressor — mentally, physically, and emotionally. It has <strong>three stages</strong>:</p>
+  </div>
+
+  <div class="gas-row">
+    <div class="gas-stage alarm">
+      <h4>① Alarm Reaction</h4>
+      <p style="font-size:13px">The body mobilises resources — <strong>"fight or flight."</strong><br><br>
+      Hypothalamus activates the sympathetic nervous system → adrenal glands release <strong>adrenaline &amp; cortisol</strong> → heart rate ↑, breathing ↑, blood pressure ↑, pupils dilate, muscles on alert, liver releases stored glucose, sweating to cool the body.</p>
+    </div>
+    <div class="gas-stage resist">
+      <h4>② Resistance Stage</h4>
+      <p style="font-size:13px">Body seems to <strong>adapt</strong> to the stressor. Reactions are less intense than the alarm stage but the body remains on high alert, continuing to expend energy reserves.</p>
+    </div>
+    <div class="gas-stage exhaust">
+      <h4>③ Exhaustion Stage</h4>
+      <p style="font-size:13px">Body <strong>depletes its resources.</strong> Prolonged high stress hormones damage the heart, weaken the immune system → illness/death if unresolved. Leads to heart disease, stroke, high blood pressure, mental disorders.</p>
+    </div>
+  </div>
+
+  <div class="rust-block">
+    <div class="block-title">Stress &amp; Illness</div>
+    <p>Psychological states cause physical illness: <strong>Stressor → Stress → Illness.</strong> The fight-or-flight response is hard-wired and designed to protect from bodily harm. But when stress hormones flood the body for non-dangerous events, they wear out the body's reserves — weakening the immune system and causing long-term health problems (heart disease, ulcers, stroke, high blood pressure, mental disorders).</p>
+  </div>
+
+  <div class="sub-title">Long-Term Effects of Stress</div>
+  <p>Chronic stress negatively affects: <strong>finances, relationships, children, career, and study</strong>. The stress effects span five domains:</p>
+  <table>
+    <thead><tr><th>Domain</th><th>Examples</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Physical</strong></td><td>Increased heart rate, breathing difficulty, butterflies in stomach, weakened immune system</td></tr>
+      <tr><td><strong>Emotional</strong></td><td>Anxiety, depression, jealousy</td></tr>
+      <tr><td><strong>Mental</strong></td><td>Can't make decisions, forgetfulness, negative self-image, obsessional intrusive thoughts</td></tr>
+      <tr><td><strong>Behavioural</strong></td><td>Emotional outbursts, sleep difficulty, anger/irritability, overeating/drinking, avoidance</td></tr>
+      <tr><td><strong>Health</strong></td><td>Heart disease, stomach ulcer, migraine, asthma, back pain</td></tr>
+    </tbody>
+  </table>
+
+
+  <!-- ══════════════════════════════════════════ MODEL ══ -->
+  <h2 class="section-title" id="model"><span class="num">3</span>A Model of Stress</h2>
+
+  <p>The seminar presents a clean model showing how personality and coping operate:</p>
+
+  <div class="flow" style="justify-content:center; margin: 20px 0;">
+    <div class="flow-box">Stressor</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box alt">Stress</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box accent">Illness</div>
+  </div>
+
+  <p style="text-align:center; font-size:13px; color:#666; margin-bottom:20px">
+    ↑ Moderators act between Stressor → Stress &nbsp;|&nbsp; Coping Strategies act between Stress → Illness &nbsp;|&nbsp; Positive Lifestyle Choices act on both sides
+  </p>
+
+  <div class="sub-title" id="cognitive-appraisal">Cognitive Appraisal — The Key Filter</div>
+  <div class="teal-block">
+    <div class="block-title">How Cognitive Appraisal Works</div>
+    <p>Before a stressor produces stress, it passes through <strong>cognitive appraisal</strong> — your interpretation of the event. A negative appraisal triggers emotional, physiological, and behavioural stress responses. A positive appraisal results in <em>no stress.</em></p>
+    <p style="margin-top:8px"><em>Example: Surprise quiz → "I can't do this" (stress) vs. "A chance to show what I know" (no stress).</em></p>
+    <p style="margin-top:8px">The ABC model from CBT captures this: <strong>A</strong>ctivating Event → <strong>B</strong>elief (interpretation) → <strong>C</strong>onsequences (behaviour/emotion). The goal is to recognise and challenge the unhelpful belief.</p>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════ MODERATORS ══ -->
+  <h2 class="section-title" id="moderators"><span class="num">4</span>Moderators of Stress</h2>
+  <p>These personality characteristics reduce the impact of stressors on the individual's stress level:</p>
+
+  <div class="mod-grid">
+    <div class="mod-card">
+      <h4>1. Personality Type (A / B / C / D)</h4>
+      <p style="font-size:13px">Your characteristic stress-response style shapes how strongly you experience stressors. See the Type A/B/C/D breakdown below.</p>
+    </div>
+    <div class="mod-card">
+      <h4>2. Locus of Control</h4>
+      <p style="font-size:13px"><strong>Internal:</strong> Believe your actions shape outcomes → feel in control → perceive stressors as manageable → happier, longer lifespan, better immune system.<br><br>
+      <strong>External:</strong> Believe outside forces decide outcomes → more susceptible to stress, depression, health problems. Perceived lack of control can lead to <strong>learned helplessness</strong>.</p>
+    </div>
+    <div class="mod-card">
+      <h4>3. Hardiness</h4>
+      <p style="font-size:13px">Considered the <em>most effective moderator — and it can be learned.</em><br><br>
+      A mental quality of resistance to stress built on <strong>three Cs</strong>:<br>
+      • <strong>Challenge</strong> — see stressors as opportunities<br>
+      • <strong>Commitment</strong> — stay committed to self, work, values<br>
+      • <strong>Control</strong> — believe your actions influence outcomes</p>
+    </div>
+  </div>
+
+  <div class="gold-block">
+    <div class="block-title">Learned Helplessness</div>
+    <p>When people have no perceived control over aversive situations, they develop a <strong>passive response</strong> — they stop trying, even when escape is possible. Originally demonstrated with dogs by Seligman &amp; Maier. In humans: leads to failure to persist, poor grades, depression. Can occur in elderly people not given choices over daily activities. Contrast with the hardy personality — opposite ends of the spectrum.</p>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════ COPING ══ -->
+  <h2 class="section-title" id="coping"><span class="num">5</span>Coping Strategies</h2>
+
+  <p>Coping refers to the techniques people use to handle stress or their reactions to it. The two main types:</p>
+
+  <div class="two-col">
+    <div class="col-card problem">
+      <span class="col-head">Problem-Focused Coping</span>
+      <p style="font-size:13px; margin-bottom:10px">An <strong>active, task-oriented</strong> approach aimed at eliminating or reducing the source of stress. Best when you believe your actions <em>can</em> affect the stressor.</p>
+      <ul>
+        <li>Identifying &amp; monitoring stressors</li>
+        <li>Identifying stress antecedents</li>
+        <li>Acquiring new skills</li>
+        <li>Setting new goals</li>
+        <li>Time management</li>
+        <li>Assertiveness training</li>
+        <li>Problem-solving</li>
+      </ul>
+    </div>
+    <div class="col-card emotion">
+      <span class="col-head">Emotion-Focused Coping</span>
+      <p style="font-size:13px; margin-bottom:10px">Aimed at <strong>managing your emotional reaction</strong> to stress. Used when the stressor itself cannot be changed — requires acceptance of the situation.</p>
+      <ul>
+        <li>Distraction (e.g., running)</li>
+        <li>Disclosure — talking or writing about feelings</li>
+        <li>Cognitive reappraisal (see below)</li>
+        <li>Relaxation / meditation</li>
+        <li>Indulging (comfort food) — can be maladaptive</li>
+        <li>Suppressing negative thoughts — often maladaptive</li>
+        <li>Defense mechanisms (Freud) — unconscious, automatic</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sub-title">Cognitive Reappraisal (2.1 in slides)</div>
+  <div class="teal-block">
+    <div class="block-title">Emotion-Focused — most useful for chronic stress</div>
+    <p><strong>Reappraising the stressor</strong> — seeing the situation in a more positive light. This is the cornerstone of <strong>Cognitive Behavioural Therapy (CBT)</strong>. It is <em>an active and conscious process</em> of changing your interpretation of the stressful event to reduce negative feelings.</p>
+    <p style="margin-top:8px"><em>E.g., "I've lost my job" → reframe as "I have more time with family and can learn new skills."</em></p>
+  </div>
+
+  <div class="sub-title">Self-Disclosure (Study Unit 3.4)</div>
+  <div class="card">
+    <p>Pennebaker (1993) found that <strong>writing about upsetting/traumatic experiences</strong> (20 mins/day for 4 days) led to fewer health clinic visits and more positive mood at year-end compared to a control group. The act of writing helps the writer work through and come to terms with the experience, reducing the negative effects of stress on the immune system.</p>
+    <p style="margin-top:8px">This is a form of <em>emotion-focused coping</em> — "venting" by putting stress into words.</p>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════ LIFESTYLE ══ -->
+  <h2 class="section-title" id="lifestyle"><span class="num">6</span>Positive Lifestyle Choices</h2>
+  <p>These act on <em>both</em> sides of the stress model — as moderators and as coping strategies:</p>
+  <div class="card-grid">
+    <div class="card-sm"><div class="card-label">1</div><h4>Exercise</h4><p style="font-size:13px">Reduces depression, anxiety, and negative emotions from stress; raises energy, releases serotonin/endorphins</p></div>
+    <div class="card-sm"><div class="card-label">2</div><h4>Progressive Relaxation Training</h4><p style="font-size:13px">Alternately tense then relax muscle groups; builds body awareness and ability to relax on command</p></div>
+    <div class="card-sm"><div class="card-label">3</div><h4>Social Support</h4><p style="font-size:13px">Strong relationships buffer stress effects; even giving support to others helps</p></div>
+    <div class="card-sm"><div class="card-label">4</div><h4>Be Spiritual</h4><p style="font-size:13px">Having purpose, self-awareness, and connectedness is associated with longer lifespan and better health</p></div>
+    <div class="card-sm"><div class="card-label">5</div><h4>Be Optimistic</h4><p style="font-size:13px">Expecting good outcomes promotes resilience; optimists show lower cortisol and better immune function</p></div>
+    <div class="card-sm"><div class="card-label">6</div><h4>Time Management</h4><p style="font-size:13px">Keeping a planner; treating all commitments (work, study, play) as serious</p></div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════ TYPE A/B/C/D ══ -->
+  <div class="sub-title" style="margin-top:28px">Personality Types A / B / C / D and Stress</div>
+  <p>The slides categorise four stress-related personality types. The key theme is: <strong>Impatience, Competitiveness, Perfectionism, Aggressiveness, Hostility</strong> all drive stress-related responses.</p>
+
+  <div class="type-grid">
+    <div class="type-card a">
+      <div class="type-label">A</div>
+      <ul>
+        <li>Competitive</li>
+        <li>Verbally aggressive</li>
+        <li>Overcommitted to achieving</li>
+        <li>Impatient</li>
+        <li>Hostile when frustrated</li>
+        <li>Sense of time urgency</li>
+        <li>Workaholic</li>
+        <li>Easily angered</li>
+      </ul>
+      <p style="font-size:11px; margin-top:8px; color:var(--rust)">Anger &amp; hostility → heart disease risk</p>
+    </div>
+    <div class="type-card b">
+      <div class="type-label">B</div>
+      <ul>
+        <li>Easygoing</li>
+        <li>Calm</li>
+        <li>Relaxed</li>
+        <li>Patient</li>
+        <li>Trusting</li>
+        <li>Good-natured</li>
+        <li>Lower need for achievement</li>
+        <li>Supportive</li>
+      </ul>
+      <p style="font-size:11px; margin-top:8px; color:var(--teal)">Lowest health risk</p>
+    </div>
+    <div class="type-card c">
+      <div class="type-label">C</div>
+      <ul>
+        <li>Cautious</li>
+        <li>Careful</li>
+        <li>Detached</li>
+        <li>Introspective</li>
+        <li>Sensitive to criticism</li>
+        <li>Serious</li>
+        <li>Results-oriented</li>
+        <li>Suppressed emotions</li>
+      </ul>
+      <p style="font-size:11px; margin-top:8px; color:var(--gold)">Suppressing anger may raise cancer risk (weak evidence)</p>
+    </div>
+    <div class="type-card d">
+      <div class="type-label">D</div>
+      <ul>
+        <li>Distressed</li>
+        <li>Worrisome</li>
+        <li>Isolated</li>
+        <li>Irritated</li>
+        <li>Sad</li>
+        <li>Lonely</li>
+        <li>Fear of rejection</li>
+        <li>Suppressed emotions</li>
+      </ul>
+      <p style="font-size:11px; margin-top:8px; color:#666">Negative affect + social inhibition → heart &amp; depression risk</p>
+    </div>
+  </div>
+
+  <div class="rust-block">
+    <div class="block-title">Key Research — Friedman &amp; Rosenman (1974)</div>
+    <p>Originally proposed Type A doubles heart disease risk. <strong>Later research refined this:</strong> it is specifically <strong>anger, mistrust, and hostility</strong> within Type A — not all Type A traits — that elevate cardiovascular risk. Type A people without hostility are no more at risk than Type B.</p>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════ EXAM TIPS ══ -->
+  <hr>
+  <div class="exam-tip">
+    <strong>Exam Reminder — Question 1 Format:</strong> A story is given with 5 concepts embedded. At least 3 are inaccurate. You must (a) identify 3 inaccurate concepts and explain <em>why</em> they're wrong (150 words), then (b) rewrite/amend 2 of those story segments to correctly illustrate the concepts using the same storyline (150 words). Markers reward precise definitions and clear rewriting — not just spotting the wrong concept but explaining the correct one clearly.
+  </div>
+
+  <div class="card" style="margin-top:16px; font-size:13.5px">
+    <p><strong>Topics covered in this guide (drawn from slides + SU3 only):</strong><br>
+    Definition &amp; types of stress · Types of stressors (acute, chronic, physical, psychological, traumatic, major life events, daily hassles) · Types of conflicts · GAS (3 stages) · Alarm reaction physiology · Effects of stress (5 domains) · Stressor → Stress → Illness model · Cognitive appraisal &amp; ABC model · Moderators (Personality Type A/B/C/D, Locus of Control, Hardiness) · Learned helplessness · Problem-focused vs Emotion-focused coping · Cognitive reappraisal · Self-disclosure · Positive lifestyle choices</p>
+  </div>
+
+</div>
+</body>
+</html>
+

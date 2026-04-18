@@ -3,938 +3,791 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chapter 6: Learning — Reference Notes</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>PSY108 — Learning: Exam Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0f1117;
-    --surface: #181c27;
-    --surface2: #1e2333;
-    --border: #2a3050;
-    --accent1: #e8a44a;
-    --accent2: #5b8dee;
-    --accent3: #6ecb8a;
-    --accent4: #d46b8a;
-    --accent5: #a78bfa;
-    --text: #dde3f5;
-    --text-muted: #8490b5;
-    --text-bright: #f0f4ff;
+    --bg: #faf8f4;
+    --surface: #ffffff;
+    --surface2: #f3f0ea;
+    --border: #e0d9ce;
+    --ink: #1a1810;
+    --ink-mid: #4a4535;
+    --ink-light: #8a8070;
+    --r: #c0392b;
+    --b: #1a5276;
+    --g: #1e8449;
+    --br: #784212;
+    --p: #6c3483;
+    --gold: #b7860b;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--ink); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.8; }
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Source Sans 3', sans-serif;
-    font-weight: 300;
-    line-height: 1.75;
-    min-height: 100vh;
-  }
+  /* HERO */
+  .hero { background: var(--ink); color: #f0ece0; padding: 52px 48px 44px; position: relative; overflow: hidden; }
+  .hero::after { content: ''; position: absolute; right: -60px; top: -60px; width: 320px; height: 320px; border-radius: 50%; background: rgba(192,57,43,0.12); pointer-events: none; }
+  .hero-inner { max-width: 880px; margin: 0 auto; position: relative; z-index: 1; }
+  .exam-badge { display: inline-block; background: var(--r); color: #fff; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; padding: 4px 12px; border-radius: 2px; margin-bottom: 16px; }
+  .hero h1 { font-family: 'Libre Baskerville', serif; font-size: clamp(28px, 4.5vw, 46px); font-weight: 700; line-height: 1.15; margin-bottom: 12px; color: #f5f0e8; }
+  .hero-sub { color: #a09880; font-size: 14px; }
+  .scope-note { margin-top: 20px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 14px 18px; font-size: 13px; color: #c8bfa8; }
+  .scope-note strong { color: #e8c97a; }
 
-  /* ── HEADER ── */
-  .hero {
-    background: linear-gradient(135deg, #0f1117 0%, #1a1030 50%, #0d1a2a 100%);
-    border-bottom: 1px solid var(--border);
-    padding: 56px 40px 48px;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse 70% 60% at 80% 50%, rgba(91,141,238,0.10) 0%, transparent 70%),
-                radial-gradient(ellipse 40% 40% at 20% 80%, rgba(232,164,74,0.08) 0%, transparent 60%);
-    pointer-events: none;
-  }
-  .hero-inner { max-width: 900px; margin: 0 auto; position: relative; }
-  .chapter-tag {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 3px;
-    color: var(--accent2);
-    text-transform: uppercase;
-    margin-bottom: 14px;
-    display: block;
-  }
-  .hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(32px, 5vw, 52px);
-    font-weight: 700;
-    color: var(--text-bright);
-    line-height: 1.15;
-    margin-bottom: 14px;
-  }
-  .hero h1 em { font-style: italic; color: var(--accent1); }
-  .hero-sub {
-    color: var(--text-muted);
-    font-size: 14px;
-    letter-spacing: 0.5px;
-  }
-
-  /* ── NAV ── */
-  .toc-bar {
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    padding: 0 40px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
+  /* NAV */
+  .toc-bar { background: var(--surface); border-bottom: 2px solid var(--border); padding: 0 48px; display: flex; align-items: stretch; overflow-x: auto; scrollbar-width: none; position: sticky; top: 0; z-index: 100; }
   .toc-bar::-webkit-scrollbar { display: none; }
-  .toc-btn {
-    background: none;
-    border: none;
-    color: var(--text-muted);
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 12.5px;
-    font-weight: 600;
-    letter-spacing: 0.4px;
-    padding: 14px 16px;
-    cursor: pointer;
-    white-space: nowrap;
-    border-bottom: 2px solid transparent;
-    transition: color 0.2s, border-color 0.2s;
-  }
-  .toc-btn:hover, .toc-btn.active {
-    color: var(--text-bright);
-    border-bottom-color: var(--accent1);
-  }
+  .toc-btn { background: none; border: none; border-bottom: 3px solid transparent; color: var(--ink-light); font-family: 'DM Sans', sans-serif; font-size: 12.5px; font-weight: 500; padding: 15px 18px; cursor: pointer; white-space: nowrap; margin-bottom: -2px; transition: color .15s, border-color .15s; }
+  .toc-btn:hover { color: var(--ink); }
+  .toc-btn.active { color: var(--r); border-bottom-color: var(--r); font-weight: 600; }
 
-  /* ── LAYOUT ── */
-  .main { max-width: 900px; margin: 0 auto; padding: 48px 40px 80px; }
-
-  /* ── SECTIONS ── */
-  .section { display: none; animation: fadeIn 0.3s ease; }
+  /* LAYOUT */
+  .main { max-width: 880px; margin: 0 auto; padding: 44px 48px 80px; }
+  .section { display: none; animation: fadeIn .25s ease; }
   .section.active { display: block; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
 
-  /* ── OVERVIEW CARDS ── */
-  .overview-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 16px;
-    margin-bottom: 40px;
-  }
-  .ov-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 22px 20px;
-    text-align: center;
-    transition: transform 0.2s;
-  }
-  .ov-card:hover { transform: translateY(-2px); }
-  .ov-icon { font-size: 28px; margin-bottom: 8px; }
-  .ov-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 4px;
-  }
-  .ov-title { font-weight: 600; font-size: 14px; color: var(--text-bright); }
-
-  /* ── SECTION HEADINGS ── */
-  .sec-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 28px;
-    color: var(--text-bright);
-    margin-bottom: 8px;
-  }
-  .sec-rule { height: 2px; background: linear-gradient(90deg, var(--accent1), transparent); border: none; margin-bottom: 32px; }
-  .sub-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 19px;
-    color: var(--accent1);
-    margin: 32px 0 12px;
-  }
-
-  /* ── CALLOUT BOXES ── */
-  .callout {
-    border-left: 3px solid;
-    border-radius: 0 10px 10px 0;
-    padding: 16px 20px;
-    margin: 20px 0;
-    font-size: 14.5px;
-  }
-  .callout.blue  { border-color: var(--accent2); background: rgba(91,141,238,0.07); }
-  .callout.gold  { border-color: var(--accent1); background: rgba(232,164,74,0.07); }
-  .callout.green { border-color: var(--accent3); background: rgba(110,203,138,0.07); }
-  .callout.pink  { border-color: var(--accent4); background: rgba(212,107,138,0.07); }
-  .callout.purple{ border-color: var(--accent5); background: rgba(167,139,250,0.07); }
-  .callout strong { color: var(--text-bright); }
-  .callout-head {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10.5px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 6px;
-  }
-  .callout.blue  .callout-head { color: var(--accent2); }
-  .callout.gold  .callout-head { color: var(--accent1); }
-  .callout.green .callout-head { color: var(--accent3); }
-  .callout.pink  .callout-head { color: var(--accent4); }
-  .callout.purple .callout-head { color: var(--accent5); }
-
-  /* ── DEFINITION LIST ── */
-  .def-grid { display: grid; gap: 12px; margin: 16px 0; }
-  .def-item {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 14px 18px;
-    display: grid;
-    grid-template-columns: 180px 1fr;
-    gap: 16px;
-    align-items: start;
-    font-size: 14px;
-  }
-  @media(max-width:600px){ .def-item { grid-template-columns: 1fr; } }
-  .def-term {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12.5px;
-    font-weight: 500;
-    color: var(--accent1);
-    padding-top: 2px;
-  }
-  .def-desc { color: var(--text); }
-
-  /* ── SEQUENCE / STEPS ── */
-  .steps { display: grid; gap: 14px; margin: 16px 0; }
-  .step {
-    display: flex;
-    gap: 16px;
-    align-items: flex-start;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 16px 18px;
-    font-size: 14px;
-  }
-  .step-num {
-    width: 30px; height: 30px;
-    border-radius: 50%;
-    background: var(--accent2);
-    color: #fff;
-    font-weight: 700;
-    font-size: 13px;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-  .step-num.gold { background: var(--accent1); }
-  .step-num.green { background: var(--accent3); color: #111; }
-  .step-num.pink { background: var(--accent4); }
-  .step-num.purple { background: var(--accent5); color: #111; }
-  .step-body strong { color: var(--text-bright); display: block; margin-bottom: 2px; font-size: 14.5px; }
-
-  /* ── COMPARISON TABLE ── */
-  .compare-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 13.5px;
-    margin: 20px 0;
-    border-radius: 10px;
-    overflow: hidden;
-  }
-  .compare-table th {
-    background: var(--surface2);
-    color: var(--text-bright);
-    font-weight: 600;
-    padding: 12px 16px;
-    text-align: left;
-    font-size: 12px;
-    letter-spacing: 0.5px;
-  }
-  .compare-table td {
-    padding: 11px 16px;
-    border-top: 1px solid var(--border);
-    background: var(--surface);
-    vertical-align: top;
-  }
-  .compare-table tr:hover td { background: var(--surface2); }
-  .tag {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 20px;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.3px;
-  }
-  .tag-blue   { background: rgba(91,141,238,0.2);  color: var(--accent2); }
-  .tag-gold   { background: rgba(232,164,74,0.2);  color: var(--accent1); }
-  .tag-green  { background: rgba(110,203,138,0.2); color: var(--accent3); }
-  .tag-pink   { background: rgba(212,107,138,0.2); color: var(--accent4); }
-  .tag-purple { background: rgba(167,139,250,0.2); color: var(--accent5); }
-
-  /* ── FORMULA/EQUATION BOX ── */
-  .formula {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 18px 22px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
-    margin: 16px 0;
-    color: var(--text-bright);
-    text-align: center;
-    letter-spacing: 0.5px;
-  }
-  .formula span { color: var(--accent1); font-weight: 500; }
-
-  /* ── INSIGHT BOX ── */
-  .insight {
-    background: linear-gradient(135deg, rgba(91,141,238,0.08), rgba(167,139,250,0.08));
-    border: 1px solid rgba(91,141,238,0.25);
-    border-radius: 12px;
-    padding: 20px 24px;
-    margin: 24px 0;
-    font-size: 14px;
-  }
-  .insight-title {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: var(--accent2);
-    margin-bottom: 8px;
-  }
-  .insight p { color: var(--text); }
-
-  /* ── KEY TERMS GRID ── */
-  .terms-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 10px;
-    margin: 20px 0;
-  }
-  .term-chip {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 10px 14px;
-    font-size: 13px;
-  }
-  .term-chip strong {
-    color: var(--accent1);
-    display: block;
-    font-size: 12.5px;
-    font-family: 'JetBrains Mono', monospace;
-    margin-bottom: 3px;
-  }
-  .term-chip span { color: var(--text-muted); font-size: 12px; }
-
+  /* HEADINGS */
+  .sec-title { font-family: 'Libre Baskerville', serif; font-size: 26px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+  .sec-rule { height: 1px; background: linear-gradient(90deg, var(--r), var(--border)); border: none; margin-bottom: 28px; }
+  .sub-title { font-family: 'Libre Baskerville', serif; font-size: 17px; font-weight: 700; color: var(--b); margin: 32px 0 10px; padding-bottom: 4px; border-bottom: 1px dashed var(--border); }
+  .sub2-title { font-size: 14px; font-weight: 600; color: var(--ink); margin: 20px 0 6px; text-transform: uppercase; letter-spacing: 0.5px; }
   p { margin-bottom: 12px; font-size: 14.5px; }
-  ul, ol { padding-left: 22px; margin-bottom: 12px; font-size: 14.5px; }
+  ul, ol { padding-left: 20px; margin-bottom: 12px; font-size: 14.5px; }
   li { margin-bottom: 6px; }
-  li::marker { color: var(--accent1); }
-  code { font-family: 'JetBrains Mono', monospace; font-size: 12px; background: var(--surface2); padding: 1px 6px; border-radius: 4px; color: var(--accent2); }
+  li::marker { color: var(--r); }
+  strong { font-weight: 600; }
+  em { font-style: italic; }
+
+  /* CALLOUT BOXES */
+  .box { border-left: 4px solid var(--b); background: var(--surface2); border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 16px 0; font-size: 14.5px; }
+  .box.r  { border-left-color: var(--r); }
+  .box.g  { border-left-color: var(--g); }
+  .box.br { border-left-color: var(--br); }
+  .box.p  { border-left-color: var(--p); }
+  .box.gold { border-left-color: var(--gold); }
+  .box-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; color: var(--b); }
+  .box.r  .box-label { color: var(--r); }
+  .box.g  .box-label { color: var(--g); }
+  .box.br .box-label { color: var(--br); }
+  .box.p  .box-label { color: var(--p); }
+  .box.gold .box-label { color: var(--gold); }
+
+  /* SPOTLIGHT */
+  .spotlight { background: #fdf2f2; border: 1px solid #f5b7b1; border-left: 4px solid var(--r); border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 20px 0; font-size: 14px; }
+  .spotlight-head { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--r); margin-bottom: 6px; }
+
+  /* INSIGHT */
+  .insight { background: #f0f3fa; border: 1px solid #adc0e8; border-radius: 8px; padding: 16px 20px; margin: 16px 0; font-size: 14px; }
+  .insight-head { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--b); margin-bottom: 6px; }
+
+  /* WARN */
+  .warn { background: #fef9e7; border: 1px solid #f9e79f; border-left: 4px solid var(--gold); border-radius: 0 8px 8px 0; padding: 14px 18px; margin: 16px 0; font-size: 14px; }
+
+  /* FORMULA */
+  .formula { background: var(--ink); color: #f0ece0; font-family: 'DM Mono', monospace; font-size: 13px; padding: 18px 24px; border-radius: 8px; text-align: center; margin: 18px 0; letter-spacing: 0.5px; line-height: 2; }
+  .formula .y  { color: #e8c97a; }
+  .formula .cy { color: #7fb3d3; }
+  .formula .gr { color: #82e0aa; }
+
+  /* TABLE */
+  .t-wrap { overflow-x: auto; margin: 18px 0; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.07); }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  th { background: var(--ink); color: #f0ece0; padding: 11px 14px; text-align: left; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.5px; font-weight: 500; }
+  td { padding: 10px 14px; border-top: 1px solid var(--border); background: var(--surface); vertical-align: top; }
+  tr:hover td { background: var(--surface2); }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 11px; font-weight: 600; font-family: 'DM Mono', monospace; }
+  .tr { background:#fdecea; color:var(--r); }
+  .tb { background:#eaf0f8; color:var(--b); }
+  .tg { background:#eafaf1; color:var(--g); }
+  .tp { background:#f5eef8; color:var(--p); }
+  .tbr{ background:#fdf3e7; color:var(--br); }
+
+  /* STEPS */
+  .steps { display: grid; gap: 12px; margin: 16px 0; }
+  .step { display: flex; gap: 14px; align-items: flex-start; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; font-size: 14px; }
+  .sn { width: 28px; height: 28px; border-radius: 50%; background: var(--b); color: #fff; font-weight: 700; font-size: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+  .sn.r { background: var(--r); }
+  .sn.g { background: var(--g); }
+  .sn.p { background: var(--p); }
+  .sn.br{ background: var(--br); }
+  .step-body strong { color: var(--ink); display: block; margin-bottom: 3px; font-size: 14.5px; }
+
+  /* GLOSSARY */
+  .terms-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(215px,1fr)); gap: 10px; margin-top: 16px; }
+  .term-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; }
+  .term-card strong { display: block; font-family: 'DM Mono', monospace; font-size: 11.5px; color: var(--r); margin-bottom: 4px; }
+  .term-card span { font-size: 12.5px; color: var(--ink-mid); line-height: 1.6; }
+
+  .divider { height: 1px; background: var(--border); border: none; margin: 28px 0; }
+
+  /* SCENARIO */
+  .scenario { background: #eafaf1; border: 1px solid #a9dfbf; border-radius: 8px; padding: 16px 20px; margin: 14px 0; font-size: 14px; }
+  .scenario-head { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--g); margin-bottom: 8px; }
+
+  @media(max-width:600px){
+    .main { padding: 28px 20px 60px; }
+    .hero { padding: 36px 20px 32px; }
+    .toc-bar { padding: 0 8px; }
+  }
 </style>
 </head>
 <body>
 
 <div class="hero">
   <div class="hero-inner">
-    <span class="chapter-tag">What is Psychology? · Pastorino & Doyle-Portillo · Chapter 6</span>
-    <h1>The Science of <em>Learning</em></h1>
-    <p class="hero-sub">Habituation · Classical Conditioning · Operant Conditioning · Observational Learning</p>
+    <span class="exam-badge">PSY108 · Seminar 2 · Exam Guide</span>
+    <h1>Learning — Exam-Focused Notes</h1>
+    <p class="hero-sub">Classical Conditioning · Operant Conditioning · Cognitive Learning</p>
+    <div class="scope-note">
+      <strong>How this guide works:</strong> Structure follows the Seminar 2 slides. Explanations draw on the Study Unit and selected textbook depth — enough to genuinely understand <em>why</em> each concept works, without overwhelming detail.
+    </div>
   </div>
 </div>
 
 <nav class="toc-bar">
   <button class="toc-btn active" onclick="show('overview')">Overview</button>
-  <button class="toc-btn" onclick="show('habituation')">6.1 Habituation</button>
-  <button class="toc-btn" onclick="show('classical')">6.2 Classical Conditioning</button>
-  <button class="toc-btn" onclick="show('operant')">6.3 Operant Conditioning</button>
-  <button class="toc-btn" onclick="show('observational')">6.4 Observational Learning</button>
-  <button class="toc-btn" onclick="show('glossary')">Glossary</button>
+  <button class="toc-btn" onclick="show('classical')">Classical Conditioning</button>
+  <button class="toc-btn" onclick="show('operant')">Operant Conditioning</button>
+  <button class="toc-btn" onclick="show('cognitive')">Cognitive Learning</button>
+  <button class="toc-btn" onclick="show('apply')">Application</button>
+  <button class="toc-btn" onclick="show('glossary')">Key Terms</button>
 </nav>
 
 <main class="main">
 
-<!-- ════════════════════════════════════════════
-     OVERVIEW
-════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════ OVERVIEW ══════════════════════════════════ -->
 <div id="overview" class="section active">
-  <h2 class="sec-title">Chapter Overview</h2>
+  <h2 class="sec-title">Overview</h2>
   <hr class="sec-rule">
 
-  <div class="callout gold">
-    <div class="callout-head">Core Definition</div>
-    <strong>Learning</strong> is a relatively permanent change in behavior, or the <em>potential</em> for behavior, that results from experience. It may or may not be immediately visible in outward action.
+  <div class="box r">
+    <div class="box-label">Core Definition</div>
+    <strong>Learning</strong> is a process through which <strong>experience produces a lasting change in behaviour or mental processes</strong>. It may show up immediately in behaviour (riding a bike) or lie dormant until needed (knowing speeding is wrong but still speeding).
   </div>
 
-  <div class="overview-grid">
-    <div class="ov-card">
-      <div class="ov-icon">🔕</div>
-      <div class="ov-label">Simplest form</div>
-      <div class="ov-title">Habituation</div>
-    </div>
-    <div class="ov-card">
-      <div class="ov-icon">🔔</div>
-      <div class="ov-label">Stimulus association</div>
-      <div class="ov-title">Classical Conditioning</div>
-    </div>
-    <div class="ov-card">
-      <div class="ov-icon">⚖️</div>
-      <div class="ov-label">Consequence-driven</div>
-      <div class="ov-title">Operant Conditioning</div>
-    </div>
-    <div class="ov-card">
-      <div class="ov-icon">👁️</div>
-      <div class="ov-label">Social / cognitive</div>
-      <div class="ov-title">Observational Learning</div>
-    </div>
-  </div>
+  <p>From the <strong>behavioural perspective</strong>, <em>nurture</em> — our environment and experiences — carries more weight than nature in shaping who we are and how we act. This is the foundation for understanding all four types of learning in this chapter.</p>
 
-  <h3 class="sub-title">Big Picture Comparison</h3>
-  <table class="compare-table">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Mechanism</th>
-        <th>Requires Behavior?</th>
-        <th>Key Theorist</th>
-      </tr>
-    </thead>
+  <h3 class="sub-title">The Three Parts (Seminar Structure)</h3>
+  <div class="t-wrap"><table>
+    <thead><tr><th>Part</th><th>Topic</th><th>Key Question</th></tr></thead>
     <tbody>
-      <tr>
-        <td><span class="tag tag-blue">Habituation</span></td>
-        <td>Repeated exposure → decreased responding</td>
-        <td>Orienting reflex only</td>
-        <td>Pavlov (noted), widespread</td>
-      </tr>
-      <tr>
-        <td><span class="tag tag-gold">Classical</span></td>
-        <td>NS paired with US → CS elicits CR</td>
-        <td>Pre-existing UR needed</td>
-        <td>Pavlov, Watson</td>
-      </tr>
-      <tr>
-        <td><span class="tag tag-green">Operant</span></td>
-        <td>Behavior → consequence → frequency changes</td>
-        <td>Yes — organism must act</td>
-        <td>Thorndike, Skinner</td>
-      </tr>
-      <tr>
-        <td><span class="tag tag-purple">Observational</span></td>
-        <td>Watch model → cognitive encoding → imitate</td>
-        <td>No overt behavior needed</td>
-        <td>Bandura</td>
-      </tr>
+      <tr><td><span class="tag tb">Part 1</span></td><td>Classical Conditioning</td><td>What sort of learning does CC explain?</td></tr>
+      <tr><td><span class="tag tg">Part 2</span></td><td>Operant Conditioning</td><td>How do we learn new behaviours through consequences?</td></tr>
+      <tr><td><span class="tag tp">Part 3</span></td><td>Cognitive Learning</td><td>How does cognitive psychology explain learning?</td></tr>
     </tbody>
-  </table>
+  </table></div>
+
+  <div class="box gold">
+    <div class="box-label">Habituation — Brief Mention</div>
+    The <strong>simplest</strong> form of learning: learning <strong>not to respond</strong> to a repeated, non-threatening stimulus. It helps us focus on what matters and ignore what doesn't. Example: tuning out a fan's hum after a while. <em>Only briefly introduced in this seminar — not tested in depth.</em>
+  </div>
 
   <div class="insight">
-    <div class="insight-title">Kim Peek — Chapter Anchor Case</div>
-    <p>Kim Peek (the real-life inspiration for Rain Man) could memorise entire books but could not learn to brush his teeth. His case frames the chapter: learning ability is not a single dimension. Classical and operant conditioning explain automatic/emotional learning; observational learning explains skill acquisition through modelling — and even Kim relied on daily modelling by his father for basic motor tasks.</p>
+    <div class="insight-head">Behaviourism vs. Cognitive Psychology — The Core Tension</div>
+    <p><strong>Behaviourists</strong> (Pavlov, Watson, Skinner) say learning is a change in <em>observable behaviour</em> driven by external stimuli and consequences. They avoided discussing thoughts or feelings.</p>
+    <p style="margin-top:8px;"><strong>Cognitive psychologists</strong> (Tolman, Bandura, Köhler) say some learning must be explained by changes in <em>internal mental processes</em> — not just behaviour. You can learn something without ever showing it in your actions (latent learning), and you can learn by watching others without doing anything yourself (observational learning).</p>
+    <p style="margin-top:8px;">The debate — whether learning is defined by a change in <em>behaviour</em> or a change in <em>understanding</em> — continues today.</p>
   </div>
 </div>
 
 
-<!-- ════════════════════════════════════════════
-     HABITUATION
-════════════════════════════════════════════ -->
-<div id="habituation" class="section">
-  <h2 class="sec-title">6.1 — Habituation</h2>
-  <hr class="sec-rule">
-
-  <div class="callout blue">
-    <div class="callout-head">Definition</div>
-    <strong>Habituation</strong> is a decrease in responding to a stimulus as it is repeated over and over. It is widely considered the <em>simplest</em> form of learning, found in virtually all organisms, including newborn infants and even fetuses.
-  </div>
-
-  <h3 class="sub-title">6.1.1 Orienting Reflex → Habituation</h3>
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">1</div>
-      <div class="step-body"><strong>Novel stimulus appears</strong> → Orienting reflex: organism stops current activity and orients sense organs toward the stimulus.</div>
-    </div>
-    <div class="step">
-      <div class="step-num gold">2</div>
-      <div class="step-body"><strong>Stimulus assessed as harmless</strong> → Organism returns attention to prior task.</div>
-    </div>
-    <div class="step">
-      <div class="step-num green">3</div>
-      <div class="step-body"><strong>Stimulus repeats</strong> → Orienting reflex diminishes with each repetition — this is habituation.</div>
-    </div>
-  </div>
-
-  <div class="callout gold">
-    <div class="callout-head">Key Purpose</div>
-    Prevents wasting mental resources on irrelevant, non-threatening stimuli; allows selective attention to be directed where it matters.
-  </div>
-
-  <h3 class="sub-title">6.1.2 Protective Function — Migraines Link</h3>
-  <p>Research shows people with migraines often have <strong>reduced ability to habituate</strong> to stimuli at the neuronal level. The brain becomes hyperactive — unable to "tune out" — potentially causing migraine pain. Teaching habituation techniques to migraine sufferers reduces attack frequency.</p>
-
-  <h3 class="sub-title">6.1.3 Dishabituation</h3>
-  <div class="callout purple">
-    <div class="callout-head">Definition</div>
-    <strong>Dishabituation</strong>: When an organism begins responding more intensely to a stimulus it had previously habituated to, because the stimulus has changed significantly or sufficient time has elapsed.
-  </div>
-
-  <table class="compare-table">
-    <thead>
-      <tr><th>Trigger</th><th>Result</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>Quality of stimulus changes significantly</td><td>Immediate dishabituation → re-orienting</td></tr>
-      <tr><td>Passage of time (e.g., long pause in stimulus)</td><td>Brief dishabituation, then rapid re-habituation</td></tr>
-    </tbody>
-  </table>
-
-  <h3 class="sub-title">6.1.4 Real-World Applications</h3>
-  <div class="def-grid">
-    <div class="def-item">
-      <div class="def-term">Vertigo / Motion Sickness</div>
-      <div class="def-desc">Physical therapists repeatedly expose clients to motion-sickness stimuli to train habituation. Used with figure skaters, pilots, and astronauts.</div>
-    </div>
-    <div class="def-item">
-      <div class="def-term">PTSD — Prolonged Exposure Therapy</div>
-      <div class="def-desc">Clients repeatedly face fear-producing stimuli, habituating to anxiety triggers and improving quality of life.</div>
-    </div>
-    <div class="def-item">
-      <div class="def-term">Anxiety Disorders</div>
-      <div class="def-desc">Mindfulness-based stress reduction and CBT enhance habituation in the HPA axis, lessening physiological stress responses.</div>
-    </div>
-  </div>
-</div>
-
-
-<!-- ════════════════════════════════════════════
-     CLASSICAL CONDITIONING
-════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════ CLASSICAL CONDITIONING ══════════════════════════════════ -->
 <div id="classical" class="section">
-  <h2 class="sec-title">6.2 — Classical Conditioning</h2>
+  <h2 class="sec-title">Classical Conditioning</h2>
   <hr class="sec-rule">
 
-  <div class="callout blue">
-    <div class="callout-head">Core Definition</div>
-    Learning that occurs when a <strong>neutral stimulus</strong> is repeatedly paired with an <strong>unconditioned stimulus</strong>, until the neutral stimulus alone can produce the response. Also called <em>Pavlovian conditioning</em>.
+  <div class="box r">
+    <div class="box-label">Core Concept</div>
+    A basic form of learning in which a <strong>stimulus that produces an innate reflex</strong> becomes associated with a <strong>previously neutral stimulus</strong>, which then acquires the power to elicit essentially the same response.
   </div>
 
-  <h3 class="sub-title">6.2.1 The Three-Step Process</h3>
+  <h3 class="sub-title">How It Was Discovered — Pavlov</h3>
+  <p>Ivan Pavlov, a Russian physiologist studying digestion, noticed his dogs began salivating <em>before</em> food appeared — just from the sight of the food bowl or the sound of his footsteps. He realised the dogs had <strong>learned to associate</strong> these cues with food. He then systematically tested this by pairing a bell with food across many trials.</p>
+  <p>The key insight: an organism can be taught to respond to a completely neutral stimulus (one that originally meant nothing) <strong>as if it were the real thing</strong> — purely through repeated association.</p>
+
+  <h3 class="sub-title">The Three-Stage Process</h3>
+
   <div class="steps">
     <div class="step">
-      <div class="step-num">1</div>
+      <div class="sn">1</div>
       <div class="step-body">
-        <strong>Unconditioned Stimulus (US) + Unconditioned Response (UR)</strong>
-        A stimulus that <em>naturally and reliably</em> causes a response without prior learning.<br>
-        <em>Example: Food (US) → Salivation (UR)</em>
+        <strong>Before Conditioning</strong>
+        Food (UCS) naturally causes salivation (UCR) — no learning needed, it's a reflex. The bell (Neutral Stimulus) produces no salivation — it means nothing to the dog yet.
       </div>
     </div>
     <div class="step">
-      <div class="step-num gold">2</div>
+      <div class="sn r">2</div>
       <div class="step-body">
-        <strong>Neutral Stimulus (NS)</strong>
-        Does not naturally produce the UR before conditioning.<br>
-        <em>Example: Buzzer — a dog does not naturally salivate to a buzzer</em>
+        <strong>During Conditioning — Pairing</strong>
+        Bell (NS) is sounded just <em>before</em> food (UCS) is presented, repeatedly. The dog salivates (UCR) because of the food. Over many trials, the dog begins to associate the bell <em>with</em> the food.
       </div>
     </div>
     <div class="step">
-      <div class="step-num green">3</div>
+      <div class="sn g">3</div>
       <div class="step-body">
-        <strong>Pair NS with US → NS becomes Conditioned Stimulus (CS) → Conditioned Response (CR)</strong>
-        After repeated pairings, the NS loses neutrality and acquires the power of the US.<br>
-        <em>Example: Buzzer (CS) alone → Salivation (CR)</em>
+        <strong>After Conditioning</strong>
+        The bell alone (now CS) causes salivation (CR) — even without food. The neutral stimulus has lost its neutrality and now has the same power as the food to produce the response.
       </div>
     </div>
   </div>
 
   <div class="formula">
-    <span>NS</span> + US → UR &nbsp;&nbsp;[repeated] &nbsp;&nbsp;→ &nbsp;&nbsp; <span>CS</span> → CR
+    <span class="y">NS</span> + <span class="cy">UCS</span> → UCR &nbsp; [repeated] &nbsp; → &nbsp; <span class="gr">CS</span> → CR
   </div>
 
-  <h3 class="sub-title">6.2.2 Factors Affecting Conditioning</h3>
-
-  <div class="def-grid">
-    <div class="def-item">
-      <div class="def-term">Contiguity</div>
-      <div class="def-desc">NS/CS and US must occur <em>close together in time</em>. Best conditioning occurs when CS immediately precedes US (forward/delayed conditioning). Backward conditioning (US before CS) is weakest.</div>
-    </div>
-    <div class="def-item">
-      <div class="def-term">Contingency</div>
-      <div class="def-desc">CS must <em>reliably predict</em> the US. Inconsistent pairing weakens the association. Both contiguity AND contingency are required for strong conditioning.</div>
-    </div>
+  <div class="warn">
+    <strong>Why timing matters (Contiguity):</strong> The NS must come <em>just before</em> the UCS — only a short time gap. If Pavlov rang the bell 2 hours before feeding, the dog would not connect the two events and conditioning would fail. Forward conditioning (NS before UCS) works best; backward (UCS before NS) works least.
   </div>
 
-  <h3 class="sub-title">Real-World Applications</h3>
+  <h3 class="sub-title">Acquisition, Extinction & Spontaneous Recovery</h3>
+  <p>These three phases describe the <em>life cycle</em> of a conditioned response and are often tested together (the seminar's graph on slide 10 illustrates all three).</p>
 
-  <div class="callout gold">
-    <div class="callout-head">Higher-Order Conditioning</div>
-    Conditioning that builds on existing conditioned responses. <strong>CS1</strong> (e.g., snakes → fear) can be paired with a new neutral stimulus to produce <strong>CS2</strong> (e.g., hiking trails → fear), without re-involving the original US.
-  </div>
-
-  <div class="callout pink">
-    <div class="callout-head">Little Albert (Watson & Rayner, 1920)</div>
-    An 11-month-old was conditioned to fear a white rat (NS) by pairing it with a loud noise (US). The resulting fear (CR) then <strong>generalised</strong> to other furry objects — rabbits, fur coats, Santa beards. Landmark but ethically problematic study.
-  </div>
-
-  <table class="compare-table">
-    <thead>
-      <tr><th>Concept</th><th>Description</th><th>Example</th></tr>
-    </thead>
+  <div class="t-wrap"><table>
+    <thead><tr><th>Phase</th><th>What Happens</th><th>Key Point</th></tr></thead>
     <tbody>
       <tr>
-        <td><span class="tag tag-gold">Stimulus Generalisation</span></td>
-        <td>CR occurs to stimuli similar to the CS (never paired with US)</td>
-        <td>Fear of bees generalises to wasps and yellow jackets</td>
+        <td><span class="tag tg">Acquisition</span></td>
+        <td>CS and UCS are paired repeatedly. CR gradually builds in strength over trials.</td>
+        <td>The learning phase — the association is being formed.</td>
       </tr>
       <tr>
-        <td><span class="tag tag-blue">Stimulus Discrimination</span></td>
-        <td>CR occurs only to the specific CS, not similar stimuli</td>
-        <td>Zoo reptile keeper fears king cobras but not all snakes</td>
+        <td><span class="tag tr">Extinction</span></td>
+        <td>CS is presented repeatedly <em>without</em> UCS. CR weakens progressively and eventually ceases.</td>
+        <td>Extinction <strong>suppresses</strong> the CR — it does <strong>NOT eliminate</strong> the underlying memory of the association.</td>
       </tr>
       <tr>
-        <td><span class="tag tag-green">Taste Aversion</span></td>
-        <td>Nausea conditioned to a food after single pairing; intervals up to 7h in humans</td>
-        <td>Peppermint ice cream → sickness → lasting aversion</td>
+        <td><span class="tag tp">Spontaneous Recovery</span></td>
+        <td>After a rest period following extinction, the CS is presented again — CR <em>reappears</em> (though weaker).</td>
+        <td>Proof that extinction only suppressed, not erased. Several extinction sessions may be needed to fully reduce the response.</td>
       </tr>
     </tbody>
-  </table>
+  </table></div>
+
+  <div class="spotlight">
+    <div class="spotlight-head">Why This Matters — Real Life Example</div>
+    A person who overcomes a fear of dogs through therapy (extinction) may suddenly feel afraid again when they encounter a dog after a long break — that is spontaneous recovery. The fear was never fully erased, only suppressed. This is why relapse is common and why multiple rounds of therapy may be needed.
+  </div>
+
+  <h3 class="sub-title">Stimulus Generalisation & Discrimination</h3>
+  <p>Once a CS is established, two opposite tendencies can emerge:</p>
+
+  <div class="t-wrap"><table>
+    <thead><tr><th>Concept</th><th>What Happens</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="tag tb">Stimulus Generalisation</span></td>
+        <td>The CR spreads to stimuli that are <em>similar</em> to the CS — even though those similar stimuli were never paired with the UCS.</td>
+        <td>Dog salivates not just to the ringing bell (CS) but also to a doorbell or alarm clock. A person bitten by a dog (CS = dog → CR = fear) also fears wolves and foxes.</td>
+      </tr>
+      <tr>
+        <td><span class="tag tg">Stimulus Discrimination</span></td>
+        <td>The organism learns to respond <em>only</em> to the specific CS, distinguishing it from similar stimuli that don't signal the UCS.</td>
+        <td>Dog salivates to the ringing bell but <em>not</em> to the doorbell. A zoo reptile keeper fears king cobras but not all snakes.</td>
+      </tr>
+    </tbody>
+  </table></div>
 
   <div class="insight">
-    <div class="insight-title">Taste Aversion — Two Unique Features</div>
-    <p><strong>1. Single-trial learning</strong> — one pairing often sufficient (unlike most CC requiring many trials).<br>
-    <strong>2. Long CS–US interval</strong> — up to 24h in non-humans; up to 7h in humans. Explained by <em>biological preparedness</em>: natural selection favoured genes enabling quick aversion to poisonous substances.</p>
+    <div class="insight-head">Why Generalisation Happens</div>
+    <p>Generalisation is actually adaptive — it would be dangerous to only fear the exact dog that bit you. Extending the fear response to similar stimuli (other dogs, similar animals) provides broader protection. Discrimination is equally important: being able to distinguish between a harmless garden snake and a venomous cobra could save your life.</p>
   </div>
 
-  <h3 class="sub-title">6.2.4 Removing Conditioned Responses</h3>
-  <div class="def-grid">
-    <div class="def-item">
-      <div class="def-term">Extinction</div>
-      <div class="def-desc">Present the CS repeatedly <em>without</em> the US. CR gradually decreases. Does not erase the association — re-acquisition is faster than original learning.</div>
-    </div>
-    <div class="def-item">
-      <div class="def-term">Spontaneous Recovery</div>
-      <div class="def-desc">A temporary re-emergence of the CR after extinction. Brief; organism quickly re-enters extinction.</div>
-    </div>
-    <div class="def-item">
-      <div class="def-term">Counterconditioning</div>
-      <div class="def-desc">Pair the CS with a US that produces an <em>incompatible</em> positive response (e.g., pairing feared object with candy to replace fear with happiness).</div>
-    </div>
-  </div>
+  <h3 class="sub-title">What Types of Responses Can Be Classically Conditioned?</h3>
+  <p>Because CC starts with a reflex (an innate, automatic response to the UCS), the responses that get conditioned are typically:</p>
+  <ul>
+    <li><strong>Emotional responses</strong> — fear, happiness, disgust. E.g., feeling happy when you smell a perfume that reminds you of your mother; Little Albert's fear of white rats spreading to all furry objects.</li>
+    <li><strong>Physiological responses</strong> — salivation, nausea. E.g., taste aversion: eating a food just before falling ill once can permanently condition nausea to that food — even years later.</li>
+  </ul>
 
-  <div class="callout green">
-    <div class="callout-head">Aversion Therapy (Alcoholism)</div>
-    Drug disulfiram + alcohol → severe nausea → conditioned aversion to alcohol taste. Modestly effective but not a standalone cure. Side effects limit use. Also being studied for cocaine and methamphetamine abuse.
+  <div class="box g">
+    <div class="box-label">Taste Aversion — A Special Case</div>
+    Taste aversion is unique because: (1) it can occur after <strong>just one pairing</strong> (unlike most CC which requires many), and (2) the gap between eating the food (NS) and feeling sick (UCS) can be up to <strong>7 hours in humans</strong> — far longer than normal CC allows. This is explained by <strong>biological preparedness</strong>: evolution has wired us to learn food–illness associations easily, because it helps us avoid poisonous substances. This is why coyotes can be trained to avoid sheep by making them sick from eating treated sheep carcasses.
   </div>
 </div>
 
 
-<!-- ════════════════════════════════════════════
-     OPERANT CONDITIONING
-════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════ OPERANT CONDITIONING ══════════════════════════════════ -->
 <div id="operant" class="section">
-  <h2 class="sec-title">6.3 — Operant Conditioning</h2>
+  <h2 class="sec-title">Operant Conditioning</h2>
   <hr class="sec-rule">
 
-  <div class="callout blue">
-    <div class="callout-head">Core Definition</div>
-    Learning from the <strong>consequences</strong> of behaviour. Unlike classical conditioning (respondent), operant behaviour is <em>chosen</em> — the organism operates on the environment to produce a consequence.
+  <div class="box g">
+    <div class="box-label">Core Concept</div>
+    In operant conditioning, the <strong>consequences of behaviour</strong> — rewards and punishments — influence the <strong>probability that the behaviour will occur again</strong>. Unlike classical conditioning where the response is forced/reflexive, here the organism <em>actively chooses</em> to act on its environment.
   </div>
 
-  <h3 class="sub-title">6.3.1 Thorndike's Law of Effect</h3>
-  <div class="callout gold">
-    <div class="callout-head">Law of Effect</div>
-    Behaviours that lead to <strong>satisfying consequences</strong> are strengthened (more likely to be repeated). Behaviours that lead to <strong>discomforting consequences</strong> are weakened (less likely to be repeated).
-  </div>
-  <p>Demonstrated with cats in <strong>puzzle boxes</strong>: cats initially escaped by trial-and-error; through reinforcement of the successful response, escape time decreased over trials.</p>
+  <p><strong>Thorndike's Law of Effect</strong> (the foundation): Behaviours that lead to satisfying consequences are <em>strengthened</em> (more likely to recur). Behaviours that lead to discomforting consequences are <em>weakened</em> (less likely to recur). He demonstrated this with cats in puzzle boxes — cats learned through trial and error, and over time went straight to the behaviour that opened the box.</p>
+  <p><strong>Skinner</strong> formalised this with the Skinner box and called it <em>operant</em> conditioning — emphasising that the organism <em>operates</em> on its environment to produce a consequence.</p>
 
-  <h3 class="sub-title">6.3.2 The Four Consequences of Behaviour</h3>
-  <table class="compare-table">
-    <thead>
-      <tr>
-        <th>Consequence</th>
-        <th>What happens</th>
-        <th>Effect on behaviour</th>
-        <th>Example</th>
-      </tr>
-    </thead>
+  <div class="formula">
+    Behaviour → <span class="y">Consequence</span> → Probability of Re-occurrence <span class="cy">↑ Reinforcement</span> or <span class="y">↓ Punishment</span>
+  </div>
+
+  <h3 class="sub-title">Types of Reinforcers</h3>
+
+  <div class="sub2-title">What — Primary vs. Secondary</div>
+  <div class="t-wrap"><table>
+    <thead><tr><th>Type</th><th>Description</th><th>Examples</th></tr></thead>
     <tbody>
       <tr>
-        <td><span class="tag tag-green">Positive Reinforcement</span></td>
-        <td>Add something pleasant (+)</td>
-        <td>↑ Behaviour increases</td>
-        <td>Praise for answering correctly</td>
+        <td><span class="tag tr">Primary</span></td>
+        <td>Directly and inherently reinforcing — fulfills a basic biological need or desire. No learning required for it to work.</td>
+        <td>Food, water, warmth, sex</td>
       </tr>
       <tr>
-        <td><span class="tag tag-blue">Negative Reinforcement</span></td>
-        <td>Remove something unpleasant (−)</td>
-        <td>↑ Behaviour increases</td>
-        <td>Cat escapes puzzle box, removing confinement</td>
-      </tr>
-      <tr>
-        <td><span class="tag tag-gold">Positive Punishment</span></td>
-        <td>Add something unpleasant (+)</td>
-        <td>↓ Behaviour decreases</td>
-        <td>Electric shock when rat presses lever</td>
-      </tr>
-      <tr>
-        <td><span class="tag tag-pink">Negative Punishment</span></td>
-        <td>Remove something pleasant (−)</td>
-        <td>↓ Behaviour decreases</td>
-        <td>Losing screen time for misbehaving</td>
+        <td><span class="tag tb">Secondary</span></td>
+        <td>Reinforcing only because it has been <em>learned</em> to be associated with a primary reinforcer. Not reinforcing on its own initially.</td>
+        <td>Money (leads to food/shelter), grades, praise, tokens. A dollar bill is just paper — what makes it reinforcing is what it can buy.</td>
       </tr>
     </tbody>
-  </table>
-
-  <div class="callout pink">
-    <div class="callout-head">⚠ Common Confusion</div>
-    <strong>Negative reinforcement ≠ Punishment.</strong> "Negative" refers to <em>removing</em> a stimulus, not a bad outcome. Both positive and negative reinforcement <em>increase</em> behaviour. Punishment always <em>decreases</em> behaviour.
-  </div>
-
-  <h3 class="sub-title">6.3.4 Schedules of Reinforcement</h3>
-
-  <table class="compare-table">
-    <thead>
-      <tr>
-        <th>Schedule</th>
-        <th>Rule</th>
-        <th>Response Rate</th>
-        <th>Extinction Resistance</th>
-        <th>Real-World Example</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>Continuous</strong></td>
-        <td>Every response reinforced</td>
-        <td>High</td>
-        <td><span class="tag tag-pink">Lowest</span></td>
-        <td>Reaching for objects</td>
-      </tr>
-      <tr>
-        <td><strong>Fixed Ratio (FR)</strong></td>
-        <td>Reinforced after set number of responses</td>
-        <td>High</td>
-        <td>Moderate</td>
-        <td>Paid per 100 units assembled</td>
-      </tr>
-      <tr>
-        <td><strong>Variable Ratio (VR)</strong></td>
-        <td>Reinforced after unpredictable number</td>
-        <td><span class="tag tag-green">Highest</span></td>
-        <td><span class="tag tag-green">Highest</span></td>
-        <td>Slot machines</td>
-      </tr>
-      <tr>
-        <td><strong>Fixed Interval (FI)</strong></td>
-        <td>First response after set time is reinforced</td>
-        <td>Scallop pattern (low then burst)</td>
-        <td>Low–Moderate</td>
-        <td>Annual performance review</td>
-      </tr>
-      <tr>
-        <td><strong>Variable Interval (VI)</strong></td>
-        <td>First response after unpredictable time interval</td>
-        <td>Steady</td>
-        <td>High</td>
-        <td>Pop quizzes</td>
-      </tr>
-    </tbody>
-  </table>
+  </table></div>
 
   <div class="insight">
-    <div class="insight-title">Key Summary — Schedules</div>
-    <p>
-      <strong>Ratio schedules</strong> produce higher response rates than interval schedules.<br>
-      <strong>Variable schedules</strong> produce greater resistance to extinction than fixed schedules.<br>
-      <strong>Continuous reinforcement</strong> produces the fastest extinction once reinforcement stops.
-    </p>
+    <div class="insight-head">Is Attention a Primary or Secondary Reinforcer?</div>
+    <p><strong>Attention is a secondary reinforcer.</strong> Primary reinforcers satisfy biological needs directly — food, water, warmth. Attention does not fit this because it is not inherently rewarding at birth.</p>
+    <p style="margin-top:8px;">Attention becomes reinforcing through <strong>learned association</strong>. From early childhood, attention from caregivers is repeatedly paired with primary reinforcers — being fed, held, kept warm. Over time, attention itself acquires reinforcing power. This is why a student like Ali may find a teacher's scolding rewarding — any attention, even negative, has been learned to be valuable.</p>
+    <p style="margin-top:8px;">This also explains why identifying the <strong>actual reinforcer</strong> behind a behaviour matters before designing any intervention. What looks like punishment from the outside may be functioning as reinforcement if it delivers something the person values — including attention.</p>
   </div>
 
-  <h3 class="sub-title">6.3.6 Shaping</h3>
-  <div class="callout purple">
-    <div class="callout-head">Shaping — Definition</div>
-    Reinforcing <strong>successive approximations</strong> of the final desired behaviour until that behaviour is achieved. Used when the target behaviour would never occur spontaneously.
-  </div>
-  <p><strong>Example:</strong> Training a dog to walk on hind legs: reinforce attention → sitting up → rearing up → standing → walking. Each step is a closer approximation.</p>
-  <p><strong>Instinctive drift:</strong> A conditioned animal may eventually revert to instinctive behaviour over the learned response — conditioning cannot fully override instinct.</p>
-
-  <h3 class="sub-title">Punishment — Why Reinforcement is Preferred</h3>
-  <div class="def-grid">
-    <div class="def-item">
-      <div class="def-term">Doesn't teach correct behaviour</div>
-      <div class="def-desc">Punishment tells the organism what not to do, but not what to do instead. Must always pair with positive modelling of desired behaviour.</div>
-    </div>
-    <div class="def-item">
-      <div class="def-term">Models aggression</div>
-      <div class="def-desc">Physical punishment teaches the child that aggression is an effective strategy — they may imitate it in other situations.</div>
-    </div>
-    <div class="def-item">
-      <div class="def-term">Often ineffective</div>
-      <div class="def-desc">Child may suppress behaviour only when parent is present; returns when unsupervised.</div>
-    </div>
-    <div class="def-item">
-      <div class="def-term">Negative emotional effects</div>
-      <div class="def-desc">Via classical conditioning, the punisher (parent) can become a CS for fear and anxiety — damaging the relationship.</div>
-    </div>
+  <div class="sub2-title">How — Positive vs. Negative</div>
+  <div class="warn">
+    <strong>⚠ Most confused concept in this chapter:</strong> "Positive" and "negative" here refer to <em>adding (+) or removing (−)</em> a stimulus — NOT to whether the experience is good or bad. Both positive AND negative reinforcement <strong>increase</strong> behaviour.
   </div>
 
-  <h3 class="sub-title">6.3.8 Cognition in Learning — Beyond Behaviourism</h3>
-
-  <div class="def-grid">
-    <div class="def-item">
-      <div class="def-term">Köhler — Insight</div>
-      <div class="def-desc">Chimps paused to mentally plan before acting — they didn't trial-and-error; they achieved sudden insight. Shows purposive, goal-directed behaviour.</div>
-    </div>
-    <div class="def-item">
-      <div class="def-term">Tolman — Latent Learning</div>
-      <div class="def-desc">Rats learned maze structure without reinforcement, developing a cognitive map. When reinforcement was later introduced, they rapidly outperformed naïve rats. Learning occurred without observable behaviour.</div>
-    </div>
+  <div class="spotlight">
+    <div class="spotlight-head">⚠ Critical Rule — Consequence Is Defined by Its Effect, Not Its Appearance</div>
+    Always identify a consequence by what it <strong>does to behaviour</strong> — not by how it looks or feels. A scolding that <em>increases</em> misbehaviour is reinforcement, not punishment — because the child may find the attention rewarding. A reward that <em>decreases</em> behaviour is punishment. Ask: did the behaviour go up or down? That tells you whether it is reinforcement or punishment. Only then decide if it is positive or negative based on whether something was added or removed.
   </div>
 
-  <div class="callout blue">
-    <div class="callout-head">Token Economy</div>
-    Secondary reinforcers (tokens) exchangeable for primary reinforcers. Advantages: (1) works across groups simultaneously, (2) allows immediate reinforcement when primary reinforcer is impractical, (3) builds delay of gratification. Risk: continuous schedule → vulnerability to extinction.
+  <div class="t-wrap"><table>
+    <thead><tr><th></th><th>Increase Behaviour ↑</th><th>Decrease Behaviour ↓</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Positive</strong><br><em>Add / Apply</em></td>
+        <td><span class="tag tg">Positive Reinforcement</span><br>Add something pleasant<br><em>Give favourite meal</em></td>
+        <td><span class="tag tr">Positive Punishment</span><br>Add something unpleasant<br><em>Scold; sulk for 2 hours</em></td>
+      </tr>
+      <tr>
+        <td><strong>Negative</strong><br><em>Remove / Withdraw</em></td>
+        <td><span class="tag tp">Negative Reinforcement</span><br>Remove something unpleasant<br><em>Remove chores as reward</em></td>
+        <td><span class="tag tbr">Negative Punishment</span><br>Remove something pleasant<br><em>Withdraw iPad time</em></td>
+      </tr>
+    </tbody>
+  </table></div>
+
+  <div class="sub2-title">When — Continuous vs. Partial Reinforcement</div>
+  <div class="t-wrap"><table>
+    <thead><tr><th>Type</th><th>Description</th><th>Best for</th><th>Risk</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="tag tg">Continuous</span></td>
+        <td>Every correct response is rewarded</td>
+        <td>Early/new learning — helps the organism quickly learn what behaviour is desired</td>
+        <td>Extinction happens fast when rewards stop. Omitting a reward may be misread as the behaviour being wrong. Can become boring over time.</td>
+      </tr>
+      <tr>
+        <td><span class="tag tb">Partial (Intermittent)</span></td>
+        <td>Only some correct responses are rewarded, on a schedule</td>
+        <td>Maintaining learnt behaviour long-term</td>
+        <td>Slower initial acquisition — but far more resistant to extinction</td>
+      </tr>
+    </tbody>
+  </table></div>
+
+  <p><strong>Why is partial reinforcement more resistant to extinction?</strong> Because the organism is <em>used to not always getting a reward</em>, so when rewards stop, it doesn't immediately know the contingency has changed — it keeps trying. With continuous reinforcement, the absence of a reward is a clear signal that something has changed, triggering faster extinction.</p>
+
+  <h3 class="sub-title">The Four Reinforcement Schedules</h3>
+  <p>Partial reinforcement comes in four types, organised by two dimensions: <strong>Ratio</strong> (based on number of responses) vs. <strong>Interval</strong> (based on time), and <strong>Fixed</strong> (predictable) vs. <strong>Variable</strong> (unpredictable).</p>
+
+  <div class="t-wrap"><table>
+    <thead><tr><th>Schedule</th><th>Rule</th><th>Response Pattern</th><th>Examples</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="tag tb">Fixed Ratio (FR)</span></td>
+        <td>Reward after a <em>set number</em> of responses</td>
+        <td>High, steady rate. Brief pause after each reward (organism "knows" it just got one). Then resumes.</td>
+        <td>Factory worker paid per 10 cartons completed; telemarketer paid per 30 calls made</td>
+      </tr>
+      <tr>
+        <td><span class="tag tr">Variable Ratio (VR)</span></td>
+        <td>Reward after an <em>unpredictable number</em> of responses — varies around an average</td>
+        <td><strong>Highest</strong> and most sustained response rate. <strong>Most resistant</strong> to extinction. No post-reward pause because you never know when the next one is coming.</td>
+        <td>Slot machines; telemarketer paid per 3 secured sales (sales rate varies); social media likes</td>
+      </tr>
+      <tr>
+        <td><span class="tag tg">Fixed Interval (FI)</span></td>
+        <td>Reward for the first response <em>after a set time</em> has passed, regardless of how many responses were made</td>
+        <td>"Scallop" pattern — low responding after reward, then burst of activity near the deadline as the time approaches.</td>
+        <td>Weekly/monthly paychecks; telemarketers paid $10/hr; year-end bonus; studying hard before a scheduled exam</td>
+      </tr>
+      <tr>
+        <td><span class="tag tp">Variable Interval (VI)</span></td>
+        <td>Reward for first response after a <em>varying time interval</em> — unpredictable</td>
+        <td>Steady, moderate responding. Second highest rate to VR. Most unpredictable — organism must always be ready.</td>
+        <td>Random visit from boss who praises; pop quizzes; checking phone for messages</td>
+      </tr>
+    </tbody>
+  </table></div>
+
+  <div class="spotlight">
+    <div class="spotlight-head">Response Rate Ranking (Cumulative Graph — SU Figure 1.8)</div>
+    From highest cumulative responses to lowest:<br>
+    <strong>VR &gt; FR &gt; VI &gt; FI &gt; No Reinforcement</strong><br><br>
+    From most to least resistant to extinction:<br>
+    <strong>Variable schedules &gt; Fixed schedules &gt; Continuous</strong><br><br>
+    Ratio schedules produce <em>higher</em> response rates than interval schedules because the organism controls how quickly it can earn rewards — work faster, earn sooner.
+  </div>
+
+  <h3 class="sub-title">Shaping</h3>
+  <p>What if you want to condition a behaviour that never occurs spontaneously? You use <strong>shaping</strong> — reinforcing <em>successive approximations</em> that gradually move toward the final desired behaviour.</p>
+  <p>Example: Training a dog to walk on its hind legs. You can't wait for it to do that spontaneously. Instead, reinforce attention → sitting up → rearing slightly → standing → taking first steps. Each closer approximation is rewarded until the full behaviour is achieved.</p>
+  <p>The same logic applies to children: a parent might start by reinforcing any studying behaviour, then only good grades on assignments, then only good grades on exams — progressively raising the standard.</p>
+
+  <h3 class="sub-title">Punishment — Why It's Often Ineffective</h3>
+  <p>Punishment can reduce behaviour, but it comes with significant drawbacks that make reinforcement the preferred approach:</p>
+  <ol>
+    <li><strong>Inconsistency problem</strong> — the unwanted behaviour disappears only while the threat of punishment is present. Remove the parent or authority figure, the behaviour returns.</li>
+    <li><strong>Lure of rewards outweighs punishment</strong> — when the immediate pleasure of a behaviour is strong enough (e.g., drugs vs. risk of imprisonment), punishment loses its deterrent effect.</li>
+    <li><strong>Triggers escape and aggression</strong> — the punished organism tries to avoid or fight back against the punisher, damaging the relationship.</li>
+    <li><strong>Inhibits learning desirable behaviour</strong> — punishment tells the organism what <em>not</em> to do, but not what <em>to</em> do instead. It can cause helplessness and depression. And crucially: <em>unwanted behaviour that goes unpunished becomes self-reinforcing</em> — the organism may learn it can "get away with it."</li>
+  </ol>
+
+  <div class="box g">
+    <div class="box-label">Helpful Conditioning Principles</div>
+    Prefer <strong>reinforcement</strong> (positive and negative) as the main strategy.<br>
+    If punishment is necessary, make it: <strong>Swift · Certain · Limited in duration/intensity · Logical · Use negative punishment over physical.</strong><br>
+    Always pair punishment with clear modelling of the <em>desired</em> behaviour and reinforcement of that behaviour.
   </div>
 </div>
 
 
-<!-- ════════════════════════════════════════════
-     OBSERVATIONAL LEARNING
-════════════════════════════════════════════ -->
-<div id="observational" class="section">
-  <h2 class="sec-title">6.4 — Observational Learning</h2>
+<!-- ══════════════════════════════════ COGNITIVE LEARNING ══════════════════════════════════ -->
+<div id="cognitive" class="section">
+  <h2 class="sec-title">Cognitive Learning</h2>
   <hr class="sec-rule">
 
-  <div class="callout blue">
-    <div class="callout-head">Core Definition</div>
-    Learning through <strong>observing and imitating</strong> the behaviour of others. Also called <em>social learning</em> or <em>modelling</em>. Bandura's framework. Departs from strict behaviourism on two counts: (1) learning without overt behaviour; (2) cognition plays a central role.
+  <div class="box p">
+    <div class="box-label">Core Concept</div>
+    According to cognitive psychology, some forms of learning must be explained as <strong>changes in mental processes</strong>, rather than as changes in behaviour alone. Pure behaviourism is insufficient — it cannot explain learning that happens without any observable action or reinforcement.
   </div>
 
-  <h3 class="sub-title">6.4.1 Bobo Doll Experiments (Bandura, 1965)</h3>
-  <p>Children watched a film of a woman beating a Bobo doll in one of three conditions:</p>
-  <table class="compare-table">
-    <thead>
-      <tr><th>Film Condition</th><th>Child's Aggression Toward Bobo</th></tr>
-    </thead>
-    <tbody>
-      <tr><td><span class="tag tag-green">Model Rewarded</span></td><td>High aggression — most imitation</td></tr>
-      <tr><td><span class="tag tag-gold">No Consequences</span></td><td>High aggression — equal to reward condition</td></tr>
-      <tr><td><span class="tag tag-pink">Model Punished</span></td><td>Lower aggression — most hesitation</td></tr>
-    </tbody>
-  </table>
+  <p>The key challenge to behaviourism came from researchers who noticed animals (and humans) sometimes <em>solving problems without trial-and-error</em>, <em>learning without reinforcement</em>, and <em>learning without doing anything at all</em>.</p>
+
+  <h3 class="sub-title">1 — Cognitive Maps (Tolman)</h3>
+
+  <div class="box">
+    <div class="box-label">Definition</div>
+    A <strong>cognitive map</strong> is a mental representation (internal image) built up through experience and stored internally. Tolman originally described it in the context of physical environments (a rat's mental layout of a maze), but the concept extends to any internal representation — of procedures, workflows, social situations, or causal relationships. It is the stored product of learning, built even without reinforcement.
+  </div>
+
+  <p><strong>Tolman's Rat Maze Experiment:</strong> Two groups of rats explored a maze. Group A received food at the end — they learned quickly. Group B received no food — they appeared to learn nothing. On day 11, food was introduced for Group B. They <em>immediately</em> matched Group A's performance — navigating the maze as efficiently as if they'd been rewarded all along.</p>
+
+  <p><strong>What this proves:</strong> Group B had been <em>building a mental map</em> of the maze the whole time, even without reinforcement. The learning was happening internally and silently — only revealed when motivation (food) was introduced. This is the essence of <strong>latent learning</strong>.</p>
+
+  <h3 class="sub-title">2 — Latent Learning (Tolman)</h3>
+
+  <div class="box p">
+    <div class="box-label">Definition</div>
+    Learning that occurs <strong>without reinforcement</strong> and <strong>without any hint that learning has taken place</strong> — it remains hidden until conditions arise that make expression worthwhile, safe, or necessary. Tolman originally described this as knowledge revealed when reinforcement is introduced, but the concept extends further: latent learning can be revealed by <strong>any shift in conditions</strong> — a reward being added, a threat being removed, necessity arising, or opportunity presenting itself.
+  </div>
 
   <div class="insight">
-    <div class="insight-title">Key Finding</div>
-    <p>When Bandura asked ALL children to demonstrate what they had learned (with no threat of punishment), all three groups showed equal knowledge of how to be aggressive. This demonstrates <strong>latent learning</strong> — performance ≠ learning. Children who saw punishment had <em>learned</em> but chose not to <em>perform</em>.</p>
-    <p style="margin-top:8px;">Seeing someone <strong>merely get away with</strong> behaviour is as effective at promoting imitation as seeing them rewarded.</p>
+    <div class="insight-head">Why Latent Learning Challenges Behaviourism</div>
+    <p>Operant conditioning predicts: no reinforcement → no learning. Tolman showed this is wrong. The rats learned the maze's layout simply by <em>exploring</em> — their cognitive processes were active the whole time, building a mental map, even without a reward to drive them. This means learning can be a purely internal, cognitive process independent of observable behaviour or consequences.</p>
+    <p style="margin-top:8px;">Everyday example: You may have memorised your neighbourhood's layout just by walking through it — without ever deliberately trying to learn it, and without being rewarded. The knowledge only becomes apparent the first time someone asks you for directions.</p>
   </div>
 
-  <h3 class="sub-title">6.4.2 Bandura's Four-Step Model of Modelling</h3>
+  <div class="insight">
+    <div class="insight-head">Extended Concept — What Reveals Latent Learning</div>
+    <p>Latent learning is not only revealed by a tangible reward being introduced. It can be revealed by <strong>any condition that makes expression of knowledge worthwhile or safe</strong>:</p>
+    <ul style="margin-top:8px;">
+      <li><strong>Reward introduced</strong> — Tolman's rats; employees given a task with a bonus attached</li>
+      <li><strong>Threat removed</strong> — children in Bobo doll experiment asked to demonstrate safely; knowledge was present but suppressed by fear of punishment</li>
+      <li><strong>Necessity arises</strong> — a person who never consciously learned a route navigates it confidently when their usual path is blocked</li>
+      <li><strong>Opportunity presents itself</strong> — a child who watched a sibling play a video game sits down and plays competently when the sibling is away</li>
+    </ul>
+    <p style="margin-top:8px;">What matters is that the <strong>knowledge was always there</strong> — built silently through observation or exploration. The revealing condition is not the cause of learning; it is simply what makes the existing learning visible.</p>
+  </div>
+
+  <h3 class="sub-title">3 — Insight Learning (Köhler)</h3>
+
+  <div class="box p">
+    <div class="box-label">Definition</div>
+    Problem solving that occurs by <strong>suddenly perceiving new forms or relationships</strong> — a "flash of insight" (also called discovery learning). The solution appears all at once after mental reflection, not through gradual trial-and-error.
+  </div>
+
+  <p><strong>Köhler's Chimps:</strong> Köhler placed a banana just out of reach outside a chimp's cage, with a stick inside. Rather than randomly trying things, the chimp <em>studied the situation</em> — and then suddenly picked up the stick and used it to pull the banana in. No trial-and-error; the solution came from mentally re-organising the problem. The chimp "saw" how the stick and banana were related before acting.</p>
+
+  <p>This shows that learning can be <em>purposive and goal-directed</em> — the chimp wasn't just responding to past reinforcement, it was using its mind to reason toward a solution. Behaviourism alone cannot explain this.</p>
+
+  <h3 class="sub-title">4 — Observational Learning / Social Learning (Bandura)</h3>
+
+  <div class="box p">
+    <div class="box-label">Definition</div>
+    A type of learning where we <strong>observe, imitate, or model</strong> another person's behaviour — and learn from the consequences we see them experience. Also called <strong>social learning</strong>. No direct reinforcement of our own behaviour is needed.
+  </div>
+
+  <p>Bandura argued that cognitive processes play a central role. We don't just mindlessly copy; we observe, encode, store, and then decide whether to perform the behaviour based on what we expect the consequences to be.</p>
+
+  <h3 class="sub-title">Bandura's Four Internal Processes</h3>
+  <p>Observational learning is not passive copying. Four internal steps determine whether observed behaviour is learned and eventually performed:</p>
+
   <div class="steps">
     <div class="step">
-      <div class="step-num">1</div>
+      <div class="sn p">1</div>
       <div class="step-body">
         <strong>Attention</strong>
-        Observer must pay attention to the model. Children attend more to warm, nurturing, or powerful models; to televised models; and with age, to models similar to themselves.
+        The observer must pay attention to the model's behaviour. Without attention, nothing is encoded. Children attend more to models who are warm, powerful, nurturing, or similar to themselves. Televised models are particularly effective at capturing attention.
       </div>
     </div>
     <div class="step">
-      <div class="step-num gold">2</div>
+      <div class="sn p">2</div>
       <div class="step-body">
-        <strong>Retention in Memory</strong>
-        Observer must form and retain a cognitive representation of the modelled behaviour. Memory is the bridge between observation and later reproduction.
+        <strong>Retention</strong>
+        The observer must store a mental representation of the observed behaviour in memory. This cognitive representation bridges the gap between watching and later reproducing — sometimes days or weeks later.
       </div>
     </div>
     <div class="step">
-      <div class="step-num green">3</div>
+      <div class="sn p">3</div>
       <div class="step-body">
         <strong>Reproduction</strong>
-        Observer must be physically and mentally capable of reproducing the behaviour. A child cannot perfectly replicate a superhero flying, but may approximate it.
+        The observer must have the physical and cognitive ability to reproduce the behaviour. A child watching a gymnast may retain the memory but lack the physical capability to reproduce it precisely.
       </div>
     </div>
     <div class="step">
-      <div class="step-num purple">4</div>
+      <div class="sn p">4</div>
       <div class="step-body">
         <strong>Motivation</strong>
-        Observer must be motivated to execute the behaviour. Expected consequences (reward or punishment) influence whether the learned behaviour is actually performed.
+        The observer must be motivated to perform the behaviour. Motivation can be external (a reward) or intrinsic (curiosity, opportunity, necessity). Even if the first three steps are complete, behaviour will not be performed without sufficient motivation.
       </div>
     </div>
   </div>
 
-  <h3 class="sub-title">Media & Children — Key Points</h3>
-  <div class="callout gold">
-    <div class="callout-head">Screen Time Research</div>
-    Children as young as <strong>12 months</strong> model emotional reactions seen on TV. Research links screen time to poorer executive functioning in some areas. American Academy of Pediatrics (AAP) recommends avoiding screen time for children under 18 months. Video games can have both negative effects (aggression, sexist attitudes) and positive effects (teamwork, cognitive skills, exergaming for physical–cognitive health).
+  <div class="sub2-title">Bandura's Bobo Doll Experiment</div>
+  <p>Children watched a film of a woman beating a Bobo doll. They were then left alone with the doll. Three conditions were used:</p>
+
+  <div class="t-wrap"><table>
+    <thead><tr><th>Condition</th><th>What Children Saw</th><th>Behaviour Toward Bobo</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="tag tr">Model Rewarded</span></td>
+        <td>Adult was praised for aggression</td>
+        <td>High aggression — imitated directly</td>
+      </tr>
+      <tr>
+        <td><span class="tag tg">No Consequences</span></td>
+        <td>Nothing happened to adult after aggression</td>
+        <td>High aggression — equal to reward condition. Simply <em>getting away with it</em> is enough — absence of punishment functions as implicit approval.</td>
+      </tr>
+      <tr>
+        <td><span class="tag tp">Model Punished</span></td>
+        <td>Adult was scolded for aggression</td>
+        <td>Lower aggression — children hesitated, expecting similar punishment for themselves</td>
+      </tr>
+    </tbody>
+  </table></div>
+
+  <div class="spotlight">
+    <div class="spotlight-head">Critical Finding — Learning ≠ Performance</div>
+    When Bandura asked <em>all</em> children to show exactly what they had seen — with no threat of punishment — every group demonstrated <strong>equal knowledge</strong> of how to be aggressive. Children who had seen the model punished had <strong>learned</strong> the behaviour just as fully — they simply chose not to <strong>perform</strong> it.<br><br>
+    <strong>Learning</strong> is the internal acquisition of knowledge. <strong>Performance</strong> is the external expression of that knowledge. They are not the same thing. Performance depends on perceived consequences — not on what has been learned.
   </div>
 
-  <div class="callout purple">
-    <div class="callout-head">Two Key Departures from Behaviourism</div>
-    1. Learning can occur without any overt change in behaviour (latent learning).<br>
-    2. Cognitive processes — attention, memory, motivation — are central to learning.
+  <div class="box p">
+    <div class="box-label">Inhibited Performance vs. Latent Learning</div>
+    The children who saw the model punished illustrate <strong>inhibited performance</strong> — their learning was fully present but <strong>suppressed by anticipated punishment</strong>. When the researcher invited them to demonstrate safely, the suppressing condition was removed and the knowledge was revealed.<br><br>
+    This connects to latent learning: the knowledge was stored silently all along and only expressed when conditions changed. Crucially, the suppression is <strong>conditional, not permanent</strong> — should conditions arise where children sense they will not be punished, that stored knowledge of aggressive behaviour can surface at any time.
+  </div>
+
+  <div class="insight">
+    <div class="insight-head">Implication for Violent Media</div>
+    <p>Most violent media does not consistently show perpetrators being punished — children are predominantly exposed to the reward and no-consequences conditions, both of which promote imitation. Even when punishment is shown, the learning still occurs and is stored as latent knowledge. Should conditions change — unsupervised settings, peer encouragement, anonymity — that stored knowledge can surface. Prevention at the point of encoding (regulating exposure) is more reliable than relying on suppression after the learning has already taken place. The less violent behaviour children observe and encode, the less there is available to be expressed when conditions become favourable.</p>
+  </div>
+
+  <div class="insight">
+    <div class="insight-head">Two Key Departures from Behaviourism</div>
+    <p><strong>1.</strong> Learning can occur without any overt change in behaviour — children learned aggression without ever being aggressive themselves.</p>
+    <p style="margin-top:6px;"><strong>2.</strong> Cognitive processes are central — <strong>attention, retention, reproduction, and motivation</strong> all shape whether observed learning becomes action. Behaviourism cannot account for this internal mediation.</p>
+  </div>
+
+  <h3 class="sub-title">How the Four Cognitive Concepts Relate</h3>
+  <p>All four concepts involve hidden internal processes — which is what makes them <em>cognitive</em> learning and why they collectively challenge behaviourism. But each describes a different aspect of that internal processing:</p>
+
+  <div class="t-wrap"><table>
+    <thead><tr><th>Concept</th><th>What it describes</th><th>Key feature</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="tag tp">Latent Learning</span></td>
+        <td>The <em>conditions</em> of learning — occurs without reinforcement, revealed when conditions become favourable</td>
+        <td>Knowledge is hidden until expression is safe, necessary, or rewarded</td>
+      </tr>
+      <tr>
+        <td><span class="tag tb">Cognitive Map</span></td>
+        <td>The <em>stored product</em> of learning — the internal mental representation itself</td>
+        <td>What latent and observational learning produce and store; broader than just physical environments</td>
+      </tr>
+      <tr>
+        <td><span class="tag tr">Insight Learning</span></td>
+        <td>The <em>restructuring</em> of stored knowledge to solve a new problem</td>
+        <td>Sudden "aha" — existing cognitive maps are reorganised; no trial-and-error needed</td>
+      </tr>
+      <tr>
+        <td><span class="tag tg">Observational Learning</span></td>
+        <td>The <em>source</em> of learning — acquired by watching a model, not through direct experience</td>
+        <td>Mediated by four internal steps: attention, retention, reproduction, motivation</td>
+      </tr>
+    </tbody>
+  </table></div>
+
+  <div class="insight">
+    <div class="insight-head">The Thread Connecting All Four</div>
+    <p>Latent learning and observational learning often operate <strong>simultaneously</strong> — a person can learn by watching (observational) while that knowledge remains hidden until conditions allow expression (latent). In both cases, cognitive maps are being built as the stored product. And when a new problem requires connecting those stored maps in a new way, insight occurs. They are different facets of the same underlying cognitive system — separated by researchers for clarity, but deeply interconnected in practice.</p>
   </div>
 </div>
 
 
-<!-- ════════════════════════════════════════════
-     GLOSSARY
-════════════════════════════════════════════ -->
-<div id="glossary" class="section">
-  <h2 class="sec-title">Key Terms Glossary</h2>
+<!-- ══════════════════════════════════ APPLICATION ══════════════════════════════════ -->
+<div id="apply" class="section">
+  <h2 class="sec-title">Application</h2>
   <hr class="sec-rule">
 
+  <h3 class="sub-title">Four Ways to Train Your Partner (SU Activity 1.5)</h3>
+  <p>These examples from the Study Unit are a great test of whether you can correctly identify and explain the four types of behavioural consequences. Practice reasoning through the <em>why</em>.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="sn r">1</div>
+      <div class="step-body">
+        <strong>Positive Punishment</strong>
+        Partner forgets your birthday → you sulk for 2 hours.<br>
+        <em>Why PP?</em> You are <strong>adding</strong> something unpleasant (sulking/tension) to decrease the probability of forgetting again.<br>
+        <span class="tag tr">Apply unpleasant → ↓ behaviour</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="sn br">2</div>
+      <div class="step-body">
+        <strong>Negative Punishment</strong>
+        Partner forgets chores → you hide the iPad.<br>
+        <em>Why NP?</em> You are <strong>removing</strong> something pleasant (iPad time) to decrease the probability of forgetting chores.<br>
+        <span class="tag tbr">Remove pleasant → ↓ behaviour</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="sn g">3</div>
+      <div class="step-body">
+        <strong>Positive Reinforcement</strong>
+        Partner does something nice → you cook their favourite meal.<br>
+        <em>Why PR?</em> You are <strong>adding</strong> something pleasant (favourite meal) to increase the probability of the nice behaviour recurring.<br>
+        <span class="tag tg">Apply pleasant → ↑ behaviour</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="sn p">4</div>
+      <div class="step-body">
+        <strong>Negative Reinforcement</strong>
+        Partner sets table before dinner → they don't need to do the dishes.<br>
+        <em>Why NR?</em> You are <strong>removing</strong> something unpleasant (dish duty) to increase the probability of the partner setting the table again.<br>
+        <span class="tag tp">Remove unpleasant → ↑ behaviour</span>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <h3 class="sub-title">Activity 1.7 — Applying Learning Principles</h3>
+
+  <div class="scenario">
+    <div class="scenario-head">Train a young dog to press the bin pedal</div>
+    Use <strong>shaping</strong> with positive reinforcement: reward the dog for sniffing the bin → reward for pawing near the pedal → reward only for touching the pedal → reward only for pressing it down. Successive approximations toward the final behaviour.
+  </div>
+
+  <div class="scenario">
+    <div class="scenario-head">Train a 2-year-old to throw rubbish in the bin</div>
+    Use <strong>shaping + positive reinforcement</strong>: praise and reward each step — walking toward bin, picking up rubbish, dropping it in. Keep instructions simple and consistent. Model the behaviour (observational learning) so the child sees what to do.
+  </div>
+
+  <div class="scenario">
+    <div class="scenario-head">Stop a dog from chewing socks</div>
+    Use <strong>positive punishment</strong> (aversive sound/spray when chewing occurs) combined with providing an acceptable chew toy and <strong>positively reinforcing</strong> chewing the toy. Punishment alone won't work — you must also redirect to the correct behaviour.
+  </div>
+
+  <div class="scenario">
+    <div class="scenario-head">Stop a 5-year-old from chewing socks</div>
+    Use <strong>negative punishment</strong> (remove a favourite activity when sock-chewing occurs). Tell them clearly why the privilege is being removed and what the correct behaviour is. Reinforce the desired behaviour (leaving socks alone) with praise.
+  </div>
+
+  <hr class="divider">
+  <h3 class="sub-title">Reinforcement Schedules — Telemarketer Examples</h3>
+  <div class="t-wrap"><table>
+    <thead><tr><th>Scenario</th><th>Schedule</th><th>Why?</th></tr></thead>
+    <tbody>
+      <tr><td>Paid $X for every 30 calls</td><td><span class="tag tb">Fixed Ratio</span></td><td>Fixed number of responses (30 calls) required per reward</td></tr>
+      <tr><td>Paid $X for every 3 secured sales</td><td><span class="tag tr">Variable Ratio</span></td><td>Number of responses varies — how many calls it takes to secure each sale is unpredictable</td></tr>
+      <tr><td>Paid $10 per hour</td><td><span class="tag tg">Fixed Interval</span></td><td>Reward after a fixed time (1 hour), regardless of call count — classic FI scallop applies: may slack mid-hour, rush near the end</td></tr>
+      <tr><td>Boss makes random unannounced visits with praise</td><td><span class="tag tp">Variable Interval</span></td><td>Reward after an unpredictable time gap — must maintain steady performance at all times</td></tr>
+    </tbody>
+  </table></div>
+
+  <hr class="divider">
+  <h3 class="sub-title">Classical vs. Operant — Quick Comparison</h3>
+  <div class="t-wrap"><table>
+    <thead><tr><th>Feature</th><th>Classical Conditioning</th><th>Operant Conditioning</th></tr></thead>
+    <tbody>
+      <tr><td>Organism's role</td><td>Passive — response is reflexive</td><td>Active — organism operates on environment</td></tr>
+      <tr><td>What is learned</td><td>Association between two <em>stimuli</em></td><td>Association between <em>behaviour and consequence</em></td></tr>
+      <tr><td>Type of response</td><td>Involuntary, emotional, physiological</td><td>Voluntary, goal-directed</td></tr>
+      <tr><td>Extinction caused by</td><td>CS presented repeatedly without UCS</td><td>Behaviour no longer reinforced</td></tr>
+      <tr><td>Key figures</td><td>Pavlov, Watson</td><td>Thorndike, Skinner</td></tr>
+    </tbody>
+  </table></div>
+</div>
+
+
+<!-- ══════════════════════════════════ GLOSSARY ══════════════════════════════════ -->
+<div id="glossary" class="section">
+  <h2 class="sec-title">Key Terms</h2>
+  <hr class="sec-rule">
+  <p style="font-size:13.5px; color:var(--ink-light); margin-bottom:20px;">All terms are drawn from the Seminar 2 slides and the Study Unit. Definitions are concise but include the <em>why</em> where it helps.</p>
+
   <div class="terms-grid">
-    <div class="term-chip"><strong>Acquisition</strong><span>Process of conditioning / learning a new response</span></div>
-    <div class="term-chip"><strong>Aversion Therapy</strong><span>Using CC to condition aversion to a harmful stimulus (e.g., alcohol)</span></div>
-    <div class="term-chip"><strong>Behaviorism</strong><span>School of thought: only observable behaviour, not cognition, should be studied</span></div>
-    <div class="term-chip"><strong>Behavior Modification</strong><span>Using learning principles therapeutically to change behaviour</span></div>
-    <div class="term-chip"><strong>Biological Preparedness</strong><span>Genetic readiness to learn certain associations (e.g., taste aversion) quickly</span></div>
-    <div class="term-chip"><strong>Classical Conditioning</strong><span>NS paired with US until NS → CS that elicits CR</span></div>
-    <div class="term-chip"><strong>Cognitive Map</strong><span>Mental representation of a physical environment (Tolman)</span></div>
-    <div class="term-chip"><strong>Conditioned Response (CR)</strong><span>Learned response to the CS</span></div>
-    <div class="term-chip"><strong>Conditioned Stimulus (CS)</strong><span>Formerly neutral stimulus that now elicits CR</span></div>
-    <div class="term-chip"><strong>Contiguity</strong><span>Temporal closeness of CS and US</span></div>
-    <div class="term-chip"><strong>Contingency</strong><span>Reliability with which CS predicts US</span></div>
-    <div class="term-chip"><strong>Continuous Reinforcement</strong><span>Every instance of behaviour is reinforced</span></div>
-    <div class="term-chip"><strong>Counterconditioning</strong><span>Replacing a CR with an incompatible response</span></div>
-    <div class="term-chip"><strong>Delay of Gratification</strong><span>Ability to wait for a later, larger reward</span></div>
-    <div class="term-chip"><strong>Dishabituation</strong><span>Renewed responding after habituation, due to stimulus change or time</span></div>
-    <div class="term-chip"><strong>Extinction</strong><span>Weakening/loss of a conditioned response</span></div>
-    <div class="term-chip"><strong>Extinction Burst</strong><span>Temporary increase in behaviour when reinforcement is first removed</span></div>
-    <div class="term-chip"><strong>Fixed Interval (FI)</strong><span>Reinforcement for first response after set time period</span></div>
-    <div class="term-chip"><strong>Fixed Ratio (FR)</strong><span>Reinforcement after set number of responses</span></div>
-    <div class="term-chip"><strong>Habituation</strong><span>Decreased responding to repeated, non-threatening stimulus</span></div>
-    <div class="term-chip"><strong>Insight</strong><span>Sudden mental solution to a problem without trial-and-error (Köhler)</span></div>
-    <div class="term-chip"><strong>Instinctive Drift</strong><span>Conditioned behaviour reverts to instinctive behaviour over time</span></div>
-    <div class="term-chip"><strong>Latent Learning</strong><span>Learning that is not immediately expressed in behaviour</span></div>
-    <div class="term-chip"><strong>Law of Effect</strong><span>Satisfying outcomes strengthen behaviour; unpleasant outcomes weaken it (Thorndike)</span></div>
-    <div class="term-chip"><strong>Learning</strong><span>Relatively permanent change in behaviour/potential from experience</span></div>
-    <div class="term-chip"><strong>Negative Punishment</strong><span>Removing pleasant stimulus → behaviour decreases</span></div>
-    <div class="term-chip"><strong>Negative Reinforcement</strong><span>Removing unpleasant stimulus → behaviour increases</span></div>
-    <div class="term-chip"><strong>Neutral Stimulus (NS)</strong><span>Stimulus that does not naturally produce the UR</span></div>
-    <div class="term-chip"><strong>Observational Learning</strong><span>Learning by watching and imitating a model</span></div>
-    <div class="term-chip"><strong>Operant Conditioning</strong><span>Learning from consequences of one's own behaviour</span></div>
-    <div class="term-chip"><strong>Orienting Reflex</strong><span>Automatic turning of sense organs toward novel stimulus</span></div>
-    <div class="term-chip"><strong>Partial Reinforcement</strong><span>Behaviour reinforced only some of the time</span></div>
-    <div class="term-chip"><strong>Positive Punishment</strong><span>Adding unpleasant stimulus → behaviour decreases</span></div>
-    <div class="term-chip"><strong>Positive Reinforcement</strong><span>Adding pleasant stimulus → behaviour increases</span></div>
-    <div class="term-chip"><strong>Primary Reinforcer</strong><span>Directly reinforcing (food, water, warmth)</span></div>
-    <div class="term-chip"><strong>Punishment</strong><span>Consequence that decreases the likelihood of behaviour</span></div>
-    <div class="term-chip"><strong>Reinforcement</strong><span>Consequence that increases the likelihood of behaviour</span></div>
-    <div class="term-chip"><strong>Schedule of Reinforcement</strong><span>Pattern / timing of reinforcement delivery</span></div>
-    <div class="term-chip"><strong>Secondary Reinforcer</strong><span>Reinforcing because it leads to primary reinforcer (e.g., money)</span></div>
-    <div class="term-chip"><strong>Shaping</strong><span>Reinforcing successive approximations toward target behaviour</span></div>
-    <div class="term-chip"><strong>Skinner Box</strong><span>Operant chamber for studying reinforcement (lever + feeder)</span></div>
-    <div class="term-chip"><strong>Spontaneous Recovery</strong><span>Temporary return of extinguished CR after rest period</span></div>
-    <div class="term-chip"><strong>Stimulus Discrimination</strong><span>Responding only to specific CS, not similar stimuli</span></div>
-    <div class="term-chip"><strong>Stimulus Generalization</strong><span>CR extends to stimuli similar to CS</span></div>
-    <div class="term-chip"><strong>Taste Aversion</strong><span>CC of nausea to a food after single pairing with illness</span></div>
-    <div class="term-chip"><strong>Token Economy</strong><span>Secondary reinforcement system using exchangeable tokens</span></div>
-    <div class="term-chip"><strong>Unconditioned Response (UR)</strong><span>Natural, unlearned response to US</span></div>
-    <div class="term-chip"><strong>Unconditioned Stimulus (US)</strong><span>Stimulus that naturally elicits a response without training</span></div>
-    <div class="term-chip"><strong>Variable Interval (VI)</strong><span>Reinforcement after unpredictable time interval</span></div>
-    <div class="term-chip"><strong>Variable Ratio (VR)</strong><span>Reinforcement after unpredictable number of responses</span></div>
+    <div class="term-card"><strong>Learning</strong><span>Lasting change in behaviour or mental processes through experience</span></div>
+    <div class="term-card"><strong>Habituation</strong><span>Simplest learning — decreasing response to a repeated, harmless stimulus</span></div>
+    <div class="term-card"><strong>Classical Conditioning</strong><span>NS repeatedly paired with UCS until NS (now CS) can elicit the response alone</span></div>
+    <div class="term-card"><strong>UCS (Unconditioned Stimulus)</strong><span>Naturally and reliably triggers an innate response without learning</span></div>
+    <div class="term-card"><strong>UCR (Unconditioned Response)</strong><span>Natural, automatic response to the UCS</span></div>
+    <div class="term-card"><strong>Neutral Stimulus (NS)</strong><span>Initially produces no response; becomes CS after conditioning</span></div>
+    <div class="term-card"><strong>CS (Conditioned Stimulus)</strong><span>Formerly neutral stimulus that now elicits the CR after conditioning</span></div>
+    <div class="term-card"><strong>CR (Conditioned Response)</strong><span>Learned response triggered by the CS alone</span></div>
+    <div class="term-card"><strong>Acquisition</strong><span>The initial learning phase — CS–CR association is being built</span></div>
+    <div class="term-card"><strong>Extinction</strong><span>CR weakens when CS is repeatedly presented without UCS. Suppresses — does NOT erase — the association</span></div>
+    <div class="term-card"><strong>Spontaneous Recovery</strong><span>Extinguished CR reappears after a rest period — proof that extinction only suppressed it</span></div>
+    <div class="term-card"><strong>Stimulus Generalisation</strong><span>CR extends to stimuli similar to CS (never paired with UCS)</span></div>
+    <div class="term-card"><strong>Stimulus Discrimination</strong><span>Responding only to the specific CS, not to similar stimuli</span></div>
+    <div class="term-card"><strong>Biological Preparedness</strong><span>Genetic predisposition to learn certain associations (e.g., taste aversion) more easily than others</span></div>
+    <div class="term-card"><strong>Taste Aversion</strong><span>CC of nausea to a food after single pairing with illness; interval can be up to 7h in humans</span></div>
+    <div class="term-card"><strong>Operant Conditioning</strong><span>Consequences of behaviour change the probability of that behaviour recurring</span></div>
+    <div class="term-card"><strong>Law of Effect</strong><span>Thorndike: satisfying consequences strengthen behaviour; unpleasant ones weaken it</span></div>
+    <div class="term-card"><strong>Primary Reinforcer</strong><span>Directly reinforcing — fulfills biological need (food, water)</span></div>
+    <div class="term-card"><strong>Secondary Reinforcer</strong><span>Learned reinforcing power via association with primary (money, grades, praise)</span></div>
+    <div class="term-card"><strong>Positive Reinforcement</strong><span>Add pleasant stimulus → behaviour ↑</span></div>
+    <div class="term-card"><strong>Negative Reinforcement</strong><span>Remove unpleasant stimulus → behaviour ↑ (NOT punishment)</span></div>
+    <div class="term-card"><strong>Positive Punishment</strong><span>Add aversive stimulus → behaviour ↓</span></div>
+    <div class="term-card"><strong>Negative Punishment</strong><span>Remove pleasant stimulus → behaviour ↓</span></div>
+    <div class="term-card"><strong>Continuous Reinforcement</strong><span>Every correct response rewarded — best for new learning; quick to extinguish</span></div>
+    <div class="term-card"><strong>Partial Reinforcement</strong><span>Only some correct responses rewarded; much greater extinction resistance</span></div>
+    <div class="term-card"><strong>Fixed Ratio (FR)</strong><span>Reward after set number of responses; high steady rate</span></div>
+    <div class="term-card"><strong>Variable Ratio (VR)</strong><span>Reward after unpredictable number; highest rate + most extinction resistant</span></div>
+    <div class="term-card"><strong>Fixed Interval (FI)</strong><span>Reward after fixed time; scallop pattern — burst near deadline</span></div>
+    <div class="term-card"><strong>Variable Interval (VI)</strong><span>Reward after variable time; steady moderate rate; very unpredictable</span></div>
+    <div class="term-card"><strong>Shaping</strong><span>Reinforcing successive approximations toward a target behaviour that wouldn't occur spontaneously</span></div>
+    <div class="term-card"><strong>Cognitive Map</strong><span>Mental representation built through experience — of environments, procedures, or relationships. The stored product of latent and observational learning (Tolman)</span></div>
+    <div class="term-card"><strong>Latent Learning</strong><span>Learning without reinforcement, hidden until conditions arise that make expression safe, necessary, or rewarded — broader than just reward introduction (Tolman)</span></div>
+    <div class="term-card"><strong>Insight Learning</strong><span>Sudden perception of new relationships to solve a problem — "aha moment"; existing cognitive maps are restructured (Köhler)</span></div>
+    <div class="term-card"><strong>Observational Learning</strong><span>Learning by watching and imitating a model; mediated by attention, retention, reproduction, motivation; no direct reinforcement needed (Bandura)</span></div>
+    <div class="term-card"><strong>Social Learning</strong><span>Another name for observational learning (Bandura, Ross & Ross, 1963)</span></div>
+    <div class="term-card"><strong>Learning vs. Performance</strong><span>Learning = internal acquisition of knowledge. Performance = external expression of that knowledge. Not performing does not mean not learning — performance depends on perceived consequences</span></div>
+    <div class="term-card"><strong>Inhibited Performance</strong><span>Learned behaviour that is suppressed and not expressed due to anticipated punishment. The learning is fully present — only the performance is blocked. Suppression is conditional, not permanent</span></div>
   </div>
 </div>
 
@@ -945,8 +798,8 @@
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
     document.querySelectorAll('.toc-btn').forEach(b => b.classList.remove('active'));
     document.getElementById(id).classList.add('active');
-    const idx = ['overview','habituation','classical','operant','observational','glossary'].indexOf(id);
-    document.querySelectorAll('.toc-btn')[idx].classList.add('active');
+    const ids = ['overview','classical','operant','cognitive','apply','glossary'];
+    document.querySelectorAll('.toc-btn')[ids.indexOf(id)].classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 </script>
