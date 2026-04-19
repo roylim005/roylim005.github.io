@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Social Psychology — Exam Practice</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f5f0;
+    --surface: #ffffff;
+    --card: #faf9f6;
+    --border: #e0dbd0;
+    --rule: #d4cec3;
+    --text: #1a1814;
+    --muted: #6b6560;
+    --hint: #9c9690;
+    --blue: #1e4a8a;
+    --blue-light: #e8eef8;
+    --blue-mid: #3a6dbf;
+    --green: #1a6644;
+    --green-light: #e8f4ee;
+    --amber: #8a5c00;
+    --amber-light: #fef6e4;
+    --red: #8a1f1f;
+    --red-light: #fdf0f0;
+    --purple: #5a2d8a;
+    --purple-light: #f2ecfa;
+    --cross: #1a1814;
+    --cross-light: #f0ede8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.75;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: var(--text);
+    color: #fff;
+    padding: 48px 48px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .site-header::before {
+    content: '';
+    position: absolute;
+    right: -60px; top: -60px;
+    width: 300px; height: 300px;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .site-header::after {
+    content: '';
+    position: absolute;
+    right: 20px; top: 20px;
+    width: 180px; height: 180px;
+    border: 1px solid rgba(255,255,255,0.04);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .header-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    color: #c9a84c;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .header-title {
+    font-family: 'Crimson Pro', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+  .header-sub {
+    color: rgba(255,255,255,0.45);
+    font-size: 0.88rem;
+    margin-top: 8px;
+  }
+  .header-meta {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 24px;
+  }
+  .meta-pill {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    padding: 4px 12px;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.55);
+    border-radius: 20px;
+  }
+  .meta-pill.gold {
+    background: #c9a84c;
+    color: #1a1814;
+    border-color: #c9a84c;
+    font-weight: 500;
+  }
+
+  /* ── INSTRUCTIONS ── */
+  .instructions {
+    background: var(--amber-light);
+    border-bottom: 2px solid #c9a84c;
+    padding: 16px 48px;
+    font-size: 0.86rem;
+    color: var(--amber);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .instructions-icon {
+    font-size: 1rem;
+    margin-top: 1px;
+    flex-shrink: 0;
+  }
+
+  /* ── PROGRESS BAR ── */
+  .progress-wrap {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 48px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .progress-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--hint);
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+  }
+  .progress-bar {
+    flex: 1;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--green);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+  .progress-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--green);
+    white-space: nowrap;
+  }
+
+  /* ── CONTAINER ── */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 28px 80px;
+  }
+
+  /* ── SECTION HEADING ── */
+  .section-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 48px 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--text);
+  }
+  .section-head:first-child { margin-top: 0; }
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    background: var(--text);
+    color: #fff;
+    padding: 3px 9px;
+    border-radius: 3px;
+    letter-spacing: 0.05em;
+  }
+  .section-head h2 {
+    font-family: 'Crimson Pro', serif;
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  /* ── QUESTION CARD ── */
+  .q-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  .q-card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .q-card.answered { border-color: var(--green); }
+
+  .q-header {
+    padding: 16px 20px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .q-num-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 500;
+    color: var(--muted);
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 2px 8px;
+    white-space: nowrap;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+  .q-tag-pill {
+    font-size: 0.68rem;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  /* tag colours */
+  .tag-attr   { background: var(--blue-light);   color: var(--blue);   }
+  .tag-dis    { background: var(--purple-light);  color: var(--purple); }
+  .tag-prej   { background: var(--red-light);     color: var(--red);    }
+  .tag-conf   { background: var(--green-light);   color: var(--green);  }
+  .tag-grp    { background: var(--amber-light);   color: var(--amber);  }
+  .tag-obed   { background: #fdecea;              color: #8a2020;       }
+  .tag-bys    { background: #e6f4f0;              color: #1a6644;       }
+  .tag-att    { background: #fce8f3;              color: #7a1f5a;       }
+  .tag-cross  { background: var(--cross-light);   color: var(--cross);  border: 1px solid #c8c4bc; }
+  .tag-new    { background: #e6f4ee; color: #1a6644; border: 1px solid #a8d8be; font-size: 0.6rem; padding: 1px 7px; }
+
+  .q-scenario {
+    padding: 10px 20px 0 20px;
+    font-size: 0.92rem;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  .q-prompt-wrap {
+    padding: 10px 20px 16px;
+  }
+  .q-prompt {
+    background: var(--card);
+    border-left: 3px solid var(--blue-mid);
+    padding: 10px 14px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--text);
+    border-radius: 0 6px 6px 0;
+    font-style: italic;
+  }
+  .q-prompt::before {
+    content: 'Question: ';
+    font-style: normal;
+    color: var(--blue-mid);
+    font-weight: 600;
+  }
+
+  /* ── REVEAL BUTTON ── */
+  .reveal-btn {
+    width: 100%;
+    padding: 12px 20px;
+    background: var(--card);
+    border: none;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    text-transform: uppercase;
+    transition: background 0.15s, color 0.15s;
+  }
+  .reveal-btn:hover { background: var(--green-light); color: var(--green); }
+  .reveal-btn.revealed { background: var(--green-light); color: var(--green); }
+  .reveal-btn .btn-icon { font-size: 0.8rem; transition: transform 0.25s; }
+  .reveal-btn.revealed .btn-icon { transform: rotate(180deg); }
+
+  /* ── ANSWER PANEL ── */
+  .answer-panel {
+    display: none;
+    border-top: 1px solid var(--green);
+    background: #f7fbf8;
+  }
+  .answer-panel.open { display: block; }
+  .answer-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--green);
+    padding: 12px 20px 0;
+    font-weight: 500;
+  }
+  .answer-body {
+    padding: 8px 20px 20px;
+  }
+  .answer-body p {
+    font-size: 0.91rem;
+    color: #2c2c2c;
+    line-height: 1.75;
+    margin-bottom: 12px;
+  }
+  .answer-body p:last-child { margin-bottom: 0; }
+
+  /* ── BACK TO TOP ── */
+  .back-top {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 48px;
+    color: var(--hint);
+    font-size: 0.8rem;
+    text-decoration: none;
+    font-family: 'JetBrains Mono', monospace;
+    transition: color 0.15s;
+  }
+  .back-top:hover { color: var(--blue); }
+
+  @media (max-width: 600px) {
+    .site-header { padding: 36px 20px 30px; }
+    .instructions { padding: 14px 20px; }
+    .progress-wrap { padding: 12px 20px; }
+    .container { padding: 28px 16px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header" id="top">
+  <div class="header-eyebrow">PSY108 · Study Unit 2 · Seminar 4</div>
+  <div class="header-title">Social Psychology<br>Exam Practice</div>
+  <p class="header-sub">Pastorino & Doyle-Portillo (5th ed.) · Scoped to SU2 pp.15–36 & Seminar 4 slides</p>
+  <div class="header-meta">
+    <span class="meta-pill gold">37 Questions</span>
+    <span class="meta-pill">8 Sections</span>
+    <span class="meta-pill">Reveal Answers When Ready</span>
+  </div>
+</header>
+
+<div class="instructions">
+  <span class="instructions-icon">◎</span>
+  <span>Attempt each question yourself before revealing the model answer. Cover the answer, write or think through your response, then check. Focus on whether you identified the right mechanism — not just the right label.</span>
+</div>
+
+<div class="progress-wrap">
+  <span class="progress-label">ANSWERS REVEALED</span>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <span class="progress-count" id="progressCount">0 / 37</span>
+</div>
+
+<div class="container">
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 1 -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="section-head">
+  <span class="section-num">01</span>
+  <h2>Attribution Theory &amp; Biases</h2>
+</div>
+
+<div class="q-card" id="qc1">
+  <div class="q-header">
+    <span class="q-num-badge">Q1</span>
+    <span class="q-tag-pill tag-attr">FAE + Attributional Charity</span>
+  </div>
+  <div class="q-scenario">During a national exam period, Mdm Siti notices that one of her students, Hafiz, submits an unusually poor essay despite being a strong writer all year. She immediately concludes that Hafiz is lazy and doesn't care about his results. However, Hafiz's classmates know he has been caring for a seriously ill parent at home for the past two weeks.</div>
+  <div class="q-prompt-wrap"><div class="q-prompt">What error is Mdm Siti making, and what would it look like for her to practise attributional charity in this situation?</div></div>
+  <button class="reveal-btn" onclick="reveal(1)"><span>Reveal Model Answer</span><span class="btn-icon">▼</span></button>
+  <div class="answer-panel" id="ap1">
+    <div class="answer-label">Model Answer</div>
+    <div class="answer-body">
+      <p>Mdm Siti is committing the Fundamental Attribution Error (FAE) — the tendency, when judging others, to overemphasise personal traits and underestimate situational forces, even when situational factors are largely responsible for the behaviour observed.</p>
+      <p>Importantly, the error here is compounded. Mdm Siti is starting from a performance outcome (a poor essay) and working backwards to a character conclusion (lazy, doesn't care). A poor essay does not straightforwardly indicate low effort. Hafiz could have tried hard under genuinely difficult circumstances and still produced weak work. Yet Mdm Siti jumps from outcome to trait, skipping two inferential steps without questioning either.</p>
+      <p>The reason this error occurs naturally is that Mdm Siti's attention is fixed on Hafiz and on the essay. She has no visibility of what is happening in his life outside school. The situational factor — that he has been managing a serious family crisis — is simply not available to her. Because she does not seek it, she defaults to the most available explanation: his character.</p>
+      <p>To practise attributional charity, Mdm Siti would need to suspend that character judgement and actively seek a situational explanation first, before drawing any conclusion about Hafiz as a person. In practice, this means checking in with Hafiz directly or speaking with his classmates — not to excuse the poor essay, but to understand it accurately. Had she done so, the situational explanation would have been readily available, and her conclusion about his character would likely have been very different.</p>
+    </div>
+  </div>
+</div>
+
+<div class="q-card" id="qc2">
+  <div class="q-header">
+    <span class="q-num-badge">Q2</span>
+    <span class="q-tag-pill tag-attr">Actor/Observer Bias</span>
+  </div>
+  <div class="q-scenario">David and his colleague Ming Li are both stuck in traffic and arrive late to a client meeting. David thinks: "The roads are impossible during school holidays — no wonder we're late." His first thought on seeing Ming Li walk in, however, is: "She's always disorganised and can never plan her time."</div>
+  <div class="q-prompt-wrap"><div class="q-prompt">Identify the specific bias David is displaying toward Ming Li — and explain what is psychologically driving the difference in how he judges the same lateness in himself versus in her.</div></div>
+  <button class="reveal-btn" onclick="reveal(2)"><span>Reveal Model Answer</span><span class="btn-icon">▼</span></button>
+  <div class="answer-panel" id="ap2">
+    <div class="answer-label">Model Answer</div>
+    <div class="answer-body">
+      <p>David is displaying the Actor/Observer Bias — the tendency to make different attributions for the same type of behaviour depending on whether we are the actor or the observer.</p>
+      <p>As the actor, David attributes his own lateness to the situation: traffic during school holidays. As an observer watching Ming Li, he attributes her lateness to a personal trait: she is always disorganised. Both were caught in the same traffic — yet David applies completely different explanatory frameworks to the identical outcome.</p>
+      <p>The psychological driver is attention. When David was stuck in traffic, he was inside the situation — he felt it and experienced it directly. The environment was vivid and available as an explanation. When Ming Li walks in, David has none of that context. All he can see is her. Her circumstances are invisible to him, so the explanation he reaches for is one about her character.</p>
+      <p>It is also worth noting that David's attribution about Ming Li is not limited to today — he thinks she is always disorganised. He has converted a single observation into a stable character trait. One further nuance: if David liked Ming Li, he would likely apply the same situational charity to her that he applies to himself — showing that the bias is shaped not just by role but also by our emotional relationship to the person being judged.</p>
+    </div>
+  </div>
+</div>
+
+<div class="q-card" id="qc3">
+  <div class="q-header">
+    <span class="q-num-badge">Q3</span>
+    <span class="q-tag-pill tag-attr">Self-Serving Bias</span>
+  </div>
+  <div class="q-scenario">Priya scores top marks in Maths and tells her parents: "All those extra practice papers paid off — I worked so hard." A week later she fails Chemistry and tells them: "The questions were out of syllabus. The teacher didn't prepare us properly."</div>
+  <div class="q-prompt-wrap"><div class="q-prompt">Which bias is Priya demonstrating? What psychological function does this serve — and at what point does this pattern stop being protective and start being harmful?</div></div>
+  <button class="reveal-btn" onclick="reveal(3)"><span>Reveal Model Answer</span><span class="btn-icon">▼</span></button>
+  <div class="answer-panel" id="ap3">
+    <div class="answer-label">Model Answer</div>
+    <div class="answer-body">
+      <p>Priya is demonstrating the self-serving bias — the tendency to attribute our successes to internal traits and our failures to external, situational factors.</p>
+      <p>When Priya scores top marks in Maths, she attributes it to internal factors: her hard work and effort. When she fails Chemistry, she attributes it to external situational factors: the questions were out of syllabus and the teacher failed to prepare the class. She takes credit for the good outcome and deflects responsibility for the bad one.</p>
+      <p>The psychological function this serves is the protection of self-esteem. More precisely, it allows Priya to maintain a stable, positive self-concept regardless of contradictory outcomes. Success confirms she is capable. Failure is explained away as someone else's fault. The net result is that her image of herself as a competent student remains intact no matter what the results show. The self-serving bias is found across virtually all cultures and age groups.</p>
+      <p>However, the bias becomes harmful when it consistently prevents honest self-assessment. If Priya never owns her Chemistry failure, she will not identify what she actually needs to improve. Over time, those around her will notice that she never takes responsibility, which gradually erodes trust and damages relationships. If this pattern solidifies across all areas of her life, the habitual need to claim all credit and assign all blame elsewhere is precisely the attributional profile associated with narcissism.</p>
+    </div>
+  </div>
+</div>
+
+<div class="q-card" id="qc4">
+  <div class="q-header">
+    <span class="q-num-badge">Q4</span>
+    <span class="q-tag-pill tag-attr">FAE + Actor/Observer in One Scenario</span>
+  </div>
+  <div class="q-scenario">Marcus sees a cyclist run a red light and immediately thinks the cyclist is reckless and irresponsible. Later that afternoon, Marcus himself runs a red light while rushing to the hospital where his child has been taken after an accident. He does not think of himself as reckless at all.</div>
+  <div class="q-prompt-wrap"><div class="q-prompt">Using two different attribution concepts, explain why Marcus judges the cyclist and himself so differently. Which concept explains his judgement of the cyclist, and which explains his judgement of himself?</div></div>
+  <button class="reveal-btn" onclick="reveal(4)"><span>Reveal Model Answer</span><span class="btn-icon">▼</span></button>
+  <div class="answer-panel" id="ap4">
+    <div class="answer-label">Model Answer</div>
+    <div class="answer-body">
+      <p>Marcus's judgement of the cyclist is best explained by the Fundamental Attribution Error (FAE). Seeing a stranger run a red light, Marcus attributes the behaviour to the cyclist's personal traits — recklessness and irresponsibility — without considering any situational factors. He has no knowledge of the cyclist's circumstances, and his attention is on the person and the behaviour.</p>
+      <p>Marcus's judgement of himself is best explained by the Actor/Observer Bias. As the actor in his own situation, Marcus is fully aware of the situational force driving his behaviour — a genuine family emergency. The environment is vivid, immediate, and emotionally charged. So he naturally applies a situational attribution to himself: the circumstances explain the action, not his character.</p>
+      <p>Together, the two concepts reveal a consistent pattern: when we observe others we reach for character explanations; when we experience situations ourselves, the context is so present that we cannot ignore it. Marcus is not being deliberately hypocritical — he is demonstrating the predictable asymmetry that arises when the same behaviour is judged from two different vantage points.</p>
+      <p>The deeper insight is that neither attribution may be fully accurate. The cyclist may also have had an urgent reason. Attribution is always a reconstruction, not a direct reading of the facts.</p>
+    </div>
+  </div>
+</div>
+
+<div class="q-card" id="qc5">
+  <div class="q-header">
+    <span class="q-num-badge">Q5</span>
+    <span class="q-tag-pill tag-attr">Culture and FAE</span>
+  </div>
+  <div class="q-scenario">In a cross-cultural study, American participants shown a video of a man pushing another in a crowded street overwhelmingly attributed it to the man's aggressive personality. Japanese participants more often suggested the man was under stress or had been provoked by the environment.</div>
+  <div class="q-prompt-wrap"><div class="q-prompt">What does this tell us about the relationship between culture and the FAE? What practical implication does this have for how people from individualistic cultures judge the behaviour of others from collectivistic backgrounds — and vice versa?</div></div>
+  <button class="reveal-btn" onclick="reveal(5)"><span>Reveal Model Answer</span><span class="btn-icon">▼</span></button>
+  <div class="answer-panel" id="ap5">
+    <div class="answer-label">Model Answer</div>
+    <div class="answer-body">
+      <p>This finding reveals that the Fundamental Attribution Error is not universal — it is more prevalent in individualistic cultures such as the United States, which emphasise individual behaviour, personal agency, and personal responsibility. Collectivistic cultures such as Japan, which emphasise group context, relationships, and situational forces, are more naturally attuned to circumstances and therefore less prone to the FAE.</p>
+      <p>The practical implication becomes significant when people from these two cultural frameworks judge each other. When someone from an individualistic culture observes behaviour shaped by collectivistic norms — for example, a colleague who stays silent in a meeting rather than voicing disagreement — they are likely to attribute that silence to personal traits: passivity or lack of confidence. What they fail to account for is that in collectivistic cultures, preserving group harmony and avoiding public confrontation is the expected and socially valued response.</p>
+      <p>The reverse is equally problematic. When someone from a collectivistic culture observes an individual from an individualistic background openly challenging a senior colleague's idea, they may attribute it to arrogance or disrespect. What they may not consider is that in individualistic cultures, direct debate signals engagement and confidence, not rudeness.</p>
+      <p>In both directions, the error is the same: attributing to character what is actually a product of cultural context. This has real consequences in multicultural workplaces, international negotiations, and cross-cultural relationships — where misreading culturally shaped behaviour as personal failing can produce unnecessary conflict, unfair judgements, and damaged trust.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 2 -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="section-head">
+  <span class="section-num">02</span>
+  <h2>Cognitive Dissonance</h2>
+</div>
+
+<div class="q-card" id="qc6">
+  <div class="q-header">
+    <span class="q-num-badge">Q6</span>
+    <span class="q-tag-pill tag-dis">Resolving Dissonance — Add New Beliefs</span>
+  </div>
+  <div class="q-scenario">Farah considers herself a committed environmentalist. Yet she orders food delivery three to four times a week, generating significant plastic packaging. After acknowledging this contradiction, she starts telling herself: "The restaurants I use actually have biodegradable packaging, so it's probably fine."</div>
+  <div class="q-prompt-wrap"><div class="q-prompt">Which of the three dissonance-reduction strategies is Farah using? Why is this the path of least resistance compared to the other two — and what does that tell us about when attitude change is easier than behaviour change?</div></div>
+  <button class="reveal-btn" onclick="reveal(6)"><span>Reveal Model Answer</span><span class="btn-icon">▼</span></button>
+  <div class="answer-panel" id="ap6">
+    <div class="answer-label">Model Answer</div>
+    <div class="answer-body">
+      <p>Farah's belief: plastic is harmful to the environment. Farah's behaviour: she orders food delivery frequently, generating plastic waste. These two cognitions are inconsistent, creating cognitive dissonance — an uncomfortable state of psychological tension she is motivated to resolve.</p>
+      <p>Farah is using the add new beliefs strategy. She introduces a new cognition — the packaging is biodegradable — that bridges the gap between her existing belief and her existing behaviour without requiring her to change either. Her identity as an environmentalist remains intact. Her delivery habit remains intact.</p>
+      <p>This is the path of least resistance because it preserves both her identity and her convenience simultaneously. Changing her behaviour would mean giving up food delivery — a real, daily sacrifice. Changing her core belief would mean dismantling an identity she has likely held for years. For most people, abandoning a deeply held value about who they are is more threatening than changing a habit.</p>
+      <p>Adding a new belief costs her almost nothing by comparison — maximum relief for minimum psychological cost. This tells us that genuine behaviour change requires not just effort but the willingness to sit with discomfort long enough for a new habit to form. The mind will almost always exhaust every cognitive reframing option before reaching that point.</p>
+    </div>
+  </div>
+</div>
+
+<div class="q-card" id="qc7">
+  <div class="q-header">
+    <span class="q-num-badge">Q7</span>
+    <span class="q-tag-pill tag-dis">When Behaviour Change is the Hardest Option</span>
+  </div>
+  <div class="q-scenario">Rachel has been in a verbally abusive relationship for three years. Each time she considers leaving, she tells herself: "He only acts this way because of work pressure. When things settle down, he'll be different. The children need a father figure." Her sister cannot understand why Rachel stays.</div>
+  <div class="q-prompt-wrap"><div class="q-prompt">Using dissonance theory, explain Rachel's reasoning. Which dissonance-reduction strategy is she using, and why might leaving — the most direct solution — feel psychologically harder than staying, even when the situation is harmful?</div></div>
+  <button class="reveal-btn" onclick="reveal(7)"><span>Reveal Model Answer</span><span class="btn-icon">▼</span></button>
+  <div class="answer-panel" id="ap7">
+    <div class="answer-label">Model Answer</div>
+    <div class="answer-body">
+      <p>Rachel's belief: the relationship is verbally abusive and harmful. Rachel's behaviour: she continues to stay. These two cognitions are inconsistent, creating cognitive dissonance — a state of psychological tension she is motivated to resolve.</p>
+      <p>Rachel has chosen to add new beliefs: he only acts this way because of work pressure; when things settle down, he will be different; the children need a father figure. Each of these is a new cognition inserted to make staying feel consistent with her awareness that the relationship is harmful.</p>
+      <p>Leaving — despite being the most logically direct resolution — carries the greatest psychological and practical cost. Practically, leaving threatens her financial security, her children's stability, and her sense of family structure. But beyond the practical costs lies a deeper psychological barrier: Rachel has invested three years in this relationship. Leaving means confronting the possibility that those three years were a mistake, that she misjudged the person she committed to. That realisation is psychologically threatening in its own right.</p>
+      <p>Adding new beliefs allows her to preserve hope — and with it, the meaning and value of those three years. This pattern explains not just abusive relationships but why people stay in failing careers, harmful friendships, and misguided commitments long after the evidence suggests they should leave. The investment itself becomes the justification.</p>
+    </div>
+  </div>
+</div>
+
+<div class="q-card" id="qc8">
+  <div class="q-header">
+    <span class="q-num-badge">Q8</span>
+    <span class="q-tag-pill tag-dis">Dissonance as a Deliberate Change Tool</span>
+  </div>
+  <div class="q-scenario">A health campaign targeting heavy drinkers takes an unusual approach. Rather than lecturing participants about health risks, it asks them to role-play as health counsellors advising a fictitious client to quit drinking — even though the participants themselves drink heavily.</div>
+  <div class="q-prompt-wrap"><div class="q-prompt">Using dissonance theory, explain the psychological mechanism this campaign is deliberately triggering. Why might this indirect approach be more effective than simply presenting people with health statistics?</div></div>
+  <button class="reveal-btn" onclick="reveal(8)"><span>Reveal Model Answer</span><span class="btn-icon">▼</span></button>
+  <div class="answer-panel" id="ap8">
+    <div class="answer-label">Model Answer</div>
+    <div class="answer-body">
+      <p>To understand this campaign, we need to start with what is already happening psychologically in the heavy drinkers before they even walk into the room. Their belief: drinking is harmful to health. Their behaviour: they continue to drink heavily. This inconsistency has always created potential dissonance — but they have already resolved it. They are in a comfortable state of consonance, maintained through added new beliefs: "I can handle it," "I only drink socially," "the research isn't conclusive." These rationalisations are the psychological scaffolding propping up their continued drinking.</p>
+      <p>The campaign works by dismantling that scaffolding from the inside. By asking participants to role-play as health counsellors advising a fictitious heavy-drinking client, the campaign engineers a very specific situation. The fictitious client will naturally raise the same rationalisations the counsellor themselves uses. And the counsellor, in their role, cannot let those rationalisations stand. They must argue against each one. In doing so, they are publicly and convincingly dismantling the very beliefs they constructed to protect their own drinking behaviour.</p>
+      <p>This creates a new and far more acute dissonance: "I just argued that these rationalisations don't hold — and yet I use those exact rationalisations to justify my own drinking." The usual escape routes have now been closed off by their own arguments. They cannot easily reach for them again without feeling the inconsistency directly.</p>
+      <p>This is why the indirect approach is far more effective than presenting health statistics. Statistics leave the existing rationalisations intact — the heavy drinker can simply add another belief: "that study doesn't apply to me." The role-play destroys the rationalisations from within, using the participant's own voice and logic against the very beliefs sustaining their behaviour. The message is not delivered to them — it is generated by them. And that makes it infinitely harder to dismiss.</p>
+    </div>
+  </div>
+</div>
+
+<div class="q-card" id="qc9">
+  <div class="q-header">
+    <span class="q-num-badge">Q9</span>
+    <span class="q-tag-pill tag-dis">Effort Justification</span>
+    <span class="q-tag-pill tag-new">New Angle</span>
+  </div>
+  <div class="q-scenario">A group of recruits undergoes an extremely demanding three-month military training programme with early morning drills, harsh conditions, and high failure rates. Those who complete it consistently describe the experience as "the most meaningful thing I've ever done" and speak with great pride about their unit. Recruits who completed an easier equivalent programme in another unit rate it as "decent but not that memorable."</div>
+  <div class="q-prompt-wrap"><div class="q-prompt">Using cognitive dissonance, explain why the more demanding programme produces stronger attachment and positive evaluation — even though, objectively, it involved more suffering. What does this tell us about how we come to value the things we have worked hardest for?</div></div>
+  <button class="reveal-btn" onclick="reveal(9)"><span>Reveal Model Answer</span><span class="btn-icon">▼</span></button>
+  <div class="answer-panel" id="ap9">
+    <div class="answer-label">Model Answer</div>
+    <div class="answer-body">
+      <p><strong>Recruits in the demanding programme:</strong></p>
+      <p>Belief: I am a rational person who would not voluntarily suffer for something worthless. Behaviour: I just went through three months of extreme suffering voluntarily. These two cognitions cannot comfortably coexist. If the experience was ordinary or unremarkable, then a rational person would not have endured what they endured — which means either they are not rational, or the experience was not worthless. The first conclusion is too threatening to accept.</p>
+      <p>So the mind resolves the dissonance through the only available route that preserves the self-concept: add a new belief. The new belief: "This was the most meaningful thing I have ever done. This unit is exceptional. Every moment of suffering was worth it." This belief is not a conscious exaggeration — it is a psychological necessity. The mind constructs it genuinely, which is why the recruits believe it completely. The greater the suffering endured, the greater the dissonance that needs resolving, and therefore the stronger and more deeply held the new belief must be.</p>
+      <p><strong>Recruits in the easier programme:</strong></p>
+      <p>Belief: I am a rational person who would not voluntarily suffer for something worthless. Behaviour: I went through a fairly comfortable programme. There is no significant suffering to account for. No dissonance arises. No new belief is needed. The result is an honest, undefended evaluation: "decent but not that memorable."</p>
+      <p>Value is not always a direct reflection of objective quality. It is often constructed by the mind in proportion to what was sacrificed to obtain it. This is why people defend gruelling careers, demanding relationships, and difficult institutions long after outside observers would have walked away. And because the belief feels genuinely true rather than constructed, it is one of the hardest forms of self-deception to recognise in yourself.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 3 -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="section-head">
+  <span class="section-num">03</span>
+  <h2>Prejudice, Discrimination &amp; Pygmalion Effect</h2>
+</div>
+
+<div class="q-card" id="qc10">
+  <div class="q-header"><span class="q-num-badge">Q10</span><span class="q-tag-pill tag-prej">Stereotype → Prejudice → Discrimination</span></div>
+  <div class="q-scenario">Mr Tan privately believes older workers adapt poorly to technology. A highly qualified 57-year-old candidate, Mrs Wong, answers all technical questions correctly and confidently. Despite this, Mr Tan scores her lower and later tells colleagues: "I just felt she wouldn't fit our fast-moving digital culture."</div>
+  <div class="q-prompt-wrap"><div class="q-prompt">Identify the stereotype, the prejudice, and the act of discrimination in this scenario. Why is the discrimination especially problematic given the evidence actually available to Mr Tan during the interview?</div></div>
+  <button class="reveal-btn" onclick="reveal(10)"><span>Reveal Model Answer</span><span class="btn-icon">▼</span></button>
+  <div class="answer-panel" id="ap10">
+    <div class="answer-label">Model Answer</div>
+    <div class="answer-body">
+      <p>The stereotype is Mr Tan's generalised belief that older workers adapt poorly to technology — a schema stored in memory and applied to all members of that age group. The prejudice is the negative attitude Mr Tan holds toward Mrs Wong specifically because she belongs to that group. The discrimination is the concrete negative action that follows — scoring Mrs Wong lower than her performance merits, disadvantaging her in the selection process because of her group membership rather than her demonstrated ability.</p>
+      <p>What makes the discrimination particularly problematic is that Mr Tan had direct, unambiguous, contradictory evidence available to him during the interview. Mrs Wong answered all technical questions correctly and confidently. That is clear disconfirmation of the stereotype he holds. A rational, evidence-based evaluator would have updated his assessment. Mr Tan did not.</p>
+      <p>This reveals how entrenched stereotypes function: they do not operate like hypotheses that are tested and revised when contradicted. They operate as filters — contradictory evidence is explained away rather than absorbed. Mr Tan's comment that he "just felt" she would not fit is precisely that manoeuvre: vague, subjective, and immune to contradiction. No interview performance, however strong, can contradict a feeling.</p>
+      <p>The discrimination is therefore problematic on two levels. First, it caused direct harm to a qualified individual judged on her age rather than her ability. Second, it is self-reinforcing — because Mr Tan never allowed the evidence to challenge his stereotype, his belief remains intact, ready to be applied to the next candidate.</p>
+    </div>
+  </div>
+</div>
+
+<div class="q-card" id="qc11">
+  <div class="q-header"><span class="q-num-badge">Q11</span><span class="q-tag-pill tag-prej">Pygmalion Effect</span></div>
+  <div class="q-scenario">A primary school teacher, Ms Lim, reads in a student's file that he had behavioural issues at his previous school. Though she has no direct evidence of misbehaviour, she monitors him more closely, calls on him less, and gives him less praise than his peers. By the end of Term 1, the student has become disruptive and disengaged.</div>
+  <div class="q-prompt-wrap"><div class="q-prompt">Using the Pygmalion effect, explain how Ms Lim's initial expectation may have produced the very outcome she feared. What does this tell us about the power of social feedback in shaping how people see themselves?</div></div>
+  <button class="reveal-btn" onclick="reveal(11)"><span>Reveal Model Answer</span><span class="btn-icon">▼</span></button>
+  <div class="answer-panel" id="ap11">
+    <div class="answer-label">Model Answer</div>
+    <div class="answer-body">
+      <p>The Pygmalion effect describes how the expectations we hold about others shape our treatment of them in ways that ultimately produce the very outcomes we anticipated — a self-fulfilling prophecy.</p>
+      <p>Ms Lim begins the school year with a negative expectation based not on anything she has directly observed but on a label in his file. This expectation shapes her behaviour: she monitors him more closely (signalling distrust), calls on him less (reducing his opportunity to participate and succeed), and gives him less praise (withdrawing positive reinforcement that builds engagement and confidence). The student receives a consistent social message: you are expected to fail, you are not trusted, and your contributions are not valued.</p>
+      <p>Over time, this social feedback shapes how the student sees himself. If the significant adult in his classroom treats him as a problem waiting to happen, it becomes increasingly difficult for him to construct a self-image as a capable, engaged learner. Disengagement and disruptive behaviour are often the result not of poor character but of a self-concept shaped by others' expectations.</p>
+      <p>This tells us that social feedback is not a neutral mirror — it is an active force that shapes identity and behaviour. Teachers, parents, and authority figures who hold negative expectations can produce the very behaviours they feared, not through any fault of the student, but through the cumulative effect of differential treatment. The reverse is equally true: positive expectations, communicated through attention and encouragement, can produce genuine improvement.</p>
+    </div>
+  </div>
+</div>
+
+<div class="q-card" id="qc12">
+  <div class="q-header"><span class="q-num-badge">Q12</span><span class="q-tag-pill tag-prej">Scapegoating Under Economic Stress</span></div>
+  <div class="q-scenario">A recession hits a town. Unemployment rises sharply. A politician begins publicly attributing job losses to foreign workers "taking local jobs." Within months, harassment of foreign workers in public spaces increases significantly — even though economists note most job losses stem from automation and global demand shifts.</div>
+  <div class="q-prompt-wrap"><div class="q-prompt">Using realistic conflict theory and scapegoating, explain how this situation developed. Why are out-group members especially vulnerable to becoming scapegoats during periods of economic stress, even when they are not the actual cause of the problem?</div></div>
+  <button class="reveal-btn" onclick="reveal(12)"><span>Reveal Model Answer</span><span class="btn-icon">▼</span></button>
+  <div class="answer-panel" id="ap12">
+    <div class="answer-label">Model Answer</div>
+    <div class="answer-body">
+      <p>Realistic conflict theory proposes that competition between groups for scarce resources — jobs, housing, economic security — is a powerful driver of inter-group hostility. When resources feel threatened, groups become protective of what they have and hostile toward those perceived to be competing for the same resources.</p>
+      <p>The recession has created genuine economic anxiety. This is exactly the condition under which scapegoating becomes psychologically attractive. Scapegoating refers to the tendency to blame out-group members for one's own group's problems — particularly when the actual cause is complex, diffuse, or difficult to control. Automation and global demand shifts are abstract, systemic forces that cannot be confronted or punished. Foreign workers, by contrast, are visible, identifiable, and already perceived as competitors.</p>
+      <p>The politician's framing provides a simple, human explanation for a complex systemic problem. This is psychologically satisfying because it restores a sense of control and offers a clear target for frustration. The out-group becomes the explanation, and directing anger toward them feels more actionable than confronting impersonal economic forces.</p>
+      <p>Out-group members are especially vulnerable during periods of stress for several interconnected reasons. They are already perceived as competitors through in-group bias. They typically lack the social and political power to push back against false attributions. And existing stereotypes that they are "taking" local resources make the scapegoating narrative feel plausible even without supporting evidence.</p>
+    </div>
+  </div>
+</div>
+
+<div class="q-card" id="qc13">
+  <div class="q-header"><span class="q-num-badge">Q13</span><span class="q-tag-pill tag-prej">Conditions for Prejudice Reduction</span></div>
+  <div class="q-scenario">A neighbourhood residents' group is in conflict with a nearby foreign workers' dormitory. The dormitory management proposes an inter-group sports event — the residents reject it. A separate proposal to jointly set up and manage a shared community garden gains reluctant approval from both sides. Six months later, tensions have measurably decreased.</div>
+  <div class="q-prompt-wrap"><div class="q-prompt">Using inter-group conflict theory and the conditions for effective prejudice reduction, explain why the community garden succeeded where the sports event would likely have failed. What is the single most critical ingredient that the garden provided?</div></div>
+  <button class="reveal-btn" onclick="reveal(13)"><span>Reveal Model Answer</span><span class="btn-icon">▼</span></button>
+  <div class="answer-panel" id="ap13">
+    <div class="answer-label">Model Answer</div>
+    <div class="answer-body">
+      <p>Research on prejudice reduction consistently shows that mere contact between groups is not enough to reduce hostility — and can sometimes make it worse if the contact is unstructured, competitive, or unequal.</p>
+      <p>A sports event would likely have failed because sports are competitive by nature — they create winners and losers, reinforcing rather than dissolving inter-group boundaries. The groups would remain clearly identified as separate teams. The interaction would be superficial and governed by competition rather than cooperation. Crucially, there would be no shared goal requiring both groups to genuinely depend on each other.</p>
+      <p>The community garden succeeded because it met the critical conditions for effective prejudice reduction. Both groups worked toward a common goal — a functioning garden — that neither could achieve alone. This is a superordinate goal: an objective that transcends group boundaries and requires genuine interdependence. Working side by side on shared tasks shifted attention from differences to shared purpose. Over time, as individuals from both groups cooperated practically, the sharp in-group and out-group boundaries began to soften.</p>
+      <p>The single most critical ingredient was genuine interdependence — the groups actually needed each other to succeed. Without interdependence, contact merely places two groups in proximity. With it, contact creates the conditions under which individuals begin to see each other as collaborators rather than competitors, and prejudice loses the competitive fuel that sustains it.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 4 -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="section-head">
+  <span class="section-num">04</span>
+  <h2>Conformity</h2>
+</div>
+
+<div class="q-card" id="qc14">
+  <div class="q-header"><span class="q-num-badge">Q14</span><span class="q-tag-pill tag-conf">Normative Conformity — Workplace</span></div>
+  <div class="q-scenario">In a board meeting, five senior managers unanimously agree that a proposed merger is a great opportunity. A junior executive, Shen, privately has significant reservations based on her financial analysis. She glances around, sees every head nodding, and stays silent — nodding along too.</div>
+  <div class="q-prompt-wrap"><div class="q-prompt">Is Shen's behaviour normative or informational conformity? Identify two conditions in this scenario that made conformity more likely — and explain how the presence of even one ally might have changed the outcome.</div></div>
+  <button class="reveal-btn" onclick="reveal(14)"><span>Reveal Model Answer</span><span class="btn-icon">▼</span></button>
+  <div class="answer-panel" id="ap14">
+    <div class="answer-label">Model Answer</div>
+    <div class="answer-body">
+      <p>Shen's behaviour is normative conformity — she changes her public behaviour to fit the group norm without any genuine attitude change. She knows her analysis raises concerns, she has not been persuaded otherwise, but she chooses to stay silent to avoid the social discomfort of being visibly at odds with five unanimous senior colleagues.</p>
+      <p>Two conditions make conformity especially likely here. First, responses are public — to voice her reservations would mean openly positioning herself against the entire room, including people with more power than her. The public nature of dissent raises its social cost enormously. Second, the group majority is unanimous — there is not a single dissenting voice Shen could align with or draw confidence from. Asch's research showed that unanimity is one of the most powerful drivers of conformity.</p>
+      <p>Had even one other person expressed a reservation — however mild — the dynamic would likely have shifted. Shen would have had social proof that dissent is permissible, a reference point showing her concerns are not eccentric, and the reduced psychological cost of speaking up. Asch found that a single ally can dramatically reduce conformity even when the majority remains large.</p>
+      <p>The ally does not need to agree with Shen's specific position — merely breaking the unanimity is enough to make independent thinking feel socially viable.</p>
+    </div>
+  </div>
+</div>
+
+<div class="q-card" id="qc15">
+  <div class="q-header"><span class="q-num-badge">Q15</span><span class="q-tag-pill tag-conf">Informational Conformity — Norm Formation</span></div>
+  <div class="q-scenario">A new resident moves into a Housing Board block. She notices all neighbours leave shoes outside their doors — one pair per person, toes facing outward. Nobody tells her this is a rule. Within a week she is arranging her shoes the same way. When a friend visits and leaves shoes facing inward, she quietly corrects them.</div>
+  <div class="q-prompt-wrap"><div class="q-prompt">Using Sherif's concept of norm formation and informational conformity, explain how this unwritten norm operates and why it can persist and spread to new people who never witnessed its origin.</div></div>
+  <button class="reveal-btn" onclick="reveal(15)"><span>Reveal Model Answer</span><span class="btn-icon">▼</span></button>
+  <div class="answer-panel" id="ap15">
+    <div class="answer-label">Model Answer</div>
+    <div class="answer-body">
+      <p>Informational conformity occurs when we conform because we are genuinely uncertain about the correct way to behave and turn to others as a source of information about what is appropriate. Unlike normative conformity — driven by the desire to be liked — informational conformity reflects a genuine change in understanding. We actually come to believe that the group's behaviour represents the correct way to act.</p>
+      <p>Sherif's norm formation research showed that in ambiguous situations, individuals converge on a shared standard of behaviour that then solidifies into a group norm — and crucially, this norm persists and is transmitted to new members who were never part of the original group that created it.</p>
+      <p>In this scenario, the new resident encounters an unfamiliar social environment with no explicit rules. The arrangement of shoes is ambiguous — there is no objectively correct way to place them. Observing that all neighbours follow the same pattern, she uses this as information: this must be the right way to do it here. She adopts the behaviour not because anyone pressured her but because the consensus of those around her is her best available guide.</p>
+      <p>The norm persists and spreads because each new resident goes through the same process — observe, interpret as informational, adopt. When the new resident corrects her visiting friend, she is actively transmitting the norm, even though she was never told about it. This is precisely Sherif's finding: norms formed through informational influence can be passed across generations within a group, acquiring the status of established social reality even when the original reason has been forgotten.</p>
+    </div>
+  </div>
+</div>
+
+<div class="q-card" id="qc16">
+  <div class="q-header"><span class="q-num-badge">Q16</span><span class="q-tag-pill tag-conf">Attitude vs Public Behaviour Under Social Pressure</span></div>
+  <div class="q-scenario">During the COVID-19 pandemic, in settings where nearly everyone wore masks, those entering without one quickly put one on — even before being asked. In settings where mask-wearing was rare, even people who personally believed in the practice often left their masks off.</div>
+  <div class="q-prompt-wrap"><div class="q-prompt">Using Asch's findings, explain both phenomena. What do these observations reveal about the gap between a person's private attitude and their public behaviour when social pressure points in the opposite direction?</div></div>
+  <button class="reveal-btn" onclick="reveal(16)"><span>Reveal Model Answer</span><span class="btn-icon">▼</span></button>
+  <div class="answer-panel" id="ap16">
+    <div class="answer-label">Model Answer</div>
+    <div class="answer-body">
+      <p>Both observations are consistent with Asch's central finding: social pressure can override a person's own judgement and privately held attitude when the majority norm points in a different direction.</p>
+      <p>In settings where nearly everyone wore masks, those entering without one were immediately confronted with an overwhelming social norm. Even without being asked, they could feel the visible misalignment between their behaviour and everyone around them. The social cost of standing out was immediate and visceral. This is normative conformity in action: behaviour changes not because the person has been persuaded but because the desire to fit in overrides their initial choice.</p>
+      <p>The reverse situation is equally revealing. People who privately believed in mask-wearing left their masks off in settings where the norm was not to wear one. When the social environment communicates a clear norm, deviating from it carries a social cost: standing out, appearing different, potentially attracting attention. For many people, the discomfort of visible nonconformity is enough to suppress behaviour that contradicts the surrounding norm — even when that behaviour aligns with their private beliefs.</p>
+      <p>Together, these observations reveal a significant gap between private attitude and public behaviour. What people do in social contexts is not simply a read-out of what they privately believe. It is the outcome of a negotiation between their beliefs and the social pressures of the environment they are in. Asch showed us that this negotiation frequently favours the social environment.</p>
+    </div>
+  </div>
+</div>
+
+<div class="q-card" id="qc17">
+  <div class="q-header"><span class="q-num-badge">Q17</span><span class="q-tag-pill tag-conf">Online vs Face-to-Face Conformity</span><span class="q-tag-pill tag-new">New Angle</span></div>
+  <div class="q-scenario">A study compares two groups discussing the same controversial policy — one face-to-face, the other via an anonymous online forum. In the face-to-face group, a clear majority opinion quickly silences minority views. In the online group, dissenting opinions continue to be expressed throughout, even after a majority position emerges.</div>
+  <div class="q-prompt-wrap"><div class="q-prompt">Using what is noted about the difference between face-to-face and online conformity, explain this finding. Does less online conformity mean the online group made a better decision? What new conformity risks might an online setting introduce instead?</div></div>
+  <button class="reveal-btn" onclick="reveal(17)"><span>Reveal Model Answer</span><span class="btn-icon">▼</span></button>
+  <div class="answer-panel" id="ap17">
+    <div class="answer-label">Model Answer</div>
+    <div class="answer-body">
+      <p>Research notes that the conformity differences visible in face-to-face interactions do not always hold in online settings. The face-to-face group experiences the full force of normative conformity: members can see each other, read social cues, and feel the immediate discomfort of visibly disagreeing with the majority. The social cost of dissent is high and tangible, making minority views difficult to sustain.</p>
+      <p>In the anonymous online forum, these social pressures are significantly reduced. Members cannot see each other's reactions, the physical discomfort of visible disagreement is absent, and anonymity lowers the personal cost of holding an unpopular position. As a result, people feel freer to express views that deviate from the emerging majority.</p>
+      <p>However, less conformity in the online setting does not automatically mean better decision-making. The online environment introduces its own conformity risks that operate differently. Anonymous online spaces can produce echo chambers — communities where a particular viewpoint dominates through algorithmic amplification and the gradual departure of those who feel unwelcome. The conformity is slower and less visible but can become more extreme over time.</p>
+      <p>Additionally, the disinhibition that reduces normative conformity online can also reduce mutual consideration and social accountability. People may express more extreme positions online precisely because there is no social cost for doing so — which can polarise rather than improve group deliberation. Less conformity is not the same as better thinking.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 5 -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="section-head">
+  <span class="section-num">05</span>
+  <h2>Groupthink</h2>
+</div>
+
+<div class="q-card" id="qc18">
+  <div class="q-header"><span class="q-num-badge">Q18</span><span class="q-tag-pill tag-grp">Directive Leadership as a Groupthink Trigger</span></div>
+  <div class="q-scenario">A school's senior management team meets to decide whether to implement a new assessment policy. The principal opens by saying: "I'm really excited about this — I think it's the right move forward." None of the vice-principals raise concerns, even though two privately worry about implementation challenges. The policy is adopted unanimously. The rollout is later described as "poorly planned" by teachers.</div>
+  <div class="q-prompt-wrap"><div class="q-prompt">Identify at least three conditions that promoted groupthink here. Which specific effect of groupthink best explains why the implementation problems were never surfaced at the planning stage?</div></div>
+  <button class="reveal-btn" onclick="reveal(18)"><span>Reveal Model Answer</span><span class="btn-icon">▼</span></button>
+  <div class="answer-panel" id="ap18">
+    <div class="answer-label">Model Answer</div>
+    <div class="answer-body">
+      <p>Three conditions promoting groupthink are clearly present. First, directive leadership: the principal expresses strong personal enthusiasm before discussion begins, signalling what the expected position is and making disagreement feel professionally risky. Second, high group cohesiveness: senior management teams typically value harmony and have close working relationships, making members reluctant to create friction. Third, absence of systematic evaluation procedures: there is no structured process for surfacing objections or inviting dissenting views before the vote.</p>
+      <p>The specific effect of groupthink that best explains why implementation problems were never surfaced is the withholding of criticism. Two vice-principals privately held concerns — the information existed within the room. The problem was not a lack of knowledge but a suppression of it. Members self-censor when they perceive that voicing objections will be unwelcome or mark them as disloyal.</p>
+      <p>Combined with collective rationalisation — the unanimous agreement signals correctness — critical concerns never reach the table. The result is a decision that looks confident and unified but is built on incomplete information.</p>
+      <p>The implementation problems that were privately anticipated by multiple members then materialise exactly as feared — a direct consequence of the group's failure to surface the knowledge it already possessed.</p>
+    </div>
+  </div>
+</div>
+
+<div class="q-card" id="qc19">
+  <div class="q-header"><span class="q-num-badge">Q19</span><span class="q-tag-pill tag-grp">High Cohesion Masking Dissent</span></div>
+  <div class="q-scenario">A startup's founding team — close-knit after four years together — receives early user data suggesting their product is underperforming in a key demographic. The team quickly dismisses it as a "sampling issue" and focuses on data confirming their original hypothesis. They press ahead with a full product launch, which subsequently fails.</div>
+  <div class="q-prompt-wrap"><div class="q-prompt">Using groupthink theory, identify the specific effects visible in this team's decision process. How did their high cohesiveness — normally a positive group quality — become the very thing that led to the poor decision?</div></div>
+  <button class="reveal-btn" onclick="reveal(19)"><span>Reveal Model Answer</span><span class="btn-icon">▼</span></button>
+  <div class="answer-panel" id="ap19">
+    <div class="answer-label">Model Answer</div>
+    <div class="answer-body">
+      <p>Several specific effects of groupthink are visible. Selective gathering of information: the team focused only on data confirming their original hypothesis while dismissing contradictory evidence as a "sampling issue" — motivated reasoning designed to preserve the existing consensus. Collective rationalisation: by reframing the negative data as a methodological artefact, the group constructed a shared justification for ignoring it. Examination of fewer alternatives: rather than treating the underperformance data as an opportunity to reconsider the launch strategy, the team moved directly to pressing ahead.</p>
+      <p>The paradox of high cohesiveness is that it creates the very conditions under which groupthink thrives. In a close-knit founding team, members share deep common identity, mutual loyalty, and shared investment in the product's success. These are genuinely valuable qualities. But they also mean that challenging the group's consensus feels like a betrayal of the team's unity and a threat to the relationships that have sustained four years of shared work.</p>
+      <p>The psychological cost of being the person who says "this data worries me" is high — it risks being seen as disloyal, pessimistic, or lacking faith in what everyone has built together. As a result, members who privately have doubts suppress them in favour of maintaining harmony and momentum.</p>
+      <p>The cohesiveness that makes the team effective in collaborative execution becomes a liability in critical evaluation — because it makes honest dissent feel socially dangerous. The team's strength becomes the mechanism of its failure.</p>
+    </div>
+  </div>
+</div>
+
+<div class="q-card" id="qc20">
+  <div class="q-header"><span class="q-num-badge">Q20</span><span class="q-tag-pill tag-grp">Time Pressure + Stress Accelerating Groupthink</span></div>
+  <div class="q-scenario">A government task force is given 48 hours to produce a recommendation on a public health scare. The chairperson steers discussion toward a single favoured solution. Any member who raises doubts is met with: "Let's not complicate this" or "We've covered that." The final recommendation has significant unintended consequences that were never discussed.</div>
+  <div class="q-prompt-wrap"><div class="q-prompt">Analyse how time pressure and directive leadership each independently amplified groupthink in this scenario. What single structural change to the group process would have been most effective in preventing this outcome — and why?</div></div>
+  <button class="reveal-btn" onclick="reveal(20)"><span>Reveal Model Answer</span><span class="btn-icon">▼</span></button>
+  <div class="answer-panel" id="ap20">
+    <div class="answer-label">Model Answer</div>
+    <div class="answer-body">
+      <p>Time pressure reduces the cognitive resources available for thorough deliberation. Under a 48-hour deadline, the group cannot systematically examine all possible solutions, test assumptions, or gather additional information. The urgency creates pressure to converge quickly on any decision rather than evaluate carefully. Groups under time pressure are also more susceptible to the first plausible solution that achieves rough consensus.</p>
+      <p>Directive leadership operates through a different mechanism: it signals to group members what the acceptable conclusion is before deliberation has fully occurred. When the chairperson consistently steers toward a single solution and dismisses doubts, members receive a clear message that dissent is unwelcome. Combined with the time pressure that makes sustained objection feel costly, members are effectively discouraged from voicing the concerns that might have caught the unintended consequences.</p>
+      <p>The single most effective structural change would have been to assign one member the formal role of devil's advocate — someone whose explicit job is to identify weaknesses and argue against the preferred solution. This institutionalises dissent: raising objections becomes a designated role rather than a personal attack. It ensures critical evaluation happens systematically rather than being suppressed by social pressure or time constraints.</p>
+      <p>Even under a tight deadline, a structured round of adversarial critique takes only minutes and dramatically improves decision quality.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 6 -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="section-head">
+  <span class="section-num">06</span>
+  <h2>Obedience — Milgram &amp; Zimbardo</h2>
+</div>
+
+<div class="q-card" id="qc21">
+  <div class="q-header"><span class="q-num-badge">Q21</span><span class="q-tag-pill tag-obed">Incremental Escalation + Foot-in-the-Door</span></div>
+  <div class="q-scenario">An insurance company trains agents to start customer calls by asking small, easy-to-agree-to questions ("Do you care about protecting your family?", "Would you like peace of mind in retirement?") before gradually moving toward larger financial commitments. Agents are instructed never to open with the full product proposal.</div>
+  <div class="q-prompt-wrap"><div class="q-prompt">Using Milgram's finding on incremental escalation alongside the foot-in-the-door compliance technique, explain why this sales approach works psychologically. What does this suggest about how ordinary people can be led to decisions they would have rejected if presented upfront?</div></div>
+  <button class="reveal-btn" onclick="reveal(21)"><span>Reveal Model Answer</span><span class="btn-icon">▼</span></button>
+  <div class="answer-panel" id="ap21">
+    <div class="answer-label">Model Answer</div>
+    <div class="answer-body">
+      <p>This sales approach exploits two overlapping psychological mechanisms that Milgram's research and compliance research have independently documented.</p>
+      <p>The foot-in-the-door technique works by beginning with a small request that is almost universally agreed to. Once a person has said yes to "Do you care about protecting your family?", their self-image shifts subtly: they are now someone who cares about family protection and is engaged in this conversation. When a larger request follows — a financial product — declining creates a tension between the new self-image and the behaviour of refusing. To avoid that inconsistency, compliance with the larger request becomes more likely.</p>
+      <p>Milgram's finding on incremental escalation adds a further dimension. In his experiments, obedience was dramatically higher because participants began with a trivial 15-volt shock and were moved up the scale one step at a time. At each increment, the gap from the previous step seemed small enough to justify. The same logic applies here: each successive step in the sales conversation feels like only a small move from where the customer already is. By the time the full financial commitment is proposed, the customer has already traversed a long psychological distance through a series of individually reasonable steps.</p>
+      <p>Together, these mechanisms reveal something important: the decision that feels unacceptable when presented in full can feel entirely reasonable when arrived at through a sequence of small, incremental steps. Understanding it is the first step to recognising when it is being used on you.</p>
+    </div>
+  </div>
+</div>
+
+<div class="q-card" id="qc22">
+  <div class="q-header"><span class="q-num-badge">Q22</span><span class="q-tag-pill tag-obed">Authority Proximity — Obedience Drops with Distance</span></div>
+  <div class="q-scenario">A middle manager is asked by her division director — via video call — to report inflated performance figures to the board. She feels uncomfortable but complies. The same manager later refuses a similar request from a new director she has never met, who contacts her only by email.</div>
+  <div class="q-prompt-wrap"><div class="q-prompt">Using Milgram's findings on physical proximity of authority, explain the difference in the manager's behaviour across the two situations. What does this suggest about the conditions under which authority figures are most effective at producing obedience?</div></div>
+  <button class="reveal-btn" onclick="reveal(22)"><span>Reveal Model Answer</span><span class="btn-icon">▼</span></button>
+  <div class="answer-panel" id="ap22">
+    <div class="answer-label">Model Answer</div>
+    <div class="answer-body">
+      <p>Milgram's research systematically varied the physical proximity between the authority figure and the participant and found that obedience decreased significantly as distance increased. When the experimenter gave instructions by telephone rather than in person, obedience dropped from 65% to approximately 27.5%. The closer and more physically present the authority figure, the more powerful the pressure to comply.</p>
+      <p>With her division director on a video call, the manager has an established relationship, can see the director's face, hears their voice, and experiences the social presence of someone whose authority she recognises. Even though the request is ethically uncomfortable, the combined weight of established authority, relational loyalty, and social presence is enough to produce compliance.</p>
+      <p>With the new director communicating only by email, multiple layers of distance are stacked simultaneously. The director is physically absent. The medium is impersonal and asynchronous. There is no established relationship creating relational loyalty. The anonymity of email means the social cost of refusal is lower — the manager does not have to face the director's reaction in real time.</p>
+      <p>This suggests that authority is most effective at producing obedience when it is embodied — when the authority figure is physically or socially present, when the relationship is established, and when refusal carries an immediate, visible social cost. Distance, in any form, weakens obedience by reducing both the immediacy of authority and the psychological cost of non-compliance.</p>
+    </div>
+  </div>
+</div>
+
+<div class="q-card" id="qc23">
+  <div class="q-header"><span class="q-num-badge">Q23</span><span class="q-tag-pill tag-obed">Psychological Distance from the Victim</span><span class="q-tag-pill tag-new">New Angle</span></div>
+  <div class="q-scenario">A technology company's content moderation team reviews flagged posts. Moderators who read the text personally and decide to remove them report high stress and regularly question whether their removals are justified. A second team uses a one-click "approve removal" function that executes an algorithm — they never directly read the content. The second team removes significantly more content with far less distress or hesitation.</div>
+  <div class="q-prompt-wrap"><div class="q-prompt">Using Milgram's concept of psychological distance from the victim, explain why the two teams behave and feel so differently — even though both are making the same consequential decision. What broader warning does this carry for how systems and processes are designed in positions of power?</div></div>
+  <button class="reveal-btn" onclick="reveal(23)"><span>Reveal Model Answer</span><span class="btn-icon">▼</span></button>
+  <div class="answer-panel" id="ap23">
+    <div class="answer-label">Model Answer</div>
+    <div class="answer-body">
+      <p>Milgram found that one of the most powerful determinants of obedience — and of willingness to cause harm — was the psychological distance between the person taking the action and the person experiencing its consequences. When the victim was remote and could neither be seen nor heard, obedience was highest. When the teacher had to physically hold the learner's hand on the shock plate, obedience dropped dramatically.</p>
+      <p>The first moderation team reads the actual content of the posts they are removing. They encounter the words, the context, the human presence behind each piece of content. This direct engagement shrinks psychological distance: the decision to remove feels personal, consequential, and ethically weighted. Their stress and hesitation are the natural result of being psychologically close to what they are doing.</p>
+      <p>The second team's one-click system maximises psychological distance. They never read the content. Their action is reduced to approving an algorithmic output — a managerial confirmation rather than a personal judgement. The human consequence of the removal is invisible to them, which allows them to act more quickly, more frequently, and with less distress.</p>
+      <p>The broader warning for systems design is significant. When processes are built to maximise efficiency by distancing decision-makers from the consequences of their decisions — through automation, abstraction, or bureaucratic intermediaries — they systematically reduce the psychological friction that keeps decision-making careful and accountable. In positions of power over other people's lives, some degree of felt responsibility and discomfort may be precisely what ensures decisions are made with appropriate care.</p>
+    </div>
+  </div>
+</div>
+
+<div class="q-card" id="qc24">
+  <div class="q-header"><span class="q-num-badge">Q24</span><span class="q-tag-pill tag-obed">Situational vs Dispositional — Milgram's Core Conclusion</span></div>
+  <div class="q-scenario">A country is found to have carried out systematic human rights violations under orders from a central authority. When officers responsible are brought to trial, many state they were "just following orders" and personally found the actions distressing. Several had impeccable records in their communities as kind, respected individuals.</div>
+  <div class="q-prompt-wrap"><div class="q-prompt">How do Milgram's conclusions challenge the instinct to attribute such actions to the personal evil of the individuals involved? What does this imply about the importance of structural and institutional safeguards — rather than simply hiring "good people" — against obedience to unjust authority?</div></div>
+  <button class="reveal-btn" onclick="reveal(24)"><span>Reveal Model Answer</span><span class="btn-icon">▼</span></button>
+  <div class="answer-panel" id="ap24">
+    <div class="answer-label">Model Answer</div>
+    <div class="answer-body">
+      <p>The instinctive response to discovering that ordinary-seeming people carried out systematic atrocities is to conclude that they must not have been ordinary at all — that they must have harboured hidden cruelty or moral deficiency. This is the Fundamental Attribution Error applied at its most consequential scale: attributing to character what is actually, in significant measure, a product of situation.</p>
+      <p>Milgram's findings directly challenge this instinct. His participants were ordinary men drawn from a range of professions and backgrounds. Yet 65% of them delivered what they believed to be potentially lethal shocks to an innocent person, simply because a calm authority figure told them to continue. There were no personality trait differences or psychological abnormalities that distinguished those who obeyed from those who refused. The primary determinant of behaviour was not character — it was the structure of the situation: authority, incremental escalation, physical distance from the victim, and diffusion of personal responsibility.</p>
+      <p>The implication for institutions is profound. Organisations cannot protect themselves against complicity in wrongdoing simply by hiring people with good values and strong character. Milgram showed us that good people, placed in the right situational conditions, are capable of following orders that violate their own stated values.</p>
+      <p>This means that safeguards against institutional wrongdoing must be structural, not personal. They must include independent oversight operating outside the chain of command, formal mechanisms for dissent that do not carry professional cost, clear individual accountability for specific decisions, and processes that keep decision-makers psychologically close to the consequences of their actions. Good intentions are necessary but not sufficient. The architecture of the institution is what ultimately determines whether good people can be led to do harmful things.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 7 -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="section-head">
+  <span class="section-num">07</span>
+  <h2>Bystander Effect &amp; Compliance</h2>
+</div>
+
+<div class="q-card" id="qc25">
+  <div class="q-header"><span class="q-num-badge">Q25</span><span class="q-tag-pill tag-bys">Both Bystander Mechanisms Together</span></div>
+  <div class="q-scenario">During evening rush hour at an MRT station, a man collapses on the platform. More than thirty commuters are present. Most pause briefly, glance at others, then continue walking. One passenger who eventually stops says: "I was looking around and nobody seemed alarmed, so at first I thought maybe he'd just tripped."</div>
+  <div class="q-prompt-wrap"><div class="q-prompt">Using both explanations of the bystander effect, explain why the crowd's inaction occurred. Based on psychological research, what is the single most effective thing a victim — or a first responder arriving at the scene — should do to increase the chance of getting help?</div></div>
+  <button class="reveal-btn" onclick="reveal(25)"><span>Reveal Model Answer</span><span class="btn-icon">▼</span></button>
+  <div class="answer-panel" id="ap25">
+    <div class="answer-label">Model Answer</div>
+    <div class="answer-body">
+      <p>The crowd's inaction is explained by two distinct but reinforcing mechanisms of the bystander effect.</p>
+      <p>The first is diffusion of responsibility. When thirty people are present, the sense of personal obligation to act is distributed across all of them. Each individual bears only a small fraction of the moral responsibility for the outcome. With so many people around, it is easy to assume that someone else is more qualified or more likely to help — and so the individual burden to act feels proportionally small.</p>
+      <p>The second mechanism is pluralistic ignorance, illustrated directly by the witness's account. When he looked around and saw no one appearing alarmed, he interpreted that social signal as information: if something serious were happening, surely someone would be acting concerned. The absence of alarm in others became evidence — incorrectly — that there was no alarm needed. Each bystander reads the calm of others as a signal that the situation is not an emergency. The collective result is that a group of people, all privately uncertain, produces a social environment that communicates certainty that nothing is wrong.</p>
+      <p>The single most effective action is to eliminate both mechanisms simultaneously by singling out one specific individual with a direct, personal request: "You — in the blue jacket — please call an ambulance now." This collapses the diffusion of responsibility by placing the entire obligation on one named person, and it breaks the pluralistic ignorance by publicly defining the situation as an emergency. Research consistently shows this is the most reliable way to convert a bystander crowd into active helpers.</p>
+    </div>
+  </div>
+</div>
+
+<div class="q-card" id="qc26">
+  <div class="q-header"><span class="q-num-badge">Q26</span><span class="q-tag-pill tag-bys">Pluralistic Ignorance as Primary Mechanism</span></div>
+  <div class="q-scenario">A student in a dormitory smells what might be smoke from a room down the hall. She opens her door and sees two other students in the corridor exchanging uncertain glances. None of them moves. All three later said they assumed it was just someone burning instant noodles — because no one else seemed worried.</div>
+  <div class="q-prompt-wrap"><div class="q-prompt">Identify which bystander mechanism is most active here — and explain how three people, all privately uncertain, collectively produced a response of complete inaction. What specific action by any one of them would have broken this dynamic?</div></div>
+  <button class="reveal-btn" onclick="reveal(26)"><span>Reveal Model Answer</span><span class="btn-icon">▼</span></button>
+  <div class="answer-panel" id="ap26">
+    <div class="answer-label">Model Answer</div>
+    <div class="answer-body">
+      <p>The primary mechanism here is pluralistic ignorance — the failure of a group of witnesses to correctly interpret a situation as an emergency because each person uses the inaction of others as evidence that no emergency exists.</p>
+      <p>What makes this case particularly striking is that all three students were privately uncertain. None of them was confident there was no danger. Each was genuinely unsure whether the smell represented a real threat. But rather than acting on their private uncertainty, each looked to the others to resolve it. And what they saw was two other people doing nothing alarming. That calm was misread as information: if it were serious, they would be acting.</p>
+      <p>The tragedy of pluralistic ignorance is that it produces collective confidence in a conclusion that no individual actually holds privately. All three students had doubts. None of them was certain it was just noodles. Yet their collective behaviour communicated certainty that it was harmless — a certainty that existed nowhere individually but emerged from the group's mutual observation of each other's inaction.</p>
+      <p>Any one of the three students could have broken this dynamic with a single clear action: walking toward the source of the smell, knocking on the door, or simply saying out loud: "I'm not sure about this — should we check?" That act of public uncertainty would have given the others social permission to acknowledge their own doubts, redefining the situation from "probably nothing" to "possibly something worth investigating." The dynamic of pluralistic ignorance is fragile — it only requires one person to break the silence for the shared false certainty to dissolve.</p>
+    </div>
+  </div>
+</div>
+
+<div class="q-card" id="qc27">
+  <div class="q-header"><span class="q-num-badge">Q27</span><span class="q-tag-pill tag-bys">Foot-in-the-Door Compliance</span></div>
+  <div class="q-scenario">A civic group trying to increase volunteerism tries two approaches. With the first group of households, they ask residents to place a small "Community Matters" sticker on their window — almost everyone agrees. Two weeks later, they return and ask the same residents to volunteer four hours per month. With the second group, they go directly to requesting four hours of volunteering. The first group has a much higher take-up rate.</div>
+  <div class="q-prompt-wrap"><div class="q-prompt">Identify the compliance technique and explain, using cognitive dissonance, why the first group is more likely to commit. What does this reveal about the relationship between small public acts of commitment and future behaviour?</div></div>
+  <button class="reveal-btn" onclick="reveal(27)"><span>Reveal Model Answer</span><span class="btn-icon">▼</span></button>
+  <div class="answer-panel" id="ap27">
+    <div class="answer-label">Model Answer</div>
+    <div class="answer-body">
+      <p>The compliance technique being used with the first group is the foot-in-the-door technique — securing a small initial commitment first, then following with a larger request.</p>
+      <p>Cognitive dissonance explains why this sequence is so effective. When residents agree to display the sticker, they make a small but public declaration about who they are: someone who cares about the community. This is not merely a neutral action — it shifts their self-image ever so slightly. They are now, in their own mind and visibly to their neighbours, someone who stands for community values.</p>
+      <p>Two weeks later, when asked to volunteer four hours per month, declining creates a dissonance between the self-image they have publicly committed to — a community-minded person — and the behaviour of refusing to give time to the community. To reduce that dissonance, the path of least resistance is to comply with the second request, which is consistent with the identity they have already publicly claimed.</p>
+      <p>Residents asked only for the four hours carry no such prior commitment. There is no established self-image to be consistent with, no prior public declaration to honour, and therefore no dissonance created by declining. This reveals something important: small public commitments are not small psychologically. They set in motion a chain of consistency pressure that makes larger subsequent commitments feel like a natural extension of who we have already declared ourselves to be.</p>
+    </div>
+  </div>
+</div>
+
+<div class="q-card" id="qc28">
+  <div class="q-header"><span class="q-num-badge">Q28</span><span class="q-tag-pill tag-bys">Door-in-the-Face vs Foot-in-the-Door — Contrast</span></div>
+  <div class="q-scenario">A charity fundraiser tests two approaches at a mall. Approach A: ask for a $200 donation first; when refused, ask for $20. Approach B: ask whether the person cares about children's welfare (almost everyone says yes), then ask for $20. Both approaches yield higher donation rates than simply asking for $20 directly — but through completely different psychological routes.</div>
+  <div class="q-prompt-wrap"><div class="q-prompt">Identify the compliance technique in each approach and explain the different psychological mechanism driving each. If you had to choose one for a one-off interaction with a stranger, which would you use and why?</div></div>
+  <button class="reveal-btn" onclick="reveal(28)"><span>Reveal Model Answer</span><span class="btn-icon">▼</span></button>
+  <div class="answer-panel" id="ap28">
+    <div class="answer-label">Model Answer</div>
+    <div class="answer-body">
+      <p>Approach A uses the door-in-the-face technique — beginning with a large request expected to be refused, then following with the smaller target request. Approach B uses the foot-in-the-door technique — beginning with a small commitment (a yes to a value question) and building toward the larger request.</p>
+      <p>The mechanisms driving each are fundamentally different. Door-in-the-face works primarily through the norm of reciprocity and perceptual contrast. When the fundraiser concedes from $200 to $20, the passerby feels a social obligation to reciprocate by also making a concession. The $20 also feels more reasonable after the $200 anchor. There is no shift in self-image — the person is simply responding to a social dynamic of mutual concession.</p>
+      <p>Foot-in-the-door works through self-image consistency and cognitive dissonance. By securing a yes to "Do you care about children's welfare?", the fundraiser establishes a self-image: this is a person who cares about children. When the $20 request follows, declining creates an inconsistency between that self-image and the behaviour of refusing to support children. Compliance resolves the dissonance.</p>
+      <p>For a one-off interaction with a complete stranger, door-in-the-face is likely more effective. Foot-in-the-door works best when the person has time to internalise the initial commitment and when the follow-up request arrives after a meaningful interval. In a brief mall interaction, the self-image shift from the opening question may not have time to consolidate. Door-in-the-face works immediately through the in-the-moment social dynamic of perceived concession and reciprocity — no consolidation time is needed.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION 8 -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="section-head">
+  <span class="section-num">08</span>
+  <h2>Interpersonal Attraction</h2>
+</div>
+
+<div class="q-card" id="qc29">
+  <div class="q-header"><span class="q-num-badge">Q29</span><span class="q-tag-pill tag-att">Proximity and Mere Exposure</span></div>
+  <div class="q-scenario">An organisation relocates two departments — previously on separate floors — into a shared open-plan office. Six months later, cross-department friendships have increased significantly, particularly among employees whose workstations are near each other. Employees at opposite ends of the office report little change in their relationships with relocated colleagues.</div>
+  <div class="q-prompt-wrap"><div class="q-prompt">Using the principle of proximity and the mere exposure effect, explain these findings. Why is spatial closeness — rather than simply knowing someone exists in the same building — important for the development of attraction and liking?</div></div>
+  <button class="reveal-btn" onclick="reveal(29)"><span>Reveal Model Answer</span><span class="btn-icon">▼</span></button>
+  <div class="answer-panel" id="ap29">
+    <div class="answer-label">Model Answer</div>
+    <div class="answer-body">
+      <p>The principle of proximity states that physical closeness in daily life is one of the strongest predictors of attraction and friendship. The more frequently we encounter someone, the more opportunity we have to interact, find common ground, and develop positive feelings toward them.</p>
+      <p>The mere exposure effect provides the psychological mechanism: the more often we are exposed to a stimulus — including a person — the more we tend to like it. Familiarity itself generates positive affect. Employees who sit near each other encounter each other multiple times a day — at the printer, in passing, during lunch, in brief corridor conversations. Each low-stakes interaction increases familiarity and, through the mere exposure effect, gradually increases liking.</p>
+      <p>Employees at opposite ends of the office do not benefit from this process, even though they technically share the same building. The key is not awareness of someone's existence — it is the frequency of actual, physical encounters. Knowing that a colleague is somewhere in the building does not produce the repeated exposure that drives the mere exposure effect.</p>
+      <p>This finding has practical implications for organisations that want to build cross-functional collaboration: physical space design matters. Shared kitchens, central meeting areas, and mixed seating arrangements that increase the frequency of incidental encounters can build the familiarity and liking that underpin effective working relationships — not because people are being forced to interact, but because proximity creates the conditions for attraction to develop naturally.</p>
+    </div>
+  </div>
+</div>
+
+<div class="q-card" id="qc30">
+  <div class="q-header"><span class="q-num-badge">Q30</span><span class="q-tag-pill tag-att">Similarity Over Complementarity</span></div>
+  <div class="q-scenario">An online dating platform experiments with two matching algorithms. Algorithm A pairs users on complementary personality traits — introverts with extroverts, planners with spontaneous types. Algorithm B matches on shared values, lifestyle, and life goals. Six months of data shows Algorithm B users have significantly higher rates of continued contact and reported satisfaction.</div>
+  <div class="q-prompt-wrap"><div class="q-prompt">Using research on similarity and attraction, explain why Algorithm B outperforms Algorithm A. Does this mean "opposites attract" is entirely false — or is there a more nuanced way to understand when complementarity might play a role?</div></div>
+  <button class="reveal-btn" onclick="reveal(30)"><span>Reveal Model Answer</span><span class="btn-icon">▼</span></button>
+  <div class="answer-panel" id="ap30">
+    <div class="answer-label">Model Answer</div>
+    <div class="answer-body">
+      <p>Research on attraction consistently supports the principle that similarity — not complementarity — is the stronger and more reliable predictor of sustained attraction and relationship satisfaction. Algorithm B's superior performance reflects this: matching on shared values and life goals creates conditions where two people are likely to agree on the things that matter most — how to spend time, what to prioritise, what a good life looks like.</p>
+      <p>There are several reasons why similarity drives attraction. Shared values and attitudes validate our own worldview, which is reinforcing and comfortable. Similarity also reduces the frequency and severity of value-based conflict, one of the most corrosive forces in long-term relationships. Additionally, being attracted to someone whose fundamental values oppose our own can create cognitive dissonance that gradually erodes the attraction.</p>
+      <p>Algorithm A's complementary matching may generate initial intrigue — but research suggests these surface-level complementarities rarely sustain attraction over time if they are not accompanied by deeper value alignment. The novelty of difference fades; the friction of misaligned life goals does not.</p>
+      <p>"Opposites attract" is not entirely false — it captures something real about initial attraction. Complementarity at the level of temperament or energy can create chemistry in early interactions. But sustained relationship satisfaction is built on shared values, mutual respect, and compatible life visions. The more accurate formulation might be: opposites can attract, but similarities keep people together.</p>
+    </div>
+  </div>
+</div>
+
+<div class="q-card" id="qc31">
+  <div class="q-header"><span class="q-num-badge">Q31</span><span class="q-tag-pill tag-att">Attraction + Cognitive Dissonance</span><span class="q-tag-pill tag-new">New Angle</span></div>
+  <div class="q-scenario">Zara finds herself strongly attracted to a new colleague, Daniel. However, as they spend more time together, she discovers that Daniel holds fundamentally different views on values that are deeply important to her — he dismisses causes she cares about and treats things she considers serious as trivial. Despite the initial attraction, Zara finds herself gradually losing interest in Daniel over the following weeks, without fully understanding why.</div>
+  <div class="q-prompt-wrap"><div class="q-prompt">Using cognitive dissonance and the role of similarity in attraction, explain the psychological process behind Zara's fading interest. What does this suggest about why initial physical attraction alone is rarely sufficient to sustain a relationship when deeper values diverge?</div></div>
+  <button class="reveal-btn" onclick="reveal(31)"><span>Reveal Model Answer</span><span class="btn-icon">▼</span></button>
+  <div class="answer-panel" id="ap31">
+    <div class="answer-label">Model Answer</div>
+    <div class="answer-body">
+      <p>Zara's experience illustrates the interplay between two psychological forces: the role of similarity in sustaining attraction, and the role of cognitive dissonance in undermining it when similarity is absent at the level of values.</p>
+      <p>Initial attraction can be driven by many factors: physical appearance, charisma, novelty, proximity. These are often powerful and immediate. But as two people spend more time together, deeper layers of compatibility become visible. In Zara's case, those deeper layers reveal significant value divergence: Daniel dismisses things she considers important and treats serious matters trivially.</p>
+      <p>This divergence creates cognitive dissonance. Zara holds the cognition "I am attracted to Daniel" alongside the cognition "Daniel does not share or respect the values that define who I am." These two cognitions are inconsistent: it is uncomfortable to be attracted to someone who implicitly undermines the things you care about most. To resolve this dissonance, the path of least resistance is to reduce the attraction — to gradually disengage emotionally. Zara does not consciously decide to lose interest. The dissonance quietly does that work.</p>
+      <p>This explains why initial physical attraction is rarely sufficient to sustain a relationship when deeper values diverge. Attraction is not a fixed state — it is dynamic and continuously influenced by what we learn about the other person. Similarity at the level of values and worldview is the psychological infrastructure that allows attraction to survive the transition from novelty to familiarity. Without it, the dissonance between who we are and who we are drawn to becomes increasingly difficult to sustain — and the attraction fades, often without either person fully understanding why.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- CROSS-SECTIONAL -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="section-head">
+  <span class="section-num">✕</span>
+  <h2>Cross-Sectional — Multiple Concepts Per Question</h2>
+</div>
+
+<div class="q-card" id="qc32">
+  <div class="q-header"><span class="q-num-badge">Q32</span><span class="q-tag-pill tag-cross">FAE + Pygmalion + Self-Fulfilling Prophecy</span></div>
+  <div class="q-scenario">A new supervisor takes over a struggling sales team. She was told the team "lacks motivation and work ethic." In her first meeting she gives minimal encouragement, assigns targets without explanation, and monitors calls closely. After two months, performance declines further. She reports back: "My manager was right — this team just doesn't want to work."</div>
+  <div class="q-prompt-wrap"><div class="q-prompt">Using the FAE, the Pygmalion effect, and self-fulfilling prophecy, trace the chain of events in this scenario. What role did attribution play in the supervisor's initial mindset, and what role did expectation play in producing the very outcome she was trying to fix?</div></div>
+  <button class="reveal-btn" onclick="reveal(32)"><span>Reveal Model Answer</span><span class="btn-icon">▼</span></button>
+  <div class="answer-panel" id="ap32">
+    <div class="answer-label">Model Answer</div>
+    <div class="answer-body">
+      <p>The chain begins with the Fundamental Attribution Error. Before meeting the team, the supervisor has already been handed a dispositional explanation for their underperformance: they lack motivation and work ethic. Rather than treating this as one possible interpretation that deserves to be tested against situational evidence, she accepts it as fact. The FAE is operating before she even walks into the room.</p>
+      <p>This attribution shapes her behaviour from the outset — and the Pygmalion effect takes over. Her expectation that the team is lazy determines how she treats them: minimal encouragement, no explanation of targets, close monitoring that signals distrust. Each of these behaviours communicates a clear message to the team: you are not trusted, you are not valued, and you are expected to underperform.</p>
+      <p>Over two months, this treatment produces the self-fulfilling prophecy. Teams that receive no encouragement, no clarity about goals, and constant surveillance tend to disengage. Motivation erodes under conditions of distrust and micromanagement. The team's performance declines — not because of any character flaw, but because the conditions created by the supervisor's behaviour have made strong performance both psychologically and practically difficult.</p>
+      <p>When the supervisor reports that her manager was right, she completes the self-fulfilling prophecy and compounds the FAE. She interprets the outcome she largely produced as confirmation of the original character attribution. The situational forces she introduced — her own management style — are invisible to her as causal factors. This is the FAE completing a full cycle: a dispositional attribution produces behaviours that generate the very outcome attributed to disposition, which then appears to confirm the original attribution.</p>
+    </div>
+  </div>
+</div>
+
+<div class="q-card" id="qc33">
+  <div class="q-header"><span class="q-num-badge">Q33</span><span class="q-tag-pill tag-cross">Zimbardo + Milgram + Normative Conformity</span></div>
+  <div class="q-scenario">A military unit is assigned to detain suspected smugglers in a remote location, far from commanding officers. The commanding officer has praised "toughness" in past operations. Over several days, treatment of detainees escalates from firm to humiliating, then physically abusive. Each soldier later says they were uncomfortable but didn't want to appear weak in front of their unit.</div>
+  <div class="q-prompt-wrap"><div class="q-prompt">Using Zimbardo's findings on situational power, Milgram's factors that increase obedience, and normative conformity, explain how ordinary soldiers arrived at abusive behaviour. Why is "I was just following orders" both psychologically understandable and yet morally insufficient?</div></div>
+  <button class="reveal-btn" onclick="reveal(33)"><span>Reveal Model Answer</span><span class="btn-icon">▼</span></button>
+  <div class="answer-panel" id="ap33">
+    <div class="answer-label">Model Answer</div>
+    <div class="answer-body">
+      <p>Zimbardo's Stanford Prison Experiment demonstrated that ordinary people, placed in roles within a powerful situational context, rapidly adopt the behaviour associated with those roles. In this scenario, the soldiers are placed in a position of total power over detainees in an isolated location, cut off from the broader norms and oversight of civilian society. Zimbardo found that isolation from outside norms was one of the key conditions enabling abusive behaviour: when the only reference point for what is acceptable is the immediate group and its assigned roles, external moral standards lose their grip.</p>
+      <p>Milgram's findings on incremental escalation are also operative here. The escalation from firm to humiliating to physically abusive did not happen in a single leap — it happened gradually, with each step seeming only a small extension of the last. The commanding officer's praise of "toughness" also functions as an authority signal endorsing a harder approach, even in the officer's absence.</p>
+      <p>Normative conformity explains each individual soldier's silence and participation. None of them wanted to appear weak in front of their unit — the social cost of breaking the emerging group norm was too high. The unit had developed its own internal norm of escalating treatment. Dissenting from that norm meant risking ridicule or the label of being soft. The desire to be accepted and respected by the group overrode individual moral discomfort.</p>
+      <p>"I was just following orders" is psychologically understandable precisely because Milgram showed us that situational forces can lead ordinary people to perform actions that violate their stated values. But it is morally insufficient because Milgram also showed us that people do refuse, that personal responsibility and concern for others are traits that reduce obedience, and that claiming to follow orders does not eliminate moral agency — it displaces it. The capacity to refuse existed. The soldiers chose not to exercise it, and that choice carries moral weight regardless of the situational pressures that made it difficult.</p>
+    </div>
+  </div>
+</div>
+
+<div class="q-card" id="qc34">
+  <div class="q-header"><span class="q-num-badge">Q34</span><span class="q-tag-pill tag-cross">Scapegoating + In-Group Bias + Self-Serving Bias</span></div>
+  <div class="q-scenario">A study finds that people who have recently been rejected from a job or social group are significantly more likely to express prejudice toward minority out-groups in the weeks that follow — even when they have had no direct interaction with those groups and those groups had no role in the rejection.</div>
+  <div class="q-prompt-wrap"><div class="q-prompt">Using scapegoating, in-group bias, and self-serving bias, explain this finding. What does it suggest about the emotional and cognitive conditions that make prejudice most likely to emerge?</div></div>
+  <button class="reveal-btn" onclick="reveal(34)"><span>Reveal Model Answer</span><span class="btn-icon">▼</span></button>
+  <div class="answer-panel" id="ap34">
+    <div class="answer-label">Model Answer</div>
+    <div class="answer-body">
+      <p>This finding reveals that prejudice is not simply a stable attitude that people either hold or do not hold. It is a dynamic response that intensifies under specific emotional and cognitive conditions — particularly when self-esteem is threatened.</p>
+      <p>The self-serving bias provides the first piece of the explanation. When people are rejected from a job or social group, they face a threatening attribution choice: was the rejection caused by something about me (a trait attribution that damages self-esteem), or by something external (a situational attribution that protects it)? The self-serving bias predicts that people will favour external explanations for failures. When the actual cause is ambiguous, a convenient external target becomes psychologically attractive.</p>
+      <p>Scapegoating enters here. Rather than attributing the rejection to identifiable situational factors or honestly examining their own role, people redirect their frustration and threatened self-esteem toward out-group members who had no actual connection to the rejection. The out-group becomes the explanation — not because there is any evidence connecting them to the rejection, but because blaming them is cognitively satisfying and emotionally relieving.</p>
+      <p>In-group bias amplifies this dynamic. Rejection from a desired group sharpens the boundary between in-group and out-group and intensifies the motivation to find value in one's existing in-group identity. One way to do this is to view out-groups more negatively. Together, these three mechanisms explain why external threat increases rather than reduces prejudice: threat activates defensive attributions, which seek an external cause, which is found in a conveniently available out-group.</p>
+    </div>
+  </div>
+</div>
+
+<div class="q-card" id="qc35">
+  <div class="q-header"><span class="q-num-badge">Q35</span><span class="q-tag-pill tag-cross">Pygmalion + Self-Serving Bias + Dissonance</span></div>
+  <div class="q-scenario">Aisha is a capable student who genuinely enjoys science. After joining a new school, her male classmates routinely speak over her and attribute group successes to themselves. Her teacher unconsciously directs complex questions mostly to male students. By year end, Aisha's participation has dropped significantly and she tells her mother she is "not really a science person."</div>
+  <div class="q-prompt-wrap"><div class="q-prompt">Using the Pygmalion effect, the self-serving bias visible in the classmates' behaviour, and cognitive dissonance, trace the psychological journey that led Aisha to this conclusion. At which point in this chain could an intervention have most effectively broken the cycle?</div></div>
+  <button class="reveal-btn" onclick="reveal(35)"><span>Reveal Model Answer</span><span class="btn-icon">▼</span></button>
+  <div class="answer-panel" id="ap35">
+    <div class="answer-label">Model Answer</div>
+    <div class="answer-body">
+      <p>The chain begins with the Pygmalion effect operating through two simultaneous channels. The teacher, by unconsciously directing complex questions to male students, communicates a differential expectation — implicitly, that boys are the scientifically capable ones and Aisha's contributions are less valued. The classmates, by speaking over Aisha and attributing group successes to themselves, deliver the same message through peer dynamics: your voice does not count, your contribution does not register.</p>
+      <p>The classmates' behaviour is itself driven by self-serving bias. By attributing shared group successes to their own individual efforts and competence, they protect and inflate their own self-image — at Aisha's expense. The attribution pattern systematically erases her contribution from the shared narrative of the group's performance.</p>
+      <p>As the year progresses, Aisha faces growing cognitive dissonance. She has a self-concept that includes genuine interest in and capability for science — but this is increasingly inconsistent with the social reality she experiences daily, where feedback consistently communicates the opposite. To resolve this dissonance, she adjusts the belief that is easier to change: her self-concept. "I am not really a science person" is a dissonance-reduction strategy — it resolves the conflict between who she believed she was and the social evidence she has been receiving all year.</p>
+      <p>The most effective intervention point would have been earliest in the chain — at the level of the teacher's differential behaviour. A teacher who actively and publicly recognises Aisha's contributions, directs complex questions to her, and challenges the attribution patterns of the group would have sent a countervailing social signal powerful enough to disrupt the self-fulfilling prophecy before Aisha's self-concept had time to shift. The later the intervention, the more entrenched the revised self-belief becomes.</p>
+    </div>
+  </div>
+</div>
+
+<div class="q-card" id="qc36">
+  <div class="q-header"><span class="q-num-badge">Q36</span><span class="q-tag-pill tag-cross">Effort Justification + Conformity + Obedience</span></div>
+  <div class="q-scenario">A volunteer organisation requires all new members to go through a demanding six-week initiation with difficult tasks and public criticism sessions. After completing it, new members describe the organisation as exceptional and become its most loyal defenders — even advocating strongly for keeping the harsh initiation for future members. Members who joined through a lighter screening process are noticeably less committed and more likely to leave.</div>
+  <div class="q-prompt-wrap"><div class="q-prompt">Using effort justification (cognitive dissonance), normative conformity, and obedience, explain why the demanding initiation produces deeper loyalty. Why might the members who experienced it be the last people to objectively evaluate whether the initiation is actually necessary?</div></div>
+  <button class="reveal-btn" onclick="reveal(36)"><span>Reveal Model Answer</span><span class="btn-icon">▼</span></button>
+  <div class="answer-panel" id="ap36">
+    <div class="answer-label">Model Answer</div>
+    <div class="answer-body">
+      <p>Effort justification provides the primary explanation. Members who completed six weeks of difficult tasks and public criticism have made a significant and painful investment. To conclude that the organisation is merely ordinary — or that the initiation was unnecessary — would mean concluding they suffered for something not worth the suffering. That conclusion creates severe cognitive dissonance. To resolve it, the mind elevates the perceived value of the organisation and the initiation itself. The more demanding the initiation, the stronger the dissonance to resolve, and therefore the stronger the resulting loyalty and positive evaluation.</p>
+      <p>Normative conformity explains why members who may privately have reservations still publicly defend the initiation. Within the organisation, advocacy for the initiation has become the norm — it is what loyal, committed members do. To question it is to risk being seen as weak or insufficiently committed. The social cost of dissent from an established group norm is high, and most members will choose conformity.</p>
+      <p>Obedience explains how the initiation was endured in the first place. The organisation has authority, the initiation is framed as a requirement, and the incremental escalation of demands — each week building on the last — mirrors the foot-in-the-door and slippery slope dynamics that Milgram documented.</p>
+      <p>Members who experienced the demanding initiation are precisely the least equipped to evaluate it objectively because their evaluation is itself a product of the dissonance they resolved. Their positive assessment is not an independent judgement — it is the conclusion their mind arrived at in order to justify what they went through. To admit the initiation was unnecessary would be to reopen the dissonance they have already resolved. This is why organisations with demanding initiations tend to perpetuate them across generations: each cohort that survives becomes an advocate for the very process that shaped their investment.</p>
+    </div>
+  </div>
+</div>
+
+<div class="q-card" id="qc37">
+  <div class="q-header"><span class="q-num-badge">Q37</span><span class="q-tag-pill tag-cross">Inter-Group Conflict + Groupthink + Bystander Effect</span></div>
+  <div class="q-scenario">Two rival university faculties are placed in a competitive quiz tournament — heightening hostility. Researchers then introduce a scenario where the entire university's internet fails before final exams, and all faculties must cooperate to pressure IT and administration. Post-experiment surveys show significantly reduced inter-faculty hostility. Within each faculty's planning sessions, members actively challenged each other's ideas — unlike during the tournament where groupthink tendencies had appeared.</div>
+  <div class="q-prompt-wrap"><div class="q-prompt">Using inter-group conflict theory and prejudice reduction conditions, explain why cooperation reduced hostility. Then explain why the shared crisis did NOT produce groupthink in the planning sessions. Finally, why did the bystander effect not occur even though many individuals were present?</div></div>
+  <button class="reveal-btn" onclick="reveal(37)"><span>Reveal Model Answer</span><span class="btn-icon">▼</span></button>
+  <div class="answer-panel" id="ap37">
+    <div class="answer-label">Model Answer</div>
+    <div class="answer-body">
+      <p><strong>Why cooperation reduced hostility:</strong> The competitive quiz tournament created the conditions for inter-group hostility that realistic conflict theory predicts — two groups competing for a scarce resource develop in-group solidarity and out-group antagonism. The internet crisis reversed this by introducing a superordinate goal: a shared objective that both groups urgently needed to achieve but could not accomplish independently. When groups must genuinely cooperate, the competitive framing that sustains hostility dissolves. Members begin to see the out-group not as rivals but as necessary partners. The shared identity of "students facing an unfair situation" temporarily superseded the faculty identities sustaining the rivalry.</p>
+      <p><strong>Why groupthink did not occur:</strong> The crisis created urgency — a condition that typically promotes groupthink. Yet groupthink was absent. The key difference is the nature of the stakes. In the quiz tournament, social cohesion and group pride were the primary goals, and dissent threatened those goals. In the crisis planning sessions, the goal was to actually solve a concrete, pressing problem with real consequences. When consequences are real and immediate, members have a strong individual motivation to ensure the plan is sound. That motivation to get it right overrides the social motivation to maintain harmony. Dissent is welcomed because it improves the plan rather than threatening the group's identity.</p>
+      <p><strong>Why the bystander effect did not occur:</strong> The bystander effect diminishes when responsibility cannot be diffused — when the situation makes it clear that each individual's action is necessary and visible. In this scenario, each faculty's contribution was explicitly required and the crisis was publicly defined as an emergency. There was no ambiguity about whether action was needed, no pluralistic ignorance, and no diffusion of responsibility because the group's success depended on each member actively contributing.</p>
+      <p>The conditions that produce the bystander effect — large anonymous crowds, ambiguous emergencies, and diffused responsibility — were all absent here. This confirms that the bystander effect is not an inevitable feature of groups. It is a product of specific situational conditions, and removing those conditions removes the effect.</p>
+    </div>
+  </div>
+</div>
+
+<a href="#top" class="back-top">↑ back to top</a>
+
+</div><!-- /container -->
+
+<script>
+  let revealed = 0;
+  const total = 37;
+
+  function reveal(n) {
+    const panel = document.getElementById('ap' + n);
+    const btn = panel.previousElementSibling;
+    const card = document.getElementById('qc' + n);
+    const isOpen = panel.classList.contains('open');
+
+    if (!isOpen) {
+      panel.classList.add('open');
+      btn.classList.add('revealed');
+      btn.querySelector('span:first-child').textContent = 'Hide Answer';
+      card.classList.add('answered');
+      revealed++;
+    } else {
+      panel.classList.remove('open');
+      btn.classList.remove('revealed');
+      btn.querySelector('span:first-child').textContent = 'Reveal Model Answer';
+      card.classList.remove('answered');
+      revealed--;
+    }
+
+    const pct = Math.round((revealed / total) * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressCount').textContent = revealed + ' / ' + total;
+  }
+</script>
+</body>
+</html>

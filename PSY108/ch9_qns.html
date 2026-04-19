@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 9 — Model Answers | PSY108</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1612;
+    --paper: #f5f0e8;
+    --cream: #ede7d9;
+    --rust: #b85c38;
+    --teal: #2d6e6e;
+    --gold: #c9943a;
+    --muted: #7a7065;
+    --light-muted: #b5ada2;
+    --border: #d4cdc4;
+    --highlight: #fff3cd;
+    --card-bg: #ffffff;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Source Serif 4', Georgia, serif; font-weight: 300; background: var(--paper); color: var(--ink); line-height: 1.75; font-size: 16px; }
+
+  /* PROGRESS BAR */
+  .progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: var(--rust); z-index: 999; width: 0%; transition: width 0.1s; }
+
+  /* HEADER */
+  header { background: var(--ink); color: var(--paper); padding: 3rem 2rem 2.5rem; text-align: center; position: relative; overflow: hidden; }
+  header::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(255,255,255,0.015) 40px, rgba(255,255,255,0.015) 41px); }
+  .header-label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.18em; color: var(--light-muted); text-transform: uppercase; margin-bottom: 0.75rem; }
+  header h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 900; line-height: 1.15; margin-bottom: 0.5rem; }
+  header h1 em { color: var(--gold); font-style: italic; }
+  .header-sub { font-size: 0.88rem; color: var(--light-muted); font-style: italic; }
+
+  /* NAV */
+  nav { position: sticky; top: 0; z-index: 100; background: var(--ink); border-bottom: 2px solid var(--rust); padding: 0 1rem; overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
+  nav::-webkit-scrollbar { display: none; }
+  nav ul { list-style: none; display: inline-flex; }
+  nav ul li a { display: inline-block; padding: 0.7rem 0.9rem; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--light-muted); text-decoration: none; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s; margin-bottom: -2px; }
+  nav ul li a:hover { color: var(--gold); border-bottom-color: var(--gold); }
+
+  /* LAYOUT */
+  .container { max-width: 860px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+
+  /* INSTRUCTIONS */
+  .instructions { background: var(--ink); color: var(--paper); border-radius: 8px; padding: 1.25rem 1.5rem; margin: 2.5rem 0 1.5rem; font-size: 0.88rem; line-height: 1.7; }
+  .instructions h3 { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem; }
+  .instructions ul { padding-left: 1.2rem; }
+  .instructions li { margin-bottom: 0.3rem; }
+
+  /* QUESTION BLOCK */
+  .question-block { margin: 2.5rem 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .question-header { background: var(--cream); padding: 1rem 1.5rem; display: flex; align-items: flex-start; gap: 1rem; border-bottom: 1px solid var(--border); cursor: pointer; user-select: none; }
+  .question-header:hover { background: #e8e0d4; }
+  .q-number { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--rust); letter-spacing: 0.1em; flex-shrink: 0; margin-top: 0.2rem; }
+  .question-header h3 { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--ink); line-height: 1.4; flex: 1; }
+  .toggle-icon { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--rust); flex-shrink: 0; margin-top: 0.2rem; transition: transform 0.2s; }
+  .question-header.open .toggle-icon { transform: rotate(180deg); }
+
+  /* SCENARIO */
+  .scenario { background: rgba(201,148,58,0.08); border-left: 4px solid var(--gold); padding: 1rem 1.25rem; margin: 1.25rem 1.5rem; border-radius: 0 6px 6px 0; font-size: 0.9rem; line-height: 1.7; font-style: italic; color: #4a3a10; }
+  .scenario-label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); font-style: normal; margin-bottom: 0.4rem; }
+
+  /* ANSWER */
+  .answer-section { display: none; padding: 0 1.5rem 1.5rem; }
+  .answer-section.visible { display: block; }
+  .answer-label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin: 1.25rem 0 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+  .answer-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .answer-text { font-size: 0.92rem; line-height: 1.8; color: #2a2520; }
+  .answer-text p { margin-bottom: 0.85rem; }
+  .answer-text p:last-child { margin-bottom: 0; }
+  .answer-text strong { font-weight: 600; color: var(--ink); }
+
+  /* KEY CONCEPTS TAG */
+  .concepts { display: flex; flex-wrap: wrap; gap: 0.4rem; padding: 0 1.5rem 1rem; }
+  .concept-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; background: rgba(184,92,56,0.08); color: var(--rust); border: 1px solid rgba(184,92,56,0.2); border-radius: 3px; padding: 0.2em 0.5em; }
+
+  /* REVEAL BUTTON */
+  .reveal-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--rust); color: white; border: none; border-radius: 4px; padding: 0.55rem 1.1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; margin: 0.5rem 1.5rem 1rem; transition: background 0.2s; }
+  .reveal-btn:hover { background: #9a4a2a; }
+  .reveal-btn.revealed { background: var(--teal); }
+
+  /* STRUCTURE NOTE */
+  .structure-note { background: rgba(45,110,110,0.07); border-left: 3px solid var(--teal); padding: 0.75rem 1rem; margin-top: 1rem; border-radius: 0 4px 4px 0; font-size: 0.83rem; color: #1d4a4a; line-height: 1.6; }
+  .structure-note strong { color: var(--teal); }
+
+  /* SECTION DIVIDER */
+  .section-divider { display: flex; align-items: center; gap: 1rem; margin: 3rem 0 1.5rem; }
+  .section-divider h2 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--ink); white-space: nowrap; }
+  .section-divider::before, .section-divider::after { content: ''; flex: 1; height: 1.5px; background: var(--border); }
+
+  /* FOOTER */
+  footer { text-align: center; padding: 2rem 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.08em; color: var(--light-muted); border-top: 1px solid var(--border); margin-top: 3rem; }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<header>
+  <div class="header-label">PSY108 · Chapter 9 · Exam Preparation</div>
+  <h1>Scenario Questions — <em>Model Answers</em></h1>
+  <div class="header-sub">Attempt each question yourself first · Reveal answer only when ready</div>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#infancy">Infancy</a></li>
+    <li><a href="#childhood">Childhood</a></li>
+    <li><a href="#adolescence">Adolescence</a></li>
+    <li><a href="#adulthood">Adulthood</a></li>
+    <li><a href="#death">Death</a></li>
+    <li><a href="#research">Research</a></li>
+  </ul>
+</nav>
+
+<div class="container">
+
+  <div class="instructions">
+    <h3>How to use this guide</h3>
+    <ul>
+      <li>Read the scenario carefully before looking at the answer</li>
+      <li>Write your own answer first — even rough notes count</li>
+      <li>Use the structure: <strong>identify → explain mechanism → link to scenario → consequence</strong>
+      <li>Only reveal the model answer after you have attempted it yourself</li>
+      <li>Pay attention to the structure notes — they explain how marks are earned</li>
+    </ul>
+  </div>
+
+  <!-- ══ INFANCY ══════════════════════════════════════════ -->
+  <div class="section-divider" id="infancy"><h2>Infancy &amp; Early Development</h2></div>
+
+  <!-- Q1 -->
+  <div class="question-block">
+    <div class="question-header" onclick="toggleAnswer(this)">
+      <span class="q-number">Q1</span>
+      <h3>A mother notices that her 7-month-old stops crying the moment she picks him up, even before she has fed him or changed his diaper. She finds this puzzling since she assumed babies cry because they are hungry or uncomfortable. What does this tell us about infant development, and what would happen to this child's development if the mother consistently ignored his crying instead?</h3>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="concepts">
+      <span class="concept-tag">Contact comfort</span>
+      <span class="concept-tag">Attachment</span>
+      <span class="concept-tag">Trust vs. Mistrust</span>
+      <span class="concept-tag">Crying reflex</span>
+      <span class="concept-tag">Avoidant attachment</span>
+    </div>
+    <button class="reveal-btn" onclick="revealAnswer(this)">▶ Reveal Model Answer</button>
+    <div class="answer-section">
+      <div class="scenario">
+        <div class="scenario-label">Scenario</div>
+        A mother notices that her 7-month-old stops crying the moment she picks him up, even before she has fed him or changed his diaper. She finds this puzzling since she assumed babies cry because they are hungry or uncomfortable. What does this tell us about infant development, and what would happen to this child's development if the mother consistently ignored his crying instead?
+      </div>
+      <div class="answer-label">Model Answer</div>
+      <div class="answer-text">
+        <p>When the infant stops crying the moment his mother picks him up — before being fed or changed — this reveals something fundamental about what infants actually need. The assumption that crying is purely a signal of physical discomfort is incomplete. Crying is also the infant's primary communication tool for seeking <strong>contact comfort</strong> — closeness, warmth, and the reassuring presence of the caregiver. Harlow's classic research demonstrated precisely this: infant monkeys spent the majority of their time clinging to the soft cloth surrogate mother rather than the wire surrogate that provided food, showing that attachment is driven by warmth and physical closeness, not nourishment. This infant's behaviour is consistent with that finding — he is not hungry or uncomfortable; he simply needs his mother's presence.</p>
+        <p>This moment is also significant in the context of <strong>Erikson's first psychosocial stage — Trust vs. Mistrust</strong> (0–1½ years). Every time the mother responds to his cry, she communicates to him — not in words but in experience — that the world is safe, predictable, and responsive. The infant gradually internalises this as a foundational sense of trust. The <strong>crying reflex</strong> is a biologically wired mechanism whose evolutionary purpose is to summon the caregiver — it is designed to be responded to.</p>
+        <p>If the mother were to consistently ignore his crying, the developmental consequences would be significant. In the short term the infant experiences repeated distress without resolution, gradually learning that his signals produce no response. Rather than developing trust, he develops <strong>mistrust</strong> — a sense that the environment is unresponsive to his needs. Over time this shapes his <strong>attachment style</strong>. Consistent emotional unavailability is associated with <strong>avoidant attachment</strong> — the child eventually stops crying and stops signalling need altogether, not because the need has gone away, but because experience has taught him that expressing it is pointless. The long-term consequences extend into adulthood, affecting aggression, quality of friendships, job satisfaction, relationship choices, and the capacity for intimacy.</p>
+      </div>
+      <div class="structure-note">
+        <strong>Structure note:</strong> Opens by correcting the mother's misconception before naming the concept. Names the concept then explains it in context. Follows a chain: short term → medium term → long term. Returns to the scenario in the conclusion.
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="question-block">
+    <div class="question-header" onclick="toggleAnswer(this)">
+      <span class="q-number">Q2</span>
+      <h3>Two brothers grow up in the same household. The elder, now 40, finds it difficult to rely on others and keeps relationships at arm's length. The younger, 35, worries constantly that people he loves will leave him and tends to become clingy. Their mother recalls being attentive to the younger child but dealing with severe depression during the elder's first year. Connect the brothers' adult patterns to their likely early experiences.</h3>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="concepts">
+      <span class="concept-tag">Attachment theory</span>
+      <span class="concept-tag">Avoidant attachment</span>
+      <span class="concept-tag">Resistant attachment</span>
+      <span class="concept-tag">Consistent vs. inconsistent caregiving</span>
+    </div>
+    <button class="reveal-btn" onclick="revealAnswer(this)">▶ Reveal Model Answer</button>
+    <div class="answer-section">
+      <div class="scenario">
+        <div class="scenario-label">Scenario</div>
+        Two brothers grow up in the same household. The elder, now 40, finds it difficult to rely on others and keeps relationships at arm's length. The younger, 35, worries constantly that people he loves will leave him and tends to become clingy. Their mother recalls being attentive to the younger child but dealing with severe depression during the elder's first year. Connect the brothers' adult patterns to their likely early experiences.
+      </div>
+      <div class="answer-label">Model Answer</div>
+      <div class="answer-text">
+        <p>The two brothers' contrasting adult personalities can be understood through <strong>Ainsworth's attachment theory</strong>, which proposes that the emotional bond formed between an infant and their primary caregiver in the first 18 months creates an internal template for all close relationships that follow. The quality of that bond is shaped not just by the caregiver's presence but by the <strong>consistency and responsiveness</strong> of their emotional availability. Despite growing up in the same household, the brothers experienced fundamentally different caregiving during their critical early months.</p>
+        <p>The mother's severe depression during the elder brother's first year made her emotionally unavailable — physically present but psychologically absent. When he cried, his signals were repeatedly met with silence or indifference. Over time, infants in this situation learn that expressing emotional need produces nothing. The adaptive response is to suppress the attachment system and function as though closeness is neither needed nor expected. This is the origin of <strong>avoidant attachment</strong>. His adult pattern — difficulty relying on others, keeping relationships at arm's length, job instability — are all consistent with this template. His adult life is still being organised around a lesson learned before he could speak.</p>
+        <p>The younger brother's pattern is harder to explain at first glance, since the mother describes herself as attentive. But attentiveness is not the same as <strong>consistency</strong>. A mother recovering from depression may be warm on some days and emotionally withdrawn on others. From the infant's perspective this unpredictability is deeply unsettling — he cannot predict when comfort will be available. The adaptive response is to amplify attachment signals — becoming hypervigilant, clinging tightly whenever the caregiver is present because he never knows when she will next be accessible. This is the origin of <strong>resistant or anxious-ambivalent attachment</strong>. His adult worry about abandonment and clinginess are the direct echo of that infant's hypervigilance.</p>
+        <p>The critical distinction between the two brothers is this: <strong>consistent</strong> unavailability produces avoidant attachment — the infant gives up signalling. <strong>Inconsistent</strong> availability produces resistant attachment — the infant escalates signalling because the response is unpredictable. One became emotionally closed; the other emotionally overwhelming — two different scars from the same mother's struggle with depression, expressed differently because the timing and nature of her unavailability differed.</p>
+      </div>
+      <div class="structure-note">
+        <strong>Structure note:</strong> Names the framework and explains why it is relevant before applying it. Each brother has his own section moving from early experience → mechanism → adult outcome. The consistent vs. inconsistent distinction is made explicit — this is the analytical heart of the answer. The conclusion draws both brothers together without repeating what was already said.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ CHILDHOOD ════════════════════════════════════════ -->
+  <div class="section-divider" id="childhood"><h2>Childhood Cognitive Development</h2></div>
+
+  <!-- Q3 -->
+  <div class="question-block">
+    <div class="question-header" onclick="toggleAnswer(this)">
+      <span class="q-number">Q3</span>
+      <h3>A kindergarten teacher places two identical balls of clay on the table. She rolls one into a long thin snake shape and asks 5-year-olds if the amounts are still the same — most say the snake has more. The same experiment with 9-year-olds produces the correct answer. However when asked why a ball of clay dropped into a tall thin cylinder would make water rise higher than in a wide shallow bowl, the 9-year-olds struggle. What does each group's response reveal, and what does the 9-year-olds' difficulty with the water question specifically tell us?</h3>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="concepts">
+      <span class="concept-tag">Preoperational stage</span>
+      <span class="concept-tag">Concrete operational stage</span>
+      <span class="concept-tag">Conservation</span>
+      <span class="concept-tag">Centration</span>
+      <span class="concept-tag">Abstract reasoning</span>
+      <span class="concept-tag">Formal operations</span>
+    </div>
+    <button class="reveal-btn" onclick="revealAnswer(this)">▶ Reveal Model Answer</button>
+    <div class="answer-section">
+      <div class="scenario">
+        <div class="scenario-label">Scenario</div>
+        A kindergarten teacher places two identical balls of clay on the table. She rolls one into a long thin snake shape and asks 5-year-olds if the amounts are still the same — most say the snake has more. The same experiment with 9-year-olds produces the correct answer. However when asked why a ball of clay dropped into a tall thin cylinder would make water rise higher than in a wide shallow bowl, the 9-year-olds struggle. What does each group's response reveal, and what does the 9-year-olds' difficulty with the water question specifically tell us?
+      </div>
+      <div class="answer-label">Model Answer</div>
+      <div class="answer-text">
+        <p>The 5-year-old students' insistence that the snake-shaped clay contains more reveals a classic failure of <strong>conservation</strong> — the understanding that quantity remains constant despite changes in appearance. But simply saying they lack conservation is not a complete explanation. The deeper cause is <strong>centration</strong> — the tendency of preoperational thinkers to focus on only one dimension of a situation at a time while ignoring others. The children fix their attention on the most visually striking change — the snake is longer — and cannot simultaneously register that it has also become thinner. Because the transformation was performed in front of them, memory cannot explain the error. Their cognitive architecture at this stage genuinely cannot process two dimensions simultaneously — longer simply means more.</p>
+        <p>The 9-year-olds have moved into the <strong>concrete operational stage</strong> and have left this limitation behind. They correctly identify that the snake and ball contain the same amount, demonstrating that conservation has been mastered. They can mentally hold both length and width in mind simultaneously and understand that one increased while the other decreased, leaving the total unchanged. Their thinking has become genuinely logical — but it remains anchored to concrete, observable, directly manipulable situations.</p>
+        <p>The water question reveals the precise ceiling of concrete operational thinking. Unlike the clay experiment — where the transformation is visible and the object tangible — the water question requires reasoning about an invisible process: the relationship between the volume of the clay, the shape of the container, and the resulting water height, entirely in the mind without a concrete transformation to observe. This is abstract, hypothetical reasoning — the kind that belongs to the <strong>formal operational stage</strong> (11+ years). The 9-year-olds are not there yet. Their logic is real but confined to the concrete and observable. The moment the problem lifts off from the tangible world, their thinking loses its footing. This also explains why hands-on activities are not merely helpful for children this age — they are a developmental necessity.</p>
+      </div>
+      <div class="structure-note">
+        <strong>Structure note:</strong> Treats the scenario as three distinct analytical moments — 5-year-olds, 9-year-olds on the clay, 9-year-olds on the water. The key move is making the contrast between the clay question and the water question explicit — this is what the examiner is testing. Every concept is explained in terms of what it means for how the child is thinking in this specific situation.
+      </div>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="question-block">
+    <div class="question-header" onclick="toggleAnswer(this)">
+      <span class="q-number">Q4</span>
+      <h3>Amir is a 4-year-old playing hide and seek. He hides by standing in the middle of the room and covering his eyes with both hands. When asked where he is hiding, he confidently says "you can't see me." His older sister, who is 8, finds this hilarious. What cognitive difference separates Amir from his sister, and what would Piaget predict about when and why this difference emerged?</h3>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="concepts">
+      <span class="concept-tag">Egocentrism</span>
+      <span class="concept-tag">Preoperational stage</span>
+      <span class="concept-tag">Concrete operational stage</span>
+      <span class="concept-tag">Perspective-taking</span>
+      <span class="concept-tag">Biological maturation</span>
+    </div>
+    <button class="reveal-btn" onclick="revealAnswer(this)">▶ Reveal Model Answer</button>
+    <div class="answer-section">
+      <div class="scenario">
+        <div class="scenario-label">Scenario</div>
+        Amir is a 4-year-old playing hide and seek. He hides by standing in the middle of the room and covering his eyes with both hands. When asked where he is hiding, he confidently says "you can't see me." His older sister, who is 8, finds this hilarious. What cognitive difference separates Amir from his sister, and what would Piaget predict about when and why this difference emerged?
+      </div>
+      <div class="answer-label">Model Answer</div>
+      <div class="answer-text">
+        <p>Amir's behaviour is a textbook illustration of <strong>egocentrism</strong> — one of the defining cognitive limitations of the <strong>preoperational stage</strong> (2–7 years). Egocentrism does not mean selfishness. It means the child cannot separate his own subjective experience from objective reality, and cannot mentally step into another person's physical viewpoint to understand what they see. When Amir covers his eyes, he experiences darkness — he cannot see. Because he cannot yet distinguish between his own experience and what others experience, he concludes that if he cannot see, he cannot be seen. His own perspective is reality as far as his cognitive architecture is concerned. He has no framework yet for asking: what does this situation look like from where you are standing?</p>
+        <p>The sister at 8 years old has moved into the <strong>concrete operational stage</strong> and has left egocentrism behind. It is worth being precise about what her laughter actually reveals — there are two layers. The first is straightforward: she knows the rules of hide and seek, and Amir is standing in plain sight not hiding — any child who understands the game would find that amusing. The second and more developmentally significant layer is that she can mentally inhabit Amir's perspective well enough to understand his logic — he covered his eyes and therefore believes he is invisible — while simultaneously seeing how that logic fails from her own viewpoint. It is the ability to hold both perspectives at once that marks the transition out of egocentrism.</p>
+        <p>Piaget would predict this shift occurs at around <strong>age 7</strong>, driven by <strong>biological maturation</strong>. As the brain develops the capacity to perform logical mental operations, the child gains the cognitive flexibility needed to hold multiple perspectives simultaneously rather than being locked into a single viewpoint. For Piaget, this transition is an internal, biologically unfolding process — not driven by social teaching or guidance from others. This is precisely what distinguishes Piaget's account from Vygotsky's: Piaget's child arrives at concrete operational thinking through their own biological development and active physical experience with the world, on a timetable set internally rather than socially.</p>
+      </div>
+      <div class="structure-note">
+        <strong>Structure note:</strong> Addresses all three parts of the question — Amir's behaviour, the sister's response, and Piaget's prediction. Handles the ambiguity of the sister's laughter honestly — acknowledging both the game-rules explanation and the perspective-taking explanation. The Piaget vs. Vygotsky distinction is included because it directly addresses the "why" of the developmental shift.
+      </div>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="question-block">
+    <div class="question-header" onclick="toggleAnswer(this)">
+      <span class="q-number">Q5</span>
+      <h3>A father is teaching his 6-year-old daughter to tie her shoelaces. On day one he does the entire thing while narrating each step aloud. By day three he holds the lace ends while she does the loops. By day seven he just watches and only speaks when she gets stuck. By day ten she ties them completely alone. Three months later, you observe the girl muttering quietly to herself "loop over, pull through" while tying her laces in a hurry. Unpack everything that is developmentally significant in this story from beginning to end.</h3>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="concepts">
+      <span class="concept-tag">Vygotsky</span>
+      <span class="concept-tag">Zone of Proximal Development</span>
+      <span class="concept-tag">Scaffolding</span>
+      <span class="concept-tag">Private speech</span>
+      <span class="concept-tag">Internalisation</span>
+    </div>
+    <button class="reveal-btn" onclick="revealAnswer(this)">▶ Reveal Model Answer</button>
+    <div class="answer-section">
+      <div class="scenario">
+        <div class="scenario-label">Scenario</div>
+        A father is teaching his 6-year-old daughter to tie her shoelaces. On day one he does the entire thing while narrating each step aloud. By day three he holds the lace ends while she does the loops. By day seven he just watches and only speaks when she gets stuck. By day ten she ties them completely alone. Three months later, you observe the girl muttering quietly to herself "loop over, pull through" while tying her laces in a hurry. Unpack everything that is developmentally significant in this story from beginning to end.
+      </div>
+      <div class="answer-label">Model Answer</div>
+      <div class="answer-text">
+        <p>This story is a precise illustration of Vygotsky's sociocultural theory of cognitive development, with every phase of the teaching process mapping onto a specific concept.</p>
+        <p>The starting point — the daughter cannot yet tie her laces alone but can do so with her father's help — defines her <strong>Zone of Proximal Development (ZPD)</strong>: the gap between what she can do independently and what she can achieve with guidance. The father's instruction targets this gap exactly — not doing something she can already do alone, and not demanding something entirely beyond her current capacity.</p>
+        <p>The gradual withdrawal of support across the ten days — from doing everything and narrating aloud, to holding the ends, to watching silently, to full independence — is <strong>scaffolding</strong> in action. The father initially provides maximum support and progressively reduces it as the daughter's competence grows. The skill moves from being jointly owned to being fully hers. Critically, the father's narration on day one is not just instruction — it is the external voice that will eventually become her internal voice.</p>
+        <p>Three months later, the girl muttering "loop over, pull through" to herself while tying her laces in a hurry is the most developmentally significant moment in the story. This is <strong>private speech</strong> — the internalisation of the father's external guidance into her own self-directed inner voice. Vygotsky argued that what we experience as thinking begins as speech between people and gradually moves inward. The father's narrated instructions, once spoken aloud to guide her, have been absorbed and transformed into her own cognitive tool. Private speech returns at any age when a task becomes challenging — and its appearance here, under the pressure of hurrying, is exactly what Vygotsky would predict.</p>
+      </div>
+      <div class="structure-note">
+        <strong>Structure note:</strong> Every phase of the story is unpacked in sequence. ZPD, scaffolding, and private speech are each explained in terms of what they mean for what is happening in this specific scenario. The private speech observation is treated as the climax of the story — which it is, developmentally.
+      </div>
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="question-block">
+    <div class="question-header" onclick="toggleAnswer(this)">
+      <span class="q-number">Q6</span>
+      <h3>Three teenagers are caught shoplifting. The first says he would not have done it if he thought he would get caught. The second says he knew it was wrong because "people like us don't do things like that" and felt deep shame when his family found out. The third says he did it because the law itself is unjust and he was acting on a higher principle of fairness. The judge notes that only one has genuinely internalised moral values. Which one, and why are the other two not yet at that level despite their very different explanations?</h3>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="concepts">
+      <span class="concept-tag">Kohlberg's moral reasoning</span>
+      <span class="concept-tag">Preconventional</span>
+      <span class="concept-tag">Conventional</span>
+      <span class="concept-tag">Postconventional</span>
+    </div>
+    <button class="reveal-btn" onclick="revealAnswer(this)">▶ Reveal Model Answer</button>
+    <div class="answer-section">
+      <div class="scenario">
+        <div class="scenario-label">Scenario</div>
+        Three teenagers are caught shoplifting. The first says he would not have done it if he thought he would get caught. The second says he knew it was wrong because "people like us don't do things like that" and felt deep shame when his family found out. The third says he did it because the law itself is unjust and he was acting on a higher principle of fairness. The judge notes that only one has genuinely internalised moral values. Which one, and why are the other two not yet at that level despite their very different explanations?
+      </div>
+      <div class="answer-label">Model Answer</div>
+      <div class="answer-text">
+        <p>The three teenagers' explanations reveal three distinct levels of moral reasoning as described by Kohlberg, and only the third has genuinely internalised moral values — though the reasoning behind each deserves careful examination.</p>
+        <p>The first teenager — "I would not have done it if I thought I would get caught" — is reasoning at the <strong>preconventional level</strong>. His moral decision is driven entirely by self-interest and the avoidance of personal consequences. There is no moral consideration of the store owner's loss or the wrongness of taking what is not his. Had the consequence been removed — if he knew with certainty he would never be caught — there is nothing in his own reasoning to stop him. His morality exists only as long as punishment does.</p>
+        <p>The second teenager — "people like us don't do things like that" and "deep shame when his family found out" — is reasoning at the <strong>conventional level</strong>. He has moved beyond pure self-interest and is anchored to social identity and group approval. The shame he references is a social consequence, not a physical one — he cares about the kind of person he is seen to be within his community. This is genuine moral development beyond the first teenager, but his morality remains externally dependent. If his social group happened to admire shoplifting, his reasoning could shift accordingly. His values belong to the group, not to himself.</p>
+        <p>The third teenager — acting on "a higher principle of fairness" regardless of the law — is the one the judge identifies as having genuinely internalised moral values. His reasoning operates at the <strong>postconventional level</strong>. His moral judgment is grounded in an internal principle that functions independently of consequences or social approval. Whether or not his specific application of that principle is correct is a separate question — what matters morally is that his compass does not require external validation to function. He would hold this position even if there were no punishment and no social disapproval. That internal independence is what distinguishes genuine moral internalisation from the rule-following of the other two.</p>
+      </div>
+      <div class="structure-note">
+        <strong>Structure note:</strong> Each teenager is handled in sequence with their level clearly named. The key analytical move is explaining not just what level each person is at, but why — what the specific mechanism is that places them there and what would cause their moral behaviour to change. The final paragraph makes the distinction between moral correctness and moral internalisation — a nuance that shows depth.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ ADOLESCENCE ══════════════════════════════════════ -->
+  <div class="section-divider" id="adolescence"><h2>Adolescence</h2></div>
+
+  <!-- Q7 -->
+  <div class="question-block">
+    <div class="question-header" onclick="toggleAnswer(this)">
+      <span class="q-number">Q7</span>
+      <h3>During a family dinner, 15-year-old Sophia refuses to eat because she has a small pimple on her chin and is convinced "everyone at school will be staring at it tomorrow." Her father shares a story about an embarrassing moment from his own teenage years. Sophia responds with "Dad, that's completely different — nobody understood what I was going through then and nobody does now." Identify every adolescent cognitive phenomenon present in this single dinner conversation.</h3>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="concepts">
+      <span class="concept-tag">Imaginary audience</span>
+      <span class="concept-tag">Personal fable</span>
+      <span class="concept-tag">Idealism of youth</span>
+      <span class="concept-tag">Amygdala</span>
+      <span class="concept-tag">Prefrontal cortex</span>
+      <span class="concept-tag">Formal operations</span>
+    </div>
+    <button class="reveal-btn" onclick="revealAnswer(this)">▶ Reveal Model Answer</button>
+    <div class="answer-section">
+      <div class="scenario">
+        <div class="scenario-label">Scenario</div>
+        During a family dinner, 15-year-old Sophia refuses to eat because she has a small pimple on her chin and is convinced "everyone at school will be staring at it tomorrow." Her father shares a story about an embarrassing moment from his own teenage years. Sophia responds with "Dad, that's completely different — nobody understood what I was going through then and nobody does now." Identify every adolescent cognitive phenomenon present in this single dinner conversation.
+      </div>
+      <div class="answer-label">Model Answer</div>
+      <div class="answer-text">
+        <p>Before examining the cognitive phenomena, it is worth noting the neurological context. During adolescence the <strong>amygdala</strong> — which regulates emotional reactions — is more active and larger than in adults, while the <strong>prefrontal cortex</strong> — responsible for judgment and impulse control — is still maturing. Sophia's refusal to eat over a small pimple reflects a brain where emotional responses are generated intensely but not yet fully regulated by rational thought. Her reaction is disproportionate by adult standards precisely because the neurological architecture for proportionate responses is not yet complete.</p>
+        <p>The most immediately visible phenomenon is the <strong>imaginary audience</strong> — the adolescent belief that others are constantly watching and evaluating them. Sophia is convinced that "everyone at school will be staring at it tomorrow." From an adult perspective this seems irrational, but from Sophia's cognitive position it feels completely real. The newly acquired formal operational ability to reason about what others might be thinking, combined with her own preoccupation with the pimple, leads her to assume others must be equally focused on it. She is performing for an audience that exists primarily in her own mind.</p>
+        <p>The <strong>personal fable</strong> is present in two moments. First, "nobody understood what I was going through then and nobody does now" — a precise expression of the belief that one's feelings are so unique and intense they are simply beyond others' comprehension. Second, her dismissal of her father's story — his attempt to suggest her experience is comparable to his is exactly what the personal fable makes impossible to accept. If her feelings are categorically unique, no comparison holds. His well-intentioned connection deepens her isolation rather than easing it.</p>
+        <p>The <strong>idealism of youth</strong> is the most subtly present of the three. It is visible in the absolute certainty with which Sophia treats her own reasoning — she does not say she is worried people might notice; she states it as settled fact. The adolescent tendency to treat their own hypothetical conclusions as definitive truth is a characteristic feature of formal operational thinking in this stage.</p>
+      </div>
+      <div class="structure-note">
+        <strong>Structure note:</strong> Opens with the neurological context before the cognitive phenomena — brain development explains why these phenomena exist. Each phenomenon is grounded in specific lines from the scenario. The personal fable section identifies both moments where it appears. Idealism of youth is acknowledged as the least visible of the three — honesty about the strength of evidence shows analytical precision.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ ADULTHOOD ════════════════════════════════════════ -->
+  <div class="section-divider" id="adulthood"><h2>Adulthood</h2></div>
+
+  <!-- Q8 -->
+  <div class="question-block">
+    <div class="question-header" onclick="toggleAnswer(this)">
+      <span class="q-number">Q8</span>
+      <h3>A 38-year-old man who has spent 15 years building a successful business suddenly feels profoundly empty. He has money, status, and a stable family, yet finds himself asking "is this all there is?" He begins mentoring young entrepreneurs and volunteers at a youth programme on weekends. Within a year his sense of emptiness lifts. What developmental process is most likely at work here, and what would the outcome have looked like if he had responded to the emptiness differently?</h3>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="concepts">
+      <span class="concept-tag">Levinson's Crisis of Urgency</span>
+      <span class="concept-tag">Generativity vs. Stagnation</span>
+      <span class="concept-tag">Erikson</span>
+      <span class="concept-tag">Midlife</span>
+    </div>
+    <button class="reveal-btn" onclick="revealAnswer(this)">▶ Reveal Model Answer</button>
+    <div class="answer-section">
+      <div class="scenario">
+        <div class="scenario-label">Scenario</div>
+        A 38-year-old man who has spent 15 years building a successful business suddenly feels profoundly empty. He has money, status, and a stable family, yet finds himself asking "is this all there is?" He begins mentoring young entrepreneurs and volunteers at a youth programme on weekends. Within a year his sense of emptiness lifts. What developmental process is most likely at work here, and what would the outcome have looked like if he had responded to the emptiness differently?
+      </div>
+      <div class="answer-label">Model Answer</div>
+      <div class="answer-text">
+        <p>This man's experience can be understood through two complementary frameworks that do different analytical work — Levinson explains the <strong>timing and shape</strong> of what he is experiencing, while Erikson explains the <strong>psychological depth</strong> of what is missing and what is at stake.</p>
+        <p>At 38, Levinson's framework places him precisely within the <strong>Crisis of Urgency</strong> (35–43 years) — defined by the collision between outward success and inner hollowness. The question "is this all there is?" is the classic expression of this stage: a dawning awareness that time is finite and that the structures built in early adulthood — career, status, family — may not be sufficient to sustain meaning in the second half of life. Critically, Levinson's Crisis of Urgency encompasses not just the crisis itself but the healthy resolution that follows. When the man begins mentoring and volunteering, he is doing precisely what Levinson describes — dismantling a life structure built around achievement and rebuilding it around meaning and contribution. The emptiness lifts because a new and more purposeful structure has been found, moving him toward Attaining Stability (43–50).</p>
+        <p>Where Levinson tells us when and what, Erikson tells us why it matters. In middle adulthood — the period Erikson associates with <strong>Generativity vs. Stagnation</strong> — the central psychological challenge is contributing meaningfully beyond oneself to community, society, and future generations. He had achieved generativity in some domains — business, family — but had not extended it outward to the broader world. The emptiness was the precise signal that the generativity need was going unmet. His mentoring and volunteering directly addressed that gap, and his restored fulfilment within a year confirms the resolution was genuine.</p>
+        <p>Had he responded to the emptiness differently — suppressing it or channelling it into purely self-focused pursuits — Erikson would predict stagnation. For a man who already possesses every external marker of success, stagnation is particularly dangerous because the internal emptiness is harder to explain and easier to deny, potentially manifesting as a midlife crisis — dramatic external changes that substitute for the genuine internal resolution that only meaningful contribution can provide.</p>
+      </div>
+      <div class="structure-note">
+        <strong>Structure note:</strong> Levinson anchors the clock — the timing and shape of the crisis and its resolution. Erikson explains what the clock is telling him — the deeper psychological need. Together they tell the complete story without repeating each other. Each framework is used to do different analytical work rather than covering the same ground twice.
+      </div>
+    </div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="question-block">
+    <div class="question-header" onclick="toggleAnswer(this)">
+      <span class="q-number">Q9</span>
+      <h3>An 82-year-old woman says: "I made many mistakes. I wasn't always the mother I should have been, and I gave up on a dream I had when I was young. But I understand now why things happened the way they did, and I have made peace with all of it." Her 79-year-old neighbour becomes distressed: "I wasted my life. I should have done everything differently and now it's too late." What developmental concept explains the difference between these two women, and what earlier life experiences does the theory suggest might have led each woman to where she is now?</h3>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="concepts">
+      <span class="concept-tag">Ego-integrity vs. Despair</span>
+      <span class="concept-tag">Erikson</span>
+      <span class="concept-tag">Life review</span>
+      <span class="concept-tag">Generativity</span>
+      <span class="concept-tag">Intimacy</span>
+    </div>
+    <button class="reveal-btn" onclick="revealAnswer(this)">▶ Reveal Model Answer</button>
+    <div class="answer-section">
+      <div class="scenario">
+        <div class="scenario-label">Scenario</div>
+        An 82-year-old woman says: "I made many mistakes. I wasn't always the mother I should have been, and I gave up on a dream I had when I was young. But I understand now why things happened the way they did, and I have made peace with all of it." Her 79-year-old neighbour becomes distressed: "I wasted my life. I should have done everything differently and now it's too late." What developmental concept explains the difference between these two women, and what earlier life experiences does the theory suggest might have led each woman to where she is now?
+      </div>
+      <div class="answer-label">Model Answer</div>
+      <div class="answer-text">
+        <p>The difference between the two women is precisely what Erikson described in his final psychosocial stage: <strong>Ego-Integrity vs. Despair</strong>. In late adulthood, individuals review their lives and judge their satisfaction with the choices they have made. When this review is generally positive — not necessarily perfect, but accepted — the person achieves ego-integrity: a sense of wholeness, serenity, and acceptance that allows them to face death without fear. When the review produces regret and a sense that it is too late to make things right, the person experiences despair.</p>
+        <p>The 82-year-old woman is a clear example of ego-integrity. Crucially, she is not claiming her life was without fault — she openly acknowledges mistakes, inadequate mothering, and an abandoned dream. What distinguishes ego-integrity from simple satisfaction is the ability to <strong>appreciate what went well and accept what did not</strong>. She has arrived at understanding rather than bitterness. The peace she describes is not the peace of a perfect life but the peace of a life that has been honestly reviewed and accepted on its own terms.</p>
+        <p>Her neighbour's distress — "I wasted my life" and "it's too late" — is the hallmark of despair. The same life review process has produced not acceptance but regret and a bitter awareness that time cannot be reclaimed. Where the first woman found meaning in imperfection, her neighbour finds only failure.</p>
+        <p>Erikson's theory suggests that the resolution of this final stage is not independent of what came before. The 82-year-old's ability to reach ego-integrity is likely connected to having successfully navigated earlier stages — developing meaningful intimate relationships, achieving a sense of generativity through contribution to others, and maintaining a stable enough identity to weather life's inevitable disappointments. The neighbour's despair may reflect unresolved challenges from those earlier stages — perhaps a life lived without deep intimacy, without meaningful contribution beyond self, or without a stable sense of who she was. The final stage does not erase what came before; it is shaped by it.</p>
+      </div>
+      <div class="structure-note">
+        <strong>Structure note:</strong> Names the concept and explains it before applying it. Handles the important nuance that ego-integrity is not the same as a perfect life — this is what the 82-year-old's statement is specifically testing. The final paragraph connects the late adulthood stage to earlier Erikson stages — showing the examiner you understand development as a cumulative process.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ DEATH & DYING ════════════════════════════════════ -->
+  <div class="section-divider" id="death"><h2>Death &amp; Dying</h2></div>
+
+  <!-- Q10 -->
+  <div class="question-block">
+    <div class="question-header" onclick="toggleAnswer(this)">
+      <span class="q-number">Q10</span>
+      <h3>A palliative care nurse observes that a terminally ill patient has stopped arguing with his doctors, stopped praying for a miracle, and stopped crying. He now spends his days quietly looking through old photographs and asking for only his closest family members to visit. A junior nurse tells the family "he seems to have given up — this is very worrying." The senior nurse disagrees. Who is right, and what is the senior nurse most likely observing?</h3>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="concepts">
+      <span class="concept-tag">Kübler-Ross</span>
+      <span class="concept-tag">Acceptance</span>
+      <span class="concept-tag">DABDA</span>
+      <span class="concept-tag">Depression</span>
+      <span class="concept-tag">Denial</span>
+    </div>
+    <button class="reveal-btn" onclick="revealAnswer(this)">▶ Reveal Model Answer</button>
+    <div class="answer-section">
+      <div class="scenario">
+        <div class="scenario-label">Scenario</div>
+        A palliative care nurse observes that a terminally ill patient has stopped arguing with his doctors, stopped praying for a miracle, and stopped crying. He now spends his days quietly looking through old photographs and asking for only his closest family members to visit. A junior nurse tells the family "he seems to have given up — this is very worrying." The senior nurse disagrees. Who is right, and what is the senior nurse most likely observing?
+      </div>
+      <div class="answer-label">Model Answer</div>
+      <div class="answer-text">
+        <p>The senior nurse is right, and the junior nurse's concern — while understandable — reflects a misreading of what is happening. The patient's behaviour is not a sign of giving up; it is a sign of having arrived at the final stage of Kübler-Ross's model of emotional reactions to impending death: <strong>Acceptance</strong>.</p>
+        <p>To understand why the senior nurse is not alarmed, it helps to read the patient's behaviour as a sequence. The stopping of arguments with doctors points to the resolution of <strong>anger</strong> — the stage characterised by "why me?" and lashing out at medical personnel. The stopping of praying for a miracle indicates the end of <strong>bargaining</strong> — the attempt to negotiate more time with a supreme being or the universe. The stopping of crying suggests the passing of <strong>depression</strong> — the deep sadness and withdrawal that accompanies mourning one's own death before it happens. What remains when anger, bargaining, and depression have run their course is acceptance.</p>
+        <p><strong>Acceptance</strong> in Kübler-Ross's model is characterised by peace and calm — not happiness, but equanimity. The patient looking through old photographs and withdrawing to only his closest family members is consistent with this stage: he is not disengaging from life out of hopelessness but consciously narrowing his world to what is most meaningful as he prepares for the end. Research supports this — terminal patients' words and writing tend to become more positive, not more negative, as death approaches.</p>
+        <p>The junior nurse's error is treating the absence of distress as pathological when it is actually the healthiest possible outcome of the dying process. Kübler-Ross was clear that not everyone reaches acceptance, and those who do have completed a significant psychological journey. Recognising this distinction is exactly what experienced palliative care requires.</p>
+      </div>
+      <div class="structure-note">
+        <strong>Structure note:</strong> Opens by directly answering who is right before explaining why — examiners reward directness. The key move is reading the patient's behaviour backward through the earlier stages to show how he arrived at acceptance. This demonstrates understanding of the model as a sequence, not just a list of labels.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ RESEARCH METHODS ═════════════════════════════════ -->
+  <div class="section-divider" id="research"><h2>Research Methods</h2></div>
+
+  <!-- Q11 -->
+  <div class="question-block">
+    <div class="question-header" onclick="toggleAnswer(this)">
+      <span class="q-number">Q11</span>
+      <h3>A researcher wants to study whether screen time in childhood affects social skills in adulthood. She designs a study where she measures the screen time habits and social skills of three groups simultaneously: children aged 8, teenagers aged 16, and adults aged 30. A colleague raises a serious concern about whether any differences found can actually be attributed to screen time or to development. What is the colleague's concern, and how would you redesign the study to address it?</h3>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="concepts">
+      <span class="concept-tag">Cross-sectional research</span>
+      <span class="concept-tag">Longitudinal research</span>
+      <span class="concept-tag">Cohort effects</span>
+      <span class="concept-tag">Developmental maturation</span>
+    </div>
+    <button class="reveal-btn" onclick="revealAnswer(this)">▶ Reveal Model Answer</button>
+    <div class="answer-section">
+      <div class="scenario">
+        <div class="scenario-label">Scenario</div>
+        A researcher wants to study whether screen time in childhood affects social skills in adulthood. She designs a study where she measures the screen time habits and social skills of three groups simultaneously: children aged 8, teenagers aged 16, and adults aged 30. A colleague raises a serious concern about whether any differences found can actually be attributed to screen time or to development. What is the colleague's concern, and how would you redesign the study to address it?
+      </div>
+      <div class="answer-label">Model Answer</div>
+      <div class="answer-text">
+        <p>The researcher has designed a <strong>cross-sectional study</strong> — measuring three different age groups simultaneously to draw conclusions about development over time. Her colleague's concern is well-founded and points to two distinct problems that together make the findings very difficult to interpret.</p>
+        <p>The first problem is <strong>cohort effects</strong>. The three groups did not simply differ in age — they grew up in fundamentally different technological eras. The 30-year-olds spent their childhood in a world where smartphones barely existed. The 8-year-olds have grown up with tablets and screens from birth. Any difference in social skills between these groups could simply reflect the fact that they were raised in entirely different technological environments — not that screen time caused the difference. You cannot separate the effect of screen time from the effect of growing up in a different era entirely.</p>
+        <p>The second problem is <strong>developmental maturation</strong>. An 8-year-old naturally has less developed social skills than a 30-year-old regardless of screen time. The design cannot distinguish between differences caused by screen time and differences caused by natural cognitive and social development. Both problems mean the colleague is right — attributing any observed differences to screen time alone would be unjustified.</p>
+        <p>The appropriate redesign is a <strong>longitudinal study</strong> — tracking the same group of children from age 8 through to age 30, measuring both screen time and social skills at multiple points. Because everyone grows up in the same era, the cohort problem is eliminated. To address the comparison problem — without which the researcher cannot isolate whether screen time specifically is responsible — the study should compare outcomes between high and low screen time users within the same cohort. Since screen time naturally varies across participants, this gives meaningful comparison without the ethical problems of formally restricting children's screen use for decades. The trade-off is that longitudinal research is expensive, time-consuming, and vulnerable to drop-out over a 22-year period — but for a question about whether childhood screen time affects adult social skills, it is the only design that can actually answer it.</p>
+      </div>
+      <div class="structure-note">
+        <strong>Structure note:</strong> Names the original design before explaining what is wrong with it. Separates the two distinct problems — cohort effects and developmental maturation — clearly. The redesign section addresses both the longitudinal solution and the within-cohort comparison, acknowledging the trade-off honestly. Ends by explaining why this is the only design that can answer the actual question.
+      </div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<footer>
+  PSY108 · Chapter 9 Scenario Model Answers · For exam preparation only · Attempt questions yourself before revealing answers
+</footer>
+
+<script>
+  // Progress bar
+  const bar = document.getElementById('progress');
+  window.addEventListener('scroll', () => {
+    const max = document.body.scrollHeight - window.innerHeight;
+    bar.style.width = (window.scrollY / max * 100) + '%';
+  });
+
+  // Toggle question open/close
+  function toggleAnswer(header) {
+    header.classList.toggle('open');
+    const block = header.closest('.question-block');
+    const answer = block.querySelector('.answer-section');
+    const btn = block.querySelector('.reveal-btn');
+    if (header.classList.contains('open')) {
+      // just open the header styling, don't reveal answer
+    } else {
+      answer.classList.remove('visible');
+      if (btn) { btn.textContent = '▶ Reveal Model Answer'; btn.classList.remove('revealed'); }
+    }
+  }
+
+  // Reveal answer button
+  function revealAnswer(btn) {
+    const block = btn.closest('.question-block');
+    const answer = block.querySelector('.answer-section');
+    const header = block.querySelector('.question-header');
+    answer.classList.toggle('visible');
+    if (answer.classList.contains('visible')) {
+      btn.textContent = '▼ Hide Model Answer';
+      btn.classList.add('revealed');
+      header.classList.add('open');
+    } else {
+      btn.textContent = '▶ Reveal Model Answer';
+      btn.classList.remove('revealed');
+    }
+  }
+</script>
+</body>
+</html>
