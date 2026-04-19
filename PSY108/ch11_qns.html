@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Personality — Scenario Practice Questions</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#1a2744;--navy2:#243460;--blue:#2e5fa3;--blue-l:#e8eef8;
+  --teal:#1d7a6b;--teal-l:#e0f3ef;--amber:#b86a0a;--amber-l:#fef3e2;
+  --rose:#9b3557;--rose-l:#fceef3;--purple:#5a3fa0;--purple-l:#eeebfa;
+  --green:#2e6b35;--green-l:#eaf4eb;
+  --slate:#4a5568;--silver:#f4f6fa;--border:#d8dfe8;
+  --text:#1e2a3a;--muted:#5a6a7e;--white:#fff;
+}
+body{font-family:'Source Sans 3',sans-serif;font-weight:400;color:var(--text);background:var(--silver);font-size:16px;line-height:1.7}
+
+.page-header{background:var(--navy);padding:2.8rem 2rem 2.4rem;text-align:center;position:relative}
+.page-header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--teal),var(--purple))}
+.badge{display:inline-block;background:rgba(255,255,255,0.12);color:#aac3e8;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:3px 14px;border-radius:20px;margin-bottom:.8rem}
+.page-header h1{font-family:'Lora',serif;font-size:2.1rem;font-weight:700;color:#fff;line-height:1.2;margin-bottom:.5rem}
+.page-header p{color:#8aaac8;font-size:14px}
+
+.container{max-width:860px;margin:0 auto;padding:2rem 1.5rem 4rem}
+
+.progress-bar{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:1rem 1.4rem;margin-bottom:2rem;display:flex;align-items:center;gap:16px}
+.progress-bar .prog-label{font-size:13px;color:var(--muted);white-space:nowrap}
+.prog-track{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+.prog-fill{height:6px;background:var(--blue);border-radius:3px;transition:width .4s ease;width:0%}
+.prog-count{font-size:13px;font-weight:600;color:var(--navy);white-space:nowrap}
+
+.section-label{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:2rem 0 .8rem;padding-left:2px}
+
+.q-card{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:1.2rem}
+.q-head{padding:1.1rem 1.4rem .8rem;border-bottom:1px solid var(--border)}
+.q-meta{display:flex;align-items:center;gap:8px;margin-bottom:.6rem}
+.q-num{font-size:11px;font-weight:600;color:var(--muted)}
+.q-tag{display:inline-block;font-size:11px;font-weight:600;padding:2px 9px;border-radius:10px;letter-spacing:.02em}
+.tag-trait{background:#e8eef8;color:#1a3a7a}
+.tag-ocean{background:#e0f3ef;color:#0a4d3e}
+.tag-assess{background:#fef3e2;color:#7a3a00}
+.tag-freud{background:#fceef3;color:#6b1a36}
+.tag-human{background:#eeebfa;color:#331a7a}
+.tag-social{background:#eaf4eb;color:#1a4a20}
+.tag-cross{background:#1a2744;color:#aac3e8}
+
+.q-scenario{font-size:15px;color:var(--slate);line-height:1.75}
+.q-scenario .char{font-style:italic;color:var(--navy2)}
+.q-ask{font-size:15px;font-weight:600;color:var(--navy);margin-top:.7rem;padding-top:.7rem;border-top:1px dashed var(--border)}
+
+.q-body{padding:0 1.4rem}
+
+.answer-toggle{width:100%;background:none;border:none;padding:1rem 0;cursor:pointer;display:flex;align-items:center;gap:8px;font-family:inherit;font-size:14px;font-weight:600;color:var(--blue);text-align:left}
+.answer-toggle .arrow{display:inline-block;width:16px;height:16px;border:1.5px solid var(--blue);border-radius:50%;line-height:13px;text-align:center;font-size:10px;flex-shrink:0;transition:transform .25s}
+.answer-toggle.open .arrow{transform:rotate(180deg)}
+.answer-toggle:hover{color:var(--navy)}
+
+.answer-panel{display:none;padding:0 0 1.2rem}
+.answer-panel.visible{display:block}
+.answer-inner{background:var(--silver);border-radius:8px;padding:1rem 1.2rem;border-left:3px solid var(--teal)}
+.answer-inner .ans-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--teal);margin-bottom:.5rem}
+.answer-inner p{font-size:14px;color:var(--slate);margin-bottom:.5rem;line-height:1.65}
+.answer-inner p:last-child{margin-bottom:0}
+.answer-inner .key{font-weight:600;color:var(--navy2)}
+.answer-inner .why{background:var(--teal-l);border-radius:6px;padding:.6rem .9rem;margin-top:.5rem;font-size:13px;color:#0a4a3a;border-left:3px solid var(--teal)}
+.answer-inner .watch-out{background:var(--amber-l);border-radius:6px;padding:.6rem .9rem;margin-top:.5rem;font-size:13px;color:#6a3000;border-left:3px solid var(--amber)}
+
+.cross-banner{background:var(--navy);color:#c5d8ee;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:5px 1.4rem;border-bottom:1px solid var(--border)}
+
+@media(max-width:600px){
+  .page-header h1{font-size:1.6rem}
+  .container{padding:1.5rem 1rem 3rem}
+}
+@media print{
+  body{background:white}
+  .answer-panel{display:block!important}
+  .answer-toggle .arrow{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="badge">PSY108 · Chapter: Personality</div>
+  <h1>Scenario Practice Questions</h1>
+  <p>Attempt each question before revealing the model answer</p>
+</div>
+
+<div class="container">
+
+<div class="progress-bar">
+  <span class="prog-label">Answers revealed</span>
+  <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+  <span class="prog-count" id="progCount">0 / 20</span>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SECTION A — WHAT IS PERSONALITY & TRAITS
+═══════════════════════════════════════════ -->
+<div class="section-label">Section A — Personality, Traits &amp; Types</div>
+
+<!-- Q1 -->
+<div class="q-card">
+  <div class="q-head">
+    <div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-trait">Traits &amp; Types</span></div>
+    <div class="q-scenario"><span class="char">Marcus</span> is generally cheerful and outgoing at work, cracking jokes with colleagues and initiating conversations. However, at his sister's wedding reception, surrounded by people he does not know, he barely speaks and looks visibly uncomfortable all evening. His colleagues who attended the wedding were puzzled — they said, "That was not the Marcus we know."</div>
+    <div class="q-ask">Using your understanding of personality, explain why Marcus's colleagues were surprised, and what this situation reveals about the nature of personality traits.</div>
+  </div>
+  <div class="q-body">
+    <button class="answer-toggle" onclick="reveal(this)"><span class="arrow">&#9660;</span> Reveal model answer</button>
+    <div class="answer-panel">
+      <div class="answer-inner">
+        <div class="ans-label">Model answer</div>
+        <p>Marcus's colleagues were surprised because personality is defined as <span class="key">the quality that causes consistency in behaviour across different situations and over time</span> — so they expected the same Marcus they knew at work to show up at the wedding. His extraversion at work had led them to predict he would behave the same way socially.</p>
+        <p>However, this scenario illustrates the <span class="key">person–situation interaction</span>: traits do not always predict behaviour perfectly across every situation. The same person can display different trait expressions when the environmental cues change. A familiar, low-stakes work context activates Marcus's extraversion; an unfamiliar social setting activates different responses.</p>
+        <p>This also shows that what his colleagues observed at work was likely a <span class="key">central trait</span> (outgoing in most situations), but in the wedding context — a different cue environment — a <span class="key">secondary trait</span> emerged (social anxiety with strangers).</p>
+        <div class="why">Key insight: Personality captures general tendencies, not absolute rules. Traits predict behaviour most reliably when situations are similar — when the context changes significantly, behaviour can shift.</div>
+        <div class="watch-out">Common mistake: Do not say Marcus "does not have a personality" or that his personality is inconsistent. The correct framing is that traits have limits in cross-situational prediction.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Q2 -->
+<div class="q-card">
+  <div class="q-head">
+    <div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-trait">Allport's Traits</span></div>
+    <div class="q-scenario">In a psychology class, three students are described as follows. <span class="char">Aisha</span> dedicates her entire life to justice — every career decision, friendship, and daily choice is filtered through whether it serves equality. <span class="char">Ben</span> is generally patient, organised, and warm, but nothing single trait defines him above all else. <span class="char">Clara</span> is competitive in sports, but perfectly calm and collaborative at work.</div>
+    <div class="q-ask">Match each student to Allport's three trait categories and explain your reasoning for each.</div>
+  </div>
+  <div class="q-body">
+    <button class="answer-toggle" onclick="reveal(this)"><span class="arrow">&#9660;</span> Reveal model answer</button>
+    <div class="answer-panel">
+      <div class="answer-inner">
+        <div class="ans-label">Model answer</div>
+        <p><span class="key">Aisha → Cardinal trait.</span> Justice governs her entire life across all situations. This single all-important trait dominates her personality the way Allport described — rare, and pervasive enough to define the whole person.</p>
+        <p><span class="key">Ben → Central traits.</span> He has a cluster of 5–10 core traits (patient, organised, warm) that account for his uniqueness, but no single one overrides everything. This is the most common pattern.</p>
+        <p><span class="key">Clara → Secondary trait.</span> Her competitiveness appears only in specific situations (sport), not across all areas of life. Secondary traits are situational tendencies — less consistent and more context-dependent.</p>
+        <div class="why">Key insight: The difference between cardinal and central is not intensity in a moment — it is whether one trait filters every single domain of the person's life (cardinal) or whether a set of traits describes most situations (central).</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Q3 -->
+<div class="q-card">
+  <div class="q-head">
+    <div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-trait">Type A/B/C/D</span></div>
+    <div class="q-scenario"><span class="char">Dr Lim</span> is a cardiovascular surgeon. She arrives early every day, pushes her team relentlessly to meet targets, snaps at nurses when procedures run late, and has been hospitalised twice for stress-related chest pain. Her colleague <span class="char">Dr Wong</span> has similar working hours but remains calm under pressure, takes breaks, and never raises his voice. A new intern notices that Dr Lim's stress seems health-damaging while Dr Wong's does not.</div>
+    <div class="q-ask">Identify the personality types of Dr Lim and Dr Wong. Research suggests that not all characteristics of Type A are equally dangerous — which specific characteristic most puts Dr Lim at cardiac risk, and why does this matter for how we understand the Type A concept?</div>
+  </div>
+  <div class="q-body">
+    <button class="answer-toggle" onclick="reveal(this)"><span class="arrow">&#9660;</span> Reveal model answer</button>
+    <div class="answer-panel">
+      <div class="answer-inner">
+        <div class="ans-label">Model answer</div>
+        <p><span class="key">Dr Lim = Type A.</span> She is competitive, impatient, hostile when frustrated, and overcommitted to achievement — all hallmark Type A traits. <span class="key">Dr Wong = Type B.</span> He is calm, patient, and trusting even under objectively identical work demands.</p>
+        <p>Friedman and Rosenman (1974) originally proposed that Type A personality doubles the risk of coronary heart disease. However, Williams (1989) refined this — it is specifically <span class="key">hostility and anger expression</span> within the Type A cluster that drives cardiac risk, not competitiveness or hard work per se.</p>
+        <p>Dr Lim snapping at nurses and showing hostile responses to delays is the most dangerous element of her profile — not her work ethic alone. This matters because it means a highly competitive, hard-working person who manages anger well (like Dr Wong) may not carry the same cardiac risk.</p>
+        <div class="why">Key insight: Two people can share "Type A" traits but have very different health outcomes depending on whether hostility is expressed. The exam may give you a Type A scenario and ask you to pinpoint the specific risk mechanism.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SECTION B — THE BIG FIVE (OCEAN)
+═══════════════════════════════════════════ -->
+<div class="section-label">Section B — The Big Five (OCEAN)</div>
+
+<!-- Q4 -->
+<div class="q-card">
+  <div class="q-head">
+    <div class="q-meta"><span class="q-num">Q4</span><span class="q-tag tag-ocean">Big Five</span></div>
+    <div class="q-scenario">A company uses a personality assessment before hiring. Four candidates receive the following profiles: <span class="char">Candidate A</span> scores very high on Conscientiousness but very low on Agreeableness. <span class="char">Candidate B</span> scores high on Openness but low on Conscientiousness. <span class="char">Candidate C</span> scores high on Neuroticism and high on Extraversion. <span class="char">Candidate D</span> scores low on Neuroticism and low on Extraversion.</div>
+    <div class="q-ask">For a role requiring creative problem-solving with independent work and minimal team interaction, which candidate is the strongest fit and which is the poorest fit? Justify your answer using specific trait descriptions — do not just name the traits.</div>
+  </div>
+  <div class="q-body">
+    <button class="answer-toggle" onclick="reveal(this)"><span class="arrow">&#9660;</span> Reveal model answer</button>
+    <div class="answer-panel">
+      <div class="answer-inner">
+        <div class="ans-label">Model answer</div>
+        <p><span class="key">Strongest fit: Candidate D.</span> Low Neuroticism means this person is emotionally stable, calm, and even-tempered — they can sustain focused independent work without emotional interference. Low Extraversion means they are comfortable working alone and do not need social stimulation to feel energised, which suits minimal team interaction.</p>
+        <p><span class="key">Poorest fit: Candidate C.</span> High Neuroticism (moody, anxious, temperamental) creates instability that undermines sustained creative output. High Extraversion means this person needs social engagement to feel energised — an independent role with little team interaction would likely feel draining rather than motivating.</p>
+        <p>Note: Candidate B (high Openness) is imaginative and creative, but low Conscientiousness means unreliable follow-through on independent projects. Candidate A is dependable but low Agreeableness may not matter for an independent role — though it is not ideal for collaboration.</p>
+        <div class="watch-out">Common mistake: Students often assume Openness alone = best for creative roles. But creative capacity without the stability and reliability to execute independently produces poor results. Always consider which traits matter for the specific demands of the role.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Q5 -->
+<div class="q-card">
+  <div class="q-head">
+    <div class="q-meta"><span class="q-num">Q5</span><span class="q-tag tag-ocean">Big Five — Stability</span></div>
+    <div class="q-scenario"><span class="char">Mrs Chen</span>, now 58, was notoriously argumentative and suspicious of colleagues in her 30s. Now her team describes her as one of the most cooperative and supportive managers they have had. Her old colleagues from her 30s are astonished — "That is not the woman we knew."</div>
+    <div class="q-ask">Using the Big Five framework, identify which specific traits appear to have changed in Mrs Chen. Research on personality stability suggests this kind of change is not unusual — explain what direction of change across adulthood the research generally predicts, and why this does not necessarily mean the Big Five is unreliable.</div>
+  </div>
+  <div class="q-body">
+    <button class="answer-toggle" onclick="reveal(this)"><span class="arrow">&#9660;</span> Reveal model answer</button>
+    <div class="answer-panel">
+      <div class="answer-inner">
+        <div class="ans-label">Model answer</div>
+        <p>Mrs Chen appears to have increased in <span class="key">Agreeableness</span> (from argumentative and suspicious → cooperative and supportive) and possibly decreased in <span class="key">Neuroticism</span> (the hostility and suspicion suggest emotional instability in her 30s; her current calmness suggests greater stability).</p>
+        <p>Research on personality across adulthood consistently finds that people generally become <span class="key">more conscientious, more agreeable, and more emotionally stable</span> as they age, while becoming slightly less open to experience and less extraverted. This pattern holds across many cultures.</p>
+        <p>This does not mean the Big Five is unreliable. The trait approach acknowledges that some change occurs, especially before age 30 — after which traits stabilise more. The Big Five still reliably captures where a person sits on each dimension at any given life stage. Reliability in testing means the same person gets similar scores across repeated short-term tests — not that personality cannot shift at all over decades.</p>
+        <div class="why">Key distinction: Short-term test reliability ≠ lifelong trait permanence. Traits are relatively stable, not absolutely fixed. This is also why the Big Five is still considered valid even as gradual adult change is documented.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SECTION C — PERSONALITY ASSESSMENT
+═══════════════════════════════════════════ -->
+<div class="section-label">Section C — Personality Assessment</div>
+
+<!-- Q6 -->
+<div class="q-card">
+  <div class="q-head">
+    <div class="q-meta"><span class="q-num">Q6</span><span class="q-tag tag-assess">Assessment</span></div>
+    <div class="q-scenario">A psychologist gives the same personality test to <span class="char">Mr Tan</span> three times over six months. The first time he scores high on social anxiety; the second time, moderately; the third time, low — the scores vary widely each sitting.</div>
+    <div class="q-ask">What specific testing property is being questioned here? Explain clearly what this property means and why consistent scores across repeated testing are important for a personality measure specifically (as opposed to, say, a test of current mood).</div>
+  </div>
+  <div class="q-body">
+    <button class="answer-toggle" onclick="reveal(this)"><span class="arrow">&#9660;</span> Reveal model answer</button>
+    <div class="answer-panel">
+      <div class="answer-inner">
+        <div class="ans-label">Model answer</div>
+        <p>The property being questioned is <span class="key">reliability</span> — specifically test-retest reliability — which is the ability of a psychological test to produce similar results for an individual over repeated testing.</p>
+        <p>For personality assessment, reliability is especially important because personality is defined as a <span class="key">stable, consistent quality</span> that does not shift dramatically from one month to the next. If a test measuring a personality trait gives wildly different scores across sittings, it is not measuring a stable underlying disposition — it may instead be measuring something temporary, like current mood or situational stress.</p>
+        <p>This is different from a mood test, where genuine variation is expected and even desirable — moods are meant to fluctuate. But if a personality trait is truly a lasting tendency, a reliable test should reflect that stability by producing similar scores over time.</p>
+        <div class="watch-out">Do not confuse this with validity. Reliability = consistency of measurement. Validity = whether you are measuring the right thing. A test can be reliable but not valid (measures consistently but the wrong construct entirely).</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Q7 -->
+<div class="q-card">
+  <div class="q-head">
+    <div class="q-meta"><span class="q-num">Q7</span><span class="q-tag tag-assess">Projective vs. Objective</span></div>
+    <div class="q-scenario">A clinical psychologist is assessing a new patient, <span class="char">James</span>, who was referred for possible depression. James has been very guarded in sessions, giving short, surface-level answers when asked directly about his feelings and childhood. The psychologist is trying to decide between using the MMPI-2 or the Rorschach Inkblot Test.</div>
+    <div class="q-ask">Explain the theoretical basis behind why the Rorschach might be chosen over the MMPI-2 specifically for James, and identify one limitation of the Rorschach that the psychologist should remain aware of.</div>
+  </div>
+  <div class="q-body">
+    <button class="answer-toggle" onclick="reveal(this)"><span class="arrow">&#9660;</span> Reveal model answer</button>
+    <div class="answer-panel">
+      <div class="answer-inner">
+        <div class="ans-label">Model answer</div>
+        <p>The Rorschach is a <span class="key">projective test</span> based on the psychoanalytic idea that when confronted with ambiguous stimuli, people unconsciously project their inner conflicts, motives, and repressed thoughts onto what they "see." Because James is guarded and unlikely to be honest on a direct self-report measure, the ambiguous inkblots bypass his conscious defences — he cannot deliberately manage his responses as easily as he can on true/false items.</p>
+        <p>The MMPI-2, while containing validity scales to detect dishonesty, is fundamentally a <span class="key">self-report inventory</span> — it relies on the person accurately representing themselves. For a guarded patient, this is a major limitation.</p>
+        <p><span class="key">Limitation of the Rorschach:</span> Because responses must be interpreted by the clinician, the results are more susceptible to subjective interpretation — even with coding systems designed to reduce variation, inter-rater differences remain a concern for reliability. The psychologist should not treat Rorschach results in isolation.</p>
+        <div class="why">Key link: Projective tests are rooted in Freudian projection — the defence mechanism where unconscious material is externalised. Knowing this connection helps explain why these tests are used for unconscious personality content specifically.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Q8 -->
+<div class="q-card">
+  <div class="q-head">
+    <div class="q-meta"><span class="q-num">Q8</span><span class="q-tag tag-assess">Validity &amp; Cultural Bias</span></div>
+    <div class="q-scenario">A multinational company translates the MBTI into Thai and administers it to employees in Bangkok to determine team role assignments. <span class="char">Sora</span>, a Thai employee, scores as a strong "Extravert" on the test. Her Thai colleagues observe that she is actually quite reserved and deferential in group settings — a norm in Thai workplace culture.</div>
+    <div class="q-ask">Identify two separate assessment concerns raised by this scenario. One concerns a psychometric property of the MBTI specifically; the other concerns a broader challenge in using Western personality tests cross-culturally. Explain both clearly.</div>
+  </div>
+  <div class="q-body">
+    <button class="answer-toggle" onclick="reveal(this)"><span class="arrow">&#9660;</span> Reveal model answer</button>
+    <div class="answer-panel">
+      <div class="answer-inner">
+        <div class="ans-label">Model answer</div>
+        <p><span class="key">Concern 1 — Validity of the MBTI:</span> The MBTI has been criticised for not truly identifying distinct personality types — research suggests people have different degrees of a trait rather than falling cleanly into one category. Sora's "Extravert" score may simply mean she scored slightly above the midpoint on a continuum, yet the MBTI presents it as a fixed type. This questions the construct validity of the instrument.</p>
+        <p><span class="key">Concern 2 — Cultural bias in Western tests:</span> Dana (1993) questioned the validity of Western assessment tests translated into other languages. Personality traits that are considered "extraverted" in a Western individualist context (speaking up, asserting views in groups) may conflict with cultural norms in collectivist Asian societies, where deference and restraint in group settings is valued and expected — not a sign of introversion. The test items were designed around Western behavioural norms, so Sora's low-assertiveness behaviour may reflect cultural socialisation rather than her true personality disposition.</p>
+        <div class="why">These are two different problems — one is an internal psychometric issue with the MBTI instrument; the other is an external validity issue arising from applying Western constructs to non-Western populations.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SECTION D — FREUD'S PSYCHODYNAMIC THEORY
+═══════════════════════════════════════════ -->
+<div class="section-label">Section D — Freud's Psychodynamic Theory</div>
+
+<!-- Q9 -->
+<div class="q-card">
+  <div class="q-head">
+    <div class="q-meta"><span class="q-num">Q9</span><span class="q-tag tag-freud">Id / Ego / Superego</span></div>
+    <div class="q-scenario"><span class="char">Kevin</span>, a 14-year-old, desperately wants a new gaming console his parents cannot afford. He thinks about stealing money from his mother's wallet. He immediately feels guilty and does not do it — instead he asks his parents if he can do extra chores to earn money.</div>
+    <div class="q-ask">Trace the internal dynamic visible in Kevin's decision, identifying the voice of each of the three Freudian personality structures and explaining how the final action reflects a well-functioning personality according to Freud.</div>
+  </div>
+  <div class="q-body">
+    <button class="answer-toggle" onclick="reveal(this)"><span class="arrow">&#9660;</span> Reveal model answer</button>
+    <div class="answer-panel">
+      <div class="answer-inner">
+        <div class="ans-label">Model answer</div>
+        <p><span class="key">Id:</span> Kevin's immediate urge to steal the money is the id speaking — the unconscious pleasure principle that seeks immediate gratification of desires without considering social rules or consequences. It wants the console now.</p>
+        <p><span class="key">Superego:</span> The guilt Kevin feels is the superego — his moral conscience, internalised from parents and culture, judging the stealing impulse as wrong. The superego acts as the judge and represents right vs. wrong.</p>
+        <p><span class="key">Ego:</span> Proposing to do extra chores is the ego's solution — operating on the reality principle. It neither simply obeys the id (steal) nor simply shuts down the desire (he still wants the console). Instead it finds a socially acceptable, realistic path that satisfies the underlying need without violating the superego's moral demands.</p>
+        <p>This reflects a <span class="key">well-functioning personality</span> — Freud said a healthy personality has a strong ego that appropriately channels instinctual energy. Kevin's ego successfully negotiates between the id and superego, producing adaptive behaviour.</p>
+        <div class="watch-out">A common exam error is saying the ego "stops" or "blocks" the id. The ego does not simply block — it redirects and negotiates. The desire (id) is still there; the ego finds a different route to meet it.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Q10 -->
+<div class="q-card">
+  <div class="q-head">
+    <div class="q-meta"><span class="q-num">Q10</span><span class="q-tag tag-freud">Psychosexual Stages &amp; Fixation</span></div>
+    <div class="q-scenario"><span class="char">Raymond</span> is a 40-year-old man who is obsessively neat — his house is meticulously organised, he becomes distraught if objects are moved even slightly, and he budgets every cent compulsively, refusing to spend on experiences or gifts even when he can well afford to. His sister describes him as "a control freak who cannot let go of anything."</div>
+    <div class="q-ask">Using Freud's psychosexual stage theory, identify at which stage Raymond appears to be fixated, explain what the developmental conflict at that stage involved, and describe how the fixation is manifesting in his adult personality. Also identify whether his pattern fits the specific sub-type of that fixation.</div>
+  </div>
+  <div class="q-body">
+    <button class="answer-toggle" onclick="reveal(this)"><span class="arrow">&#9660;</span> Reveal model answer</button>
+    <div class="answer-panel">
+      <div class="answer-inner">
+        <div class="ans-label">Model answer</div>
+        <p><span class="key">Stage: Anal stage (18 months – 3 years).</span> The key developmental conflict involved toilet training — specifically, the child's experience of parental pressure to control bowel and bladder elimination. Successfully resolving this stage required receiving an optimal balance of parental encouragement and freedom around this control.</p>
+        <p>Raymond's excessive orderliness, compulsive hoarding of money (refuses to let go of it), and need for rigid control all reflect <span class="key">anal-retentive fixation</span> — the sub-type where the child "held in" during the anal stage and the adult personality becomes overly controlling, stingy, and perfectionistic. The sister's phrase "cannot let go of anything" is a direct behavioural echo of the anal-retentive pattern.</p>
+        <p>The fixation occurred because the conflict at this stage was not optimally resolved — either too much or too little parental control during toilet training left psychic energy "stuck" at this stage, and it continues to express itself in adult behaviour.</p>
+        <div class="why">Note the contrast: anal-expulsive fixation produces the opposite — excessive messiness, impulsive generosity, and lack of control. Raymond's pattern is specifically retentive, not expulsive.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Q11 -->
+<div class="q-card">
+  <div class="q-head">
+    <div class="q-meta"><span class="q-num">Q11</span><span class="q-tag tag-freud">Oedipus / Phallic Stage</span></div>
+    <div class="q-scenario">A mother notices that her 4-year-old son <span class="char">Eli</span> has recently started refusing to let his parents hug each other, pulling them apart physically, and insisting on sleeping between them. He also began mimicking the way his father walks and dresses — copying his hairstyle and mannerisms with great enthusiasm.</div>
+    <div class="q-ask">Interpret Eli's two sets of behaviours through Freud's psychosexual stage theory. Explain what psychological process each set of behaviours reflects, and what the second set of behaviours (mimicking the father) signals about where Eli is in resolving this stage.</div>
+  </div>
+  <div class="q-body">
+    <button class="answer-toggle" onclick="reveal(this)"><span class="arrow">&#9660;</span> Reveal model answer</button>
+    <div class="answer-panel">
+      <div class="answer-inner">
+        <div class="ans-label">Model answer</div>
+        <p>At age 4, Eli is in the <span class="key">phallic stage (3–6 years)</span>. According to Freud, during this stage young boys unconsciously develop attraction toward their mother and feel competitive hostility toward their father — the <span class="key">Oedipus complex</span>.</p>
+        <p><span class="key">Behaviour 1 (separating parents, sleeping between them):</span> This reflects the Oedipus complex directly — Eli's unconscious wish to bond exclusively with his mother and remove the father from that position.</p>
+        <p><span class="key">Behaviour 2 (copying the father):</span> This reflects the beginning of <span class="key">identification with the same-sex parent</span> — the mechanism through which the Oedipus complex resolves. Eli's ego has recognised that he cannot displace his father, and instead of maintaining rivalry, he begins to imitate and identify with him. This is a healthy sign — the rivalry is giving way to identification, which also marks the formation of the superego as the father's values are internalised.</p>
+        <div class="why">The two behaviours represent different points in the same process: Behaviour 1 = the conflict is active; Behaviour 2 = resolution beginning. Identifying this progression in a scenario is an important exam skill.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Q12 -->
+<div class="q-card">
+  <div class="q-head">
+    <div class="q-meta"><span class="q-num">Q12</span><span class="q-tag tag-freud">Freud — Limitation</span></div>
+    <div class="q-scenario">A researcher argues: "Freud's theory of personality development is scientifically useless because you can use it to explain any behaviour after it happens, but you cannot use it to predict behaviour before it happens. A theory that can explain everything explains nothing."</div>
+    <div class="q-ask">Is the researcher's criticism valid? Explain the specific methodological problem they are pointing to, and identify one other criticism of Freud's approach that is separate from this one.</div>
+  </div>
+  <div class="q-body">
+    <button class="answer-toggle" onclick="reveal(this)"><span class="arrow">&#9660;</span> Reveal model answer</button>
+    <div class="answer-panel">
+      <div class="answer-inner">
+        <div class="ans-label">Model answer</div>
+        <p>The researcher's criticism is <span class="key">largely valid</span>. The specific problem identified is that Freudian theory is not easily testable — it cannot be falsified. Measuring the unconscious is inherently difficult because participants are, by definition, unaware of these impulses. Psychosexual stages are similarly difficult to measure empirically. Because the theory cannot be straightforwardly confirmed or disproved with data, it remains a possible explanation but not a scientifically robust one.</p>
+        <p>The researcher describes a problem called <span class="key">unfalsifiability</span> — a theory that can be invoked to explain any outcome after the fact lacks predictive power, which is a core requirement for scientific theories.</p>
+        <p><span class="key">A separate criticism:</span> Freud's data came almost entirely from case studies of patients with nervous disorders and his own self-analysis. These are a non-representative sample — his observations may not be objective, and his conclusions cannot be generalised to the broader population. Cross-cultural research has also not consistently supported Freud, possibly because his theory reflects Western individualist values and may not apply in collectivist cultures.</p>
+        <div class="watch-out">Do not say "Freud is completely wrong." The exam rewards nuance — Freud's contribution to understanding the unconscious, defence mechanisms, and early childhood importance remains acknowledged, even if his methods were flawed.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SECTION E — HUMANISTIC THEORY
+═══════════════════════════════════════════ -->
+<div class="section-label">Section E — Humanistic Theory</div>
+
+<!-- Q13 -->
+<div class="q-card">
+  <div class="q-head">
+    <div class="q-meta"><span class="q-num">Q13</span><span class="q-tag tag-human">Humanistic — Rogers</span></div>
+    <div class="q-scenario"><span class="char">Priya</span> excels at drawing but her parents have always told her that art is a waste of time. Growing up, she received praise only when she focused on academic subjects. Now as an adult, Priya has a successful corporate career but feels persistently empty and unfulfilled. She secretly draws at night and feels most alive during those moments, but publicly dismisses art as "just a hobby" and feels ashamed of her love for it.</div>
+    <div class="q-ask">Explain Priya's situation using Carl Rogers's concepts of self-concept, unconditional positive regard, and the conflict between her actual self and her ideal self. Why does Rogers's framework predict that Priya would feel unfulfilled despite her professional success?</div>
+  </div>
+  <div class="q-body">
+    <button class="answer-toggle" onclick="reveal(this)"><span class="arrow">&#9660;</span> Reveal model answer</button>
+    <div class="answer-panel">
+      <div class="answer-inner">
+        <div class="ans-label">Model answer</div>
+        <p>Priya experienced primarily <span class="key">conditional positive regard</span> from her parents — love and acceptance were contingent on performing academically, not on who she genuinely was. Rogers argues that when children receive conditional regard, they internalise others' standards and develop a self-concept based on external expectations rather than their own inner values.</p>
+        <p>Priya's <span class="key">self-concept</span> (how she sees herself: a corporate professional, art is shameful) has been shaped by her parents' imposed values rather than her own organismic valuing process — her authentic inner experience that art is where she feels most alive. This creates <span class="key">incongruence</span> between her actual self (who she genuinely is — an artist at heart) and her ideal self (shaped by parental standards — a successful non-artist).</p>
+        <p>Rogers predicts emptiness precisely because <span class="key">self-actualisation</span> — the master motive of human personality development — requires moving toward one's genuine potential. When the path to fulfilment has been blocked by conditionally imposed standards, professional success in the wrong direction does not satisfy the actualising tendency. No external achievement compensates for living in contradiction with one's real self.</p>
+        <div class="why">Rogers's humanistic view directly contrasts with Freud here: the problem is not an unconscious conflict from childhood trauma, but a conscious incongruence between who Priya is and who she has been conditioned to be. The solution is not uncovering repressed memories but restoring contact with authentic self-experience.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Q14 -->
+<div class="q-card">
+  <div class="q-head">
+    <div class="q-meta"><span class="q-num">Q14</span><span class="q-tag tag-human">Humanistic — Criticism</span></div>
+    <div class="q-scenario">A student argues: "The humanistic view of personality is the most hopeful — if everyone just worked on self-actualisation and had free will, the world would be a better place. Every person just needs unconditional love and they will grow into a good person." A classmate pushes back: "But what about people who commit terrible crimes despite having loving, supportive families? The humanistic view cannot explain that."</div>
+    <div class="q-ask">Evaluate both positions. What is the core optimistic assumption of the humanistic approach that the first student is echoing? What is the specific limitation the second student is identifying? Is either student entirely wrong?</div>
+  </div>
+  <div class="q-body">
+    <button class="answer-toggle" onclick="reveal(this)"><span class="arrow">&#9660;</span> Reveal model answer</button>
+    <div class="answer-panel">
+      <div class="answer-inner">
+        <div class="ans-label">Model answer</div>
+        <p>The first student is echoing humanistic psychology's core optimistic assumption: that all people have a <span class="key">built-in drive toward positive growth and self-actualisation</span>, and that unconditional positive regard is the key environmental condition that allows this natural potential to flourish. This is not an unfair representation of Rogers and Maslow's position.</p>
+        <p>The second student identifies the most cited criticism of the humanistic approach: its assumption is considered <span class="key">naïve and overly optimistic</span>. Critics argue that humanists underestimate the human capacity for evil — not all people are inherently good, and not all destructive behaviour can be explained by insufficient positive regard. The example of loving families producing harmful individuals challenges the claim that good conditions reliably produce good personalities.</p>
+        <p>Neither student is entirely wrong. The first captures humanistic theory accurately; the second identifies a genuine limitation that critics have raised. A balanced answer acknowledges that the humanistic framework has real explanatory value for healthy development while noting it struggles to account for the darker aspects of human personality without invoking external causes for everything.</p>
+        <div class="watch-out">An additional exam-relevant limitation: key humanistic concepts (actualising tendency, organismic valuing process, unconditional positive regard) are difficult to validate experimentally. The main data source was Rogers's own therapy sessions — subject to both client self-presentation bias and therapist interpretation bias.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SECTION F — SOCIAL COGNITIVE THEORY
+═══════════════════════════════════════════ -->
+<div class="section-label">Section F — Social Cognitive Theory</div>
+
+<!-- Q15 -->
+<div class="q-card">
+  <div class="q-head">
+    <div class="q-meta"><span class="q-num">Q15</span><span class="q-tag tag-social">Reciprocal Determinism &amp; Self-Efficacy</span></div>
+    <div class="q-scenario"><span class="char">Sofia</span> grew up in a family where academic failure was treated as shameful. She entered university believing she was "not smart enough" for difficult subjects. In her first statistics module, she failed. This confirmed her belief about herself, so she avoided challenging modules thereafter. Over time, she chose easier paths, surrounded herself with friends who also avoided difficult courses, and graduated with a degree that she knew was not her best effort.</div>
+    <div class="q-ask">Trace Sofia's situation using Bandura's concept of reciprocal determinism — identify specifically how her thoughts, behaviour, and environment each influenced the others in a cycle. Then explain what role self-efficacy played in driving this cycle.</div>
+  </div>
+  <div class="q-body">
+    <button class="answer-toggle" onclick="reveal(this)"><span class="arrow">&#9660;</span> Reveal model answer</button>
+    <div class="answer-panel">
+      <div class="answer-inner">
+        <div class="ans-label">Model answer</div>
+        <p><span class="key">Reciprocal determinism</span> (Bandura) holds that personality emerges from the mutual interaction of Thoughts ↔ Behaviour ↔ Environment — each factor continuously shaping the others.</p>
+        <p><span class="key">Thoughts:</span> Sofia's belief that she was not smart enough (low self-efficacy in academic domains) shaped which modules she chose (behaviour) and which social environment she sought out (friends who also avoided challenge).</p>
+        <p><span class="key">Behaviour:</span> Avoiding difficult modules meant Sofia never had opportunities to succeed in them — removing the very experiences that might have corrected her belief. Her choice of easier paths then reinforced the thought that she could only manage easier work.</p>
+        <p><span class="key">Environment:</span> Surrounding herself with friends who avoided challenge normalised avoidance, further reinforced the belief, and made it socially safer to not try — the environment shaped her thoughts and continued to limit her behaviour.</p>
+        <p><span class="key">Self-efficacy</span> was the engine of this cycle. Low self-efficacy (the expectation of failure in academic domains) caused Sofia to approach challenges believing she would not succeed — which caused her to give up more easily or not try, which produced the failure that "confirmed" her low self-belief. This is a self-reinforcing cycle driven by expectation.</p>
+        <div class="why">The social cognitive explanation does not blame unconscious drives or childhood trauma — it locates the cause in a thinking pattern that is learned and therefore, in principle, changeable. This is why cognitive-behavioural therapy targets self-efficacy beliefs directly.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Q16 -->
+<div class="q-card">
+  <div class="q-head">
+    <div class="q-meta"><span class="q-num">Q16</span><span class="q-tag tag-social">Locus of Control</span></div>
+    <div class="q-scenario">Two colleagues receive the same negative performance review. <span class="char">Nathan</span> says: "I need to look at what I can improve — maybe I should have sought feedback earlier and managed my time differently." <span class="char">Grace</span> says: "My manager has never liked me. The whole system is rigged against people like me. There is nothing I could have done."</div>
+    <div class="q-ask">Identify the locus of control orientation of each person. Research suggests their orientations will predict differences in their future behaviour and health — describe two specific predicted differences between Nathan and Grace, and explain what Grace risks if her pattern persists over time.</div>
+  </div>
+  <div class="q-body">
+    <button class="answer-toggle" onclick="reveal(this)"><span class="arrow">&#9660;</span> Reveal model answer</button>
+    <div class="answer-panel">
+      <div class="answer-inner">
+        <div class="ans-label">Model answer</div>
+        <p><span class="key">Nathan = Internal locus of control.</span> He attributes outcomes to his own actions and abilities — things within his control. <span class="key">Grace = External locus of control.</span> She attributes outcomes to external forces (the manager's bias, the system) — things outside her control.</p>
+        <p><span class="key">Predicted difference 1 — Future performance:</span> Nathan is likely to identify specific changes, act on them, and perform better in future reviews. Grace, believing outcomes are not within her power, is unlikely to change behaviour — "What is the point?" This is why internals tend to have higher academic and professional achievement than externals.</p>
+        <p><span class="key">Predicted difference 2 — Health behaviours:</span> Internals believe they can influence their own health and are more likely to exercise, follow medical advice, and eat well. Externals tend toward fatalistic health attitudes ("when my time comes, it comes"), making preventive health behaviours less likely for Grace.</p>
+        <p>If Grace's external orientation persists, she risks developing <span class="key">learned helplessness</span> — a state where repeated perceived lack of control in aversive situations leads a person to stop trying to change outcomes entirely, even when change is possible. This also makes her more susceptible to depression and chronic stress.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SECTION G — CROSS-SECTIONAL QUESTIONS
+═══════════════════════════════════════════ -->
+<div class="section-label">Section G — Cross-Theory Application</div>
+
+<!-- Q17 -->
+<div class="q-card">
+  <div class="cross-banner">Cross-theory · Freud + Humanistic</div>
+  <div class="q-head">
+    <div class="q-meta"><span class="q-num">Q17</span><span class="q-tag tag-cross">Cross-theory</span></div>
+    <div class="q-scenario"><span class="char">Daniel</span>, 35, is a people-pleaser who cannot say no to any request, even when he is overwhelmed. In therapy, his psychologist suggests two interpretations: (A) Daniel's inability to refuse stems from repressed anger toward his controlling parents — anger the superego will not permit him to express, so it is displaced into excessive compliance. (B) Daniel has developed a self-concept as "a person who must earn love through helpfulness," built from years of conditional positive regard where he was only valued when he complied with others.</div>
+    <div class="q-ask">These two interpretations reflect two different personality theories. Identify each theory, and explain one key difference in how each theory would approach helping Daniel — what would each perspective say the source of the problem is and what needs to change?</div>
+  </div>
+  <div class="q-body">
+    <button class="answer-toggle" onclick="reveal(this)"><span class="arrow">&#9660;</span> Reveal model answer</button>
+    <div class="answer-panel">
+      <div class="answer-inner">
+        <div class="ans-label">Model answer</div>
+        <p><span class="key">Interpretation A = Psychodynamic (Freudian).</span> The problem lies in the unconscious — specifically, in the conflict between the id's anger and the superego's prohibition of expressing it. The ego resolves this through a defence mechanism (reaction formation or displacement), expressing the opposite of the underlying impulse. For Freud, helping Daniel requires uncovering and working through the repressed conflict — making the unconscious conscious through techniques like analysis. The source is in the buried past.</p>
+        <p><span class="key">Interpretation B = Humanistic (Rogers).</span> The problem lies in a self-concept built on conditional positive regard. Daniel internalised the rule "I am only loveable if I am helpful," which disconnected him from his authentic self and actualising tendency. For Rogers, healing involves restoring unconditional positive regard — helping Daniel experience acceptance regardless of his compliance, so he can rebuild a self-concept grounded in his genuine identity. The source is in a distorted self-perception.</p>
+        <p><span class="key">Key difference:</span> Freud looks backward and inward to unconscious dynamics; Rogers looks at the present self-concept and the relational conditions needed to restore authentic growth. Freud sees the cause as unconscious conflict; Rogers sees it as incongruence between the imposed self-concept and the real self.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Q18 -->
+<div class="q-card">
+  <div class="cross-banner">Cross-theory · Trait + Social Cognitive + Freud</div>
+  <div class="q-head">
+    <div class="q-meta"><span class="q-num">Q18</span><span class="q-tag tag-cross">Cross-theory</span></div>
+    <div class="q-scenario"><span class="char">Natalie</span> is chronically late for everything — meetings, appointments, social events. Three of her friends offer different explanations. <span class="char">Friend 1</span> says: "Natalie is just a low-conscientiousness person. That is who she is." <span class="char">Friend 2</span> says: "Natalie grew up watching her mother always run late — she learned it is normal and that nothing bad happens when you are late." <span class="char">Friend 3</span> says: "Natalie is never late to events that matter to her — only to the ones she resents but feels obligated to attend. She cannot say she does not want to go, so her body says it for her."</div>
+    <div class="q-ask">Match each friend's explanation to a personality theory, identify the specific concept each invokes, and evaluate which explanation is hardest to test scientifically and why.</div>
+  </div>
+  <div class="q-body">
+    <button class="answer-toggle" onclick="reveal(this)"><span class="arrow">&#9660;</span> Reveal model answer</button>
+    <div class="answer-panel">
+      <div class="answer-inner">
+        <div class="ans-label">Model answer</div>
+        <p><span class="key">Friend 1 = Trait approach (Five-Factor Model).</span> Explains lateness as a stable internal disposition — low Conscientiousness (careless, impulsive, disorganised). Personality as a consistent, internal trait pattern that predicts behaviour across situations.</p>
+        <p><span class="key">Friend 2 = Social Cognitive approach (Bandura — Social Learning).</span> Natalie observed her mother's behaviour and the consequence that nothing bad happened (modelling + outcome expectation). She learned that lateness is acceptable through observational learning. The behaviour was reinforced by the environment's non-response, shaping her expectations.</p>
+        <p><span class="key">Friend 3 = Psychodynamic approach (Freud — unconscious conflict / passive-aggressive expression).</span> Natalie's lateness is an unconscious expression of resentment she cannot consciously admit or directly express — the id's hostility to unwanted obligations is expressing itself despite the ego's social compliance. This is consistent with Freud's idea that unconscious impulses find indirect behavioural outlets.</p>
+        <p><span class="key">Hardest to test scientifically: Friend 3's explanation.</span> To test it, you would need to access and verify Natalie's unconscious resentment — which is, by definition, inaccessible to direct measurement. How do you design an experiment that proves lateness is caused by repressed resentment rather than habit or low conscientiousness? The unconscious cannot be directly observed, making the psychodynamic explanation difficult to falsify — the same methodological problem that critics identify with Freud generally.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Q19 -->
+<div class="q-card">
+  <div class="cross-banner">Cross-theory · OCEAN + Assessment + Humanistic</div>
+  <div class="q-head">
+    <div class="q-meta"><span class="q-num">Q19</span><span class="q-tag tag-cross">Cross-theory</span></div>
+    <div class="q-scenario">A school counsellor administers a Big Five personality test to 16-year-old <span class="char">Jasmine</span> and finds she scores very high on Neuroticism and very low on Openness. Based on the results, the counsellor tells Jasmine's parents: "Your daughter is naturally anxious and closed-minded — these are stable traits she will likely carry through life. You should direct her toward predictable, low-stimulus career paths." Jasmine, who dreams of becoming an architect, is visibly crushed by this conversation.</div>
+    <div class="q-ask">Identify three separate problems with the counsellor's use of the assessment — one concerning what trait theory itself says about stability and change, one concerning how personality tests should be applied to adolescents specifically, and one from a humanistic perspective about what this interaction may do to Jasmine.</div>
+  </div>
+  <div class="q-body">
+    <button class="answer-toggle" onclick="reveal(this)"><span class="arrow">&#9660;</span> Reveal model answer</button>
+    <div class="answer-panel">
+      <div class="answer-inner">
+        <div class="ans-label">Model answer</div>
+        <p><span class="key">Problem 1 — Trait stability (from within trait theory itself):</span> Trait research acknowledges that personality is more changeable in adolescence and young adulthood than after age 30. The teen years are precisely when people experiment with new identities and may revise traits significantly. Telling a 16-year-old these traits are fixed and lifelong misrepresents what trait theory actually says — it overstates the permanence of traits at this developmental stage.</p>
+        <p><span class="key">Problem 2 — Assessment application:</span> Personality tests measure tendencies at a point in time, not destiny. High Neuroticism does not mean "anxious in every situation forever." Traits also exist on a continuum — even a high score does not mean the opposite qualities are absent. Using a single assessment snapshot to direct a teenager's entire career path misapplies what the tool is designed to do. Additionally, adolescent self-report may be less stable than adult self-report, making test-retest reliability lower at this age.</p>
+        <p><span class="key">Problem 3 — Humanistic perspective:</span> Rogers would argue that this interaction constitutes a powerful form of <span class="key">conditional negative regard</span> — Jasmine is being told she is fundamentally limited, which will damage her self-concept. The counsellor's verdict, delivered to her parents as a fixed truth, contradicts humanistic principles around the actualising tendency. If Jasmine internalises this assessment as her self-concept, it may become a self-fulfilling prophecy — not because the traits were truly fixed, but because she no longer believes she can grow.</p>
+        <div class="why">This question tests whether you can critique theory application rather than just recall it. The exam often presents a scenario where someone uses a concept correctly in isolation but misapplies it — being able to identify where the misapplication occurs is the key skill.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Q20 -->
+<div class="q-card">
+  <div class="cross-banner">Cross-theory · All four approaches — story-correction format</div>
+  <div class="q-head">
+    <div class="q-meta"><span class="q-num">Q20</span><span class="q-tag tag-cross">Story Correction</span></div>
+    <div class="q-scenario">Read the following short paragraph. It contains <strong>three inaccurate illustrations</strong> of personality concepts:
+    <br><br>
+    <em>"Personality is mostly about how people behave in specific situations — it changes significantly from one context to the next, which is what makes it interesting to study. According to Freud, the ego is the part of personality present from birth that seeks immediate pleasure regardless of consequence. Meanwhile, humanistic psychologists like Rogers believed that personality is shaped by unconscious drives fighting for control, and that the key to healthy development is resolving these conflicts before adulthood. Finally, a person with an internal locus of control tends to feel helpless in stressful situations because they believe outcomes are determined by forces outside themselves."</em></div>
+    <div class="q-ask">Identify the three inaccurate concepts, explain precisely why each is wrong, and write a corrected version of that sentence for each one.</div>
+  </div>
+  <div class="q-body">
+    <button class="answer-toggle" onclick="reveal(this)"><span class="arrow">&#9660;</span> Reveal model answer</button>
+    <div class="answer-panel">
+      <div class="answer-inner">
+        <div class="ans-label">Model answer</div>
+        <p><span class="key">Inaccuracy 1:</span> "Personality is mostly about how people behave in specific situations — it changes significantly from one context to the next."</p>
+        <p>Why wrong: Personality is defined as the quality that causes <em>consistency</em> in behaviour across different situations and over time — not change. While situational context does influence behaviour (person-situation interaction), the defining feature of personality is its relative stability, not its variability.</p>
+        <p>Corrected: "Personality is the quality that causes consistency in behaviour across different situations and over time — it captures general tendencies that remain relatively stable even as specific contexts influence behaviour."</p>
+        <hr style="border:none;border-top:1px dashed var(--border);margin:.8rem 0">
+        <p><span class="key">Inaccuracy 2:</span> "The ego is the part of personality present from birth that seeks immediate pleasure regardless of consequence."</p>
+        <p>Why wrong: This describes the <em>id</em>, not the ego. The id is present from birth and operates on the pleasure principle — seeking immediate gratification. The ego develops as the child encounters reality, operates on the reality principle, and acts as the rational negotiator between the id's desires and the demands of the real world.</p>
+        <p>Corrected: "According to Freud, the id is the part of personality present from birth that seeks immediate pleasure regardless of consequence. The ego develops later and operates on the reality principle, regulating the id's impulses in socially acceptable ways."</p>
+        <hr style="border:none;border-top:1px dashed var(--border);margin:.8rem 0">
+        <p><span class="key">Inaccuracy 3:</span> "Humanistic psychologists like Rogers believed that personality is shaped by unconscious drives fighting for control... the key is resolving these conflicts before adulthood."</p>
+        <p>Why wrong: This describes Freud's psychodynamic theory, not humanistic theory. Humanists like Rogers explicitly rejected unconscious conflicts as the primary driver of personality. Instead, Rogers believed personality is driven by the actualising tendency — the innate drive to grow, adapt, learn, and reach one's potential — and that healthy development comes from unconditional positive regard and an authentic self-concept, not conflict resolution.</p>
+        <p>Corrected: "Humanistic psychologists like Rogers believed that personality is driven by the actualising tendency — a built-in motive to grow and fulfil one's potential. The key to healthy development is receiving unconditional positive regard so that the self-concept aligns with one's genuine experience."</p>
+        <div class="why">This question mirrors the actual Q1 exam format. The skill is: (a) spot the wrong concept, (b) explain what is wrong and what the concept actually means, (c) rewrite correctly. Practise identifying which theory a statement belongs to — misattribution between Freud and humanistic is the most common exam error in this chapter.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="text-align:center;color:var(--muted);font-size:13px;margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border)">
+  20 scenario questions · PSY108 Personality · Slides 24–33 &amp; Study Unit pp. 14–28
+</div>
+
+</div>
+
+<script>
+var revealed = 0;
+var total = 20;
+function reveal(btn) {
+  var panel = btn.nextElementSibling;
+  var wasHidden = !panel.classList.contains('visible');
+  panel.classList.toggle('visible');
+  btn.classList.toggle('open');
+  btn.childNodes[1].nodeValue = panel.classList.contains('visible') ? ' Hide answer' : ' Reveal model answer';
+  if (wasHidden) {
+    revealed++;
+  } else {
+    revealed--;
+  }
+  if (revealed < 0) revealed = 0;
+  document.getElementById('progCount').textContent = revealed + ' / ' + total;
+  document.getElementById('progFill').style.width = Math.round((revealed / total) * 100) + '%';
+}
+</script>
+</body>
+</html>

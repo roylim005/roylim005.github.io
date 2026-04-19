@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stress & Health — Scenario Practice</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1018;
+    --surface: #141820;
+    --surface2: #1a2030;
+    --border: #252d45;
+    --accent: #c9773a;
+    --accent2: #e8b86a;
+    --accent3: #4db89a;
+    --accent4: #5c96d6;
+    --purple: #9b7de0;
+    --text: #dde2ed;
+    --muted: #6b7794;
+    --heading: 'Playfair Display', serif;
+    --body: 'DM Sans', sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--body); font-size: 15px; line-height: 1.75; }
+
+  /* HERO */
+  .hero {
+    padding: 56px 40px 44px;
+    text-align: center;
+    background: radial-gradient(ellipse at 50% 0%, rgba(201,119,58,0.12) 0%, transparent 65%);
+    border-bottom: 1px solid var(--border);
+  }
+  .hero .badge {
+    display: inline-block;
+    background: rgba(201,119,58,0.12);
+    border: 1px solid rgba(201,119,58,0.35);
+    color: var(--accent);
+    font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+    padding: 5px 16px; border-radius: 20px; margin-bottom: 20px;
+  }
+  .hero h1 { font-family: var(--heading); font-size: clamp(28px,5vw,46px); font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 12px; }
+  .hero h1 em { color: var(--accent); font-style: normal; }
+  .hero p { color: var(--muted); font-size: 14px; max-width: 540px; margin: 0 auto; }
+
+  /* INSTRUCTIONS */
+  .instructions {
+    max-width: 820px; margin: 32px auto; padding: 0 28px;
+    background: rgba(92,150,214,0.06); border: 1px solid rgba(92,150,214,0.2);
+    border-radius: 12px; padding: 20px 24px;
+  }
+  .instructions p { font-size: 13.5px; color: #8fa4c4; }
+  .instructions strong { color: var(--accent4); }
+
+  /* SECTION NAV */
+  .section-nav {
+    display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+    padding: 20px 28px; border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(13,16,24,0.96); backdrop-filter: blur(8px);
+  }
+  .section-nav a {
+    color: var(--muted); text-decoration: none; font-size: 11.5px; font-weight: 500;
+    letter-spacing: 0.4px; padding: 5px 12px; border-radius: 20px;
+    border: 1px solid var(--border); transition: all 0.18s; white-space: nowrap;
+  }
+  .section-nav a:hover { color: #fff; border-color: var(--accent); background: rgba(201,119,58,0.08); }
+
+  /* CONTAINER */
+  .container { max-width: 820px; margin: 0 auto; padding: 44px 28px 100px; }
+
+  /* SECTION HEADER */
+  .sec-header {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 28px; margin-top: 60px;
+    padding-bottom: 16px; border-bottom: 1px solid var(--border);
+  }
+  .sec-header:first-child { margin-top: 0; }
+  .sec-num {
+    width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--heading); font-size: 16px; font-weight: 900;
+  }
+  .sec-num.orange { background: rgba(201,119,58,0.15); color: var(--accent); border: 1px solid rgba(201,119,58,0.3); }
+  .sec-num.teal   { background: rgba(77,184,154,0.12); color: var(--accent3); border: 1px solid rgba(77,184,154,0.3); }
+  .sec-num.blue   { background: rgba(92,150,214,0.12); color: var(--accent4); border: 1px solid rgba(92,150,214,0.3); }
+  .sec-num.purple { background: rgba(155,125,224,0.12); color: var(--purple); border: 1px solid rgba(155,125,224,0.3); }
+  .sec-num.gold   { background: rgba(232,184,106,0.12); color: var(--accent2); border: 1px solid rgba(232,184,106,0.3); }
+  .sec-title { font-family: var(--heading); font-size: 20px; font-weight: 700; color: #fff; }
+  .sec-sub { font-size: 12px; color: var(--muted); margin-top: 2px; letter-spacing: 0.3px; }
+
+  /* QUESTION CARD */
+  .q-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin-bottom: 18px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .q-card:hover { border-color: #3a4565; }
+  .q-header {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 20px 22px 16px;
+  }
+  .q-num {
+    font-family: var(--heading); font-size: 22px; font-weight: 900;
+    line-height: 1; flex-shrink: 0; min-width: 28px;
+  }
+  .q-body { flex: 1; }
+  .q-tag {
+    display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 1.2px;
+    text-transform: uppercase; padding: 2px 10px; border-radius: 10px; margin-bottom: 9px;
+  }
+  .tag-apply { background: rgba(77,184,154,0.12); color: var(--accent3); border: 1px solid rgba(77,184,154,0.25); }
+  .tag-analyse { background: rgba(92,150,214,0.12); color: var(--accent4); border: 1px solid rgba(92,150,214,0.25); }
+  .tag-evaluate { background: rgba(155,125,224,0.12); color: var(--purple); border: 1px solid rgba(155,125,224,0.25); }
+  .tag-cross { background: rgba(232,184,106,0.12); color: var(--accent2); border: 1px solid rgba(232,184,106,0.25); }
+  .q-text { font-size: 14.5px; color: var(--text); line-height: 1.72; }
+  .q-scenario {
+    background: rgba(255,255,255,0.03); border-left: 2px solid var(--border);
+    border-radius: 0 8px 8px 0; padding: 12px 16px; margin: 10px 0 0;
+    font-size: 14px; color: #a8b6cc; font-style: italic;
+  }
+
+  /* REVEAL BUTTON */
+  .reveal-btn {
+    display: flex; align-items: center; gap: 8px;
+    margin: 0 22px 18px; padding: 11px 18px;
+    background: transparent; border: 1px solid var(--border);
+    border-radius: 8px; cursor: pointer; color: var(--muted);
+    font-family: var(--body); font-size: 13px; font-weight: 500;
+    transition: all 0.2s; width: fit-content;
+  }
+  .reveal-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(201,119,58,0.06); }
+  .reveal-btn .arrow {
+    width: 18px; height: 18px; border-radius: 50%;
+    background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center;
+    font-size: 10px; transition: transform 0.2s;
+  }
+  .reveal-btn.open .arrow { transform: rotate(180deg); }
+  .reveal-btn.open { border-color: var(--accent3); color: var(--accent3); background: rgba(77,184,154,0.05); }
+
+  /* ANSWER PANEL */
+  .answer-panel {
+    display: none;
+    border-top: 1px solid var(--border);
+    padding: 20px 22px 22px;
+    background: rgba(77,184,154,0.03);
+  }
+  .answer-panel.visible { display: block; }
+  .answer-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--accent3); margin-bottom: 12px;
+  }
+  .answer-panel p { font-size: 14px; color: #b0bece; margin-bottom: 10px; }
+  .answer-panel p:last-child { margin-bottom: 0; }
+  .answer-panel strong { color: #dde2ed; font-weight: 600; }
+  .answer-panel em { color: var(--accent2); font-style: normal; font-weight: 500; }
+  .answer-panel ul { padding-left: 18px; margin: 8px 0; }
+  .answer-panel ul li { font-size: 13.5px; color: #a0b0c4; margin-bottom: 5px; }
+  .key-concept {
+    background: rgba(201,119,58,0.08); border: 1px solid rgba(201,119,58,0.2);
+    border-radius: 8px; padding: 12px 14px; margin-top: 12px;
+    font-size: 13px; color: #c8a87a;
+  }
+  .key-concept strong { color: var(--accent); }
+
+  /* CROSS-SECTION DIVIDER */
+  .cross-banner {
+    background: linear-gradient(135deg, rgba(232,184,106,0.06), rgba(155,125,224,0.06));
+    border: 1px solid rgba(232,184,106,0.2);
+    border-radius: 12px; padding: 18px 22px; margin: 48px 0 28px;
+    text-align: center;
+  }
+  .cross-banner .cb-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent2); margin-bottom: 6px; }
+  .cross-banner p { font-size: 13px; color: var(--muted); }
+
+  /* PROGRESS */
+  .progress-bar {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    height: 3px; background: var(--border); z-index: 200;
+  }
+  .progress-fill {
+    height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2));
+    width: 0%; transition: width 0.3s;
+  }
+
+  /* SCORE */
+  .score-display {
+    position: fixed; bottom: 14px; right: 20px;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 20px; padding: 7px 16px; font-size: 12px; color: var(--muted);
+    z-index: 200; transition: all 0.2s;
+  }
+  .score-display span { color: var(--accent2); font-weight: 600; }
+
+  @media (max-width: 600px) {
+    .hero { padding: 40px 20px 32px; }
+    .container { padding: 32px 18px 80px; }
+    .q-header { padding: 16px 16px 12px; }
+    .reveal-btn { margin: 0 16px 14px; }
+    .answer-panel { padding: 16px 16px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="badge">PSY108 · Chapter 12 · Exam Prep</div>
+  <h1>Scenario-Based<br><em>Practice Questions</em></h1>
+  <p>Apply, analyse, and evaluate — not just recall. Each question tests a distinct angle of the concept.</p>
+</div>
+
+<div style="max-width:820px; margin: 28px auto 0; padding: 0 28px;">
+  <div class="instructions">
+    <p><strong>How to use this:</strong> Read each scenario carefully and formulate your answer before clicking <em>"Show Model Answer."</em> The answers are hidden until you choose to reveal them — section by section or one at a time. Questions progress from within-section application to cross-section integration at the end.</p>
+  </div>
+</div>
+
+<nav class="section-nav">
+  <a href="#s1">Stress Defined</a>
+  <a href="#s2">Sources & Types</a>
+  <a href="#s3">Conflicts</a>
+  <a href="#s4">GAS</a>
+  <a href="#s5">Fight or Flight</a>
+  <a href="#s6">Effects</a>
+  <a href="#s7">Cognitive Appraisal</a>
+  <a href="#s8">Personality Types</a>
+  <a href="#s9">Locus of Control</a>
+  <a href="#s10">Hardiness</a>
+  <a href="#s11">Coping</a>
+  <a href="#s12">Cross-Section</a>
+</nav>
+
+<div class="container">
+
+  <!-- ===== SECTION 1: STRESS DEFINED ===== -->
+  <div class="sec-header" id="s1">
+    <div class="sec-num orange">1</div>
+    <div><div class="sec-title">What is Stress?</div><div class="sec-sub">Definition, perception, advantages & disadvantages</div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header">
+      <div class="q-num" style="color:var(--accent)">Q1</div>
+      <div class="q-body">
+        <span class="q-tag tag-apply">Apply</span>
+        <div class="q-text">Two colleagues, Marcus and Priya, are given the same last-minute project deadline by their manager. Marcus is visibly anxious, loses sleep, and develops a tension headache. Priya feels energised and stays late willingly, treating it as an opportunity to demonstrate her skills. Both face the same objective situation.
+          <div class="q-scenario">Using the definition of stress, explain why only Marcus, and not Priya, is experiencing stress — even though the stressor is identical.</div>
+        </div>
+      </div>
+    </div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)"><div class="arrow">▼</div> Show Model Answer</button>
+    <div class="answer-panel">
+      <div class="answer-label">Model Answer</div>
+      <p>Stress is defined as a <strong>psychological state uniquely perceived by the individual</strong>, accompanied by predictable physical and behavioural changes in response to a perceived challenge or threat. The key word is <em>perceived</em> — it is not the objective nature of the stressor that determines stress, but how the individual interprets it.</p>
+      <p>Marcus appraises the deadline as a <strong>threat</strong> — he believes it will exceed his ability to cope, triggering physiological symptoms (headache, disrupted sleep) and emotional distress. Priya appraises the same deadline as a <strong>challenge</strong> — something that, while demanding, lies within her perceived ability to handle and even benefit from.</p>
+      <p>This illustrates that the stressor (deadline) is constant, but stress is not. Stress arises only when perceived demand exceeds perceived ability, which is subjective and varies between individuals.</p>
+      <div class="key-concept"><strong>Key concept tested:</strong> Stress is individually perceived, not objectively determined. Same stressor ≠ same stress.</div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header">
+      <div class="q-num" style="color:var(--accent)">Q2</div>
+      <div class="q-body">
+        <span class="q-tag tag-analyse">Analyse</span>
+        <div class="q-text">A sports coach tells her athlete: "The stress you feel before a race is what gets you to the starting line sharp. But if you still feel it three weeks after the race, that's when I worry."
+          <div class="q-scenario">What psychological principle is the coach intuitively describing, and what are the implications of ignoring her warning?</div>
+        </div>
+      </div>
+    </div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)"><div class="arrow">▼</div> Show Model Answer</button>
+    <div class="answer-panel">
+      <div class="answer-label">Model Answer</div>
+      <p>The coach is describing the <strong>adaptive vs. maladaptive nature of stress</strong>. Short-term stress has advantages: it enables focus on the threatening event and sets the body ready to respond — mobilising energy, heightening alertness, and improving performance under pressure.</p>
+      <p>However, stress that persists beyond the immediate situation becomes a disadvantage. Prolonged stress leads to the <em>exhaustion stage</em> of GAS, where the body depletes its resources. Chronic stress threatens health — increasing susceptibility to heart disease, high blood pressure, stroke, and mental disorders.</p>
+      <p>Ignoring the coach's warning means the athlete continues activating the fight-or-flight response without recovery. Over time, this wears out the body's reserves, weakens the immune system, and shifts stress from a performance enhancer into a health liability.</p>
+      <div class="key-concept"><strong>Key concept tested:</strong> Stress is not inherently bad — it is duration and chronicity that determines whether it helps or harms.</div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 2: SOURCES ===== -->
+  <div class="sec-header" id="s2">
+    <div class="sec-num teal">2</div>
+    <div><div class="sec-title">Sources & Types of Stressors</div><div class="sec-sub">Acute, chronic, physical, psychological — and the role of perception</div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header">
+      <div class="q-num" style="color:var(--accent3)">Q3</div>
+      <div class="q-body">
+        <span class="q-tag tag-apply">Apply</span>
+        <div class="q-text">Hassan works in a hospital where he regularly deals with critical emergencies. He reports that individual emergencies no longer rattle him much — it's the constant understaffing, the feeling that there will never be enough hands, and eating lunch alone every day for two years that have slowly ground him down.
+          <div class="q-scenario">Classify Hassan's stressors using the types of stressors framework. Explain why the stressors he finds most debilitating are particularly damaging.</div>
+        </div>
+      </div>
+    </div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)"><div class="arrow">▼</div> Show Model Answer</button>
+    <div class="answer-panel">
+      <div class="answer-label">Model Answer</div>
+      <p>The individual emergencies are <strong>acute stressors</strong> — short-term, intense but time-limited. Hassan has adapted to these, which explains why they no longer affect him as strongly.</p>
+      <p>The understaffing and sense of no relief are <strong>chronic stressors</strong> — long-term, continuous conditions with no clear endpoint. Eating alone daily could be classified as both a <em>chronic stressor</em> and a <em>social stressor</em> (a subtype of chronic stress). These are the stressors Hassan finds most debilitating.</p>
+      <p>Chronic stressors are particularly damaging because they do not allow the body to return to baseline. The body remains in a prolonged <em>resistance stage</em> (GAS), continuously expending resources. Over time, this leads to exhaustion — depleting physiological reserves, suppressing immune function, and increasing vulnerability to illness. Unlike acute stressors, there is no recovery window.</p>
+      <div class="key-concept"><strong>Key concept tested:</strong> Chronic stressors are more harmful not because they are more intense, but because they are unrelenting — preventing recovery.</div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header">
+      <div class="q-num" style="color:var(--accent3)">Q4</div>
+      <div class="q-body">
+        <span class="q-tag tag-evaluate">Evaluate</span>
+        <div class="q-text">During a fire drill at school, 30 students evacuate the building. Afterwards, most students joke about the interruption to their day. However, one student, Aisha, is trembling, can't stop thinking about it hours later, and avoids the building the next morning.
+          <div class="q-scenario">How does this scenario challenge the idea that stressors are objective? What type of stressor is this for each group, and what does Aisha's response suggest about the nature of psychological stressors?</div>
+        </div>
+      </div>
+    </div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)"><div class="arrow">▼</div> Show Model Answer</button>
+    <div class="answer-panel">
+      <div class="answer-label">Model Answer</div>
+      <p>This scenario directly challenges the notion that stressors are objective. The fire drill is the same event for all 30 students, yet its impact is vastly different. For most students, it is <strong>not a stressor at all</strong> — or at most a mild, trivial interruption. For Aisha, it functions as a significant <strong>psychological stressor</strong> — subjective and deeply personal.</p>
+      <p>The fire drill could be classified as a <em>physical stressor</em> in form (sudden loud alarm, evacuation) but its primary impact on Aisha is <strong>psychological</strong> — it is her individual perception, possibly linked to prior trauma or anxiety, that determines her extreme reaction.</p>
+      <p>Aisha's lingering avoidance and intrusive thoughts suggest the stressor has shifted from acute to something resembling <strong>posttraumatic stress</strong> — where the response persists beyond the triggering event and begins to disrupt functioning. This reinforces that psychological stressors are <em>subjective</em>: the same event is a non-event for most and a crisis for one.</p>
+      <div class="key-concept"><strong>Key concept tested:</strong> Psychological stressors are inherently subjective — the same event can range from non-stressful to traumatic depending on the individual.</div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 3: CONFLICTS ===== -->
+  <div class="sec-header" id="s3">
+    <div class="sec-num blue">3</div>
+    <div><div class="sec-title">Internal Conflicts</div><div class="sec-sub">The four types and their stress implications</div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header">
+      <div class="q-num" style="color:var(--accent4)">Q5</div>
+      <div class="q-body">
+        <span class="q-tag tag-apply">Apply</span>
+        <div class="q-text">Ling has been offered two job positions. Job A pays significantly more but requires long hours and frequent travel away from her young children. Job B has a manageable workload and lets her be home every evening, but the pay is barely above her current salary.
+          <div class="q-scenario">What type of conflict is Ling experiencing? Why is this type of conflict more stressful than simply choosing between two good options?</div>
+        </div>
+      </div>
+    </div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)"><div class="arrow">▼</div> Show Model Answer</button>
+    <div class="answer-panel">
+      <div class="answer-label">Model Answer</div>
+      <p>Ling is experiencing a <strong>multiple approach-avoidance conflict</strong> — each option carries both positive and negative features simultaneously. Job A offers financial reward (approach) but costs family time (avoidance). Job B preserves family life (approach) but offers limited financial growth (avoidance).</p>
+      <p>This is more stressful than an approach-approach conflict (two purely good options) because there is no clean "win." Every choice involves a genuine loss. Ling cannot simply pick the better option — she must accept a negative consequence whichever path she takes. This creates persistent tension, rumination, and often paralysis in decision-making.</p>
+      <p>The stress is compounded because the competing values (financial security vs. present parenting) are both deeply meaningful — making the trade-off feel significant rather than trivial.</p>
+      <div class="key-concept"><strong>Key concept tested:</strong> Multiple approach-avoidance conflicts generate the most prolonged stress because every option has a genuine downside — there is no cost-free choice.</div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header">
+      <div class="q-num" style="color:var(--accent4)">Q6</div>
+      <div class="q-body">
+        <span class="q-tag tag-analyse">Analyse</span>
+        <div class="q-text">During a counselling session, a client tells the therapist: "I know I need to apologise to my father, but I can't bear the idea of the awkward conversation. But if I don't do it, the guilt is eating me alive. I feel stuck — I just can't make myself do either."
+          <div class="q-scenario">Identify the type of conflict and explain why the client feels "stuck." What is the psychological consequence of remaining in this state?</div>
+        </div>
+      </div>
+    </div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)"><div class="arrow">▼</div> Show Model Answer</button>
+    <div class="answer-panel">
+      <div class="answer-label">Model Answer</div>
+      <p>This is an <strong>avoidance-avoidance conflict</strong> — both options are unpleasant. Apologising means enduring an uncomfortable conversation (avoidance). Not apologising means continuing to suffer guilt (avoidance). Neither option offers relief.</p>
+      <p>The client feels "stuck" because there is no attractive path forward. In avoidance-avoidance conflicts, the natural response is <em>inaction</em> — people remain undecided and inactive, or "frozen," because moving in any direction leads somewhere unpleasant. The discomfort of each option keeps pushing the person back.</p>
+      <p>Remaining stuck in this conflict maintains and amplifies stress. The unresolved situation continues to be perceived as a threat, sustaining physiological and emotional stress responses. Over time, chronic unresolved conflict contributes to anxiety, lowered mood, and can affect physical health through prolonged stress hormone activation.</p>
+      <div class="key-concept"><strong>Key concept tested:</strong> Avoidance-avoidance conflicts create paralysis. The "frozen" state is not neutral — it sustains the stress response and can lead to chronic distress.</div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 4: GAS ===== -->
+  <div class="sec-header" id="s4">
+    <div class="sec-num purple">4</div>
+    <div><div class="sec-title">General Adaptation Syndrome (GAS)</div><div class="sec-sub">The three stages and their health implications</div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header">
+      <div class="q-num" style="color:var(--purple)">Q7</div>
+      <div class="q-body">
+        <span class="q-tag tag-analyse">Analyse</span>
+        <div class="q-text">Farida is a final-year student preparing for major exams. During the first week of exam revision, she feels a surge of focus and energy. By week three, she still functions but notices she needs more effort to concentrate. By week six — just before exams begin — she falls ill with a flu, can barely get out of bed, and her performance drops sharply.
+          <div class="q-scenario">Map Farida's experience across the three stages of GAS. At what stage does the greatest long-term danger begin, and why?</div>
+        </div>
+      </div>
+    </div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)"><div class="arrow">▼</div> Show Model Answer</button>
+    <div class="answer-panel">
+      <div class="answer-label">Model Answer</div>
+      <p><strong>Week 1 — Alarm Reaction:</strong> Farida's surge of focus and energy reflects the body mobilising its resources. The sympathetic nervous system activates, adrenaline and cortisol are released, heart rate rises, and glucose is made available. This is the body preparing to cope with the stressor (exams).</p>
+      <p><strong>Week 3 — Resistance Stage:</strong> Farida still functions but requires more effort. The body is adapting to the persistent stressor — physiological arousal remains elevated but is no longer at peak alarm levels. The body attempts to repair itself and conserve energy while maintaining coping capacity.</p>
+      <p><strong>Week 6 — Exhaustion Stage:</strong> Farida falls ill. The body has depleted its reserves. High levels of cortisol over a prolonged period have suppressed her immune system (immunosuppression), making her vulnerable to the flu. Cognitive performance deteriorates as resources are exhausted.</p>
+      <p>The <em>exhaustion stage</em> is where the greatest long-term danger begins — not only because of immediate illness, but because chronic exhaustion can damage the heart, weaken immune function persistently, and create lasting vulnerability to disease.</p>
+      <div class="key-concept"><strong>Key concept tested:</strong> GAS is sequential and cumulative. The exhaustion stage is dangerous not just because of what it causes now, but what it damages long-term.</div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header">
+      <div class="q-num" style="color:var(--purple)">Q8</div>
+      <div class="q-body">
+        <span class="q-tag tag-evaluate">Evaluate</span>
+        <div class="q-text">Two employees at the same company both face a difficult period of corporate restructuring. Employee A is eventually told his role is secure. Employee B is not given any resolution — the uncertainty drags on for eight months. Both showed similar stress responses at the start.
+          <div class="q-scenario">Using GAS, explain why Employee B is at significantly greater health risk than Employee A, even though they started from the same point.</div>
+        </div>
+      </div>
+    </div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)"><div class="arrow">▼</div> Show Model Answer</button>
+    <div class="answer-panel">
+      <div class="answer-label">Model Answer</div>
+      <p>Both employees entered the <strong>alarm stage</strong> simultaneously — same stressor, similar initial physiological response. However, their trajectories diverge based on resolution.</p>
+      <p>For <strong>Employee A</strong>, once his role is confirmed, the hypothalamus turns off the sympathetic nervous system, stress hormones cease, and the body returns to parasympathetic (calm) mode. He exits GAS before reaching exhaustion — successful resistance.</p>
+      <p>For <strong>Employee B</strong>, the absence of resolution means the stressor persists. He passes through the resistance stage and, over eight months of sustained physiological arousal, moves into the <strong>exhaustion stage</strong>. Prolonged cortisol and adrenaline damage the cardiovascular system, suppress immune function, and increase susceptibility to illness. He faces risks Employee A has already recovered from.</p>
+      <p>The critical variable is not the initial intensity of stress but its <em>duration and whether it resolves</em>. Chronic, unresolved stress is the primary driver of GAS-related health damage.</p>
+      <div class="key-concept"><strong>Key concept tested:</strong> GAS outcomes are determined by resolution, not just onset. Unresolved stress progresses to exhaustion while resolved stress allows recovery.</div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 5: FIGHT OR FLIGHT ===== -->
+  <div class="sec-header" id="s5">
+    <div class="sec-num gold">5</div>
+    <div><div class="sec-title">The Fight-or-Flight Response</div><div class="sec-sub">Physiological mechanisms and the modern mismatch problem</div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header">
+      <div class="q-num" style="color:var(--accent2)">Q9</div>
+      <div class="q-body">
+        <span class="q-tag tag-apply">Apply</span>
+        <div class="q-text">Ben is about to present his quarterly report to senior management. As he waits outside the boardroom, his heart pounds, his palms sweat, his mouth goes dry, and he finds himself unable to sit still.
+          <div class="q-scenario">Trace the physiological chain of events producing Ben's symptoms. Why does this response occur even though there is no actual physical danger?</div>
+        </div>
+      </div>
+    </div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)"><div class="arrow">▼</div> Show Model Answer</button>
+    <div class="answer-panel">
+      <div class="answer-label">Model Answer</div>
+      <p>Ben has <strong>appraised</strong> the presentation as threatening. This perception sends a distress signal to the <strong>hypothalamus</strong>, which activates the sympathetic nervous system and signals the <strong>adrenal glands</strong> to release <em>adrenaline and cortisol</em> into the bloodstream.</p>
+      <p>These stress hormones produce Ben's symptoms: his <strong>pounding heart</strong> reflects increased heart rate and blood pressure to pump blood to large muscle groups. <strong>Sweating</strong> is the body cooling itself during heightened metabolic activity. His <strong>dry mouth</strong> results from blood being redirected away from non-essential functions (like digestion). His <strong>restlessness</strong> reflects muscles being placed on alert, ready for action.</p>
+      <p>The response occurs despite no physical danger because the fight-or-flight mechanism is hardwired to respond to <em>perceived</em> threats — not just physical ones. The brain does not distinguish between a predator and a boardroom audience. Any stimulus appraised as threatening activates the same ancient survival system, even when the appropriate response is neither fighting nor fleeing.</p>
+      <div class="key-concept"><strong>Key concept tested:</strong> The fight-or-flight response is triggered by cognitive appraisal, not objective danger — which is why modern social stressors activate a system designed for physical threats.</div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header">
+      <div class="q-num" style="color:var(--accent2)">Q10</div>
+      <div class="q-body">
+        <span class="q-tag tag-evaluate">Evaluate</span>
+        <div class="q-text">A health psychologist argues: "The fight-or-flight response was humanity's greatest survival tool for 99% of our existence. But in modern society, it has become one of our greatest health liabilities."
+          <div class="q-scenario">Do you agree with this statement? Use specific examples of modern stressors and the physiological consequences to support your evaluation.</div>
+        </div>
+      </div>
+    </div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)"><div class="arrow">▼</div> Show Model Answer</button>
+    <div class="answer-panel">
+      <div class="answer-label">Model Answer</div>
+      <p>This statement is well-supported. The fight-or-flight response evolved as a short-term, high-intensity survival mechanism — hardwired to protect the body from immediate physical harm. In ancestral environments, the stressor would resolve quickly (escape or confront), allowing recovery.</p>
+      <p>In modern life, stressors are predominantly <strong>psychological and chronic</strong> — financial pressure, career concerns, relationships, study demands. These activate the same physiological cascade (adrenaline, cortisol, elevated heart rate) but <em>cannot be resolved by physical action</em>. You cannot punch your way out of debt or run away from a failing exam grade.</p>
+      <p>The result is that stress hormones flow continuously for events that cause no real danger, <strong>wearing out the body's reserves</strong> without an appropriate outlet. Chronically elevated cortisol weakens the immune system, raises blood pressure, damages the cardiovascular system, and disrupts sleep. The very mechanism that kept ancestors alive now contributes to heart disease, ulcers, and mental health disorders.</p>
+      <p>The psychologist's argument is therefore valid: the mismatch between the system's design (acute physical threat) and its modern triggers (chronic psychological pressure) is the core problem.</p>
+      <div class="key-concept"><strong>Key concept tested:</strong> The fight-or-flight response is not inherently harmful — the mismatch between its design and modern stressors is what creates health risk.</div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 6: EFFECTS ===== -->
+  <div class="sec-header" id="s6">
+    <div class="sec-num orange">6</div>
+    <div><div class="sec-title">Effects of Stress</div><div class="sec-sub">Physical, emotional, mental, behavioural, health, organisational</div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header">
+      <div class="q-num" style="color:var(--accent)">Q11</div>
+      <div class="q-body">
+        <span class="q-tag tag-apply">Apply</span>
+        <div class="q-text">A manager notices that over the past three months, a previously reliable team member, David, has started missing deadlines, snapping at colleagues during meetings, forgetting instructions given just hours earlier, and calling in sick more often than usual.
+          <div class="q-scenario">Using the framework of stress effects, map each of David's observable changes to its corresponding domain. What does this pattern suggest about the stage and severity of David's stress?</div>
+        </div>
+      </div>
+    </div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)"><div class="arrow">▼</div> Show Model Answer</button>
+    <div class="answer-panel">
+      <div class="answer-label">Model Answer</div>
+      <p><strong>Missing deadlines</strong> → <em>Organisational effect</em> (poor performance, absenteeism in spirit — not delivering on commitments).<br>
+      <strong>Snapping at colleagues</strong> → <em>Behavioural effect</em> (anger/irritation, emotional outbursts) and <em>Emotional effect</em> (irritability).<br>
+      <strong>Forgetting instructions</strong> → <em>Mental effect</em> (forgetfulness, difficulty concentrating).<br>
+      <strong>Calling in sick more often</strong> → <em>Health effect</em> (increased susceptibility to illness, indicating immune system suppression) and <em>Organisational effect</em> (absenteeism).</p>
+      <p>The fact that effects are now visible across <em>multiple domains simultaneously</em> — behavioural, mental, health, and organisational — suggests David is well beyond an acute stress episode. This pattern is consistent with someone entering or already in the <strong>exhaustion stage of GAS</strong>, where physiological and psychological resources are significantly depleted.</p>
+      <p>The three-month timeframe also flags this as <strong>chronic stress</strong>, not an acute response — making intervention urgent, as continued deterioration risks more serious health consequences.</p>
+      <div class="key-concept"><strong>Key concept tested:</strong> Real-world stress rarely presents in one domain. Multi-domain effects signal severity and chronicity — not just "bad days."</div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 7: COGNITIVE APPRAISAL ===== -->
+  <div class="sec-header" id="s7">
+    <div class="sec-num teal">7</div>
+    <div><div class="sec-title">Cognitive Appraisal & the ABC Model</div><div class="sec-sub">Primary appraisal, perceived demand vs. ability, reappraisal</div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header">
+      <div class="q-num" style="color:var(--accent3)">Q12</div>
+      <div class="q-body">
+        <span class="q-tag tag-apply">Apply</span>
+        <div class="q-text">Sarah receives critical feedback on her assignment from her professor, with a note saying: "This needs substantial revision before resubmission." Sarah immediately thinks: "I'm terrible at this. I'll never pass. Everyone must think I'm the weakest student in the class." She spends the rest of the day unable to concentrate and cancels plans with friends.
+          <div class="q-scenario">Apply the ABC model to Sarah's experience. Identify each component and explain which component a counsellor would target — and how.</div>
+        </div>
+      </div>
+    </div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)"><div class="arrow">▼</div> Show Model Answer</button>
+    <div class="answer-panel">
+      <div class="answer-label">Model Answer</div>
+      <p><strong>A — Activating Event:</strong> Receiving critical feedback on her assignment requiring revision.</p>
+      <p><strong>B — Belief (Interpretation):</strong> "I'm terrible at this. I'll never pass. Everyone thinks I'm the weakest." These are catastrophic, globalised, and mind-reading interpretations of a specific piece of feedback.</p>
+      <p><strong>C — Consequences:</strong> Inability to concentrate (mental effect), social withdrawal — cancelling plans (behavioural effect), and emotional distress.</p>
+      <p>A counsellor would target <strong>B</strong> — the belief/interpretation. This is the modifiable link in the chain. The feedback (A) is fixed; but the belief that one piece of feedback means permanent failure is not factually grounded. The counsellor would use <em>cognitive reappraisal</em>: helping Sarah recognise the distorted thought ("I'm terrible at everything") and challenge it with evidence ("The professor believes revision is possible — that's why she asked for it, not a fail").</p>
+      <p>By changing B, the consequences (C) shift — reduced distress, restored focus, maintained social engagement.</p>
+      <div class="key-concept"><strong>Key concept tested:</strong> The ABC model shows that the event (A) does not directly cause distress (C) — the belief (B) does. Intervention at B is the goal of cognitive reappraisal.</div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header">
+      <div class="q-num" style="color:var(--accent3)">Q13</div>
+      <div class="q-body">
+        <span class="q-tag tag-evaluate">Evaluate</span>
+        <div class="q-text">A student who failed his driving test says: "I'm not stressed about it — failing just means I wasn't ready, and now I know exactly what to work on." His friend, who also failed, says nothing but is visibly shaken and withdraws from conversation for the rest of the day.
+          <div class="q-scenario">Using the concept of perceived demand vs. perceived ability, explain the divergence in their reactions. What does this tell us about where stress really comes from?</div>
+        </div>
+      </div>
+    </div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)"><div class="arrow">▼</div> Show Model Answer</button>
+    <div class="answer-panel">
+      <div class="answer-label">Model Answer</div>
+      <p>Both students faced the same objective outcome — a failed driving test. The divergence in their reactions comes from how each student appraises the demand of the situation relative to their perceived ability to handle it.</p>
+      <p>The <strong>first student</strong> perceives the failed test as manageable (demand ≤ perceived ability). His perceived ability to cope — learn from the failure, prepare better, retake — is sufficient. He experiences no stress because there is no perceived gap between what the situation demands and what he can handle.</p>
+      <p>The <strong>second student</strong> perceives the failed test as overwhelming (demand > perceived ability). His perceived ability to cope is insufficient — perhaps he interprets the failure as a reflection of global inadequacy, or fears he can never pass. This gap generates stress, visible in behavioural withdrawal.</p>
+      <p>This illustrates that <em>stress does not originate in the event itself</em>, but in the perceived discrepancy between demands and coping resources. The stressor is identical; the cognitive appraisal is entirely different — and the appraisal determines the stress response.</p>
+      <div class="key-concept"><strong>Key concept tested:</strong> Stress = perceived demand exceeds perceived ability. Same event, different appraisals = different stress levels.</div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 8: PERSONALITY TYPES ===== -->
+  <div class="sec-header" id="s8">
+    <div class="sec-num blue">8</div>
+    <div><div class="sec-title">Personality Types A, B, C & D</div><div class="sec-sub">Stress responses and health implications</div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header">
+      <div class="q-num" style="color:var(--accent4)">Q14</div>
+      <div class="q-body">
+        <span class="q-tag tag-analyse">Analyse</span>
+        <div class="q-text">Two managers both work in a high-pressure sales environment and both experience setbacks. Manager A responds to a lost deal by slamming his fist on the desk, loudly berating a junior colleague, and immediately launching into aggressive problem-solving. Manager B responds by quietly absorbing the news, maintaining a composed exterior, saying nothing to the team, but privately feeling deep despair about her own worth as a leader.
+          <div class="q-scenario">Identify the personality type of each manager. Which poses a greater long-term health risk and why — even though only one is visibly reactive?</div>
+        </div>
+      </div>
+    </div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)"><div class="arrow">▼</div> Show Model Answer</button>
+    <div class="answer-panel">
+      <div class="answer-label">Model Answer</div>
+      <p><strong>Manager A</strong> exhibits <em>Type A</em> characteristics — verbally aggressive, easily angered, hostile when frustrated, overcommitted to achievement. His reaction is visible, explosive, and outward.</p>
+      <p><strong>Manager B</strong> exhibits features of both <em>Type C</em> (suppressed emotion, serious, sensitive to criticism) and <em>Type D</em> (internalised distress, negative self-image, social withdrawal). She suppresses her emotional response entirely.</p>
+      <p>Both types carry health risks, but the comparison is nuanced. Manager A's hostility and anger are linked to increased risk of <em>cardiovascular disease</em>. However, Manager B's combination of suppressed negative emotions and social inhibition (Type D features) poses significant long-term risk — people who don't express negative emotions show <em>elevated stress hormone levels</em>, particularly in social situations, without any external release valve.</p>
+      <p>The danger of Manager B's pattern is precisely its invisibility — her distress goes unnoticed and unaddressed, accumulating internally. Over time, this suppression maintains high physiological stress without any relief, increasing her risk of depression, heart problems, and high blood pressure.</p>
+      <div class="key-concept"><strong>Key concept tested:</strong> External expressiveness does not determine health risk. Suppressed emotional responses can be equally or more damaging — risk is not always visible.</div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 9: LOCUS OF CONTROL ===== -->
+  <div class="sec-header" id="s9">
+    <div class="sec-num purple">9</div>
+    <div><div class="sec-title">Locus of Control & Learned Helplessness</div><div class="sec-sub">Internal vs. external; the progression to helplessness</div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header">
+      <div class="q-num" style="color:var(--purple)">Q15</div>
+      <div class="q-body">
+        <span class="q-tag tag-apply">Apply</span>
+        <div class="q-text">Two students receive the same poor grade on a test. Student A thinks: "I didn't study the right chapters — I'll reorganise my revision strategy for the next one." Student B thinks: "The professor just doesn't like me. No matter what I do, the grade always comes out wrong."
+          <div class="q-scenario">Identify the locus of control of each student and predict their likely long-term academic and wellbeing outcomes based on their orientations.</div>
+        </div>
+      </div>
+    </div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)"><div class="arrow">▼</div> Show Model Answer</button>
+    <div class="answer-panel">
+      <div class="answer-label">Model Answer</div>
+      <p><strong>Student A</strong> has an <em>internal locus of control</em> — he attributes the outcome to his own behaviour (wrong chapters, revision strategy) and believes he can change the outcome through his own actions. He perceives the stressor as manageable and responds with problem-focused action.</p>
+      <p><strong>Student B</strong> has an <em>external locus of control</em> — he attributes the outcome to forces outside himself (the professor's bias, bad luck). He believes external factors decide the result regardless of his effort.</p>
+      <p><strong>Long-term outcomes:</strong> Student A is likely to maintain motivation, adapt his approach, experience lower stress, and perform better over time — consistent with research showing internals are happier, less stressed, and physically healthier. Student B is at risk of reduced effort (why try if it won't matter?), higher susceptibility to depression, and potentially developing <em>learned helplessness</em> — where repeated perceived lack of control leads to passive resignation even when solutions are available. His external orientation also predicts greater vulnerability to chronic stress.</p>
+      <div class="key-concept"><strong>Key concept tested:</strong> Locus of control shapes not just how we respond to one stressor but our entire approach to challenge — internally oriented individuals are fundamentally more stress-resilient.</div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header">
+      <div class="q-num" style="color:var(--purple)">Q16</div>
+      <div class="q-body">
+        <span class="q-tag tag-evaluate">Evaluate</span>
+        <div class="q-text">An elderly resident in a nursing home was previously an active, independent person. After six months in the facility, where staff handle all daily decisions — meals, schedules, activity choices — her family notices she has become passive, rarely initiates conversation, and seems to have lost interest in things she previously loved. When asked what she'd like for dinner, she shrugs: "Whatever they decide."
+          <div class="q-scenario">Using learned helplessness, explain what has happened to this resident. What is the mechanism through which this state develops, and what are the health implications?</div>
+        </div>
+      </div>
+    </div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)"><div class="arrow">▼</div> Show Model Answer</button>
+    <div class="answer-panel">
+      <div class="answer-label">Model Answer</div>
+      <p>The resident is displaying classic signs of <strong>learned helplessness</strong> — a passive response to the environment developed through repeated exposure to situations where she has no control over outcomes. The nursing home structure has systematically removed her ability to influence her daily life.</p>
+      <p><strong>The mechanism:</strong> When an individual repeatedly experiences that their actions have no effect on outcomes (all decisions are made for her), they learn that effort is futile. This expectation of futility generalises — she no longer initiates even when she technically could, because her prior experience has "taught" her that her choices don't matter. The shrug response to the dinner question demonstrates this perfectly.</p>
+      <p><strong>Health implications:</strong> Learned helplessness elevates perceived stress (loss of control is a primary stressor), increases susceptibility to depression, and reduces motivation to engage in health-promoting behaviours. Research confirms this pattern in elderly individuals in facilities that remove choice — it accelerates physical and cognitive decline. Restoring perceived control (even small choices) is known to reverse some of these effects.</p>
+      <div class="key-concept"><strong>Key concept tested:</strong> Learned helplessness is environmentally induced, not a fixed trait — it develops through repeated removal of control and can be reversed by restoring agency.</div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 10: HARDINESS ===== -->
+  <div class="sec-header" id="s10">
+    <div class="sec-num gold">10</div>
+    <div><div class="sec-title">Hardiness: The 3 Cs</div><div class="sec-sub">Challenge, Commitment, Control as stress moderators</div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header">
+      <div class="q-num" style="color:var(--accent2)">Q17</div>
+      <div class="q-body">
+        <span class="q-tag tag-apply">Apply</span>
+        <div class="q-text">Two junior doctors are placed in the same highly demanding residency programme. Dr. Ramirez consistently frames difficult cases as "the kind of learning you can't get from textbooks." Even after a 36-hour shift, she engages her team and reflects on what each case taught her. She has never missed a shift due to illness. Dr. Cole, equally skilled clinically, increasingly dreads each shift, feels detached from his work, and has taken several sick days citing exhaustion.
+          <div class="q-scenario">Using the three components of hardiness, explain why Dr. Ramirez appears more stress-resilient than Dr. Cole. Identify which specific Cs seem most prominent or absent in each.</div>
+        </div>
+      </div>
+    </div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)"><div class="arrow">▼</div> Show Model Answer</button>
+    <div class="answer-panel">
+      <div class="answer-label">Model Answer</div>
+      <p><strong>Dr. Ramirez</strong> demonstrates all three Cs of hardiness:</p>
+      <ul>
+        <li><em>Challenge</em> — She frames difficult cases as learning opportunities, not threats. Hardship is viewed as growth.</li>
+        <li><em>Commitment</em> — She remains engaged with her work and team even after exhausting shifts, reflecting strong purpose and investment in her role.</li>
+        <li><em>Control</em> — Her reflective approach suggests she perceives herself as an active agent in her development, not a passive victim of circumstances.</li>
+      </ul>
+      <p><strong>Dr. Cole</strong> appears to lack primarily the <em>Challenge</em> and <em>Commitment</em> components. He appraises shifts as threats rather than challenges (dread), and his detachment signals eroding commitment to his work and its meaning. Without these, the same objective workload becomes a source of chronic distress rather than development.</p>
+      <p>Hardiness does not reduce the stressor — Dr. Ramirez works the same hours. It changes the <em>appraisal</em> and the coping response. Hardy individuals reappraise stressors as challenges, engage more actively, and consequently experience less physiological damage from sustained stress. The 3 Cs are considered the most effective stress moderators — and critically, they can be learned.</p>
+      <div class="key-concept"><strong>Key concept tested:</strong> Hardiness doesn't change the stressor — it transforms its meaning. The 3 Cs determine whether adversity depletes or develops you.</div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 11: COPING ===== -->
+  <div class="sec-header" id="s11">
+    <div class="sec-num teal">11</div>
+    <div><div class="sec-title">Coping Strategies</div><div class="sec-sub">Problem-focused, emotion-focused, cognitive reappraisal</div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header">
+      <div class="q-num" style="color:var(--accent3)">Q18</div>
+      <div class="q-body">
+        <span class="q-tag tag-apply">Apply</span>
+        <div class="q-text">Nadia is anxious about an upcoming presentation at work. She responds by: (a) practising the presentation in front of a mirror every evening, (b) calling a friend to vent about how nervous she feels, and (c) reminding herself that being selected to present means her manager believes in her ability.
+          <div class="q-scenario">Classify each of Nadia's three responses into the correct coping category. Explain which one — (b) or (c) — is the more psychologically sophisticated emotion-focused strategy, and why.</div>
+        </div>
+      </div>
+    </div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)"><div class="arrow">▼</div> Show Model Answer</button>
+    <div class="answer-panel">
+      <div class="answer-label">Model Answer</div>
+      <p><strong>(a) Practising the presentation</strong> → <em>Problem-focused coping</em>. She is directly addressing the source of the stressor — building competence to change the situation (acquiring skills, setting goals, reducing actual performance risk).</p>
+      <p><strong>(b) Venting to a friend</strong> → <em>Emotion-focused coping</em> (emotional expression / social support). She is managing her emotional reaction to the stressor without changing the stressor itself.</p>
+      <p><strong>(c) Reminding herself she was chosen for a reason</strong> → <em>Emotion-focused coping</em>, specifically <strong>cognitive reappraisal</strong>. She is actively and consciously reinterpreting the situation in a more realistic, positive light to reduce negative emotion.</p>
+      <p>Response <strong>(c) is the more psychologically sophisticated</strong> strategy. Venting (b) provides temporary relief but doesn't change the interpretation driving the anxiety — the anxiety may return. Cognitive reappraisal (c) addresses the <em>root belief</em> generating the emotional response. By reframing selection as evidence of trust rather than pressure, Nadia reduces the perceived threat at its source. Research also shows that cognitive reappraisal can reduce immunosuppression and is the cornerstone of CBT — a deeply evidence-based therapeutic approach.</p>
+      <div class="key-concept"><strong>Key concept tested:</strong> Not all emotion-focused coping is equal. Cognitive reappraisal changes the interpretation driving distress; venting releases distress temporarily without changing interpretation.</div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header">
+      <div class="q-num" style="color:var(--accent3)">Q19</div>
+      <div class="q-body">
+        <span class="q-tag tag-evaluate">Evaluate</span>
+        <div class="q-text">A student who has just been told she must wait six weeks for her university appeal decision responds by: redoing her timetable to maximise revision in the meantime, journalling every evening about her anxiety, and booking a weekly badminton session with friends.
+          <div class="q-scenario">Evaluate the appropriateness of her coping strategy given the nature of this specific stressor. Is the use of problem-focused coping justified here, or is it potentially a form of avoidance?</div>
+        </div>
+      </div>
+    </div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)"><div class="arrow">▼</div> Show Model Answer</button>
+    <div class="answer-panel">
+      <div class="answer-label">Model Answer</div>
+      <p>This scenario requires evaluating the <em>fit</em> between coping strategy and the controllability of the stressor.</p>
+      <p>The appeal decision is <strong>not within the student's control</strong> — the outcome is determined externally over a fixed six-week period. The study unit notes this clearly: emotion-focused coping is most appropriate when the situation <em>requires acceptance</em>.</p>
+      <p><strong>Journalling and badminton</strong> are well-suited to this stressor — they are emotion-focused strategies that help manage anxiety and maintain wellbeing during an uncontrollable waiting period. These are genuinely adaptive responses.</p>
+      <p><strong>Redoing her timetable</strong> is more nuanced. On one hand, it is productive and addresses a controllable aspect (her revision quality, which may influence future outcomes). On the other hand, if it is driven primarily by anxiety rather than genuine need — an attempt to <em>feel</em> in control when she isn't — it could represent a form of avoidance: redirecting energy to avoid confronting the anxiety of the wait. In this case, it may temporarily suppress distress without processing it, potentially making the underlying anxiety worse when the timetable work runs out.</p>
+      <p>The optimal approach combines emotion-focused strategies that accept the uncontrollable element with targeted problem-focused strategies applied only to genuinely controllable sub-components.</p>
+      <div class="key-concept"><strong>Key concept tested:</strong> Problem-focused coping is not always adaptive — if applied to an uncontrollable stressor, it can be a form of avoidance rather than genuine coping.</div>
+    </div>
+  </div>
+
+  <!-- ===== CROSS-SECTION ===== -->
+  <div class="cross-banner" id="s12">
+    <div class="cb-label">⚡ Cross-Section Integration</div>
+    <p>These questions require connecting multiple concepts from across the chapter. They reflect the kind of complex scenario questions that appear in exams.</p>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header">
+      <div class="q-num" style="color:var(--accent2)">Q20</div>
+      <div class="q-body">
+        <span class="q-tag tag-cross">Cross-Section</span>
+        <div class="q-text">James has been in the same entry-level role for four years despite strong performance reviews. Every time a promotion opportunity arises, he tells himself "the system is rigged" and doesn't apply. A colleague suggests applying together, but James refuses: "What's the point? It'll go to someone with connections anyway." He's been having persistent headaches and has recently developed insomnia.
+          <div class="q-scenario">Using at least THREE distinct concepts from the chapter, provide a comprehensive psychological analysis of James's situation. Include what is maintaining his current state and what intervention would most effectively break the cycle.</div>
+        </div>
+      </div>
+    </div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)"><div class="arrow">▼</div> Show Model Answer</button>
+    <div class="answer-panel">
+      <div class="answer-label">Model Answer</div>
+      <p><strong>1. External Locus of Control:</strong> James consistently attributes outcomes to external forces ("rigged system," "connections") rather than his own actions. This external orientation means he perceives no personal agency over his career — reducing motivation to act and amplifying the threat he perceives in each missed opportunity.</p>
+      <p><strong>2. Learned Helplessness:</strong> James has developed a passive response based on his repeated experience (real or perceived) of effort not producing results. Even when a solution is offered (applying with a colleague), he does not act — a hallmark of learned helplessness. The futility expectation has generalised beyond specific situations to all promotion attempts.</p>
+      <p><strong>3. Chronic Stressor + GAS Exhaustion:</strong> Four years of ongoing career frustration constitutes a chronic stressor. The persistent headaches and insomnia are physical symptoms consistent with prolonged physiological stress activation — suggesting James may be in or approaching the exhaustion stage of GAS, where bodily resources are depleted and health begins to deteriorate.</p>
+      <p><strong>4. Cognitive Appraisal (Threat vs. Challenge):</strong> James appraises every promotion opportunity as a threat (inevitable rejection and humiliation) rather than a challenge (opportunity to demonstrate growth). This appraisal drives avoidance behaviour.</p>
+      <p><strong>Most effective intervention:</strong> The most powerful entry point is <em>cognitive reappraisal</em> targeting the belief structure (ABC model: challenge the B — "the system is rigged"). Alongside this, rebuilding an <em>internal locus of control</em> through structured, achievable actions (identifying what IS within his control in the application process) would begin to erode the helplessness. Hardiness training — reframing the situation as a challenge and rebuilding commitment to his career goals — would address the root orientation. The physical symptoms also warrant immediate stress management: exercise, sleep hygiene, and structured relaxation.</p>
+      <div class="key-concept"><strong>Key concept tested:</strong> Real-world stress is not a single concept in isolation. External locus, learned helplessness, and maladaptive appraisal form reinforcing cycles — effective intervention must target the belief driving the cycle, not just the symptoms.</div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header">
+      <div class="q-num" style="color:var(--accent2)">Q21</div>
+      <div class="q-body">
+        <span class="q-tag tag-cross">Cross-Section</span>
+        <div class="q-text">Two friends, both preparing for the same national certification exam in eight weeks, have opposite responses. Claire creates a detailed study schedule, joins a study group, frames exam preparation as "building my professional credentials," and goes for a run when she feels overwhelmed. Daniel keeps thinking "if I fail this, my career is over," avoids the study materials, spends evenings gaming, and has been experiencing stomach problems and difficulty concentrating.
+          <div class="q-scenario">Using GAS, coping strategies, cognitive appraisal, and one personality-related concept, compare the two friends' psychological trajectories. Predict where each will likely be physiologically and psychologically by exam week — and why.</div>
+        </div>
+      </div>
+    </div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)"><div class="arrow">▼</div> Show Model Answer</button>
+    <div class="answer-panel">
+      <div class="answer-label">Model Answer</div>
+      <p><strong>Cognitive Appraisal:</strong> Claire appraises the exam as a <em>challenge</em> — a path to growth, within her perceived ability to manage. Daniel appraises it as a <em>threat</em> — catastrophic, potentially career-ending, likely beyond his ability to handle. This fundamental difference in B (belief) shapes every downstream response.</p>
+      <p><strong>Coping:</strong> Claire uses an integrated strategy — study schedule and study group are <em>problem-focused</em> (changing the situation); running when overwhelmed is <em>emotion-focused</em> (managing her internal state adaptively). Daniel's gaming is avoidance — a maladaptive emotion-focused response that neither resolves the stressor nor effectively processes his anxiety. It delays confrontation and allows the stressor's impact to accumulate.</p>
+      <p><strong>GAS trajectory:</strong> Claire is likely managing the <em>resistance stage</em> well — her alarm has mobilised productive energy, and her coping strategies are replenishing resources rather than depleting them. By exam week, she is likely to be at baseline or even performance-enhanced. Daniel is likely progressing toward <em>exhaustion</em> — his avoidance means the stressor remains unaddressed while his physiological stress response continues. The stomach problems (a physical effect) and concentration difficulties (a mental effect) already signal this trajectory.</p>
+      <p><strong>Personality-related concept:</strong> Claire's approach reflects features of a <em>hardy personality</em> — challenge orientation, commitment to goals, perceived control. Daniel's catastrophic thinking and social withdrawal reflect <em>Type D</em> tendencies — negative emotionality and isolation, which research links to elevated stress hormone levels and greater health risk.</p>
+      <p><strong>By exam week:</strong> Claire is likely alert, prepared, and physiologically ready. Daniel risks entering the exam in the exhaustion stage — cognitively impaired, physically symptomatic, and undermined by his own belief system. The irony is that his catastrophic belief ("if I fail, my career is over") is precisely what is producing the conditions most likely to cause failure.</p>
+      <div class="key-concept"><strong>Key concept tested:</strong> Cognitive appraisal, coping choice, GAS stage, and personality orientation are not separate — they form a coherent trajectory. The belief you start with shapes every downstream outcome.</div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header">
+      <div class="q-num" style="color:var(--accent2)">Q22</div>
+      <div class="q-body">
+        <span class="q-tag tag-cross">Cross-Section</span>
+        <div class="q-text">A school counsellor observes the following about a 16-year-old student, Wei: He has been telling her, "I always mess everything up." His parents recently divorced and he moved to a new school three months ago. He has been getting into arguments with teachers, cannot focus in class, and has been ill twice this term. When the counsellor suggested he join a drama club to meet friends, Wei responded: "I'd just embarrass myself. What's the point?"
+          <div class="q-scenario">Identify the types of stressors Wei is experiencing. Analyse his response using at least three psychological concepts. What is the counsellor's most important intervention priority and why?</div>
+        </div>
+      </div>
+    </div>
+    <button class="reveal-btn" onclick="toggleAnswer(this)"><div class="arrow">▼</div> Show Model Answer</button>
+    <div class="answer-panel">
+      <div class="answer-label">Model Answer</div>
+      <p><strong>Types of Stressors:</strong> Wei faces <em>major life events</em> (parental divorce — a significant involuntary, undesirable change), a <em>chronic social stressor</em> (new school, social isolation, loss of peer network), and accumulating <em>daily hassles</em> (classroom conflicts, academic pressure). The combination of multiple stressor types simultaneously amplifies overall stress load.</p>
+      <p><strong>Learned Helplessness:</strong> "I always mess everything up" and "What's the point?" are textbook indicators. Wei has generalised a sense of futility — based on recent experiences of uncontrollable negative events (divorce, relocation) — to new situations where he could actually succeed. He does not try because he expects failure regardless.</p>
+      <p><strong>Cognitive Appraisal (Threat orientation):</strong> Wei appraises the drama club not as a challenge (opportunity to meet people) but as a threat (public embarrassment). His perceived ability to handle social situations is critically low relative to his perceived demand — generating anxiety and avoidance.</p>
+      <p><strong>GAS / Physical effects:</strong> Two illnesses this term, inability to concentrate, and emotional outbursts (arguments with teachers) suggest Wei is already experiencing the physical and mental effects of stress — consistent with the exhaustion stage's immune suppression and cognitive impairment.</p>
+      <p><strong>Counsellor's priority:</strong> The most important intervention is rebuilding Wei's <em>perceived control and internal locus of control</em> — because learned helplessness is the mechanism blocking all other progress. As long as Wei believes effort is futile, no coping strategy, activity, or social opportunity will gain traction. The counsellor should start with small, structured, achievable tasks where success is near-certain — demonstrating to Wei that his actions can produce positive outcomes. Once this foundation shifts, cognitive reappraisal of social situations and gradual engagement (like drama) become viable.</p>
+      <div class="key-concept"><strong>Key concept tested:</strong> When multiple stressors converge, they do not just add — they reinforce each other. Learned helplessness is the most important first target because it blocks all other interventions.</div>
+    </div>
+  </div>
+
+  <div style="text-align:center; margin-top:48px; padding-top:28px; border-top:1px solid var(--border); color:var(--muted); font-size:12px;">
+    22 Questions · PSY108 Chapter 12 · Exam Prep · Scenario-Based Practice
+  </div>
+
+</div>
+
+<!-- PROGRESS BAR -->
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+<div class="score-display">Revealed: <span id="revealCount">0</span> / 22</div>
+
+<script>
+  let revealCount = 0;
+
+  function toggleAnswer(btn) {
+    const panel = btn.nextElementSibling;
+    const isOpen = panel.classList.contains('visible');
+    if (!isOpen) {
+      panel.classList.add('visible');
+      btn.classList.add('open');
+      btn.innerHTML = '<div class="arrow">▼</div> Hide Answer';
+      revealCount++;
+    } else {
+      panel.classList.remove('visible');
+      btn.classList.remove('open');
+      btn.innerHTML = '<div class="arrow">▼</div> Show Model Answer';
+      revealCount = Math.max(0, revealCount - 1);
+    }
+    document.getElementById('revealCount').textContent = revealCount;
+    document.getElementById('progressFill').style.width = (revealCount / 22 * 100) + '%';
+  }
+
+  // Scroll progress
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    // Only update fill on scroll if no answers revealed
+    if (revealCount === 0) {
+      document.getElementById('progressFill').style.width = (scrollTop / docHeight * 100) + '%';
+    }
+  });
+</script>
+</body>
+</html>

@@ -3,633 +3,878 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Personality — PSY107/108 Study Guide</title>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>Personality – Exam Study Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
-:root {
-  --ink:       #1c1c28;
-  --paper:     #f9f7f2;
-  --cream:     #f0ece0;
-  --rule:      #ddd8cc;
-  --accent:    #b5341e;
-  --teal:      #0e6b72;
-  --blue:      #1a4f8a;
-  --gold:      #9a6c00;
-  --sage:      #3a6b45;
-  --purple:    #5240a0;
-  --muted:     #6b6460;
-  --light-red: #fdf0ee;
-  --light-teal:#eaf6f7;
-  --light-blue:#edf3fb;
-  --light-gold:#fef8e7;
-  --light-sage:#edf6f0;
-  --light-purp:#f0eeff;
-}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-*{box-sizing:border-box;margin:0;padding:0}
+  :root {
+    --navy: #1a2744;
+    --navy-mid: #243460;
+    --blue: #2e5fa3;
+    --blue-light: #e8eef8;
+    --teal: #1d7a6b;
+    --teal-light: #e0f3ef;
+    --amber: #b86a0a;
+    --amber-light: #fef3e2;
+    --rose: #9b3557;
+    --rose-light: #fceef3;
+    --purple: #5a3fa0;
+    --purple-light: #eeebfa;
+    --slate: #4a5568;
+    --silver: #f4f6fa;
+    --border: #d8dfe8;
+    --text: #1e2a3a;
+    --text-muted: #5a6a7e;
+    --white: #ffffff;
+  }
 
-body {
-  font-family:'DM Sans',sans-serif;
-  background:var(--paper);
-  color:var(--ink);
-  font-size:15px;
-  line-height:1.75;
-}
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 400;
+    color: var(--text);
+    background: var(--silver);
+    font-size: 16px;
+    line-height: 1.7;
+  }
 
-.site-header {
-  background:var(--ink);
-  color:var(--paper);
-  padding:52px 48px 40px;
-  position:relative;
-  overflow:hidden;
-}
-.site-header::before {
-  content:'';position:absolute;inset:0;
-  background:repeating-linear-gradient(-55deg,transparent,transparent 18px,rgba(255,255,255,0.025) 18px,rgba(255,255,255,0.025) 36px);
-}
-.header-inner{position:relative;max-width:900px;margin:0 auto;}
-.eyebrow{font-size:10px;letter-spacing:3.5px;text-transform:uppercase;color:#b5aa88;margin-bottom:10px;font-weight:500;}
-.header-title{font-family:'Lora',serif;font-size:clamp(2.4rem,5vw,3.6rem);font-weight:700;line-height:1.08;margin-bottom:10px;}
-.header-sub{font-size:13.5px;color:rgba(249,247,242,0.55);font-style:italic;max-width:580px;}
+  /* ── HEADER ── */
+  .page-header {
+    background: var(--navy);
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .page-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 30px,
+      rgba(255,255,255,0.015) 30px,
+      rgba(255,255,255,0.015) 31px
+    );
+  }
+  .page-header .badge {
+    display: inline-block;
+    background: var(--blue);
+    color: #c8d8f5;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+  }
+  .page-header h1 {
+    font-family: 'Lora', serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 0.6rem;
+  }
+  .page-header p {
+    color: #a0b4cc;
+    font-size: 14px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
 
-.toc-nav {
-  background:var(--cream);
-  border-bottom:1.5px solid var(--rule);
-  position:sticky;top:0;z-index:200;
-  box-shadow:0 2px 10px rgba(0,0,0,0.06);
-  overflow-x:auto;
-  white-space:nowrap;
-}
-.toc-nav a {
-  display:inline-block;padding:13px 16px;
-  font-size:11.5px;font-weight:600;letter-spacing:0.6px;text-transform:uppercase;
-  color:var(--muted);text-decoration:none;
-  border-bottom:2.5px solid transparent;
-  transition:color .18s,border-color .18s;
-}
-.toc-nav a:hover,.toc-nav a.active{color:var(--accent);border-bottom-color:var(--accent);}
+  /* ── LAYOUT ── */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+  }
 
-main{max-width:900px;margin:0 auto;padding:48px 32px 100px;}
+  /* ── SECTION ── */
+  .section {
+    margin-bottom: 2.5rem;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 2px solid var(--border);
+  }
+  .section-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-family: 'Lora', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--navy);
+  }
 
-section{margin-bottom:64px;scroll-margin-top:56px;}
-.section-head{display:flex;align-items:flex-start;gap:16px;margin-bottom:24px;padding-bottom:14px;border-bottom:2px solid var(--rule);}
-.sec-num{font-family:'Lora',serif;font-size:2.4rem;font-weight:700;color:var(--rule);line-height:1;min-width:42px;flex-shrink:0;}
-.sec-title{font-family:'Lora',serif;font-size:1.6rem;font-weight:700;line-height:1.2;}
+  /* ── CARDS ── */
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1rem;
+  }
+  .card-title {
+    font-family: 'Lora', serif;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--navy-mid);
+  }
+  .card p { font-size: 15px; color: var(--slate); margin-bottom: 0.4rem; }
+  .card p:last-child { margin-bottom: 0; }
 
-h3{font-family:'Lora',serif;font-size:1.15rem;font-weight:600;color:var(--teal);margin:28px 0 10px;}
-p{margin-bottom:.9rem;}
+  /* accent strips */
+  .card.blue  { border-left: 4px solid var(--blue);   }
+  .card.teal  { border-left: 4px solid var(--teal);   }
+  .card.amber { border-left: 4px solid var(--amber);  }
+  .card.rose  { border-left: 4px solid var(--rose);   }
+  .card.purple{ border-left: 4px solid var(--purple); }
 
-.callout{border-left:4px solid;padding:14px 18px;margin:18px 0;border-radius:0 6px 6px 0;}
-.callout-note  {border-color:var(--teal);background:var(--light-teal);}
-.callout-warn  {border-color:var(--gold);background:var(--light-gold);}
-.callout-def   {border-color:var(--accent);background:var(--light-red);}
-.callout-key   {border-color:var(--blue);background:var(--light-blue);}
-.callout-tip   {border-color:var(--sage);background:var(--light-sage);}
-.callout strong{display:block;font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:5px;opacity:.7;}
-.callout p{margin:0;font-size:14px;line-height:1.65;}
+  /* ── CALLOUT ── */
+  .callout {
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+    font-size: 15px;
+  }
+  .callout.blue   { background: var(--blue-light);   border-left: 4px solid var(--blue);   }
+  .callout.teal   { background: var(--teal-light);   border-left: 4px solid var(--teal);   }
+  .callout.amber  { background: var(--amber-light);  border-left: 4px solid var(--amber);  }
+  .callout.rose   { background: var(--rose-light);   border-left: 4px solid var(--rose);   }
+  .callout.purple { background: var(--purple-light); border-left: 4px solid var(--purple); }
+  .callout strong { font-weight: 600; }
 
-.banner{background:var(--ink);color:var(--paper);padding:16px 22px;border-radius:6px;margin:20px 0;font-size:14px;line-height:1.6;}
-.banner strong{color:#c9b978;}
+  /* ── GRID ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+  @media(max-width: 640px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .page-header h1 { font-size: 1.8rem; }
+    .ocean-table { font-size: 13px; }
+  }
 
-.outcomes{background:var(--ink);border-radius:8px;overflow:hidden;margin:20px 0;}
-.outcomes-head{background:#2a2a3e;padding:12px 20px;}
-.outcomes-head span{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:#c9b978;font-weight:600;}
-.outcomes-body{padding:4px 0 8px;}
-.outcome-row{display:flex;align-items:flex-start;gap:10px;padding:7px 20px;}
-.outcome-row:nth-child(odd){background:rgba(255,255,255,0.03);}
-.outcome-tick{flex-shrink:0;width:18px;height:18px;background:#3a6b45;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:2px;}
-.outcome-tick svg{width:10px;height:10px;}
-.outcome-text{font-size:13.5px;color:rgba(249,247,242,.85);}
-.outcome-row.warn .outcome-tick{background:#9a6c00;}
+  /* ── OCEAN TABLE ── */
+  .ocean-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--white);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    font-size: 14px;
+  }
+  .ocean-table thead tr { background: var(--navy); color: #fff; }
+  .ocean-table thead th {
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.03em;
+  }
+  .ocean-table tbody tr:nth-child(even) { background: var(--silver); }
+  .ocean-table tbody td { padding: 9px 14px; vertical-align: top; }
+  .ocean-table .letter {
+    font-family: 'Lora', serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+  .letter.O { color: var(--teal);   }
+  .letter.C { color: var(--blue);   }
+  .letter.E { color: var(--purple); }
+  .letter.A { color: var(--amber);  }
+  .letter.N { color: var(--rose);   }
 
-.tbl-wrap{overflow-x:auto;margin:20px 0;}
-table{width:100%;border-collapse:collapse;font-size:13.5px;}
-thead tr{background:var(--ink);color:var(--paper);}
-thead th{padding:10px 14px;text-align:left;font-weight:600;font-size:12px;letter-spacing:.4px;}
-tbody td{padding:9px 14px;border:1px solid var(--rule);vertical-align:top;line-height:1.55;}
-tbody tr:nth-child(even) td{background:var(--cream);}
-td.label{font-weight:600;white-space:nowrap;}
-td.badge{font-weight:700;text-align:center;white-space:nowrap;}
+  /* ── PERSONALITY TYPES TABLE ── */
+  .type-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 1rem;
+  }
+  @media(max-width: 640px) { .type-grid { grid-template-columns: 1fr 1fr; } }
+  .type-card {
+    border-radius: 8px;
+    padding: 0.9rem 1rem;
+  }
+  .type-card .type-label {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+    font-family: 'Lora', serif;
+  }
+  .type-card ul { list-style: none; padding: 0; }
+  .type-card ul li { font-size: 13px; padding: 1px 0; }
+  .type-card ul li::before { content: '· '; }
+  .typeA { background: #fff0f3; border: 1px solid #f5bfcc; }
+  .typeA .type-label { color: #8b2040; }
+  .typeA ul li { color: #7a3048; }
+  .typeB { background: #e9f7f2; border: 1px solid #9dd9c3; }
+  .typeB .type-label { color: #0e5e48; }
+  .typeB ul li { color: #256852; }
+  .typeC { background: #eef3ff; border: 1px solid #b0c4f7; }
+  .typeC .type-label { color: #1e3d8f; }
+  .typeC ul li { color: #2a4c9e; }
+  .typeD { background: #fdf3e5; border: 1px solid #f2c87d; }
+  .typeD .type-label { color: #7a4200; }
+  .typeD ul li { color: #8a5010; }
 
-.red  {background:var(--light-red);color:var(--accent);}
-.blue {background:var(--light-blue);color:var(--blue);}
-.teal {background:var(--light-teal);color:var(--teal);}
-.gold {background:var(--light-gold);color:var(--gold);}
-.sage {background:var(--light-sage);color:var(--sage);}
-.purp {background:var(--light-purp);color:var(--purple);}
-.grey {background:var(--cream);color:var(--muted);}
+  /* ── ICEBERG ── */
+  .iceberg {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+  }
+  .ice-above {
+    background: #daeeff;
+    padding: 1rem 1.4rem;
+    border-bottom: 2px dashed #9bc5e0;
+  }
+  .ice-below {
+    background: #1a4a6e;
+    padding: 1rem 1.4rem;
+  }
+  .ice-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .ice-above .ice-label { color: #3a7aa0; }
+  .ice-below .ice-label { color: #7ab8d9; }
+  .ice-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .ice-tag {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .ego-tag  { background: #b3d9f2; color: #0c3a5a; }
+  .super-tag{ background: #c4e6dd; color: #0a3d2e; }
+  .id-tag   { background: #244d6e; color: #8fcce8; }
+  .ice-desc { font-size: 13px; margin-top: 0.4rem; }
+  .ice-above .ice-desc { color: #2c5f7a; }
+  .ice-below .ice-desc { color: #7ab8d9; }
 
-.ocean-grid{display:grid;gap:10px;margin:20px 0;}
-.ocean-card{display:grid;grid-template-columns:52px 1fr 1fr;border-radius:6px;overflow:hidden;border:1px solid var(--rule);}
-.ocean-letter{display:flex;align-items:center;justify-content:center;font-family:'Lora',serif;font-size:2rem;font-weight:700;color:#fff;}
-.o-bg{background:#b5341e;}.c-bg{background:#1a4f8a;}.e-bg{background:#3a6b45;}
-.a-bg{background:#9a6c00;}.n-bg{background:#5240a0;}
-.ocean-col{padding:12px 14px;font-size:13.5px;line-height:1.55;}
-.ocean-col:last-child{border-left:1px solid var(--rule);}
-.ocean-col b{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:4px;}
-.ocean-hdr .ocean-col{background:var(--ink);color:rgba(249,247,242,.7);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;}
+  /* ── STAGES TABLE ── */
+  .stages-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    background: var(--white);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .stages-table thead th {
+    background: var(--navy-mid);
+    color: #fff;
+    padding: 9px 14px;
+    text-align: left;
+    font-weight: 600;
+  }
+  .stages-table tbody td { padding: 9px 14px; vertical-align: top; border-bottom: 1px solid var(--border); }
+  .stages-table tbody tr:last-child td { border-bottom: none; }
+  .stage-badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+  }
 
-.trait-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin:20px 0;}
-.trait-card{background:#fff;border:1px solid var(--rule);border-radius:6px;overflow:hidden;}
-.trait-card-head{padding:10px 14px;font-weight:700;font-size:13px;}
-.trait-card-body{padding:12px 14px;font-size:13.5px;line-height:1.6;}
-.tc-cardinal  .trait-card-head{background:var(--light-red);color:var(--accent);}
-.tc-central   .trait-card-head{background:var(--light-blue);color:var(--blue);}
-.tc-secondary .trait-card-head{background:var(--light-sage);color:var(--sage);}
+  /* ── THEORY COMPARISON ── */
+  .theory-compare {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .theory-compare table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  .theory-compare thead th {
+    background: var(--navy);
+    color: #fff;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 600;
+  }
+  .theory-compare tbody td {
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .theory-compare tbody tr:last-child td { border-bottom: none; }
+  .theory-compare tbody tr:nth-child(even) td { background: var(--silver); }
 
-.iceberg{border-radius:10px;overflow:hidden;margin:20px 0;}
-.ice-above{background:#b8d8e8;padding:18px 22px;}
-.ice-above .zone{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#2c4a5a;margin-bottom:6px;}
-.ice-above .name{font-family:'Lora',serif;font-size:1.25rem;font-weight:700;color:#1a3040;}
-.ice-above .desc{font-size:13.5px;color:#2c4a5a;margin-top:4px;}
-.ice-line{background:#7ab3cb;padding:6px 22px;font-size:10.5px;text-transform:uppercase;letter-spacing:2px;color:#1a3040;text-align:center;}
-.ice-below{background:#1a4f8a;padding:12px 22px 18px;display:grid;gap:10px;}
-.ice-block{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:6px;padding:12px 16px;color:#fff;}
-.ice-block .name{font-family:'Lora',serif;font-size:1.05rem;font-weight:600;margin-bottom:4px;}
-.ice-block .desc{font-size:13.5px;opacity:.9;line-height:1.55;}
+  /* ── EXAM TIP ── */
+  .exam-tip {
+    background: #fffbea;
+    border: 1px solid #f5d97a;
+    border-left: 4px solid #d4a017;
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    font-size: 14px;
+    margin-top: 1rem;
+    color: #5a4000;
+  }
+  .exam-tip strong { color: #8a5a00; }
 
-.flow-row{display:flex;align-items:center;justify-content:center;gap:10px;margin:20px 0;flex-wrap:wrap;}
-.flow-node{background:var(--teal);color:#fff;padding:12px 20px;border-radius:6px;font-weight:600;font-size:14px;text-align:center;}
-.flow-arrow{color:var(--teal);font-size:1.5rem;font-weight:700;}
+  /* ── KEY TERM ── */
+  .key-terms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 0.6rem;
+  }
+  .term {
+    background: var(--navy);
+    color: #c5d5ea;
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+  }
 
-.loc-grid{display:grid;grid-template-columns:140px 1fr 1fr;gap:1px;background:var(--rule);border-radius:6px;overflow:hidden;margin:20px 0;}
-.loc-cell{background:#fff;padding:10px 14px;font-size:13.5px;line-height:1.55;}
-.loc-cell.hdr{background:var(--ink);color:#fff;font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.5px;}
-.loc-cell.row-label{background:var(--cream);font-weight:600;font-size:13px;}
-.loc-int{background:var(--light-blue);}
-.loc-ext{background:var(--light-red);}
+  /* ── DIVIDER ── */
+  hr.soft { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
 
-.kv-list{margin:12px 0 18px;display:grid;gap:8px;}
-.kv{display:grid;grid-template-columns:170px 1fr;gap:12px;padding:8px 12px;background:#fff;border:1px solid var(--rule);border-radius:4px;font-size:14px;}
-.kv dt{font-weight:600;color:var(--blue);line-height:1.5;}
-.kv dd{line-height:1.6;}
-
-ul.clean{list-style:none;padding:0;margin:10px 0;}
-ul.clean li{padding:4px 0 4px 20px;position:relative;font-size:14px;line-height:1.6;}
-ul.clean li::before{content:'▸';position:absolute;left:0;color:var(--accent);font-size:.75rem;top:6px;}
-
-.back-btn{position:fixed;bottom:24px;right:24px;background:var(--ink);color:#c9b978;border:none;cursor:pointer;width:42px;height:42px;border-radius:50%;font-size:1.1rem;box-shadow:0 4px 16px rgba(0,0,0,.2);transition:transform .2s;}
-.back-btn:hover{transform:translateY(-3px);}
-
-hr.sec-rule{border:none;border-top:1.5px solid var(--rule);margin:56px 0 0;}
-
-/* source tag */
-.src{display:inline-block;font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:1px 7px;border-radius:3px;margin-left:6px;vertical-align:middle;}
-.src-su{background:#edf6f0;color:#3a6b45;}
-.src-sl{background:#edf3fb;color:#1a4f8a;}
-.src-both{background:#f0ece0;color:#6b6460;}
-
-@media(max-width:600px){
-  .ocean-card{grid-template-columns:40px 1fr;}
-  .ocean-col:last-child{display:none;}
-  .kv{grid-template-columns:1fr;}
-  .loc-grid{grid-template-columns:100px 1fr 1fr;}
-}
+  /* ── PRINT ── */
+  @media print {
+    body { background: white; font-size: 13px; }
+    .page-header { background: var(--navy) !important; -webkit-print-color-adjust: exact; }
+    .card, .callout, .iceberg, .ocean-table, .stages-table, .theory-compare { break-inside: avoid; }
+  }
 </style>
 </head>
 <body>
 
-<header class="site-header">
-  <div class="header-inner">
-    <div class="eyebrow">PSY107 / PSY108 · Personality Slides (Slides 24+) &amp; Study Unit 3 Chapter 2 · Revised</div>
-    <h1 class="header-title">Personality</h1>
-    <p class="header-sub">Covers only the personality slides (slides 24 onwards) and Study Unit 3 Chapter 2. Slides 3–23 are the Stress chapter and are excluded here.</p>
-  </div>
-</header>
+<div class="page-header">
+  <div class="badge">PSY108 · Study Unit 3 · Seminar 6</div>
+  <h1>Personality</h1>
+  <p>Exam-focused guide · Slides 24–33 &amp; Study Unit pp. 14–28</p>
+</div>
 
-<nav class="toc-nav">
-  <a href="#outcomes">Outcomes</a>
-  <a href="#definition">Definition</a>
-  <a href="#theories">Theories</a>
-  <a href="#trait">Trait &amp; OCEAN</a>
-  <a href="#nature">Nature vs Nurture</a>
-  <a href="#freud">Freud</a>
-  <a href="#humanistic">Humanistic</a>
-  <a href="#social-cog">Social Cognitive</a>
-  <a href="#assessment">Assessment</a>
-</nav>
+<div class="container">
 
-<main>
+  <!-- ══════════════════════════════════════════════
+       SECTION 1 — WHAT IS PERSONALITY?
+  ═══════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div class="section-title">What Is Personality?</div>
+    </div>
 
-<!-- ══ OUTCOMES ══ -->
-<section id="outcomes">
-  <div class="section-head">
-    <span class="sec-num">LO</span>
-    <h2 class="sec-title">Learning Outcomes — Personality</h2>
-  </div>
-  <p style="font-size:13.5px;color:var(--muted);margin-bottom:16px;">Source tags used throughout this guide: <span class="src src-sl">Slides</span> = personality slides (slide 24+) only &nbsp;·&nbsp; <span class="src src-su">Study Unit</span> = Study Unit 3 Chapter 2 only &nbsp;·&nbsp; <span class="src src-both">Both</span> = appears in both sources</p>
-  <div class="outcomes">
-    <div class="outcomes-head"><span>From Study Unit 3 Learning Outcomes — Personality</span></div>
-    <div class="outcomes-body">
-      <div class="outcome-row"><div class="outcome-tick"><svg viewBox="0 0 10 8"><path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="outcome-text">Compare trait and type theories of personality</span></div>
-      <div class="outcome-row"><div class="outcome-tick"><svg viewBox="0 0 10 8"><path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="outcome-text">List and describe The Big Five dimensions of personality (OCEAN)</span></div>
-      <div class="outcome-row"><div class="outcome-tick"><svg viewBox="0 0 10 8"><path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="outcome-text">Describe the various methods used to assess personality</span></div>
-      <div class="outcome-row"><div class="outcome-tick"><svg viewBox="0 0 10 8"><path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="outcome-text">Describe Freud's theory of personality and the role of the id, ego, and superego</span></div>
-      <div class="outcome-row"><div class="outcome-tick"><svg viewBox="0 0 10 8"><path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="outcome-text">Describe the major humanistic theories and their contribution</span></div>
-      <div class="outcome-row"><div class="outcome-tick"><svg viewBox="0 0 10 8"><path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="outcome-text">Describe social learning and cognitive theories and their contribution</span></div>
-      <div class="outcome-row warn"><div class="outcome-tick"><svg viewBox="0 0 10 8"><path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="outcome-text">Discuss the nature vs nurture debate — genetic contributions AND environmental influence on personality traits (Study Unit directs to textbook sections on this)</span></div>
+    <div class="card blue">
+      <div class="card-title">Definition</div>
+      <p>Personality is <strong>the quality that causes consistency in behaviour across different situations and over time</strong> — it is your general style of interacting with the world, and is the essence of who you are.</p>
+    </div>
+
+    <div class="callout teal">
+      <strong>Key insight (Slide 25):</strong> Even though you describe yourself as "cheerful", "sociable" or "extroverted", those traits are never 100% consistent — context still matters. Personality captures the <em>general pattern</em>, not an absolute rule.
+    </div>
+
+    <div class="callout blue">
+      <strong>Multiple theories exist (Slide 26):</strong> Psychologists have proposed several theoretical explanations for personality — Dispositional (Traits &amp; Types), Biological &amp; Evolutionary, Cognitive, Social Learning, Humanistic, and Psychoanalytic. <em>None has the whole truth.</em> Each explains the person from a different angle.
     </div>
   </div>
-  <div class="callout callout-warn">
-    <strong>Important scope note</strong>
-    <p>Slides 3–23 are the <strong>Stress &amp; Health chapter</strong> — concepts like GAS, coping strategies, stress moderators, and the ABC cognitive appraisal model belong to that chapter, not this one. The personality slides begin from slide 24 ("Personality — The quality that causes consistency…"). This guide covers only slides 24 onwards plus Study Unit 3 Chapter 2.</p>
-  </div>
-</section>
 
-<!-- ══ DEFINITION ══ -->
-<section id="definition">
-  <div class="section-head">
-    <span class="sec-num">01</span>
-    <h2 class="sec-title">What is Personality? <span class="src src-both">Both</span></h2>
-  </div>
 
-  <div class="callout callout-def">
-    <strong>Core Definition — from Slides</strong>
-    <p>Personality is <em>the quality that causes <strong>consistency</strong> in behaviour under different situations and across time</em>. It is a person's general style of interacting with the world — the essence of who the person is.</p>
-  </div>
-
-  <p>Even as physical appearance changes, personality tends to remain stable. The Study Unit uses the <strong>Phineas Gage</strong> case to open the personality chapter: in 1848, an iron rod passed through the frontal lobes of his brain. His memory and reasoning remained intact, but his personality transformed completely — from even-tempered and conscientious to hostile and impulsive. This revealed the link between the <strong>prefrontal cortex and personality</strong>.</p>
-
-  <p>The slides also ask: "I am cheerful, I like to socialise, I am an extrovert — 100%?" The point is that personality traits describe <em>general tendencies</em>, not absolute rules. Nobody expresses any trait 100% of the time in all contexts.</p>
-
-  <div class="callout callout-note">
-    <strong>Key insight from slides</strong>
-    <p>Psychologists have proposed several theoretical explanations for personality — <em>none has the whole truth</em>. Each theory explains the person from a different angle, like different people describing different parts of the same elephant. Each perspective contributes something the others cannot.</p>
-  </div>
-</section>
-
-<!-- ══ THEORIES OVERVIEW ══ -->
-<section id="theories">
-  <div class="section-head">
-    <span class="sec-num">02</span>
-    <h2 class="sec-title">The Four Major Theories — Overview <span class="src src-su">Study Unit</span></h2>
-  </div>
-  <p>Study Unit Table 3.5 summarises all four theories. No single theory comprehensively explains personality — each contributes a different lens.</p>
-  <div class="tbl-wrap">
-    <table>
-      <thead><tr><th>Theory</th><th>Theorists</th><th>Core of Personality</th><th>Cause of Problems</th><th>Development</th></tr></thead>
-      <tbody>
-        <tr><td class="badge blue">Trait</td><td>Allport, Cattell</td><td>Organises responses in characteristic modes (traits)</td><td>Faulty or inappropriately learned traits</td><td>Genetic factors and learning</td></tr>
-        <tr><td class="badge red">Psychodynamic</td><td>Freud</td><td>Maximises gratification; instinctual unconscious urges direct behaviour</td><td>Imbalances between id, ego, superego → fixations</td><td>Five psychosexual stages</td></tr>
-        <tr><td class="badge sage">Humanistic</td><td>Rogers</td><td>Actualises, maintains and enhances life through self-actualisation</td><td>Incongruence between self and ideal self-concept</td><td>Cumulative self-actualisation and sense of self-worth</td></tr>
-        <tr><td class="badge teal">Social Cognitive</td><td>Bandura, Rotter</td><td>Ways of thinking and acting in response to a changing environment</td><td>Inappropriate thoughts or faulty reasoning</td><td>Process of thinking about new responses</td></tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<!-- ══ TRAIT ══ -->
-<section id="trait">
-  <div class="section-head">
-    <span class="sec-num">03</span>
-    <h2 class="sec-title">Trait Theory &amp; The Big Five (OCEAN)</h2>
-  </div>
-
-  <h3>3.1 Personality Traits &amp; Personality Types <span class="src src-su">Study Unit</span></h3>
-  <p><strong>Personality traits</strong> are specific dimensions along which everyone differs in a consistent way. <strong>Personality types</strong> are people who share a common set of traits. The Study Unit identifies four key types explicitly in the personality chapter:</p>
-  <div class="tbl-wrap">
-    <table>
-      <thead><tr><th>Type</th><th>Description</th></tr></thead>
-      <tbody>
-        <tr><td class="badge grey">Introvert</td><td>Shy, reserved, attention focused <em>inward</em>, self-centred</td></tr>
-        <tr><td class="badge grey">Extravert</td><td>Bold, outgoing, attention directed <em>outward</em></td></tr>
-        <tr><td class="badge red">Type A</td><td>Typically ambitious, competitive, and hostile. Friedman &amp; Rosenman (1974): CHD risk doubled. Williams (1989) refined this: only those who express <em>hostility and anger</em> are at cardiovascular risk — not all Type A individuals.</td></tr>
-        <tr><td class="badge sage">Type B</td><td>Relaxed, uncompetitive, inclined to self-analysis</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="callout callout-warn">
-    <strong>Scope note — Types C &amp; D</strong>
-    <p>Types C and D appear only in slides 3–23 (the Stress chapter), not in the personality slides or the Study Unit personality chapter. They are part of stress content. They are therefore <strong>not covered in this personality guide</strong>.</p>
-  </div>
-
-  <h3>3.2 Allport's Three Types of Traits <span class="src src-su">Study Unit</span></h3>
-  <p>Gordon Allport (1961) identified <strong>three</strong> types of traits. A common error is listing only two — all three must be known.</p>
-  <div class="trait-cards">
-    <div class="trait-card tc-cardinal">
-      <div class="trait-card-head">Cardinal Traits</div>
-      <div class="trait-card-body">A single, all-important trait that <strong>dominates every area</strong> of a person's life. <em>Very few people have a cardinal trait.</em><br><br>Example: Abraham Lincoln — honesty; Napoleon — ambition. The trait is so pervasive it defines the person across all contexts without exception.</div>
+  <!-- ══════════════════════════════════════════════
+       SECTION 2 — DISPOSITIONAL APPROACH: TRAITS & TYPES
+  ═══════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div class="section-title">The Dispositional Perspective: Traits &amp; Types</div>
     </div>
-    <div class="trait-card tc-central">
-      <div class="trait-card-head">Central Traits</div>
-      <div class="trait-card-body">A combination of <strong>5–10 traits</strong> that accounts for the uniqueness of a person's personality. <strong>Most people</strong> are described through central traits.<br><br>Examples: confident, warm, sociable, cautious, optimistic, passionate, serious, reliable.</div>
+
+    <div class="card blue">
+      <div class="card-title">Personality Traits vs. Personality Types</div>
+      <p><strong>Personality traits</strong> are specific dimensions along which people consistently differ from one another — e.g. someone is "always neat and organised" or "never without something to say." Traits can predict future behaviour.</p>
+      <p><strong>Personality types</strong> refer to groups of people who share a common cluster of traits — e.g. Introvert, Extravert, Type A, Type B.</p>
     </div>
-    <div class="trait-card tc-secondary">
-      <div class="trait-card-head">Secondary Traits</div>
-      <div class="trait-card-body">Tendencies that appear <strong>only in certain situations</strong> — less consistent and more context-specific than central traits.<br><br>Example: a generally calm person who becomes aggressive only when frustrated in competitive situations.</div>
+
+    <!-- Allport's Traits -->
+    <div class="card teal">
+      <div class="card-title">Allport's Trait Categories</div>
+      <p><strong>Cardinal traits</strong> — a single all-important trait that dominates a person's entire personality. Rare. (e.g. Abraham Lincoln's honesty)</p>
+      <p><strong>Central traits</strong> — a combination of 5–10 traits that account for the uniqueness of a person's personality. Most people have these.</p>
+      <p><strong>Secondary traits</strong> — situational tendencies that are less consistent; how we behave in specific situations.</p>
     </div>
-  </div>
-  <div class="callout callout-warn">
-    <strong>Why are cardinal traits rare?</strong>
-    <p>It is unusual for one tendency to override context in every area of life. Most people moderate behaviour by situation — a cardinal trait does not allow this moderation at all. That pervasiveness is what makes it rare.</p>
-  </div>
 
-  <h3>3.3 Cattell's 16 Personality Factors (16PF) <span class="src src-su">Study Unit</span></h3>
-  <p>Raymond Cattell (1946) measured personality along 16 trait dimensions (Study Unit Table 3.2). The Big Five simplifies this into five broader factors. Sample 16PF pairs: Reserved↔Outgoing · Affected by feelings↔Emotionally stable · Submissive↔Dominant · Shy↔Bold · Tough-minded↔Sensitive · Relaxed↔Tense.</p>
-
-  <h3>3.4 The Big Five (OCEAN) <span class="src src-both">Both</span></h3>
-  <p>Despite almost 18,000 words to describe personality, five dimensions are sufficient. These appear universal across cultures and even other species.</p>
-
-  <div class="ocean-grid">
-    <div class="ocean-card ocean-hdr" style="border:1px solid var(--rule);">
-      <div class="ocean-letter" style="background:var(--ink);font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.5);">Letter</div>
-      <div class="ocean-col"><b>High Score</b></div>
-      <div class="ocean-col"><b>Low Score</b></div>
+    <!-- Cattell note -->
+    <div class="callout amber">
+      <strong>Cattell's 16PF (Study Unit p. 17–18):</strong> Raymond Cattell used factor analysis to reduce personality descriptions down to 16 source traits — broad, universal tendencies present in everyone's personality to different degrees. The Big Five model later simplified this to five factors.
     </div>
-    <div class="ocean-card">
-      <div class="ocean-letter o-bg">O</div>
-      <div class="ocean-col"><b>Openness to Experience</b>Curious, imaginative, creative, wide range of interests, willingness to seek new experiences, independent, open to ideas, interested in arts</div>
-      <div class="ocean-col"><b>Low Openness</b>Practical, conventional, prefers routine, generally sceptical of new ideas</div>
-    </div>
-    <div class="ocean-card">
-      <div class="ocean-letter c-bg">C</div>
-      <div class="ocean-col"><b>Conscientiousness</b>Hardworking, responsible, disciplined, ambitious, organised, reliable, dependable, goal-driven, self-controlled, plans things</div>
-      <div class="ocean-col"><b>Low Conscientiousness</b>Impulsive, careless, disorganised, unreliable, lazy, rebellious</div>
-    </div>
-    <div class="ocean-card">
-      <div class="ocean-letter e-bg">E</div>
-      <div class="ocean-col"><b>Extraversion</b>Sociable, optimistic, talkative, outgoing, warm, seeks adventure, assertive, full of energy, enthusiastic</div>
-      <div class="ocean-col"><b>Low Extraversion (Introversion)</b>Quiet, reserved, withdrawn, passive</div>
-    </div>
-    <div class="ocean-card">
-      <div class="ocean-letter a-bg">A</div>
-      <div class="ocean-col"><b>Agreeableness</b>Trusting, helpful, considerate, cooperative, empathetic, forgiving, good-natured, affectionate, polite, grateful</div>
-      <div class="ocean-col"><b>Low Agreeableness</b>Critical, uncooperative, suspicious, unhelpful, rude, antagonistic</div>
-    </div>
-    <div class="ocean-card">
-      <div class="ocean-letter n-bg">N</div>
-      <div class="ocean-col"><b>Neuroticism</b>Anxious, moody, stressed, hostile, self-conscious, often depressed, often tense, prone to negative emotions</div>
-      <div class="ocean-col"><b>Low Neuroticism</b>Calm, even-tempered, secure, relaxed, rarely depressed, emotionally stable</div>
-    </div>
-  </div>
-</section>
 
-<!-- ══ NATURE VS NURTURE ══ -->
-<section id="nature">
-  <div class="section-head">
-    <span class="sec-num">04</span>
-    <h2 class="sec-title">Nature vs Nurture in Personality <span class="src src-su">Study Unit</span></h2>
-  </div>
-
-  <div class="callout callout-warn">
-    <strong>Learning Outcome</strong>
-    <p>The Study Unit explicitly states this as a learning outcome and directs students to read the textbook on <em>genetic contributions to personality</em> and <em>environmental influence on personality traits</em>.</p>
-  </div>
-
-  <h3>4.1 The Nature Argument — Genetic Contributions</h3>
-  <div class="kv-list">
-    <dl class="kv"><dt>Twin studies</dt><dd>Identical twins reared apart show remarkable personality similarities when reunited. More similarities between identical twins than fraternal twins — supports a genetic component. Famous example: the "Jim twins" — both drove Chevrolets, smoked the same brand, worked as deputies, shared the same hobbies despite separate upbringings.</dd></dl>
-    <dl class="kv"><dt>Adoption studies</dt><dd>Adopted children show more personality similarities to their biological parents (genes, no shared environment) than to adoptive parents (environment, no shared genes) — suggesting personality traits are moderately heritable.</dd></dl>
-    <dl class="kv"><dt>Temperament</dt><dd>Newborns show differences in temperament strongly linked to genes and stable over time — suggesting some personality dispositions are present from birth.</dd></dl>
-    <dl class="kv"><dt>Neuroscience</dt><dd>Serotonin transporter gene is linked to anxiety-related traits. Dopamine receptor gene is linked to novelty-seeking. Specific genes influence neurotransmitter functioning that shapes personality dimensions.</dd></dl>
-  </div>
-
-  <h3>4.2 The Nurture Argument — Environmental Influence</h3>
-  <div class="kv-list">
-    <dl class="kv"><dt>Person-situation interaction</dt><dd>Even stable traits behave differently depending on context. The same trait can produce different behaviours in different environments — showing that environment shapes how traits are expressed.</dd></dl>
-    <dl class="kv"><dt>Age &amp; culture</dt><dd>Gradual personality change occurs across adulthood. People generally become more conscientious, agreeable, and emotionally stable with age. Culture shapes which traits are valued and how they are expressed.</dd></dl>
-    <dl class="kv"><dt>Social learning</dt><dd>Bandura showed personality is shaped through observational learning — watching others and outcomes of their behaviour. Personality patterns can be acquired by modelling, not just genes.</dd></dl>
-    <dl class="kv"><dt>Parenting</dt><dd>Rogers showed that conditional vs unconditional positive regard shapes the self-concept and personality trajectory throughout childhood.</dd></dl>
-  </div>
-
-  <div class="callout callout-tip">
-    <strong>Conclusion — Interaction Position</strong>
-    <p>Neither nature nor nurture alone determines personality. Both contribute, and the real story is in their <strong>interaction</strong>: multiple genes working simultaneously together with multiple environmental and developmental events produce personality.</p>
-  </div>
-</section>
-
-<!-- ══ FREUD ══ -->
-<section id="freud">
-  <div class="section-head">
-    <span class="sec-num">05</span>
-    <h2 class="sec-title">Freud's Psychodynamic Theory <span class="src src-both">Both</span></h2>
-  </div>
-
-  <div class="banner">
-    <strong>Core idea (from slides):</strong> Nothing we do as adults is by chance. The <strong>unconscious</strong> is the key to personality. Personality forms during the first few years of life, rooted in unresolved conflicts of early childhood.
-  </div>
-
-  <h3>5.1 The Three Structures — Iceberg Model <span class="src src-both">Both</span></h3>
-
-  <div class="iceberg">
-    <div class="ice-above">
-      <div class="zone">Conscious level — visible</div>
-      <div class="name">EGO</div>
-      <div class="desc"><strong>Reality Principle.</strong> Conscious, rational, regulating. Negotiates between id demands and superego standards. What others see in our behaviour. Aim: safety, compromise, delayed gratification.</div>
-    </div>
-    <div class="ice-line">— waterline — below consciousness —</div>
-    <div class="ice-below">
-      <div class="ice-block">
-        <div class="name">SUPEREGO — Preconscious level</div>
-        <div class="desc"><strong>Moral/Idealistic Principle.</strong> The judge. Our moral centre, conscience, and values. Develops around age 5 through identification with the same-sex parent. Learned from parents and culture. Represents right and wrong. Aim: perfection.</div>
+    <!-- Type A/B/C/D -->
+    <p style="font-weight:600; font-size:15px; color:var(--navy); margin-bottom:0.7rem;">Personality Types A / B / C / D (Slide 16 &amp; Study Unit p. 15–16)</p>
+    <div class="type-grid">
+      <div class="type-card typeA">
+        <div class="type-label">Type A</div>
+        <ul>
+          <li>Competitive</li>
+          <li>Verbally aggressive</li>
+          <li>Impatient</li>
+          <li>Hostile when frustrated</li>
+          <li>Workaholic</li>
+          <li>Sense of time urgency</li>
+          <li>Easily angered</li>
+        </ul>
       </div>
-      <div class="ice-block">
-        <div class="name">ID — Unconscious level</div>
-        <div class="desc"><strong>Pleasure Principle.</strong> Present from birth. Entirely unconscious. Seeks immediate gratification and avoids pain. Drives sexual and aggressive impulses. Aim: immediate gratification at all costs.</div>
+      <div class="type-card typeB">
+        <div class="type-label">Type B</div>
+        <ul>
+          <li>Easygoing</li>
+          <li>Calm &amp; relaxed</li>
+          <li>Patient</li>
+          <li>Trusting</li>
+          <li>Good-natured</li>
+          <li>Supportive</li>
+          <li>Lower need for achievement</li>
+        </ul>
+      </div>
+      <div class="type-card typeC">
+        <div class="type-label">Type C</div>
+        <ul>
+          <li>Cautious</li>
+          <li>Careful</li>
+          <li>Detached</li>
+          <li>Introspective</li>
+          <li>Sensitive to criticism</li>
+          <li>Serious</li>
+          <li>Suppressed emotion</li>
+        </ul>
+      </div>
+      <div class="type-card typeD">
+        <div class="type-label">Type D</div>
+        <ul>
+          <li>Distressed</li>
+          <li>Worrisome</li>
+          <li>Isolated</li>
+          <li>Irritated</li>
+          <li>Sad &amp; lonely</li>
+          <li>Fear of rejection</li>
+          <li>Suppressed emotion</li>
+        </ul>
       </div>
     </div>
+
+    <div class="exam-tip">
+      <strong>Exam note:</strong> Friedman &amp; Rosenman (1974) found Type A personality doubles the risk of coronary heart disease. Williams (1989) refined this — it is specifically the <em>hostility and anger</em> component of Type A that drives the heart disease risk, not competitiveness alone.
+    </div>
   </div>
 
-  <div class="callout callout-note">
-    <strong>When they conflict — from slides</strong>
-    <p>Excessive conflict between id and superego → <strong>dysfunction → creates anxiety</strong>. The ego manages this anxiety through <strong>defence mechanisms</strong>. A <strong>Freudian slip</strong> is when the id's impulse breaks through before the ego can screen it — the true unconscious feeling "slips out."</p>
-  </div>
 
-  <h3>5.2 Id, Ego &amp; Superego — Full Comparison <span class="src src-su">Study Unit</span></h3>
-  <div class="tbl-wrap">
-    <table>
-      <thead><tr><th></th><th>Id</th><th>Ego</th><th>Superego</th></tr></thead>
+  <!-- ══════════════════════════════════════════════
+       SECTION 3 — THE BIG FIVE (OCEAN)
+  ═══════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <div class="section-title">The Big Five — OCEAN (Five-Factor Model)</div>
+    </div>
+
+    <div class="callout teal">
+      Most personality theorists believe the important aspects of character can be captured in five core dimensions (Costa &amp; McCrae). Each dimension is a <strong>continuum</strong> — people score somewhere along the spectrum from low to high, not in a fixed category.
+    </div>
+
+    <table class="ocean-table">
+      <thead>
+        <tr>
+          <th>Letter</th>
+          <th>Trait</th>
+          <th>High score looks like…</th>
+          <th>Low score looks like…</th>
+        </tr>
+      </thead>
       <tbody>
-        <tr><td class="label">Nature</td><td>Biological aspect</td><td>Psychological aspect</td><td>Societal &amp; parental aspect</td></tr>
-        <tr><td class="label">Level</td><td>Unconscious</td><td>Conscious, preconscious &amp; unconscious</td><td>Conscious, preconscious &amp; unconscious</td></tr>
-        <tr><td class="label">Principle</td><td class="red">Pleasure</td><td class="blue">Reality</td><td class="sage">Moralistic &amp; idealistic</td></tr>
-        <tr><td class="label">Purpose</td><td>Seek pleasure &amp; avoid pain</td><td>Adapt to reality while controlling id &amp; superego</td><td>Represents right &amp; wrong; the judge</td></tr>
-        <tr><td class="label">Aim</td><td>Immediate gratification</td><td>Safety, compromise &amp; delayed gratification</td><td>Perfection. Develops ~age 5 from parents &amp; culture.</td></tr>
+        <tr>
+          <td><span class="letter O">O</span></td>
+          <td><strong>Openness to Experience</strong></td>
+          <td>Curious, imaginative, creative, wide range of interests, independent, seeks new experiences</td>
+          <td>Practical, conventional, prefers routine, generally sceptical of new ideas</td>
+        </tr>
+        <tr>
+          <td><span class="letter C">C</span></td>
+          <td><strong>Conscientiousness</strong></td>
+          <td>Hardworking, responsible, organised, self-disciplined, goal-driven, dependable, ambitious</td>
+          <td>Impulsive, careless, disorganised, unreliable, spontaneous</td>
+        </tr>
+        <tr>
+          <td><span class="letter E">E</span></td>
+          <td><strong>Extraversion</strong></td>
+          <td>Sociable, outgoing, optimistic, talkative, assertive, seeks adventure, warm</td>
+          <td>Quiet, reserved, withdrawn, prefers own company (Introvert)</td>
+        </tr>
+        <tr>
+          <td><span class="letter A">A</span></td>
+          <td><strong>Agreeableness</strong></td>
+          <td>Helpful, trusting, cooperative, considerate, empathetic, forgiving, polite</td>
+          <td>Critical, uncooperative, suspicious, rude, antagonistic</td>
+        </tr>
+        <tr>
+          <td><span class="letter N">N</span></td>
+          <td><strong>Neuroticism</strong></td>
+          <td>Anxious, worrisome, moody, temperamental, prone to negative emotions, often tense</td>
+          <td>Calm, even-tempered, emotionally stable, secure, relaxed</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="exam-tip">
+      <strong>Memory aid:</strong> <strong>OCEAN</strong> — each letter is the first letter of each trait. The five factors appear across all cultures and even in other species (chimpanzees, bonobos), suggesting they may be universal personality components.
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════
+       SECTION 4 — PERSONALITY ASSESSMENT
+  ═══════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <div class="section-title">Personality Assessment</div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card blue">
+        <div class="card-title">Reliability</div>
+        <p>A test's ability to produce <strong>consistent results</strong> over repeated testing. Personality should be stable over time, so a reliable test should give similar scores each time.</p>
+        <p><em>Test-retest method:</em> administer the same test twice and compare scores. <em>Split-half method:</em> divide test into two halves — if scores match, it is reliable.</p>
+      </div>
+      <div class="card teal">
+        <div class="card-title">Validity</div>
+        <p>A test's ability to <strong>measure what it claims to measure</strong>. Types include: content validity, predictive validity, face validity, and construct validity.</p>
+        <p>Example: The MMPI-2 has good validity because it correctly identifies depressed or psychotic persons.</p>
+      </div>
+    </div>
+
+    <p style="font-weight:600; font-size:15px; color:var(--navy); margin: 1rem 0 0.7rem;">Personality Tests</p>
+    <div class="grid-2">
+      <div class="card amber">
+        <div class="card-title">Objective / Self-Report Tests</div>
+        <p><strong>MMPI (Minnesota Multiphasic Personality Inventory):</strong> Used to assess psychopathology / abnormalities in personality. 567 true/false items across 10 clinical scales.</p>
+        <p><strong>NEO-PI / NEO PI-R:</strong> Measures the Big Five personality traits.</p>
+        <p><strong>Cattell's 16PF:</strong> Measures 16 source traits along a continuum.</p>
+        <p><strong>MBTI (Myers-Briggs):</strong> Classifies people along 4 dimensions — Introversion-Extraversion, Thinking-Feeling, Sensation-Intuition, Judgement-Perception.</p>
+      </div>
+      <div class="card rose">
+        <div class="card-title">Projective Tests</div>
+        <p>Show ambiguous images; the assumption is that people project their unconscious inner thoughts and conflicts onto the images when interpreting them.</p>
+        <p><strong>Rorschach Inkblot Test:</strong> 10 inkblot cards — describe what you see.</p>
+        <p><strong>TAT (Thematic Apperception Test):</strong> Ambiguous pictures — tell a story about what is happening.</p>
+        <p>Both tests originated from Freud's concept of projection as a defence mechanism.</p>
+      </div>
+    </div>
+
+    <div class="exam-tip">
+      <strong>Key criticism of MBTI (Study Unit p. 21):</strong> It did not appear to truly identify distinct personality types — people have different <em>degrees</em> of a trait rather than having a particular type. This questions its construct validity.
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════
+       SECTION 5 — PSYCHODYNAMIC / FREUD
+  ═══════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <div class="section-title">Psychodynamic Theory — Freud (Slides 30–32)</div>
+    </div>
+
+    <div class="callout blue">
+      <strong>Core idea:</strong> "Personality forms during the first few years of life, rooted in unresolved conflicts of early childhood." Nothing we do as adults is by chance — the <strong>unconscious</strong> is the key to personality.
+    </div>
+
+    <!-- Iceberg diagram of Id/Ego/Superego -->
+    <div class="iceberg" style="margin-bottom:1rem;">
+      <div class="ice-above">
+        <div class="ice-label">Above the surface — visible / conscious</div>
+        <div class="ice-row">
+          <span class="ice-tag ego-tag">EGO — Reality Principle</span>
+        </div>
+        <div class="ice-desc">Conscious level. Rational. Regulates. Balances id demands with reality. Adapts to the real world while controlling both the id and the superego. Aims for safety and compromise.</div>
+      </div>
+      <div class="ice-below">
+        <div class="ice-label">Below the surface — preconscious &amp; unconscious</div>
+        <div class="ice-row" style="margin-bottom:0.5rem;">
+          <span class="ice-tag super-tag">SUPEREGO — Moral Principle</span>
+        </div>
+        <div class="ice-desc" style="margin-bottom:0.8rem;">Preconscious level. The judge. Our moral centre and values. Develops around age 5 through internalising parental and cultural rules. Represents right vs. wrong. Aims for perfection.</div>
+        <div class="ice-row" style="margin-bottom:0.4rem;">
+          <span class="ice-tag id-tag">ID — Pleasure Principle</span>
+        </div>
+        <div class="ice-desc">Unconscious level. Present from birth. Seeks immediate gratification of biological urges. Wants everything pleasurable, avoids pain. Purely selfish and instinctual.</div>
+      </div>
+    </div>
+
+    <div class="callout rose">
+      <strong>When the three conflict (Slide 32):</strong> The id, ego, and superego interact to produce motives for behaviour and thought. When they clash excessively, this creates <strong>dysfunction → excessive conflict → anxiety</strong>. The ego uses defence mechanisms to cope with this anxiety.
+    </div>
+
+    <!-- Psychosexual Stages -->
+    <p style="font-weight:600; font-size:15px; color:var(--navy); margin: 1.2rem 0 0.7rem;">Freud's Psychosexual Stages of Development (Study Unit p. 25)</p>
+
+    <div class="callout amber">
+      <strong>Key principle:</strong> Conflicts at each stage must be successfully resolved before moving on. Too much or too little satisfaction at a stage = <strong>fixation</strong> — the person becomes stuck, and adult personality problems reflect that unresolved stage.
+    </div>
+
+    <table class="stages-table">
+      <thead>
+        <tr>
+          <th>Stage</th>
+          <th>Age</th>
+          <th>Focus &amp; Key Conflict</th>
+          <th>If Fixated…</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="stage-badge" style="background:#fce4ec;color:#880e4f;">Oral</span></td>
+          <td>0–18 mths</td>
+          <td>Mouth is the erogenous zone. Key conflict: weaning from feeding.</td>
+          <td>Overeating, nail-biting, smoking, alcoholism, boasting</td>
+        </tr>
+        <tr>
+          <td><span class="stage-badge" style="background:#e8f5e9;color:#1b5e20;">Anal</span></td>
+          <td>18 mths–3 yrs</td>
+          <td>Anus/rectum. Key conflict: toilet training — control of elimination.</td>
+          <td>Overly neat/stingy (anal-retentive) OR excessively messy/carefree (anal-expulsive)</td>
+        </tr>
+        <tr>
+          <td><span class="stage-badge" style="background:#e3f2fd;color:#0d47a1;">Phallic</span></td>
+          <td>3–6 yrs</td>
+          <td>Genitals. Oedipus/Electra complex — unconscious attraction to opposite-sex parent, rivalry with same-sex parent. Resolved by identifying with same-sex parent → superego forms.</td>
+          <td>Unresolved sexual/authority conflicts in adult relationships</td>
+        </tr>
+        <tr>
+          <td><span class="stage-badge" style="background:#f3e5f5;color:#4a148c;">Latency</span></td>
+          <td>6 yrs–puberty</td>
+          <td>Sexual impulses are dormant. Energy directed to school and peer relations. No major conflict to resolve.</td>
+          <td>No specific fixation at this stage</td>
+        </tr>
+        <tr>
+          <td><span class="stage-badge" style="background:#fff8e1;color:#e65100;">Genital</span></td>
+          <td>Puberty–adult</td>
+          <td>Genitals again become the focus. Sexual urges from the phallic stage resurface and are transferred to an age-appropriate partner.</td>
+          <td>Difficulty forming mature intimate relationships</td>
+        </tr>
       </tbody>
     </table>
   </div>
 
-  <h3>5.3 Freud's Psychosexual Stages <span class="src src-su">Study Unit</span></h3>
-  <p>Conflicts at each stage must be successfully resolved before moving on. Failure → <strong>fixation</strong> at that stage → adult personality problems related to that stage.</p>
-  <div class="tbl-wrap">
-    <table>
-      <thead><tr><th>Stage</th><th>Age</th><th>Focus &amp; Key Conflict</th></tr></thead>
-      <tbody>
-        <tr><td class="badge gold">Oral</td><td>0–18 months</td><td>Mouth is the erogenous zone. Pleasure from sucking, feeding. Key conflict: <strong>weaning</strong>. Oral fixation in adults: overeating, nail-biting, smoking, boasting.</td></tr>
-        <tr><td class="badge blue">Anal</td><td>18 months – 3 yrs</td><td>Pleasure from controlling waste elimination. Key conflict: <strong>toilet training</strong>. Anal-retentive fixation: overly neat, stingy, rigid, hoarding. Anal-expulsive: sloppy, carefree, impulsive.</td></tr>
-        <tr><td class="badge red">Phallic</td><td>3–6 years</td><td>Genitals are focus. Key conflict: <strong>Oedipus complex</strong> (boys attracted to mother, rivalry with father) / <strong>Electra complex</strong> (girls). Resolution: identification with same-sex parent → <strong>superego forms</strong>.</td></tr>
-        <tr><td class="badge grey">Latency</td><td>6 yrs – puberty</td><td>Sexual impulses are dormant. Focus on school and peers. Child spends more time in same-sex groups. <strong>No key conflict</strong> to resolve.</td></tr>
-        <tr><td class="badge purp">Genital</td><td>Puberty – adult</td><td>Sexual urges reappear. Adolescent redirects earlier phallic-stage attractions toward age-appropriate partners. Adult intimate relationships reflect this redirection.</td></tr>
-      </tbody>
-    </table>
-  </div>
-</section>
 
-<!-- ══ HUMANISTIC ══ -->
-<section id="humanistic">
-  <div class="section-head">
-    <span class="sec-num">06</span>
-    <h2 class="sec-title">Humanistic Theory <span class="src src-su">Study Unit</span></h2>
-  </div>
+  <!-- ══════════════════════════════════════════════
+       SECTION 6 — HUMANISTIC THEORY
+  ═══════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <div class="section-title">Humanistic Theory (Slide 33)</div>
+    </div>
 
-  <div class="banner">
-    <strong>Core idea (from slides):</strong> Personality is driven by needs to <strong>adapt, learn, grow and excel</strong> — NOT by unconscious conflicts. We have enormous potential, possibility, and choice (<strong>free will</strong>). Each person has their own unique subjective experience of reality.
-  </div>
+    <div class="callout purple">
+      <strong>Core contrast with Freud:</strong> Humanists believe personality is <em>not</em> driven by unconscious conflicts and defences against anxiety. Instead, personality is driven by our needs to <strong>adapt, learn, grow, and excel</strong>.
+    </div>
 
-  <h3>6.1 Carl Rogers — Self Theory</h3>
-  <div class="kv-list">
-    <dl class="kv"><dt>Self-concept</dt><dd>An individual's awareness of a continuous identity. Shapes behaviour by acting as a self-monitor against an inner standard. If self-concept is good, we try to live up to our ideal standard. If bad, we behave and feel badly.</dd></dl>
-    <dl class="kv"><dt>Self-actualisation</dt><dd>The master motive — the drive to fulfil one's potential and become one's best self. Personality is driven by the need to actualise, not by unconscious conflict.</dd></dl>
-    <dl class="kv"><dt>Unconditional positive regard</dt><dd>Acceptance and love with no strings attached. Essential for healthy personality. Allows the child to keep their own inner valuing system and develop an authentic self-concept grounded in who they actually are.</dd></dl>
-    <dl class="kv"><dt>Conditional positive regard</dt><dd>Love/acceptance contingent on meeting standards. Causes the person to base their self-concept on others' judgements rather than their own inner values. Over time they stop listening to their own organismic valuing process.</dd></dl>
-    <dl class="kv"><dt>Incongruence</dt><dd>The gap between the actual self and the ideal self-concept. When large, causes psychological discomfort and emptiness despite apparent external success — because the person is not living as who they truly are.</dd></dl>
-  </div>
+    <div class="grid-3">
+      <div class="card purple">
+        <div class="card-title">Self-Actualisation</div>
+        <p>The "master motive" — the built-in human drive to fulfil one's natural potential. Personality development is a process of growth toward self-actualisation.</p>
+      </div>
+      <div class="card purple">
+        <div class="card-title">Free Will</div>
+        <p>We have enormous potential, possibility, and choice. Humanists are optimistic — we are not simply products of unconscious drives or past conditioning.</p>
+      </div>
+      <div class="card purple">
+        <div class="card-title">Uniqueness of Individuals</div>
+        <p>Each person has a unique subjective experience of reality. Understanding personality requires understanding how the person views themselves and their world (self-concept).</p>
+      </div>
+    </div>
 
-  <h3>6.2 Maslow's Hierarchy of Needs</h3>
-  <p>Lower-order needs must be substantially satisfied before higher-level needs become motivating. Maslow estimated only 1 in 10 people operates from self-actualisation needs.</p>
-  <ul class="clean">
-    <li><strong>Physiological</strong> — hunger, thirst (bottom of hierarchy)</li>
-    <li><strong>Safety</strong> — security, freedom from harm</li>
-    <li><strong>Belongingness &amp; Love</strong> — affiliation, acceptance</li>
-    <li><strong>Esteem</strong> — achievement, recognition, competence</li>
-    <li><strong>Cognitive</strong> — to know, understand, explore</li>
-    <li><strong>Aesthetic</strong> — symmetry, order, beauty</li>
-    <li><strong>Self-actualisation</strong> — fulfil potential, realise self (top)</li>
-  </ul>
-  <div class="callout callout-warn">
-    <strong>Limitation</strong>
-    <p>The hierarchy does not explain why some people forgo lower needs for higher ones (e.g., Nelson Mandela choosing imprisonment over silence). Culture also heavily influences which needs are prioritised.</p>
-  </div>
-</section>
+    <div class="card purple" style="margin-top:0;">
+      <div class="card-title">Carl Rogers &amp; Self-Concept (Study Unit p. 26)</div>
+      <p><strong>Self-concept</strong> is our perception or image of our abilities and uniqueness. Rogers believed a positive self-image enhances personal development.</p>
+      <p><strong>Unconditional positive regard</strong> — acceptance and love with no strings attached — is key to healthy personality development. When children receive conditional regard (love only when they meet certain standards), they develop a self-concept based on others' views rather than their own inner experience.</p>
+    </div>
 
-<!-- ══ SOCIAL COGNITIVE ══ -->
-<section id="social-cog">
-  <div class="section-head">
-    <span class="sec-num">07</span>
-    <h2 class="sec-title">Social Cognitive Theory <span class="src src-su">Study Unit</span></h2>
+    <div class="card teal">
+      <div class="card-title">Maslow's Hierarchy of Needs (Study Unit p. 26)</div>
+      <p>Maslow's hierarchy explains why people consistently behave as they do. Lower-level needs must be satisfied before higher-level needs motivate behaviour: Physiological → Safety → Belongingness → Esteem → Cognitive/Aesthetic → <strong>Self-Actualisation</strong>.</p>
+      <p>Only about 1 in 10 people operate from self-actualisation needs.</p>
+    </div>
   </div>
 
-  <div class="banner">
-    <strong>Core idea:</strong> Personality is NOT determined by unconscious motives. It is shaped by <strong>social learning through observation</strong> AND by patterns of thinking about the environment. Problems arise from inappropriate thoughts or faulty reasoning.
+
+  <!-- ══════════════════════════════════════════════
+       SECTION 7 — SOCIAL COGNITIVE THEORY
+  ═══════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">7</div>
+      <div class="section-title">Social Cognitive Theory (Study Unit pp. 27–28)</div>
+    </div>
+
+    <div class="callout blue">
+      The social cognitive perspective disputes that personality is determined by unconscious motives. Instead, it focuses on how social learning and patterns of thinking shape personality.
+    </div>
+
+    <div class="grid-2">
+      <div class="card blue">
+        <div class="card-title">Bandura — Reciprocal Determinism</div>
+        <p>Personality is the product of three interacting forces: <strong>Environment ↔ Behaviour ↔ Thoughts</strong>. Each factor influences the other two in a continuous cycle.</p>
+        <p><strong>Social Learning Theory</strong> stresses that expectations of behavioural outcomes are established through <em>observing</em> what happens to others.</p>
+        <p><strong>Self-efficacy</strong> — one's expectation of success in a given situation — is a critical element. High self-efficacy in a domain → more likely to succeed there.</p>
+      </div>
+      <div class="card blue">
+        <div class="card-title">Rotter — Locus of Control</div>
+        <p>Our beliefs about how much control we have over events influence our behaviour and are an important characteristic of personality.</p>
+        <p><strong>Internal locus:</strong> believes own actions determine outcomes. More active, alert, happier, longer lifespan, better immune system, less stress.</p>
+        <p><strong>External locus:</strong> believes outcomes are determined by factors outside their control (luck, fate). More susceptible to stress, depression, and health problems.</p>
+        <p>Perceived lack of control in aversive situations → <strong>learned helplessness</strong>.</p>
+      </div>
+    </div>
   </div>
 
-  <h3>7.1 Bandura — Reciprocal Determinism &amp; Self-Efficacy</h3>
-  <p>Personality is the product of three mutually interacting forces:</p>
-  <div class="flow-row">
-    <div class="flow-node">Environment</div>
-    <div class="flow-arrow">⇌</div>
-    <div class="flow-node">Behaviour</div>
-    <div class="flow-arrow">⇌</div>
-    <div class="flow-node">Cognition<br><small style="font-weight:400;font-size:12px;">(thoughts, beliefs, goals)</small></div>
-  </div>
-  <p>Each force influences the other two reciprocally. We choose environments that shape our thinking; thinking guides behaviour; behaviour changes the environment. Personality forms through this ongoing loop.</p>
-  <div class="callout callout-key">
-    <strong>Self-Efficacy</strong>
-    <p>One's expectation of success in a given situation. <strong>High self-efficacy</strong> → approach tasks confidently → better outcomes. <strong>Low self-efficacy</strong> → likely to give up or not try → poor outcomes → reinforces belief that one cannot succeed. Self-efficacy can differ across different domains of life.</p>
+
+  <!-- ══════════════════════════════════════════════
+       SECTION 8 — THEORY COMPARISON TABLE
+  ═══════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">8</div>
+      <div class="section-title">Theory Comparison Summary (Study Unit p. 28)</div>
+    </div>
+
+    <div class="theory-compare">
+      <table>
+        <thead>
+          <tr>
+            <th>Theory</th>
+            <th>Key Theorists</th>
+            <th>Core of Personality</th>
+            <th>Structure</th>
+            <th>Cause of Problems</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Trait</strong></td>
+            <td>Allport, Cattell</td>
+            <td>Organises responses in characteristic modes</td>
+            <td>Traits</td>
+            <td>Faulty learning or inappropriate traits</td>
+          </tr>
+          <tr>
+            <td><strong>Psychodynamic</strong></td>
+            <td>Freud</td>
+            <td>Maximises gratification, minimises punishment; instinctual unconscious urges</td>
+            <td>Id, ego, superego</td>
+            <td>Imbalances between id, ego, and superego; resulting fixations</td>
+          </tr>
+          <tr>
+            <td><strong>Humanistic</strong></td>
+            <td>Rogers, Maslow</td>
+            <td>Actualises, maintains, and enhances the experience of life through self-actualisation</td>
+            <td>Self (self-concept)</td>
+            <td>Incongruence between self and concept of ideal self</td>
+          </tr>
+          <tr>
+            <td><strong>Social Cognitive</strong></td>
+            <td>Bandura, Rotter</td>
+            <td>Ways of thinking and acting in response to a changing environment</td>
+            <td>Responses determined by thoughts</td>
+            <td>Inappropriate thoughts or faulty reasoning</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout amber" style="margin-top:1rem;">
+      <strong>No single theory is complete.</strong> Each perspective contributes to our understanding of personality development. The exam will likely ask you to apply, compare, or correct examples using these theories — knowing the core of each approach and what it says causes personality problems is key.
+    </div>
   </div>
 
-  <h3>7.2 Rotter — Locus of Control</h3>
-  <p>Our beliefs about how much control we have over outcomes shape personality and behaviour significantly.</p>
-  <div class="loc-grid">
-    <div class="loc-cell hdr"></div>
-    <div class="loc-cell hdr" style="background:#1a4f8a;">Internal Locus</div>
-    <div class="loc-cell hdr" style="background:#b5341e;">External Locus</div>
-    <div class="loc-cell row-label">Belief</div>
-    <div class="loc-cell loc-int">If I take action, the outcome can be achieved. I am in control.</div>
-    <div class="loc-cell loc-ext">Factors outside my control decide the outcome. Fate/luck/others determine it.</div>
-    <div class="loc-cell row-label">Academic behaviour</div>
-    <div class="loc-cell loc-int">Studies more, attributes outcomes to effort → higher achievement</div>
-    <div class="loc-cell loc-ext">Studies less, attributes outcomes to luck or teacher → lower achievement</div>
-    <div class="loc-cell row-label">Health behaviour</div>
-    <div class="loc-cell loc-int">Exercises, follows doctor's advice, gets checkups — believes health is controllable</div>
-    <div class="loc-cell loc-ext">More fatalistic about health — "what will be, will be"</div>
-    <div class="loc-cell row-label">Risk</div>
-    <div class="loc-cell loc-int">—</div>
-    <div class="loc-cell loc-ext">Perceived lack of control → <strong>learned helplessness</strong></div>
+
+  <!-- ══════════════════════════════════════════════
+       KEY TERMS
+  ═══════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">9</div>
+      <div class="section-title">Key Terms to Know</div>
+    </div>
+    <div class="key-terms">
+      <span class="term">Personality</span>
+      <span class="term">Personality traits</span>
+      <span class="term">Personality types</span>
+      <span class="term">Cardinal traits</span>
+      <span class="term">Central traits</span>
+      <span class="term">Secondary traits</span>
+      <span class="term">Big Five / OCEAN</span>
+      <span class="term">Five-factor theory</span>
+      <span class="term">Type A / B / C / D</span>
+      <span class="term">Reliability</span>
+      <span class="term">Validity</span>
+      <span class="term">MMPI-2</span>
+      <span class="term">MBTI</span>
+      <span class="term">Rorschach Inkblot Test</span>
+      <span class="term">TAT</span>
+      <span class="term">Projective test</span>
+      <span class="term">Id / Ego / Superego</span>
+      <span class="term">Pleasure principle</span>
+      <span class="term">Reality principle</span>
+      <span class="term">Moral principle</span>
+      <span class="term">Fixation</span>
+      <span class="term">Psychosexual stages</span>
+      <span class="term">Oedipus / Electra complex</span>
+      <span class="term">Self-actualisation</span>
+      <span class="term">Self-concept</span>
+      <span class="term">Unconditional positive regard</span>
+      <span class="term">Free will</span>
+      <span class="term">Reciprocal determinism</span>
+      <span class="term">Self-efficacy</span>
+      <span class="term">Locus of control</span>
+      <span class="term">Learned helplessness</span>
+    </div>
   </div>
-</section>
 
-<!-- ══ ASSESSMENT ══ -->
-<section id="assessment">
-  <div class="section-head">
-    <span class="sec-num">08</span>
-    <h2 class="sec-title">Personality Assessment <span class="src src-su">Study Unit</span></h2>
+  <div style="text-align:center; color:var(--text-muted); font-size:13px; margin-top:3rem; padding-top:1.5rem; border-top:1px solid var(--border);">
+    Based on Seminar 6 slides (pp. 24–33) &amp; Study Unit 3 (pp. 14–28) · Pastorino &amp; Doyle-Portillo, <em>What is Psychology?</em> 5th ed.
   </div>
 
-  <h3>8.1 Reliability &amp; Validity</h3>
-  <div class="kv-list">
-    <dl class="kv"><dt>Reliability</dt><dd>The ability of a test to produce <strong>consistent results</strong> over repeated testing. Since personality is stable, results should not change dramatically. Tested via <em>test-retest method</em> (same test given twice) or <em>split-half method</em> (test divided into two halves; scores compared).</dd></dl>
-    <dl class="kv"><dt>Validity</dt><dd>The ability of a test to <strong>measure what it claims to measure</strong>. Types: <em>content validity</em> (measures intended knowledge), <em>predictive validity</em> (predicts future achievements), <em>face validity</em> (appropriate by inspection), <em>construct validity</em> (measures the specific psychological quality designed).</dd></dl>
-  </div>
-  <div class="callout callout-warn">
-    <strong>Cultural Bias Concern</strong>
-    <p>Dana (1993) questioned the validity of Western assessment tests translated into other languages. Tests may reflect Western values and fail to accurately measure personality in other cultural contexts — especially tools assessing psychopathology.</p>
-  </div>
-
-  <h3>8.2 Key Assessment Tools</h3>
-  <div class="tbl-wrap">
-    <table>
-      <thead><tr><th>Tool</th><th>Type</th><th>Key Details</th></tr></thead>
-      <tbody>
-        <tr>
-          <td class="badge gold">MMPI-2</td>
-          <td>Self-report inventory</td>
-          <td>Minnesota Multiphasic Personality Inventory. Clinical tool identifying problem areas of personality. Contains <strong>validity scales</strong> to assess truthfulness of responses. Good validity — identifies depressed or psychotic persons.</td>
-        </tr>
-        <tr>
-          <td class="badge blue">Myers-Briggs (MBTI)</td>
-          <td>Type indicator</td>
-          <td>4 dimensions: Introversion-Extraversion, Thinking-Feeling, Sensation-Intuition, Judgement-Perception. <em>Criticism:</em> may not identify truly distinct types — people may have different <em>degrees</em> of a trait rather than a fixed type (Furnham et al., 2003).</td>
-        </tr>
-        <tr>
-          <td class="badge sage">NEO PI-R</td>
-          <td>Self-report inventory</td>
-          <td>Measures the Big Five (OCEAN) personality traits. Places a person on the continuum of each of the five dimensions.</td>
-        </tr>
-        <tr>
-          <td class="badge grey">Cattell's 16PF</td>
-          <td>Self-report inventory</td>
-          <td>Measures personality along 16 trait dimensions. More detailed but harder to use in research than the Big Five.</td>
-        </tr>
-        <tr>
-          <td class="badge purp">Rorschach Inkblot</td>
-          <td>Projective test</td>
-          <td>Patient describes what they see in 10 ambiguous inkblots. Assumes patients <strong>project unconscious conflicts</strong> onto images — revealing repressed thoughts. Rooted in Freud's defence mechanism of projection. Bypasses conscious self-filtering.</td>
-        </tr>
-        <tr>
-          <td class="badge purp">TAT</td>
-          <td>Projective test</td>
-          <td>Thematic Apperception Test. Patient shown ambiguous pictures and asked to tell a story. Responses coded for consistent themes, emotions, or issues. Also rooted in psychodynamic theory — reveals unconscious preoccupations. Both TAT and Rorschach access information a direct interview would not reveal.</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="callout callout-tip">
-    <strong>Why use multiple assessment methods?</strong>
-    <p>Each method accesses a different layer: self-report captures what people are aware of/willing to disclose; projective tests bypass conscious filtering; behavioural observation captures real-world patterns. <strong>Convergence across methods increases diagnostic confidence</strong> and reduces the risk of any single method's blind spots.</p>
-  </div>
-</section>
-
-<hr class="sec-rule">
-<p style="text-align:center;color:var(--muted);font-size:13px;margin-top:32px;font-style:italic;">End of Personality Study Guide · PSY107/108 · Personality Slides (24+) &amp; Study Unit 3 Chapter 2</p>
-
-</main>
-
-<button class="back-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
-
-<script>
-const navLinks = document.querySelectorAll('.toc-nav a');
-const sections = document.querySelectorAll('section[id]');
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      navLinks.forEach(a => a.classList.remove('active'));
-      const match = document.querySelector(`.toc-nav a[href="#${e.target.id}"]`);
-      if (match) match.classList.add('active');
-    }
-  });
-}, { rootMargin: '-20% 0px -65% 0px' });
-sections.forEach(s => obs.observe(s));
-</script>
+</div>
 </body>
 </html>
