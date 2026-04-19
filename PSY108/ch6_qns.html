@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PSY108 — Learning: Scenario Practice</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f18;
+    --surf: #13161f;
+    --surf2: #191d2c;
+    --surf3: #1f2438;
+    --border: #2a3050;
+    --border2: #3d4878;
+    --ink: #dce2f5;
+    --mid: #7a85b0;
+    --dim: #42496e;
+    --gold: #e8a44a;
+    --blue: #5b8dee;
+    --green: #6ecb8a;
+    --pink: #e06b8a;
+    --purple: #a78bfa;
+    --teal: #4dcfbe;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--ink); font-family: 'DM Sans', sans-serif; font-weight: 300; min-height: 100vh; line-height: 1.8; }
+
+  /* ── HEADER ── */
+  .hdr {
+    padding: 48px 44px 40px;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(150deg, #0d0f18 0%, #121628 55%, #0d1420 100%);
+    position: relative; overflow: hidden;
+  }
+  .hdr::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 55% 80% at 92% 40%, rgba(91,141,238,0.07) 0%, transparent 65%),
+      radial-gradient(ellipse 35% 55% at 8% 90%, rgba(232,164,74,0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hdr-in { max-width: 820px; margin: 0 auto; position: relative; }
+  .hdr-tag { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--blue); margin-bottom: 14px; display: block; }
+  .hdr h1 { font-family: 'Crimson Pro', serif; font-size: clamp(26px, 4vw, 42px); font-weight: 700; color: #f0f4ff; line-height: 1.2; margin-bottom: 10px; }
+  .hdr p { color: var(--mid); font-size: 13.5px; max-width: 580px; line-height: 1.7; }
+  .hdr-note { margin-top: 18px; background: rgba(232,164,74,0.08); border: 1px solid rgba(232,164,74,0.2); border-radius: 8px; padding: 12px 16px; font-size: 13px; color: #c8a870; }
+  .hdr-note strong { color: var(--gold); }
+
+  /* ── STICKY NAV ── */
+  .nav-bar {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--surf);
+    border-bottom: 1px solid var(--border);
+    padding: 0 44px;
+    display: flex; gap: 0; overflow-x: auto; scrollbar-width: none;
+  }
+  .nav-bar::-webkit-scrollbar { display: none; }
+  .nav-btn {
+    background: none; border: none; border-bottom: 3px solid transparent;
+    color: var(--mid); font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500;
+    padding: 14px 16px; cursor: pointer; white-space: nowrap; margin-bottom: -1px;
+    transition: color .15s, border-color .15s;
+  }
+  .nav-btn:hover { color: var(--ink); }
+  .nav-btn.cc.active  { color: var(--blue);   border-bottom-color: var(--blue); font-weight: 600; }
+  .nav-btn.oc.active  { color: var(--green);  border-bottom-color: var(--green); font-weight: 600; }
+  .nav-btn.cog.active { color: var(--purple); border-bottom-color: var(--purple); font-weight: 600; }
+  .nav-btn.mix.active { color: var(--gold);   border-bottom-color: var(--gold); font-weight: 600; }
+
+  /* ── MAIN ── */
+  .main { max-width: 820px; margin: 0 auto; padding: 36px 44px 80px; }
+  .section { display: none; animation: fadeUp .28s ease; }
+  .section.active { display: block; }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+  /* ── SECTION HEADER ── */
+  .sec-hdr { margin-bottom: 28px; }
+  .sec-hdr h2 { font-family: 'Crimson Pro', serif; font-size: 24px; font-weight: 700; color: #f0f4ff; margin-bottom: 4px; }
+  .sec-hdr p { font-size: 13px; color: var(--mid); }
+  .sec-rule { height: 1px; margin: 14px 0 28px; border: none; }
+  .sec-rule.cc  { background: linear-gradient(90deg, var(--blue), transparent); }
+  .sec-rule.oc  { background: linear-gradient(90deg, var(--green), transparent); }
+  .sec-rule.cog { background: linear-gradient(90deg, var(--purple), transparent); }
+  .sec-rule.mix { background: linear-gradient(90deg, var(--gold), transparent); }
+
+  /* ── QUESTION CARD ── */
+  .q-card {
+    background: var(--surf);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin-bottom: 24px;
+    overflow: hidden;
+    transition: border-color .2s;
+  }
+  .q-card:hover { border-color: var(--border2); }
+
+  .q-head {
+    padding: 20px 24px 0;
+    display: flex; align-items: flex-start; gap: 14px;
+  }
+  .q-num-badge {
+    width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .q-num-badge.cc  { background: rgba(91,141,238,0.15);  color: var(--blue); }
+  .q-num-badge.oc  { background: rgba(110,203,138,0.15); color: var(--green); }
+  .q-num-badge.cog { background: rgba(167,139,250,0.15); color: var(--purple); }
+  .q-num-badge.mix { background: rgba(232,164,74,0.15);  color: var(--gold); }
+
+  .q-meta { flex: 1; }
+  .q-tag {
+    font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1.5px;
+    text-transform: uppercase; margin-bottom: 6px; display: block;
+  }
+  .q-tag.cc  { color: var(--blue); }
+  .q-tag.oc  { color: var(--green); }
+  .q-tag.cog { color: var(--purple); }
+  .q-tag.mix { color: var(--gold); }
+
+  .q-focus {
+    font-size: 11.5px; color: var(--dim);
+    font-family: 'DM Mono', monospace;
+  }
+
+  .q-body { padding: 16px 24px 0; }
+
+  .scenario-box {
+    background: var(--surf2);
+    border-left: 3px solid var(--border2);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    margin-bottom: 14px;
+    font-size: 14.5px;
+    line-height: 1.85;
+    color: var(--ink);
+  }
+  .scenario-box.cc  { border-left-color: var(--blue); }
+  .scenario-box.oc  { border-left-color: var(--green); }
+  .scenario-box.cog { border-left-color: var(--purple); }
+  .scenario-box.mix { border-left-color: var(--gold); }
+
+  .q-prompt { font-size: 14.5px; color: var(--ink); font-weight: 500; line-height: 1.7; margin-bottom: 6px; }
+  .q-sub { font-size: 13.5px; color: var(--mid); margin-bottom: 14px; font-style: italic; }
+
+  .marks-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+  .mark-chip {
+    font-family: 'DM Mono', monospace; font-size: 10.5px;
+    background: var(--surf3); border: 1px solid var(--border);
+    border-radius: 4px; padding: 2px 8px; color: var(--mid);
+  }
+  .trap-chip {
+    font-family: 'DM Mono', monospace; font-size: 10.5px;
+    background: rgba(224,107,138,0.1); border: 1px solid rgba(224,107,138,0.3);
+    border-radius: 4px; padding: 2px 8px; color: var(--pink);
+  }
+
+  /* ── REVEAL BUTTON ── */
+  .reveal-btn {
+    display: block; width: 100%;
+    background: var(--surf2); border: none; border-top: 1px solid var(--border);
+    color: var(--mid); font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
+    padding: 14px 24px; cursor: pointer; text-align: left;
+    transition: background .15s, color .15s;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .reveal-btn:hover { background: var(--surf3); color: var(--ink); }
+  .reveal-btn .arrow { transition: transform .25s; font-size: 11px; }
+  .reveal-btn.open .arrow { transform: rotate(180deg); }
+  .reveal-btn.cc:hover  { color: var(--blue); }
+  .reveal-btn.oc:hover  { color: var(--green); }
+  .reveal-btn.cog:hover { color: var(--purple); }
+  .reveal-btn.mix:hover { color: var(--gold); }
+
+  /* ── MODEL ANSWER ── */
+  .model-answer {
+    display: none;
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    background: var(--bg);
+    animation: fadeUp .2s ease;
+  }
+  .model-answer.open { display: block; }
+  .ans-label {
+    font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2.5px;
+    text-transform: uppercase; margin-bottom: 14px; display: block;
+  }
+  .ans-label.cc  { color: var(--blue); }
+  .ans-label.oc  { color: var(--green); }
+  .ans-label.cog { color: var(--purple); }
+  .ans-label.mix { color: var(--gold); }
+
+  .ans-body { font-size: 14px; line-height: 1.85; color: var(--ink); }
+  .ans-body p { margin-bottom: 12px; }
+  .ans-body strong { color: #f0f4ff; font-weight: 600; }
+  .ans-body em { color: var(--mid); font-style: italic; }
+  .ans-body ul, .ans-body ol { padding-left: 20px; margin-bottom: 12px; }
+  .ans-body li { margin-bottom: 6px; }
+  .ans-body li::marker { color: var(--gold); }
+
+  .ans-part {
+    border-left: 2px solid var(--border2);
+    padding: 12px 16px;
+    margin: 14px 0;
+    background: var(--surf2);
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+    line-height: 1.85;
+  }
+  .ans-part-label {
+    font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--mid); margin-bottom: 6px; display: block;
+  }
+
+  .key-point {
+    background: rgba(232,164,74,0.07); border: 1px solid rgba(232,164,74,0.2);
+    border-radius: 8px; padding: 12px 16px; margin: 12px 0;
+    font-size: 13.5px; color: #c8a870;
+  }
+  .key-point strong { color: var(--gold); }
+
+  .trap-note {
+    background: rgba(224,107,138,0.07); border: 1px solid rgba(224,107,138,0.2);
+    border-radius: 8px; padding: 12px 16px; margin: 12px 0;
+    font-size: 13.5px; color: #c87090;
+  }
+  .trap-note strong { color: var(--pink); }
+
+  @media(max-width:600px){
+    .main { padding: 24px 20px 60px; }
+    .hdr { padding: 36px 20px 32px; }
+    .nav-bar { padding: 0 8px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-in">
+    <span class="hdr-tag">PSY108 · Learning · Scenario Practice</span>
+    <h1>Application Questions</h1>
+    <p>16 scenario-based questions designed to test application, not recall. Each question approaches a concept from a different angle — including cross-sectional questions that require you to draw on multiple concepts simultaneously.</p>
+    <div class="hdr-note">
+      <strong>How to use this:</strong> Read each scenario carefully. Attempt your answer fully before clicking <em>Reveal Model Answer</em>. Answers are hidden until you choose to reveal them. If your answer differs, reason through why — then bring your questions back for discussion.
+    </div>
+  </div>
+</div>
+
+<nav class="nav-bar">
+  <button class="nav-btn cc active" onclick="show('cc')">Classical Conditioning</button>
+  <button class="nav-btn oc" onclick="show('oc')">Operant Conditioning</button>
+  <button class="nav-btn cog" onclick="show('cog')">Cognitive Learning</button>
+  <button class="nav-btn mix" onclick="show('mix')">Cross-Sectional</button>
+</nav>
+
+<main class="main">
+
+<!-- ═══════════════════════════════════════════════════
+     CLASSICAL CONDITIONING
+═══════════════════════════════════════════════════ -->
+<div id="cc" class="section active">
+  <div class="sec-hdr">
+    <h2>Classical Conditioning</h2>
+    <p>4 questions — each testing a different angle of CC beyond simple element identification.</p>
+  </div>
+  <hr class="sec-rule cc">
+
+  <!-- Q1 -->
+  <div class="q-card">
+    <div class="q-head">
+      <div class="q-num-badge cc">Q1</div>
+      <div class="q-meta">
+        <span class="q-tag cc">Classical Conditioning</span>
+        <span class="q-focus">Angle: The UCS is not what you expect — context as CS</span>
+      </div>
+    </div>
+    <div class="q-body">
+      <div class="scenario-box cc">
+        Nadia grew up watching her mother cook elaborate Sunday meals. The entire experience — the warm kitchen, the smell of spices, the sound of pots — was always followed by the whole family gathering, laughing, and enjoying the meal together. Those family meals made Nadia feel deeply happy and loved. Nadia is now an adult living alone. On Sunday evenings, even before she has spoken to anyone or eaten anything, she notices that simply being in a warm kitchen with spices on the stove makes her feel an unexpected wave of warmth and belonging — even when she is alone.
+      </div>
+      <p class="q-prompt">Using classical conditioning, explain how Nadia came to feel warmth and belonging from the smell of a kitchen alone. Identify all elements clearly. Then explain what would happen if Nadia moved to a new country where she never cooked and never experienced a warm family kitchen again — and what this would tell us about the conditioned response.</p>
+      <div class="marks-row">
+        <span class="mark-chip">Identify all CC elements</span>
+        <span class="mark-chip">Explain extinction process</span>
+        <span class="mark-chip">Explain spontaneous recovery</span>
+        <span class="trap-chip">⚠ Trap: What is the actual UCS here?</span>
+      </div>
+    </div>
+    <button class="reveal-btn cc" onclick="toggle(this)">
+      <span class="arrow">▼</span> Reveal Model Answer
+    </button>
+    <div class="model-answer">
+      <span class="ans-label cc">Model Answer — Q1</span>
+      <div class="ans-body">
+        <p>Classical conditioning explains how a previously neutral stimulus — the warm kitchen environment — acquired the power to produce feelings of warmth and belonging on its own.</p>
+
+        <div class="ans-part">
+          <span class="ans-part-label">Identifying the Elements</span>
+          <p><strong>UCS</strong> = The family gathering, connection, laughter and love that followed the Sunday meals. This is the stimulus that naturally and automatically produced the feeling of warmth and belonging — no learning required.<br>
+          <strong>UCR</strong> = Feeling of warmth and belonging (natural emotional response to genuine family connection).<br>
+          <strong>NS → CS</strong> = The warm kitchen with spices — initially just the physical environment of cooking, it became repeatedly paired with the family gathering (UCS) across many Sunday meals over years.<br>
+          <strong>CR</strong> = Feeling of warmth and belonging triggered by the kitchen environment alone, even without any family present.</p>
+        </div>
+
+        <div class="trap-note">
+          <strong>⚠ Common trap:</strong> Many students identify the kitchen or the smell as the UCS because it is vivid and present. It is not. The kitchen was originally a neutral environment. The UCS is the family connection — the event that naturally produced the emotional response. The kitchen only became powerful through association with that event. Always ask: what naturally caused the response <em>before</em> any learning?
+        </div>
+
+        <div class="ans-part">
+          <span class="ans-part-label">Extinction and Spontaneous Recovery</span>
+          <p>If Nadia moved to a new country and never experienced a warm family kitchen again, the conditioned stimulus (kitchen with spices) would be repeatedly encountered without the UCS (family gathering). Over time, through <strong>extinction</strong>, the CR — the feeling of warmth and belonging — would weaken progressively and eventually cease. The association would be suppressed.</p>
+          <p>However, extinction does not erase the underlying learning. Years later, if Nadia visited a kitchen that strongly resembled her childhood home, she might experience a sudden wave of the same feeling — <strong>spontaneous recovery</strong>. The CR re-emerges after a rest period even after apparent extinction. This would confirm that the conditioned association was suppressed, not eliminated.</p>
+        </div>
+
+        <div class="key-point">
+          <strong>Key insight:</strong> Emotional responses — happiness, belonging, nostalgia — are among the most commonly classically conditioned responses in everyday life. The UCS is always the event or experience that naturally produced the emotion, not the environmental context that was present around it.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q-card">
+    <div class="q-head">
+      <div class="q-num-badge cc">Q2</div>
+      <div class="q-meta">
+        <span class="q-tag cc">Classical Conditioning</span>
+        <span class="q-focus">Angle: Higher-order conditioning — fear spreading without original UCS</span>
+      </div>
+    </div>
+    <div class="q-body">
+      <div class="scenario-box cc">
+        As a child, Marcus was once trapped in a broken elevator for several hours. The experience was terrifying and left him with a strong fear of elevators. As an adult, Marcus works in a tall office building. He manages his elevator fear by taking the stairs every day. Over time, he has started to notice that he also feels anxious whenever he approaches the stairwell — even though nothing frightening has ever happened to him in a stairwell.
+      </div>
+      <p class="q-prompt">Explain how Marcus developed a fear of elevators using classical conditioning. Then explain, using a specific concept, how his anxiety spread to the stairwell — even though the stairwell was never associated with being trapped. Finally, explain whether this new stairwell anxiety is likely to be stronger or weaker than his elevator fear, and why.</p>
+      <div class="marks-row">
+        <span class="mark-chip">CC elements for elevator fear</span>
+        <span class="mark-chip">Name and explain spread to stairwell</span>
+        <span class="mark-chip">Strength comparison with reasoning</span>
+        <span class="trap-chip">⚠ Trap: Generalisation or higher-order conditioning?</span>
+      </div>
+    </div>
+    <button class="reveal-btn cc" onclick="toggle(this)">
+      <span class="arrow">▼</span> Reveal Model Answer
+    </button>
+    <div class="model-answer">
+      <span class="ans-label cc">Model Answer — Q2</span>
+      <div class="ans-body">
+        <div class="ans-part">
+          <span class="ans-part-label">Elevator Fear — Classical Conditioning</span>
+          <p><strong>UCS</strong> = Being trapped in the broken elevator (the threatening experience itself).<br>
+          <strong>UCR</strong> = Terror and panic (natural response to being trapped and helpless).<br>
+          <strong>NS → CS</strong> = The elevator — initially a neutral object, repeatedly associated with the terrifying experience, it became a CS.<br>
+          <strong>CR</strong> = Fear and anxiety triggered by elevators alone, even without being trapped.</p>
+        </div>
+
+        <div class="ans-part">
+          <span class="ans-part-label">Spread to Stairwell — Higher-Order Conditioning</span>
+          <p>The stairwell anxiety is best explained by <strong>higher-order conditioning</strong>, not simply stimulus generalisation. Here is the distinction:</p>
+          <p><strong>Stimulus generalisation</strong> would apply if Marcus feared other enclosed spaces that physically resemble elevators — tight rooms, small cabins. The stairwell does not particularly resemble an elevator.</p>
+          <p><strong>Higher-order conditioning</strong> explains it more precisely: the elevator (CS1) has become so strongly associated with fear that it now functions like a UCS itself. Marcus uses the stairwell every day as an alternative to the elevator — the stairwell (new NS) becomes repeatedly associated with thinking about, approaching, and avoiding the elevator (CS1). Over time the stairwell acquires its own anxiety-triggering power, becoming CS2. The original terrifying event (being trapped) never needed to be involved.</p>
+        </div>
+
+        <div class="ans-part">
+          <span class="ans-part-label">Strength Comparison</span>
+          <p>The stairwell anxiety (CS2) will be <strong>weaker</strong> than the elevator fear (CS1). Each step removed from the original UCS weakens the conditioned association. CS1 was directly paired with the genuinely terrifying UCS. CS2 was only paired with CS1 — a conditioned stimulus, not the original unconditioned event. The emotional power diminishes at each level of higher-order conditioning.</p>
+        </div>
+
+        <div class="key-point">
+          <strong>Key insight:</strong> Higher-order conditioning explains how fears and anxieties can spread to stimuli that were never present during the original traumatic event — purely through association chains. This is why phobias often expand over time into related situations, and why treatment must sometimes address multiple layers of conditioning, not just the original one.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q-card">
+    <div class="q-head">
+      <div class="q-num-badge cc">Q3</div>
+      <div class="q-meta">
+        <span class="q-tag cc">Classical Conditioning</span>
+        <span class="q-focus">Angle: Using taste aversion deliberately — and its limits</span>
+      </div>
+    </div>
+    <div class="q-body">
+      <div class="scenario-box cc">
+        A wildlife conservation team is trying to stop a troop of monkeys from raiding a local fruit farm. The monkeys have been stealing mangoes repeatedly, causing significant damage. The team considers two strategies: Strategy A — place motion-activated loud alarm speakers throughout the farm to frighten the monkeys every time they enter. Strategy B — leave out mangoes laced with a chemical that causes temporary nausea and vomiting, which the monkeys will eat before the team can stop them.
+      </div>
+      <p class="q-prompt">Both strategies use classical conditioning. Explain how each strategy works using CC principles. Then argue which strategy is likely to be more effective and more durable — and explain what makes taste aversion conditioning uniquely powerful compared to standard classical conditioning.</p>
+      <div class="marks-row">
+        <span class="mark-chip">CC mechanism for both strategies</span>
+        <span class="mark-chip">Comparative effectiveness argument</span>
+        <span class="mark-chip">Unique features of taste aversion</span>
+        <span class="trap-chip">⚠ Trap: Why does Strategy A have a durability weakness?</span>
+      </div>
+    </div>
+    <button class="reveal-btn cc" onclick="toggle(this)">
+      <span class="arrow">▼</span> Reveal Model Answer
+    </button>
+    <div class="model-answer">
+      <span class="ans-label cc">Model Answer — Q3</span>
+      <div class="ans-body">
+        <div class="ans-part">
+          <span class="ans-part-label">Strategy A — Alarm Speakers</span>
+          <p><strong>UCS</strong> = Loud frightening alarm sound (naturally produces fear/flight response).<br>
+          <strong>UCR</strong> = Fear, fleeing (natural response to sudden loud noise).<br>
+          <strong>NS → CS</strong> = The farm environment / presence of mangoes — paired with the alarm sound repeatedly.<br>
+          <strong>CR</strong> = Fear and avoidance when approaching the farm, triggered by the environment alone.</p>
+          <p>This is standard classical conditioning. The monkeys learn to associate the farm with frightening sounds and avoid it.</p>
+        </div>
+
+        <div class="ans-part">
+          <span class="ans-part-label">Strategy B — Taste Aversion</span>
+          <p><strong>UCS</strong> = The nausea-inducing chemical (naturally produces nausea and vomiting).<br>
+          <strong>UCR</strong> = Nausea and vomiting (natural biological response).<br>
+          <strong>NS → CS</strong> = The taste, smell, and sight of mangoes — paired with the chemical-induced illness.<br>
+          <strong>CR</strong> = Nausea triggered by mangoes alone, making the monkeys avoid them.</p>
+        </div>
+
+        <div class="ans-part">
+          <span class="ans-part-label">Which is More Effective and Why</span>
+          <p><strong>Strategy B (taste aversion) is likely more effective and more durable</strong> for three reasons:</p>
+          <p><strong>1. Single-trial learning.</strong> Taste aversion can be conditioned after just one pairing of the food with illness. Strategy A requires repeated pairings of the alarm with the farm to establish a strong CR. One bad mango experience may be sufficient to condition lasting avoidance.</p>
+          <p><strong>2. Long CS–US interval tolerance.</strong> Taste aversion conditioning can occur even when the sickness arrives hours after eating. This is unique to taste aversion — standard CC requires the NS and UCS to be close in time. The conservation team does not need perfect timing.</p>
+          <p><strong>3. Strategy A has a critical durability weakness.</strong> The alarm only works while the speakers are active. If monkeys eventually discover the speakers are not always on — or if they habituate to the alarm over time — the conditioned avoidance will weaken. Taste aversion, by contrast, is internal: the monkeys' own bodies deliver the consequence, making it impossible to habituate to or test for safety in the same way.</p>
+        </div>
+
+        <div class="key-point">
+          <strong>Key insight:</strong> Taste aversion is explained by <strong>biological preparedness</strong> — evolution has wired animals to rapidly associate food with illness because avoiding poisonous substances is critical for survival. This is why it violates the usual rules of CC: it learns fast, tolerates long gaps, and resists extinction. Strategy A, being standard CC, lacks all three of these advantages.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="q-card">
+    <div class="q-head">
+      <div class="q-num-badge cc">Q4</div>
+      <div class="q-meta">
+        <span class="q-tag cc">Classical Conditioning</span>
+        <span class="q-focus">Angle: Counterconditioning as treatment — and why extinction alone is insufficient</span>
+      </div>
+    </div>
+    <div class="q-body">
+      <div class="scenario-box cc">
+        Sophie has had a severe fear of injections since childhood, when a nurse administered a painful vaccination without warning. She now avoids all medical check-ups because even seeing a clinic door triggers her anxiety. Her doctor recommends two possible approaches: Approach X — gradually expose Sophie to clinics and medical settings repeatedly with no injections involved, to reduce her fear over time. Approach Y — pair clinic visits with genuinely pleasant experiences Sophie loves, such as her favourite music, a warm drink, and a calming environment, while ensuring no pain occurs.
+      </div>
+      <p class="q-prompt">(a) Identify the original classical conditioning elements that created Sophie's fear of clinics. (b) Explain how Approach X works and what risk it carries that Sophie's doctor should warn her about. (c) Explain how Approach Y works differently from Approach X — and argue why Approach Y may produce more lasting results.</p>
+      <div class="marks-row">
+        <span class="mark-chip">CC elements for fear development</span>
+        <span class="mark-chip">Approach X — extinction + spontaneous recovery warning</span>
+        <span class="mark-chip">Approach Y — counterconditioning mechanism</span>
+        <span class="trap-chip">⚠ Trap: Why is extinction not a permanent cure?</span>
+      </div>
+    </div>
+    <button class="reveal-btn cc" onclick="toggle(this)">
+      <span class="arrow">▼</span> Reveal Model Answer
+    </button>
+    <div class="model-answer">
+      <span class="ans-label cc">Model Answer — Q4</span>
+      <div class="ans-body">
+        <div class="ans-part">
+          <span class="ans-part-label">(a) Original Classical Conditioning</span>
+          <p><strong>UCS</strong> = The painful, unexpected injection (naturally produces pain and distress).<br>
+          <strong>UCR</strong> = Fear, pain response, distress.<br>
+          <strong>NS → CS</strong> = The nurse, the clinic, medical settings generally — all present during the painful experience, becoming conditioned stimuli over time.<br>
+          <strong>CR</strong> = Fear and anxiety triggered by clinic doors, medical settings, even before any injection occurs. Stimulus generalisation has also occurred — Sophie's fear spread from the specific nurse to all medical environments.</p>
+        </div>
+
+        <div class="ans-part">
+          <span class="ans-part-label">(b) Approach X — Extinction and Its Limitation</span>
+          <p>Approach X uses <strong>extinction</strong>. By repeatedly exposing Sophie to clinics and medical settings without any painful procedure (CS without UCS), the conditioned association is weakened over trials. Sophie's anxiety (CR) decreases progressively until it appears to cease.</p>
+          <p>However, the doctor should clearly warn Sophie that <strong>extinction suppresses the CR but does not erase the underlying association</strong>. If Sophie goes a long period without exposure — for example, avoiding clinics for a year after therapy — she may experience <strong>spontaneous recovery</strong>: the fear returning when she next enters a clinic, even after it appeared fully extinguished. Multiple rounds of extinction may be needed, and even then, the association remains dormant rather than deleted.</p>
+        </div>
+
+        <div class="ans-part">
+          <span class="ans-part-label">(c) Approach Y — Counterconditioning and Why It May Last Longer</span>
+          <p>Approach Y uses <strong>counterconditioning</strong>. Rather than simply removing the CR through non-reinforced exposure, it actively pairs the CS (clinic environment) with a new UCS that produces a response <strong>incompatible with fear</strong> — in this case, pleasant music, warmth, and calm produce relaxation and comfort. Since it is difficult to simultaneously feel afraid and genuinely relaxed, the fear response is replaced rather than merely suppressed.</p>
+          <p>This may produce more lasting results because the underlying association itself is being changed — not just weakened. Sophie is not simply learning "clinic = no longer dangerous." She is learning "clinic = pleasant and safe." The new positive association competes directly with and works to replace the old fearful one. This means spontaneous recovery is less likely, because the CS has been reconditioned to trigger a competing positive response, not merely left in a suppressed state.</p>
+        </div>
+
+        <div class="key-point">
+          <strong>Key insight:</strong> Extinction and counterconditioning both reduce a conditioned fear, but through different mechanisms. Extinction weakens the old association by non-reinforcement. Counterconditioning replaces the old association with a new, incompatible one. Counterconditioning addresses the underlying learning more directly and is generally considered more robust.
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end CC -->
+
+
+<!-- ═══════════════════════════════════════════════════
+     OPERANT CONDITIONING
+═══════════════════════════════════════════════════ -->
+<div id="oc" class="section">
+  <div class="sec-hdr">
+    <h2>Operant Conditioning</h2>
+    <p>5 questions — covering consequence identification, schedule design, extinction, shaping, and punishment effectiveness.</p>
+  </div>
+  <hr class="sec-rule oc">
+
+  <!-- Q5 -->
+  <div class="q-card">
+    <div class="q-head">
+      <div class="q-num-badge oc">Q5</div>
+      <div class="q-meta">
+        <span class="q-tag oc">Operant Conditioning</span>
+        <span class="q-focus">Angle: Consequence defined by effect — reward that decreases behaviour</span>
+      </div>
+    </div>
+    <div class="q-body">
+      <div class="scenario-box oc">
+        Mrs Tan wants to encourage her shy daughter Linh to speak up more in class. Every time Linh answers a question, Mrs Tan publicly announces to the whole class: "Everyone, did you hear Linh? What a wonderful answer!" and leads the class in applause. After two weeks, Linh has stopped answering questions altogether and now refuses to participate even when directly called upon.
+      </div>
+      <p class="q-prompt">(a) Is Mrs Tan's strategy functioning as reinforcement or punishment? Explain your reasoning carefully — do not rely on how the strategy appears, but on what it does to Linh's behaviour. (b) What does this tell us about what Linh actually finds rewarding or aversive? (c) What operant conditioning strategy would you recommend instead, and how should it be designed?</p>
+      <div class="marks-row">
+        <span class="mark-chip">Identify by effect not appearance</span>
+        <span class="mark-chip">Explain what Linh values</span>
+        <span class="mark-chip">Recommend alternative strategy</span>
+        <span class="trap-chip">⚠ Trap: Public praise looks like reinforcement — is it?</span>
+      </div>
+    </div>
+    <button class="reveal-btn oc" onclick="toggle(this)">
+      <span class="arrow">▼</span> Reveal Model Answer
+    </button>
+    <div class="model-answer">
+      <span class="ans-label oc">Model Answer — Q5</span>
+      <div class="ans-body">
+        <div class="ans-part">
+          <span class="ans-part-label">(a) Reinforcement or Punishment?</span>
+          <p>Despite appearing to be a reward, Mrs Tan's strategy is functioning as <strong>positive punishment</strong>. In operant conditioning, the type of consequence is always defined by its <strong>effect on behaviour</strong> — not by the intention of the person delivering it or by how it appears externally.</p>
+          <p>Since Linh's answering behaviour has <strong>decreased</strong> and eventually stopped entirely, the consequence must be functioning as punishment. Something unpleasant has been added to Linh's experience following her behaviour, which has reduced the probability of the behaviour recurring. That something is the public attention and applause — which Linh, as a shy child, finds uncomfortable and embarrassing rather than rewarding.</p>
+        </div>
+
+        <div class="ans-part">
+          <span class="ans-part-label">(b) What Linh Actually Values</span>
+          <p>This reveals that Linh does not value public recognition or group attention — in fact she finds it aversive. As a shy child, being put in the spotlight in front of her peers is distressing, not pleasurable. The applause that Mrs Tan intended as a reward functioned as an aversive stimulus because it drew attention to Linh in a way she finds deeply uncomfortable.</p>
+          <p>This illustrates a critical principle: <strong>a reinforcer only reinforces if it is valued by the specific individual</strong>. Mrs Tan made the assumption that public praise is universally rewarding — it is not.</p>
+        </div>
+
+        <div class="ans-part">
+          <span class="ans-part-label">(c) Recommended Strategy</span>
+          <p>Mrs Tan should use <strong>positive reinforcement</strong> — but with a reinforcer that Linh actually values. Before implementing any strategy, Mrs Tan should identify what Linh finds genuinely rewarding. For a shy child, this is likely to be private, quiet recognition rather than public attention.</p>
+          <p>For example: a quiet word after class ("Linh, that was a really thoughtful answer today"), a written note of praise, or extra responsibility given privately. The reinforcer adds something pleasant <em>to Linh specifically</em>, making her more likely to participate again. Over time, as Linh becomes more comfortable, Mrs Tan can gradually introduce slightly more visible acknowledgement — using shaping principles to approach the final desired behaviour incrementally.</p>
+        </div>
+
+        <div class="key-point">
+          <strong>Key insight:</strong> Always identify the type of consequence by its effect on behaviour first. Then determine whether something was added or removed. Public praise can be punishment. Ignoring someone can be reinforcement. The behaviour's trajectory — up or down — is the only reliable guide.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="q-card">
+    <div class="q-head">
+      <div class="q-num-badge oc">Q6</div>
+      <div class="q-meta">
+        <span class="q-tag oc">Operant Conditioning</span>
+        <span class="q-focus">Angle: Same behaviour — different schedules produce very different outcomes</span>
+      </div>
+    </div>
+    <div class="q-body">
+      <div class="scenario-box oc">
+        Three employees at the same company all check their work email obsessively throughout the day — sometimes 40–50 times. When asked why, each gives a different reason. <strong>Employee A</strong> says: "My boss sends my performance rating every Friday at 5pm — I want to be ready." <strong>Employee B</strong> says: "My boss sometimes sends me surprise praise emails — I never know when they'll arrive." <strong>Employee C</strong> says: "I get a small digital badge on my profile every time I respond within 10 minutes to a client email."
+      </div>
+      <p class="q-prompt">For each employee, identify the reinforcement schedule driving their email-checking behaviour and explain your reasoning. Then predict: if the company changes its email system and the reinforcements stop entirely, which employee's email-checking behaviour will be most resistant to extinction and which will extinguish fastest? Explain why, using what you know about schedules and extinction resistance.</p>
+      <div class="marks-row">
+        <span class="mark-chip">Identify schedule for each employee</span>
+        <span class="mark-chip">Predict extinction resistance with reasoning</span>
+        <span class="trap-chip">⚠ Trap: Employee A — is this FI or something else?</span>
+      </div>
+    </div>
+    <button class="reveal-btn oc" onclick="toggle(this)">
+      <span class="arrow">▼</span> Reveal Model Answer
+    </button>
+    <div class="model-answer">
+      <span class="ans-label oc">Model Answer — Q6</span>
+      <div class="ans-body">
+        <div class="ans-part">
+          <span class="ans-part-label">Schedule Identification</span>
+          <p><strong>Employee A — Fixed Interval (FI).</strong> The performance rating arrives at a predictable, fixed time — every Friday at 5pm — regardless of how many emails were checked during the week. The reward is time-based and predictable. This explains the obsessive checking: under FI, behaviour typically surges near the end of the interval as the reward approaches. Employee A likely checks most frantically on Friday afternoons.</p>
+          <p><strong>Employee B — Variable Interval (VI).</strong> The praise emails arrive at unpredictable times — sometimes twice in a day, sometimes not for weeks. The reward is time-based but variable and completely unpredictable. This produces steady, consistent checking throughout the day because the employee cannot know when the next reward will arrive — they must always be ready.</p>
+          <p><strong>Employee C — Fixed Ratio (FR).</strong> The badge is delivered after every 10-minute response — a set number of responses (one response per email) within a fixed time window. The reward is tied to a specific behavioural output, not time. This drives high-frequency checking because faster checking enables faster responding and therefore faster badge accumulation.</p>
+        </div>
+
+        <div class="ans-part">
+          <span class="ans-part-label">Extinction Resistance</span>
+          <p><strong>Most resistant to extinction: Employee B (Variable Interval).</strong> Variable schedules produce the greatest resistance to extinction because the organism is accustomed to unpredictable rewards — the absence of a reward does not immediately signal that the contingency has changed. Employee B will continue checking for a long time after rewards stop, because gaps between rewards have always been part of the experience.</p>
+          <p><strong>Fastest extinction: Employee A (Fixed Interval).</strong> Fixed interval schedules produce the lowest extinction resistance among partial schedules. Because the reward has always arrived at a predictable time, its absence sends a clear and immediate signal that the contingency is no longer operating. Employee A will recognise relatively quickly that no Friday rating is coming and will reduce checking behaviour faster than the others.</p>
+          <p>Employee C (Fixed Ratio) falls between the two — faster extinction than VI but slower than FI, because the ratio requirement makes the lack of badge feedback more noticeable after a clear number of responses with no result.</p>
+        </div>
+
+        <div class="key-point">
+          <strong>Key insight:</strong> Variable schedules resist extinction because unpredictability is built into the organism's expectation. The organism cannot distinguish "rewards have stopped" from "this is just a long gap." Fixed schedules make the absence of reward obvious and recognisable — extinction therefore proceeds faster.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="q-card">
+    <div class="q-head">
+      <div class="q-num-badge oc">Q7</div>
+      <div class="q-meta">
+        <span class="q-tag oc">Operant Conditioning</span>
+        <span class="q-focus">Angle: Extinction vs punishment — misidentified by most students</span>
+      </div>
+    </div>
+    <div class="q-body">
+      <div class="scenario-box oc">
+        Four-year-old Kai throws a tantrum in the supermarket whenever his mother refuses to buy him sweets. His mother has tried two approaches at different times. In Month 1, she immediately gave in and bought the sweets to stop the tantrum. In Month 2, on advice from a parenting class, she began completely ignoring the tantrums — no eye contact, no response, nothing — every single time they occurred. By the end of Month 2, the tantrums had reduced significantly.
+      </div>
+      <p class="q-prompt">(a) Using operant conditioning, explain what was happening in Month 1 — what was being reinforced, and what type of reinforcement was occurring for both Kai and his mother? (b) Explain what technique the mother used in Month 2 and why it worked. (c) The mother notices that on the first day of Month 3, Kai's tantrum was actually worse than usual before it faded. What concept explains this, and what should she do?</p>
+      <div class="marks-row">
+        <span class="mark-chip">Two-sided reinforcement analysis</span>
+        <span class="mark-chip">Operant extinction mechanism</span>
+        <span class="mark-chip">Extinction burst — identification and response</span>
+        <span class="trap-chip">⚠ Trap: What is reinforcing the mother's behaviour in Month 1?</span>
+      </div>
+    </div>
+    <button class="reveal-btn oc" onclick="toggle(this)">
+      <span class="arrow">▼</span> Reveal Model Answer
+    </button>
+    <div class="model-answer">
+      <span class="ans-label oc">Model Answer — Q7</span>
+      <div class="ans-body">
+        <div class="ans-part">
+          <span class="ans-part-label">(a) Month 1 — Mutual Reinforcement</span>
+          <p>In Month 1, both Kai and his mother were being reinforced simultaneously — which is why the pattern was so difficult to break.</p>
+          <p><strong>Kai's reinforcement:</strong> Kai's tantrum behaviour was maintained by <strong>positive reinforcement</strong> — the tantrum (behaviour) led to receiving sweets (pleasant stimulus added), increasing the probability of tantrums in future supermarket visits.</p>
+          <p><strong>Mother's reinforcement:</strong> The mother's giving-in behaviour was maintained by <strong>negative reinforcement</strong> — buying the sweets (behaviour) removed the unpleasant experience of the tantrum (aversive stimulus removed), increasing the probability of giving in again in future. She was being trained to give in just as reliably as Kai was being trained to tantrum.</p>
+        </div>
+
+        <div class="ans-part">
+          <span class="ans-part-label">(b) Month 2 — Operant Extinction</span>
+          <p>The mother used <strong>operant extinction</strong> — systematically withholding the reinforcer that had been maintaining the tantrum behaviour. By completely ignoring the tantrums (giving no attention, no sweets, no response), she removed the consequence that had been sustaining the behaviour. With no reinforcement forthcoming, the tantrum behaviour became progressively less frequent and eventually reduced significantly.</p>
+          <p>This is distinct from punishment: no aversive stimulus was added and no pleasant stimulus was removed. The behaviour simply produced nothing — and a behaviour that produces nothing eventually stops.</p>
+        </div>
+
+        <div class="ans-part">
+          <span class="ans-part-label">(c) Extinction Burst</span>
+          <p>The temporarily worse tantrum at the start of Month 3 is an <strong>extinction burst</strong>. When a previously reinforced behaviour suddenly stops producing a reward, the organism often escalates the behaviour briefly — trying harder, louder, or longer — in an attempt to obtain the reinforcement that has always worked before.</p>
+          <p>This is a completely normal and expected part of the extinction process and actually signals that the extinction is working. The mother should <strong>continue ignoring</strong> the escalated tantrum consistently. If she gives in during the extinction burst — even once — she will have partially reinforced the more intense tantrum, making it harder to extinguish going forward and potentially teaching Kai that escalating further is the key to success.</p>
+        </div>
+
+        <div class="key-point">
+          <strong>Key insight:</strong> Extinction bursts are a trap for parents and educators. The behaviour gets worse before it gets better, and the temptation to give in at exactly that moment is highest. Giving in during a burst is one of the most counterproductive things possible — it reinforces the most extreme version of the behaviour.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="q-card">
+    <div class="q-head">
+      <div class="q-num-badge oc">Q8</div>
+      <div class="q-meta">
+        <span class="q-tag oc">Operant Conditioning</span>
+        <span class="q-focus">Angle: Shaping applied to human skill development — not animal training</span>
+      </div>
+    </div>
+    <div class="q-body">
+      <div class="scenario-box oc">
+        Mr Hassan is a piano teacher working with a 12-year-old student, Priya, who is a complete beginner. His goal is for Priya to eventually perform a full piece from memory in a school concert. On her first lesson, Priya can barely identify the keys on the keyboard. Mr Hassan has twelve weeks before the concert.
+      </div>
+      <p class="q-prompt">Using the principle of shaping, design a step-by-step progression that Mr Hassan could use to build Priya's performance ability over twelve weeks. Explain the key principle behind each transition between steps. Then explain why Mr Hassan cannot simply play the full piece for Priya repeatedly and expect her to replicate it — and what learning concept this limitation relates to.</p>
+      <div class="marks-row">
+        <span class="mark-chip">Shaping — successive approximations with reasoning</span>
+        <span class="mark-chip">Why full-piece modelling alone is insufficient</span>
+        <span class="mark-chip">Link to reproduction step in observational learning</span>
+        <span class="trap-chip">⚠ Trap: What limits observational learning here?</span>
+      </div>
+    </div>
+    <button class="reveal-btn oc" onclick="toggle(this)">
+      <span class="arrow">▼</span> Reveal Model Answer
+    </button>
+    <div class="model-answer">
+      <span class="ans-label oc">Model Answer — Q8</span>
+      <div class="ans-body">
+        <div class="ans-part">
+          <span class="ans-part-label">Shaping Progression</span>
+          <p>Shaping works by reinforcing <strong>successive approximations</strong> — each step must be achievable from the current level, and the standard is raised only when the current behaviour is reliably established.</p>
+          <ul>
+            <li><strong>Weeks 1–2:</strong> Reinforce correct key identification and hand positioning. Priya is rewarded for finding and pressing individual correct notes. Standard: any note played correctly with proper finger placement.</li>
+            <li><strong>Weeks 3–4:</strong> Raise the standard to short sequences — 3 to 5 note patterns with both hands separately. Reinforce accuracy and smoothness. Only move forward when sequences are consistent.</li>
+            <li><strong>Weeks 5–6:</strong> Introduce hands-together coordination on simple bars of the piece. Reinforce any clean combined passage, however slow.</li>
+            <li><strong>Weeks 7–8:</strong> Connect bars into short phrases. Reinforce fluency and memory of those phrases.</li>
+            <li><strong>Weeks 9–10:</strong> Link phrases into full sections. Reinforce the ability to recover gracefully from errors rather than stopping.</li>
+            <li><strong>Weeks 11–12:</strong> Full piece from memory at performance tempo. Reinforce confidence, expression, and recovery — not just technical accuracy.</li>
+          </ul>
+          <p>At each transition, the key principle is that reinforcement is withheld from previous approximations and now only given for the closer approximation. This is what drives progress — the organism must advance to obtain the reward.</p>
+        </div>
+
+        <div class="ans-part">
+          <span class="ans-part-label">Why Full-Piece Modelling Alone Is Insufficient</span>
+          <p>Mr Hassan cannot simply perform the full piece for Priya and expect her to replicate it, even with many repetitions. This limitation relates to the <strong>reproduction step</strong> in Bandura's observational learning framework.</p>
+          <p>Observational learning requires that the observer has both the <strong>cognitive representation</strong> of the behaviour (which Priya can develop by watching) and the <strong>physical and technical capability</strong> to reproduce it. Priya may watch the performance and encode a mental representation — she may understand what the piece sounds like, what the hand movements look like, and even what fingers are used. But her current motor skill level, finger dexterity, and coordination are not yet developed enough to physically reproduce what she has observed.</p>
+          <p>Modelling the full piece is still valuable — it gives Priya a goal, develops her musical ear, and builds the cognitive map of the piece. But it cannot substitute for the progressive skill-building that shaping provides. Both processes work best together: observational learning builds the mental model; shaping builds the physical capability.</p>
+        </div>
+
+        <div class="key-point">
+          <strong>Key insight:</strong> Shaping and observational learning are complementary, not competing. Watching a model gives the learner the cognitive representation. Shaping builds the physical ability to reproduce it. Neither alone is sufficient for complex skill acquisition.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="q-card">
+    <div class="q-head">
+      <div class="q-num-badge oc">Q9</div>
+      <div class="q-meta">
+        <span class="q-tag oc">Operant Conditioning</span>
+        <span class="q-focus">Angle: Designing a lasting behaviour strategy — continuous to partial transition</span>
+      </div>
+    </div>
+    <div class="q-body">
+      <div class="scenario-box oc">
+        The management of a call centre wants to improve the quality of customer service calls. Currently, agents receive no feedback unless a complaint is filed. Management is considering two plans. <strong>Plan A:</strong> A supervisor listens to every single call and immediately tells each agent after every call whether it was good or poor. <strong>Plan B:</strong> A supervisor provides feedback after every call for the first month, then gradually shifts to providing feedback unpredictably — sometimes after one call, sometimes after several, with no pattern the agents can predict.
+      </div>
+      <p class="q-prompt">Using operant conditioning principles, evaluate both plans. Which plan is likely to produce better long-term performance and why? In your answer, explain what happens to behaviour under each plan when the supervisor is absent or feedback temporarily stops — and what this means practically for the call centre.</p>
+      <div class="marks-row">
+        <span class="mark-chip">Continuous reinforcement analysis</span>
+        <span class="mark-chip">Continuous → partial schedule transition</span>
+        <span class="mark-chip">Extinction vulnerability comparison</span>
+        <span class="trap-chip">⚠ Trap: Plan A seems better — is it?</span>
+      </div>
+    </div>
+    <button class="reveal-btn oc" onclick="toggle(this)">
+      <span class="arrow">▼</span> Reveal Model Answer
+    </button>
+    <div class="model-answer">
+      <span class="ans-label oc">Model Answer — Q9</span>
+      <div class="ans-body">
+        <div class="ans-part">
+          <span class="ans-part-label">Plan A — Continuous Reinforcement</span>
+          <p>Plan A uses <strong>continuous reinforcement</strong> — every correct behaviour (good call) is reinforced with immediate feedback. This is highly effective for establishing the behaviour quickly and clearly communicating what standard is expected. Agents learn fast what good service looks like.</p>
+          <p>However, continuously reinforced behaviour is highly <strong>vulnerable to extinction</strong>. Because agents have learned that good performance should always produce feedback, any interruption — supervisor absent, busy period, sick day — sends a clear signal that the contingency has changed. Performance quality is likely to drop noticeably whenever feedback is not consistently delivered. The agents have essentially been trained to perform well only when they know they are being monitored.</p>
+        </div>
+
+        <div class="ans-part">
+          <span class="ans-part-label">Plan B — Continuous Then Partial Reinforcement</span>
+          <p>Plan B is strategically superior. It begins with continuous reinforcement in Month 1 — correctly establishing the behaviour and communicating the standard clearly. It then transitions to a <strong>variable ratio schedule</strong> — feedback delivered unpredictably after varying numbers of calls.</p>
+          <p>This transition is the key. Variable ratio schedules produce <strong>the highest response rates</strong> and <strong>greatest resistance to extinction</strong> of all schedules. Because agents can never predict when feedback will arrive, they must maintain high performance consistently — they cannot identify a "safe" period to coast. When the supervisor is absent or feedback pauses, agents cannot distinguish this from a normal gap in a variable schedule — so they continue performing well.</p>
+        </div>
+
+        <div class="ans-part">
+          <span class="ans-part-label">Practical Implication</span>
+          <p>Plan A creates performance that is dependent on constant supervision — sustainable only while the supervisor is present and consistent. The moment supervision lapses, performance lapses with it. Plan B builds performance that is internalised and self-sustaining — the unpredictability of feedback means agents maintain quality not because they know they are being watched, but because they have learned that quality performance is the only reliable strategy. This is the difference between compliance and genuine behavioural change.</p>
+        </div>
+
+        <div class="key-point">
+          <strong>Key insight:</strong> The ideal behaviour change programme starts with continuous reinforcement to establish the habit, then transitions to variable partial reinforcement to make it durable. This mirrors how lasting habits are built in everyday life — initially requiring consistent reinforcement, eventually sustained by occasional and unpredictable rewards.
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end OC -->
+
+
+<!-- ═══════════════════════════════════════════════════
+     COGNITIVE LEARNING
+═══════════════════════════════════════════════════ -->
+<div id="cog" class="section">
+  <div class="sec-hdr">
+    <h2>Cognitive Learning</h2>
+    <p>4 questions — testing latent learning, learning vs performance, insight, and observational learning from non-standard angles.</p>
+  </div>
+  <hr class="sec-rule cog">
+
+  <!-- Q10 -->
+  <div class="q-card">
+    <div class="q-head">
+      <div class="q-num-badge cog">Q10</div>
+      <div class="q-meta">
+        <span class="q-tag cog">Cognitive Learning</span>
+        <span class="q-focus">Angle: Latent learning revealed by threat removal, not reward</span>
+      </div>
+    </div>
+    <div class="q-body">
+      <div class="scenario-box cog">
+        For three years, an employee named Darius has worked quietly in a busy accounting firm. He has never been given any training, feedback, or performance reviews. He simply observes his colleagues, attends meetings, and reads documents that cross his desk. His manager has never tested or rewarded him for anything. When a senior accountant unexpectedly resigns, the manager nervously assigns Darius to cover the role for a week — expecting problems. Darius handles the work competently with almost no guidance. Later, Darius admits he never thought he had learned anything — he just absorbed it over time.
+      </div>
+      <p class="q-prompt">(a) What concept best explains Darius's unexpected competence? What was he doing during those three years even though no one was testing or rewarding him? (b) In this scenario, it was not a reward that revealed Darius's learning — it was necessity. What does this tell us about the conditions under which latent learning is revealed? (c) What would a strict behaviourist say about Darius's learning, and why would they be wrong?</p>
+      <div class="marks-row">
+        <span class="mark-chip">Latent learning + cognitive map identification</span>
+        <span class="mark-chip">Extended conditions for revealing latent learning</span>
+        <span class="mark-chip">Critique of behaviourism</span>
+      </div>
+    </div>
+    <button class="reveal-btn cog" onclick="toggle(this)">
+      <span class="arrow">▼</span> Reveal Model Answer
+    </button>
+    <div class="model-answer">
+      <span class="ans-label cog">Model Answer — Q10</span>
+      <div class="ans-body">
+        <div class="ans-part">
+          <span class="ans-part-label">(a) Latent Learning and Cognitive Maps</span>
+          <p>Darius's competence is explained by <strong>latent learning</strong> (Tolman) — learning that occurs without reinforcement and without any hint that it has taken place, remaining hidden until conditions arise that make expression worthwhile or necessary.</p>
+          <p>During his three years, Darius was not passive. Through observing colleagues, attending meetings, and reading documents, he was actively building <strong>cognitive maps</strong> — internal mental representations of how the accounting work operates, what processes follow what, how decisions are made, and how problems are handled. This knowledge was accumulated silently without any external reinforcement or deliberate intention to learn. It was stored internally, invisible to anyone including Darius himself.</p>
+        </div>
+
+        <div class="ans-part">
+          <span class="ans-part-label">(b) Conditions for Revealing Latent Learning</span>
+          <p>Tolman's original formulation described latent learning as revealed when reinforcement is introduced. Darius's case extends this: his learning was revealed not by a reward but by <strong>necessity</strong> — the situation demanded that he use his knowledge, and that demand was sufficient to unlock expression.</p>
+          <p>This tells us that latent learning is revealed by any <strong>shift in conditions that makes expression of knowledge worthwhile, safe, or necessary</strong>. These conditions include: a reward being introduced, a threat being removed, an opportunity arising, or — as here — a necessity that makes using the knowledge unavoidable. What matters is not the specific type of condition but that the existing internal knowledge finally has a reason to surface.</p>
+        </div>
+
+        <div class="ans-part">
+          <span class="ans-part-label">(c) Behaviourist Critique</span>
+          <p>A strict behaviourist following Skinner's framework would argue that Darius could not have learned anything meaningful during those three years because he received no reinforcement for any work-related behaviour. Learning, in the behaviourist model, requires consequences — behaviour must be reinforced or punished for learning to be said to have occurred. Since Darius was never tested, never rewarded, and never received feedback, the behaviourist would predict he should have learned nothing.</p>
+          <p>They would be wrong because Darius's performance demonstrates that learning clearly occurred. His competence was real, effective, and immediately applicable — all developed without a single reinforcer. This is precisely what Tolman's research showed: the internal cognitive system can learn through exploration and observation entirely independently of external consequences. Behaviourism's insistence on observable behaviour and reinforcement as the definition of learning fails to account for the quiet, continuous learning that happens inside the mind every day.</p>
+        </div>
+
+        <div class="key-point">
+          <strong>Key insight:</strong> Most of what we know, we have never been formally rewarded for learning. Navigation, social norms, language nuances, professional knowledge — much of it accumulates as latent learning through observation and experience, waiting to be used when the situation calls for it.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q11 -->
+  <div class="q-card">
+    <div class="q-head">
+      <div class="q-num-badge cog">Q11</div>
+      <div class="q-meta">
+        <span class="q-tag cog">Cognitive Learning</span>
+        <span class="q-focus">Angle: Learning vs performance in a real adult social context</span>
+      </div>
+    </div>
+    <div class="q-body">
+      <div class="scenario-box cog">
+        Farah grew up in a home where her parents frequently argued aggressively — shouting, name-calling, throwing objects. As a child she watched these scenes repeatedly. In her adult relationships, Farah is known by her friends as unusually calm and patient — she consistently handles conflicts with measured conversation and never raises her voice. However, her close friend notices that during one particularly stressful argument with her partner, Farah briefly resorted to shouting and name-calling in a way that was very unlike her. Farah was deeply distressed afterwards and said: "I don't know where that came from."
+      </div>
+      <p class="q-prompt">(a) What concept explains how Farah came to know aggressive conflict behaviour so well despite never practising it? (b) What explains why she consistently does not perform this behaviour in normal circumstances — and what does this tell us about the relationship between learning and performance? (c) What does the moment of breakdown during high stress reveal — and what does this suggest about the permanence of inhibited performance?</p>
+      <div class="marks-row">
+        <span class="mark-chip">Observational learning of aggression</span>
+        <span class="mark-chip">Inhibited performance — motivation and consequences</span>
+        <span class="mark-chip">Suppression is conditional not permanent</span>
+        <span class="trap-chip">⚠ Trap: Farah seems not to have learned aggression — but has she?</span>
+      </div>
+    </div>
+    <button class="reveal-btn cog" onclick="toggle(this)">
+      <span class="arrow">▼</span> Reveal Model Answer
+    </button>
+    <div class="model-answer">
+      <span class="ans-label cog">Model Answer — Q11</span>
+      <div class="ans-body">
+        <div class="ans-part">
+          <span class="ans-part-label">(a) How Farah Learned Aggression</span>
+          <p>Farah learned aggressive conflict behaviour through <strong>observational learning</strong> (Bandura). By watching her parents argue repeatedly throughout childhood, she paid attention to their behaviour (Attention), stored detailed representations of their patterns — shouting, name-calling, object-throwing — in memory (Retention), and developed the cognitive and physical capability to reproduce those behaviours (Reproduction). All four of Bandura's internal steps were operating, except the fourth: <strong>Motivation</strong> to perform the behaviour was consistently absent in normal circumstances.</p>
+        </div>
+
+        <div class="ans-part">
+          <span class="ans-part-label">(b) Why She Does Not Perform — Learning vs. Performance</span>
+          <p>Farah does not perform the behaviour because she is <strong>not motivated to</strong> — and the expected consequences of aggressive behaviour are aversive to her. Having witnessed the damage aggressive conflict caused in her family, Farah has developed strong internal values against it. She has also likely experienced or observed that calm communication produces better outcomes.</p>
+          <p>This illustrates the critical distinction between <strong>learning and performance</strong>: learning is the internal acquisition of knowledge or skill; performance is the external expression of that knowledge. Farah fully learned aggressive behaviour patterns through years of observation. She consistently chooses not to perform them because her motivation, values, and anticipated consequences all work against expression. Not performing does not mean not knowing.</p>
+        </div>
+
+        <div class="ans-part">
+          <span class="ans-part-label">(c) The Breakdown Under Stress — Inhibited Performance</span>
+          <p>The moment of breakdown reveals that Farah's non-aggressive behaviour is an example of <strong>inhibited performance</strong> — the learning of aggression was fully present but suppressed by motivation, values, and anticipated consequences. Under extreme stress, however, those suppressing conditions were temporarily overwhelmed. The stored patterns of aggressive behaviour — encoded through years of childhood observation — surfaced when Farah's usual self-regulation resources were depleted.</p>
+          <p>This confirms that <strong>the suppression of learned behaviour is conditional, not permanent</strong>. The knowledge never went away. It was always available. Under normal conditions the inhibiting factors — values, anticipated consequences, conscious choice — kept it dormant. Under sufficiently extreme conditions, the stored learning found expression despite those inhibitors.</p>
+          <p>This has important real-world implications: people who grew up in aggressive environments carry that learning with them regardless of how different their adult behaviour appears. The risk of expression rises under stress, fatigue, or emotional overwhelm — precisely when inhibitory resources are lowest.</p>
+        </div>
+
+        <div class="key-point">
+          <strong>Key insight:</strong> The Bobo doll experiment plays out in real human lives. Children who observe aggression learn it — fully — regardless of whether they ever replicate it. Whether they perform it depends on conditions that can change. This is one reason why the environment children grow up in matters so much beyond what they consciously do or say.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q12 -->
+  <div class="q-card">
+    <div class="q-head">
+      <div class="q-num-badge cog">Q12</div>
+      <div class="q-meta">
+        <span class="q-tag cog">Cognitive Learning</span>
+        <span class="q-focus">Angle: Distinguishing insight from trial-and-error and latent learning</span>
+      </div>
+    </div>
+    <div class="q-body">
+      <div class="scenario-box cog">
+        Three students are stuck on the same difficult mathematics problem they have never seen before. <strong>Student A</strong> tries one method, fails, tries another, fails again, adjusts, and after many attempts finally solves it. <strong>Student B</strong> stares at the problem quietly for several minutes without writing anything, then suddenly picks up the pen and solves it correctly in one attempt with no crossings-out. <strong>Student C</strong> looks at the problem, recognises it resembles a type of problem covered in a textbook chapter she read six months ago, and uses that approach to solve it efficiently.
+      </div>
+      <p class="q-prompt">For each student, identify the type of learning or problem-solving process that best describes their approach. Explain clearly what distinguishes each from the others — particularly what makes Student B's approach different from both Student A and Student C. What is the internal cognitive event that Student B experienced?</p>
+      <div class="marks-row">
+        <span class="mark-chip">Trial-and-error vs insight vs latent learning</span>
+        <span class="mark-chip">Distinguishing features of insight</span>
+        <span class="mark-chip">Internal cognitive mechanism of insight</span>
+        <span class="trap-chip">⚠ Trap: Student C looks like insight — is it?</span>
+      </div>
+    </div>
+    <button class="reveal-btn cog" onclick="toggle(this)">
+      <span class="arrow">▼</span> Reveal Model Answer
+    </button>
+    <div class="model-answer">
+      <span class="ans-label cog">Model Answer — Q12</span>
+      <div class="ans-body">
+        <div class="ans-part">
+          <span class="ans-part-label">Student A — Trial-and-Error (Operant Conditioning)</span>
+          <p>Student A demonstrates <strong>trial-and-error learning</strong> — the approach described by Thorndike's Law of Effect. Each failed attempt is a behaviour that produces no reinforcement (no solution), so it is abandoned. Each adjusted attempt moves incrementally closer to the correct method. Learning occurs gradually through the consequences of repeated attempts. There is no sudden reorganisation — progress is cumulative and visible in the crossing-outs and adjustments.</p>
+        </div>
+
+        <div class="ans-part">
+          <span class="ans-part-label">Student C — Latent Learning + Cognitive Map</span>
+          <p>Student C is using <strong>latent learning</strong>. Six months ago she read a textbook chapter — receiving no reinforcement for doing so, and with no immediate test or application. That reading built a <strong>cognitive map</strong> — a stored mental representation of a problem-solving method. Now, encountering a situation where that knowledge is useful, she retrieves and applies it. The learning was hidden for six months until the right conditions (a matching problem) revealed it. The solution comes efficiently but not suddenly — she recognises and applies an existing method rather than mentally reorganising anything new.</p>
+        </div>
+
+        <div class="ans-part">
+          <span class="ans-part-label">Student B — Insight Learning</span>
+          <p>Student B demonstrates <strong>insight learning</strong> (Köhler) — the sudden perception of new relationships or a new way of understanding a problem. The key features that distinguish it: the long silent period of mental reflection without visible action, followed by a sudden, confident, error-free solution. No trial-and-error occurred. No previously stored method was retrieved and applied.</p>
+          <p>The internal cognitive event is a <strong>perceptual reorganisation</strong> — Student B was mentally restructuring the components of the problem until suddenly the relationships between them resolved into a coherent solution. The "aha" moment is not simply remembering something; it is the experience of the mind finding a new structural configuration that makes the solution suddenly obvious. Once the insight occurs, the solution is immediate and certain — hence the single attempt with no crossings-out.</p>
+        </div>
+
+        <div class="trap-note">
+          <strong>⚠ Why Student C is not insight:</strong> Student C's solution feels efficient and effortless, which might suggest insight. But insight involves solving a problem through <em>new mental reorganisation</em> — the solution was not previously known or stored. Student C is applying something she already learned. That is retrieval of a cognitive map, not insight. Insight produces knowledge that did not exist before; latent learning retrieves knowledge that was already stored.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q13 -->
+  <div class="q-card">
+    <div class="q-head">
+      <div class="q-num-badge cog">Q13</div>
+      <div class="q-meta">
+        <span class="q-tag cog">Cognitive Learning</span>
+        <span class="q-focus">Angle: When observational learning fails — which of the four steps broke down?</span>
+      </div>
+    </div>
+    <div class="q-body">
+      <div class="scenario-box cog">
+        A company runs a three-hour training session where a trainer demonstrates complex software workflows on a projector screen. Four employees attend. <strong>Employee 1</strong> spends the session replying to emails on her phone and barely watches. <strong>Employee 2</strong> watches everything attentively but is given no opportunity to practise or use the software afterwards for six months. <strong>Employee 3</strong> watches attentively and remembers everything, but the software requires precise hand-eye coordination that Employee 3's recent hand injury makes physically impossible. <strong>Employee 4</strong> watches everything and remembers it, but feels the software is unnecessarily complicated and sees no benefit in learning it — he believes pen-and-paper methods are superior.
+      </div>
+      <p class="q-prompt">All four employees experienced the same training session but none will be able to perform the software tasks effectively. For each employee, identify which specific step in Bandura's four-step model of observational learning failed — and explain precisely why that step's failure prevents the learning from being expressed as performance.</p>
+      <div class="marks-row">
+        <span class="mark-chip">Four steps — one failure per employee</span>
+        <span class="mark-chip">Precise explanation of each failure</span>
+        <span class="trap-chip">⚠ Trap: Employee 2 — did learning occur? What is the real failure?</span>
+      </div>
+    </div>
+    <button class="reveal-btn cog" onclick="toggle(this)">
+      <span class="arrow">▼</span> Reveal Model Answer
+    </button>
+    <div class="model-answer">
+      <span class="ans-label cog">Model Answer — Q13</span>
+      <div class="ans-body">
+        <div class="ans-part">
+          <span class="ans-part-label">Employee 1 — Attention Failed</span>
+          <p>Employee 1 failed at the <strong>Attention</strong> step. She spent the session on her phone and barely watched the trainer. Without attending to the model's behaviour, no information was encoded at all. Bandura's model requires that the observer pay close attention to the behaviour being modelled — without this first step, none of the subsequent steps can occur. She has no cognitive representation of the software workflows because she never processed what was being demonstrated.</p>
+        </div>
+
+        <div class="ans-part">
+          <span class="ans-part-label">Employee 2 — Retention Failed</span>
+          <p>Employee 2 watched attentively — so Attention succeeded. However, six months passed with no opportunity to practise or use the software. The <strong>Retention</strong> step was initially successful (she encoded the information during the session) but the cognitive representation decayed over time without rehearsal or reinforcement through use. When she eventually needs to use the software, the stored mental representation has faded to the point where it can no longer support accurate performance. Retention requires not just initial encoding but maintenance of that representation over time.</p>
+        </div>
+
+        <div class="ans-part">
+          <span class="ans-part-label">Employee 3 — Reproduction Failed</span>
+          <p>Employee 3 attended and retained the information fully — Attention and Retention both succeeded. The failure is at the <strong>Reproduction</strong> step. Bandura's model requires that the observer has the <strong>physical capability</strong> to reproduce the observed behaviour. Employee 3's hand injury makes the precise motor coordination required by the software physically impossible, regardless of how clearly the method is understood mentally. The knowledge is present but the body cannot execute it.</p>
+        </div>
+
+        <div class="ans-part">
+          <span class="ans-part-label">Employee 4 — Motivation Failed</span>
+          <p>Employee 4 attended fully, retained the information, and is physically capable of using the software. The failure is at the <strong>Motivation</strong> step. Bandura's model requires that the observer be motivated to perform the behaviour. Employee 4 believes the software is unnecessary and inferior to his existing methods. He has no motivation — intrinsic or extrinsic — to apply what he learned. The knowledge is fully present but will not be expressed as performance because there is no reason, in Employee 4's view, to perform it.</p>
+        </div>
+
+        <div class="key-point">
+          <strong>Key insight:</strong> Observational learning can fail at any of the four steps independently. This is why effective training design must address all four: ensure attention (engaging delivery), support retention (practice and follow-up), accommodate physical capability (accessible tools and support), and cultivate motivation (meaningful relevance and incentive). Failing any one step prevents performance regardless of the quality of the others.
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end COG -->
+
+
+<!-- ═══════════════════════════════════════════════════
+     CROSS-SECTIONAL
+═══════════════════════════════════════════════════ -->
+<div id="mix" class="section">
+  <div class="sec-hdr">
+    <h2>Cross-Sectional Questions</h2>
+    <p>3 questions — each requires drawing on multiple learning concepts simultaneously, as real exam application questions typically do.</p>
+  </div>
+  <hr class="sec-rule mix">
+
+  <!-- Q14 -->
+  <div class="q-card">
+    <div class="q-head">
+      <div class="q-num-badge mix">Q14</div>
+      <div class="q-meta">
+        <span class="q-tag mix">Classical + Operant Conditioning</span>
+        <span class="q-focus">Angle: Both operating simultaneously — untangle each thread</span>
+      </div>
+    </div>
+    <div class="q-body">
+      <div class="scenario-box mix">
+        Every evening, when Mr Lee gets home from work, his dog Bruno rushes to the door barking excitedly. Mr Lee always greets Bruno warmly, plays with him for ten minutes, and gives him a treat. Over time, Mr Lee notices that Bruno now begins barking and pacing excitedly whenever he hears the specific sound of Mr Lee's car engine in the driveway — even before the door opens. Mr Lee also notices that since he started giving Bruno the treat only after Bruno sits calmly and stops barking, Bruno has started automatically sitting quietly by the door when he hears the car.
+      </div>
+      <p class="q-prompt">This scenario contains both classical conditioning and operant conditioning operating simultaneously. (a) Identify and explain the classical conditioning process occurring with Bruno's response to the car engine. (b) Identify and explain the operant conditioning process occurring with Bruno's sitting behaviour. (c) Explain how these two learning processes are fundamentally different in terms of the nature of the response and the organism's role.</p>
+      <div class="marks-row">
+        <span class="mark-chip">CC elements for car engine response</span>
+        <span class="mark-chip">OC elements for sitting behaviour</span>
+        <span class="mark-chip">Fundamental distinction between CC and OC</span>
+        <span class="trap-chip">⚠ Trap: The treat appears in both — which process does it belong to?</span>
+      </div>
+    </div>
+    <button class="reveal-btn mix" onclick="toggle(this)">
+      <span class="arrow">▼</span> Reveal Model Answer
+    </button>
+    <div class="model-answer">
+      <span class="ans-label mix">Model Answer — Q14</span>
+      <div class="ans-body">
+        <div class="ans-part">
+          <span class="ans-part-label">(a) Classical Conditioning — Car Engine Response</span>
+          <p><strong>UCS</strong> = Mr Lee's arrival, warm greeting, play and affection — naturally produces excitement and joy in Bruno.<br>
+          <strong>UCR</strong> = Excitement, barking, pacing (natural emotional response to a loved person arriving).<br>
+          <strong>NS → CS</strong> = The specific sound of Mr Lee's car engine — present every evening just before Mr Lee enters, repeatedly paired with the arrival over time.<br>
+          <strong>CR</strong> = Excitement, barking and pacing triggered by the car engine sound alone — before the door even opens, before Mr Lee is seen.</p>
+          <p>This is a classically conditioned <strong>emotional and physiological response</strong>. Bruno did not choose to become excited at the sound of the car — the response was automatic, produced by the association between the neutral stimulus (car engine) and the unconditioned stimulus (Mr Lee's arrival). Bruno's role is essentially passive: the response was drawn out of him by the pairing.</p>
+        </div>
+
+        <div class="ans-part">
+          <span class="ans-part-label">(b) Operant Conditioning — Sitting Behaviour</span>
+          <p>Bruno's sitting behaviour is shaped by <strong>positive reinforcement</strong>. The behaviour (sitting calmly and stopping barking) produces a pleasant consequence (treat), which increases the probability of the behaviour recurring. Bruno has learned — through the consequences of his behaviour — that sitting quietly leads to a treat, while barking does not.</p>
+          <p>This is operant conditioning because Bruno is <strong>actively choosing</strong> to perform a voluntary behaviour in order to produce a desired consequence. He operates on his environment (sits, looks at Mr Lee) to generate a reward. The sitting behaviour is goal-directed, not reflexive.</p>
+        </div>
+
+        <div class="ans-part">
+          <span class="ans-part-label">(c) Fundamental Difference</span>
+          <p>The two processes differ in two fundamental ways:</p>
+          <p><strong>Nature of the response:</strong> Classical conditioning conditions <em>involuntary, reflexive, emotional and physiological responses</em> — Bruno cannot choose not to feel excited when he hears the car. Operant conditioning shapes <em>voluntary, goal-directed behaviours</em> — Bruno chooses to sit because he has learned it produces a reward.</p>
+          <p><strong>The organism's role:</strong> In classical conditioning, the organism is essentially <em>passive</em> — the response is elicited by the stimulus association. Skinner called this respondent behaviour. In operant conditioning, the organism is <em>active</em> — it operates on its environment to produce a consequence. This is why Skinner used the term operant: the behaviour operates on the world.</p>
+        </div>
+
+        <div class="trap-note">
+          <strong>⚠ The treat trap:</strong> The treat appears in both processes but belongs differently to each. In the CC process, the treat is part of Mr Lee's arrival (UCS) — it contributes to the warm, positive association Bruno has built with the car engine sound. In the OC process, the treat is the specific positive reinforcer delivered contingently on the sitting behaviour. Same object, completely different functional role in each learning process.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q15 -->
+  <div class="q-card">
+    <div class="q-head">
+      <div class="q-num-badge mix">Q15</div>
+      <div class="q-meta">
+        <span class="q-tag mix">Operant + Observational Learning</span>
+        <span class="q-focus">Angle: When punishment fails and cognitive learning fills the gap</span>
+      </div>
+    </div>
+    <div class="q-body">
+      <div class="scenario-box mix">
+        A secondary school has a persistent bullying problem. The current approach is to punish students caught bullying — detention, public reprimand, and letters home to parents. Despite three years of this policy, bullying rates have not decreased and some teachers report they may have increased. A new school counsellor proposes replacing the current approach with two initiatives: a peer mentorship programme where older students who handle conflict well are visibly paired with younger students throughout the school day, and a classroom programme where teachers consistently model and reinforce respectful disagreement during discussions.
+      </div>
+      <p class="q-prompt">(a) Using operant conditioning principles, explain at least three reasons why the punishment-based approach has failed to reduce bullying — and may have made it worse. (b) Explain how each of the two new initiatives works using cognitive learning principles. (c) Why might the combined approach be more effective than either punishment or either initiative alone?</p>
+      <div class="marks-row">
+        <span class="mark-chip">Three OC reasons punishment failed</span>
+        <span class="mark-chip">Observational learning mechanism for both initiatives</span>
+        <span class="mark-chip">Combined approach reasoning</span>
+        <span class="trap-chip">⚠ Trap: Could punishment be making bullying worse? How?</span>
+      </div>
+    </div>
+    <button class="reveal-btn mix" onclick="toggle(this)">
+      <span class="arrow">▼</span> Reveal Model Answer
+    </button>
+    <div class="model-answer">
+      <span class="ans-label mix">Model Answer — Q15</span>
+      <div class="ans-body">
+        <div class="ans-part">
+          <span class="ans-part-label">(a) Why Punishment Failed — Three OC Reasons</span>
+          <p><strong>1. Inconsistency and presence-dependence.</strong> Punishment only suppresses behaviour while the threat is present. Bullying typically occurs when teachers are not watching — away from supervision, in corridors, online. Since the punishment contingency only applies when students are caught, the behaviour continues freely in unsupervised contexts. The student learns: "do not bully where teachers can see," not "do not bully."</p>
+          <p><strong>2. Punishment does not teach the desired behaviour.</strong> Detention and reprimands tell students what not to do but provide no information about how to handle conflict, assert themselves, or manage social dynamics constructively. Without knowing the correct alternative behaviour, students have no replacement skill to use — and may revert to what they know.</p>
+          <p><strong>3. Public reprimand may be functioning as reinforcement, not punishment.</strong> For students who bully for social status or attention, being publicly reprimanded in front of peers may actually deliver exactly what they value — visibility, notoriety, and peer attention. If this is the case, the consequence is functioning as positive reinforcement (adding social attention), increasing rather than decreasing the behaviour. This explains why bullying rates may have risen despite punishment.</p>
+        </div>
+
+        <div class="ans-part">
+          <span class="ans-part-label">(b) How the New Initiatives Work</span>
+          <p><strong>Peer mentorship programme:</strong> This works through <strong>observational learning</strong>. Younger students are consistently exposed to older peer models who demonstrate constructive, respectful conflict behaviour throughout the school day. Through Bandura's process — <strong>Attention</strong> (the mentor is visible and proximate), <strong>Retention</strong> (patterns of respectful behaviour are encoded over repeated daily interactions), <strong>Reproduction</strong> (the behaviours are socially achievable), and <strong>Motivation</strong> (the mentor models are older, admired peers — a powerful source of social motivation) — younger students acquire alternative conflict behaviours through observation alone.</p>
+          <p><strong>Classroom modelling programme:</strong> This also uses observational learning, with the teacher as model. By consistently demonstrating respectful disagreement during live discussions — and reinforcing it when students replicate it — teachers create both a modelled template and operant reinforcement of the desired behaviour. Students encode what respectful conflict looks like and are immediately rewarded when they attempt it, building the behaviour through both cognitive and operant pathways simultaneously.</p>
+        </div>
+
+        <div class="ans-part">
+          <span class="ans-part-label">(c) Why the Combined Approach Is More Effective</span>
+          <p>Punishment alone addresses only the suppression of the unwanted behaviour — and unreliably at that. The new initiatives address what punishment never could: <strong>providing a model of what the desired behaviour actually looks like</strong> and building the motivation and capability to perform it.</p>
+          <p>The combination works because it targets different levels of the problem simultaneously. Observational learning builds the cognitive template — students know what respectful behaviour looks like and how to do it. Operant reinforcement in the classroom makes respectful behaviour rewarding — students experience the positive consequences of doing it. The peer mentorship sustains latent learning across the school environment — students are continuously encoding alternative conflict models even outside formal lessons. And reduced reliance on punishment means less resentment, less aggression modelling by authority figures, and less social attention being delivered to bullying behaviour.</p>
+        </div>
+
+        <div class="key-point">
+          <strong>Key insight:</strong> Punishment addresses what not to do. Observational learning addresses what to do instead. Reinforcement makes the desired behaviour worth doing. All three are needed for lasting behavioural change — punishment alone is the least efficient of the three.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q16 -->
+  <div class="q-card">
+    <div class="q-head">
+      <div class="q-num-badge mix">Q16</div>
+      <div class="q-meta">
+        <span class="q-tag mix">Full Case Study — All Concepts</span>
+        <span class="q-focus">Exam-style two-part question integrating CC, OC, and Cognitive Learning</span>
+      </div>
+    </div>
+    <div class="q-body">
+      <div class="scenario-box mix">
+        Daniel is a 35-year-old professional who has been trying to establish a daily exercise habit for two years without success. His gym-going history is as follows. In Year 1, he went every day and rewarded himself with a smoothie after every session — but stopped completely when work got busy and the smoothies became inconvenient. In early Year 2, he joined a new gym with a friend who was a committed exerciser. He watched his friend's routine for several weeks before starting himself, and when he did begin, he immediately knew how to use the equipment correctly. His new personal trainer gives him performance feedback at unpredictable times — sometimes after one session, sometimes after four or five. Despite this, Daniel still struggles with motivation to go on days when he does not feel like it, and often skips sessions citing stress. His doctor notes that Daniel grew up in a household where his parents never exercised and consistently said that exercise "is not for people like us."
+      </div>
+      <p class="q-prompt"><strong>Part A (15 marks):</strong> Using your knowledge of operant conditioning, explain why Daniel's Year 1 exercise habit failed so quickly, and evaluate the effectiveness of the personal trainer's current feedback approach. What schedule is the trainer using, and why is it more appropriate for maintaining Daniel's exercise habit long-term?</p>
+      <p class="q-prompt" style="margin-top:14px;"><strong>Part B (15 marks):</strong> Using cognitive learning concepts, explain (i) how Daniel was able to use gym equipment correctly despite having no formal training at the new gym, (ii) what his parents' attitudes and behaviour are likely to have contributed to his current struggles with motivation, and (iii) what a cognitive learning-based intervention might look like to address his motivation problem.</p>
+      <div class="marks-row">
+        <span class="mark-chip">Part A: 15 marks — OC analysis</span>
+        <span class="mark-chip">Part B: 15 marks — Cognitive learning analysis</span>
+        <span class="trap-chip">⚠ Exam-style: Both parts must be answered fully</span>
+      </div>
+    </div>
+    <button class="reveal-btn mix" onclick="toggle(this)">
+      <span class="arrow">▼</span> Reveal Model Answer
+    </button>
+    <div class="model-answer">
+      <span class="ans-label mix">Model Answer — Q16</span>
+      <div class="ans-body">
+
+        <div class="ans-part">
+          <span class="ans-part-label">Part A — Operant Conditioning</span>
+          <p><strong>Why Year 1 Failed — Continuous Reinforcement Vulnerability</strong></p>
+          <p>Daniel's Year 1 habit was maintained by <strong>continuous reinforcement</strong> — a smoothie reward after every single session. While this is effective for rapidly establishing a new behaviour, it carries a critical vulnerability: behaviour maintained on continuous reinforcement is the most susceptible to extinction. When the reinforcement stopped — because the smoothies became inconvenient — the exercise behaviour had no resistance to the absence of reward. The organism under continuous reinforcement has learned a clear contingency: behaviour should always produce a reward. When it does not, the signal is unmistakable and extinction proceeds rapidly. Daniel stopped completely, rather than reducing gradually, which is consistent with the fast extinction pattern of continuously reinforced behaviour.</p>
+          <p><strong>The Personal Trainer's Feedback — Variable Interval Schedule</strong></p>
+          <p>The personal trainer provides feedback at unpredictable times — sometimes after one session, sometimes after four or five. This is a <strong>variable interval (VI) schedule</strong> — reinforcement is delivered based on time that varies unpredictably.</p>
+          <p>This is significantly more appropriate than the Year 1 approach for three reasons. First, VI schedules produce <strong>steady, consistent responding</strong> — Daniel cannot predict when feedback will arrive, so he has no basis for identifying a "safe" session to skip. Second, VI schedules produce considerably greater <strong>resistance to extinction</strong> than continuous reinforcement — when feedback is absent, Daniel cannot distinguish this from a normal gap in the variable schedule. Third, the schedule gradually reduces Daniel's dependence on external reinforcement, which is essential for building a self-sustaining habit.</p>
+          <p>However, the schedule alone cannot fully address Daniel's motivation problem on difficult days — schedules manage the frequency and durability of an established behaviour, but they do not address the deeper cognitive and motivational barriers explored in Part B.</p>
+        </div>
+
+        <div class="ans-part">
+          <span class="ans-part-label">Part B — Cognitive Learning</span>
+          <p><strong>(i) Using Equipment Without Formal Training — Observational Learning</strong></p>
+          <p>Daniel's ability to use gym equipment correctly after weeks of watching his friend is explained by <strong>observational learning</strong> (Bandura). By observing his committed friend's routine — paying <strong>attention</strong> to equipment use, body positioning, and sequencing — Daniel built and <strong>retained</strong> detailed cognitive representations of the correct procedures. When he began exercising himself, he had both the cognitive map and the physical capability to <strong>reproduce</strong> what he had observed. His friend's commitment and competence also provided natural <strong>motivation</strong> — seeing the friend perform effectively and consistently created a model worth emulating. No formal instruction was needed because the four internal processes of observational learning had already completed the work.</p>
+
+          <p><strong>(ii) Parents' Attitudes — Observational Learning of Negative Motivation</strong></p>
+          <p>Daniel's parents consistently modelled a sedentary lifestyle and explicitly communicated the belief that exercise "is not for people like us." Through <strong>observational learning</strong>, Daniel encoded both the behavioural model (parents who do not exercise) and the cognitive framework (exercise is not relevant to his identity or social group). These observations built a <strong>latent cognitive map</strong> about who exercises and why — and Daniel is not in that category.</p>
+          <p>This goes beyond simple modelling — it represents the internalisation of a value and identity belief through years of exposure. Even if Daniel consciously wants to exercise, this deep-seated cognitive schema creates a motivational resistance that operates below the level of simple reward and punishment. It is the motivational step in Bandura's framework being persistently undermined by a competing internal narrative absorbed through observation during childhood.</p>
+
+          <p><strong>(iii) Cognitive Learning-Based Intervention</strong></p>
+          <p>An effective intervention must address the cognitive layer, not just the behavioural one. Several approaches:</p>
+          <p>First, introduce Daniel to <strong>new observational models</strong> who share his social background, age, and professional context but who exercise successfully — people who look like him and who counter the "not for people like us" schema. Seeing similar others succeed is a powerful source of observational learning motivation and can begin to restructure the cognitive map his parents built.</p>
+          <p>Second, address the <strong>latent learning</strong> Daniel already has about exercise benefits — through reading, documentaries, conversations with his doctor. This knowledge may already exist in dormant form; creating conditions where its relevance to his personal goals becomes salient could reveal it as motivation without requiring new learning.</p>
+          <p>Third, help Daniel develop <strong>insight</strong> into the connection between his parents' beliefs and his current struggles — recognising that his resistance is not inherent but learned, and that learned patterns can be replaced through new experience and observation, can itself be a powerful motivator for change.</p>
+        </div>
+
+        <div class="key-point">
+          <strong>Key insight for the exam:</strong> Real behaviour problems rarely have a single cause or solution. Daniel's exercise failure involves operant conditioning (wrong schedule → easy extinction), observational learning (parental modelling of sedentary identity), and latent cognitive barriers (internalised beliefs about who exercises). An effective intervention must address all three layers — which is exactly what good exam answers demonstrate.
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end MIX -->
+
+</main>
+
+<script>
+  function show(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    const map = { cc: 0, oc: 1, cog: 2, mix: 3 };
+    document.querySelectorAll('.nav-btn')[map[id]].classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function toggle(btn) {
+    const answer = btn.nextElementSibling;
+    const isOpen = answer.classList.contains('open');
+    answer.classList.toggle('open', !isOpen);
+    btn.classList.toggle('open', !isOpen);
+    btn.querySelector('.arrow').textContent = isOpen ? '▼' : '▲';
+    if (!isOpen) {
+      btn.querySelector('span:last-child') && (btn.childNodes[1].textContent = ' Hide Model Answer');
+    } else {
+      btn.childNodes[1].textContent = ' Reveal Model Answer';
+    }
+  }
+</script>
+</body>
+</html>

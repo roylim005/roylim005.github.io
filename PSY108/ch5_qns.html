@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 5 — Exam Practice Questions</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf8f3;
+    --surface: #ffffff;
+    --surface2: #f5f2eb;
+    --border: #e8e2d4;
+    --border2: #d4ccbb;
+    --ink: #1c1a15;
+    --ink-muted: #6b6458;
+    --ink-dim: #a89f92;
+    --gold: #c4922a;
+    --gold-light: #f0d898;
+    --gold-pale: #fdf5e0;
+    --red: #b84040;
+    --red-pale: #fdf0f0;
+    --green: #3a7a5a;
+    --green-pale: #f0f7f3;
+    --blue: #3a5a8a;
+    --blue-pale: #f0f4fb;
+    --purple: #6a4a8a;
+    --purple-pale: #f5f0fb;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  /* ─── PROGRESS ─── */
+  .reading-progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), #e8b84b);
+    z-index: 9999;
+    width: 0%;
+    transition: width 0.1s;
+  }
+
+  /* ─── HEADER ─── */
+  header {
+    background: var(--ink);
+    color: #faf8f3;
+    padding: 56px 48px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -80px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(196,146,42,0.15) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  header::after {
+    content: '"The purpose of education is not to fill a bucket but to light a fire."';
+    position: absolute;
+    bottom: 20px; right: 48px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: rgba(250,248,243,0.25);
+    letter-spacing: 0.5px;
+  }
+
+  .header-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: #faf8f3;
+    margin-bottom: 10px;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .header-sub {
+    font-size: 13.5px;
+    color: rgba(250,248,243,0.5);
+    font-style: italic;
+  }
+
+  /* ─── STATS BAR ─── */
+  .stats-bar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 48px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--ink-muted);
+  }
+
+  .stat-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .stat-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ─── NAV ─── */
+  .nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(250,248,243,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 48px;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .nav-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    margin-right: 8px;
+  }
+
+  .nav-pill {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--border2);
+    color: var(--ink-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    background: none;
+    font-family: 'Outfit', sans-serif;
+    white-space: nowrap;
+  }
+
+  .nav-pill:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-pale); }
+  .nav-pill.active { border-color: var(--gold); color: var(--gold); background: var(--gold-pale); font-weight: 600; }
+
+  /* ─── CONTAINER ─── */
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 48px 100px;
+  }
+
+  /* ─── SECTION HEADER ─── */
+  .section-header {
+    margin: 56px 0 28px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--ink);
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+  }
+
+  .section-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: var(--gold-pale);
+    border: 1px solid var(--gold-light);
+    padding: 3px 10px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  /* ─── QUESTION CARD ─── */
+  .q-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 28px;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+
+  .q-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.07); }
+
+  .q-header {
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .q-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    flex-shrink: 0;
+    min-width: 36px;
+  }
+
+  .q-meta {
+    flex: 1;
+  }
+
+  .q-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+
+  .q-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+
+  .tag-mot  { background: rgba(196,146,42,0.12); color: var(--gold); border: 1px solid rgba(196,146,42,0.25); }
+  .tag-emo  { background: rgba(106,74,138,0.1);  color: var(--purple); border: 1px solid rgba(106,74,138,0.2); }
+  .tag-cross { background: rgba(58,90,138,0.1);  color: var(--blue); border: 1px solid rgba(58,90,138,0.2); }
+  .tag-diff-med  { background: rgba(196,146,42,0.08); color: #9a7020; border: 1px solid rgba(196,146,42,0.2); }
+  .tag-diff-hard { background: rgba(184,64,64,0.08);  color: var(--red); border: 1px solid rgba(184,64,64,0.2); }
+
+  .q-concept {
+    font-size: 12px;
+    color: var(--ink-dim);
+    font-style: italic;
+  }
+
+  .q-body {
+    padding: 20px 24px;
+  }
+
+  .q-text {
+    font-size: 14.5px;
+    line-height: 1.8;
+    color: var(--ink);
+  }
+
+  .q-text strong { color: var(--ink); font-weight: 600; }
+
+  /* ─── ANSWER SECTION ─── */
+  .answer-toggle {
+    width: 100%;
+    background: var(--surface2);
+    border: none;
+    border-top: 1px solid var(--border);
+    padding: 14px 24px;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-muted);
+    transition: all 0.2s;
+    letter-spacing: 0.3px;
+  }
+
+  .answer-toggle:hover { background: var(--gold-pale); color: var(--gold); }
+  .answer-toggle.revealed { background: var(--gold-pale); color: var(--gold); border-top-color: var(--gold-light); }
+
+  .toggle-icon {
+    font-size: 11px;
+    transition: transform 0.3s;
+    opacity: 0.6;
+  }
+
+  .answer-toggle.revealed .toggle-icon { transform: rotate(180deg); opacity: 1; }
+
+  .answer-body {
+    display: none;
+    padding: 24px;
+    border-top: 1px solid var(--gold-light);
+    background: var(--gold-pale);
+    animation: fadeIn 0.3s ease;
+  }
+
+  .answer-body.open { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .answer-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .answer-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--gold-light);
+  }
+
+  .answer-text {
+    font-size: 14px;
+    line-height: 1.85;
+    color: var(--ink);
+  }
+
+  .answer-text p { margin-bottom: 14px; }
+  .answer-text p:last-child { margin-bottom: 0; }
+  .answer-text strong { color: var(--ink); font-weight: 600; }
+  .answer-text em { font-style: italic; color: var(--ink-muted); }
+
+  .answer-text .key-point {
+    background: white;
+    border-left: 3px solid var(--gold);
+    padding: 10px 16px;
+    margin: 14px 0;
+    border-radius: 0 8px 8px 0;
+    font-size: 13.5px;
+  }
+
+  .answer-text .key-point.green { border-left-color: var(--green); }
+  .answer-text .key-point.blue  { border-left-color: var(--blue); }
+  .answer-text .key-point.red   { border-left-color: var(--red); }
+
+  /* ─── CROSS SECTION DIVIDER ─── */
+  .cross-divider {
+    margin: 48px 0 0;
+    text-align: center;
+    position: relative;
+  }
+
+  .cross-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 0; right: 0;
+    height: 1px;
+    background: var(--border2);
+  }
+
+  .cross-divider span {
+    position: relative;
+    background: var(--bg);
+    padding: 0 16px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--ink-dim);
+  }
+
+  /* ─── SECTION VISIBILITY ─── */
+  .q-section { display: block; }
+  .q-section.hidden { display: none; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 600px) {
+    header, .nav-bar, .stats-bar, .container { padding-left: 20px; padding-right: 20px; }
+    h1 { font-size: 2rem; }
+    .q-num { font-size: 1.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="reading-progress" id="progress"></div>
+
+<header>
+  <div class="header-label">Chapter 5 · Exam Practice · Pastorino & Doyle-Portillo</div>
+  <h1>Motivation <em>&</em> Emotion</h1>
+  <div class="header-sub">Applied scenario questions — attempt each before revealing the model answer</div>
+</header>
+
+<div class="stats-bar">
+  <div class="stat"><span class="stat-dot" style="background:var(--gold)"></span><span class="stat-val">20</span> questions</div>
+  <div class="stat"><span class="stat-dot" style="background:var(--purple)"></span><span class="stat-val">8</span> motivation</div>
+  <div class="stat"><span class="stat-dot" style="background:var(--blue)"></span><span class="stat-val">8</span> emotion</div>
+  <div class="stat"><span class="stat-dot" style="background:var(--green)"></span><span class="stat-val">4</span> cross-sectional</div>
+</div>
+
+<nav class="nav-bar">
+  <span class="nav-label">Jump to</span>
+  <button class="nav-pill active" onclick="showAll(this)">All</button>
+  <button class="nav-pill" onclick="filterSection('mot', this)">Motivation</button>
+  <button class="nav-pill" onclick="filterSection('emo', this)">Emotion</button>
+  <button class="nav-pill" onclick="filterSection('cross', this)">Cross-Sectional</button>
+</nav>
+
+<div class="container">
+
+  <!-- ══════════ MOTIVATION ══════════ -->
+  <div class="q-section" id="sec-mot">
+    <div class="section-header">
+      <span class="section-tag">Motivation</span>
+      <h2>Theories of Motivation</h2>
+    </div>
+
+    <!-- Q1 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">1</div>
+        <div class="q-meta">
+          <div class="q-tags">
+            <span class="q-tag tag-mot">Motivation</span>
+            <span class="q-tag tag-diff-med">Moderate</span>
+          </div>
+          <div class="q-concept">Instinct Theory vs Drive Reduction Theory</div>
+        </div>
+      </div>
+      <div class="q-body">
+        <div class="q-text">
+          A wildlife researcher observes that newborn sea turtles, immediately after hatching, instinctively crawl toward the ocean without any prior experience or parental guidance. She also notices that the same turtles, after hours of swimming, will rest on a warm rock — but only until they feel energised again, after which they return to the sea.<br><br>
+          A colleague argues: <em>"Both behaviours are explained by the same motivation theory."</em> Do you agree? Using two different motivation theories, explain each behaviour separately and identify where the colleague's reasoning breaks down.
+        </div>
+      </div>
+      <button class="answer-toggle" onclick="toggleAnswer(this)">
+        <span>Reveal Model Answer</span><span class="toggle-icon">▼</span>
+      </button>
+      <div class="answer-body">
+        <div class="answer-label">Model Answer</div>
+        <div class="answer-text">
+          <p>The colleague's reasoning is incorrect — the two behaviours are better explained by <strong>two different theories of motivation</strong>.</p>
+          <div class="key-point"><strong>Behaviour 1 — Crawling toward the ocean:</strong> This is best explained by <strong>Instinct Theory</strong> (James, 1890). Instincts are genetically determined, inborn impulses that direct behaviour without prior learning or experience. The newborn sea turtle has never seen the ocean, received no guidance, and has had no opportunity to learn — yet it crawls toward the sea immediately after hatching. This is a clear example of an innate, biologically programmed behaviour that evolved because it supports survival and procreation.</div>
+          <div class="key-point green"><strong>Behaviour 2 — Resting until energised, then returning:</strong> This is better explained by <strong>Drive Reduction Theory</strong> (Hull, 1943). Drive reduction theory states that motivation stems from the desire to reduce an uncomfortable internal state — a drive — caused by unmet biological needs. After hours of swimming, the turtle's energy reserves are depleted, creating a <strong>primary drive</strong> (fatigue/energy deficit). The turtle rests to restore homeostasis. Once energy is restored, the drive dissipates and the uncomfortable state is resolved — the turtle returns to the sea. This is a cyclical, need-driven behaviour regulated by a <strong>negative feedback loop</strong> maintaining homeostasis.</div>
+          <p>The colleague's reasoning breaks down because Instinct Theory cannot adequately explain the rest-and-recover behaviour — that behaviour depends on an internal state of deficit and restoration, not an inborn impulse. Conversely, Drive Reduction Theory cannot explain the ocean-crawling behaviour, since there is no biological deficit driving it — it is simply an innate directive. Each theory has its own domain of explanation.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">2</div>
+        <div class="q-meta">
+          <div class="q-tags">
+            <span class="q-tag tag-mot">Motivation</span>
+            <span class="q-tag tag-diff-med">Moderate</span>
+          </div>
+          <div class="q-concept">Yerkes-Dodson Arousal Theory — different application angle</div>
+        </div>
+      </div>
+      <div class="q-body">
+        <div class="q-text">
+          Two surgeons are preparing for operations. Dr Lim is performing a routine appendectomy she has done hundreds of times. Before the procedure, she listens to energetic music in the scrub room and jokes with her team. Dr Chen is performing a rare and technically complex heart surgery for the first time. He arrives early, spends time in silence reviewing his notes, and asks the team to minimise conversation during the operation.<br><br>
+          Using arousal theory, explain why each surgeon's approach is appropriate for their respective task. What would likely happen to each surgeon's performance if they swapped approaches?
+        </div>
+      </div>
+      <button class="answer-toggle" onclick="toggleAnswer(this)">
+        <span>Reveal Model Answer</span><span class="toggle-icon">▼</span>
+      </button>
+      <div class="answer-body">
+        <div class="answer-label">Model Answer</div>
+        <div class="answer-text">
+          <p>Both surgeons' approaches are explained by the <strong>Yerkes-Dodson curve</strong> (Yerkes & Dodson, 1908), which states that performance is optimal at a <strong>moderate level of arousal</strong>, and that the optimal arousal level depends on <strong>task complexity</strong> — simple tasks tolerate higher arousal while complex tasks require lower arousal.</p>
+          <div class="key-point"><strong>Dr Lim — routine appendectomy (simple, familiar task):</strong> A procedure performed hundreds of times is largely automatic and low in cognitive demand. For such tasks, a <strong>higher arousal level</strong> is closer to optimal — it keeps the surgeon alert, engaged, and prevents the underarousal that comes from performing a repetitive task. Her energetic music and relaxed team atmosphere appropriately elevate her arousal without pushing her into the overarousal zone.</div>
+          <div class="key-point green"><strong>Dr Chen — complex, first-time heart surgery (high-complexity task):</strong> A rare and technically demanding procedure requires intense concentration, precise decision-making, and careful processing of new information. For such tasks, <strong>lower arousal</strong> is closer to optimal — excess stimulation would interfere with concentration and degrade performance. His silence, focused preparation, and minimal conversation appropriately keep his arousal low enough to support the cognitive demands of the surgery.</div>
+          <div class="key-point blue"><strong>If they swapped approaches:</strong> Dr Lim in silence doing a routine procedure risks <strong>underarousal</strong> — she may become bored, inattentive, or mentally disengaged, increasing the risk of careless errors. Dr Chen with energetic music and casual banter during complex surgery risks <strong>overarousal</strong> — the excess stimulation would overwhelm his cognitive capacity, impairing the precise thinking the procedure demands. Both would likely perform worse than with their original approaches.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">3</div>
+        <div class="q-meta">
+          <div class="q-tags">
+            <span class="q-tag tag-mot">Motivation</span>
+            <span class="q-tag tag-diff-med">Moderate</span>
+          </div>
+          <div class="q-concept">Self-Determination Theory — competence, autonomy, relatedness</div>
+        </div>
+      </div>
+      <div class="q-body">
+        <div class="q-text">
+          Three employees at the same company all report feeling unmotivated at work, but for different reasons.<br><br>
+          <strong>Employee A</strong> says: <em>"I feel like I'm just going through the motions — my manager micromanages every decision I make and I have no say in how I do my work."</em><br><br>
+          <strong>Employee B</strong> says: <em>"I never feel like I'm getting better at anything. The tasks are always the same and I never feel stretched or challenged."</em><br><br>
+          <strong>Employee C</strong> says: <em>"I feel completely isolated — I work from home and haven't spoken to a teammate in weeks."</em><br><br>
+          Using Self-Determination Theory, identify which specific psychological need is unmet for each employee and explain how satisfying that need would restore their motivation.
+        </div>
+      </div>
+      <button class="answer-toggle" onclick="toggleAnswer(this)">
+        <span>Reveal Model Answer</span><span class="toggle-icon">▼</span>
+      </button>
+      <div class="answer-body">
+        <div class="answer-label">Model Answer</div>
+        <div class="answer-text">
+          <p><strong>Self-Determination Theory</strong> (Deci & Ryan, 2008) states that humans are motivated when three core psychological needs are met: <strong>competence</strong> (feeling skilled and effective), <strong>autonomy</strong> (feeling in control of one's own behaviour), and <strong>relatedness</strong> (feeling connected to others). When any of these needs is unmet, motivation declines.</p>
+          <div class="key-point"><strong>Employee A — unmet need: Autonomy.</strong> Being micromanaged removes any sense of control over how work is done. Employee A feels <strong>controlled</strong> rather than autonomous — experiencing what Self-Determination Theory calls <strong>controlled motivation</strong>, where behaviour feels compelled rather than self-directed. Restoring autonomy — such as allowing Employee A to make decisions about how to approach tasks — would shift motivation back toward the <strong>autonomous</strong> end of the spectrum, increasing genuine engagement.</div>
+          <div class="key-point green"><strong>Employee B — unmet need: Competence.</strong> Repetitive, unchallenging tasks provide no opportunity to develop skill or feel effective. Without growth or mastery, Employee B has no sense of becoming more capable. Providing more challenging, stretching tasks that allow Employee B to develop new skills would restore the sense of <strong>competence</strong> — a key driver of intrinsic motivation and engagement.</div>
+          <div class="key-point blue"><strong>Employee C — unmet need: Relatedness.</strong> Complete isolation severs the sense of connection to others that humans fundamentally need. Self-Determination Theory identifies <strong>relatedness</strong> — feeling connected and close to others — as essential for sustained motivation. Restoring regular team interaction, even virtually, would address this unmet need and rebuild Employee C's sense of belonging and investment in the shared work.</div>
+          <p>Each employee's demotivation has a different root cause — and Self-Determination Theory reveals that addressing motivation at work requires understanding <em>which</em> specific psychological need is unmet, rather than applying a one-size-fits-all solution.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">4</div>
+        <div class="q-meta">
+          <div class="q-tags">
+            <span class="q-tag tag-mot">Motivation</span>
+            <span class="q-tag tag-diff-hard">Challenging</span>
+          </div>
+          <div class="q-concept">Maslow's Hierarchy — limitation and real-world contradiction</div>
+        </div>
+      </div>
+      <div class="q-body">
+        <div class="q-text">
+          A documentary profiles three individuals living in extreme poverty in a developing country. Despite severe food insecurity and unsafe living conditions:<br><br>
+          — <strong>Person A</strong> spends her evenings teaching neighbourhood children to read, finding deep purpose in it.<br>
+          — <strong>Person B</strong> organises a community choir, saying it makes him feel connected and alive.<br>
+          — <strong>Person C</strong> focuses entirely on finding food each day and cannot think about anything else.<br><br>
+          A psychologist watching the documentary says: <em>"Only Person C's behaviour can be fully predicted by Maslow's theory. The other two expose its limitations."</em><br><br>
+          Do you agree with the psychologist? Use Maslow's hierarchy to analyse all three individuals and evaluate the psychologist's claim.
+        </div>
+      </div>
+      <button class="answer-toggle" onclick="toggleAnswer(this)">
+        <span>Reveal Model Answer</span><span class="toggle-icon">▼</span>
+      </button>
+      <div class="answer-body">
+        <div class="answer-label">Model Answer</div>
+        <div class="answer-text">
+          <p><strong>Maslow's hierarchy of needs</strong> (1970) proposes that human needs are arranged in priority order from the base upwards: <strong>physiological → safety → belongingness and love → esteem → cognitive → aesthetic → self-actualisation → transcendence</strong>. The theory states that lower-level needs must be satisfied before higher-level needs can motivate behaviour.</p>
+          <div class="key-point"><strong>Person C</strong> — focused entirely on finding food — behaves exactly as Maslow's theory predicts. With <strong>physiological needs</strong> (food, survival) unmet, Person C is consumed by the most basic level of the hierarchy and cannot attend to anything higher. Maslow's theory accounts for this perfectly.</div>
+          <div class="key-point green"><strong>Person A</strong> — teaching children despite food insecurity — is pursuing what Maslow would classify as <strong>self-actualisation</strong> — reaching her full potential through meaningful contribution. According to Maslow's sequential model, she should not be motivated by this until all lower needs are met. Her behaviour directly <strong>contradicts</strong> the hierarchy, as she is skipping multiple levels.</div>
+          <div class="key-point blue"><strong>Person B</strong> — organising a choir — is fulfilling <strong>belongingness and love needs</strong>, a mid-level need in Maslow's hierarchy. Again, this should only motivate behaviour after physiological and safety needs are secured — which they are not. His behaviour also <strong>contradicts</strong> the strict sequential ordering.</div>
+          <p>The psychologist's claim is largely correct. Maslow's theory predicts Person C's behaviour accurately but <strong>cannot account for</strong> Persons A and B — both of whom are pursuing higher-order needs despite unmet lower-level needs. This reveals a fundamental limitation: Maslow's hierarchy assumes a rigid, universal sequence that does not reflect the full complexity of human motivation. People frequently skip levels, particularly when higher-order needs such as meaning, purpose, and connection provide powerful motivation even in the absence of material security.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">5</div>
+        <div class="q-meta">
+          <div class="q-tags">
+            <span class="q-tag tag-mot">Motivation</span>
+            <span class="q-tag tag-diff-med">Moderate</span>
+          </div>
+          <div class="q-concept">Intrinsic vs Extrinsic — nuanced application</div>
+        </div>
+      </div>
+      <div class="q-body">
+        <div class="q-text">
+          A school introduces a reading programme where students receive gold stars and prizes for every book they finish. Initially, reading rates increase dramatically. Six months later, the programme ends. The teacher notices that students who were <em>already avid readers</em> before the programme now read <strong>less</strong> than before it started. Meanwhile, students who <em>rarely read</em> before the programme continue reading at roughly the same rate as during the programme — but no more.<br><br>
+          Using motivation theory, explain the different outcomes for each group of students. What does this reveal about the relationship between intrinsic and extrinsic motivation?
+        </div>
+      </div>
+      <button class="answer-toggle" onclick="toggleAnswer(this)">
+        <span>Reveal Model Answer</span><span class="toggle-icon">▼</span>
+      </button>
+      <div class="answer-body">
+        <div class="answer-label">Model Answer</div>
+        <div class="answer-text">
+          <p>This scenario illustrates a critical principle from motivation theory: <strong>overuse of extrinsic rewards can undermine pre-existing intrinsic motivation</strong>.</p>
+          <div class="key-point"><strong>Avid readers — reading less after the programme:</strong> Before the programme, these students were <strong>intrinsically motivated</strong> — they read for the enjoyment, curiosity, and personal satisfaction the activity itself provided. When the school introduced gold stars and prizes, their motivation shifted from intrinsic to <strong>extrinsic</strong> — they began associating reading with earning rewards rather than with personal enjoyment. Once the external rewards were removed, these students were left without either source of motivation — the intrinsic enjoyment had been weakened by the shift, and the extrinsic reward was gone. The result is that they now read <em>less</em> than before the programme began.</div>
+          <div class="key-point green"><strong>Non-readers — continuing at the same rate:</strong> These students had little or no intrinsic motivation for reading before the programme. For them, the extrinsic rewards <em>were</em> the motivation — there was no pre-existing intrinsic drive to undermine. Without the rewards, they return roughly to their baseline — the external reward sustained the behaviour while present but created no lasting intrinsic interest.</div>
+          <div class="key-point blue"><strong>What this reveals:</strong> Extrinsic motivation is most effective for activities a person would not otherwise engage in — it can initiate behaviour. However, introducing extrinsic rewards for activities that are already intrinsically motivating can be counterproductive — it replaces genuine enjoyment with external dependency. Once the reward is removed, the original intrinsic motivation may not fully recover. This suggests that <strong>intrinsic motivation is more self-sustaining</strong> and valuable for long-term engagement, while extrinsic rewards should be used carefully to avoid undermining it.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">6</div>
+        <div class="q-meta">
+          <div class="q-tags">
+            <span class="q-tag tag-mot">Motivation</span>
+            <span class="q-tag tag-diff-hard">Challenging</span>
+          </div>
+          <div class="q-concept">Locus of Control + Achievement Motivation + Seligman — integrated</div>
+        </div>
+      </div>
+      <div class="q-body">
+        <div class="q-text">
+          Two sales managers both miss their quarterly targets by the same margin.<br><br>
+          <strong>Manager X</strong> says: <em>"The market conditions were terrible this quarter — there was nothing I could have done. I'll just wait for things to improve."</em><br><br>
+          <strong>Manager Y</strong> says: <em>"I clearly need to work on my client relationship skills. I'm going to sign up for a training course and restructure my approach next quarter."</em><br><br>
+          Six months later, Manager X has missed targets again. Manager Y has exceeded hers.<br><br>
+          Using <strong>three</strong> psychological concepts — Seligman's explanatory style, locus of control, and achievement motivation — analyse both managers' responses. Explain how each concept contributed to their different outcomes.
+        </div>
+      </div>
+      <button class="answer-toggle" onclick="toggleAnswer(this)">
+        <span>Reveal Model Answer</span><span class="toggle-icon">▼</span>
+      </button>
+      <div class="answer-body">
+        <div class="answer-label">Model Answer</div>
+        <div class="answer-text">
+          <p>The contrasting outcomes of Manager X and Manager Y can be explained through three interconnected psychological concepts.</p>
+          <div class="key-point"><strong>Seligman's Explanatory Style:</strong> Manager X demonstrates a <strong>pessimistic explanatory style</strong> — attributing failure to <strong>external, stable, and unchangeable</strong> factors ("market conditions," "nothing I could have done"). This leaves no room for personal agency or improvement. Manager Y demonstrates an <strong>optimistic explanatory style</strong> — attributing failure to <strong>internal, specific, and changeable</strong> factors ("I need to work on my client relationship skills"). This framing treats failure as a solvable problem rather than a fixed reality, motivating constructive action.</div>
+          <div class="key-point green"><strong>Locus of Control:</strong> Manager X has an <strong>external locus of control</strong> — believing outcomes are determined by forces beyond his control (market conditions, luck). With no perceived ability to influence results, there is little motivation to try differently. Manager Y has an <strong>internal locus of control</strong> — believing outcomes depend on her own ability and effort. This belief drives her to take specific, targeted action (training course, restructured approach) that directly addresses the cause of failure.</div>
+          <div class="key-point blue"><strong>Achievement Motivation:</strong> Manager X behaves like a <strong>low achiever</strong> — choosing the passive strategy of waiting, which requires no accountability. If he continues to miss targets, he can attribute it to unchangeable market forces. Manager Y behaves like a <strong>high achiever</strong> — choosing a <strong>moderately challenging</strong> response (skill development, restructured approach) that is demanding but achievable. High achievers attribute outcomes to ability and effort (internal locus), take ownership of failure, and pursue specific improvements — all of which contributed to Manager Y exceeding her targets six months later.</div>
+          <p>Together, these three concepts show that the same objective failure produces very different motivational outcomes depending on how a person interprets it. Manager X's passive waiting was both predicted and perpetuated by his pessimistic style, external locus, and low-achiever pattern. Manager Y's growth was driven by the optimistic, internal, high-achiever orientation that turned failure into a catalyst for improvement.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">7</div>
+        <div class="q-meta">
+          <div class="q-tags">
+            <span class="q-tag tag-mot">Motivation</span>
+            <span class="q-tag tag-diff-med">Moderate</span>
+          </div>
+          <div class="q-concept">Freud's Psychodynamic Theory — applied to unexplained behaviour</div>
+        </div>
+      </div>
+      <div class="q-body">
+        <div class="q-text">
+          Sandra is a highly professional and composed lawyer who prides herself on her calm demeanour. However, she has noticed that every time she is assigned a male supervisor — regardless of how fair or supportive he is — she becomes inexplicably hostile, misses deadlines, and subtly undermines his authority. She cannot explain why. Her behaviour does not occur with female supervisors. Sandra's therapist suggests the pattern may be rooted in something she is not consciously aware of.<br><br>
+          Which theory of motivation would the therapist be drawing on? Identify the specific forces within this theory that could account for Sandra's behaviour, and explain why Sandra's inability to explain it is consistent with the theory rather than a contradiction of it.
+        </div>
+      </div>
+      <button class="answer-toggle" onclick="toggleAnswer(this)">
+        <span>Reveal Model Answer</span><span class="toggle-icon">▼</span>
+      </button>
+      <div class="answer-body">
+        <div class="answer-label">Model Answer</div>
+        <div class="answer-text">
+          <p>The therapist is drawing on <strong>Freud's Psychodynamic Theory of Motivation</strong>, which states that motivation comes from the depths of the <strong>unconscious mind</strong>. The <strong>Id</strong> contains two basic instinctual drives: <strong>Eros</strong> (erotic and sexual desires) and <strong>Thanatos</strong> (aggressive and destructive impulses). These drives operate below conscious awareness and continue to influence behaviour even when the person has no knowledge of them.</p>
+          <div class="key-point"><strong>Thanatos and Sandra's hostility:</strong> Sandra's repeated hostility, deadline-missing, and undermining behaviour toward male supervisors — despite their fairness — reflects <strong>Thanatos</strong>, the aggressive and destructive impulse. This aggressive drive is being directed specifically toward male authority figures, suggesting it is being activated by something deeply embedded in Sandra's unconscious — possibly unresolved experiences with male authority in her past — rather than by anything the supervisors have actually done.</div>
+          <div class="key-point green"><strong>Why Sandra's inability to explain it is consistent with the theory:</strong> According to Psychodynamic Theory, unconscious drives <strong>by definition</strong> operate outside of conscious awareness. The person being driven by them will have no access to their origin and no ability to explain them through conscious reasoning. Sandra's inability to explain her behaviour is not a contradiction of the theory — it is precisely what the theory predicts. If the motivation were conscious, Sandra would recognise it and likely choose to act differently. The fact that she cannot see the source is itself evidence of unconscious motivation at work.</div>
+          <p>Freud's theory also suggests that such unconscious drives may surface indirectly — through patterns of behaviour, emotional reactions, or responses to specific triggers — rather than through direct conscious thought. Sandra's consistent pattern across different male supervisors suggests a recurring unconscious activation rather than rational responses to individual people.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">8</div>
+        <div class="q-meta">
+          <div class="q-tags">
+            <span class="q-tag tag-mot">Motivation</span>
+            <span class="q-tag tag-diff-hard">Challenging</span>
+          </div>
+          <div class="q-concept">Individualist vs Collectivist — motivation and goal-setting</div>
+        </div>
+      </div>
+      <div class="q-body">
+        <div class="q-text">
+          A multinational company introduces a new performance incentive programme. Employees in the US office respond enthusiastically — individual bonuses, personal recognition awards, and public leaderboards drive a significant increase in productivity. The same programme is rolled out to the Singapore office. Productivity there barely changes, and some employees report feeling <em>uncomfortable</em> with the public rankings.<br><br>
+          Using the concepts of individualist and collectivist cultures, explain why the same incentive programme produced such different outcomes in each office. What would a more effective motivation strategy for the Singapore office look like, based on these concepts?
+        </div>
+      </div>
+      <button class="answer-toggle" onclick="toggleAnswer(this)">
+        <span>Reveal Model Answer</span><span class="toggle-icon">▼</span>
+      </button>
+      <div class="answer-body">
+        <div class="answer-label">Model Answer</div>
+        <div class="answer-text">
+          <p>The contrasting outcomes reflect fundamental differences between <strong>individualist</strong> and <strong>collectivist</strong> cultural orientations and how they shape what motivates people.</p>
+          <div class="key-point"><strong>US office — individualist culture:</strong> Individualist cultures promote <strong>individual needs, desires, and identity</strong>. People are generally more expressive of their emotions and more motivated by personal recognition and individual achievement. Individual bonuses, personal awards, and public leaderboards align perfectly with this cultural orientation — they directly reward personal performance, celebrate individual identity, and satisfy the desire for personal recognition. These incentives are intrinsically motivating in an individualist framework.</div>
+          <div class="key-point green"><strong>Singapore office — collectivist culture:</strong> Collectivist cultures prioritise the <strong>good of the group</strong> over individual needs and desires. Individual needs are minimised in favour of group harmony. A core belief is that drawing attention to individual differences — particularly through public rankings — can <strong>disrupt intra-group relationships and social functioning</strong>. Public leaderboards that highlight individual winners and losers create exactly this kind of disruption, causing discomfort rather than motivation. Individual bonuses may also feel at odds with a cultural orientation that values collective achievement over personal gain.</div>
+          <div class="key-point blue"><strong>A more effective strategy for the Singapore office</strong> would align with collectivist values: team-based bonuses rewarding group performance, recognition given to the team as a whole rather than to individuals, and incentives framed around collective goals ("our team achieved X") rather than personal rankings. This approach would motivate employees without disrupting the group harmony that collectivist cultures prioritise.</div>
+          <p>This scenario illustrates that motivation is not culturally universal — what drives behaviour in one cultural context may actively undermine it in another. Effective motivation strategies must be designed with cultural orientation in mind.</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /sec-mot -->
+
+  <!-- ══════════ EMOTION ══════════ -->
+  <div class="q-section" id="sec-emo">
+    <div class="section-header">
+      <span class="section-tag">Emotion</span>
+      <h2>Theories of Emotion</h2>
+    </div>
+
+    <!-- Q9 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">9</div>
+        <div class="q-meta">
+          <div class="q-tags">
+            <span class="q-tag tag-emo">Emotion</span>
+            <span class="q-tag tag-diff-med">Moderate</span>
+          </div>
+          <div class="q-concept">Function of Emotions + 5 Components</div>
+        </div>
+      </div>
+      <div class="q-body">
+        <div class="q-text">
+          A neurologist presents a case study of a patient, Mr H, who suffered brain damage that eliminated his ability to experience emotions. Mr H's intelligence, memory, and language remain completely intact. Yet despite this, he is unable to hold down a job, struggles to maintain relationships, and cannot make even simple decisions like what to eat for lunch — often spending hours deliberating without resolution.<br><br>
+          Using your understanding of what emotions do for us, explain why Mr H's inability to feel emotions — despite his intact intelligence — leads to such profound difficulties in daily functioning. In your answer, identify at least <strong>three</strong> specific consequences of his emotional impairment.
+        </div>
+      </div>
+      <button class="answer-toggle" onclick="toggleAnswer(this)">
+        <span>Reveal Model Answer</span><span class="toggle-icon">▼</span>
+      </button>
+      <div class="answer-body">
+        <div class="answer-label">Model Answer</div>
+        <div class="answer-text">
+          <p>Mr H's case illustrates a fundamental principle about the function of emotions: <strong>emotions are not merely feelings — they are essential tools that enable us to function effectively in daily life.</strong> Emotions help us <strong>attend and respond to important situations</strong> and <strong>convey our intentions to others</strong>. Without them, even a person of intact intelligence faces profound impairment.</p>
+          <div class="key-point"><strong>Consequence 1 — Inability to connect events to meaning:</strong> Emotions allow us to attach significance to events and experiences. Without emotions, Mr H cannot determine which situations matter and which do not. Every situation feels equally neutral — he cannot register that being late to work is more important than what he had for breakfast. This makes it impossible to prioritise effectively.</div>
+          <div class="key-point green"><strong>Consequence 2 — Inability to value one course of action over another:</strong> Emotions provide the evaluative signal that makes one option feel better or worse than another. Without this signal, Mr H has no basis for preferring one choice over another — hence his inability to decide what to eat for lunch. Every option is equally weightless without emotional input to guide preference.</div>
+          <div class="key-point blue"><strong>Consequence 3 — Inability to convey intentions and maintain relationships:</strong> Emotions are a primary channel through which we communicate our intentions, reactions, and inner states to others. Without emotional expression — through facial expressions, tone, and behavioural reactions — Mr H cannot signal warmth, interest, displeasure, or care. Relationships require this constant emotional communication; without it, connections break down.</div>
+          <p>Mr H's case reveals that intelligence alone is insufficient for effective human functioning. Emotions serve as the evaluative and communicative infrastructure that gives meaning to experience, guides decision-making, and enables social connection. <em>"To know but not to feel"</em> — as Mr H demonstrates — leaves a person unable to prioritise, decide, or connect.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">10</div>
+        <div class="q-meta">
+          <div class="q-tags">
+            <span class="q-tag tag-emo">Emotion</span>
+            <span class="q-tag tag-diff-med">Moderate</span>
+          </div>
+          <div class="q-concept">James-Lange Theory — application and limitation</div>
+        </div>
+      </div>
+      <div class="q-body">
+        <div class="q-text">
+          During a robbery, two bystanders experience the same event. <strong>Bystander A</strong> feels his hands trembling, his heart racing, and his stomach knotting — and concludes he is terrified. <strong>Bystander B</strong>, a retired police officer, notices the same physical sensations but thinks: <em>"I've felt this before — this is just adrenaline. I know exactly what to do."</em> She feels calm and focused rather than terrified.<br><br>
+          Using the James-Lange Theory, explain Bystander A's experience. Then explain why Bystander B's experience <strong>challenges</strong> the theory. What does this suggest about the limitations of James-Lange?
+        </div>
+      </div>
+      <button class="answer-toggle" onclick="toggleAnswer(this)">
+        <span>Reveal Model Answer</span><span class="toggle-icon">▼</span>
+      </button>
+      <div class="answer-body">
+        <div class="answer-label">Model Answer</div>
+        <div class="answer-text">
+          <p>The <strong>James-Lange Theory</strong> (1884) states that emotion is equal to the <strong>pattern of physiological arousal</strong> experienced in response to a stimulus. The bodily reaction to an event <em>is</em> the emotion — there is no separate subjective feeling that causes the physical response. The sequence is: <strong>Stimulus → Physiological arousal → Emotion.</strong></p>
+          <div class="key-point"><strong>Bystander A — consistent with James-Lange:</strong> He encounters the robbery (stimulus), experiences trembling, racing heart, and stomach knotting (physiological arousal), and concludes he is terrified. According to James-Lange, this pattern of physiological reactions <em>is</em> his terror. The bodily response and the emotion are one and the same.</div>
+          <div class="key-point green"><strong>Bystander B — challenges James-Lange:</strong> She experiences the <em>identical</em> physiological arousal — same trembling, racing heart, stomach knotting — yet feels calm and focused rather than terrified. According to James-Lange, identical physiological responses should produce identical emotions. But they do not. Bystander B's experience demonstrates that the <strong>same physiological pattern can produce different emotions</strong> depending on how a person interprets and contextualises their bodily state.</div>
+          <div class="key-point blue"><strong>What this reveals about James-Lange's limitations:</strong> This directly echoes Cannon's criticism — that physiological responses are not sufficiently differentiated to account for the wide range of emotions we experience. If emotion were nothing more than a bodily pattern, two people with identical physiological responses should feel the same emotion. Bystander B's case shows that <strong>cognitive interpretation plays a crucial role</strong> — her experience as a police officer allows her to reframe the arousal differently, producing a different emotional outcome. This suggests that physiology alone cannot fully explain emotion, and that cognition must also be involved.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q11 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">11</div>
+        <div class="q-meta">
+          <div class="q-tags">
+            <span class="q-tag tag-emo">Emotion</span>
+            <span class="q-tag tag-diff-med">Moderate</span>
+          </div>
+          <div class="q-concept">Cannon-Bard Theory — simultaneous emotion and physiology</div>
+        </div>
+      </div>
+      <div class="q-body">
+        <div class="q-text">
+          A mother is told, without any warning, that her child has been in an accident. In the <strong>same instant</strong>, she feels a wave of terror wash over her consciousness AND feels her heart lurch and her body go cold. She is later unable to say which happened first — the feeling of terror or the physical reaction. <em>"They just hit me at the same moment,"</em> she says.<br><br>
+          Which theory of emotion best accounts for the mother's experience? Explain the theory and why it fits. Then explain which theory it most directly contradicts, and why.
+        </div>
+      </div>
+      <button class="answer-toggle" onclick="toggleAnswer(this)">
+        <span>Reveal Model Answer</span><span class="toggle-icon">▼</span>
+      </button>
+      <div class="answer-body">
+        <div class="answer-label">Model Answer</div>
+        <div class="answer-text">
+          <p>The theory that best accounts for the mother's experience is the <strong>Cannon-Bard Theory of Emotion</strong>.</p>
+          <div class="key-point"><strong>Cannon-Bard Theory:</strong> This theory states that emotion does not originate in the body — it originates in the <strong>brain</strong>. When a stimulus is encountered, the brain simultaneously triggers both the <strong>subjective emotional experience</strong> (feeling terrified) and the <strong>physiological arousal</strong> (heart lurching, body going cold) at the same time. Neither causes the other — both are triggered together by the brain's response to the stimulus.</div>
+          <div class="key-point green"><strong>Why it fits the mother's experience:</strong> The mother's inability to determine which came first — the terror or the physical reaction — is precisely what Cannon-Bard predicts. Because the brain triggers both simultaneously, there is no sequence to detect. They arrive together as one unified response to the news. This is the defining feature of Cannon-Bard: <strong>simultaneous</strong> emotion and physiological arousal, both caused by the brain rather than one causing the other.</div>
+          <div class="key-point blue"><strong>Theory it most directly contradicts — James-Lange:</strong> James-Lange argues that physiological arousal comes <strong>first</strong> and the emotion is simply the awareness of that arousal. In James-Lange, the mother would feel her heart lurch first, and only then experience the terror as a result. But the mother reports no such sequence — both arrived at the same instant. This directly contradicts James-Lange's claim that bodily response precedes and causes the emotional experience.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q12 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">12</div>
+        <div class="q-meta">
+          <div class="q-tags">
+            <span class="q-tag tag-emo">Emotion</span>
+            <span class="q-tag tag-diff-hard">Challenging</span>
+          </div>
+          <div class="q-concept">Schachter-Singer Two-Factor — misattribution of arousal</div>
+        </div>
+      </div>
+      <div class="q-body">
+        <div class="q-text">
+          After drinking three cups of strong coffee, Wei feels his heart racing and his palms sweating. He sits down to watch the news, which features a story about political corruption that he finds mildly irritating under normal circumstances. Today, however, he finds himself feeling <strong>furious</strong> — far more angry than the story would usually make him feel. He snaps at his wife and slams his laptop shut.<br><br>
+          Using the Two-Factor Theory of Emotion, explain Wei's disproportionate anger. In your answer, specifically address what role the coffee played — and whether Wei's anger is "real." Then identify which aspect of this scenario Cannon had already predicted would be a problem for a purely physiological theory of emotion.
+        </div>
+      </div>
+      <button class="answer-toggle" onclick="toggleAnswer(this)">
+        <span>Reveal Model Answer</span><span class="toggle-icon">▼</span>
+      </button>
+      <div class="answer-body">
+        <div class="answer-label">Model Answer</div>
+        <div class="answer-text">
+          <p>Wei's disproportionate anger is explained by the <strong>Two-Factor Theory of Emotion</strong> (Schachter & Singer, 1962), which states that emotion is the product of <strong>physiological arousal</strong> combined with a <strong>cognitive label</strong> derived from situational context.</p>
+          <div class="key-point"><strong>The role of the coffee:</strong> The three cups of coffee produced genuine physiological arousal — racing heart, sweating palms. This arousal is real but <strong>undifferentiated</strong> — it has no inherent emotional meaning. Wei does not consciously think "the coffee is making me aroused." Instead, his brain scans the environment for an explanation and finds the news story about political corruption. He uses this contextual cue to <strong>label</strong> his arousal as anger — and that label becomes the emotion he experiences.</div>
+          <div class="key-point green"><strong>Is Wei's anger real?</strong> According to Two-Factor Theory — yes. The emotion is real because Wei genuinely experiences it. However, its <strong>intensity</strong> is amplified beyond what the news story alone would normally produce, because the coffee has added a layer of physiological arousal that Wei has misattributed to the news. His anger is a combination of mild irritation from the news and the surplus arousal from caffeine — all labelled as anger.</div>
+          <div class="key-point blue"><strong>Cannon's prediction:</strong> Cannon had already argued that <strong>artificially created physiological arousal does not give rise to genuine emotion</strong>. Drinking coffee increases arousal but should not cause fear, anger, or any specific emotion — because if emotion were purely physiological, artificially induced arousal would automatically produce emotion. Wei's case shows the opposite — his coffee-induced arousal only became anger when there was a contextual trigger to label it. This supports Cannon's point that physiology alone is insufficient, but also shows that when a context IS present, the artificially induced arousal can intensify the resulting emotion.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q13 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">13</div>
+        <div class="q-meta">
+          <div class="q-tags">
+            <span class="q-tag tag-emo">Emotion</span>
+            <span class="q-tag tag-diff-med">Moderate</span>
+          </div>
+          <div class="q-concept">Lazarus Cognitive-Mediational — reappraisal in practice</div>
+        </div>
+      </div>
+      <div class="q-body">
+        <div class="q-text">
+          Three colleagues receive identical critical feedback from their manager: <em>"Your presentation today did not meet the standard expected."</em><br><br>
+          <strong>Colleague A</strong> feels devastated and humiliated — she interprets it as proof she is not good enough for the role.<br>
+          <strong>Colleague B</strong> feels neutral — he believes the manager is routinely harsh with everyone and discounts the comment entirely.<br>
+          <strong>Colleague C</strong> initially feels stung, but then reframes it: <em>"This tells me exactly where I need to grow — I'll use this."</em> She feels motivated.<br><br>
+          Using Lazarus's Cognitive-Mediational Theory, explain why three people feel three completely different emotions in response to the same event. What does Colleague C's response specifically demonstrate about how emotions can be regulated?
+        </div>
+      </div>
+      <button class="answer-toggle" onclick="toggleAnswer(this)">
+        <span>Reveal Model Answer</span><span class="toggle-icon">▼</span>
+      </button>
+      <div class="answer-body">
+        <div class="answer-label">Model Answer</div>
+        <div class="answer-text">
+          <p><strong>Lazarus's Cognitive-Mediational Theory</strong> (1995) states that our <strong>initial cognitive appraisal</strong> of a situation determines what emotion we will feel. The stimulus itself does not cause the emotion — it is how we evaluate and interpret the stimulus that generates the emotional response. The sequence is: <strong>Stimulus → Cognitive appraisal → Emotion (with physiological arousal bundled inside).</strong></p>
+          <div class="key-point"><strong>Colleague A:</strong> She appraises the feedback as <strong>threatening and personally damning</strong> — evidence of personal inadequacy. This appraisal generates <strong>devastation and humiliation</strong>. The stimulus is the same for all three, but her appraisal frames it as an attack on her identity and capability.</div>
+          <div class="key-point green"><strong>Colleague B:</strong> He appraises the feedback as <strong>irrelevant</strong> — he attributes it to the manager's general harshness rather than to any genuine failing of his own. Because his appraisal judges the stimulus as not personally meaningful or threatening, he experiences <strong>neutrality</strong>. No threatening appraisal, no threatening emotion.</div>
+          <div class="key-point blue"><strong>Colleague C:</strong> She appraises the feedback as a <strong>challenge and opportunity for growth</strong> rather than a threat. This produces <strong>motivation</strong> rather than distress. Crucially, she demonstrates what Lazarus calls <strong>reappraisal</strong> — she initially feels stung (first appraisal) but actively reframes the meaning of the event (second appraisal), shifting her emotional experience from negative to motivating. This shows that emotions are not fixed responses to events — they can be regulated by changing how we cognitively evaluate a situation. Reappraisal is therefore a powerful emotion regulation strategy: seeing an event as a challenge rather than a threat can transform the emotion it generates.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q14 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">14</div>
+        <div class="q-meta">
+          <div class="q-tags">
+            <span class="q-tag tag-emo">Emotion</span>
+            <span class="q-tag tag-diff-med">Moderate</span>
+          </div>
+          <div class="q-concept">Facial Feedback Hypothesis — mechanism and real-world application</div>
+        </div>
+      </div>
+      <div class="q-body">
+        <div class="q-text">
+          A therapist working with patients with depression introduces an unusual exercise: she asks patients to hold a <strong>gentle smile</strong> for two minutes each morning while looking in the mirror, even if they feel nothing. Several patients report that after a few weeks, their mornings feel slightly less heavy — even on days when nothing externally has changed.<br><br>
+          A sceptical colleague says: <em>"That can't work — you can't change how you feel just by moving your face. Emotions come first, expressions follow."</em><br><br>
+          Using the Facial Feedback Hypothesis, explain how the therapist's exercise might produce the effect patients describe. Describe the specific proposed biological mechanism. Then address the sceptical colleague's claim directly.
+        </div>
+      </div>
+      <button class="answer-toggle" onclick="toggleAnswer(this)">
+        <span>Reveal Model Answer</span><span class="toggle-icon">▼</span>
+      </button>
+      <div class="answer-body">
+        <div class="answer-label">Model Answer</div>
+        <div class="answer-text">
+          <p>The therapist's exercise is consistent with the <strong>Facial Feedback Hypothesis</strong> (McIntosh, 1996), which proposes that our experience of emotion is affected by the <strong>feedback the brain receives from facial muscles</strong>. The brain is accustomed to associating certain facial muscle configurations with specific emotions. When we feel happy, we smile — but the reverse also holds: the facial expression itself can send signals back to the brain that influence how we feel.</p>
+          <div class="key-point"><strong>How the exercise might work:</strong> When patients hold a gentle smile, their facial muscles adopt a configuration associated with positive emotion. These muscles send <strong>feedback signals</strong> back to the brain indicating that the person is smiling. Even without a genuine emotional trigger, the brain interprets this muscular feedback and adjusts the person's emotional experience accordingly — making mornings feel slightly less heavy.</div>
+          <div class="key-point green"><strong>The specific biological mechanism:</strong> The configuration of facial muscles affects <strong>blood flow to the brain</strong>. Smiling changes blood flow in a way that <strong>decreases brain temperature</strong>. This change in brain temperature then affects the release of <strong>neurotransmitters</strong> that regulate mood — potentially explaining why even a forced smile can produce a mild improvement in emotional state.</div>
+          <div class="key-point blue"><strong>Addressing the sceptical colleague:</strong> The colleague's claim — "emotions come first, expressions follow" — reflects the traditional view of emotional expression as a one-way street. The Facial Feedback Hypothesis challenges this by proposing a <strong>two-way relationship</strong> between expression and emotion. A meta-analysis of 138 studies supports the finding that facial muscle configuration does influence mood, suggesting the colleague's claim is an oversimplification. The relationship between expression and feeling is bidirectional — not just from emotion to face, but also from face back to emotion.</div>
+          <p>It is important to note that the Facial Feedback Hypothesis remains a <strong>hypothesis</strong> rather than a fully established theory — its effect sizes are modest and some replication studies have produced mixed results. However, the available evidence does suggest a genuine, if partial, influence of facial expression on emotional experience.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q15 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">15</div>
+        <div class="q-meta">
+          <div class="q-tags">
+            <span class="q-tag tag-emo">Emotion</span>
+            <span class="q-tag tag-diff-hard">Challenging</span>
+          </div>
+          <div class="q-concept">Plutchik + Ekman + Cultural Display Rules — integrated</div>
+        </div>
+      </div>
+      <div class="q-body">
+        <div class="q-text">
+          At an international business conference, a Korean delegate receives unexpected public praise from the chairperson for his outstanding work. His face remains completely neutral — no smile, no visible reaction. An American delegate sitting nearby whispers to her colleague: <em>"He doesn't look pleased at all — maybe he's embarrassed or unhappy with the praise?"</em><br><br>
+          Later, a colleague who knows the Korean delegate well says he was <strong>deeply honoured</strong> by the recognition.<br><br>
+          Using concepts of basic emotions, cultural display rules, and collectivist culture, explain: (a) what the American delegate misread and why, and (b) what the Korean delegate was likely experiencing internally versus expressing externally. What does this reveal about the universality and cultural variability of emotion?
+        </div>
+      </div>
+      <button class="answer-toggle" onclick="toggleAnswer(this)">
+        <span>Reveal Model Answer</span><span class="toggle-icon">▼</span>
+      </button>
+      <div class="answer-body">
+        <div class="answer-label">Model Answer</div>
+        <div class="answer-text">
+          <p>This scenario illustrates the tension between the <strong>universality of basic emotions</strong> and the <strong>cultural variability of emotional expression</strong>.</p>
+          <div class="key-point"><strong>(a) What the American delegate misread and why:</strong> The American delegate assumed that the absence of a smile meant the absence of positive emotion. This reflects an <strong>individualist cultural lens</strong> — in individualist cultures, emotions are seen as expressions of personal identity and people are generally <strong>more expressive of emotions openly</strong>. Receiving public praise and feeling pleased would normally produce a visible smile or expression of gratitude. The American applied her own cultural display rules to interpret a culturally different response, leading to a misreading.</div>
+          <div class="key-point green"><strong>(b) Internal experience vs external expression for the Korean delegate:</strong> Internally, the Korean delegate was experiencing <strong>happiness and honour</strong> — basic emotions that Ekman (1993) identified as universal across cultures. However, externally he expressed nothing — consistent with <strong>collectivist display rules</strong>. In collectivist cultures, the belief is that expressing emotion — even positive emotion — in a public group setting can <strong>disrupt intra-group relationships and social functioning</strong>. Drawing attention to oneself through visible emotional display can be seen as placing individual needs above group harmony. Maintaining a neutral expression is therefore the socially appropriate behaviour, not evidence of indifference.</div>
+          <div class="key-point blue"><strong>What this reveals — universality vs cultural variability:</strong> Ekman's cross-cultural research found that <strong>basic emotions</strong> such as happiness, sadness, fear, anger, surprise, disgust, and contempt are universally experienced and recognisable across cultures. However, <strong>display rules</strong> — the cultural norms governing when and how emotions are expressed — vary significantly between cultures. The Korean delegate demonstrates this distinction perfectly: the internal emotional experience (honour, happiness) was universal, but the external expression was shaped entirely by collectivist display rules. Misreading the expression as the emotion is a common cross-cultural error.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q16 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">16</div>
+        <div class="q-meta">
+          <div class="q-tags">
+            <span class="q-tag tag-emo">Emotion</span>
+            <span class="q-tag tag-diff-hard">Challenging</span>
+          </div>
+          <div class="q-concept">Mere Exposure Effect — Zajonc, cognition vs emotion debate</div>
+        </div>
+      </div>
+      <div class="q-body">
+        <div class="q-text">
+          A commuter takes the same train route every day for a year. At one station, a street musician always plays the same unfamiliar melody. The commuter never stops, never consciously listens, and could not name the tune. One day, the musician is absent. The commuter feels an unexpected and inexplicable sense of <strong>mild loss or emptiness</strong> — something feels missing, though he cannot identify what.<br><br>
+          (a) Which psychological phenomenon explains the commuter's unexpected feeling?<br>
+          (b) What does this suggest about whether cognition is necessary for emotion?<br>
+          (c) How would Lazarus respond to this case — and why does this create a genuine theoretical debate that has never been fully resolved?
+        </div>
+      </div>
+      <button class="answer-toggle" onclick="toggleAnswer(this)">
+        <span>Reveal Model Answer</span><span class="toggle-icon">▼</span>
+      </button>
+      <div class="answer-body">
+        <div class="answer-label">Model Answer</div>
+        <div class="answer-text">
+          <div class="key-point"><strong>(a) The Mere Exposure Effect (Zajonc):</strong> The commuter's unexpected sense of loss is explained by Zajonc's <strong>Mere Exposure Effect</strong> — the phenomenon whereby we develop an emotional preference or attachment toward stimuli we have been frequently exposed to, even without consciously recognising or processing them. The commuter has been exposed to the melody hundreds of times without ever consciously attending to it. This repeated exposure alone has created a positive emotional association — detectable only when the stimulus is absent.</div>
+          <div class="key-point green"><strong>(b) What this suggests about cognition and emotion:</strong> The commuter's feeling arose with <strong>no conscious recognition, no knowledge of what is missing, and no cognitive processing</strong> of the melody. Zajonc would argue this demonstrates that <strong>emotion can occur completely independently of cognition</strong> — the emotional response (mild loss) was generated purely by the absence of a repeatedly experienced stimulus, without any evaluation, memory retrieval, or conscious thought.</div>
+          <div class="key-point blue"><strong>(c) Lazarus's response and the unresolved debate:</strong> Lazarus would argue that even in this case, an <strong>unconscious cognitive appraisal</strong> must have occurred — the brain registered the absence of a familiar stimulus and evaluated it as a minor disruption to an expected pattern, generating the emotional response. For Lazarus, there is always <em>some</em> form of appraisal, even if below conscious awareness. This creates a genuine theoretical debate: the commuter's feeling arose without any conscious cognition — but does that mean no cognition at all (Zajonc), or unconscious cognition we simply cannot detect (Lazarus)? This debate has never been fully resolved because <strong>unconscious processes are by definition unobservable</strong> — there is no clean way to prove whether an unconscious appraisal occurred or whether the response was purely automatic with no evaluation whatsoever. Both positions remain theoretically defensible.</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /sec-emo -->
+
+  <!-- ══════════ CROSS-SECTIONAL ══════════ -->
+  <div class="q-section" id="sec-cross">
+    <div class="section-header">
+      <span class="section-tag">Cross-Sectional</span>
+      <h2>Motivation × Emotion</h2>
+    </div>
+
+    <div class="cross-divider"><span>These questions integrate concepts across both motivation and emotion</span></div>
+
+    <!-- Q17 -->
+    <div class="q-card" style="margin-top:28px">
+      <div class="q-header">
+        <div class="q-num">17</div>
+        <div class="q-meta">
+          <div class="q-tags">
+            <span class="q-tag tag-cross">Cross-Sectional</span>
+            <span class="q-tag tag-diff-med">Moderate</span>
+          </div>
+          <div class="q-concept">Emotion as motivation + Lazarus reappraisal + Locus of Control</div>
+        </div>
+      </div>
+      <div class="q-body">
+        <div class="q-text">
+          After receiving a poor grade, two students have contrasting reactions.<br><br>
+          <strong>Student A</strong> feels intense shame and embarrassment. These feelings cause her to avoid studying altogether — she skips classes, stops attempting assignments, and eventually withdraws from the course.<br><br>
+          <strong>Student B</strong> feels the same initial shame. However, he reframes the situation: <em>"This grade shows me where I need to focus — it doesn't define me."</em> His shame transforms into determination, and he studies harder than before, eventually improving significantly.<br><br>
+          Using concepts from <strong>both</strong> motivation and emotion, explain how the same emotion — shame — produced such dramatically different behavioural outcomes. Your answer should reference at least <strong>one emotion theory</strong> and <strong>one motivation concept</strong>.
+        </div>
+      </div>
+      <button class="answer-toggle" onclick="toggleAnswer(this)">
+        <span>Reveal Model Answer</span><span class="toggle-icon">▼</span>
+      </button>
+      <div class="answer-body">
+        <div class="answer-label">Model Answer</div>
+        <div class="answer-text">
+          <p>This scenario demonstrates that the same emotion does not automatically produce the same behaviour — the <strong>cognitive interpretation</strong> of an emotion and a person's <strong>motivational orientation</strong> together determine the behavioural outcome.</p>
+          <div class="key-point"><strong>Emotion Theory — Lazarus's Cognitive-Mediational Theory:</strong> Both students initially appraise the poor grade as a threat or failure — generating shame. However, Student B engages in <strong>reappraisal</strong> — he reframes the meaning of the event from "evidence of failure" to "information about where to improve." This cognitive reappraisal shifts the emotional experience from shame to determination. Lazarus's theory shows that emotions are not fixed responses — they can be regulated and transformed through how we choose to interpret a situation. Student A never reappraises — her original appraisal persists and continues to generate avoidance behaviour.</div>
+          <div class="key-point green"><strong>Motivation Concept — Locus of Control and Seligman's Explanatory Style:</strong> Student A appears to have an <strong>external locus of control</strong> and a <strong>pessimistic explanatory style</strong> — the poor grade feels like evidence of a fixed, unchangeable inadequacy ("I can't do this"), leaving her with no motivation to try. Student B demonstrates an <strong>internal locus of control</strong> and an <strong>optimistic explanatory style</strong> — he attributes the outcome to specific, changeable factors (areas needing focus) and believes his effort can alter the result. This motivational orientation transforms the emotional experience of shame into a driver of action rather than a reason for withdrawal.</div>
+          <p>Together, these concepts reveal that emotion and motivation are deeply intertwined. The same emotional trigger can either drain motivation or fuel it — depending on how a person appraises and reframes the event, and whether they believe they have the power to change their situation.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q18 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">18</div>
+        <div class="q-meta">
+          <div class="q-tags">
+            <span class="q-tag tag-cross">Cross-Sectional</span>
+            <span class="q-tag tag-diff-hard">Challenging</span>
+          </div>
+          <div class="q-concept">Maslow + Emotion function + Display Rules</div>
+        </div>
+      </div>
+      <div class="q-body">
+        <div class="q-text">
+          A humanitarian aid worker spends two years in a conflict zone, living with limited food, no stable shelter, and constant physical danger. Despite these conditions, colleagues describe her as <strong>remarkably purposeful and emotionally alive</strong> — she laughs, grieves openly when patients die, and speaks passionately about her work. When she returns home to safety and comfort, she describes feeling <strong>strangely empty and unmotivated</strong> — despite having all her basic needs met.<br><br>
+          Using concepts from <strong>both motivation and emotion</strong>, provide a rich explanation of: (a) why she remained purposeful and emotionally engaged despite unmet basic needs, and (b) why safety and comfort paradoxically left her feeling empty and unmotivated.
+        </div>
+      </div>
+      <button class="answer-toggle" onclick="toggleAnswer(this)">
+        <span>Reveal Model Answer</span><span class="toggle-icon">▼</span>
+      </button>
+      <div class="answer-body">
+        <div class="answer-label">Model Answer</div>
+        <div class="answer-text">
+          <div class="key-point"><strong>(a) Purposeful and emotionally alive despite unmet basic needs:</strong> From a motivation perspective, this directly challenges <strong>Maslow's hierarchy of needs</strong>, which predicts that physiological and safety needs must be met before higher needs can motivate behaviour. The aid worker's deep sense of purpose reflects <strong>self-actualisation</strong> — reaching her full potential through meaningful contribution — operating powerfully even without a foundation of basic security. This is one of Maslow's most significant limitations: the theory cannot account for individuals whose higher-order needs are so compelling that they override basic survival concerns. From an emotion perspective, the function of emotions is to help us <strong>attend and respond to important situations and convey our intentions to others</strong>. In the conflict zone, every situation carried genuine stakes — grief, urgency, purpose, connection. Her emotions were constantly engaged because the environment demanded authentic emotional responses. Laughing, grieving, and speaking passionately are all healthy emotional expressions fulfilling this function fully.</div>
+          <div class="key-point green"><strong>(b) Empty and unmotivated despite basic needs being met:</strong> Maslow's hierarchy would predict that with physiological and safety needs met, the aid worker should now be free to pursue higher needs. Yet she feels empty — suggesting that <strong>having basic needs met does not automatically activate higher motivation</strong>. The meaningful context that was driving her self-actualisation — urgency, purpose, connection, mattering — has been removed. Without a sense that her actions matter, higher-order motivation collapses even in physical comfort. From an emotion perspective, returning to a safe, comfortable environment removes the emotionally meaningful stimuli that kept her emotionally engaged. Her emotions no longer have important situations to respond to or convey intentions about — leading to emotional flatness. This reveals that <strong>emotions require meaningful engagement</strong> to function fully. Safety and comfort without meaning can paradoxically produce emotional emptiness precisely because there is nothing important enough to feel deeply about.</div>
+          <p>Together, these concepts suggest that human wellbeing requires more than the satisfaction of basic needs — it requires <strong>meaning, purpose, and emotional engagement</strong>. The absence of these higher-order needs can produce emptiness even in the presence of physical comfort.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q19 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">19</div>
+        <div class="q-meta">
+          <div class="q-tags">
+            <span class="q-tag tag-cross">Cross-Sectional</span>
+            <span class="q-tag tag-diff-hard">Challenging</span>
+          </div>
+          <div class="q-concept">Intrinsic motivation + Arousal + Cannon-Bard vs James-Lange</div>
+        </div>
+      </div>
+      <div class="q-body">
+        <div class="q-text">
+          Leo is a competitive rock climber. He trains daily not for prizes or recognition, but because he finds the sport <strong>completely absorbing</strong>. During a particularly difficult climb, he notices his heart pounding, his muscles straining, and his focus becoming razor-sharp — and simultaneously feels a profound sense of <strong>exhilaration and aliveness</strong> that he describes as arriving "all at once."<br><br>
+          A friend who is afraid of heights watches Leo climb and experiences the <strong>same physical sensations</strong> — racing heart, tense muscles — but feels <strong>terror</strong> rather than exhilaration.<br><br>
+          (a) What type of motivation drives Leo's climbing, and what does his optimal performance during this high-arousal activity suggest about arousal theory?<br>
+          (b) Using emotion theory, explain why Leo and his friend have the same physiological experience but feel completely different emotions. Use at least <strong>two theories</strong> in your answer.
+        </div>
+      </div>
+      <button class="answer-toggle" onclick="toggleAnswer(this)">
+        <span>Reveal Model Answer</span><span class="toggle-icon">▼</span>
+      </button>
+      <div class="answer-body">
+        <div class="answer-label">Model Answer</div>
+        <div class="answer-text">
+          <div class="key-point"><strong>(a) Motivation — Intrinsic motivation and arousal theory:</strong> Leo is driven by <strong>intrinsic motivation</strong> — he climbs not for external rewards like prizes or recognition, but for the internal reward of absorption, challenge, and aliveness. The activity itself is the reward. His optimal performance during a high-arousal activity also has implications for <strong>arousal theory</strong> (Yerkes-Dodson). Rock climbing is a physically demanding but largely procedural task — experienced climbers develop automatic movement patterns that reduce the cognitive complexity of the activity. For experienced practitioners, this type of task may actually benefit from <strong>higher arousal</strong> — consistent with the Yerkes-Dodson principle that simpler or highly practised tasks tolerate higher arousal levels. Leo's razor-sharp focus and optimal performance at high arousal is consistent with this.</div>
+          <div class="key-point green"><strong>(b) Emotion theory — same physiology, different emotions:</strong> <strong>James-Lange Theory</strong> struggles to explain this scenario. If emotion is simply the pattern of physiological arousal, both Leo and his friend — experiencing identical physical sensations — should feel the same emotion. They do not. This exposes James-Lange's key limitation: identical physiological profiles produce different emotions, suggesting that physiology alone cannot determine which emotion is experienced. <strong>Lazarus's Cognitive-Mediational Theory</strong> explains the difference more effectively. Leo appraises climbing as <strong>challenging, meaningful, and personally mastered</strong> — generating exhilaration. His friend appraises the same activity as <strong>dangerous and beyond her control</strong> — generating terror. The identical physiological arousal is present in both cases, but the <strong>cognitive appraisal determines the emotion</strong>, not the arousal itself. Leo's description of exhilaration arriving "all at once" — simultaneously with the physical sensations — is also consistent with <strong>Cannon-Bard Theory</strong>, which argues that subjective emotion and physiological arousal are triggered simultaneously by the brain rather than one causing the other.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q20 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">20</div>
+        <div class="q-meta">
+          <div class="q-tags">
+            <span class="q-tag tag-cross">Cross-Sectional</span>
+            <span class="q-tag tag-diff-hard">Challenging</span>
+          </div>
+          <div class="q-concept">Full integration — all major theories across motivation and emotion</div>
+        </div>
+      </div>
+      <div class="q-body">
+        <div class="q-text">
+          Maya grew up with a highly critical father who frequently told her she was not smart enough to succeed. As an adult, she works obsessively long hours despite already being successful by any objective measure. She cannot explain why she still feels driven to prove herself. When she wins an industry award, she feels <strong>no satisfaction</strong> — only a fleeting sense of relief followed immediately by anxiety about what comes next. Colleagues who achieve far less seem happier and more content than she is.<br><br>
+          This is a rich, complex scenario. Using concepts from <strong>across both motivation and emotion</strong>, provide the most complete psychological explanation you can of Maya's behaviour and emotional experience. There is no single correct answer — you will be assessed on the <strong>range, accuracy, and integration</strong> of concepts applied.
+        </div>
+      </div>
+      <button class="answer-toggle" onclick="toggleAnswer(this)">
+        <span>Reveal Model Answer</span><span class="toggle-icon">▼</span>
+      </button>
+      <div class="answer-body">
+        <div class="answer-label">Model Answer</div>
+        <div class="answer-text">
+          <p>Maya's behaviour and emotional experience can be understood through multiple psychological frameworks applied together.</p>
+          <div class="key-point"><strong>Freud's Psychodynamic Theory — unconscious motivation:</strong> Maya's inability to explain her drive to prove herself suggests <strong>unconscious motivation</strong> rooted in her father's criticism. Her relentless work despite objective success reflects <strong>Thanatos</strong> redirected inward as self-pressure, or Eros as a drive for validation she never received. The motivation operates below conscious awareness — she cannot stop even when she wants to, because the driver is not visible to her conscious mind.</div>
+          <div class="key-point green"><strong>Locus of Control + Seligman's Explanatory Style:</strong> Growing up with a critical father likely instilled an <strong>external, unstable sense of self-worth</strong> — her value feels contingent on external achievement rather than internal self-acceptance. Her <strong>pessimistic explanatory style</strong> may mean she attributes success to luck or circumstance rather than genuine ability — which is why winning an award produces only relief rather than satisfaction. She cannot internalise success.</div>
+          <div class="key-point blue"><strong>Achievement Motivation — maladaptive form:</strong> Maya's obsessive overworking suggests achievement motivation that has lost its adaptive function. Rather than choosing <strong>moderate, meaningful challenges</strong> as high achievers typically do, she is driven by anxiety — working not toward a goal but away from a feared identity ("not smart enough"). This is achievement motivation driven by avoidance rather than genuine mastery.</div>
+          <div class="key-point"><strong>Maslow's Hierarchy — esteem needs never satisfied:</strong> Maya appears stuck at the <strong>esteem needs</strong> level — constantly seeking external validation to fill an internal deficit. Because the deficit is psychological rather than material, no amount of external achievement can satisfy it. She cannot move toward self-actualisation because her esteem needs keep reasserting themselves regardless of what she achieves.</div>
+          <div class="key-point green"><strong>Lazarus — maladaptive appraisal patterns:</strong> Maya consistently appraises her achievements as <strong>insufficient or temporary</strong> — each success is immediately reframed as a precursor to potential failure ("anxiety about what comes next"). This perpetual threat appraisal generates chronic anxiety and prevents the satisfaction that might otherwise follow achievement. Healthy reappraisal — seeing achievement as evidence of genuine capability — could interrupt this cycle.</div>
+          <div class="key-point blue"><strong>Function of emotions — disconnected:</strong> Maya's inability to feel satisfaction after winning an award suggests her emotional responses have become disconnected from their normal function. Emotions should help us <strong>respond to important events</strong> — satisfaction after success serves to reinforce meaningful behaviour. Maya's emotional system is generating anxiety as if success were a threat, rather than satisfaction as if it were a reward. This disconnection between achievement and positive emotion is one of the most debilitating aspects of her experience.</div>
+          <p>In summary, Maya's experience reflects the compounding effect of unconscious motivation (Freud), pessimistic explanatory style and external locus (Seligman), maladaptive achievement motivation, unresolved esteem needs (Maslow), chronic threat appraisal (Lazarus), and emotional dysregulation. No single theory explains her fully — it is the interaction of all these forces that produces her particular pattern of driven, joyless striving.</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /sec-cross -->
+
+</div><!-- /container -->
+
+<script>
+// ── READING PROGRESS ──
+window.addEventListener('scroll', () => {
+  const el = document.getElementById('progress');
+  const doc = document.documentElement;
+  const pct = (doc.scrollTop / (doc.scrollHeight - doc.clientHeight)) * 100;
+  el.style.width = pct + '%';
+});
+
+// ── TOGGLE ANSWER ──
+function toggleAnswer(btn) {
+  btn.classList.toggle('revealed');
+  const body = btn.nextElementSibling;
+  body.classList.toggle('open');
+  btn.querySelector('span:first-child').textContent =
+    body.classList.contains('open') ? 'Hide Model Answer' : 'Reveal Model Answer';
+}
+
+// ── SECTION FILTER ──
+function showAll(btn) {
+  document.querySelectorAll('.nav-pill').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.q-section').forEach(s => s.classList.remove('hidden'));
+}
+
+function filterSection(key, btn) {
+  document.querySelectorAll('.nav-pill').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.q-section').forEach(s => {
+    s.classList.toggle('hidden', !s.id.includes(key));
+  });
+}
+</script>
+</body>
+</html>
