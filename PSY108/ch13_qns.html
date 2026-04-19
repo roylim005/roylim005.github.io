@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MHD Exam Practice — Scenario Questions</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f5f0;
+    --surface: #ffffff;
+    --card: #fefefe;
+    --border: #e2ddd6;
+    --ink: #1c1a17;
+    --ink-dim: #5a5650;
+    --ink-faint: #9a948c;
+    --accent: #c0392b;
+    --accent-soft: #fdf0ee;
+    --accent-border: #e8b5b0;
+    --green: #2d6a4f;
+    --green-soft: #eef6f1;
+    --green-border: #a8d5be;
+    --blue: #1a4a7a;
+    --blue-soft: #eef3fa;
+    --amber: #7a4a1a;
+    --amber-soft: #fdf5e6;
+    --purple: #4a1a7a;
+    --purple-soft: #f3eefa;
+    --section-colors: #c0392b, #1a6b4a, #1a4a7a, #7a4a1a, #4a1a7a, #1a5a6b, #4a4a1a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.75;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--ink);
+    color: #f7f5f0;
+    padding: 52px 40px 44px;
+    text-align: center;
+  }
+  .header-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #9a9480;
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-family: 'Lora', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 12px;
+    color: #f7f5f0;
+  }
+  .header-sub {
+    font-size: 0.88rem;
+    color: #6a6458;
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* INSTRUCTIONS */
+  .instructions {
+    background: var(--amber-soft);
+    border: 1px solid #e2c890;
+    border-left: 4px solid #c8961a;
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin: 32px auto;
+    max-width: 860px;
+    font-size: 0.88rem;
+    color: var(--amber);
+  }
+  .instructions strong { color: #5a3a0a; }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(247,245,240,0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 20px;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  nav::-webkit-scrollbar { height: 3px; }
+  nav::-webkit-scrollbar-thumb { background: var(--border); }
+  nav ul { list-style: none; display: inline-flex; gap: 0; padding: 0; }
+  nav a {
+    display: inline-block;
+    padding: 13px 15px;
+    font-size: 0.74rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  nav a:hover { color: var(--ink); border-bottom-color: var(--accent); }
+
+  /* CONTAINER */
+  .container { max-width: 860px; margin: 0 auto; padding: 0 24px 80px; }
+
+  /* SECTION HEADERS */
+  .section-block { margin-top: 56px; }
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid var(--border);
+  }
+  .section-num {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .section-title-block h2 {
+    font-family: 'Lora', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .section-title-block p {
+    font-size: 0.78rem;
+    color: var(--ink-faint);
+    margin-top: 2px;
+  }
+
+  /* QUESTION CARD */
+  .q-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .q-header {
+    padding: 18px 22px 14px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .q-num {
+    font-family: 'Lora', serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--ink-faint);
+    min-width: 28px;
+    padding-top: 2px;
+  }
+  .q-body { flex: 1; }
+  .q-tag {
+    display: inline-block;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 2px 10px;
+    border-radius: 20px;
+    margin-bottom: 8px;
+  }
+  .q-scenario {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 0.93rem;
+    color: var(--ink-dim);
+    background: var(--bg);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin: 10px 0;
+    border-left: 3px solid var(--border);
+    line-height: 1.7;
+  }
+  .q-ask {
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin-top: 10px;
+  }
+
+  /* ANSWER TOGGLE */
+  .answer-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 22px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--ink-faint);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    user-select: none;
+    transition: background 0.15s, color 0.15s;
+    border-top: none;
+  }
+  .answer-toggle:hover { background: var(--bg); color: var(--ink); }
+  .toggle-icon {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem;
+    transition: transform 0.2s, background 0.15s;
+    color: var(--ink-dim);
+  }
+  .answer-toggle.open .toggle-icon {
+    transform: rotate(180deg);
+    background: var(--green);
+    color: #fff;
+  }
+  .answer-toggle.open { color: var(--green); }
+
+  /* ANSWER PANEL */
+  .answer-panel {
+    display: none;
+    padding: 20px 22px 22px;
+    border-top: 1px solid var(--green-border);
+    background: var(--green-soft);
+    font-size: 0.9rem;
+  }
+  .answer-panel.visible { display: block; }
+  .answer-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 12px;
+  }
+  .answer-panel p { color: #2a4a3a; margin-bottom: 8px; font-size: 0.9rem; }
+  .answer-panel strong { color: #1a3a2a; }
+  .answer-panel ul { padding-left: 18px; margin: 6px 0; }
+  .answer-panel ul li { color: #2a4a3a; font-size: 0.88rem; margin-bottom: 5px; }
+  .key-point {
+    background: rgba(45,106,79,0.08);
+    border: 1px solid var(--green-border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-top: 12px;
+    font-size: 0.84rem;
+    color: var(--green);
+  }
+  .key-point strong { color: #1a4a30; }
+
+  /* CROSS-SECTIONAL BADGE */
+  .cross-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #5a1a7a;
+    background: #f3eefa;
+    border: 1px solid #c8a8e0;
+    padding: 2px 10px;
+    border-radius: 20px;
+  }
+
+  /* PROGRESS BAR AREA */
+  .progress-bar-wrap {
+    background: var(--border);
+    border-radius: 4px;
+    height: 5px;
+    margin: 8px 0 16px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: var(--green);
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+  .progress-text {
+    font-size: 0.75rem;
+    color: var(--ink-faint);
+    margin-bottom: 4px;
+  }
+
+  /* COLORS PER SECTION */
+  .sec1 .section-num { background: #c0392b; }
+  .sec1 .q-tag { background: #fdf0ee; color: #c0392b; border: 1px solid #e8b5b0; }
+  .sec2 .section-num { background: #1a6b4a; }
+  .sec2 .q-tag { background: #eef6f1; color: #1a6b4a; border: 1px solid #a8d5be; }
+  .sec3 .section-num { background: #1a4a7a; }
+  .sec3 .q-tag { background: #eef3fa; color: #1a4a7a; border: 1px solid #a8c5e0; }
+  .sec4 .section-num { background: #7a4a1a; }
+  .sec4 .q-tag { background: #fdf5e6; color: #7a4a1a; border: 1px solid #d8b880; }
+  .sec5 .section-num { background: #4a1a7a; }
+  .sec5 .q-tag { background: #f3eefa; color: #4a1a7a; border: 1px solid #c8a8e0; }
+  .sec6 .section-num { background: #1a5a6b; }
+  .sec6 .q-tag { background: #eef6f8; color: #1a5a6b; border: 1px solid #a0ccd8; }
+  .sec7 .section-num { background: #4a4a1a; }
+  .sec7 .q-tag { background: #f8f6e8; color: #4a4a1a; border: 1px solid #c8c880; }
+  .secX .section-num { background: #3a1a4a; }
+  .secX .q-tag { background: #f5eefa; color: #3a1a4a; border: 1px solid #c0a0d8; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-eyebrow">PSY108 · Chapter 13 · Mental Health Disorders</div>
+  <h1>Scenario-Based Exam Practice</h1>
+  <p class="header-sub">All questions require application, not recall. Attempt each question fully before revealing the model answer.</p>
+</header>
+
+<div class="container">
+
+  <div class="instructions">
+    <strong>How to use this:</strong> Read the scenario, think through your answer, then click <em>"Reveal Model Answer"</em>. If your reasoning differs, re-read both — sometimes a different angle is equally valid, but note what the model answer emphasises. Questions move from single-section to cross-sectional toward the end.
+  </div>
+
+  <div class="progress-text" id="prog-text">Answers revealed: 0 / 30</div>
+  <div class="progress-bar-wrap"><div class="progress-bar-fill" id="prog-bar"></div></div>
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- SECTION 1: What is a MHD              -->
+  <!-- ══════════════════════════════════════ -->
+  <div class="section-block sec1" id="s1">
+    <div class="section-label">
+      <div class="section-num">1</div>
+      <div class="section-title-block">
+        <h2>What is a Mental Health Disorder?</h2>
+        <p>The 3 indicators · Degree & Frequency · Cultural context</p>
+      </div>
+    </div>
+
+    <!-- Q1 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Q1</div>
+        <div class="q-body">
+          <span class="q-tag">Indicators · Cultural Relativity</span>
+          <div class="q-scenario">Marcus is a 35-year-old man living in a tight-knit religious community where speaking in tongues during worship is a common practice. His new city doctor, unfamiliar with his culture, witnesses Marcus doing this and notes it as "hearing and responding to voices others cannot hear." The doctor flags this for a possible psychotic disorder.</div>
+          <div class="q-ask">Is the doctor's concern well-founded? Using the definition of a mental health disorder, evaluate whether Marcus's behaviour should be classified as a disorder.</div>
+        </div>
+      </div>
+      <div class="answer-toggle" onclick="toggleAnswer(this)">
+        <div class="toggle-icon">▾</div> Reveal Model Answer
+      </div>
+      <div class="answer-panel">
+        <div class="answer-label">Model Answer</div>
+        <p>The doctor's concern is <strong>not well-founded</strong> in this case. A mental health disorder requires behaviour that is <strong>not typical or culturally expected</strong> — but this standard must be evaluated within the person's own cultural context, not the clinician's.</p>
+        <p>Within Marcus's community, speaking in tongues is an <strong>accepted and expected practice</strong> during worship. It is not atypical within his cultural group. There is also no indication of <strong>distress</strong> (he is not suffering) or <strong>dysfunction</strong> (no evidence of impaired functioning in work, relationships, or daily life).</p>
+        <p>This scenario illustrates a key limitation: <strong>social norms vary widely across cultures</strong>, and judging behaviour as dysfunctional based on that criterion alone is especially problematic. All three indicators must be present and evaluated in cultural context before a disorder can be identified.</p>
+        <div class="key-point"><strong>Exam insight:</strong> The 3Ds must all be considered together. One indicator — especially "not culturally expected" — is never sufficient on its own.</div>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Q2</div>
+        <div class="q-body">
+          <span class="q-tag">Degree & Frequency · Dysfunction</span>
+          <div class="q-scenario">Both Rachel and Priya are anxious about their upcoming national exams. Rachel loses sleep for two nights, snaps at her parents once, and finds it hard to concentrate in class that week. Priya has been unable to attend school for the past three weeks, cannot eat, cries uncontrollably every day, and has stopped speaking to all her friends.</div>
+          <div class="q-ask">Both girls show anxiety. Explain why one situation warrants clinical concern and the other does not, drawing on the concept of degree and frequency.</div>
+        </div>
+      </div>
+      <div class="answer-toggle" onclick="toggleAnswer(this)">
+        <div class="toggle-icon">▾</div> Reveal Model Answer
+      </div>
+      <div class="answer-panel">
+        <div class="answer-label">Model Answer</div>
+        <p>Both girls experience anxiety, but the key distinction lies in <strong>degree and frequency</strong> — the central criterion for determining clinical significance.</p>
+        <p><strong>Rachel's</strong> anxiety is <strong>proportionate and time-limited</strong>. It is a normal, expected stress response to a high-stakes situation. While unpleasant, it does not severely impair her functioning and resolves naturally. This is <em>not</em> a disorder.</p>
+        <p><strong>Priya's</strong> response meets all three indicators: (1) It is <strong>not typical</strong> — most students manage to attend school even under exam stress; (2) She experiences significant <strong>distress</strong> — daily uncontrollable crying, no appetite; (3) There is clear <strong>dysfunction</strong> — she cannot go to school, has stopped eating, and has withdrawn completely from social life. The duration (three weeks) and intensity clearly cross the clinical threshold.</p>
+        <div class="key-point"><strong>Exam insight:</strong> Anxiety itself is normal. The issue is always: how severe? How frequent? How long? Does it impair functioning?</div>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Q3</div>
+        <div class="q-body">
+          <span class="q-tag">All 3 Indicators · Judgment Call</span>
+          <div class="q-scenario">A company CEO is known for working 90-hour weeks, skipping family dinners almost every night, and becoming explosively angry at employees who make small mistakes. He claims he is perfectly fine, is highly successful, and does not feel distressed at all. His wife, however, has filed for divorce citing his behaviour, and two of his children say they feel they have no father.</div>
+          <div class="q-ask">Does this CEO meet the criteria for a mental health disorder? Construct your argument carefully using all three indicators.</div>
+        </div>
+      </div>
+      <div class="answer-toggle" onclick="toggleAnswer(this)">
+        <div class="toggle-icon">▾</div> Reveal Model Answer
+      </div>
+      <div class="answer-panel">
+        <div class="answer-label">Model Answer</div>
+        <p>This is a genuinely debatable case — which is precisely the point. A useful exam answer acknowledges the complexity.</p>
+        <p><strong>Not typical/culturally expected:</strong> Working 90-hour weeks and explosive anger at minor mistakes could be considered extreme and outside typical professional norms, though "hustle culture" may normalise some of this.</p>
+        <p><strong>Distress:</strong> The CEO himself reports <em>no personal distress</em>. However, the definition also includes distress caused to <em>others</em> — his wife is divorcing him and his children feel fatherless. His behaviour is causing significant distress to those around him.</p>
+        <p><strong>Dysfunction:</strong> His <strong>professional functioning</strong> appears intact. But his <strong>family relationships are breaking down</strong>, which represents impaired functioning in a major life domain.</p>
+        <p>This case illustrates that the <strong>absence of self-perceived distress does not rule out a disorder</strong>. Dysfunction and distress to others are also valid indicators. Whether this crosses the clinical threshold is a <strong>judgment call</strong> — a clinician would look further into the pattern's severity and whether it meets specific DSM criteria.</p>
+        <div class="key-point"><strong>Exam insight:</strong> Distress can be to <em>others</em>, not just the person. High professional functioning does not protect against dysfunction in other life domains.</div>
+      </div>
+    </div>
+
+  </div><!-- /sec1 -->
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- SECTION 2: Models                     -->
+  <!-- ══════════════════════════════════════ -->
+  <div class="section-block sec2" id="s2">
+    <div class="section-label">
+      <div class="section-num">2</div>
+      <div class="section-title-block">
+        <h2>Models of Mental Health Disorder</h2>
+        <p>Medical model weaknesses · Psychological perspectives · Biopsychosocial</p>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Q4</div>
+        <div class="q-body">
+          <span class="q-tag">Medical Model · Weaknesses</span>
+          <div class="q-scenario">James has been diagnosed with depression. His psychiatrist prescribes antidepressants and tells him: "Your brain chemistry is imbalanced — take this medication and you should feel better. No need to change your lifestyle or go for therapy." Three months later, James's medication has reduced his symptoms, but he still avoids social situations, hasn't changed his sedentary lifestyle, and feels he has no control over his own recovery because "it's just my brain."</div>
+          <div class="q-ask">Using the weaknesses of the medical model, explain what is problematic about how James's doctor approached his treatment.</div>
+        </div>
+      </div>
+      <div class="answer-toggle" onclick="toggleAnswer(this)">
+        <div class="toggle-icon">▾</div> Reveal Model Answer
+      </div>
+      <div class="answer-panel">
+        <div class="answer-label">Model Answer</div>
+        <p>This scenario illustrates all three key weaknesses of the medical model in practice:</p>
+        <ul>
+          <li><strong>"Doctor knows best" approach:</strong> The psychiatrist made a unilateral decision without exploring James's psychological or social circumstances, treating him as a passive recipient of medical knowledge rather than an active participant in his recovery.</li>
+          <li><strong>Patient becomes passive:</strong> James now attributes his condition entirely to brain chemistry. This learned passivity is a direct outcome — he feels no agency over his recovery, which can itself worsen depression (linking to learned helplessness).</li>
+          <li><strong>Does not encourage good coping skills:</strong> James still avoids social situations and has not changed contributing lifestyle factors. Medication reduced symptoms but did not address the behavioural and psychological dimensions that maintain his disorder.</li>
+        </ul>
+        <p>The medical model treats the disorder like a broken organ to be chemically repaired, overlooking the <strong>psychological and sociocultural factors</strong> that also play a role. A biopsychosocial approach would additionally address his thinking patterns, social withdrawal, and lifestyle.</p>
+        <div class="key-point"><strong>Exam insight:</strong> The medical model isn't wrong — biological factors are real. The problem is when it is applied as the <em>only</em> explanation and treatment approach.</div>
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Q5</div>
+        <div class="q-body">
+          <span class="q-tag">Psychological Perspectives · Identifying the Model</span>
+          <div class="q-scenario">Three therapists are discussing the same patient — a young woman who is afraid of dogs after being badly bitten as a child. Therapist A says: "She has unconscious unresolved fear from the traumatic experience, and that fear has been repressed." Therapist B says: "She learned to fear dogs through classical conditioning — the bite was a painful unconditioned stimulus that got paired with dogs." Therapist C says: "She catastrophises whenever she sees a dog — she automatically thinks 'it will attack me and I will die' even when the dog is calm and leashed."</div>
+          <div class="q-ask">Identify which psychological perspective each therapist represents and briefly explain what each would focus on in treatment.</div>
+        </div>
+      </div>
+      <div class="answer-toggle" onclick="toggleAnswer(this)">
+        <div class="toggle-icon">▾</div> Reveal Model Answer
+      </div>
+      <div class="answer-panel">
+        <div class="answer-label">Model Answer</div>
+        <p><strong>Therapist A — Psychoanalytic perspective.</strong> Focuses on unconscious conflicts and repressed memories from early experiences. Treatment would aim to uncover and resolve these buried emotions — making the unconscious conscious — perhaps through free association or dream analysis.</p>
+        <p><strong>Therapist B — Social Learning perspective.</strong> Views the fear as a learned behaviour through classical conditioning (pain of bite = unconditioned stimulus; dog = conditioned stimulus → fear). Treatment might involve systematic desensitisation — gradually unpairing the dog from the fear response.</p>
+        <p><strong>Therapist C — Cognitive perspective.</strong> Focuses on the patient's cognitive distortions (catastrophising, automatic negative thinking). Treatment would challenge and restructure these irrational beliefs — cognitive restructuring/CBT — so that the patient can evaluate the actual threat level more accurately.</p>
+        <div class="key-point"><strong>Exam insight:</strong> Notice all three therapists see the same phobia but interpret the cause differently. In practice, the biopsychosocial model integrates all three views rather than choosing one.</div>
+      </div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Q6</div>
+        <div class="q-body">
+          <span class="q-tag">Sociocultural · Biopsychosocial</span>
+          <div class="q-scenario">Two women — Amina from a low-income neighbourhood with a history of childhood abuse and limited social support, and Claire from an upper-middle-class family with strong family bonds — both carry an identical genetic vulnerability to depression. Amina develops severe depression at age 22; Claire does not, even at age 40.</div>
+          <div class="q-ask">Use the biopsychosocial model to explain why the same genetic vulnerability led to different outcomes for Amina and Claire.</div>
+        </div>
+      </div>
+      <div class="answer-toggle" onclick="toggleAnswer(this)">
+        <div class="toggle-icon">▾</div> Reveal Model Answer
+      </div>
+      <div class="answer-panel">
+        <div class="answer-label">Model Answer</div>
+        <p>The biopsychosocial model holds that mental health disorders result from the <strong>interaction of biological, psychological, and social factors</strong> — not from any single cause alone. Having a genetic vulnerability (biological) only tells part of the story.</p>
+        <p><strong>Amina:</strong> Her biological vulnerability was amplified by multiple sociocultural and psychological risk factors — childhood abuse (adverse early experience that can affect brain chemistry and emotional regulation), low socioeconomic status (associated with higher depression rates), and limited social support (which buffers against dysfunction after trauma). These converging factors tipped her biological predisposition into a full disorder.</p>
+        <p><strong>Claire:</strong> Despite the same genetic risk, her protective sociocultural factors — financial stability, strong family bonds — acted as buffers. The biopsychosocial model predicts that social and psychological strengths can prevent biological vulnerabilities from expressing as disorders.</p>
+        <div class="key-point"><strong>Exam insight:</strong> The biopsychosocial model explains why identical twins don't always both develop the same disorder — environment and psychology either protect or amplify genetic risk.</div>
+      </div>
+    </div>
+
+  </div><!-- /sec2 -->
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- SECTION 3: DSM                        -->
+  <!-- ══════════════════════════════════════ -->
+  <div class="section-block sec3" id="s3">
+    <div class="section-label">
+      <div class="section-num">3</div>
+      <div class="section-title-block">
+        <h2>DSM Classification</h2>
+        <p>Purpose · Limitations · Cultural bias · Stigma</p>
+      </div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Q7</div>
+        <div class="q-body">
+          <span class="q-tag">DSM · Stigma · Labelling</span>
+          <div class="q-scenario">After a difficult period, 17-year-old Kai is diagnosed with Major Depressive Disorder and this is recorded in his school medical file. His form teacher, upon reading this, begins assigning him less challenging work, excuses him from class presentations "to avoid stress," and tells other teachers to "go easy on him." Kai's friends, having heard through the school grapevine, start treating him as fragile. Over time, Kai himself starts to believe he cannot handle pressure.</div>
+          <div class="q-ask">Using the concept of diagnostic labelling, analyse the consequences that have unfolded for Kai — both from others and within himself.</div>
+        </div>
+      </div>
+      <div class="answer-toggle" onclick="toggleAnswer(this)">
+        <div class="toggle-icon">▾</div> Reveal Model Answer
+      </div>
+      <div class="answer-panel">
+        <div class="answer-label">Model Answer</div>
+        <p>This scenario demonstrates two key negative consequences of diagnostic labelling:</p>
+        <p><strong>1. Social stigma and changed treatment by others.</strong> Once labelled, Kai is treated differently — his teacher reduces expectations and peers treat him as fragile. This creates <strong>prejudice and discrimination</strong>, which the DSM is criticised for enabling. The label, intended to help, has paradoxically reduced Kai's opportunities for normal development and participation.</p>
+        <p><strong>2. Self-fulfilling prophecy.</strong> Over time, Kai internalises others' perception of him as unable to handle pressure. He begins to <strong>behave in ways consistent with the label</strong>, even if this does not reflect his actual capacity. The diagnosis has shaped his self-concept in a damaging way — this is the self-fulfilling prophecy critique of labelling.</p>
+        <p>This does not mean the DSM's classification is useless — it provides a common language and enables treatment. But this case shows how labels must be handled with care, particularly in social environments involving young people.</p>
+        <div class="key-point"><strong>Exam insight:</strong> The question is not whether DSM labelling is good or bad — it is about understanding the <em>real consequences</em> of labelling and stigma on the individual's functioning and self-perception.</div>
+      </div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Q8</div>
+        <div class="q-body">
+          <span class="q-tag">DSM · Cultural Bias in Diagnosis</span>
+          <div class="q-scenario">A study in the 1970s found that the same case history was more likely to be diagnosed with schizophrenia by American psychiatrists and with depression by British psychiatrists. Today, research shows that African Americans are diagnosed with schizophrenia at higher rates than White Americans presenting with similar symptoms, and receive lower quality of subsequent care.</div>
+          <div class="q-ask">What does this reveal about the DSM system as a diagnostic tool? What does this imply for a clinician applying the DSM?</div>
+        </div>
+      </div>
+      <div class="answer-toggle" onclick="toggleAnswer(this)">
+        <div class="toggle-icon">▾</div> Reveal Model Answer
+      </div>
+      <div class="answer-panel">
+        <div class="answer-label">Model Answer</div>
+        <p>These findings reveal that despite the DSM providing standardised criteria, <strong>diagnosis is not a purely objective process</strong>. The clinician's own cultural background, assumptions, and biases — both conscious and unconscious — influence how they interpret and apply the criteria.</p>
+        <p>The cross-national study shows that <strong>the same symptoms can be classified differently depending on the cultural lens of the professional</strong>. The racial disparity in schizophrenia diagnoses suggests that race influences clinical judgment in ways that cannot be explained by symptom differences alone.</p>
+        <p>For a practising clinician, this implies: (1) The DSM is a <strong>useful but imperfect tool</strong> that requires cultural sensitivity; (2) They must actively check for <strong>personal bias</strong> when evaluating patients from different cultural, racial, or socioeconomic backgrounds; (3) The <strong>sociocultural context</strong> of the patient must always be considered when applying any diagnostic label.</p>
+        <div class="key-point"><strong>Exam insight:</strong> DSM limitations are not reasons to abandon classification — they are reasons to use it thoughtfully. Mental illness may be caused by a combination of factors, and its diagnosis can be biased due to cultural or social factors.</div>
+      </div>
+    </div>
+
+  </div><!-- /sec3 -->
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- SECTION 4: ANXIETY DISORDERS          -->
+  <!-- ══════════════════════════════════════ -->
+  <div class="section-block sec4" id="s4">
+    <div class="section-label">
+      <div class="section-num">4</div>
+      <div class="section-title-block">
+        <h2>Anxiety, OCD &amp; PTSD</h2>
+        <p>GAD · Panic/Agoraphobia · Phobia · OCD · PTSD · Distinguishing between disorders</p>
+      </div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Q9</div>
+        <div class="q-body">
+          <span class="q-tag">GAD vs Panic Disorder · Distinguishing</span>
+          <div class="q-scenario">Sandra worries constantly — about whether she left the gas on, whether her children are safe at school, whether her boss is unhappy with her work, and whether she remembered to pay the bills. She cannot switch off even at night, is frequently exhausted, and her husband says she seems always on edge. Meanwhile, Sandra's colleague Darren suddenly experienced a terrifying episode at the supermarket last month — his heart pounded, he couldn't breathe, felt he was dying, and fled the store. He now avoids supermarkets and crowded places entirely out of fear it will happen again.</div>
+          <div class="q-ask">Both experience anxiety. Distinguish between their conditions, identifying the specific disorder each likely has and explaining the key difference in how their anxiety operates.</div>
+        </div>
+      </div>
+      <div class="answer-toggle" onclick="toggleAnswer(this)">
+        <div class="toggle-icon">▾</div> Reveal Model Answer
+      </div>
+      <div class="answer-panel">
+        <div class="answer-label">Model Answer</div>
+        <p><strong>Sandra</strong> likely has <strong>Generalized Anxiety Disorder (GAD)</strong>. Her anxiety is <strong>persistent, pervasive, and unfocused</strong> — covering many areas of daily life, major and minor, without a specific external trigger. The key feature is chronic, difficult-to-control worry that is present most of the time, causing physical (fatigue) and relational strain.</p>
+        <p><strong>Darren</strong> likely has <strong>Panic Disorder with Agoraphobia</strong>. His experience was an abrupt episode of intense, overwhelming fear with physical symptoms peaking rapidly — a classic <strong>panic attack</strong>. Crucially, the attack had <em>no connection to present events</em>. His subsequent avoidance of supermarkets and crowded spaces reflects <strong>agoraphobia</strong> — fear of places where he might have another attack and escape would be difficult. This is "fear of fear."</p>
+        <p>The key difference: Sandra's anxiety is <strong>diffuse and ongoing</strong>; Darren's is <strong>episodic, sudden, and intense</strong>, now driving avoidance behaviour.</p>
+        <div class="key-point"><strong>Exam insight:</strong> Focus, duration, and pattern are the key distinguishing features. GAD = many things, always. Panic = sudden, intense, no clear cause.</div>
+      </div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Q10</div>
+        <div class="q-body">
+          <span class="q-tag">Specific Phobia · Social Learning · Operant Conditioning</span>
+          <div class="q-scenario">As a child, eight-year-old Nora watched her older brother get stung badly by a wasp and have a severe allergic reaction requiring hospitalisation. She screamed and cried throughout the ordeal. Now at 28, Nora runs out of rooms when she sees any flying insect, refuses to eat outdoors, and cancelled a beach holiday because "there might be bees." She admits her fear is excessive but cannot stop the panic that overwhelms her.</div>
+          <div class="q-ask">Using learning theory, explain how Nora's phobia developed and how it is being maintained twenty years later.</div>
+        </div>
+      </div>
+      <div class="answer-toggle" onclick="toggleAnswer(this)">
+        <div class="toggle-icon">▾</div> Reveal Model Answer
+      </div>
+      <div class="answer-panel">
+        <div class="answer-label">Model Answer</div>
+        <p><strong>Development — Observational (Vicarious) Learning and Classical Conditioning:</strong> Nora did not need to be stung herself. She acquired the fear by <strong>observing her brother's traumatic experience</strong> — this is <strong>observational/vicarious conditioning</strong>. The wasp (neutral stimulus) became associated with extreme distress (unconditioned fear response), making it a conditioned stimulus that now elicits fear automatically. Her screaming during the event suggests she also directly experienced high arousal in the presence of wasps — contributing to conditioning.</p>
+        <p><strong>Maintenance — Negative Reinforcement:</strong> Every time Nora <strong>escapes or avoids</strong> a situation involving flying insects, her anxiety temporarily decreases. This relief <strong>negatively reinforces the avoidance behaviour</strong>, making her more likely to avoid in the future. Avoidance prevents the natural extinction of the fear response because she never stays long enough to learn that the insect is not dangerous.</p>
+        <p>Her recognition that the fear is irrational (she "admits it is excessive") is characteristic of specific phobia — awareness of irrationality but inability to control the fear response.</p>
+        <div class="key-point"><strong>Exam insight:</strong> Phobias often start via vicarious or direct conditioning, but they are <em>maintained</em> through negative reinforcement (avoidance). This is why simply "knowing" the fear is irrational doesn't make it go away.</div>
+      </div>
+    </div>
+
+    <!-- Q11 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Q11</div>
+        <div class="q-body">
+          <span class="q-tag">OCD · Distinguishing Ritual from Habit</span>
+          <div class="q-scenario">Ben, a chef, washes his hands thoroughly before handling food, checks that oven dials are off before leaving work, and arranges his mise en place in the same order each day. His colleague Tim also washes his hands — but does so 25 times a day, bleeds from skin cracking, and if he cannot wash immediately after touching a door handle, he becomes so distressed he cannot continue cooking. Tim also cannot leave work without checking every oven dial five times in a fixed sequence, even after being told by three colleagues that all are off.</div>
+          <div class="q-ask">Ben's and Tim's behaviours look similar on the surface. Explain what makes Tim's situation an OCD presentation while Ben's does not.</div>
+        </div>
+      </div>
+      <div class="answer-toggle" onclick="toggleAnswer(this)">
+        <div class="toggle-icon">▾</div> Reveal Model Answer
+      </div>
+      <div class="answer-panel">
+        <div class="answer-label">Model Answer</div>
+        <p><strong>Ben's</strong> behaviours are <strong>purposeful habits and professional standards</strong>. They are rational, proportionate to his work context, do not cause distress, and do not impair his functioning. He can flexibly adapt if circumstances require it.</p>
+        <p><strong>Tim's</strong> behaviours meet the OCD criteria on several fronts:</p>
+        <ul>
+          <li><strong>Obsessions:</strong> Intrusive, unwanted fear of contamination drives his compulsive handwashing. These thoughts are not rational in proportion to actual risk.</li>
+          <li><strong>Compulsions:</strong> The handwashing and checking rituals are performed to neutralise the obsessive anxiety, but provide only <em>temporary relief</em>. Not performing them causes extreme distress.</li>
+          <li><strong>Dysfunction:</strong> His skin bleeds, he cannot continue working without completing rituals, and reassurance from others does not reduce the compulsion. The behaviour is time-consuming and harmful.</li>
+          <li><strong>Loss of control:</strong> He continues despite knowing cognitively that the ovens have been confirmed off — the compulsion overrides rational knowledge.</li>
+        </ul>
+        <div class="key-point"><strong>Exam insight:</strong> OCD is about <em>intrusive thoughts + compulsions that temporarily relieve distress but are time-consuming, harmful, and dysfunction-causing</em>. Normal habits are flexible, proportionate, and not driven by anxiety relief.</div>
+      </div>
+    </div>
+
+    <!-- Q12 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Q12</div>
+        <div class="q-body">
+          <span class="q-tag">PTSD · Symptoms · Triggers</span>
+          <div class="q-scenario">Elena survived a serious car accident two years ago. She has returned to work and can function, but refuses to drive or be in cars — she takes only public transport. When her colleague casually mentions a traffic report, Elena becomes visibly shaken. On the anniversary of the accident, she calls in sick, can't sleep, and experiences a vivid sensation of being back in the crash. Her husband says she has become distant and "emotionally shut down" when they used to be very close.</div>
+          <div class="q-ask">Map Elena's experiences onto the PTSD symptom progression and explain what distinguishes PTSD from a normal stress response to trauma.</div>
+        </div>
+      </div>
+      <div class="answer-toggle" onclick="toggleAnswer(this)">
+        <div class="toggle-icon">▾</div> Reveal Model Answer
+      </div>
+      <div class="answer-panel">
+        <div class="answer-label">Model Answer</div>
+        <p>Elena's experiences map onto the PTSD progression as follows:</p>
+        <ul>
+          <li><strong>Traumatic event:</strong> The serious car accident.</li>
+          <li><strong>Intrusive memories:</strong> The vivid re-experiencing on the anniversary — a <em>flashback</em> — is a hallmark PTSD symptom. This is not just remembering; it is a sensory re-living of the event.</li>
+          <li><strong>Avoidance/Numbing:</strong> Refusing all car travel, and becoming emotionally shut down and distant from her husband — she has withdrawn from intimacy as part of emotional numbing.</li>
+          <li><strong>Mood/Cognition change:</strong> The distress when a colleague mentions traffic shows that trauma-associated stimuli (here, even tangential references to driving) trigger fear responses.</li>
+          <li><strong>Heightened arousal:</strong> Sleep disturbance on the anniversary and being easily shaken by reminders indicate persistent hypervigilance.</li>
+        </ul>
+        <p><strong>What distinguishes PTSD from normal trauma response:</strong> Most people exposed to trauma recover with resilience. PTSD develops when symptoms persist, intensify, and significantly disrupt functioning — two years later, Elena still cannot use cars and her most intimate relationship has been damaged. The persistence and breadth of impairment is what elevates this beyond normal grief or stress.</p>
+        <div class="key-point"><strong>Exam insight:</strong> The PTSD flow is: traumatic event → intrusive memories → avoidance/numbing → mood/cognition change → heightened arousal. Each element is present in Elena's case.</div>
+      </div>
+    </div>
+
+  </div><!-- /sec4 -->
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- SECTION 5: SOMATIC & DISSOCIATIVE     -->
+  <!-- ══════════════════════════════════════ -->
+  <div class="section-block sec5" id="s5">
+    <div class="section-label">
+      <div class="section-num">5</div>
+      <div class="section-title-block">
+        <h2>Somatic &amp; Dissociative Disorders</h2>
+        <p>Somatic · Illness anxiety · Conversion · DID · Dissociative amnesia</p>
+      </div>
+    </div>
+
+    <!-- Q13 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Q13</div>
+        <div class="q-body">
+          <span class="q-tag">Somatic vs Conversion vs Illness Anxiety · Distinguishing</span>
+          <div class="q-scenario">Three patients visit a clinic:
+Patient A complains of chronic stomach pain, headaches, and fatigue. Multiple medical tests show no physical cause. She is not particularly worried about having a serious illness — she simply feels the pain and it disrupts her daily life.
+Patient B woke up last week unable to move his right arm. There is no neurological damage. His wife left him three days before the paralysis appeared.
+Patient C has no physical symptoms but visits four different doctors each month, convinced she has bowel cancer despite repeated negative scans and colonoscopies.</div>
+          <div class="q-ask">Identify the most likely disorder for each patient and explain the key feature that distinguishes one from the other.</div>
+        </div>
+      </div>
+      <div class="answer-toggle" onclick="toggleAnswer(this)">
+        <div class="toggle-icon">▾</div> Reveal Model Answer
+      </div>
+      <div class="answer-panel">
+        <div class="answer-label">Model Answer</div>
+        <p><strong>Patient A — Somatic Symptom Disorder.</strong> Psychological distress is being expressed through <em>real bodily symptoms</em> with no physical explanation. Crucially, she is not preoccupied with the belief that she has a serious illness — she simply experiences the symptoms. The pain is real and not intentional or faked.</p>
+        <p><strong>Patient B — Conversion Disorder.</strong> Emotional distress (his wife leaving) has been converted into a <em>sensory-motor symptom</em> — paralysis of the arm — with no organic cause. The stressor directly preceded the physical symptom. This is the "all in the mind" mechanism where psychological conflict manifests as a loss of physical function.</p>
+        <p><strong>Patient C — Illness Anxiety Disorder.</strong> She has no actual physical symptoms but is consumed by the <em>belief</em> that she has a serious illness. She repeatedly seeks medical reassurance, but even negative evidence does not reassure her — she doctor-shops. The disorder centres on the anxiety about illness, not the symptoms themselves.</p>
+        <div class="key-point"><strong>Key distinctions:</strong> Somatic = real symptoms, no illness preoccupation. Conversion = stressor → specific sensory-motor loss, no organic cause. Illness anxiety = no symptoms, but convinced of serious disease.</div>
+      </div>
+    </div>
+
+    <!-- Q14 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Q14</div>
+        <div class="q-body">
+          <span class="q-tag">Dissociative Identity Disorder · Function of Alters</span>
+          <div class="q-scenario">A therapist treating a patient with DID notices that one alter — who calls himself "Marco" — is aggressive, confrontational, and speaks in a deep voice. Another alter, "Little Amy," is a 6-year-old child who cries and hides. The patient's core identity, Sarah, has no memory of either appearing. Sarah has a documented history of severe physical and sexual abuse from ages 4 to 12 by a family member. She is gentle and timid in the session.</div>
+          <div class="q-ask">Using the explanation for why DID develops, explain what function "Marco" and "Little Amy" might serve, and why Sarah has no memory of them.</div>
+        </div>
+      </div>
+      <div class="answer-toggle" onclick="toggleAnswer(this)">
+        <div class="toggle-icon">▾</div> Reveal Model Answer
+      </div>
+      <div class="answer-panel">
+        <div class="answer-label">Model Answer</div>
+        <p>DID is understood as a <strong>defensive dissociation mechanism</strong> that develops in response to chronic, severe childhood trauma — most commonly at the hands of loved ones. The child's mind creates alter identities as <strong>protective shields</strong> that allow the core identity to survive overwhelming experiences.</p>
+        <p><strong>"Marco"</strong> — aggressive and confrontational — likely serves as a <strong>protector alter</strong>. During abuse, Sarah's timid self could not fight back. Marco may have been created to provide the aggression, strength, and defiance that the core self could not access, emerging when threat is perceived.</p>
+        <p><strong>"Little Amy"</strong> — a 6-year-old child — may represent the part of Sarah that <strong>holds the trauma memories and emotional pain</strong> from the period of abuse. Keeping this separate from Sarah's core consciousness protects her from being overwhelmed by the experience.</p>
+        <p><strong>Why no memory:</strong> Each alter operates within <strong>its own consciousness</strong>. The fragmentation means Sarah's core identity does not have access to what happens when an alter is in control. This amnesia is part of the dissociation — it protects the core self from traumatic material.</p>
+        <div class="key-point"><strong>Exam insight:</strong> DID is not random — each alter typically has a function. The disorder is a coping mechanism that becomes maladaptive in adult life when the threat is no longer present.</div>
+      </div>
+    </div>
+
+    <!-- Q15 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Q15</div>
+        <div class="q-body">
+          <span class="q-tag">Depersonalisation · Dissociative Amnesia · Distinguishing</span>
+          <div class="q-scenario">After narrowly escaping a building fire, two survivors describe different experiences. Survivor A says: "After we got out, I felt like I was watching myself from above — like I was in a movie, floating outside my body. Everything felt unreal. It lasted about an hour." Survivor B says: "I remember the alarm going off and then I was outside, safe. But I have no memory of how I got down the stairs or who helped me — about 20 minutes are completely gone."</div>
+          <div class="q-ask">Identify which dissociative experience each survivor had and explain the mechanism behind each.</div>
+        </div>
+      </div>
+      <div class="answer-toggle" onclick="toggleAnswer(this)">
+        <div class="toggle-icon">▾</div> Reveal Model Answer
+      </div>
+      <div class="answer-panel">
+        <div class="answer-label">Model Answer</div>
+        <p><strong>Survivor A — Depersonalisation.</strong> The sensation of floating outside one's own body and observing oneself as if from an external position is the defining feature of depersonalisation. The person experiences a <strong>separation of mind and body</strong>, feeling like an observer of their own experience — "like being in a dream." This is a dissociative response to extreme acute stress, where the mind detaches from the overwhelming experience of the moment.</p>
+        <p><strong>Survivor B — Dissociative Amnesia.</strong> A <strong>selective memory gap</strong> for a specific stressful period, while immediate and remote memory remain intact (they remember the alarm, and they know they are now safe). The 20-minute gap covering the escape is the classic pattern — traumatic stress triggers a disconnection of memory encoding during the most overwhelming moments.</p>
+        <p>Both are dissociative responses to trauma, but the mechanism differs: depersonalisation involves altered <em>perception of self</em>; dissociative amnesia involves <em>memory loss</em> for the traumatic period.</p>
+        <div class="key-point"><strong>Exam insight:</strong> Brief dissociative experiences following acute trauma are common and not necessarily pathological. They become disorders when persistent and severely impairing.</div>
+      </div>
+    </div>
+
+  </div><!-- /sec5 -->
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- SECTION 6: MOOD DISORDERS             -->
+  <!-- ══════════════════════════════════════ -->
+  <div class="section-block sec6" id="s6">
+    <div class="section-label">
+      <div class="section-num">6</div>
+      <div class="section-title-block">
+        <h2>Mood Disorders</h2>
+        <p>Major depression · Bipolar · SAD · Depression in men vs women</p>
+      </div>
+    </div>
+
+    <!-- Q16 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Q16</div>
+        <div class="q-body">
+          <span class="q-tag">Bipolar vs Major Depression · Mood Spectrum</span>
+          <div class="q-scenario">During the first half of the year, David's wife described him as "a completely different person" — he was sleeping only 3–4 hours but felt fully rested, started five new business ventures, spoke so fast she could barely follow him, and spent $40,000 on investments without consulting her. By August, David had not left his bedroom for three weeks, stopped eating, felt completely worthless, and told his wife "there's no point in anything."</div>
+          <div class="q-ask">Identify David's condition and explain what distinguishes it from a diagnosis of Major Depressive Disorder, using his specific experiences as evidence.</div>
+        </div>
+      </div>
+      <div class="answer-toggle" onclick="toggleAnswer(this)">
+        <div class="toggle-icon">▾</div> Reveal Model Answer
+      </div>
+      <div class="answer-panel">
+        <div class="answer-label">Model Answer</div>
+        <p>David's condition is <strong>Bipolar Disorder</strong> — sometimes called manic-depressive disorder — characterised by cycling between two poles: mania and depression.</p>
+        <p><strong>First half of year — Manic episode:</strong> David shows the hallmarks: decreased need for sleep without fatigue (3–4 hours feeling rested), abnormally elevated energy, rapid speech, inflated sense of capability (five new ventures), and <em>impulsive high-risk behaviour</em> ($40,000 investment without consultation). Mania involves a persistently elevated or expansive mood with increased activity present for at least one week.</p>
+        <p><strong>August — Depressive episode:</strong> Withdrawal from daily life (bedroom for three weeks), loss of appetite, feelings of worthlessness, and hopelessness ("no point in anything") are classic major depressive symptoms.</p>
+        <p><strong>What distinguishes this from Major Depressive Disorder:</strong> MDD involves only the depressive pole — mood stays below euthymic. What makes David's case Bipolar is the <strong>presence of both poles</strong> — the same person experiencing both mania and depression. MDD patients do not swing into manic episodes.</p>
+        <div class="key-point"><strong>Exam insight:</strong> In the exam, if a case shows depression only → consider MDD. If a case shows depression AND episodes of abnormally elevated mood, energy, impulsivity → Bipolar Disorder.</div>
+      </div>
+    </div>
+
+    <!-- Q17 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Q17</div>
+        <div class="q-body">
+          <span class="q-tag">Depression · Gender Differences · Why Women More Vulnerable</span>
+          <div class="q-scenario">Statistics consistently show that women are twice as likely as men to be diagnosed with depression, yet the rate of suicide is higher in men. Two friends discuss this: Friend A says "Women are just more emotional." Friend B says "Maybe men are depressed too but don't show it or get diagnosed."</div>
+          <div class="q-ask">Who makes the more psychologically informed point? Using the biopsychosocial factors discussed, explain why depression rates differ by gender AND why the suicide disparity might exist.</div>
+        </div>
+      </div>
+      <div class="answer-toggle" onclick="toggleAnswer(this)">
+        <div class="toggle-icon">▾</div> Reveal Model Answer
+      </div>
+      <div class="answer-panel">
+        <div class="answer-label">Model Answer</div>
+        <p><strong>Friend B is more psychologically informed.</strong> Saying "women are just more emotional" is a cultural stereotype, not a scientific explanation. The gender gap in depression diagnosis is real but has multiple causes — including factors that may <em>reduce</em> diagnosis in men rather than actual lower prevalence.</p>
+        <p><strong>Why women are more vulnerable to depression:</strong></p>
+        <ul>
+          <li><strong>Biological:</strong> Hormonal influences — estrogen and progesterone affect serotonin and dopamine functioning, relevant to mood regulation.</li>
+          <li><strong>Psychological:</strong> Women are more likely to use a <em>ruminative coping style</em> — focusing on and repeatedly analysing their feelings — which prolongs depressive episodes. Men are more likely to distract themselves or take action.</li>
+          <li><strong>Sociocultural:</strong> Women face greater rates of poverty, discrimination, sexual abuse, and are socialised toward passive/dependent roles — all increasing feelings of helplessness and uncontrollability linked to depression.</li>
+        </ul>
+        <p><strong>Why men have higher suicide rates despite lower diagnosis:</strong> Male gender socialisation encourages men to be strong and suppress emotion — men are less likely to admit distress, seek help, or cry, and more likely to hide feelings, be irritable, or abuse alcohol. This means depression in men may be <strong>underdiagnosed</strong> and left untreated until it reaches a critical level. When men do act on suicidal ideation, they also tend to use more lethal methods.</p>
+        <div class="key-point"><strong>Exam insight:</strong> Gender differences in diagnosis can reflect actual vulnerability differences <em>and</em> differences in how disorders are expressed and recognised — these must be distinguished.</div>
+      </div>
+    </div>
+
+    <!-- Q18 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Q18</div>
+        <div class="q-body">
+          <span class="q-tag">Cognitive Factors in Depression · Beck's Model</span>
+          <div class="q-scenario">After failing one module in his degree, 20-year-old Leon tells his counsellor: "I failed because I am stupid and always will be. I was never good enough for university. My parents must be so ashamed of me. There's no point trying again — I'll just fail everything. I always ruin things." He dismisses his counsellor's reminder that he passed seven other modules with above-average grades.</div>
+          <div class="q-ask">Using Beck's cognitive model, identify and explain at least three cognitive patterns evident in Leon's thinking that are linked to depression.</div>
+        </div>
+      </div>
+      <div class="answer-toggle" onclick="toggleAnswer(this)">
+        <div class="toggle-icon">▾</div> Reveal Model Answer
+      </div>
+      <div class="answer-panel">
+        <div class="answer-label">Model Answer</div>
+        <p>Leon's thinking reflects several <strong>cognitive distortions</strong> consistent with Beck's model of depression:</p>
+        <ul>
+          <li><strong>Overgeneralisation / Global negative attribution:</strong> "I am stupid and always will be" — one failure becomes a permanent, global truth about his identity. A single event is applied to all situations.</li>
+          <li><strong>Selective abstraction (filtering out the positive):</strong> He dismisses the counsellor's reminder that he passed seven other modules with above-average grades. People who are depressed <strong>reject positive experiences</strong> and focus selectively on negatives.</li>
+          <li><strong>Catastrophising:</strong> "There's no point trying again — I'll just fail everything." He imagines the worst possible outcome and treats it as inevitable.</li>
+          <li><strong>Internal attribution of negative events:</strong> Failing one module is interpreted as evidence that <em>he</em> is fundamentally flawed ("I always ruin things"), rather than considering situational factors (exam difficulty, stress, or simply a one-time setback).</li>
+        </ul>
+        <p>Beck's model holds that these negative cognitions operate <strong>automatically</strong> — the person may not even be aware of these thinking errors, but they shape how they interpret every subsequent experience, maintaining depression.</p>
+        <div class="key-point"><strong>Exam insight:</strong> Cognitive distortions are not just "negative thinking" — they are <em>systematic errors</em> in how information is processed, and they feed back into depressed mood, creating a vicious cycle.</div>
+      </div>
+    </div>
+
+  </div><!-- /sec6 -->
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- SECTION 7: SCHIZOPHRENIA              -->
+  <!-- ══════════════════════════════════════ -->
+  <div class="section-block sec7" id="s7">
+    <div class="section-label">
+      <div class="section-num">7</div>
+      <div class="section-title-block">
+        <h2>Schizophrenia</h2>
+        <p>Positive vs negative symptoms · Myths · Causes</p>
+      </div>
+    </div>
+
+    <!-- Q19 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Q19</div>
+        <div class="q-body">
+          <span class="q-tag">Positive vs Negative Symptoms · Identifying</span>
+          <div class="q-scenario">A nurse observes two patients on a psychiatric ward, both diagnosed with schizophrenia. Patient X paces the corridors, speaks rapidly about how the hospital staff are secret government agents monitoring him through his meals, and sometimes shouts responses to voices that only he can hear. Patient Y sits quietly in the corner all day, barely responds when spoken to, has not showered in a week, gives one-word answers, and shows no emotional reaction even when his family visits.</div>
+          <div class="q-ask">Classify the specific symptoms exhibited by each patient as positive or negative, and explain what each classification tells us about the nature of their symptom.</div>
+        </div>
+      </div>
+      <div class="answer-toggle" onclick="toggleAnswer(this)">
+        <div class="toggle-icon">▾</div> Reveal Model Answer
+      </div>
+      <div class="answer-panel">
+        <div class="answer-label">Model Answer</div>
+        <p><strong>Patient X — Predominantly Positive Symptoms</strong> (an excess or distortion of normal functions):</p>
+        <ul>
+          <li><strong>Persecutory delusions</strong> — belief that staff are secret government agents monitoring him. This is a false belief with no basis in reality.</li>
+          <li><strong>Auditory hallucinations</strong> — shouting responses to voices only he can hear. These voices feel real and have power over the person.</li>
+          <li>Rapid, possibly disorganised speech (word salad indicators).</li>
+        </ul>
+        <p><strong>Patient Y — Predominantly Negative Symptoms</strong> (a restriction or absence of normal functions):</p>
+        <ul>
+          <li><strong>Avolition</strong> — inability to follow through on self-care (no shower in a week), sitting passively all day.</li>
+          <li><strong>Alogia</strong> — one-word answers; poverty of speech.</li>
+          <li><strong>Blunted affect</strong> — no emotional response even when family visits; flat, emotionally unresponsive.</li>
+        </ul>
+        <p>The "positive/negative" distinction does <em>not</em> mean good/bad. Positive = something added that shouldn't be there. Negative = something taken away that should be there. Patient X's symptoms are more visible and dramatic; Patient Y's are quieter but equally severe — and <strong>patients with predominantly negative symptoms often respond less well to medication</strong>.</p>
+        <div class="key-point"><strong>Exam insight:</strong> Positive symptoms = added (delusions, hallucinations, disorganised speech, disordered behaviour). Negative symptoms = subtracted (blunted affect, alogia, avolition).</div>
+      </div>
+    </div>
+
+    <!-- Q20 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Q20</div>
+        <div class="q-body">
+          <span class="q-tag">Schizophrenia · Misconceptions · Media Portrayal</span>
+          <div class="q-scenario">A news report runs with the headline: "Schizophrenic man attacks neighbour." A community petition calls for a group home for schizophrenia patients to be closed, citing "safety concerns." Meanwhile, a popular film depicts the protagonist's schizophrenia as a dramatic split into two opposing personalities who fight each other for control of his body.</div>
+          <div class="q-ask">Identify two factual errors in how schizophrenia is being portrayed across these three contexts, and explain the real-world harm these misconceptions cause.</div>
+        </div>
+      </div>
+      <div class="answer-toggle" onclick="toggleAnswer(this)">
+        <div class="toggle-icon">▾</div> Reveal Model Answer
+      </div>
+      <div class="answer-panel">
+        <div class="answer-label">Model Answer</div>
+        <p><strong>Error 1 — Schizophrenia = multiple personality (the film).</strong> The film confuses schizophrenia with <strong>Dissociative Identity Disorder (DID)</strong>. Schizophrenia involves the <em>disintegration</em> of one identity — a breakdown in connection between thought, emotion, perception, and behaviour. DID involves the existence of multiple <em>intact</em> identities. These are entirely different disorders. This is one of the most common and damaging public misconceptions.</p>
+        <p><strong>Error 2 — Schizophrenia = inherently violent (the headline and petition).</strong> While research does show a modest increased risk of violence in schizophrenia, this is <strong>significantly associated with substance abuse, being male, refusing treatment, and duration of illness</strong> — variables also associated with violence in the general population. Many people with schizophrenia are <em>not violent</em> — they are more likely to be withdrawn and prefer to be left alone.</p>
+        <p><strong>Real-world harm:</strong> These misconceptions fuel <strong>stigma, fear, and discrimination</strong>. The petition to close the group home denies patients community integration and support — factors critical to recovery. Media portrayals reduce complex individuals to dangerous stereotypes, making them less likely to seek treatment and making society less compassionate in its response.</p>
+        <div class="key-point"><strong>Exam insight:</strong> Schizophrenia = disintegration of one identity. DID = multiple intact identities. Never confuse these two. And always contextualise the violence link with associated variables.</div>
+      </div>
+    </div>
+
+  </div><!-- /sec7 -->
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- CROSS-SECTIONAL QUESTIONS             -->
+  <!-- ══════════════════════════════════════ -->
+  <div class="section-block secX" id="sX">
+    <div class="section-label">
+      <div class="section-num">✕</div>
+      <div class="section-title-block">
+        <h2>Cross-Sectional Questions</h2>
+        <p>Integrating concepts across the chapter — the type most likely to challenge exam candidates</p>
+      </div>
+    </div>
+
+    <!-- Q21 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Q21</div>
+        <div class="q-body">
+          <span class="cross-badge">⟷ Cross-section</span><br><br>
+          <span class="q-tag">OCD / Schizophrenia · DID · Distinguishing Disorders</span>
+          <div class="q-scenario">Three patients each report "hearing voices." Patient 1 hears a voice telling him that his hands are contaminated and that he must wash them immediately or something terrible will happen. He recognises the voice as coming from his own mind and is distressed by it. Patient 2 hears several voices conversing with each other — some praise him, others threaten him. He believes these voices come from external forces with power over him and does not recognise them as symptoms. Patient 3 reports that a different "part of herself" — who has a different name and speaks in a child's voice — sometimes takes over and she has no memory of what happens during that time.</div>
+          <div class="q-ask">All three patients report voices, but the clinical picture is different for each. Identify each patient's likely disorder and explain the critical distinguishing features that led to your assessment.</div>
+        </div>
+      </div>
+      <div class="answer-toggle" onclick="toggleAnswer(this)">
+        <div class="toggle-icon">▾</div> Reveal Model Answer
+      </div>
+      <div class="answer-panel">
+        <div class="answer-label">Model Answer</div>
+        <p><strong>Patient 1 — OCD (with intrusive thoughts).</strong> The "voice" he hears is an <strong>obsessive intrusive thought</strong> — internally recognised as coming from his own mind (ego-dystonic). He knows it is irrational but cannot ignore it. The compulsion (handwashing) follows to neutralise the anxiety. In OCD, insight is retained — the person recognises the thoughts are their own and excessive, which distinguishes it from psychosis.</p>
+        <p><strong>Patient 2 — Schizophrenia.</strong> Auditory hallucinations in schizophrenia feel <strong>external and real</strong>. The patient does not recognise them as internal or as symptoms. The voices have power over him, may be pleasant or threatening, and he responds to them as if they are truly external. Crucially, <strong>he lacks insight</strong> — he does not know he is unwell. This is a positive symptom of schizophrenia.</p>
+        <p><strong>Patient 3 — Dissociative Identity Disorder (DID).</strong> The "voice" is actually an <strong>alter identity</strong> — a separate self with its own name and manner of speech. The presence of amnesia (no memory of what the alter does) and the distinct alter identity with its own consciousness are characteristic of DID, not hallucination.</p>
+        <div class="key-point"><strong>Exam insight:</strong> "Hearing voices" alone is not a diagnosis. The critical question is: Does the person have insight? Is the voice internal or external? Is there an alternate identity? The same presenting symptom can point to OCD, schizophrenia, or DID depending on these distinctions.</div>
+      </div>
+    </div>
+
+    <!-- Q22 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Q22</div>
+        <div class="q-body">
+          <span class="cross-badge">⟷ Cross-section</span><br><br>
+          <span class="q-tag">PTSD / Dissociation · Overlap · Distinction</span>
+          <div class="q-scenario">After surviving a violent assault, Maya has nightmares about the event, avoids the street where it happened, and feels emotionally detached from her family. During her therapy sessions, she sometimes reports a feeling of "watching herself from outside" during the flashbacks — as if the person in the memory is not really her. Her therapist notes that Maya does not have separate identities or amnesia for daily events.</div>
+          <div class="q-ask">Maya appears to show both PTSD and dissociative features. Explain how these two experiences are related, and why she would not be diagnosed with a dissociative disorder.</div>
+        </div>
+      </div>
+      <div class="answer-toggle" onclick="toggleAnswer(this)">
+        <div class="toggle-icon">▾</div> Reveal Model Answer
+      </div>
+      <div class="answer-panel">
+        <div class="answer-label">Model Answer</div>
+        <p>Maya's primary presentation is <strong>PTSD</strong>. She shows the full symptom cluster: intrusive memories (nightmares), avoidance (the street), emotional numbing/detachment, and re-experiencing the trauma.</p>
+        <p>The <strong>depersonalisation experiences during flashbacks</strong> ("watching herself from outside") are a recognised <em>dissociative subtype</em> of PTSD. Research acknowledges that some PTSD patients — particularly those who experienced repeated sexual or physical trauma — do experience dissociative symptoms as part of their PTSD. The DSM-5 includes a <strong>dissociative-PTSD subtype</strong> for this reason.</p>
+        <p>However, Maya would <em>not</em> be diagnosed with a separate dissociative disorder because:</p>
+        <ul>
+          <li>She does not have <strong>persistent, standalone depersonalisation</strong> outside of trauma-related flashbacks</li>
+          <li>There are no <strong>separate alter identities</strong> (no DID)</li>
+          <li>There is no <strong>amnesia for daily events</strong> (no dissociative amnesia)</li>
+          <li>The dissociation is <em>context-specific</em> and tied to trauma re-experiencing</li>
+        </ul>
+        <p>This illustrates that dissociation exists on a <strong>continuum</strong> — from everyday experiences to PTSD-associated symptoms to full dissociative disorders.</p>
+        <div class="key-point"><strong>Exam insight:</strong> PTSD and dissociation overlap significantly, especially in trauma survivors. The distinction is whether dissociation is trauma-context-specific (PTSD subtype) or a pervasive, standalone pattern (dissociative disorder).</div>
+      </div>
+    </div>
+
+    <!-- Q23 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Q23</div>
+        <div class="q-body">
+          <span class="cross-badge">⟷ Cross-section</span><br><br>
+          <span class="q-tag">Biopsychosocial · Anxiety + Depression · Comorbidity</span>
+          <div class="q-scenario">Sophie, a 19-year-old student, is referred to a counsellor. She grew up with a mother who had anxiety disorder and a father who was often critical. She was socially awkward in school and was bullied. She now avoids lectures because she fears people judging her, worries constantly about "everything going wrong," cannot sleep, has lost interest in her studies, feels worthless, and has gained significant weight. Her doctor says she shows signs of both social anxiety disorder and major depression.</div>
+          <div class="q-ask">Use the biopsychosocial model to explain how Sophie arrived at this point with two co-occurring disorders. Then explain what the concept of comorbidity adds to our understanding of her situation.</div>
+        </div>
+      </div>
+      <div class="answer-toggle" onclick="toggleAnswer(this)">
+        <div class="toggle-icon">▾</div> Reveal Model Answer
+      </div>
+      <div class="answer-panel">
+        <div class="answer-label">Model Answer</div>
+        <p><strong>Biopsychosocial explanation:</strong></p>
+        <ul>
+          <li><strong>Biological:</strong> Her mother has anxiety disorder — suggesting a possible <em>genetic predisposition</em> to anxiety. Anxiety disorders run in families, and children of parents with anxiety have greater risk.</li>
+          <li><strong>Psychological:</strong> Her father was critical — this can promote <em>negative cognitive patterns</em> (e.g., internalising criticism, low self-worth, expecting negative evaluation from others). Her avoidance of lectures is a learned behaviour that reduces short-term anxiety (negative reinforcement) but maintains the disorder long-term.</li>
+          <li><strong>Sociocultural:</strong> Bullying in school — an adverse childhood experience — damaged her self-concept and social confidence, creating the foundations for social anxiety. The stress of university life compounded these vulnerabilities.</li>
+        </ul>
+        <p><strong>Comorbidity:</strong> Sophie meets criteria for <em>two</em> disorders simultaneously — social anxiety disorder and major depression. Comorbidity means the disorders co-exist and likely <strong>interact</strong>. Her social anxiety causes her to withdraw from lectures and peers; isolation worsens depression; depression reduces her motivation and energy to challenge the anxiety; anxiety keeps her isolated. Each disorder feeds the other in a reinforcing cycle, making <strong>treatment more complex</strong> than if only one disorder were present.</p>
+        <div class="key-point"><strong>Exam insight:</strong> Comorbidity is common in anxiety and mood disorders. They don't just add up — they interact and amplify each other, which is why a single-factor explanation of any disorder is always inadequate.</div>
+      </div>
+    </div>
+
+    <!-- Q24 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Q24</div>
+        <div class="q-body">
+          <span class="cross-badge">⟷ Cross-section</span><br><br>
+          <span class="q-tag">3Ds · Models · Disorder Classification · Integration</span>
+          <div class="q-scenario">A school counsellor is approached by a worried parent whose teenage son, Jayden, has been spending 8–10 hours a day playing video games, has stopped attending school, avoids all social contact, eats only when reminded, and becomes extremely hostile when access to gaming is restricted. Jayden himself insists: "I'm not sick. Gaming is my life. I'm perfectly happy." His parents are distressed and his school results have collapsed.</div>
+          <div class="q-ask">Walk through how you would assess Jayden using (a) the 3 indicators, (b) the question of whose perspective counts in the distress criterion, and (c) which model of mental health disorder would be most useful for understanding and addressing his situation.</div>
+        </div>
+      </div>
+      <div class="answer-toggle" onclick="toggleAnswer(this)">
+        <div class="toggle-icon">▾</div> Reveal Model Answer
+      </div>
+      <div class="answer-panel">
+        <div class="answer-label">Model Answer</div>
+        <p><strong>(a) The 3 Indicators:</strong></p>
+        <ul>
+          <li><strong>Not typical/culturally expected:</strong> While gaming is common, 8–10 hours daily to the exclusion of all other activities is atypical behaviour in degree and frequency.</li>
+          <li><strong>Distress:</strong> Jayden denies personal distress — but his parents are significantly distressed, and distress to others is part of the definition. His hostility when restricted also suggests emotional dysregulation that could constitute internal distress he is not recognising.</li>
+          <li><strong>Dysfunction:</strong> Most clearly present — he has stopped attending school, withdrawn from all social contact, and his academic results have collapsed. Dysfunction in multiple domains (education, social, self-care) is evident.</li>
+        </ul>
+        <p><strong>(b) Whose perspective counts:</strong> Jayden's claim of happiness raises an important point. A person can meet disorder criteria even without self-perceived distress if there is clear dysfunction and distress in others. His lack of insight may itself be part of the problem. The definition explicitly includes distress caused to those around the person.</p>
+        <p><strong>(c) Most useful model:</strong> The <strong>biopsychosocial model</strong> is most comprehensive. Biologically, there may be reward-circuit involvement (dopamine reinforcement from gaming). Psychologically, gaming may be serving a function — avoiding social anxiety, academic failure fear, or other psychological stress (cognitive/social learning perspective). Socioculturally, academic pressure, family dynamics, and peer relationships need exploration. The medical model alone (if gaming disorder were purely "brain chemistry") would miss the psychological drivers and would risk making Jayden passive in his own recovery.</p>
+        <div class="key-point"><strong>Exam insight:</strong> This question tests integration — you must apply the 3Ds carefully (noting the absence of self-distress), handle the definitional subtlety about who can feel distress, and justify a model choice rather than just naming one.</div>
+      </div>
+    </div>
+
+    <!-- Q25 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Q25</div>
+        <div class="q-body">
+          <span class="cross-badge">⟷ Cross-section</span><br><br>
+          <span class="q-tag">Mood Disorder · Somatic · Misdiagnosis Risk</span>
+          <div class="q-scenario">Mr. Tan, a 55-year-old man, visits his GP repeatedly over six months complaining of exhaustion, poor sleep, headaches, and stomach problems. All medical tests come back normal. He refuses to consider that stress could be contributing: "I'm not crazy — there's something physically wrong with me." His wife mentions that he has been unusually irritable, has lost interest in golf (his lifelong hobby), and has been drinking more alcohol. He dismisses this: "I'm just tired and stressed from work."</div>
+          <div class="q-ask">What might a psychologically informed clinician suspect is happening that Mr. Tan and his GP may be missing? Identify the relevant disorder(s) and explain why this presentation is common in a specific demographic.</div>
+        </div>
+      </div>
+      <div class="answer-toggle" onclick="toggleAnswer(this)">
+        <div class="toggle-icon">▾</div> Reveal Model Answer
+      </div>
+      <div class="answer-panel">
+        <div class="answer-label">Model Answer</div>
+        <p>A psychologically informed clinician would suspect <strong>Major Depressive Disorder presenting atypically in a middle-aged man</strong>, possibly alongside <strong>somatic symptom disorder</strong> (physical complaints without organic cause).</p>
+        <p><strong>Why this is being missed:</strong> Mr. Tan is presenting his depression through its <em>physical</em> symptoms — fatigue, sleep problems, headaches, stomach issues. This is common and consistent with somatic symptom disorder, where psychological distress manifests as bodily complaints. Without a psychological lens, the GP treats only the physical symptoms.</p>
+        <p><strong>Underlying depression:</strong> His wife's observations fill in the psychological picture — <strong>loss of interest in golf</strong> (anhedonia — loss of pleasure in usual activities, a core diagnostic criterion), <strong>irritability</strong>, and <strong>increased alcohol use</strong> — all consistent with depression.</p>
+        <p><strong>Why this demographic:</strong> This pattern is common in <strong>middle-aged men</strong>. Male gender-role socialisation encourages men to be strong, suppress emotion, and deny psychological vulnerability. Men are <strong>less likely to report sadness</strong> and more likely to express depression through irritability, physical symptoms, and substance use. This makes depression in men both <strong>underdiagnosed and undertreated</strong>. His strong resistance ("I'm not crazy") reflects the stigma men feel toward psychological difficulties.</p>
+        <div class="key-point"><strong>Exam insight:</strong> Depression does not always look like crying and hopelessness — especially in men. Physical symptoms, irritability, substance use, and anhedonia can all be its face. Understanding gender-specific expression of depression prevents misdiagnosis.</div>
+      </div>
+    </div>
+
+    <!-- Q26 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Q26</div>
+        <div class="q-body">
+          <span class="cross-badge">⟷ Cross-section</span><br><br>
+          <span class="q-tag">Anxiety · Social Learning · Cognitive · Schizophrenia · Distinguishing Irrational Fear from Delusion</span>
+          <div class="q-scenario">Two university students both believe their classmates are talking negatively about them. Student A is aware that this fear is probably exaggerated, experiences racing heart and sweating in seminars, has stopped contributing in class, and has declined all social invitations for three months. Student B is absolutely convinced — without doubt — that classmates are secretly reporting his words to the university administration as part of a coordinated campaign to get him expelled. He has begun recording all conversations and has filed formal complaints against five classmates.</div>
+          <div class="q-ask">Both students fear social evaluation. Explain why these represent fundamentally different clinical presentations, and what key psychological feature separates the two.</div>
+        </div>
+      </div>
+      <div class="answer-toggle" onclick="toggleAnswer(this)">
+        <div class="toggle-icon">▾</div> Reveal Model Answer
+      </div>
+      <div class="answer-panel">
+        <div class="answer-label">Model Answer</div>
+        <p><strong>Student A — Social Anxiety Disorder.</strong> The key features are: (1) he <strong>recognises his fear is probably exaggerated</strong> — insight is intact; (2) his fear, though irrational, is within the realm of normal social concern (people might judge him); (3) he responds with physiological anxiety and <em>avoidance</em>. Social anxiety disorder is characterised by irrational, persistent fear of <strong>negative evaluation</strong> — but the person knows the fear is disproportionate.</p>
+        <p><strong>Student B — Persecutory Delusion (consistent with Schizophrenia).</strong> The key feature is <strong>absolute, unshakeable conviction</strong> in the belief — he does not consider it might be wrong. The belief is not just exaggerated social fear; it is a <em>systematised persecutory delusion</em>: a specific, fixed false belief that others are coordinating against him. His response (recording, formal complaints) demonstrates the belief is driving reality-based actions, not just avoidance. Crucially, he shows <strong>no insight</strong> — he does not recognise this as a symptom.</p>
+        <p><strong>The separating feature: insight.</strong> Student A knows at some level his fear is excessive. Student B does not — his belief feels completely real and justified. This distinction between irrational fear (insight retained) and delusion (no insight, firm false belief) is a critical clinical boundary.</p>
+        <div class="key-point"><strong>Exam insight:</strong> Insight — awareness that one's experience may be a symptom — is a crucial differentiator between anxiety disorders and psychotic disorders. Both involve distorted perception of social threat, but the certainty and level of insight are fundamentally different.</div>
+      </div>
+    </div>
+
+    <!-- Q27 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Q27</div>
+        <div class="q-body">
+          <span class="cross-badge">⟷ Cross-section</span><br><br>
+          <span class="q-tag">Models · Stigma · Social Consequences · All sections</span>
+          <div class="q-scenario">A community is debating whether to establish a mental health halfway house in their neighbourhood. Resident A argues: "These people have brain diseases — they need medical care in a hospital, not here." Resident B argues: "Once you're labelled mentally ill, you're always a danger — the label is permanent." Resident C argues: "Mental illness only happens to weak people who can't cope — if they tried harder they wouldn't be sick."</div>
+          <div class="q-ask">Each resident holds a misconception. Using concepts from the chapter, correct each resident's position with a psychologically informed response.</div>
+        </div>
+      </div>
+      <div class="answer-toggle" onclick="toggleAnswer(this)">
+        <div class="toggle-icon">▾</div> Reveal Model Answer
+      </div>
+      <div class="answer-panel">
+        <div class="answer-label">Model Answer</div>
+        <p><strong>Resident A — "Brain disease requiring hospitalisation."</strong> While the medical model correctly identifies biological factors (genetics, neurochemistry, brain abnormalities), it is incomplete. The <strong>biopsychosocial model</strong> shows that psychological and social factors are equally important in both the development and recovery from mental illness. Community integration — <em>not</em> isolation in hospitals — is associated with better outcomes, particularly for conditions like schizophrenia where social support and reduced stress are critical factors in preventing relapse.</p>
+        <p><strong>Resident B — "The label is permanent."</strong> This reflects the real but criticised risk of diagnostic labelling and stigma. Research shows that <strong>schizophrenic symptoms and episodes tend to decrease as a person ages</strong> and that recovery is very much related to social and economic support. Labels are not life sentences. Furthermore, the stigma itself — as this resident is demonstrating — can be more disabling than the disorder, reducing quality of life and willingness to seek help.</p>
+        <p><strong>Resident C — "Mental illness = personal weakness."</strong> This is perhaps the most harmful misconception. Mental health disorders result from complex <strong>biopsychosocial interactions</strong> — genetic predispositions, brain chemistry, adverse life experiences, and social stressors — not character weakness or lack of effort. This misconception discourages people from seeking help and places blame on the person for circumstances largely outside their control.</p>
+        <div class="key-point"><strong>Exam insight:</strong> Stigma is not just a social problem — it has measurable clinical consequences (reduced treatment-seeking, worsened outcomes, isolation). Understanding where stigma comes from and how to counter it is a key applied skill.</div>
+      </div>
+    </div>
+
+    <!-- Q28 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Q28</div>
+        <div class="q-body">
+          <span class="cross-badge">⟷ Cross-section</span><br><br>
+          <span class="q-tag">Cognitive · Learning · PTSD · Depression · Learned Helplessness</span>
+          <div class="q-scenario">Following a period of sustained workplace bullying, Zahra was made redundant. She has since applied for 20 jobs and been rejected. She now says: "I don't bother applying any more — I'll just be rejected again. I'm clearly not good enough for any job. I was always going to end up like this." She rarely leaves home, has stopped replying to friends' messages, and feels that nothing she does makes any difference.</div>
+          <div class="q-ask">Using the concepts of learned helplessness and cognitive distortions, explain how Zahra arrived at her current state. Does her presentation also raise any concern for another disorder discussed in the chapter?</div>
+        </div>
+      </div>
+      <div class="answer-toggle" onclick="toggleAnswer(this)">
+        <div class="toggle-icon">▾</div> Reveal Model Answer
+      </div>
+      <div class="answer-panel">
+        <div class="answer-label">Model Answer</div>
+        <p><strong>Learned helplessness:</strong> Zahra's repeated experience of uncontrollable negative outcomes — bullying (where her efforts to cope didn't help), followed by redundancy (not her choice), followed by 20 rejections — has generated a belief that <strong>her behaviour cannot influence outcomes</strong>. Like the dogs in Seligman's experiments, she has stopped responding even when action could lead to success. "I don't bother applying" is the direct behavioural manifestation of learned helplessness — she stops trying because she expects failure regardless of effort.</p>
+        <p><strong>Cognitive distortions (Beck):</strong></p>
+        <ul>
+          <li>"I'll just be rejected again" — catastrophising and overgeneralisation from past experience</li>
+          <li>"I'm clearly not good enough for any job" — global negative attribution; one domain of setback applied universally to self-worth</li>
+          <li>"I was always going to end up like this" — fatalistic thinking, internal and stable attribution</li>
+        </ul>
+        <p><strong>Additional concern — PTSD:</strong> The sustained workplace bullying represents a prolonged adverse experience. If Zahra experiences intrusive memories of the bullying, avoidance of work-related environments, emotional numbing, and heightened distress when reminded of the workplace — her presentation could also qualify for PTSD. The avoidance and withdrawal may be both depressive and trauma-driven.</p>
+        <div class="key-point"><strong>Exam insight:</strong> Learned helplessness and cognitive distortions reinforce each other — helplessness generates "I cannot control things" thinking; cognitive distortions make this belief feel factual. Together they create and maintain depression.</div>
+      </div>
+    </div>
+
+    <!-- Q29 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Q29</div>
+        <div class="q-body">
+          <span class="cross-badge">⟷ Cross-section</span><br><br>
+          <span class="q-tag">GAD · Somatic · Cognitive · Medical Model Limitation</span>
+          <div class="q-scenario">For five years, Hui Min has visited her doctor every two months with different physical complaints — back pain, chest tightness, stomach cramps, and frequent headaches. Tests consistently show nothing physically wrong. Her doctor, frustrated, refers her to a specialist for further testing each time. Hui Min believes her doctor is "not finding the real cause" and continues to seek medical explanations. She is also a chronic worrier — she frets constantly about her children's health, finances, and even minor issues. She cannot relax and says she hasn't had a good night's sleep in years.</div>
+          <div class="q-ask">Identify the two overlapping psychological conditions Hui Min may have. Explain how they interact, and why the purely medical approach has so far failed to help her.</div>
+        </div>
+      </div>
+      <div class="answer-toggle" onclick="toggleAnswer(this)">
+        <div class="timeout-panel">
+        </div>
+      </div>
+      <div class="answer-toggle" onclick="toggleAnswer(this)">
+        <div class="toggle-icon">▾</div> Reveal Model Answer
+      </div>
+      <div class="answer-panel">
+        <div class="answer-label">Model Answer</div>
+        <p>Hui Min shows signs of two overlapping conditions:</p>
+        <p><strong>1. Generalized Anxiety Disorder (GAD):</strong> Persistent, uncontrollable worry about multiple life domains (children, finances, minor issues) that has been present for years, with sleep disturbance — meeting GAD's key criteria of chronic, pervasive anxiety without a specific trigger.</p>
+        <p><strong>2. Somatic Symptom Disorder:</strong> Real physical symptoms (back pain, chest tightness, stomach cramps, headaches) with no identifiable organic cause, that she genuinely experiences. The anxiety from GAD is being <em>somatised</em> — expressed through the body — which is the mechanism of somatic symptom disorder.</p>
+        <p><strong>How they interact:</strong> Her chronic anxiety (GAD) activates the sympathetic nervous system continuously — this creates genuine physical tension, gastric disturbance, and cardiovascular symptoms (chest tightness, headaches). The physical symptoms then become a new source of worry ("something is seriously wrong with my body"), amplifying her GAD. This creates a <strong>reinforcing loop</strong> — anxiety causes physical symptoms; physical symptoms increase anxiety.</p>
+        <p><strong>Why the medical approach fails:</strong> The medical model treats her as a patient with an undiscovered physical disease. Each specialist referral confirms to Hui Min that a physical cause must exist and hasn't been found yet. This <strong>reinforces her illness beliefs</strong> and keeps her seeking medical reassurance rather than addressing the psychological root. No amount of negative tests will break this cycle because the tests address a different level of the problem. A psychological or biopsychosocial approach is needed to address the anxiety generating the symptoms.</p>
+        <div class="key-point"><strong>Exam insight:</strong> GAD and somatic symptom disorder frequently co-occur. The body's stress response to chronic anxiety is real — it produces measurable physical symptoms. The medical model alone will keep chasing physical causes that don't exist.</div>
+      </div>
+    </div>
+
+    <!-- Q30 -->
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Q30</div>
+        <div class="q-body">
+          <span class="cross-badge">⟷ Cross-section · Synthesis</span><br><br>
+          <span class="q-tag">Full Chapter Integration · Models · Disorder · Stigma · Assessment</span>
+          <div class="q-scenario">A secondary school teacher notices that 16-year-old Wei has changed dramatically over the past year. Once an active, sociable student, he now sits alone, barely speaks, has submitted no work in two months, and appears to respond to things in the classroom that others cannot see or hear. When the teacher told his parents, his father said: "There's nothing wrong with him — he's just lazy and attention-seeking. In my time, we didn't have these so-called mental illnesses." His mother worries but says: "If we send him to a psychiatrist, everyone will know he's crazy and his future is ruined."</div>
+          <div class="q-ask">This scenario touches on assessment, models, cultural attitudes, stigma, and disorder identification. Write a comprehensive response that (a) identifies what disorder Wei may have and the evidence, (b) addresses the father's dismissal using the appropriate model, and (c) responds to the mother's concerns about labelling and stigma.</div>
+        </div>
+      </div>
+      <div class="answer-toggle" onclick="toggleAnswer(this)">
+        <div class="toggle-icon">▾</div> Reveal Model Answer
+      </div>
+      <div class="answer-panel">
+        <div class="answer-label">Model Answer</div>
+        <p><strong>(a) Possible disorder — Schizophrenia:</strong> The evidence is concerning. Wei shows both <strong>positive symptoms</strong> — appearing to respond to things others cannot see or hear (possible hallucinations) — and <strong>negative symptoms</strong> — social withdrawal (from sociable to isolated), cessation of academic work (avolition), and apparent emotional withdrawal. The onset in adolescence is consistent with the typical age of onset for schizophrenia in males (late teens to early 20s). The gradual change over a year also reflects the common pattern of schizophrenic onset. Critically, people with schizophrenia are often <strong>unaware they are unwell</strong>, which may explain why Wei has not sought help.</p>
+        <p><strong>(b) Addressing the father — using the biopsychosocial model against the "lazy/attention-seeking" dismissal:</strong> The father's view reflects a pre-scientific understanding — personal failing as the cause of abnormal behaviour. The biopsychosocial model demonstrates that mental health disorders arise from the <em>interaction</em> of biological factors (genetics, brain abnormalities, neurotransmitter dysfunction), psychological factors, and social factors — not from laziness or choice. A person with schizophrenia is not choosing their symptoms any more than a person with diabetes chooses their blood sugar levels. Dismissing the symptoms as a character failing not only fails Wei but could delay treatment that is critical to his prognosis.</p>
+        <p><strong>(c) Addressing the mother's stigma concerns — labelling:</strong> The mother's fear is understandable and reflects real social stigma around mental illness. However, the risks of <em>not</em> seeking help need to be weighed carefully. Without early intervention, Wei's symptoms and functioning are likely to worsen — <strong>early treatment is one of the strongest predictors of better long-term outcomes</strong>. As for the label "ruining his future" — it is actually the untreated disorder, with its mounting dysfunction, that poses the greater risk to his future. The label, when handled responsibly by a clinician, enables targeted support. What causes social harm is not the diagnosis itself but the <strong>stigma and discrimination that others apply to it</strong> — which is a reason to educate the community, not to avoid diagnosis.</p>
+        <div class="key-point"><strong>Exam insight:</strong> This question integrates the entire chapter. The best answers weave together: disorder identification (positive/negative symptoms), model application (biopsychosocial vs folk model), cultural context (Asian family dynamics, shame around mental illness), and the double-edged reality of diagnostic labelling.</div>
+      </div>
+    </div>
+
+  </div><!-- /secX -->
+
+</div><!-- /container -->
+
+<script>
+  let revealed = 0;
+  const total = 30;
+
+  function toggleAnswer(btn) {
+    const panel = btn.nextElementSibling;
+    const isOpen = panel.classList.contains('visible');
+    if (!isOpen) {
+      panel.classList.add('visible');
+      btn.classList.add('open');
+      btn.querySelector('.toggle-icon').textContent = '▴';
+      btn.lastChild.textContent = ' Hide Answer';
+      revealed++;
+      updateProgress();
+    } else {
+      panel.classList.remove('visible');
+      btn.classList.remove('open');
+      btn.querySelector('.toggle-icon').textContent = '▾';
+      btn.lastChild.textContent = ' Reveal Model Answer';
+      revealed--;
+      updateProgress();
+    }
+  }
+
+  function updateProgress() {
+    revealed = Math.max(0, revealed);
+    document.getElementById('prog-text').textContent = `Answers revealed: ${revealed} / ${total}`;
+    document.getElementById('prog-bar').style.width = `${(revealed / total) * 100}%`;
+  }
+</script>
+</body>
+</html>

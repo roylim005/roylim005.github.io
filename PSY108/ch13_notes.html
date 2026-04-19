@@ -3,624 +3,953 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PSY108 Exam Reference Guide · Study Unit 3</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Mental Health Disorders – Study Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #1a1a2e;
-    --paper: #f7f4ef;
-    --cream: #ede8e0;
-    --rust: #c0392b;
-    --teal: #1a7a6e;
-    --gold: #b8860b;
-    --violet: #6b3fa0;
-    --muted: #7a7068;
-    --border: #d4cec6;
-    --highlight: #fff3cd;
-    --card: #ffffff;
-    --shadow: 0 2px 16px rgba(26,26,46,0.08);
+    --bg: #0f0e17;
+    --surface: #1a1928;
+    --card: #211f35;
+    --border: #2e2c4a;
+    --accent1: #e8a87c;   /* warm amber */
+    --accent2: #7c9eff;   /* soft blue */
+    --accent3: #a8e6cf;   /* mint */
+    --accent4: #ffb3c6;   /* blush */
+    --accent5: #c9b1ff;   /* lavender */
+    --accent6: #ffd166;   /* yellow */
+    --text: #e8e6f0;
+    --text-dim: #9896b0;
+    --text-muted: #6a6880;
   }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--paper); color: var(--ink); font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.75; }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    padding: 0 0 80px;
+  }
 
   /* HEADER */
-  .site-header { background: var(--ink); color: var(--paper); padding: 48px 40px 36px; border-bottom: 4px solid var(--rust); position: relative; overflow: hidden; }
-  .site-header::before { content:''; position:absolute; top:-60px; right:-60px; width:280px; height:280px; border:2px solid rgba(247,244,239,0.07); border-radius:50%; }
-  .header-eyebrow { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--rust); margin-bottom:10px; }
-  .header-title { font-family:'Playfair Display',serif; font-size:clamp(26px,5vw,46px); font-weight:700; line-height:1.15; margin-bottom:8px; }
-  .header-sub { font-size:13px; color:rgba(247,244,239,0.55); font-weight:300; }
+  header {
+    background: linear-gradient(135deg, #1a1928 0%, #0f0e17 60%, #1e1635 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 60px 40px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -80px; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(124,158,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    background: rgba(124,158,255,0.1);
+    border: 1px solid rgba(124,158,255,0.25);
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    font-weight: 900;
+    line-height: 1.15;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+  h1 span { color: var(--accent1); }
+  .subtitle {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+  }
 
   /* NAV */
-  .nav-strip { background:var(--cream); border-bottom:1px solid var(--border); padding:0 24px; position:sticky; top:0; z-index:100; box-shadow:0 2px 8px rgba(26,26,46,0.06); }
-  .nav-inner { max-width:980px; margin:0 auto; display:flex; gap:0; overflow-x:auto; scrollbar-width:none; }
-  .nav-inner::-webkit-scrollbar { display:none; }
-  .nav-pill { display:inline-block; padding:13px 14px; font-family:'DM Mono',monospace; font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); text-decoration:none; white-space:nowrap; border-bottom:2px solid transparent; transition:color 0.2s,border-color 0.2s; }
-  .nav-pill:hover { color:var(--rust); border-color:var(--rust); }
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(15,14,23,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 20px;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  nav::-webkit-scrollbar { height: 3px; }
+  nav::-webkit-scrollbar-thumb { background: var(--border); }
+  nav ul { list-style: none; display: inline-flex; gap: 2px; padding: 0; }
+  nav a {
+    display: inline-block;
+    padding: 14px 16px;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+    border-bottom: 2px solid transparent;
+  }
+  nav a:hover { color: var(--text); border-bottom-color: var(--accent1); }
 
   /* LAYOUT */
-  .wrapper { max-width:980px; margin:0 auto; padding:0 24px; }
-  .section { padding:52px 0 32px; border-bottom:1px solid var(--border); }
-  .section:last-of-type { border-bottom:none; }
-  .section-tag { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--rust); margin-bottom:6px; }
-  .section-title { font-family:'Playfair Display',serif; font-size:clamp(20px,4vw,30px); font-weight:700; line-height:1.2; margin-bottom:18px; }
-  .section-intro { font-size:14.5px; color:var(--muted); max-width:700px; margin-bottom:28px; line-height:1.8; }
-  .sub-title { font-family:'Playfair Display',serif; font-size:17px; font-weight:700; margin:28px 0 14px; color:var(--ink); }
+  .container { max-width: 980px; margin: 0 auto; padding: 0 24px; }
 
-  /* DEF BOX */
-  .def-box { background:var(--ink); color:var(--paper); border-left:4px solid var(--rust); padding:18px 22px; border-radius:0 8px 8px 0; margin-bottom:24px; font-size:14.5px; }
-  .def-box strong { color:var(--rust); font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; display:block; margin-bottom:5px; }
-
-  /* CALLOUT */
-  .callout { background:var(--highlight); border-left:4px solid var(--gold); padding:14px 18px; border-radius:0 8px 8px 0; margin-bottom:22px; font-size:14px; }
-  .callout strong { color:var(--gold); }
-  .callout.teal { background:#e8f5f3; border-left-color:var(--teal); }
-  .callout.teal strong { color:var(--teal); }
-  .callout.violet { background:#f2ecfa; border-left-color:var(--violet); }
-  .callout.violet strong { color:var(--violet); }
+  /* SECTION */
+  section { padding: 60px 0 20px; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+  .section-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #fff;
+  }
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
 
   /* CARDS */
-  .card-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(250px,1fr)); gap:16px; margin-bottom:26px; }
-  .card { background:var(--card); border:1px solid var(--border); border-top:3px solid var(--teal); border-radius:8px; padding:18px; box-shadow:var(--shadow); transition:transform 0.18s,box-shadow 0.18s; }
-  .card:hover { transform:translateY(-2px); box-shadow:0 6px 24px rgba(26,26,46,0.11); }
-  .card.rust { border-top-color:var(--rust); }
-  .card.gold { border-top-color:var(--gold); }
-  .card.violet { border-top-color:var(--violet); }
-  .card h3 { font-family:'Playfair Display',serif; font-size:15px; font-weight:700; margin-bottom:7px; }
-  .card p { font-size:13px; color:var(--muted); line-height:1.65; }
-  .tag { display:inline-block; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; background:var(--cream); color:var(--muted); padding:2px 7px; border-radius:4px; margin-bottom:8px; }
-
-  /* BPS GRID */
-  .bps-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0; border:1px solid var(--border); border-radius:10px; overflow:hidden; margin-bottom:26px; box-shadow:var(--shadow); }
-  .bps-col { padding:22px 18px; background:var(--card); }
-  .bps-col:not(:last-child) { border-right:1px solid var(--border); }
-  .bps-col h4 { font-family:'Playfair Display',serif; font-size:15px; font-weight:700; margin-bottom:12px; padding-bottom:8px; border-bottom:2px solid; }
-  .bps-col.bio h4 { color:var(--rust); border-color:var(--rust); }
-  .bps-col.psych h4 { color:var(--teal); border-color:var(--teal); }
-  .bps-col.social h4 { color:var(--gold); border-color:var(--gold); }
-  .bps-col ul { list-style:none; padding:0; }
-  .bps-col li { font-size:13px; color:var(--muted); padding:4px 0; border-bottom:1px dashed var(--border); line-height:1.5; }
-  .bps-col li:last-child { border-bottom:none; }
-
-  /* TWO-COL */
-  .two-col { display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid var(--border); border-radius:10px; overflow:hidden; margin-bottom:24px; box-shadow:var(--shadow); }
-  .two-col .col { padding:20px 18px; background:var(--card); }
-  .two-col .col:first-child { border-right:1px solid var(--border); }
-  .two-col .col h4 { font-family:'Playfair Display',serif; font-size:15px; font-weight:700; margin-bottom:10px; padding-bottom:8px; border-bottom:2px solid var(--border); }
-  .two-col .col.head-rust h4 { color:var(--rust); border-bottom-color:var(--rust); }
-  .two-col .col.head-teal h4 { color:var(--teal); border-bottom-color:var(--teal); }
-  .two-col .col.head-gold h4 { color:var(--gold); border-bottom-color:var(--gold); }
-  .two-col .col.head-violet h4 { color:var(--violet); border-bottom-color:var(--violet); }
-  .two-col ul { list-style:none; padding:0; }
-  .two-col li { font-size:13px; color:var(--muted); padding:4px 0; border-bottom:1px dashed var(--border); line-height:1.5; }
-  .two-col li:last-child { border-bottom:none; }
-
-  /* TABLE */
-  .ref-table { width:100%; border-collapse:collapse; margin-bottom:26px; font-size:13.5px; box-shadow:var(--shadow); border-radius:8px; overflow:hidden; }
-  .ref-table thead tr { background:var(--ink); color:var(--paper); }
-  .ref-table th { padding:11px 14px; text-align:left; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; font-weight:500; }
-  .ref-table td { padding:10px 14px; border-bottom:1px solid var(--border); vertical-align:top; background:var(--card); }
-  .ref-table tr:last-child td { border-bottom:none; }
-  .ref-table tr:hover td { background:var(--cream); }
-
-  /* ACCORDION */
-  .accordion { margin-bottom:8px; }
-  .acc-trigger { width:100%; background:var(--card); border:1px solid var(--border); border-radius:8px; padding:13px 18px; text-align:left; font-family:'DM Sans',sans-serif; font-size:14px; font-weight:500; color:var(--ink); cursor:pointer; display:flex; justify-content:space-between; align-items:center; transition:background 0.15s; }
-  .acc-trigger:hover { background:var(--cream); }
-  .acc-trigger.open { border-radius:8px 8px 0 0; border-bottom-color:transparent; }
-  .acc-trigger .arrow { font-size:17px; transition:transform 0.25s; color:var(--muted); }
-  .acc-trigger.open .arrow { transform:rotate(180deg); }
-  .acc-body { display:none; background:var(--card); border:1px solid var(--border); border-top:none; border-radius:0 0 8px 8px; padding:14px 18px; font-size:13.5px; color:var(--muted); line-height:1.75; }
-  .acc-body.open { display:block; }
-  .acc-body ul { padding-left:18px; }
-  .acc-body li { margin-bottom:5px; }
-  .acc-body strong { color:var(--ink); }
-
-  /* STAT STRIP */
-  .stat-strip { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:12px; margin-bottom:24px; }
-  .stat-box { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:16px 14px; text-align:center; box-shadow:var(--shadow); }
-  .stat-num { font-family:'Playfair Display',serif; font-size:26px; font-weight:700; color:var(--rust); display:block; line-height:1.1; }
-  .stat-label { font-size:11.5px; color:var(--muted); margin-top:3px; line-height:1.4; }
-
-  /* FLOW */
-  .flow { display:flex; align-items:center; gap:0; flex-wrap:wrap; margin-bottom:24px; }
-  .flow-box { background:var(--ink); color:var(--paper); padding:10px 16px; border-radius:6px; font-size:12.5px; text-align:center; min-width:90px; }
-  .flow-box.teal { background:var(--teal); }
-  .flow-box.rust { background:var(--rust); }
-  .flow-box.gold { background:var(--gold); }
-  .flow-box.violet { background:var(--violet); }
-  .flow-arrow { color:var(--muted); font-size:20px; padding:0 6px; }
-
-  /* KEY TERMS */
-  .keyterms-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(195px,1fr)); gap:9px; margin-bottom:24px; }
-  .keyterm { background:var(--card); border:1px solid var(--border); border-radius:6px; padding:9px 13px; font-size:13px; box-shadow:var(--shadow); transition:background 0.15s; cursor:default; }
-  .keyterm:hover { background:var(--cream); }
-  .keyterm-word { font-family:'Playfair Display',serif; font-weight:700; font-size:13.5px; color:var(--ink); display:block; margin-bottom:2px; }
-  .keyterm-def { font-size:12px; color:var(--muted); line-height:1.5; }
-
-  /* FOOTER */
-  .site-footer { background:var(--ink); color:rgba(247,244,239,0.45); text-align:center; padding:26px; font-size:11.5px; margin-top:48px; font-family:'DM Mono',monospace; letter-spacing:0.06em; }
-
-  @media(max-width:640px){
-    .bps-grid,.two-col { grid-template-columns:1fr; }
-    .bps-col:not(:last-child),.two-col .col:first-child { border-right:none; border-bottom:1px solid var(--border); }
-    .site-header { padding:30px 18px 22px; }
-    .flow { gap:4px; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin-bottom: 14px;
   }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  /* DEFINITION BOX */
+  .def-box {
+    background: linear-gradient(135deg, rgba(232,168,124,0.08), rgba(124,158,255,0.05));
+    border: 1px solid rgba(232,168,124,0.2);
+    border-left: 3px solid var(--accent1);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+  }
+  .def-box strong { color: var(--accent1); }
+
+  /* THREE COLUMNS */
+  .three-col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  @media(max-width: 640px) { .three-col { grid-template-columns: 1fr; } }
+
+  /* COLORED CARD HEADERS */
+  .col-amber .card-head { background: rgba(232,168,124,0.12); border-color: rgba(232,168,124,0.25); color: var(--accent1); }
+  .col-blue  .card-head { background: rgba(124,158,255,0.12); border-color: rgba(124,158,255,0.25); color: var(--accent2); }
+  .col-mint  .card-head { background: rgba(168,230,207,0.12); border-color: rgba(168,230,207,0.25); color: var(--accent3); }
+  .col-blush .card-head { background: rgba(255,179,198,0.12); border-color: rgba(255,179,198,0.25); color: var(--accent4); }
+  .col-lav   .card-head { background: rgba(201,177,255,0.12); border-color: rgba(201,177,255,0.25); color: var(--accent5); }
+  .col-yel   .card-head { background: rgba(255,209,102,0.12); border-color: rgba(255,209,102,0.25); color: var(--accent6); }
+
+  .card-head {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 600;
+    border: 1px solid;
+    border-radius: 8px;
+    padding: 5px 12px;
+    display: inline-block;
+    margin-bottom: 12px;
+  }
+
+  /* PILL TAGS */
+  .tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin: 3px 3px 3px 0;
+  }
+  .tag-amber { background: rgba(232,168,124,0.15); color: var(--accent1); }
+  .tag-blue  { background: rgba(124,158,255,0.15); color: var(--accent2); }
+  .tag-mint  { background: rgba(168,230,207,0.15); color: var(--accent3); }
+  .tag-blush { background: rgba(255,179,198,0.15); color: var(--accent4); }
+  .tag-lav   { background: rgba(201,177,255,0.15); color: var(--accent5); }
+  .tag-yel   { background: rgba(255,209,102,0.15); color: var(--accent6); }
+
+  /* LIST STYLES */
+  ul.guide-list { list-style: none; padding: 0; }
+  ul.guide-list li {
+    padding: 6px 0 6px 20px;
+    position: relative;
+    font-size: 0.92rem;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    color: var(--text-dim);
+  }
+  ul.guide-list li:last-child { border-bottom: none; }
+  ul.guide-list li::before {
+    content: '›';
+    position: absolute; left: 4px;
+    color: var(--text-muted);
+  }
+  ul.guide-list li strong { color: var(--text); }
+
+  /* DISORDER CARDS */
+  .disorder-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 22px;
+    margin-bottom: 14px;
+    transition: border-color 0.2s;
+  }
+  .disorder-card:hover { border-color: rgba(255,255,255,0.1); }
+  .disorder-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .disorder-num {
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  /* TWO COL GRID */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  @media(max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* FLOW DIAGRAM */
+  .flow {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 14px 0;
+  }
+  .flow-item {
+    background: rgba(124,158,255,0.1);
+    border: 1px solid rgba(124,158,255,0.2);
+    border-radius: 8px;
+    padding: 7px 14px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--accent2);
+  }
+  .flow-arrow { color: var(--text-muted); font-size: 1.1rem; }
+
+  /* HIGHLIGHT BOX */
+  .highlight {
+    background: rgba(201,177,255,0.07);
+    border: 1px solid rgba(201,177,255,0.15);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 12px 0;
+    font-size: 0.88rem;
+    color: var(--text-dim);
+  }
+  .highlight strong { color: var(--accent5); }
+
+  /* MYTH VS FACT */
+  .mvf {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 14px;
+  }
+  @media(max-width:500px){ .mvf { grid-template-columns: 1fr; } }
+  .myth-box { background: rgba(255,100,100,0.07); border: 1px solid rgba(255,100,100,0.15); border-radius: 10px; padding: 14px; font-size: 0.84rem; }
+  .fact-box { background: rgba(168,230,207,0.07); border: 1px solid rgba(168,230,207,0.2); border-radius: 10px; padding: 14px; font-size: 0.84rem; }
+  .myth-box .lbl { color: #ff8080; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
+  .fact-box .lbl { color: var(--accent3); font-weight: 700; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
+
+  /* SEPARATOR */
+  hr.sep { border: none; border-top: 1px solid var(--border); margin: 40px 0 0; }
+
+  /* SMALL TEXT */
+  .note { font-size: 0.8rem; color: var(--text-muted); margin-top: 8px; }
+
+  /* POSITIVE/NEGATIVE labels */
+  .pos-label { color: var(--accent3); font-weight: 600; font-size: 0.8rem; }
+  .neg-label { color: var(--accent4); font-weight: 600; font-size: 0.8rem; }
+
+  p { font-size: 0.92rem; color: var(--text-dim); margin-bottom: 10px; }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<header class="site-header">
-  <div class="wrapper">
-    <div class="header-eyebrow">PSY108 · Study Unit 3 · Exam Reference Guide</div>
-    <h1 class="header-title">Mental Health Disorders</h1>
-    <p class="header-sub">Based on Seminar 5 Slides & Study Unit 3 (Chapter 1) · Pastorino & Doyle-Portillo (5th ed.)</p>
-  </div>
+<header>
+  <div class="header-tag">PSY108 · Chapter 13 · Exam Guide</div>
+  <h1>Mental Health <span>Disorders</span></h1>
+  <p class="subtitle">Based on Seminar 5 Slides &amp; Study Unit Notes · Pastorino &amp; Doyle-Portillo (5th Ed.)</p>
 </header>
 
-<!-- NAV -->
-<nav class="nav-strip">
-  <div class="nav-inner">
-    <a class="nav-pill" href="#s1">Abnormality</a>
-    <a class="nav-pill" href="#s2">Models</a>
-    <a class="nav-pill" href="#s3">DSM</a>
-    <a class="nav-pill" href="#s4">Anxiety</a>
-    <a class="nav-pill" href="#s5">Mood</a>
-    <a class="nav-pill" href="#s6">Somatic & Dissociative</a>
-    <a class="nav-pill" href="#s7">Schizophrenia</a>
-    <a class="nav-pill" href="#terms">Key Terms</a>
-  </div>
+<nav>
+  <ul>
+    <li><a href="#s1">What is MHD?</a></li>
+    <li><a href="#s2">Models</a></li>
+    <li><a href="#s3">DSM</a></li>
+    <li><a href="#s4">Anxiety</a></li>
+    <li><a href="#s5">Somatic &amp; Dissociative</a></li>
+    <li><a href="#s6">Mood</a></li>
+    <li><a href="#s7">Schizophrenia</a></li>
+  </ul>
 </nav>
 
-<div class="wrapper">
+<!-- ═══════════════════════════════════════════ -->
+<!-- SECTION 1: What is a Mental Health Disorder -->
+<!-- ═══════════════════════════════════════════ -->
+<section id="s1">
+<div class="container">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(232,168,124,0.12); border:1px solid rgba(232,168,124,0.2);">🧠</div>
+    <h2>What is a Mental Health Disorder?</h2>
+  </div>
 
-  <!-- ══ SECTION 1: ABNORMALITY ══ -->
-  <section class="section" id="s1">
-    <div class="section-tag">Chapter 1 · Study Unit 3</div>
-    <h2 class="section-title">What Is Abnormality?</h2>
-    <p class="section-intro">There is no sharp line separating normal from abnormal behaviour. A judgement call is made when two or more indicators are present, considering the <strong>degree and frequency</strong> of the behaviour.</p>
+  <div class="def-box">
+    A <strong>mental health disorder</strong> is a <strong>dysfunction</strong> in thinking, emotions, and/or social behaviour that <strong>impairs functioning</strong> and is <strong>not culturally expected</strong>.
+  </div>
 
-    <div class="def-box">
-      <strong>Definition</strong>
-      A mental health disorder = dysfunction in thinking, emotions, or social behaviour that (1) is <em>not typical or culturally expected</em>, (2) causes <em>distress</em>, and (3) results in <em>dysfunction</em> in daily functioning.
+  <p>There is <strong style="color:var(--text)">no sharp line</strong> between normal and abnormal behaviour — it is a judgment call based on <strong style="color:var(--text)">degree and frequency</strong>. A key practical test: <em>does it affect your daily functioning?</em> If yes → seek help.</p>
+
+  <div class="three-col" style="margin-top:20px;">
+    <div class="card col-amber">
+      <div class="card-head">1 · Not Typical / Culturally Expected</div>
+      <ul class="guide-list">
+        <li>Behaviour is <strong>statistically rare</strong> compared to most people</li>
+        <li>Violates <strong>social and cultural norms</strong></li>
+        <li>⚠️ Norms vary widely across cultures and across time</li>
+        <li>Judging on this alone is problematic</li>
+      </ul>
     </div>
-
-    <div class="callout teal"><strong>Key insight from SU3:</strong> Behaviour exists on a continuum. Normality is statistically defined (bell curve), but being statistically rare does not automatically mean abnormal — context, culture, and functioning all matter.</div>
-
-    <h3 class="sub-title">Three Indicators of Abnormality</h3>
-    <table class="ref-table">
-      <thead><tr><th>Indicator</th><th>What it means</th><th>Example</th></tr></thead>
-      <tbody>
-        <tr>
-          <td><strong>Not typical / culturally expected</strong></td>
-          <td>Behaviour occurs far less or more often than most people do; violates social/cultural norms. Norms vary across cultures and historical periods.</td>
-          <td>Washing hands 50 times a day when most people wash a handful of times.</td>
-        </tr>
-        <tr>
-          <td><strong>Distress</strong></td>
-          <td>Causes significant personal pain, emotional suffering, or distress to those around the person.</td>
-          <td>Feeling overwhelming terror that prevents leaving the house.</td>
-        </tr>
-        <tr>
-          <td><strong>Dysfunction</strong></td>
-          <td>Interferes with ability to hold a job, go to school, or form close relationships. The key question: does it affect daily functioning?</td>
-          <td>Unable to go to work or maintain friendships because of the behaviour.</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="callout"><strong>Exam note:</strong> The APA (1994) adds that the problem must reside within the person (biological, learned, or mental) and must not be a deliberate reaction to conditions like poverty or prejudice.</div>
-  </section>
-
-  <!-- ══ SECTION 2: MODELS ══ -->
-  <section class="section" id="s2">
-    <div class="section-tag">Chapter 1 · Seminar 5 Slides</div>
-    <h2 class="section-title">Models for Understanding Mental Health Disorders</h2>
-    <p class="section-intro">Three broad models explain how mental health disorders arise. No single model is complete on its own.</p>
-
-    <div class="card-grid">
-      <div class="card rust">
-        <div class="tag">Historical</div>
-        <h3>Demon Model</h3>
-        <p>Mental illness seen as the work of Satan or evil spirits. Treatment involved exorcism or punishment. Now considered unscientific.</p>
-      </div>
-      <div class="card">
-        <div class="tag">Biological</div>
-        <h3>Medical Model</h3>
-        <p>Mental disorders are diseases caused by genetics, brain chemistry imbalances, or physical dysfunction. Treated with medication or surgery.</p>
-        <p style="margin-top:8px;font-size:12px;color:var(--rust);">⚠ Weakness: "Doctor knows best" — patient becomes passive, may lead to unnecessary drug therapy, does not build coping skills.</p>
-      </div>
-      <div class="card gold">
-        <div class="tag">Psychological</div>
-        <h3>Psychological View</h3>
-        <p>Dysfunction results from internal or external factors. Four perspectives: <em>psychoanalytic</em> (past conflicts), <em>social learning</em> (learned behaviour), <em>cognitive</em> (faulty thinking), <em>humanistic</em> (distorted self).</p>
-      </div>
+    <div class="card col-blue">
+      <div class="card-head">2 · Distress</div>
+      <ul class="guide-list">
+        <li>Causes significant <strong>personal pain</strong> to the individual</li>
+        <li>Or causes <strong>distress to others</strong> (e.g. chronic lying, violence)</li>
+        <li>Often what drives a person to seek treatment</li>
+      </ul>
     </div>
+    <div class="card col-mint">
+      <div class="card-head">3 · Dysfunction</div>
+      <ul class="guide-list">
+        <li><strong>Interferes with ability to function</strong> — work, school, relationships</li>
+        <li>The more difficulty functioning, the more likely it meets criteria</li>
+        <li>Most important practical indicator</li>
+      </ul>
+    </div>
+  </div>
 
-    <h3 class="sub-title">The Four Psychological Perspectives</h3>
-    <table class="ref-table">
-      <thead><tr><th>Perspective</th><th>Core Idea</th><th>Key Mechanism</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Psychoanalytic</strong></td><td>Present problems caused by unresolved conflicts from the past</td><td>Childhood trauma / relationships buried in the unconscious. Treatment: make the unconscious conscious.</td></tr>
-        <tr><td><strong>Social Learning</strong></td><td>Abnormal behaviour is <em>learned</em>, just as normal behaviour is</td><td>Through associations, reinforcements, and punishments (classical/operant conditioning, modelling).</td></tr>
-        <tr><td><strong>Cognitive</strong></td><td>Internal processes — expectations, biases, and cognitive errors — produce disordered behaviour</td><td>Illogical thinking ("cognitive errors") distort perception of reality.</td></tr>
-        <tr><td><strong>Humanistic</strong></td><td>Disorder arises from incongruence between ideal self and actual self</td><td>Distorted feeling of being unable to achieve true potential or live a meaningful life.</td></tr>
-      </tbody>
-    </table>
+  <div class="highlight">
+    <strong>Key exam point:</strong> All three indicators (the "3Ds") are used together. Judgement is needed when 2 or more are present. Degree and frequency matter — a behaviour that is mild and rare is less likely to meet disorder criteria than one that is severe and persistent.
+  </div>
+</div>
+</section>
 
-    <h3 class="sub-title">Sociocultural Approach</h3>
-    <p style="font-size:14px;color:var(--muted);margin-bottom:20px;">Takes into account social and cultural factors including age, race, gender, social roles, and socioeconomic status. Internal biological and psychological processes can only be fully understood within the larger social and cultural context.</p>
+<hr class="sep">
 
-    <h3 class="sub-title">Biopsychosocial Model — Integrating All Perspectives</h3>
-    <div class="bps-grid">
-      <div class="bps-col bio">
-        <h4>Biological</h4>
-        <ul>
-          <li>Genetics</li>
-          <li>Neurotransmitter imbalance</li>
-          <li>Brain structure / function</li>
-          <li>Chemical imbalance</li>
-        </ul>
-      </div>
-      <div class="bps-col psych">
-        <h4>Psychological</h4>
-        <ul>
-          <li>Low self-esteem / negative body image</li>
-          <li>Cognitive errors / distorted thinking</li>
-          <li>Avoidance behaviours</li>
-          <li>Emotional distress / maladaptive behaviour</li>
-        </ul>
-      </div>
-      <div class="bps-col social">
-        <h4>Sociocultural</h4>
-        <ul>
-          <li>Others criticising / ridiculing</li>
-          <li>Cultural stereotypes</li>
-          <li>Social roles, poverty, discrimination</li>
-          <li>Age, race, gender</li>
-        </ul>
+<!-- ═══════════════════════════════════════════ -->
+<!-- SECTION 2: Models / Explanations           -->
+<!-- ═══════════════════════════════════════════ -->
+<section id="s2">
+<div class="container">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(124,158,255,0.12); border:1px solid rgba(124,158,255,0.2);">🔬</div>
+    <h2>Models of Mental Health Disorder</h2>
+  </div>
+
+  <!-- Row 1: Demon, Medical, Biopsychosocial -->
+  <div class="three-col">
+    <div class="card col-blush">
+      <div class="card-head">Demon Model</div>
+      <ul class="guide-list">
+        <li>Behaviour is the <strong>work of Satan / evil spirits</strong></li>
+        <li>Historical (pre-scientific) view</li>
+        <li>Treatment: exorcism / punishment</li>
+      </ul>
+    </div>
+    <div class="card col-amber">
+      <div class="card-head">Medical Model (Biological)</div>
+      <ul class="guide-list">
+        <li>MHD viewed as a <strong>disease</strong> — like any physical illness</li>
+        <li>Caused by: <strong>genetics, chemical imbalance, brain dysfunction</strong></li>
+        <li>Treatment: medication, surgery</li>
+      </ul>
+      <div class="highlight" style="margin-top:10px; font-size:0.8rem;">
+        <strong>Weaknesses:</strong> "Doctor knows best" → patient becomes passive · may lead to unnecessary drug therapy · does not encourage good coping skills
       </div>
     </div>
-    <div class="callout"><strong>Key point:</strong> No single theory is correct. Most disorders result from a combination of all three domains — hence "biopsychosocial".</div>
-  </section>
+    <div class="card col-mint">
+      <div class="card-head">Biopsychosocial Model</div>
+      <ul class="guide-list">
+        <li><strong>Integrates all perspectives</strong></li>
+        <li>No single cause — it is a combination of:</li>
+        <li><strong>Biological</strong> (brain, genes, chemistry)</li>
+        <li><strong>Psychological</strong> (thoughts, emotions, learning)</li>
+        <li><strong>Social/cultural</strong> (environment, gender, poverty)</li>
+      </ul>
+      <p class="note" style="margin-top:8px;">This is the currently accepted approach. Most disorders cannot be explained by one factor alone.</p>
+    </div>
+  </div>
 
-  <!-- ══ SECTION 3: DSM ══ -->
-  <section class="section" id="s3">
-    <div class="section-tag">Chapter 1 · SU3 + Seminar Slides</div>
-    <h2 class="section-title">The DSM Classification System</h2>
-    <p class="section-intro">The <em>Diagnostic and Statistical Manual of Mental Disorders</em> is the standard classification system used by clinicians worldwide. The current version is <strong>DSM-5-TR (2022)</strong>.</p>
+  <!-- Psychological sub-perspectives -->
+  <h3 style="color:var(--accent5); margin: 24px 0 14px;">Psychological Model — 4 Perspectives</h3>
+  <div class="card-grid">
+    <div class="card col-lav">
+      <div class="card-head">Psychoanalytic</div>
+      <ul class="guide-list">
+        <li>Present problems caused by <strong>unresolved conflicts in the past</strong></li>
+        <li>Tied to early relationships and childhood trauma</li>
+        <li>Memories are <strong>buried (repressed)</strong> in the unconscious mind</li>
+        <li>Goal of therapy: <em>make the unconscious conscious</em></li>
+      </ul>
+    </div>
+    <div class="card col-blue">
+      <div class="card-head">Social Learning</div>
+      <ul class="guide-list">
+        <li>Abnormal behaviour is <strong>learned</strong>, just as normal behaviour is</li>
+        <li>Through <strong>associations, reinforcements, and punishments</strong> (classical &amp; operant conditioning)</li>
+        <li>Observational learning also plays a role</li>
+      </ul>
+    </div>
+    <div class="card col-amber">
+      <div class="card-head">Cognitive</div>
+      <ul class="guide-list">
+        <li>Focuses on <strong>internal processes</strong>: expectations, biases, thinking errors</li>
+        <li><strong>Cognitive errors (distortions)</strong> result in maladaptive behaviour</li>
+        <li>Negative automatic thinking patterns maintain disorders</li>
+      </ul>
+    </div>
+    <div class="card col-mint">
+      <div class="card-head">Humanistic</div>
+      <ul class="guide-list">
+        <li>Disorder stems from <strong>incongruence</strong> between ideal self and actual self</li>
+        <li>Distorted feeling of being unable to achieve true potential</li>
+        <li>Failure to fulfil basic needs blocks self-actualisation</li>
+      </ul>
+    </div>
+  </div>
 
-    <div class="two-col">
-      <div class="col head-teal">
-        <h4>What the DSM does</h4>
-        <ul>
-          <li>Classifies disorders by mental and behavioural symptoms</li>
-          <li>Provides specific diagnostic criteria for ~300 disorders</li>
-          <li>Atheoretical — does not speculate on causes</li>
-          <li>Creates common language for clinicians and researchers</li>
-          <li>Has important legal implications (e.g., fitness to stand trial)</li>
+  <!-- Sociocultural -->
+  <div class="card" style="margin-top:4px;">
+    <div class="card-head col-yel" style="background:rgba(255,209,102,0.12); border-color:rgba(255,209,102,0.25); color:var(--accent6);">Sociocultural Approach</div>
+    <p>Takes into account the <strong style="color:var(--text)">social and cultural factors</strong> that shape behaviour: <strong style="color:var(--text)">age, race, gender, social roles, socioeconomic status</strong>, poverty, discrimination, and environmental stressors. Internal biological and psychological processes can only be fully understood in the context of society and culture.</p>
+  </div>
+</div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- SECTION 3: DSM Classification              -->
+<!-- ═══════════════════════════════════════════ -->
+<section id="s3">
+<div class="container">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(255,209,102,0.12); border:1px solid rgba(255,209,102,0.2);">📋</div>
+    <h2>Classifying Mental Disorders — The DSM</h2>
+  </div>
+
+  <div class="def-box">
+    The <strong>DSM-V-TR (2022)</strong> — Diagnostic and Statistical Manual of Mental Disorders — is the most widely used system. It classifies disorders by their <strong>mental and behavioural symptoms</strong>.
+  </div>
+
+  <div class="two-col">
+    <div class="card col-mint">
+      <div class="card-head">Why classify?</div>
+      <ul class="guide-list">
+        <li>When a problem is identified and classified, <strong>appropriate treatment can be given</strong></li>
+        <li>Provides a <strong>common language</strong> for clinicians and researchers</li>
+        <li>Helps study possible underlying causes</li>
+        <li>Needed for insurance, resource allocation</li>
+      </ul>
+    </div>
+    <div class="card col-blush">
+      <div class="card-head">Limitations</div>
+      <ul class="guide-list">
+        <li>Diagnosis can be <strong>biased</strong> by culture, race, or gender</li>
+        <li>Mental illness may be influenced by <strong>social and cultural variables</strong></li>
+        <li>Diagnosis can carry <strong>stigma</strong></li>
+        <li>The suffering of the afflicted is real regardless of debate</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="highlight">
+    <strong>Indicators of abnormality reminder:</strong> No sharp line between normal and abnormal. Judgment call when 2+ indicators present. <strong>Degree &amp; frequency</strong> determine clinical significance. The key question: does it affect daily functioning?
+  </div>
+</div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- SECTION 4: ANXIETY DISORDERS               -->
+<!-- ═══════════════════════════════════════════ -->
+<section id="s4">
+<div class="container">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(201,177,255,0.12); border:1px solid rgba(201,177,255,0.2);">⚡</div>
+    <h2>Anxiety, OCD &amp; Trauma-Related Disorders</h2>
+  </div>
+
+  <p>Anxiety disorders differ from everyday worry in their <strong style="color:var(--text)">focus, duration, intensity, and degree of functional impairment</strong>. The key is that anxiety is out of proportion and significantly disrupts daily life.</p>
+
+  <!-- GAD -->
+  <div class="disorder-card">
+    <div class="disorder-title">
+      <div class="disorder-num" style="background:rgba(201,177,255,0.15); color:var(--accent5);">1</div>
+      <h3 style="color:var(--accent5);">Generalized Anxiety Disorder (GAD)</h3>
+    </div>
+    <p><strong style="color:var(--text)">Core feature:</strong> Feel anxious <em>most of the time</em> about many different things — major and minor — without a specific known cause.</p>
+    <ul class="guide-list">
+      <li><strong>Persistent and pervasive</strong> feelings of anxiety, without a clear external trigger</li>
+      <li>Worry is <strong>difficult to control</strong></li>
+      <li>Symptoms: restlessness, easy fatigue, difficulty concentrating, irritability, muscle tension, sleep problems</li>
+      <li>Example worry: "Will my children get good jobs? Will they get partners? Will they grow up to be pretty?"</li>
+      <li>Must be present <strong>more days than not for 6 months</strong></li>
+      <li>Women have higher rates than men</li>
+    </ul>
+  </div>
+
+  <!-- Panic Disorder -->
+  <div class="disorder-card">
+    <div class="disorder-title">
+      <div class="disorder-num" style="background:rgba(255,179,198,0.15); color:var(--accent4);">2</div>
+      <h3 style="color:var(--accent4);">Panic Disorder &amp; Agoraphobia</h3>
+    </div>
+    <p><strong style="color:var(--text)">Core feature:</strong> Abrupt (peaks within 10 minutes) episodes of intense fear/discomfort with <strong>no connection to present events</strong> — sometimes called "fear of fear."</p>
+    <div class="two-col" style="margin-top:10px;">
+      <div>
+        <div class="card-head col-blush">Panic Disorder</div>
+        <ul class="guide-list">
+          <li>Sudden overwhelming panic — heart pounds, ringing in ears, difficulty breathing, numbness</li>
+          <li>Person <strong>stays away</strong> from triggers to avoid another attack</li>
+          <li>No identifiable specific cause</li>
         </ul>
       </div>
-      <div class="col head-rust">
-        <h4>Criticisms of the DSM</h4>
-        <ul>
-          <li>Too many disorders listed</li>
-          <li>No clear boundary between normal and abnormal</li>
-          <li>Some disorders not easily distinguishable from others</li>
-          <li>Clinician subjectivity and bias in diagnosis</li>
-          <li>Labelling risk: stigma and self-fulfilling prophecy</li>
-          <li>Comorbidity: symptoms often overlap multiple disorders</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="callout"><strong>Comorbidity</strong> — when a person meets the criteria for more than one disorder at the same time. Common across most disorder categories.</div>
-    <div class="callout teal"><strong>DSM-5 update:</strong> Used the "spectrum" concept to group related disorders (e.g., autism spectrum disorder, schizophrenia spectrum disorder) that share biological or psychological qualities.</div>
-  </section>
-
-  <!-- ══ SECTION 4: ANXIETY ══ -->
-  <section class="section" id="s4">
-    <div class="section-tag">Seminar 5 Slides · Chapter 13</div>
-    <h2 class="section-title">Anxiety, OCD & Trauma-Related Disorders</h2>
-    <p class="section-intro">Anxiety disorders are differentiated mainly by their <strong>focus</strong> (what they fear) and <strong>duration</strong>. Anxiety becomes disordered when its intensity, frequency, and duration are out of proportion to the actual threat.</p>
-
-    <h3 class="sub-title">The Five Anxiety Disorders (Know all five)</h3>
-    <div class="card-grid">
-      <div class="card">
-        <div class="tag">1 · GAD</div>
-        <h3>Generalized Anxiety Disorder</h3>
-        <p>Persistent, pervasive feelings of anxiety <em>without any known external cause</em>. Feels anxious most of the time over things that don't warrant worrying. Women worry more than men (higher rates in women).</p>
-        <p style="margin-top:6px;font-size:12px;font-style:italic;color:var(--teal);">DSM criteria: ≥6 months, ≥3 symptoms (restlessness, fatigue, poor concentration, irritability, muscle tension, sleep disturbance).</p>
-      </div>
-      <div class="card rust">
-        <div class="tag">2 · Panic</div>
-        <h3>Panic Disorder / Agoraphobia</h3>
-        <p><strong>Panic disorder:</strong> Abrupt onset of intense fear or discomfort, usually peaks within 10 minutes, with <em>no connection to present events</em>. Creates "fear of fear" — person avoids anything that reminds them of the last attack.</p>
-        <p style="margin-top:6px;"><strong>Agoraphobia:</strong> Fear of places where escape may be difficult. Develops from panic disorder. Can leave people housebound.</p>
-      </div>
-      <div class="card gold">
-        <div class="tag">3 · Phobia</div>
-        <h3>Specific Phobia / Social Anxiety</h3>
-        <p><strong>Phobia:</strong> Irrational fear of specific objects or situations (e.g., spiders, heights, patrol cars, trolley bags, feathers). <em>Persistent and irrational</em>. Goes to great lengths to avoid the feared object while recognising the fear is unreasonable.</p>
-        <p style="margin-top:6px;"><strong>Social anxiety disorder:</strong> Persistent fear of being negatively evaluated in social situations.</p>
-      </div>
-      <div class="card">
-        <div class="tag">4 · OCD</div>
-        <h3>OCD / Hoarding Disorder</h3>
-        <p><strong>Obsessions:</strong> Involuntary, intrusive and nonsensical thoughts, images, or urges one tries to resist or eliminate. Most common: contamination and aggression.</p>
-        <p style="margin-top:6px;"><strong>Compulsions:</strong> Actions performed to suppress the thoughts and provide relief. Most common: cleaning/washing or checking rituals. Only provides temporary relief — not performing them increases anxiety.</p>
-        <p style="margin-top:6px;"><strong>Hoarding:</strong> Inability to discard possessions even when of no value. Linked to meticulous and perfectionist personality.</p>
-      </div>
-      <div class="card violet">
-        <div class="tag">5 · PTSD</div>
-        <h3>Posttraumatic Stress Disorder</h3>
-        <p>Develops after exposure to a terrifying event. Progression:</p>
-        <div class="flow" style="margin-top:8px;flex-wrap:wrap;gap:4px;">
-          <div class="flow-box" style="font-size:11px;padding:6px 10px;">Traumatic Event</div>
-          <span class="flow-arrow">→</span>
-          <div class="flow-box teal" style="font-size:11px;padding:6px 10px;">Initial Reactions</div>
-          <span class="flow-arrow">→</span>
-          <div class="flow-box rust" style="font-size:11px;padding:6px 10px;">Intrusive Memories</div>
-          <span class="flow-arrow">→</span>
-          <div class="flow-box gold" style="font-size:11px;padding:6px 10px;">Avoidance / Numbing</div>
-          <span class="flow-arrow">→</span>
-          <div class="flow-box violet" style="font-size:11px;padding:6px 10px;">Mood / Cognition Change</div>
-          <span class="flow-arrow">→</span>
-          <div class="flow-box" style="font-size:11px;padding:6px 10px;">Heightened Arousal</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ SECTION 5: MOOD ══ -->
-  <section class="section" id="s5">
-    <div class="section-tag">Seminar 5 Slides · Chapter 13</div>
-    <h2 class="section-title">Mood Disorders</h2>
-    <p class="section-intro">Mood disorders have a <strong>disturbance in mood</strong> as their prominent feature — defined and diagnosed by the occurrence of one or more mood episodes, or periods of abnormal happiness or sadness. Mood must be <em>consistently inappropriate to the situation</em>.</p>
-
-    <h3 class="sub-title">Major Depression (Unipolar)</h3>
-    <div class="def-box">
-      <strong>Major Depression</strong>
-      Form of depression that does <em>not</em> alternate with mania. Accounts for the majority of mental hospital admissions. Diagnosis requires: depressed mood or loss of interest/pleasure + ≥4 symptoms for ≥2 weeks.
-    </div>
-
-    <h3 class="sub-title">Symptoms of Major Depression (Degree & Frequency)</h3>
-    <div class="two-col">
-      <div class="col head-rust">
-        <h4>Core Symptoms</h4>
-        <ul>
-          <li>Feel worthless / excessive guilt</li>
-          <li>Lack of appetite / weight change</li>
-          <li>Social withdrawal</li>
-          <li>Sleeping disorder (too much or too little)</li>
-          <li>Agitated OR lethargic movement</li>
-          <li>Loss of energy / fatigue</li>
-          <li>Suicidal thoughts</li>
-        </ul>
-      </div>
-      <div class="col head-gold">
-        <h4>Who is more vulnerable?</h4>
-        <ul>
-          <li>Women are twice as likely as men</li>
-          <li>Adolescent females aged 13–15 especially at risk</li>
-          <li>People living in poverty</li>
-          <li>Those with a family history of depression</li>
-          <li>People who experienced early adverse life events</li>
-          <li>Those with ruminative coping style</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="callout teal"><strong>Seasonal Affective Disorder (SAD):</strong> Depression triggered by deprivation of sunlight. Many SAD symptoms are the <em>opposite</em> of major depression — increased appetite, weight gain, more sleep.</div>
-
-    <h3 class="sub-title">Bipolar Disorder</h3>
-    <div class="def-box">
-      <strong>Bipolar Disorder</strong>
-      A "roller coaster of mood" — the person experiences <em>both</em> manic episodes AND major depressive episodes. Typically the mania and depression alternate, though in rare cases they may coexist. Also called "manic-depressive disorder."
-    </div>
-
-    <div class="two-col">
-      <div class="col head-gold">
-        <h4>Manic Episode</h4>
-        <ul>
-          <li>Happy, euphoric, elated</li>
-          <li>Overconfident / inflated self-esteem</li>
-          <li>Very energetic, hyperactive</li>
-          <li>Highly talkative</li>
-          <li>Decreased need for sleep</li>
-          <li>Impulsive / risk-taking behaviour</li>
-          <li>May include delusions or hallucinations</li>
-        </ul>
-      </div>
-      <div class="col head-rust">
-        <h4>Depressive Episode</h4>
-        <ul>
-          <li>Not interested in usual activities</li>
-          <li>No energy / fatigue</li>
-          <li>Withdrawal from others</li>
-          <li>Feelings of worthlessness</li>
-          <li>Sleep / appetite changes</li>
-          <li>Suicidal ideation</li>
+      <div>
+        <div class="card-head" style="background:rgba(255,179,198,0.1); border-color:rgba(255,179,198,0.2); color:var(--accent4);">Agoraphobia</div>
+        <ul class="guide-list">
+          <li>Fear of <strong>places</strong> — malls, cinemas, grocery stores</li>
+          <li>Avoidance of places where escape may be difficult if panic occurs</li>
+          <li>Can lead to being housebound</li>
         </ul>
       </div>
     </div>
+  </div>
 
-    <div class="callout"><strong>Unipolar vs Bipolar:</strong> In <em>unipolar</em> depression, mood only goes down. In <em>bipolar</em> depression, mood swings from manic peaks to depressive troughs. Men and women are equally likely to develop bipolar disorder.</div>
-  </section>
-
-  <!-- ══ SECTION 6: SOMATIC & DISSOCIATIVE ══ -->
-  <section class="section" id="s6">
-    <div class="section-tag">Seminar 5 Slides · Chapter 13</div>
-    <h2 class="section-title">Somatic & Dissociative Disorders</h2>
-
-    <h3 class="sub-title">Somatic Symptom Disorders</h3>
-    <p style="font-size:14px;color:var(--muted);margin-bottom:16px;">Psychological problems appearing in the form of <strong>bodily symptoms or physical complaints</strong> that cannot be explained in terms of a physical disease. The pain "felt" can be very real — the somatic symptoms are neither intentionally produced nor feigned; they appear to be unconscious to the patient.</p>
-
-    <div class="card-grid">
-      <div class="card gold">
-        <div class="tag">Somatic</div>
-        <h3>Somatic Symptom Disorder</h3>
-        <p><strong>Anxiety → Physical Symptoms.</strong> Psychological distress is expressed through genuine physical complaints (e.g., pain, fatigue) with no identifiable medical cause. The person is not faking.</p>
-      </div>
-      <div class="card rust">
-        <div class="tag">Somatic</div>
-        <h3>Illness Anxiety Disorder</h3>
-        <p>Excessive concern about having a serious medical illness. Person frequently seeks medical reassurance even in the absence of evidence. When told nothing is physically wrong, they seek another doctor rather than psychological help.</p>
-      </div>
-      <div class="card violet">
-        <div class="tag">Somatic</div>
-        <h3>Conversion Disorder</h3>
-        <p>Emotional distress is expressed through <strong>physical malfunctioning</strong>, often involving sensory-motor symptoms (e.g., blindness, paralysis, inability to speak) with no organic pathology.</p>
-        <p style="margin-top:6px;font-size:12px;">Flow: <em>Stressor (e.g., car accident) → Loss of sensation (speech, mobility, sight)</em>. Often called "all in the mind." The patient may be unaware of the psychological cause.</p>
-      </div>
+  <!-- Phobia / Social Anxiety -->
+  <div class="disorder-card">
+    <div class="disorder-title">
+      <div class="disorder-num" style="background:rgba(255,209,102,0.15); color:var(--accent6);">3</div>
+      <h3 style="color:var(--accent6);">Specific Phobia &amp; Social Anxiety Disorder</h3>
     </div>
-
-    <h3 class="sub-title">Dissociative Disorders</h3>
-    <p style="font-size:14px;color:var(--muted);margin-bottom:16px;">Involve a "fragmentation" of the personality — the mind splits off uncomfortable feelings or memories and loses them to conscious recall. Typically linked to severe stress or a history of trauma.</p>
-
-    <div class="card-grid">
-      <div class="card">
-        <div class="tag">Dissociative</div>
-        <h3>Dissociative Amnesia</h3>
-        <p>Following a <strong>stressful event</strong>, the person experiences selective memory loss of that event. Immediate and remote memory remain intact — only the stressor-related memory is lost.</p>
-      </div>
-      <div class="card rust">
-        <div class="tag">Dissociative</div>
-        <h3>Dissociative Fugue</h3>
-        <p>Dissociative amnesia <em>plus</em> "flight" from one's home, family, and job. The person may travel far and take on a new identity, with no memory of their previous life.</p>
-      </div>
-      <div class="card gold">
-        <div class="tag">Dissociative</div>
-        <h3>Depersonalisation Disorder</h3>
-        <p>Sensation of the <strong>mind and body having separated</strong>. Person feels like an external observer of their own body — as if in a dream or an "out of body" experience. May be linked to OCD.</p>
-      </div>
-      <div class="card violet">
-        <div class="tag">Dissociative</div>
-        <h3>Dissociative Identity Disorder (DID)</h3>
-        <p>Individual displays <strong>multiple identities</strong> (alters). A dominant self emerges to protect the core identity. Each alter contrasts with the original self, operates within its own consciousness, and tends to emerge suddenly under stress.</p>
-        <p style="margin-top:6px;font-size:12px;color:var(--rust);">Almost all cases involve documented chronic childhood physical/sexual abuse. ≠ Schizophrenia.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ SECTION 7: SCHIZOPHRENIA ══ -->
-  <section class="section" id="s7">
-    <div class="section-tag">Seminar 5 Slides · SU3 · Chapter 13</div>
-    <h2 class="section-title">Schizophrenia</h2>
-    <p class="section-intro">Schizophrenia is a <strong>psychotic disorder</strong> — the person is out of touch with reality, forming their own reality and often believing they are living a completely different life. It is characterised by major disturbances in <strong>thought, emotion, and behaviour</strong>. Affects ~1% of the population worldwide.</p>
-
-    <div class="two-col">
-      <div class="col head-teal">
-        <h4>Facts about Schizophrenia</h4>
-        <ul>
-          <li>Psychotic split from reality</li>
-          <li>Unable to distinguish real from unreal</li>
-          <li>Hallucinate (usually auditory — "hearing voices")</li>
-          <li>Strange delusional ideas</li>
-          <li>Apathetic, loss of interest</li>
-          <li>Unity of mind is broken — evident in language</li>
-          <li>Sufferer is often <em>unaware</em> of their condition</li>
-          <li>Symptoms appear in adolescence or young adulthood</li>
+    <div class="two-col" style="margin-top:10px;">
+      <div>
+        <div class="card-head col-yel">Specific Phobia</div>
+        <ul class="guide-list">
+          <li><strong>Irrational fear</strong> of a specific object or situation (not just extreme fear)</li>
+          <li>Person recognises the fear is unreasonable but cannot stop it</li>
+          <li>Example: pilot who panics going above the 10th floor of a building</li>
+          <li>Examples: patrol car, trolley bag, feathers, spiders</li>
+          <li>Key words: <strong>Persistent, Irrational</strong></li>
+          <li>Markedly interferes with ability to function</li>
         </ul>
       </div>
-      <div class="col head-rust">
-        <h4>Myths about Schizophrenia</h4>
-        <ul>
-          <li>❌ Same as multiple personality (DID)</li>
-          <li>❌ All people with schizophrenia are dangerous and violent</li>
-          <li>❌ Caused by bad parenting</li>
+      <div>
+        <div class="card-head col-yel">Social Anxiety Disorder (Social Phobia)</div>
+        <ul class="guide-list">
+          <li>Irrational, persistent fear of being <strong>negatively evaluated by others</strong></li>
+          <li>Fear of public speaking, eating in public, meeting new people</li>
+          <li>Extreme fear of rejection, embarrassment, or humiliation</li>
         </ul>
-        <p style="font-size:12.5px;margin-top:12px;color:var(--muted);">Note: DID = multiple <em>intact</em> identities. Schizophrenia = one identity that is <em>no longer intact</em>.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- OCD / Hoarding -->
+  <div class="disorder-card">
+    <div class="disorder-title">
+      <div class="disorder-num" style="background:rgba(168,230,207,0.15); color:var(--accent3);">4</div>
+      <h3 style="color:var(--accent3);">Obsessive-Compulsive Disorder (OCD) &amp; Hoarding</h3>
+    </div>
+    <div class="two-col" style="margin-top:10px;">
+      <div>
+        <div class="card-head col-mint">OCD</div>
+        <ul class="guide-list">
+          <li><strong>Obsessions</strong>: involuntary, intrusive, nonsensical thoughts/images/urges that one tries to resist or eliminate</li>
+          <li>Most common: contamination &amp; aggression thoughts</li>
+          <li><strong>Compulsions</strong>: actions performed to suppress thoughts and provide relief</li>
+          <li>Most common: cleaning/washing or checking rituals</li>
+          <li>Compulsions can <strong>interfere significantly</strong> with everyday living</li>
+          <li>Associated with <strong>meticulous and perfectionist personality</strong></li>
+        </ul>
+      </div>
+      <div>
+        <div class="card-head col-mint">Hoarding Disorder</div>
+        <ul class="guide-list">
+          <li>Persistent difficulty <strong>discarding possessions</strong> even when of little value</li>
+          <li>Having to discard possessions causes significant distress and anxiety</li>
+          <li>Living space becomes cluttered and unusable</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- PTSD -->
+  <div class="disorder-card">
+    <div class="disorder-title">
+      <div class="disorder-num" style="background:rgba(124,158,255,0.15); color:var(--accent2);">5</div>
+      <h3 style="color:var(--accent2);">Posttraumatic Stress Disorder (PTSD)</h3>
+    </div>
+    <p>Develops after exposure to a <strong style="color:var(--text)">terrifying event</strong> (assault, disaster, combat, sudden death of a loved one).</p>
+    <div class="flow">
+      <div class="flow-item">Traumatic Event</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item">Initial Reactions</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item">Intrusive Memories</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item">Avoidance / Numbing</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item">Mood / Cognition Change</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item">Heightened Arousal</div>
+    </div>
+    <ul class="guide-list">
+      <li><strong>Intrusive memories:</strong> flashbacks, nightmares, distressing thoughts triggered by reminders</li>
+      <li><strong>Avoidance/Numbing:</strong> avoid situations/thoughts associated with trauma; emotional withdrawal</li>
+      <li><strong>Hypervigilance:</strong> always on guard, difficulty sleeping and concentrating</li>
+      <li>Anniversaries of trauma can trigger symptoms</li>
+    </ul>
+  </div>
+
+</div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- SECTION 5: SOMATIC & DISSOCIATIVE          -->
+<!-- ═══════════════════════════════════════════ -->
+<section id="s5">
+<div class="container">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(255,179,198,0.12); border:1px solid rgba(255,179,198,0.2);">🪞</div>
+    <h2>Somatic &amp; Dissociative Disorders</h2>
+  </div>
+
+  <!-- SOMATIC -->
+  <h3 style="color:var(--accent4); margin-bottom:14px;">Somatic Symptom &amp; Related Disorders</h3>
+  <p style="margin-bottom:16px;">Physical complaints for which there is no apparent physical cause — the key idea is <strong style="color:var(--text)">Anxiety → Physical Symptoms</strong>. The pain felt is real; the somatic symptoms are neither intentionally produced nor faked.</p>
+
+  <div class="three-col">
+    <div class="card col-blush">
+      <div class="card-head">Somatic Symptom Disorder</div>
+      <ul class="guide-list">
+        <li>Psychological problems appearing as <strong>bodily symptoms or physical complaints</strong></li>
+        <li>Cannot be explained in terms of a physical disease</li>
+        <li>The pain "felt" can be very real</li>
+        <li>Symptoms appear <strong>unconscious</strong> to the patient — not intentional</li>
+      </ul>
+    </div>
+    <div class="card col-blush">
+      <div class="card-head">Illness Anxiety Disorder</div>
+      <ul class="guide-list">
+        <li><strong>Excessive concern</strong> about having a serious medical illness</li>
+        <li>Frequently seeks medical reassurance <strong>even in the absence of evidence</strong></li>
+        <li>Convinced of a serious illness — not just one or two symptoms</li>
+        <li>May refuse to see doctors, or doctor-shop</li>
+      </ul>
+    </div>
+    <div class="card col-blush">
+      <div class="card-head">Conversion Disorder</div>
+      <ul class="guide-list">
+        <li>Emotional distress expressed through <strong>physical symptoms / malfunctioning</strong></li>
+        <li>Often involves <strong>sensory-motor loss</strong>: blindness, paralysis, inability to speak</li>
+        <li><strong>No organic pathology</strong> — "all in the mind"</li>
+        <li>Stressor → Loss of sensation (speech, mobility, sight…)</li>
+        <li>Patient may repress the stressor or be unaware of its impact</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- DISSOCIATIVE -->
+  <h3 style="color:var(--accent5); margin: 28px 0 14px;">Dissociative Disorders</h3>
+  <p style="margin-bottom:16px;">"Fragmentation" of the personality. The mind <strong style="color:var(--text)">splits off uncomfortable feelings or memories</strong> and loses them to conscious recall. Typically linked to severe stress or trauma.</p>
+
+  <div class="card-grid">
+    <div class="disorder-card" style="margin-bottom:0;">
+      <div class="disorder-title">
+        <div class="disorder-num" style="background:rgba(201,177,255,0.12); color:var(--accent5);">1</div>
+        <h3 style="color:var(--accent5);">Dissociative Amnesia</h3>
+      </div>
+      <ul class="guide-list">
+        <li>Stressful event → <strong>selective memory loss</strong></li>
+        <li>Immediate and remote memory remain intact</li>
+        <li>Memory of a specific traumatic period is lost</li>
+      </ul>
+    </div>
+
+    <div class="disorder-card" style="margin-bottom:0;">
+      <div class="disorder-title">
+        <div class="disorder-num" style="background:rgba(201,177,255,0.12); color:var(--accent5);">2</div>
+        <h3 style="color:var(--accent5);">Dissociative Fugue</h3>
+      </div>
+      <ul class="guide-list">
+        <li>Dissociative amnesia <strong>plus "flight"</strong> from home, family, and job</li>
+        <li>Person may wander and assume a new identity</li>
+        <li>Can't recall past life or identity</li>
+      </ul>
+    </div>
+
+    <div class="disorder-card" style="margin-bottom:0;">
+      <div class="disorder-title">
+        <div class="disorder-num" style="background:rgba(201,177,255,0.12); color:var(--accent5);">3</div>
+        <h3 style="color:var(--accent5);">Depersonalisation Disorder</h3>
+      </div>
+      <ul class="guide-list">
+        <li>Sensation of <strong>mind and body having separated</strong></li>
+        <li>Person feels like an <strong>external observer of their own body</strong></li>
+        <li>Like being in a dream / out-of-body experience</li>
+        <li>Associated with OCD</li>
+      </ul>
+    </div>
+
+    <div class="disorder-card" style="margin-bottom:0;">
+      <div class="disorder-title">
+        <div class="disorder-num" style="background:rgba(201,177,255,0.12); color:var(--accent5);">4</div>
+        <h3 style="color:var(--accent5);">Dissociative Identity Disorder (DID)</h3>
+      </div>
+      <ul class="guide-list">
+        <li>Individual displays <strong>multiple identities (alters)</strong></li>
+        <li>A <strong>dominant self</strong> emerges to protect against trauma</li>
+        <li>Each alter <strong>contrasts with the original self</strong></li>
+        <li>Each operates <strong>within its own consciousness</strong></li>
+        <li>Alters <strong>emerge suddenly under stress</strong></li>
+        <li>Almost all patients have documented severe childhood abuse</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- SECTION 6: MOOD DISORDERS                  -->
+<!-- ═══════════════════════════════════════════ -->
+<section id="s6">
+<div class="container">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(255,209,102,0.12); border:1px solid rgba(255,209,102,0.2);">🌊</div>
+    <h2>Mood Disorders</h2>
+  </div>
+
+  <div class="def-box">
+    Mood disorders are defined and diagnosed by the occurrence of one or more <strong>mood episodes</strong>, or periods of <strong>abnormal happiness or sadness</strong>. Disturbance in mood is their prominent feature.
+  </div>
+
+  <div class="two-col">
+    <!-- Major Depression -->
+    <div class="card col-yel">
+      <div class="card-head">Major Depression (Unipolar)</div>
+      <p style="margin-bottom:10px;"><strong style="color:var(--text)">Form of depression that does not alternate with mania.</strong> Consistently inappropriate to the situation. Accounts for a large share of mental hospital admissions.</p>
+      <ul class="guide-list">
+        <li><strong>Feel worthless</strong> — exaggerated guilt and self-blame</li>
+        <li><strong>Lack appetite</strong> — significant weight change</li>
+        <li><strong>Withdrawal</strong> — loss of interest in usual activities</li>
+        <li><strong>Sleeping disorder</strong> — too much or too little</li>
+        <li><strong>Agitated or lethargic</strong> motor activity</li>
+        <li><strong>Suicidal thoughts</strong></li>
+        <li>Also includes <em>Seasonal Affective Disorder (SAD)</em> — linked to deprivation of sunlight; often shows opposite symptoms (increased appetite, weight gain, more sleep)</li>
+      </ul>
+      <div class="highlight" style="margin-top:10px; font-size:0.8rem;">
+        <strong>Who is more vulnerable?</strong> Women twice as likely as men · Adolescent females 13–15 especially at risk · Lower socioeconomic status · People with a history of adverse life events
       </div>
     </div>
 
-    <h3 class="sub-title">Symptoms: Positive vs Negative</h3>
-    <div class="two-col">
-      <div class="col head-teal">
-        <h4>Positive Symptoms — "They have what others do not"</h4>
-        <ul>
-          <li><strong>Delusions</strong> — mind feels controlled from outside; thoughts are "spoken out loud"; ideas are loosely associated</li>
-          <li><strong>Hallucinations</strong> — both pleasant and unpleasant; person is responsive to voices; the voices feel real and have power over them</li>
-          <li><strong>Disorganised speech</strong> — word salad; loose associations</li>
-          <li><strong>Disorganised behaviour</strong> — catatonic stupor or catatonic excitement</li>
-        </ul>
-        <p style="font-size:12px;margin-top:8px;color:var(--teal);">→ Better response to medication; less severe course.</p>
-      </div>
-      <div class="col head-rust">
-        <h4>Negative Symptoms — "They do not have what others have"</h4>
-        <ul>
-          <li><strong>Loss of energy</strong>, motivation, and self-care</li>
-          <li><strong>Withdrawal</strong>; preoccupied with internal thoughts</li>
-          <li><strong>Emotional changes</strong></li>
-          <li><strong>Alogia</strong> — poverty of speech; brief, empty replies</li>
-          <li><strong>Blunted affect</strong> — flat facial expression, no emotional response</li>
-          <li><strong>Avolition</strong> — inability to initiate goal-directed behaviour</li>
-        </ul>
-        <p style="font-size:12px;margin-top:8px;color:var(--rust);">→ Poorer prognosis; less responsive to medication.</p>
-      </div>
+    <!-- Bipolar -->
+    <div class="card col-amber">
+      <div class="card-head">Bipolar Disorder</div>
+      <p style="margin-bottom:10px;">Extremes of mood, from <strong>mania</strong> to <strong>depression</strong>. A "roller coaster of mood" — also called manic-depressive disorder. The mania and depression typically <strong>alternate</strong>, though in rare cases they may coexist.</p>
+      <ul class="guide-list">
+        <li><strong>Manic episode:</strong> Happy, confident, energetic, hyperactive, talkative, decreased need for sleep, inflated self-esteem, risky behaviours</li>
+        <li><strong>Depressive episode:</strong> Not interested, no energy, withdrawal — same as major depression symptoms</li>
+        <li>Both episodes must occur for a bipolar diagnosis</li>
+        <li>Men and women are equally likely to be diagnosed</li>
+        <li>Onset typically in late adolescence / early adulthood</li>
+      </ul>
     </div>
+  </div>
 
-    <h3 class="sub-title">Biological Explanations (from SU3)</h3>
-    <div class="callout teal"><strong>Genetics:</strong> Identical twin of a person with schizophrenia has ~48% chance of developing it; fraternal twin ~17%. Adopted children of biological parents with schizophrenia are 10× more likely to develop it. But no single gene — multiple chromosomal regions involved.</div>
-    <div class="callout"><strong>Dopamine hypothesis:</strong> Originally, excess dopamine activity was thought to cause schizophrenia. Drugs that reduce dopamine (phenothiazines) reduce positive symptoms. However, newer drugs like clozapine block different dopamine receptors, showing the relationship is more complex. Glutamate dysfunction also plays a role.</div>
-    <div class="callout violet"><strong>Brain structure:</strong> Enlarged ventricles (fluid-filled cavities) reduce overall brain size. Frontal and temporal lobe dysfunction also implicated. Family communication patterns and social isolation can influence onset in genetically at-risk individuals.</div>
-  </section>
-
-  <!-- ══ KEY TERMS ══ -->
-  <section class="section" id="terms">
-    <div class="section-tag">Glossary</div>
-    <h2 class="section-title">Key Terms</h2>
-    <div class="keyterms-grid">
-      <!-- Disorders -->
-      <div class="keyterm"><span class="keyterm-word">Agoraphobia</span><span class="keyterm-def">Fear of places where escape may be difficult or help unavailable.</span></div>
-      <div class="keyterm"><span class="keyterm-word">Alogia</span><span class="keyterm-def">Poverty of speech; brief, empty replies (negative symptom of schizophrenia).</span></div>
-      <div class="keyterm"><span class="keyterm-word">Avolition</span><span class="keyterm-def">Inability to initiate goal-directed behaviour; apathy (negative symptom).</span></div>
-      <div class="keyterm"><span class="keyterm-word">Bipolar Disorder</span><span class="keyterm-def">Mood cycling between manic and depressive episodes ("manic-depressive disorder").</span></div>
-      <div class="keyterm"><span class="keyterm-word">Blunted Affect</span><span class="keyterm-def">Lack of emotional expression; flat face and tone (negative symptom).</span></div>
-      <div class="keyterm"><span class="keyterm-word">Catatonic Stupor</span><span class="keyterm-def">Total absence of motor movement; remaining rigid for hours.</span></div>
-      <div class="keyterm"><span class="keyterm-word">Cognitive Distortions</span><span class="keyterm-def">Negative automatic thinking errors; pessimistic interpretations (Aaron Beck).</span></div>
-      <div class="keyterm"><span class="keyterm-word">Comorbidity</span><span class="keyterm-def">When a person meets diagnostic criteria for more than one disorder simultaneously.</span></div>
-      <div class="keyterm"><span class="keyterm-word">Compulsions</span><span class="keyterm-def">Repetitive behaviours performed to neutralise obsession-related anxiety.</span></div>
-      <div class="keyterm"><span class="keyterm-word">Conversion Disorder</span><span class="keyterm-def">Emotional distress expressed through physical sensory-motor symptoms (e.g., blindness, paralysis) with no organic pathology.</span></div>
-      <div class="keyterm"><span class="keyterm-word">Delusions</span><span class="keyterm-def">False beliefs held as true despite no basis in shared reality.</span></div>
-      <div class="keyterm"><span class="keyterm-word">Depersonalisation</span><span class="keyterm-def">Sensation of mind and body having separated; feeling like an observer of one's own body.</span></div>
-      <div class="keyterm"><span class="keyterm-word">DID</span><span class="keyterm-def">Dissociative Identity Disorder — two or more distinct identities within one person.</span></div>
-      <div class="keyterm"><span class="keyterm-word">Dissociative Amnesia</span><span class="keyterm-def">Selective memory loss of a stressful event; immediate and remote memory intact.</span></div>
-      <div class="keyterm"><span class="keyterm-word">Dissociative Fugue</span><span class="keyterm-def">Dissociative amnesia plus "flight" from one's home, family, and job.</span></div>
-      <div class="keyterm"><span class="keyterm-word">DSM</span><span class="keyterm-def">Diagnostic and Statistical Manual — standard system for classifying mental disorders by symptoms.</span></div>
-      <div class="keyterm"><span class="keyterm-word">GAD</span><span class="keyterm-def">Generalised Anxiety Disorder — persistent pervasive anxiety without known external cause.</span></div>
-      <div class="keyterm"><span class="keyterm-word">Hallucinations</span><span class="keyterm-def">Perceiving something that others do not; most commonly auditory in schizophrenia.</span></div>
-      <div class="keyterm"><span class="keyterm-word">Illness Anxiety Disorder</span><span class="keyterm-def">Excessive conviction of having a serious illness despite no medical evidence.</span></div>
-      <div class="keyterm"><span class="keyterm-word">Major Depressive Disorder</span><span class="keyterm-def">Depressed mood or anhedonia + ≥4 symptoms for ≥2 weeks; impairs functioning.</span></div>
-      <div class="keyterm"><span class="keyterm-word">Mania</span><span class="keyterm-def">Persistently elevated mood, high energy, impulsivity, decreased need for sleep.</span></div>
-      <div class="keyterm"><span class="keyterm-word">Medical Model</span><span class="keyterm-def">Treats mental disorders like physical diseases — diagnosed and treated with medication/surgery.</span></div>
-      <div class="keyterm"><span class="keyterm-word">Mental Health Disorder</span><span class="keyterm-def">Dysfunction in cognition/emotion/social behaviour that is not culturally expected and impairs functioning.</span></div>
-      <div class="keyterm"><span class="keyterm-word">Obsessions</span><span class="keyterm-def">Recurrent, involuntary, intrusive and nonsensical thoughts or urges one tries to resist.</span></div>
-      <div class="keyterm"><span class="keyterm-word">OCD</span><span class="keyterm-def">Obsessive-Compulsive Disorder — uncontrollable obsessions and/or compulsions that interfere with daily life.</span></div>
-      <div class="keyterm"><span class="keyterm-word">Panic Disorder</span><span class="keyterm-def">Recurrent abrupt panic attacks + fear of future attacks (fear of fear) with no connection to present events.</span></div>
-      <div class="keyterm"><span class="keyterm-word">PTSD</span><span class="keyterm-def">Posttraumatic Stress Disorder — intrusive memories, avoidance, emotional numbing and hypervigilance following trauma.</span></div>
-      <div class="keyterm"><span class="keyterm-word">Psychosis</span><span class="keyterm-def">Loss of contact with reality; impaired perception and thinking. Not on the continuum of normal behaviour.</span></div>
-      <div class="keyterm"><span class="keyterm-word">Psychopathology</span><span class="keyterm-def">Scientific study of mental health disorders and distortions of personality and normal functioning.</span></div>
-      <div class="keyterm"><span class="keyterm-word">SAD</span><span class="keyterm-def">Seasonal Affective Disorder — depression triggered by deprivation of sunlight; opposite symptoms to major depression.</span></div>
-      <div class="keyterm"><span class="keyterm-word">Schizophrenia</span><span class="keyterm-def">Chronic psychotic disorder (~1%) with major disturbances in thought, emotion, and behaviour; person is out of touch with reality.</span></div>
-      <div class="keyterm"><span class="keyterm-word">Social Anxiety Disorder</span><span class="keyterm-def">Irrational, persistent fear of negative evaluation in social situations.</span></div>
-      <div class="keyterm"><span class="keyterm-word">Somatic Symptom Disorder</span><span class="keyterm-def">Psychological distress appearing as real but medically unexplainable physical symptoms.</span></div>
-      <div class="keyterm"><span class="keyterm-word">Specific Phobia</span><span class="keyterm-def">Persistent, irrational fear and avoidance of a specific object/situation; person recognises fear is unreasonable.</span></div>
+  <!-- Visual mood chart concept -->
+  <div class="card" style="margin-top:4px; text-align:center;">
+    <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:12px;">Mood Spectrum</p>
+    <div style="display:flex; align-items:center; justify-content:center; gap:0; border-radius:10px; overflow:hidden; height:36px;">
+      <div style="flex:1; background:rgba(255,209,102,0.4); display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:600; color:var(--accent6);">MANIC</div>
+      <div style="flex:2; background:rgba(168,230,207,0.15); display:flex; align-items:center; justify-content:center; font-size:0.75rem; color:var(--text-muted);">EUTHYMIC (normal)</div>
+      <div style="flex:1; background:rgba(124,158,255,0.3); display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:600; color:var(--accent2);">DEPRESSED</div>
     </div>
-  </section>
+    <p class="note" style="margin-top:10px;"><strong style="color:var(--text)">Bipolar</strong> swings between Manic &amp; Depressed poles &nbsp;·&nbsp; <strong style="color:var(--text)">Unipolar (Major) Depression</strong> stays below the euthymic line</p>
+  </div>
 
-</div><!-- /wrapper -->
+</div>
+</section>
 
-<footer class="site-footer">
-  PSY108 · Study Unit 3 · Chapter 1: Mental Health Disorders · Exam Reference Guide · Based on Seminar 5 Slides & SU3 · Pastorino & Doyle-Portillo (5th ed.)
-</footer>
+<hr class="sep">
 
-<script>
-  function toggle(btn){
-    btn.classList.toggle('open');
-    btn.nextElementSibling.classList.toggle('open');
-  }
-</script>
+<!-- ═══════════════════════════════════════════ -->
+<!-- SECTION 7: SCHIZOPHRENIA                   -->
+<!-- ═══════════════════════════════════════════ -->
+<section id="s7">
+<div class="container">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(168,230,207,0.12); border:1px solid rgba(168,230,207,0.2);">🔀</div>
+    <h2>Schizophrenia</h2>
+  </div>
+
+  <div class="def-box">
+    Schizophrenia has <strong>major disturbances in thought, emotion, and behaviour</strong>. It is a <strong>psychotic disorder</strong> — the person is out of touch with reality, forms their own reality, and is unable to distinguish real from unreal.
+  </div>
+
+  <!-- Myths vs Facts -->
+  <div class="mvf">
+    <div class="myth-box">
+      <div class="lbl">❌ Myths</div>
+      <ul class="guide-list" style="font-size:0.83rem;">
+        <li>Multiple personality (that's DID — a different disorder)</li>
+        <li>Dangerous and violent by nature</li>
+        <li>Result of bad parenting</li>
+      </ul>
+    </div>
+    <div class="fact-box">
+      <div class="lbl">✓ Facts</div>
+      <ul class="guide-list" style="font-size:0.83rem;">
+        <li>Psychotic split from reality</li>
+        <li>Unable to distinguish real from unreal</li>
+        <li>May hallucinate or have delusional ideas</li>
+        <li>May be apathetic, losing interest in things</li>
+        <li>Unity of mind is broken — evident in their language</li>
+        <li>Sufferer is often <strong>unaware</strong> of their condition</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Positive & Negative symptoms -->
+  <h3 style="color:var(--text); margin: 24px 0 14px;">Symptoms of Schizophrenia</h3>
+  <div class="two-col">
+    <div class="card" style="border-color:rgba(168,230,207,0.2);">
+      <div class="pos-label" style="display:block; margin-bottom:10px;">✦ POSITIVE SYMPTOMS — "they have what others do not"</div>
+      <ul class="guide-list">
+        <li><strong>Delusions</strong>: mind feels controlled from outside; thoughts spoken out loud; ideas loosely associated</li>
+        <li><strong>Hallucinations</strong>: both pleasant and unpleasant; responsive to voices; voices feel real and have power over them. <em>Auditory hallucinations most common.</em></li>
+        <li>Disorganised speech (loose associations / "word salad")</li>
+        <li>Disordered/catatonic behaviour</li>
+      </ul>
+    </div>
+    <div class="card" style="border-color:rgba(255,179,198,0.2);">
+      <div class="neg-label" style="display:block; margin-bottom:10px;">✦ NEGATIVE SYMPTOMS — "they lack what others have"</div>
+      <ul class="guide-list">
+        <li><strong>Loss of energy, motivation and self-care</strong></li>
+        <li>Withdrawal — occupied with internal thoughts</li>
+        <li>Emotional changes / <strong>blunted affect</strong> (flat emotions, immobile facial expression)</li>
+        <li><strong>Poverty of speech (alogia)</strong> — brief, empty replies</li>
+        <li>Emotional/social withdrawal, apathy</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="highlight" style="margin-top:14px;">
+    <strong>Key distinction:</strong> Positive symptoms = something added/distorted (delusions, hallucinations). Negative symptoms = something absent/reduced (emotion, speech, motivation). People with predominantly positive symptoms tend to respond better to medication.
+  </div>
+
+  <!-- Causes -->
+  <h3 style="color:var(--text); margin: 24px 0 14px;">Causes (Biopsychosocial)</h3>
+  <div class="three-col">
+    <div class="card col-amber">
+      <div class="card-head">Biological</div>
+      <ul class="guide-list">
+        <li><strong>Strong genetic component</strong> — family, twin &amp; adoption studies show high heritability</li>
+        <li>Identical twin: ~48% chance if other twin has it</li>
+        <li>Neurotransmitters: excess <strong>dopamine</strong> (positive symptoms); also glutamate dysfunction</li>
+        <li>Enlarged brain ventricles (reduce overall brain size)</li>
+        <li>Frontal and temporal lobe dysfunction</li>
+      </ul>
+    </div>
+    <div class="card col-blue">
+      <div class="card-head">Psychological / Developmental</div>
+      <ul class="guide-list">
+        <li>Prenatal factors: birth complications, maternal stress, prenatal viruses</li>
+        <li>Brain synapses are trimmed in adolescence — hypothesis is that too many are trimmed in schizophrenia</li>
+        <li>Genes interact with prenatal environment</li>
+      </ul>
+    </div>
+    <div class="card col-mint">
+      <div class="card-head">Social / Environmental</div>
+      <ul class="guide-list">
+        <li>Quality of <strong>family communications</strong> can influence onset in high-risk individuals</li>
+        <li>Critical, hostile families = higher susceptibility</li>
+        <li>Chronic stress from low-income lifestyle can trigger relapses</li>
+        <li>Family/environment do not <em>cause</em> schizophrenia but affect susceptibility</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- FOOTER -->
+<div class="container" style="margin-top:60px; text-align:center;">
+  <div style="border-top:1px solid var(--border); padding-top:24px;">
+    <p style="font-size:0.78rem; color:var(--text-muted);">Study Guide based on Seminar 5 Slides &amp; PSY108 Study Unit Notes &nbsp;·&nbsp; Pastorino &amp; Doyle-Portillo, <em>What Is Psychology?</em> 5th Ed.</p>
+    <p style="font-size:0.75rem; color:var(--text-muted); margin-top:4px;">Covers topics assessed in the examination only &nbsp;·&nbsp; Textbook content not in slides/notes is excluded</p>
+  </div>
+</div>
+
 </body>
 </html>
