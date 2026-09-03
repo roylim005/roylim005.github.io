@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HBC201 — Study Unit 1 Exam Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f7f7f4;
+    --ink:#1d2321;
+    --ink-soft:#4a534f;
+    --rule:#dcded7;
+    --ch1:#146356;   /* Ch1 teal — research & the field */
+    --ch1-tint:#e6efec;
+    --ch2:#3d4a7a;   /* Ch2 indigo — philosophy */
+    --ch2-tint:#e8eaf2;
+    --ch3:#a15c1f;   /* Ch3 amber/rust — ethics, caution */
+    --ch3-tint:#f3e9dc;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    font-size:17px;
+    line-height:1.65;
+  }
+  h1,h2,h3,.serif{font-family:'Lora',Georgia,serif;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 120px;}
+
+  /* ---------- Masthead ---------- */
+  header.masthead{
+    max-width:760px;margin:0 auto;padding:56px 24px 32px;
+    border-bottom:1px solid var(--rule);
+  }
+  .kicker{font-family:'Lora',serif;font-style:italic;color:var(--ink-soft);font-size:15px;margin:0 0 6px;}
+  header.masthead h1{font-size:2.1rem;line-height:1.2;margin:0 0 10px;font-weight:700;}
+  .subhead{color:var(--ink-soft);font-size:16px;max-width:60ch;margin:0;}
+  .source-note{margin-top:22px;font-size:14px;color:var(--ink-soft);display:flex;gap:18px;flex-wrap:wrap;}
+  .source-note span{display:inline-flex;align-items:center;gap:8px;}
+  .dot{width:9px;height:9px;border-radius:50%;display:inline-block;}
+
+  /* ---------- Sticky quick nav ---------- */
+  nav.jump{
+    position:sticky;top:0;z-index:10;
+    background:rgba(247,247,244,0.94);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--rule);
+  }
+  nav.jump .inner{
+    max-width:760px;margin:0 auto;padding:12px 24px;
+    display:flex;gap:20px;font-size:14px;overflow-x:auto;
+  }
+  nav.jump a{color:var(--ink-soft);text-decoration:none;white-space:nowrap;font-weight:500;}
+  nav.jump a:hover, nav.jump a:focus-visible{color:var(--ink);}
+
+  /* ---------- Chapter structure ---------- */
+  .chapter{padding-top:64px;}
+  .chapter-head{display:flex;align-items:baseline;gap:14px;margin-bottom:6px;}
+  .chapter-num{
+    font-family:'Lora',serif;font-weight:600;font-size:1rem;
+    color:#fff;background:var(--accent);
+    width:34px;height:34px;border-radius:50%;
+    display:inline-flex;align-items:center;justify-content:center;
+    flex:none;
+  }
+  .chapter h2{font-size:1.55rem;margin:0;font-weight:700;}
+  .chapter-tag{color:var(--ink-soft);font-size:14.5px;margin:2px 0 34px 48px;}
+
+  #ch1{--accent:var(--ch1);}
+  #ch2{--accent:var(--ch2);}
+  #ch3{--accent:var(--ch3);}
+
+  section.topic{margin-bottom:38px;}
+  section.topic h3{
+    font-size:1.12rem;margin:0 0 4px;font-weight:600;
+    color:var(--accent);
+  }
+  section.topic .lead{margin:0 0 10px;}
+  section.topic ul{margin:8px 0 12px;padding-left:22px;}
+  section.topic li{margin-bottom:5px;}
+
+  .example{
+    background:var(--tint);
+    border-radius:3px;
+    padding:14px 18px;
+    margin-top:10px;
+    font-size:15.5px;
+  }
+  #ch1 .example{--tint:var(--ch1-tint);}
+  #ch2 .example{--tint:var(--ch2-tint);}
+  #ch3 .example{--tint:var(--ch3-tint);}
+  .example .eyebrow{
+    font-family:'Lora',serif;font-style:italic;
+    color:var(--accent);font-size:14px;margin-bottom:4px;display:block;
+  }
+
+  table.compare{width:100%;border-collapse:collapse;margin:14px 0;font-size:15.5px;}
+  table.compare th,table.compare td{
+    text-align:left;padding:9px 12px;border-bottom:1px solid var(--rule);
+    vertical-align:top;
+  }
+  table.compare th{font-family:'Lora',serif;font-weight:600;color:var(--accent);}
+
+  .case{
+    border-top:1px solid var(--rule);
+    padding-top:14px;margin-top:14px;
+  }
+  .case .case-title{font-weight:600;display:block;margin-bottom:3px;}
+
+  /* ---------- Self-assessment ---------- */
+  .practice{
+    margin-top:44px;
+    padding:26px 24px 8px;
+    background:#fff;
+    border:1px solid var(--rule);
+    border-radius:4px;
+  }
+  .practice h3{
+    font-size:1.05rem;margin:0 0 4px;
+    color:var(--accent);
+  }
+  .practice > p{margin:0 0 18px;color:var(--ink-soft);font-size:14.5px;}
+  details{
+    border-bottom:1px solid var(--rule);
+    padding:14px 0;
+  }
+  details:last-of-type{border-bottom:none;}
+  summary{
+    cursor:pointer;
+    font-family:'Lora',serif;
+    font-weight:500;
+    font-size:16px;
+    list-style:none;
+    display:flex;
+    gap:10px;
+    align-items:baseline;
+  }
+  summary::-webkit-details-marker{display:none;}
+  summary::before{
+    content:"+";
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    color:var(--accent);
+    flex:none;
+    width:16px;
+  }
+  details[open] summary::before{content:"–";}
+  .answer{
+    margin:10px 0 4px 26px;
+    font-size:15px;
+    color:var(--ink-soft);
+  }
+  .answer strong{color:var(--ink);font-weight:600;}
+
+  /* ---------- misc ---------- */
+  .divider{
+    border:none;border-top:1px solid var(--rule);
+    margin:64px 0 0;
+  }
+  footer{
+    max-width:760px;margin:70px auto 0;padding:24px;
+    color:var(--ink-soft);font-size:13.5px;
+    border-top:1px solid var(--rule);
+  }
+  @media (max-width:600px){
+    body{font-size:16px;}
+    header.masthead{padding:40px 20px 28px;}
+    .chapter-tag{margin-left:0;}
+    .chapter-head{flex-wrap:wrap;}
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <p class="kicker">HBC201 · Research Methods for the Social and Behavioural Sciences</p>
+  <h1>Study Unit 1 — Exam Prep Guide</h1>
+  <p class="subhead">Introduction to Social and Behavioural Science Research: why research matters, the philosophy behind it, and the ethics that govern it — organised the way it was taught in Seminar 1, with the Study Unit reading filled in underneath.</p>
+  <div class="source-note">
+    <span><span class="dot" style="background:var(--ch1)"></span>Ch.1 Research: Why It Matters</span>
+    <span><span class="dot" style="background:var(--ch2)"></span>Ch.2 Philosophical Foundations</span>
+    <span><span class="dot" style="background:var(--ch3)"></span>Ch.3 Research Ethics</span>
+  </div>
+</header>
+
+<nav class="jump">
+  <div class="inner">
+    <a href="#ch1">1 · Why research matters</a>
+    <a href="#ch2">2 · Philosophy</a>
+    <a href="#ch3">3 · Ethics</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ===================== CHAPTER 1 ===================== -->
+<div class="chapter" id="ch1">
+  <div class="chapter-head">
+    <span class="chapter-num">1</span>
+    <h2>Research: Why It Matters</h2>
+  </div>
+  <p class="chapter-tag">What social and behavioural science research is, what it's made of, and why it's worth doing.</p>
+
+  <section class="topic">
+    <h3>1.1 What is social and behavioural science research?</h3>
+    <p class="lead">Social science research studies "experiences, events, and facts in social reality" (Neuman, 2014). It spans disciplines like anthropology, psychology, sociology, political science, and economics. <strong>Behavioural science</strong> is the slice of social science focused specifically on human behaviour — psychology is its core discipline, but it also shows up as voting-behaviour studies in political science or consumer-behaviour studies in economics.</p>
+    <div class="example">
+      <span class="eyebrow">Think of it this way</span>
+      A sociologist studying why people queue in an orderly line at a hawker centre is doing social science research. A researcher tracking <em>why</em> a shopper picks one brand of instant noodles over another at the point of purchase is doing behavioural research — same broad field, narrower focus on behaviour itself.
+    </div>
+  </section>
+
+  <section class="topic">
+    <h3>1.2 The key elements of a research study</h3>
+    <p class="lead">A study doesn't have to hit these in strict order (Bryman, 2012) — but every study touches all seven:</p>
+    <ul>
+      <li><strong>Philosophy of research</strong> — the assumptions a researcher brings, whether acknowledged or not.</li>
+      <li><strong>Literature review</strong> — finding out what previous researchers already discovered about the topic.</li>
+      <li><strong>Research question</strong> — typically framed around Why, When, Who, How, or Where.</li>
+      <li><strong>Research design</strong> — the plan for answering that question (covered in depth in Study Unit 2).</li>
+      <li><strong>Research ethics</strong> — protecting participants and the integrity of the process throughout.</li>
+      <li><strong>Data collection</strong> — gathering evidence suited to the question.</li>
+      <li><strong>Data analysis, interpretation, and dissemination</strong> — making sense of the data and sharing the findings.</li>
+    </ul>
+    <div class="example">
+      <span class="eyebrow">Relatable example</span>
+      Imagine you notice students seem more anxious before graded presentations than before written tests (a starting observation). You read up on presentation anxiety (literature review), ask "How does presentation anxiety affect student performance?" (research question), decide to survey 200 students (design + data collection), get consent and keep responses anonymous (ethics), then run the numbers and write it up (analysis + dissemination). All seven elements, one small study.
+    </div>
+  </section>
+
+  <section class="topic">
+    <h3>1.3 Why does this research matter?</h3>
+    <p class="lead">Byrne (2017) frames the value of social and behavioural science research around three benefits:</p>
+    <ul>
+      <li>It <strong>enhances our knowledge</strong> of the social reality we live in (e.g. personal identity, human behaviour).</li>
+      <li>It can <strong>suggest a solution</strong> to a real issue.</li>
+      <li>It lets us <strong>evaluate whether a proposed solution actually works</strong>.</li>
+    </ul>
+    <div class="case">
+      <span class="case-title">Case: Occupational commitment (Clements, 2014)</span>
+      A series of studies asking why nurses and social workers stay in — or leave — their professions in the UK. Motivated by personal experience, literature, and practical workforce issues; aimed to eventually design an intervention. Illustrates: research suggesting a solution to a real workforce problem.
+    </div>
+    <div class="case">
+      <span class="case-title">Case: Cognitive training research (Sim & Chee, 2018)</span>
+      A cognitive-training programme for the elderly, originally developed in Japan, adapted and tested for efficacy in Singapore. Illustrates: knowledge (and interventions) don't always transfer directly across contexts — they need re-evaluation.
+    </div>
+    <div class="case">
+      <span class="case-title">Case: Olweus Bullying Prevention Programme (Kuykendall, 2014)</span>
+      A programme developed and tested in Norway, evaluated for its effectiveness at reducing bullying in schools in the United States. Illustrates: evaluating whether a proposed solution actually solves the problem it was designed for.
+    </div>
+  </section>
+
+  <div class="practice">
+    <h3>Test yourself — Chapter 1</h3>
+    <p>Cover the answer, try to say it in your own words first.</p>
+
+    <details>
+      <summary>What distinguishes "behavioural science" from the broader field of "social science"?</summary>
+      <div class="answer"><strong>Answer:</strong> Behavioural science is the subset of social science that focuses specifically on human behaviour (e.g. psychology, voting behaviour, consumer behaviour), while social science more broadly covers experiences, events, and facts of social reality across disciplines like anthropology, sociology, and economics.</div>
+    </details>
+
+    <details>
+      <summary>Name the seven key elements of a social/behavioural science research study.</summary>
+      <div class="answer"><strong>Answer:</strong> Philosophy of research, literature review, research question, research design, research ethics, data collection, and data analysis/interpretation/dissemination.</div>
+    </details>
+
+    <details>
+      <summary>According to Byrne (2017), what are the three ways social and behavioural science research benefits society?</summary>
+      <div class="answer"><strong>Answer:</strong> It enhances our knowledge of social reality, it can suggest a solution to an issue, and it can evaluate whether a proposed solution actually works.</div>
+    </details>
+
+    <details>
+      <summary>The Olweus Bullying Prevention case study is a good example of which of the three benefits above — and why?</summary>
+      <div class="answer"><strong>Answer:</strong> Evaluating a proposed solution — the researcher assessed whether a programme that worked in Norway actually reduced bullying when implemented in US schools.</div>
+    </details>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ===================== CHAPTER 2 ===================== -->
+<div class="chapter" id="ch2">
+  <div class="chapter-head">
+    <span class="chapter-num">2</span>
+    <h2>From Philosophical Foundations to Real-Life Applications</h2>
+  </div>
+  <p class="chapter-tag">The assumptions underneath every study — whether the researcher notices them or not.</p>
+
+  <section class="topic">
+    <h3>2.1 Ontology vs. epistemology</h3>
+    <table class="compare">
+      <tr><th>Ontology</th><th>Epistemology</th></tr>
+      <tr>
+        <td>What is the <em>nature</em> of social entities? (Is society "real" and fixed, or something people construct?)</td>
+        <td>What should count as <em>acceptable knowledge</em> in a discipline? (How do we know something is true?)</td>
+      </tr>
+    </table>
+    <div class="example">
+      <span class="eyebrow">Relatable example</span>
+      Ontology asks: "Does 'company culture' exist as a real, solid thing independent of the employees, or is it just something people keep re-creating through daily interactions?" Epistemology asks a different question: "How would we even know if we've measured company culture correctly — a survey score, or interviews?"
+    </div>
+  </section>
+
+  <section class="topic">
+    <h3>2.2 Philosophical positions in quantitative vs. qualitative research</h3>
+    <p class="lead">These four terms describe the assumptions researchers bring, grouped by the research orientation they typically underpin:</p>
+    <table class="compare">
+      <tr><th>Quantitative</th><th>Qualitative</th></tr>
+      <tr><td><strong>Objectivism</strong> — society is an entity independent of the people in it.</td><td><strong>Constructivism</strong> — reality is built through social interaction, and keeps being revised.</td></tr>
+      <tr><td><strong>Positivism</strong> — there's a stable reality, and it should be studied objectively.</td><td><strong>Interpretivism</strong> — reality isn't stable or pre-existing; it's given meaning through ongoing interaction (e.g. symbolic interactionism).</td></tr>
+    </table>
+    <div class="example">
+      <span class="eyebrow">Relatable example</span>
+      <strong>Objectivism:</strong> a school's rules and hierarchy exist as a structure separate from any one teacher or student — everyone has to work within it regardless of their personal feelings about it.<br><br>
+      <strong>Positivism:</strong> a researcher assumes "student motivation" is a real, measurable thing and tries to capture it objectively with a validated questionnaire.<br><br>
+      <strong>Constructivism:</strong> "student motivation" isn't a fixed quantity — it's continuously built and rebuilt through classroom interactions, so two classes might construct very different meanings of "being motivated."<br><br>
+      <strong>Interpretivism:</strong> a researcher sits in on lessons to understand how motivation is talked about and given meaning by students and teachers themselves, rather than assuming one fixed definition.
+    </div>
+  </section>
+
+  <section class="topic">
+    <h3>2.3 Logics of enquiry: deduction and induction</h3>
+    <table class="compare">
+      <tr><th>Deduction</th><th>Induction</th></tr>
+      <tr><td>Theory → Hypothesis. You start with an existing theory and derive a testable prediction from it.</td><td>Empirical data → Theory. You start with observations and build a general theory from the pattern.</td></tr>
+    </table>
+    <p class="lead"><strong>The hypothetico-deductive method</strong> (common in quantitative research) runs in a loop:</p>
+    <p class="lead" style="text-align:center;font-family:'Lora',serif;">Theory → Hypothesis → Empirical data → Hypothesis supported or rejected → (feeds back into) Theory</p>
+    <div class="example">
+      <span class="eyebrow">Relatable example</span>
+      <strong>Deduction:</strong> Theory says sleep-deprived students perform worse academically → hypothesis: "students who sleep &lt;6 hours will score lower on tests" → you collect test scores and sleep logs to check.<br><br>
+      <strong>Induction:</strong> You interview dozens of top-performing students and notice most of them mention a consistent morning routine → you build a new theory that routine (not just sleep) predicts performance.
+    </div>
+  </section>
+
+  <section class="topic">
+    <h3>2.4 Theories are always tentative</h3>
+    <p class="lead">Fox (2012)'s point: a theory built from observation (e.g. "all observed birds can fly") can be overturned by a single contradictory case (a flightless bird, like a penguin). So researchers should stay open to alternative explanations and be cautious about generalising findings from one context to another — social phenomena are usually shaped by many interacting factors.</p>
+    <div class="example">
+      <span class="eyebrow">Combining both</span>
+      Induction and deduction aren't opposites in practice — they work together: induction builds a new theory from data, deduction then derives testable hypotheses from that new theory, and the results feed back into refining the theory again. The occupational commitment case study (Clements, 2014) explicitly discusses choosing between a deductive and inductive approach.
+    </div>
+  </section>
+
+  <div class="practice">
+    <h3>Test yourself — Chapter 2</h3>
+    <p>Cover the answer, try to say it in your own words first.</p>
+
+    <details>
+      <summary>What's the difference between an ontological question and an epistemological question about a research topic?</summary>
+      <div class="answer"><strong>Answer:</strong> Ontology asks about the nature of the thing being studied (is it real/fixed, or constructed?). Epistemology asks what should count as acceptable knowledge about it — how we can know something is true.</div>
+    </details>
+
+    <details>
+      <summary>Match each term to quantitative or qualitative research: objectivism, constructivism, positivism, interpretivism.</summary>
+      <div class="answer"><strong>Answer:</strong> Quantitative — objectivism and positivism. Qualitative — constructivism and interpretivism.</div>
+    </details>
+
+    <details>
+      <summary>A researcher starts with an existing theory of motivation and derives a testable hypothesis from it. Is this deduction or induction?</summary>
+      <div class="answer"><strong>Answer:</strong> Deduction — moving from theory to hypothesis.</div>
+    </details>
+
+    <details>
+      <summary>Outline the four steps of the hypothetico-deductive method.</summary>
+      <div class="answer"><strong>Answer:</strong> (1) A hypothesis is deduced from an existing theory, (2) empirical data is collected, (3) the data is used to examine the hypothesis, (4) the hypothesis is either supported (providing evidence for the theory) or rejected (suggesting the theory needs revision).</div>
+    </details>
+
+    <details>
+      <summary>Why should researchers treat all theories as "tentative"?</summary>
+      <div class="answer"><strong>Answer:</strong> A theory built on observed patterns can be overturned by a single contradictory case (e.g. "all birds fly" is disproved by one flightless bird), and findings from one context may not generalise to another because social phenomena are shaped by many factors — so researchers should stay open to alternative explanations.</div>
+    </details>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ===================== CHAPTER 3 ===================== -->
+<div class="chapter" id="ch3">
+  <div class="chapter-head">
+    <span class="chapter-num">3</span>
+    <h2>Research Ethics</h2>
+  </div>
+  <p class="chapter-tag">Protecting participants, and protecting the integrity of the findings themselves.</p>
+
+  <section class="topic">
+    <h3>3.1 Why ethics codes and IRBs exist</h3>
+    <p class="lead">Professional bodies (e.g. the American Psychological Association) publish ethics codes to guide practice. Universities and research organisations maintain an <strong>Institutional Review Board (IRB)</strong> or <strong>Research Ethics Committee (REC)</strong> that researchers must consult before starting a study.</p>
+    <div class="example">
+      <span class="eyebrow">Historical background</span>
+      Modern research ethics exists largely because of past abuses: Nazi medical experiments on concentration camp prisoners (leading to the Nuremberg Code), Unit 731's experiments in wartime Japan, and the Tuskegee Syphilis Study in the US, where treatment was deliberately withheld from Black men with syphilis from 1932 to 1972 so researchers could observe the disease's untreated progression. These cases led directly to the Belmont Report (1979), the source of the three principles below.
+    </div>
+  </section>
+
+  <section class="topic">
+    <h3>3.2 The three Belmont principles</h3>
+    <table class="compare">
+      <tr><th>Principle</th><th>What it requires</th></tr>
+      <tr><td><strong>Respect for Persons</strong></td><td>Acknowledge participants' autonomy — give adequate information, get voluntary participation, and extra protection for those who are immature or incapacitated.</td></tr>
+      <tr><td><strong>Beneficence</strong></td><td>Don't harm one person for the benefit of others; maximise benefit and minimise harm.</td></tr>
+      <tr><td><strong>Justice</strong></td><td>Benefits and burdens of research should be distributed fairly — don't target vulnerable groups simply because they're easier to recruit.</td></tr>
+    </table>
+    <div class="example">
+      <span class="eyebrow">Relatable example</span>
+      A university only recruits low-income students for a risky new teaching trial because they're the ones who "have to" say yes for the course credit on offer — that would violate <strong>Justice</strong> (unfairly imposing the burden on a vulnerable group), even if the trial itself is well-designed.
+    </div>
+  </section>
+
+  <section class="topic">
+    <h3>3.3 Common ethical issues concerning participants</h3>
+    <ul>
+      <li><strong>Conflict of interest</strong> — e.g. a study's funder favours a particular finding, which pressures the researcher. Not always avoidable, but must be disclosed and managed honestly.</li>
+      <li><strong>Informed consent</strong> — participants need to know the purpose, procedure, their right to withdraw, any risks/benefits, confidentiality arrangements, incentives, and who to contact with questions.</li>
+      <li><strong>Selection of participants and measures</strong> — don't unfairly exclude groups, don't over-generalise findings to populations you didn't study, and use measures actually validated for your population.</li>
+      <li><strong>Use of incentives</strong> — incentives must be non-coercive; they shouldn't pressure someone into participating or unfairly burden economically disadvantaged people.</li>
+      <li><strong>Anonymity</strong> — participants' identities are protected (e.g. replacing names with codes).</li>
+      <li><strong>Confidentiality</strong> — data is kept private and reported in a way that can't be traced back to an individual (e.g. reporting only aggregated averages).</li>
+    </ul>
+    <div class="example">
+      <span class="eyebrow">Case: Laud Humphreys' "Tearoom Trade"</span>
+      A classic (and controversial) example raised alongside informed consent — Humphreys covertly observed men's anonymous sexual encounters in public restrooms without their consent, then later traced their identities via car licence plates to interview them at home under a false pretext. It's used precisely because it violates informed consent, and arguably anonymity and beneficence too — a useful case to have in mind for essay questions on why consent matters.
+    </div>
+  </section>
+
+  <section class="topic">
+    <h3>3.4 Ethical issues in reporting findings and protecting IP</h3>
+    <ul>
+      <li><strong>No faking data</strong> (fabrication).</li>
+      <li><strong>No plagiarism.</strong></li>
+      <li><strong>No duplicate publication</strong> of the same data as if it were new.</li>
+      <li>Researchers may <strong>share data</strong> for verification/reanalysis, provided participant confidentiality is protected.</li>
+      <li><strong>Authorship credit</strong> should reflect each person's actual scientific contribution — not their seniority or institutional status.</li>
+      <li><strong>Reviewers</strong> (of manuscripts, grant applications) must keep submissions confidential and respect the authors' proprietary rights.</li>
+    </ul>
+    <div class="example">
+      <span class="eyebrow">Relatable example</span>
+      A senior professor adds their name as first author to a paper mostly written and researched by a junior student, simply because of their seniority — this breaches the authorship-credit principle, since credit should track actual contribution, not institutional rank.
+    </div>
+  </section>
+
+  <div class="practice">
+    <h3>Test yourself — Chapter 3</h3>
+    <p>Cover the answer, try to say it in your own words first.</p>
+
+    <details>
+      <summary>What is an IRB/REC, and when should a researcher consult it?</summary>
+      <div class="answer"><strong>Answer:</strong> An Institutional Review Board or Research Ethics Committee — a body within a university or research organisation that oversees the ethical conduct of research projects. Researchers should consult it before conducting any research activity, to determine whether approval is required.</div>
+    </details>
+
+    <details>
+      <summary>Name and briefly explain the three principles from the Belmont Report.</summary>
+      <div class="answer"><strong>Answer:</strong> Respect for Persons (acknowledge autonomy, obtain voluntary informed participation, protect the vulnerable); Beneficence (don't harm one person to benefit others, maximise benefit and minimise harm); Justice (fairly distribute the benefits and burdens of research, don't unduly target vulnerable groups).</div>
+    </details>
+
+    <details>
+      <summary>What's the difference between anonymity and confidentiality?</summary>
+      <div class="answer"><strong>Answer:</strong> Anonymity means the participant's identity is never known or recorded (e.g. using a code instead of a name). Confidentiality means the identity may be known to the researcher, but is kept private and never disclosed or linked to specific data in reporting (e.g. reporting only aggregated results).</div>
+    </details>
+
+    <details>
+      <summary>Why is a "conflict of interest" not automatically unethical?</summary>
+      <div class="answer"><strong>Answer:</strong> Conflicts of interest can arise unavoidably (e.g. a funder with a preferred outcome). The ethical obligation isn't to have zero conflicts, but to be alert to them, avoid them where possible, and honestly disclose and manage them when they can't be avoided.</div>
+    </details>
+
+    <details>
+      <summary>List three ethical issues covered under "reporting of research findings and protection of intellectual property rights."</summary>
+      <div class="answer"><strong>Answer:</strong> Any three of: not fabricating data, avoiding plagiarism, avoiding duplicate publication, sharing data responsibly for verification, giving authorship credit based on actual contribution, and reviewers protecting the confidentiality of submissions they review.</div>
+    </details>
+
+    <details>
+      <summary>What made the Tearoom Trade study ethically controversial?</summary>
+      <div class="answer"><strong>Answer:</strong> The researcher covertly observed participants without their knowledge or consent, then traced their real identities (via car licence plates) to interview them later under a false pretext — a clear breach of informed consent, and arguably of anonymity as well.</div>
+    </details>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  Compiled from HBC201 Seminar 1 slides (11 Aug 2026) and Study Unit 1 — Introduction to Social and Behavioural Science Research. For exam prep use; always check the Study Guide and Canvas for the current syllabus and formative assessment.
+</footer>
+
+</body>
+</html>
