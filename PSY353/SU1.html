@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Study Unit 1 — The Building Blocks of Well-Being</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF9F5;
+    --ink:#20241F;
+    --ink-soft:#565C51;
+    --line:#DCD9CC;
+    --forest:#2E5C42;
+    --forest-deep:#1D3E2C;
+    --gold:#B98A2F;
+    --slate:#526078;
+    --card:#FFFFFF;
+    --mix:#8A5A8A;
+    --radius:10px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-weight:600;
+    color:var(--forest-deep);
+    line-height:1.25;
+  }
+  a{color:var(--forest);}
+  .layout{
+    display:grid;
+    grid-template-columns:260px minmax(0,1fr);
+    max-width:1180px;
+    margin:0 auto;
+  }
+  /* ---------- Sidebar ---------- */
+  nav.toc{
+    position:sticky;
+    top:0;
+    align-self:start;
+    height:100vh;
+    overflow-y:auto;
+    padding:28px 20px 40px 28px;
+    border-right:1px solid var(--line);
+  }
+  .toc .brand{
+    font-family:'Source Serif 4',serif;
+    font-size:0.95rem;
+    color:var(--ink-soft);
+    margin-bottom:2px;
+  }
+  .toc .brand strong{
+    display:block;
+    font-size:1.15rem;
+    color:var(--forest-deep);
+    margin-top:2px;
+  }
+  .toc ul{list-style:none;padding:0;margin:22px 0 0;}
+  .toc li{margin-bottom:2px;}
+  .toc a{
+    display:block;
+    text-decoration:none;
+    color:var(--ink-soft);
+    font-size:0.88rem;
+    padding:6px 10px;
+    border-radius:7px;
+    border-left:2px solid transparent;
+  }
+  .toc a:hover{background:#F0EEE4;color:var(--forest-deep);}
+  .toc a.active{color:var(--forest-deep);border-left:2px solid var(--forest);background:#EFF3EC;font-weight:500;}
+  .toc .subnote{
+    margin-top:26px;
+    padding-top:16px;
+    border-top:1px solid var(--line);
+    font-size:0.78rem;
+    color:var(--ink-soft);
+  }
+  /* ---------- Main ---------- */
+  main{padding:48px 56px 100px;min-width:0;}
+  header.hero{margin-bottom:52px;}
+  header.hero .kicker{
+    color:var(--gold);
+    font-size:0.85rem;
+    font-weight:600;
+    margin-bottom:10px;
+  }
+  header.hero h1{font-size:2.3rem;margin:0 0 14px;max-width:640px;}
+  header.hero p{color:var(--ink-soft);max-width:600px;font-size:1.02rem;}
+  section.block{
+    margin-bottom:64px;
+    scroll-margin-top:24px;
+  }
+  section.block > h2{
+    font-size:1.55rem;
+    padding-bottom:10px;
+    border-bottom:1px solid var(--line);
+    margin-bottom:22px;
+  }
+  section.block > h2 .num{
+    color:var(--gold);
+    font-family:'Inter',sans-serif;
+    font-weight:700;
+    font-size:0.95rem;
+    margin-right:10px;
+  }
+  h3.sub{font-size:1.12rem;margin:30px 0 10px;color:var(--forest-deep);}
+  p{margin:0 0 14px;}
+  ul.plain{margin:0 0 14px;padding-left:22px;}
+  ul.plain li{margin-bottom:6px;}
+
+  .callout{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:18px 20px;
+    margin:18px 0;
+  }
+  .callout.example{border-left:3px solid var(--gold);}
+  .callout.example .label{font-weight:600;color:var(--gold);font-size:0.82rem;margin-bottom:6px;}
+  .callout.taught{border-left:3px solid var(--forest);}
+  .callout.taught .label{font-weight:600;color:var(--forest);font-size:0.82rem;margin-bottom:6px;}
+  .callout.taught .label:before{content:"seminar emphasis — ";text-transform:none;}
+
+  .grid-cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:14px;
+    margin:18px 0 22px;
+  }
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:16px 18px;
+  }
+  .card h4{margin:0 0 8px;font-size:1rem;color:var(--forest-deep);}
+  .card p{font-size:0.92rem;color:var(--ink-soft);margin:0;}
+  .card ul{margin:8px 0 0;padding-left:18px;font-size:0.9rem;color:var(--ink);}
+
+  table.compare{
+    width:100%;
+    border-collapse:collapse;
+    margin:18px 0 26px;
+    font-size:0.92rem;
+  }
+  table.compare th,table.compare td{
+    border:1px solid var(--line);
+    padding:10px 12px;
+    text-align:left;
+    vertical-align:top;
+  }
+  table.compare th{background:#F0EEE4;color:var(--forest-deep);font-family:'Source Serif 4',serif;font-weight:600;}
+  table.compare tr:nth-child(even) td{background:#FCFBF7;}
+
+  .tag{
+    display:inline-block;
+    font-size:0.72rem;
+    font-weight:600;
+    padding:2px 8px;
+    border-radius:20px;
+    margin-right:6px;
+  }
+  .tag.hedonic{background:#F4E7C9;color:#7A5A16;}
+  .tag.eudaimonic{background:#DCEADF;color:var(--forest-deep);}
+  .tag.rich{background:#EBDEEC;color:var(--mix);}
+
+  blockquote{
+    margin:16px 0;
+    padding:12px 18px;
+    border-left:3px solid var(--slate);
+    background:#F4F5F7;
+    font-style:italic;
+    color:var(--ink-soft);
+    font-size:0.95rem;
+  }
+
+  /* ---------- Self-test ---------- */
+  .quiz-item{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    margin-bottom:12px;
+    overflow:hidden;
+  }
+  .quiz-q{
+    padding:16px 18px;
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:14px;
+    font-weight:500;
+  }
+  .quiz-q .qnum{color:var(--gold);font-weight:700;margin-right:8px;font-family:'Source Serif 4',serif;}
+  .quiz-q .chevron{
+    flex:none;
+    width:18px;height:18px;
+    color:var(--ink-soft);
+    transition:transform .18s ease;
+    margin-top:2px;
+  }
+  .quiz-item.open .chevron{transform:rotate(180deg);}
+  .quiz-a{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .22s ease;
+    background:#F6F5EF;
+  }
+  .quiz-item.open .quiz-a{max-height:600px;}
+  .quiz-a-inner{padding:0 18px 18px 46px;font-size:0.94rem;color:var(--ink-soft);}
+  .quiz-a-inner strong{color:var(--forest-deep);}
+  .quiz-topic{
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:0.03em;
+    color:var(--ink-soft);
+    margin-bottom:16px;
+  }
+
+  footer{
+    padding:30px 56px 60px;
+    color:var(--ink-soft);
+    font-size:0.82rem;
+    border-top:1px solid var(--line);
+  }
+
+  @media (max-width:880px){
+    .layout{grid-template-columns:1fr;}
+    nav.toc{
+      position:relative;
+      height:auto;
+      border-right:none;
+      border-bottom:1px solid var(--line);
+      padding:20px;
+    }
+    main{padding:36px 22px 80px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+  <nav class="toc" id="toc">
+    <div class="brand">PSY353 · Study Unit 1<strong>Building Blocks of Well-Being</strong></div>
+    <ul>
+      <li><a href="#origins">Origins &amp; Definition</a></li>
+      <li><a href="#hedonic-eudaimonic">Hedonic vs. Eudaimonic</a></li>
+      <li><a href="#models">Theoretical Models</a></li>
+      <li><a href="#emotions">Emotions &amp; Well-Being</a></li>
+      <li><a href="#taking-charge">Taking Charge of Happiness</a></li>
+      <li><a href="#limits">Limits &amp; Critiques</a></li>
+      <li><a href="#selftest">Self-Test</a></li>
+    </ul>
+    <div class="subnote">Green-edged boxes = points the seminar slides emphasised beyond the study unit reading. Gold-edged boxes = worked examples.</div>
+  </nav>
+
+  <main>
+    <header class="hero">
+      <div class="kicker">Exam Revision Guide</div>
+      <h1>The Building Blocks of Well-Being</h1>
+      <p>A concept-by-concept walkthrough combining Study Unit 1 with what the Seminar 1 slides added or emphasised, with plain-language examples and a short-answer self-test at the end.</p>
+    </header>
+
+    <!-- ============ 1. ORIGINS ============ -->
+    <section class="block" id="origins">
+      <h2><span class="num">01</span>What Is Positive Psychology?</h2>
+
+      <p>Positive psychology is the scientific study of <strong>optimal human functioning and flourishing</strong> — what allows individuals, communities, and societies to do well, not just avoid dysfunction. It was launched in its modern form by Martin Seligman, who argued that psychology had become lopsided: most research addressed disorder and dysfunction, while comparatively little examined what makes life go well. Seligman wanted the field to also build on people's existing strengths, not only repair what's broken.</p>
+
+      <h3 class="sub">Why the field emerged</h3>
+      <p>Seligman and Csikszentmihalyi (2000) pointed out that most people function reasonably well and report being satisfied, yet research disproportionately studies negatives — likely because negatives threaten survival and demand attention (Baumeister et al., 2001, "bad is stronger than good"). Positive psychology set out to balance this by researching flourishing alongside dysfunction.</p>
+
+      <div class="callout example">
+        <div class="label">Example</div>
+        Clinical psychology asks, "how do we treat someone's depression?" Positive psychology asks the complementary question: "what conditions help someone who isn't depressed go on to actually thrive — feel engaged at work, have meaningful relationships, find purpose?" Neither question replaces the other.
+      </div>
+
+      <h3 class="sub">What it is — and is not</h3>
+      <div class="grid-cards">
+        <div class="card">
+          <h4>It is</h4>
+          <ul>
+            <li>Evidence-based and scientific, not folk wisdom</li>
+            <li>A field that acknowledges negatives exist</li>
+            <li>A guide toward incremental betterment</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>It is not</h4>
+          <ul>
+            <li>A denial of life's real difficulties</li>
+            <li>A "quick-fix" or miracle cure for happiness</li>
+            <li>"Just think positive" as a cure-all</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout taught">
+        <div class="label">Seminar emphasis</div>
+        Watch for <strong>toxic positivity</strong> — the pressure to appear happy or "positive-only" that dismisses real distress. The seminar stressed that oversimplifying positive psychology into "just think happy thoughts" misrepresents the field, and that as a science it should always be questioned: is the evidence sound? Does it hold across different contexts and cultures? What are the exceptions?
+      </div>
+
+      <h3 class="sub">Regenerative Positive Psychology (Steger, 2025)</h3>
+      <p>Steger argues the field must evolve alongside global crises (climate change, political instability, inequality) rather than focus narrowly on the individual. Since positive psychology began, happiness has risen somewhat and depression/suicidality have fallen in some measures — but anxiety, alcohol-use disorders, and environmental decline have worsened. He proposes three pillars: (1) extend well-being to include all living systems, not just humans; (2) direct research, education, and policy at the social, political, and environmental systems that sustain a good life; (3) cultivate individuals as active caretakers of collective and planetary well-being.</p>
+
+      <div class="callout example">
+        <div class="label">Example</div>
+        A traditional PPI might teach an individual employee gratitude journaling to reduce burnout. A "regenerative" approach would additionally ask whether the workplace's culture or policies are the actual source of the burnout — and try to change the system, not just help the person cope with it.
+      </div>
+    </section>
+
+    <!-- ============ 2. HEDONIC vs EUDAIMONIC ============ -->
+    <section class="block" id="hedonic-eudaimonic">
+      <h2><span class="num">02</span>Hedonic vs. Eudaimonic Well-Being</h2>
+      <p>These are the two oldest and most influential traditions in well-being research (Ryan &amp; Deci, 2001), and most exam questions on "which theory says what" hinge on knowing this split clearly.</p>
+
+      <table class="compare">
+        <tr><th></th><th><span class="tag hedonic">Hedonic</span></th><th><span class="tag eudaimonic">Eudaimonic</span></th></tr>
+        <tr>
+          <td><strong>Core idea</strong></td>
+          <td>The good life = maximum pleasure, minimum displeasure</td>
+          <td>The good life = meaning, growth, and realising one's potential ("flourishing")</td>
+        </tr>
+        <tr>
+          <td><strong>Main measure</strong></td>
+          <td>Subjective Well-Being (SWB): high life satisfaction + high positive affect + low negative affect</td>
+          <td>No single measure — captured via theories like Self-Determination Theory or Ryff's Psychological Well-Being</td>
+        </tr>
+        <tr>
+          <td><strong>View of negative emotion</strong></td>
+          <td>Something to minimise — it directly detracts from well-being</td>
+          <td>Not necessarily contradictory to well-being — meaningful pursuits can be stressful</td>
+        </tr>
+      </table>
+
+      <div class="callout example">
+        <div class="label">Example</div>
+        A doctor volunteering in a war-torn region experiences frequent negative emotions (grief, exhaustion, fear) — hedonically, their well-being looks poor. But they may find deep purpose and meaning in the work, scoring high on eudaimonic well-being. This is the classic case for why "happiness" and "well-being" are not identical.
+      </div>
+
+      <p>Note also — and this is a common exam trip-up — that a term is often used to <em>differentiate</em> "well-being" from "happiness": well-being is the broader umbrella term covering many indicators of positive functioning, while happiness refers more narrowly to the emotional experience of positivity and satisfaction.</p>
+
+      <div class="callout taught">
+        <div class="label">Seminar emphasis</div>
+        Keyes et al. (2002) argue the best outcome combines both traditions — pleasure <em>and</em> meaning — rather than treating them as competing philosophies you must choose between.
+      </div>
+    </section>
+
+    <!-- ============ 3. MODELS ============ -->
+    <section class="block" id="models">
+      <h2><span class="num">03</span>Theoretical Models of Well-Being</h2>
+      <p>Several models try to specify exactly what well-being is made of. They overlap heavily — expect exam questions that test whether you can tell them apart. The one unifying theme across all of them: <strong>well-being is multifaceted</strong>, never reducible to one single number or feeling.</p>
+
+      <h3 class="sub">Self-Determination Theory (Ryan &amp; Deci, 2000) — eudaimonic</h3>
+      <p>Proposes three universal psychological needs that must be met for well-being:</p>
+      <ul class="plain">
+        <li><strong>Autonomy</strong> — having choice and control over your own decisions and actions</li>
+        <li><strong>Competence</strong> — feeling effective at managing your environment and accomplishing things that matter</li>
+        <li><strong>Relatedness</strong> — having strong, supportive social relationships</li>
+      </ul>
+      <div class="callout example">
+        <div class="label">Example</div>
+        A junior employee who is micromanaged (low autonomy), given tasks beyond their skill level with no support (low competence), and works remotely with no team contact (low relatedness) will likely report poor well-being at work even if paid well — because none of the three needs are being met.
+      </div>
+
+      <h3 class="sub">Authentic Happiness — Three Pathways (Seligman, 2002)</h3>
+      <ul class="plain">
+        <li><strong>The Pleasant Life</strong> — pursuing pleasure, enjoyment, and positive emotion</li>
+        <li><strong>The Engaged Life</strong> — being absorbed in activities (work, hobbies, relationships) that use your strengths</li>
+        <li><strong>The Meaningful Life</strong> — serving something larger than yourself</li>
+      </ul>
+      <p>Seligman later expanded this into PERMA, adding relationships and accomplishment as explicit components.</p>
+
+      <h3 class="sub">The PERMA Model (Seligman, 2011)</h3>
+      <div class="grid-cards">
+        <div class="card"><h4>P — Positive Emotion</h4><p>Experiencing pleasant feelings and positive affect</p></div>
+        <div class="card"><h4>E — Engagement</h4><p>Being absorbed and immersed in activities ("flow")</p></div>
+        <div class="card"><h4>R — Relationships</h4><p>Warm, trusting, supportive social bonds</p></div>
+        <div class="card"><h4>M — Meaning</h4><p>Using your strengths in service of something beyond yourself</p></div>
+        <div class="card"><h4>A — Accomplishment</h4><p>A sense of achievement in domains that matter to you</p></div>
+      </div>
+      <p>An extended "PERMA+4" has been proposed, adding physical health, mindset, environment, and economic security — but the evidence for this extension is still described as preliminary, so don't treat it as settled fact on an exam.</p>
+
+      <h3 class="sub">Psychological Well-Being (Ryff &amp; Keyes, 1995) — eudaimonic</h3>
+      <p>Six components, plus an overall higher-order factor combining them: autonomy, environmental mastery, personal growth, positive relations with others, purpose in life, and self-acceptance.</p>
+      <div class="callout example">
+        <div class="label">Example distinguishing it from SDT</div>
+        Ryff's model overlaps with SDT's autonomy and relatedness, but adds <em>personal growth</em> and <em>self-acceptance</em> — dimensions SDT doesn't explicitly name. If an exam question describes someone who "has made peace with their past mistakes and evaluates themselves positively," that maps most cleanly onto Ryff's <em>self-acceptance</em>, not SDT.
+      </div>
+
+      <h3 class="sub">Psychological Richness (Oishi &amp; Westgate, 2022) — a proposed third type</h3>
+      <p>Distinct from both hedonic and eudaimonic well-being. A psychologically rich life is defined by novelty, curiosity, unexpectedness, and gaining new perspectives — not necessarily pleasure or meaning.</p>
+      <table class="compare">
+        <tr><th><span class="tag hedonic">Hedonic</span></th><th><span class="tag eudaimonic">Eudaimonic</span></th><th><span class="tag rich">Psychologically rich</span></th></tr>
+        <tr><td>Joy, stability, comfort</td><td>Meaning, purpose, coherence</td><td>Variety, perspective change</td></tr>
+      </table>
+      <div class="callout example">
+        <div class="label">Example</div>
+        Someone who climbs Mt. Everest or backpacks through unfamiliar, difficult countries may not come away particularly happy or with a grand sense of purpose — but they gain novel perspectives and a psychologically rich life. The seminar noted this can also apply to people processing trauma: reframing hardship as a source of growth and new perspective can be a route to a good life even when the hedonic or eudaimonic routes are blocked.
+      </div>
+      <div class="callout taught">
+        <div class="label">Seminar emphasis</div>
+        Oishi et al. (2020) found cultural/individual variation in which type people prefer: in Singapore, roughly 54.8% preferred a happy (hedonic) life, 38.5% a meaningful (eudaimonic) life, and only 6.7% a psychologically rich life — useful as a concrete stat if an exam asks about preferences for these three life types.
+      </div>
+    </section>
+
+    <!-- ============ 4. EMOTIONS ============ -->
+    <section class="block" id="emotions">
+      <h2><span class="num">04</span>Emotions and Well-Being</h2>
+      <p>Emotions are both an <em>outcome</em> of well-being (feeling good indicates things are going well) and a <em>cause</em> of it (feelings actively shape future well-being).</p>
+
+      <h3 class="sub">Positive emotions — the Broaden-and-Build Theory (Fredrickson, 2001)</h3>
+      <p>Positive emotions <strong>broaden</strong> our thinking and range of possible actions, which in turn helps us <strong>build</strong> lasting resources (physical, social, psychological) for the future. The logic: feeling good signals your environment is currently safe, freeing you from threat-focused vigilance so you can explore, play, and connect.</p>
+      <div class="callout example">
+        <div class="label">Example</div>
+        A child who feels safe and happy is more likely to engage in imaginative play, which builds cognitive and physical skills useful later in life — versus a child in a threatening environment who stays narrowly focused on safety and doesn't get those same developmental benefits.
+      </div>
+      <ul class="plain">
+        <li><strong>Find, remind, and bind</strong> (Algoe, 2012): gratitude strengthens relationships and encourages reciprocity — an evolutionary mechanism thought to support cooperation among ancestors.</li>
+        <li><strong>Undoing hypothesis</strong> (Fredrickson, 2000): positive emotions may help people recover faster from stress — though evidence here is mixed.</li>
+      </ul>
+      <div class="callout taught">
+        <div class="label">Seminar emphasis — supporting studies worth citing</div>
+        <ul class="plain">
+          <li><strong>Steptoe &amp; Wardle (2011):</strong> positive affect measured on just one random day predicted mortality five years later — low-PA group had a 7.3% death rate vs. 3.6% for the high-PA group.</li>
+          <li><strong>Cohen et al. (2003):</strong> volunteers deliberately exposed to flu viruses were less likely to actually get sick if they generally experienced more positive emotion — suggesting positive emotion supports immune function.</li>
+        </ul>
+      </div>
+      <p>Limitation to remember: positive emotion isn't unconditionally good — it can promote heuristic (less careful) thinking, and telling a struggling person to simply "cheer up" is rarely helpful.</p>
+
+      <h3 class="sub">Negative emotions</h3>
+      <p>Hedonic theory frames well-being as minimising negative emotion, but negative emotions serve real adaptive functions and shouldn't be treated as purely bad:</p>
+      <ul class="plain">
+        <li><strong>Fear</strong> — protects you from danger</li>
+        <li><strong>Anger</strong> — motivates you to protect what matters, and can improve performance in competitive or negotiation contexts</li>
+        <li><strong>Disgust</strong> — protects you from illness/contamination</li>
+      </ul>
+      <p>Negative emotion also often promotes more systematic, careful thinking (less reliance on heuristics/stereotypes) compared with positive emotion.</p>
+      <div class="callout taught">
+        <div class="label">Seminar emphasis</div>
+        Fredrickson &amp; Losada (2005) proposed an ideal "positivity ratio" of about 2.9:1 (often rounded to 3:1) — the idea that some negative emotion mixed with substantially more positive emotion is optimal. This specific ratio has been <strong>heavily criticised and largely debunked</strong> statistically — if this comes up on the exam, the safe answer is that the general idea (a healthy mix, not zero negativity) remains plausible, but the precise 3:1 number is not credible.
+      </div>
+
+      <h3 class="sub">Mixed emotions</h3>
+      <p>Feeling positive and negative simultaneously (e.g., happy <em>and</em> sad; grateful <em>and</em> guilty) (Larsen &amp; McGraw, 2011). Evidence on whether this helps or harms well-being is genuinely mixed (no pun avoidable):</p>
+      <ul class="plain">
+        <li><strong>Integrative perspective:</strong> mixed emotions support more holistic, effective processing of complex situations.</li>
+        <li><strong>Conflict perspective:</strong> mixed emotions are uncomfortable and disrupt one's sense of coherence, harming well-being.</li>
+      </ul>
+      <div class="callout example">
+        <div class="label">Example</div>
+        Graduating from university can trigger mixed emotions — excitement about the future and sadness about leaving friends behind. Some research suggests this kind of mixed emotion (during a genuinely significant life transition) supports better adjustment, while daily "low-stakes" mixed emotions may be more likely to feel simply uncomfortable and unhelpful.
+      </div>
+      <p>Context seems to matter: some studies found mixed emotions were linked to poorer well-being in ordinary daily life but linked to <em>better</em> well-being when experienced during genuine adversity — and specifically, only when no separate stressful event was also occurring. Which two emotions are mixed also matters: less contradictory combinations appear less harmful than starkly conflicting ones.</p>
+    </section>
+
+    <!-- ============ 5. TAKING CHARGE ============ -->
+    <section class="block" id="taking-charge">
+      <h2><span class="num">05</span>Taking Charge of Happiness</h2>
+
+      <h3 class="sub">The Sustainable Happiness Model (Lyubomirsky et al., 2005)</h3>
+      <p>A widely-cited (and widely-critiqued) breakdown of what determines happiness:</p>
+      <div class="grid-cards">
+        <div class="card"><h4>50%</h4><p>Genetics — your inherited "set point"</p></div>
+        <div class="card"><h4>10%</h4><p>Circumstances — e.g., socioeconomic status, where you're born</p></div>
+        <div class="card"><h4>40%</h4><p>Intentional daily activities — the part potentially within your control</p></div>
+      </div>
+      <p><strong>Important nuance for the exam:</strong> the original 40% figure is now considered an overestimate. Sheldon &amp; Lyubomirsky (2021) themselves revisited this and noted the real effect of intentional activity, while still significant and non-trivial, is smaller than first proposed. The core message that survives critique: well-being is <em>partly</em> outside our control and <em>partly</em> something we can influence — not a strict, precise 50/10/40 split.</p>
+      <div class="callout example">
+        <div class="label">Example</div>
+        Two people born with similar genetics and similar income can end up with quite different happiness levels depending on their daily habits — one nurtures friendships, exercises, and practises gratitude; the other doesn't. The model predicts this difference should show up mainly in the "40%" (or however much smaller the real figure is) — but for someone with a severe chronic illness or disability, that same slice of "controllable" activity may be much more constrained, so the model describes population averages, not guarantees for every individual.
+      </div>
+      <div class="callout taught">
+        <div class="label">Seminar emphasis — concrete intentional activities</div>
+        <ul class="plain">
+          <li>Fostering positive relationships; doing kind things for others</li>
+          <li>Leisure/hobbies, exercise, good sleep and eating habits</li>
+          <li>Self-kindness; using positive psychology interventions</li>
+        </ul>
+        Newer evidence (Delhey et al., 2026) suggests there are multiple distinct "pathways to a good life" that each independently boost satisfaction — the <em>exciting</em> life (travel, stimulation), the <em>cozy</em> life (relaxation, slowing down), and the <em>prosperous</em> life (occupational/material success). Interestingly, the <em>sustainable</em> life (reducing one's ecological footprint) did <strong>not</strong> predict satisfaction in this research — a useful counter-intuitive point to remember. The takeaway: there's no single one-size-fits-all recipe.
+      </div>
+
+      <h3 class="sub">Countering maladaptive cognitions (seminar-only content)</h3>
+      <p>The seminar introduced common unhelpful thinking patterns that can be targeted to support well-being — useful as short-answer "identify the cognitive distortion" material:</p>
+      <ul class="plain">
+        <li><strong>Catastrophizing</strong> — assuming the worst possible outcome ("I failed one exam, so I'll drop out and I'm worthless")</li>
+        <li><strong>Dichotomous (black/white) thinking</strong> — no middle ground ("He's late, so he must be a horrible person")</li>
+        <li><strong>Labelling</strong> — reducing yourself to one harsh word ("I'm a useless loser")</li>
+        <li><strong>Magnification</strong> — blowing one bad event out of proportion ("The shopkeeper was rude, so my whole day is ruined")</li>
+        <li><strong>Disqualifying the positive</strong> — dismissing good things ("My boss praised me, but that doesn't count")</li>
+        <li><strong>"Must" language</strong> — rigid self-imposed rules ("I must get an A+ or I'm a failure")</li>
+        <li><strong>Negative cognitive triad</strong> — attributing setbacks as global, personal, and permanent ("I failed, so I'll fail at everything, because I'm hopelessly and permanently stupid")</li>
+      </ul>
+
+      <h3 class="sub">Positive Psychology Interventions (PPIs)</h3>
+      <p>Evidence-based activities that improve well-being by increasing positive behaviours, emotions, and/or cognitions — not designed to replace clinical treatment but to complement it.</p>
+
+      <div class="grid-cards">
+        <div class="card">
+          <h4>Gratitude interventions</h4>
+          <p><strong>Gratitude visit:</strong> write and personally deliver a letter of thanks to someone who was kind but never properly thanked.</p>
+          <p><strong>Counting blessings:</strong> write down three good things each day and their causes, nightly for a week. Interestingly, doing this weekly worked better than doing it three times a week — participants doing it more often got bored and found it less meaningful.</p>
+        </div>
+        <div class="card">
+          <h4>Strengths-based interventions</h4>
+          <p>Based on the VIA classification of 24 signature strengths (Peterson &amp; Seligman) across six virtue categories (wisdom, courage, humanity, justice, temperance, transcendence). Identify your top five strengths, then use one in a new way each day for a week. Seligman et al. (2005) found this raised happiness even 6 months later. Love, hope, curiosity, zest, and gratitude are the strengths most strongly linked to life satisfaction.</p>
+        </div>
+        <div class="card">
+          <h4>Kindness interventions</h4>
+          <p>Performing random acts of kindness, or "counting kind acts" for a week, boosts happiness (Otake et al., 2006; Rowland &amp; Curry, 2018) — regardless of whether kindness was directed at strangers or friends. Even just <em>observing</em> kindness increased happiness. Prosocial spending — spending money on others rather than yourself — similarly boosts happiness (Dunn et al., 2008).</p>
+        </div>
+        <div class="card">
+          <h4>Savouring &amp; optimism interventions</h4>
+          <p>Savouring: deliberately attending to positive experiences to amplify their impact. Optimism: e.g., picturing three good things awaiting you tomorrow, or the "best possible selves" exercise (imagining your ideal future self across life domains).</p>
+        </div>
+      </div>
+
+      <div class="callout taught">
+        <div class="label">Seminar emphasis — motivation &amp; fit</div>
+        A PPI only works if the person is motivated to actually do it, and if it's a good <strong>person-activity fit</strong> — matched to their personality, preferences, and life circumstances. Wetchler et al. (2026) found some demographic groups (e.g., White, female, older, higher socioeconomic status) engage with PPIs more often — but PPIs benefit people across demographics as long as they actually complete the programme.
+      </div>
+
+      <div class="callout example">
+        <div class="label">Example</div>
+        A highly introverted person may not enjoy a kindness intervention that requires approaching strangers, but might thrive with a gratitude-journaling intervention done privately. Prescribing the same PPI to everyone regardless of personality ignores person-activity fit.
+      </div>
+    </section>
+
+    <!-- ============ 6. LIMITS ============ -->
+    <section class="block" id="limits">
+      <h2><span class="num">06</span>Limits and Critiques of Positive Psychology</h2>
+      <p>Because it's an evidence-based discipline, positive psychology has to acknowledge its own weaknesses. Van Zyl et al. (2024) systematically reviewed the major criticisms:</p>
+      <ul class="plain">
+        <li><strong>Conceptual and methodological issues</strong> — some underlying theory and measurement approaches remain contested.</li>
+        <li><strong>Overgeneralisation</strong> — applying interventions in a "one-size-fits-all" way without considering culture or context.</li>
+        <li><strong>Small effect sizes</strong> — meta-analyses (e.g., White et al., 2019; Davis et al., 2016 on gratitude; Cregg &amp; Cheavens, 2020/2021) generally find PPIs work, but with small effects — and gratitude interventions are not necessarily better than simple active-control activities.</li>
+        <li><strong>Commercialisation and conflicts of interest</strong> — companies with financial stakes in positive psychology products may fund research that's biased toward favourable findings.</li>
+        <li><strong>Risk of "toxic positivity"</strong> — oversimplified positivity messaging that dismisses genuine hardship.</li>
+      </ul>
+      <div class="callout example">
+        <div class="label">Example</div>
+        A wellness app company that funds a study on its own gratitude-journaling feature has a financial incentive to find (or emphasise) positive results — even if the effect size is small or the study design is weak. This doesn't necessarily mean the finding is false, but it should be disclosed and treated with extra scrutiny.
+      </div>
+      <p>The balanced position the course takes: positive psychology is genuinely valuable as a science, but it cannot "solve all problems" or override real structural and circumstantial constraints on people's lives. It's neither a cure-all nor worthless — it offers modest, real, evidence-backed tools.</p>
+    </section>
+
+    <!-- ============ SELF TEST ============ -->
+    <section class="block" id="selftest">
+      <h2><span class="num">07</span>Self-Test — Short Answer</h2>
+      <p style="color:var(--ink-soft);font-size:0.92rem;">Tap a question to reveal a model short answer. Try answering in your head (or on paper) before revealing.</p>
+
+      <div id="quiz"></div>
+    </section>
+
+    <footer>
+      Built for exam revision from Study Unit 1 (course reading) and Seminar 1 slides. Always verify specific citation details against the original study unit and slide deck before an open-book assessment.
+    </footer>
+  </main>
+</div>
+
+<script>
+const quizData = [
+  {
+    topic:"Origins & definition",
+    q:"What core imbalance in psychology did Seligman argue positive psychology should correct?",
+    a:"Psychology had focused heavily on studying and treating dysfunction (mental illness, maladaptive behaviour) while under-researching the conditions that let people and communities actively flourish. Positive psychology aims to study optimal functioning alongside — not instead of — pathology."
+  },
+  {
+    topic:"Origins & definition",
+    q:"Give one reason positive psychology is not a 'quick-fix' for happiness.",
+    a:"It is evidence-based and its interventions generally show small-to-medium effect sizes; it does not deny real hardship, and simply 'thinking positive' does not resolve deep or structural problems. It complements, rather than replaces, approaches like clinical therapy."
+  },
+  {
+    topic:"Origins & definition",
+    q:"What does Steger's Regenerative Positive Psychology add to the traditional focus of the field?",
+    a:"It extends the focus beyond individual well-being to the social, political, and environmental systems people live within, arguing the field should help 'regenerate' those systems (and consider well-being of all living systems), not just improve individual outcomes in isolation."
+  },
+  {
+    topic:"Hedonic vs. eudaimonic",
+    q:"Define hedonic well-being and name its most common measure.",
+    a:"Hedonic well-being is the view that the good life means maximising pleasure and minimising displeasure. Its most common operationalisation is Subjective Well-Being (SWB): high life satisfaction, high positive affect, and low negative affect."
+  },
+  {
+    topic:"Hedonic vs. eudaimonic",
+    q:"Why might someone with high eudaimonic well-being still report frequent negative emotion?",
+    a:"Eudaimonic theory holds that negative emotion does not necessarily contradict well-being — meaningful, purposeful pursuits (e.g., demanding but purposeful work) can be genuinely stressful while still contributing to a flourishing, well-lived life."
+  },
+  {
+    topic:"Theoretical models",
+    q:"List the three needs proposed by Self-Determination Theory.",
+    a:"Autonomy (control over one's own choices), Competence (feeling effective in managing one's environment), and Relatedness (having supportive, positive relationships)."
+  },
+  {
+    topic:"Theoretical models",
+    q:"Name the five components of the PERMA model.",
+    a:"Positive Emotion, Engagement, Relationships, Meaning, and Accomplishment."
+  },
+  {
+    topic:"Theoretical models",
+    q:"How does Ryff's Psychological Well-Being model differ from Self-Determination Theory, even though both are eudaimonic?",
+    a:"Ryff's model has six components — autonomy, environmental mastery, personal growth, positive relations with others, purpose in life, and self-acceptance. It shares autonomy and relatedness-type ideas with SDT, but adds dimensions SDT does not explicitly name, such as personal growth and self-acceptance."
+  },
+  {
+    topic:"Theoretical models",
+    q:"What makes psychological richness distinct from both hedonic and eudaimonic well-being?",
+    a:"Psychological richness is defined by novelty, unexpectedness, curiosity, and gaining new perspectives — not necessarily pleasure (hedonic) or a sense of purpose/coherence (eudaimonic). A life can be psychologically rich without being especially happy or meaningful."
+  },
+  {
+    topic:"Emotions",
+    q:"Explain the broaden-and-build theory in one or two sentences.",
+    a:"Positive emotions broaden a person's thought-action repertoire (they consider more possibilities and behaviours), and this broadening helps build lasting physical, social, and psychological resources that support well-being in the future."
+  },
+  {
+    topic:"Emotions",
+    q:"Give one adaptive function each for fear, anger, and disgust.",
+    a:"Fear protects us from danger/threats; anger motivates us to protect what matters to us and can improve performance in competitive situations; disgust protects us from illness or contamination."
+  },
+  {
+    topic:"Emotions",
+    q:"What does the evidence say about Fredrickson's proposed 'ideal positivity ratio' of about 3:1?",
+    a:"It has been heavily criticised and largely debunked as a precise, mathematically-derived figure. The broader idea — that some negative emotion combined with more frequent positive emotion may be healthy — remains plausible, but the specific ratio itself should not be cited as established fact."
+  },
+  {
+    topic:"Emotions",
+    q:"Is it true that mixed emotions are always harmful to well-being? Justify your answer.",
+    a:"No. Evidence is mixed: the integrative perspective suggests mixed emotions can support more effective, holistic processing of complex situations, while the conflict perspective suggests they are uncomfortable and disrupt coherence. Some findings suggest context matters — e.g., mixed emotions may be more harmful in ordinary daily life but less so (or even helpful) during genuine adversity."
+  },
+  {
+    topic:"Taking charge of happiness",
+    q:"According to the Sustainable Happiness Model, what three factors determine happiness, and roughly what proportion does each contribute?",
+    a:"Genetics (~50%, one's happiness 'set point'), life circumstances (~10%, e.g. socioeconomic status), and intentional daily activities (originally estimated at ~40%, though this figure is now considered an overestimate by the original authors)."
+  },
+  {
+    topic:"Taking charge of happiness",
+    q:"What important caveat did Sheldon & Lyubomirsky (2021) add to their own earlier model?",
+    a:"They noted the original 40% estimate for intentional activities was likely too high, and that while positive psychology interventions have a real, significant effect on happiness, the effect size is actually relatively small."
+  },
+  {
+    topic:"Taking charge of happiness",
+    q:"Identify the cognitive distortion: 'My boss praised my work today, but that doesn't really count.'",
+    a:"Disqualifying the positive — dismissing or discounting a genuinely positive event or feedback rather than accepting it at face value."
+  },
+  {
+    topic:"Taking charge of happiness",
+    q:"Describe the gratitude visit intervention and its typical timeframe.",
+    a:"Over one week, a participant writes a letter of gratitude to someone who was especially kind to them but never properly thanked, then delivers and reads it to that person in person."
+  },
+  {
+    topic:"Taking charge of happiness",
+    q:"What is 'person-activity fit' and why does it matter for PPIs?",
+    a:"It refers to how well a given intervention matches a person's personality, preferences, and life circumstances. PPIs require individual motivation and effort, so an intervention that's a poor fit for someone (e.g., a highly social task for an introvert) is less likely to be practised consistently or to work."
+  },
+  {
+    topic:"Limits & critiques",
+    q:"Name three broad categories of criticism levelled at positive psychology.",
+    a:"Any three of: conceptual/methodological limitations; overgeneralisation across cultures and contexts (a one-size-fits-all approach); small effect sizes for interventions; commercialisation and conflicts of interest in funded research; risk of promoting 'toxic positivity.'"
+  },
+  {
+    topic:"Limits & critiques",
+    q:"Why is commercialisation flagged as a concern for positive psychology research?",
+    a:"Companies with a financial stake in positive-psychology-related products or services may fund research in ways that create a conflict of interest, potentially biasing findings toward favourable results for what they sell. Such conflicts should, at minimum, be transparently declared in publications."
+  }
+];
+
+const quizContainer = document.getElementById('quiz');
+quizData.forEach((item, i) => {
+  const div = document.createElement('div');
+  div.className = 'quiz-item';
+  div.innerHTML = `
+    <div class="quiz-q" data-idx="${i}">
+      <div><span class="qnum">${i+1}.</span>${item.q}</div>
+      <svg class="chevron" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="quiz-a"><div class="quiz-a-inner"><div class="quiz-topic">${item.topic}</div><strong>Model answer:</strong> ${item.a}</div></div>
+  `;
+  quizContainer.appendChild(div);
+});
+
+quizContainer.addEventListener('click', (e) => {
+  const q = e.target.closest('.quiz-q');
+  if(!q) return;
+  q.parentElement.classList.toggle('open');
+});
+
+// Scrollspy for TOC
+const sections = document.querySelectorAll('section.block');
+const tocLinks = document.querySelectorAll('.toc a');
+const spy = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      const id = entry.target.getAttribute('id');
+      tocLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    }
+  });
+}, { rootMargin: '-15% 0px -70% 0px' });
+sections.forEach(s => spy.observe(s));
+</script>
+
+</body>
+</html>
