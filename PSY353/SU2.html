@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Study Unit 2 — The Pursuit of Happiness</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF9F5;
+    --ink:#20241F;
+    --ink-soft:#565C51;
+    --line:#DCD9CC;
+    --forest:#2E5C42;
+    --forest-deep:#1D3E2C;
+    --gold:#B98A2F;
+    --slate:#526078;
+    --card:#FFFFFF;
+    --mix:#8A5A8A;
+    --radius:10px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-weight:600;
+    color:var(--forest-deep);
+    line-height:1.25;
+  }
+  a{color:var(--forest);}
+  .layout{
+    display:grid;
+    grid-template-columns:260px minmax(0,1fr);
+    max-width:1180px;
+    margin:0 auto;
+  }
+  /* ---------- Sidebar ---------- */
+  nav.toc{
+    position:sticky;
+    top:0;
+    align-self:start;
+    height:100vh;
+    overflow-y:auto;
+    padding:28px 20px 40px 28px;
+    border-right:1px solid var(--line);
+  }
+  .toc .brand{
+    font-family:'Source Serif 4',serif;
+    font-size:0.95rem;
+    color:var(--ink-soft);
+    margin-bottom:2px;
+  }
+  .toc .brand strong{
+    display:block;
+    font-size:1.15rem;
+    color:var(--forest-deep);
+    margin-top:2px;
+  }
+  .toc .crumb{
+    display:inline-block;
+    margin-top:10px;
+    font-size:0.76rem;
+    color:var(--forest);
+    text-decoration:none;
+    border:1px solid var(--line);
+    padding:4px 9px;
+    border-radius:20px;
+  }
+  .toc .crumb:hover{background:#F0EEE4;}
+  .toc ul{list-style:none;padding:0;margin:22px 0 0;}
+  .toc li{margin-bottom:2px;}
+  .toc a.link{
+    display:block;
+    text-decoration:none;
+    color:var(--ink-soft);
+    font-size:0.88rem;
+    padding:6px 10px;
+    border-radius:7px;
+    border-left:2px solid transparent;
+  }
+  .toc a.link:hover{background:#F0EEE4;color:var(--forest-deep);}
+  .toc a.link.active{color:var(--forest-deep);border-left:2px solid var(--forest);background:#EFF3EC;font-weight:500;}
+  .toc .subnote{
+    margin-top:26px;
+    padding-top:16px;
+    border-top:1px solid var(--line);
+    font-size:0.78rem;
+    color:var(--ink-soft);
+  }
+  .toc .legend{margin-top:10px;font-size:0.76rem;}
+  .toc .legend div{margin-bottom:5px;padding-left:12px;position:relative;}
+  .toc .legend div:before{content:"";position:absolute;left:0;top:3px;width:3px;height:12px;border-radius:2px;}
+  .toc .legend .l1:before{background:var(--forest);}
+  .toc .legend .l2:before{background:var(--gold);}
+  .toc .legend .l3:before{background:var(--slate);}
+  /* ---------- Main ---------- */
+  main{padding:48px 56px 100px;min-width:0;}
+  header.hero{margin-bottom:52px;}
+  header.hero .kicker{
+    color:var(--gold);
+    font-size:0.85rem;
+    font-weight:600;
+    margin-bottom:10px;
+  }
+  header.hero h1{font-size:2.3rem;margin:0 0 14px;max-width:640px;}
+  header.hero p{color:var(--ink-soft);max-width:600px;font-size:1.02rem;}
+  section.block{
+    margin-bottom:64px;
+    scroll-margin-top:24px;
+  }
+  section.block > h2{
+    font-size:1.55rem;
+    padding-bottom:10px;
+    border-bottom:1px solid var(--line);
+    margin-bottom:22px;
+  }
+  section.block > h2 .num{
+    color:var(--gold);
+    font-family:'Inter',sans-serif;
+    font-weight:700;
+    font-size:0.95rem;
+    margin-right:10px;
+  }
+  h3.sub{font-size:1.12rem;margin:30px 0 10px;color:var(--forest-deep);}
+  h4.subsub{font-size:0.98rem;margin:20px 0 6px;color:var(--ink);}
+  p{margin:0 0 14px;}
+  ul.plain{margin:0 0 14px;padding-left:22px;}
+  ul.plain li{margin-bottom:6px;}
+
+  .callout{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:18px 20px;
+    margin:18px 0;
+  }
+  .callout.example{border-left:3px solid var(--gold);}
+  .callout.example .label{font-weight:600;color:var(--gold);font-size:0.82rem;margin-bottom:6px;}
+  .callout.taught{border-left:3px solid var(--forest);}
+  .callout.taught .label{font-weight:600;color:var(--forest);font-size:0.82rem;margin-bottom:6px;}
+  .callout.readingonly{border-left:3px solid var(--slate);}
+  .callout.readingonly .label{font-weight:600;color:var(--slate);font-size:0.82rem;margin-bottom:6px;}
+
+  .grid-cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:14px;
+    margin:18px 0 22px;
+  }
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:16px 18px;
+  }
+  .card h4{margin:0 0 8px;font-size:1rem;color:var(--forest-deep);}
+  .card p{font-size:0.92rem;color:var(--ink-soft);margin:0;}
+  .card ul{margin:8px 0 0;padding-left:18px;font-size:0.9rem;color:var(--ink);}
+
+  table.compare{
+    width:100%;
+    border-collapse:collapse;
+    margin:18px 0 26px;
+    font-size:0.92rem;
+  }
+  table.compare th,table.compare td{
+    border:1px solid var(--line);
+    padding:10px 12px;
+    text-align:left;
+    vertical-align:top;
+  }
+  table.compare th{background:#F0EEE4;color:var(--forest-deep);font-family:'Source Serif 4',serif;font-weight:600;}
+  table.compare tr:nth-child(even) td{background:#FCFBF7;}
+
+  .tag{
+    display:inline-block;
+    font-size:0.72rem;
+    font-weight:600;
+    padding:2px 8px;
+    border-radius:20px;
+    margin-right:6px;
+  }
+  .tag.pos{background:#DCEADF;color:var(--forest-deep);}
+  .tag.neg{background:#F3DADA;color:#8A3A3A;}
+  .tag.mix{background:#EBDEEC;color:var(--mix);}
+
+  blockquote{
+    margin:16px 0;
+    padding:12px 18px;
+    border-left:3px solid var(--slate);
+    background:#F4F5F7;
+    font-style:italic;
+    color:var(--ink-soft);
+    font-size:0.95rem;
+  }
+
+  /* ---------- Self-test ---------- */
+  .quiz-item{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    margin-bottom:12px;
+    overflow:hidden;
+  }
+  .quiz-q{
+    padding:16px 18px;
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:14px;
+    font-weight:500;
+  }
+  .quiz-q .qnum{color:var(--gold);font-weight:700;margin-right:8px;font-family:'Source Serif 4',serif;}
+  .quiz-q .chevron{
+    flex:none;
+    width:18px;height:18px;
+    color:var(--ink-soft);
+    transition:transform .18s ease;
+    margin-top:2px;
+  }
+  .quiz-item.open .chevron{transform:rotate(180deg);}
+  .quiz-a{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .22s ease;
+    background:#F6F5EF;
+  }
+  .quiz-item.open .quiz-a{max-height:600px;}
+  .quiz-a-inner{padding:0 18px 18px 46px;font-size:0.94rem;color:var(--ink-soft);}
+  .quiz-a-inner strong{color:var(--forest-deep);}
+  .quiz-topic{
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:0.03em;
+    color:var(--ink-soft);
+    margin-bottom:16px;
+  }
+
+  footer{
+    padding:30px 56px 60px;
+    color:var(--ink-soft);
+    font-size:0.82rem;
+    border-top:1px solid var(--line);
+  }
+
+  @media (max-width:880px){
+    .layout{grid-template-columns:1fr;}
+    nav.toc{
+      position:relative;
+      height:auto;
+      border-right:none;
+      border-bottom:1px solid var(--line);
+      padding:20px;
+    }
+    main{padding:36px 22px 80px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+  <nav class="toc" id="toc">
+    <div class="brand">PSY353 · Study Unit 2<strong>The Pursuit of Happiness</strong></div>
+    <a class="crumb" href="index.html">← Study Unit 1</a>
+    <ul>
+      <li><a class="link" href="#personality">Personality &amp; Well-Being</a></li>
+      <li><a class="link" href="#change">Can Personality Change?</a></li>
+      <li><a class="link" href="#self">The Self</a></li>
+      <li><a class="link" href="#knowselves">Do We Know Ourselves?</a></li>
+      <li><a class="link" href="#money">Money &amp; Well-Being</a></li>
+      <li><a class="link" href="#optimism">Optimism &amp; Pessimism</a></li>
+      <li><a class="link" href="#selftest">Self-Test</a></li>
+    </ul>
+    <div class="subnote">
+      <div class="legend">
+        <div class="l1">Green = seminar added/emphasised beyond the reading</div>
+        <div class="l2">Gold = worked example</div>
+        <div class="l3">Slate = reading-only, not yet covered live in seminar</div>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <header class="hero">
+      <div class="kicker">Exam Revision Guide</div>
+      <h1>The Pursuit of Happiness</h1>
+      <p>Study Unit 2 combined with Seminar 2 (Personality &amp; the Self; Money &amp; Well-Being). Note: the Optimism &amp; Pessimism chapter of the study unit is scheduled for Seminar 3, so that section here draws on the reading only — check the next seminar's slides once available.</p>
+    </header>
+
+    <!-- ============ 1. PERSONALITY ============ -->
+    <section class="block" id="personality">
+      <h2><span class="num">01</span>Personality and Well-Being</h2>
+      <p>Personality is a relatively stable, enduring pattern in how someone thinks, feels, and behaves. Because it's stable, it substantially shapes well-being over the long run — one 2024 paper (Mõttus et al.) claims personality alone can explain 60–80% of variance in life satisfaction, though the seminar flagged this figure as likely inflated due to questioned validity of the well-being measures used. Even so, personality clearly matters a great deal for well-being — comparable in importance to socioeconomic status and cognitive ability in predicting outcomes like mortality, divorce, and occupational success (Roberts et al., 2007).</p>
+
+      <div class="callout taught">
+        <div class="label">Seminar emphasis</div>
+        The seminar explicitly contrasted the scientifically-supported Big Five with the hugely popular <strong>MBTI ("16 personalities")</strong> — MBTI is heavily criticised in scientific psychology (Stein &amp; Swan, 2019) for weak reliability and validity. It's fine to use MBTI for fun, but it is not a credible framework to cite as evidence in this course.
+      </div>
+
+      <h3 class="sub">The Big Five (OCEAN)</h3>
+      <div class="grid-cards">
+        <div class="card"><h4>Openness</h4><p>Intellectual curiosity, artistic appreciation, imagination, willingness to seek new experiences</p></div>
+        <div class="card"><h4>Conscientiousness</h4><p>Hardworking, meticulous, responsible, disciplined</p></div>
+        <div class="card"><h4>Extraversion</h4><p>Sociable, outgoing, talkative, energetic</p></div>
+        <div class="card"><h4>Agreeableness</h4><p>Kind, trusting, warm, considerate</p></div>
+        <div class="card"><h4>Neuroticism</h4><p>Reactive to negative events, high negative affect</p></div>
+      </div>
+
+      <p><strong>Extraversion and neuroticism are consistently the strongest predictors</strong> of well-being among the Big Five — they are most directly tied to positive and negative emotion respectively. Steel et al. (2008) found meta-analytic associations larger than r = .50 for both, which is a very large effect in psychology. Agreeableness and openness are weaker, less consistent predictors; conscientiousness has a more mixed, context-dependent relationship.</p>
+
+      <h4 class="subsub">Extraversion</h4>
+      <p>Extraverts tend to be happier for several converging reasons: better emotion regulation, more skill at generating positive affect for themselves, and richer social lives (more social activities, higher perceived social connection, and higher-quality interactions).</p>
+      <div class="callout taught">
+        <div class="label">Seminar emphasis</div>
+        Part of extraverts' advantage is <strong>person-environment fit</strong>: most societies socially reward extraverted behaviour. Introverts often feel pressure to act more extraverted than they naturally are, and this perceived pressure itself is linked to lower happiness (Lawn et al., 2019). Extraverts also do better in job interviews and get more positive social feedback simply for acting sociably.
+      </div>
+      <div class="callout example">
+        <div class="label">Example — the introvert lockdown paradox</div>
+        During COVID-19 lockdowns, you might expect extraverts to suffer the most from reduced socialising. Kroencke et al. (2023) found the opposite pattern was more nuanced: extraverts' well-being advantage doesn't come from quantity of social contact alone, so they weren't hit disproportionately hard. In fact, having more social interaction during lockdown was more strongly tied to life satisfaction for <em>introverts</em> — contrary to intuition, introverts appear to need social connection just as much, if not managed differently. (Note: other researchers, e.g. Entringer &amp; Gosling, 2022, found extraverts suffered more loneliness — so the evidence isn't fully consistent.)
+      </div>
+      <p>Important distinction: introversion is <strong>not the same as social anxiety</strong>, nor social anhedonia (inability to enjoy social interaction). A well-adjusted introvert simply prefers more alone time and is comfortable with that preference, while still able to enjoy and function in social situations when needed.</p>
+
+      <h4 class="subsub">Neuroticism</h4>
+      <p>One of the most consistently detrimental traits for well-being: linked to more worry, greater reactivity to stress, poorer relationships (less trust of partners, more attention- and reassurance-seeking, more conflict — Esplin et al., 2025), higher risk of mental health difficulties, and poorer emotion regulation.</p>
+      <div class="callout taught">
+        <div class="label">Seminar emphasis</div>
+        Some standard well-being strategies work <em>less well</em> for highly neurotic individuals — e.g., cognitive reappraisal did not produce emotional benefits for them (Ng &amp; Diener, 2009), and the benefit of labelling one's negative emotions for physical health only held for low-neuroticism individuals (Oh &amp; Tong, 2020). Encouragingly, a very recent study (Haehner et al., 2026) found neuroticism <em>can</em> be reduced: <strong>emotional support strategies</strong> (prompting people to reach out for support) worked best; <strong>behavioural activation</strong> (engaging in valued activities) helped but had low compliance; <strong>cognitive restructuring</strong> (challenging unhelpful thoughts) was ineffective and even backfired.
+      </div>
+
+      <h4 class="subsub">Conscientiousness</h4>
+      <p>Generally linked to better health and success (less risky health behaviour, e.g. smoking; more career/educational success), which in turn supports well-being.</p>
+      <div class="callout taught">
+        <div class="label">Seminar emphasis — nuance</div>
+        Conscientiousness isn't purely beneficial: <strong>excessively high</strong> conscientiousness is linked to obsessive-compulsive tendencies (Carter et al., 2015), and highly conscientious individuals suffer <strong>larger</strong> drops in life satisfaction after becoming unemployed (Boyce et al., 2010) — likely because their identity/sense of achievement is more tied to productive output.
+      </div>
+
+      <h4 class="subsub">Openness &amp; Agreeableness</h4>
+      <p>Openness is a complex, multi-faceted trait with mixed effects: openness to <em>fantasy</em> is linked to higher depression, while openness to <em>action</em> is linked to lower depression (Carillo et al., 2001); openness to ideas/feelings can be especially beneficial in retirement, offering room for growth (Stephan, 2009). Agreeableness shows small positive benefits — agreeable people are less reactive to aggression cues and prefer/attend less to negative media.</p>
+
+      <div class="callout example">
+        <div class="label">Example</div>
+        Two retirees with identical financial circumstances: one high in openness to ideas takes up new hobbies and learning, finding retirement meaningful; the other, low in openness, struggles to find purpose once work structure disappears. This illustrates why openness's well-being effect can depend heavily on life stage and which facet of openness is being expressed.
+      </div>
+    </section>
+
+    <!-- ============ 2. CAN PERSONALITY CHANGE ============ -->
+    <section class="block" id="change">
+      <h2><span class="num">02</span>Can Personality Be Changed?</h2>
+      <p>Personality is fairly stable by definition, and about 40% of it is estimated to be genetically heritable (Sanchez-Roige et al., 2018) — so, referring back to the Sustainable Happiness Model from Study Unit 1, personality contributes partly to the "uncontrollable" side of well-being. But stable does not mean fixed: personality can and does shift, just usually slowly and modestly.</p>
+
+      <h3 class="sub">Change across the lifespan</h3>
+      <p>A meta-analysis (Graham et al., 2020) found: extraversion, conscientiousness, and openness tend to <strong>decline</strong> with age; neuroticism generally declines too, but can <strong>rise again in very old age</strong>; trends for agreeableness were unclear/inconsistent.</p>
+
+      <h3 class="sub">The TESSERA Framework (Wrzus &amp; Roberts, 2017)</h3>
+      <p>Explains <em>how</em> deliberate change happens: repeated exposure to specific situations, cognitions, behaviours, and affective experiences over time gradually becomes ingrained into personality, producing genuine trait change.</p>
+      <div class="callout example">
+        <div class="label">Example</div>
+        Someone who consistently, repeatedly forces themselves to behave in a meticulous, organised way at work — even if it doesn't come naturally at first — may, over months or years, actually become measurably more conscientious as a trait, not just as a behaviour they perform.
+      </div>
+      <div class="callout taught">
+        <div class="label">Seminar emphasis — supporting evidence</div>
+        <ul class="plain">
+          <li>Setting and completing concrete behavioural goals (e.g., deliberately acting more extraverted) produces real personality change (Hudson et al., 2018/2019).</li>
+          <li>Mothers who experienced more positive emotion and positive relationships showed healthier personality-change trajectories across the Big Five over six years (Borghuis et al., 2018).</li>
+          <li>Joshanloo (2024): an increasing sense of purpose in life tends to <em>precede</em> positive personality changes (more openness, conscientiousness, extraversion, agreeableness; less neuroticism) — suggesting purpose may be a lever for trait change, not just an outcome of it.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ 3. THE SELF ============ -->
+    <section class="block" id="self">
+      <h2><span class="num">03</span>The Self</h2>
+
+      <h3 class="sub">Self-esteem</h3>
+      <p>Self-esteem = the subjective evaluation you hold of yourself, rooted in self-worth, self-efficacy, and self-acceptance. It has both a <strong>trait</strong> component (your generally stable baseline) and a <strong>state</strong> component (temporary shifts — e.g., a boost after success, a dip after failure), and both a <strong>global</strong> level and <strong>domain-specific</strong> levels (e.g., academic self-esteem, appearance self-esteem).</p>
+      <p>High self-esteem is generally linked to better well-being across many outcomes, and appears to buffer against <em>mortality salience</em> (distress triggered by reminders of death).</p>
+
+      <div class="callout taught">
+        <div class="label">Seminar emphasis</div>
+        <strong>Implicit egotism / the endowment effect:</strong> most people are motivated to feel good about themselves and even about things connected to them. Loewenstein &amp; Adler (1995) found participants who imagined owning a mug valued it at ~$3.50, but once actually given the mug, valued it at ~$5 — simply owning something inflates its perceived value. (Note: an alternative explanation is that this reflects greed/self-interest rather than self-esteem per se — worth mentioning if asked to critique the study.)
+      </div>
+
+      <h4 class="subsub">The dark side of self-esteem</h4>
+      <p>Chasing self-esteem as a goal — rather than it being a natural byproduct — can be costly (Crocker &amp; Park, 2004): anxiety from pressure to succeed, loss of autonomy/intrinsic motivation, damaged relationships from excess competitiveness and self-focus, worse health/mental health especially after failure, and poorer self-regulation (e.g., risky coping behaviours). Fragile or unstable high self-esteem, when threatened, is also linked to increased <strong>aggression</strong> (Baumeister et al., 1996).</p>
+      <div class="callout example">
+        <div class="label">Example</div>
+        A student who ties their entire sense of worth to getting straight As may become highly anxious before exams, isolate themselves to study competitively rather than collaboratively, and spiral into distress after a single B grade — this is the "costly pursuit of self-esteem" in action, distinct from someone who simply has healthy, secure self-esteem.
+      </div>
+
+      <h3 class="sub">Social comparison &amp; relative deprivation</h3>
+      <p>Festinger's (1954) Social Comparison Theory: people compare themselves to similar, proximal, relevant others to gauge their own standing. Upward comparison can motivate self-improvement but can also lower self-esteem and satisfaction — e.g., upward comparisons on Instagram are linked to increased depressive symptoms (Aubry et al., 2024).</p>
+      <div class="callout taught">
+        <div class="label">Seminar emphasis</div>
+        Happier people are <strong>less susceptible</strong> to social comparison overall, and tend to favour <em>downward</em> comparison when they do compare. Boyce et al. (2010) found it's specifically having <em>more than others</em> — not just having more in absolute terms — that boosts happiness from income.
+      </div>
+      <p><strong>Relative deprivation</strong>: feeling worse off compared to others, regardless of your objective circumstances. Classic demonstration (Solnick &amp; Hemenway, 1998): given a choice between (A) $50,000 while others get $25,000, or (B) $100,000 while others get $250,000 — most people chose A, despite B offering more absolute money, because A offers a better relative position.</p>
+
+      <h3 class="sub">Authenticity (seminar-only)</h3>
+      <p>Being your "true" self — aligning your genuine thoughts and feelings with your outward behaviour. Meta-analytic evidence (Sutton, 2020) links authenticity to higher well-being and greater engagement in life.</p>
+    </section>
+
+    <!-- ============ 4. DO WE KNOW OURSELVES ============ -->
+    <section class="block" id="knowselves">
+      <h2><span class="num">04</span>Do We Know Ourselves? (Seminar-only content)</h2>
+      <p>This theme — largely added in the seminar rather than the reading — covers how poorly people predict their own future emotional reactions, and connects directly back to hedonic adaptation from the study unit.</p>
+
+      <h3 class="sub">Affective forecasting</h3>
+      <p>People are often inaccurate at predicting how they'll feel about future events — both underestimating their ability to rationalise bad outcomes (cognitive dissonance) and overestimating the joy a goal's achievement will bring.</p>
+      <div class="callout taught">
+        <div class="label">Seminar emphasis — supporting studies</div>
+        <ul class="plain">
+          <li><strong>Baumeister et al. (1993):</strong> comparing accounts of being rejected vs. rejecting someone else, "rejector" narratives contained fewer positive emotions, more negative emotions, and more counterfactual "wishing it didn't happen" thinking than "rejected" narratives — showing our intuitions about who suffers more in a breakup can be wrong.</li>
+          <li><strong>Eastwick et al. (2008):</strong> people in relationships predicted how distressed a breakup would make them; those who did break up <em>overestimated</em> their actual distress — and the more in love they claimed to be, the more inaccurate their forecast was.</li>
+        </ul>
+      </div>
+
+      <h3 class="sub">Hedonic adaptation, revisited</h3>
+      <p>Same core concept as Study Unit 1: emotional reactions to change eventually drift back toward a stable "set point" (get $50,000 → now you want $100,000; get promoted to manager → now you want to be CEO). Brickman et al.'s (1978) lottery-winner/accident-victim study is the classic evidence, but the seminar stressed being critical of it — small sample size, and other researchers argue adaptation may only be partial, not complete.</p>
+      <div class="callout example">
+        <div class="label">Example</div>
+        Someone who buys their dream car feels intense joy for the first few weeks, but within a few months the car simply becomes "their car" — the everyday commute doesn't feel meaningfully happier than before the purchase. This is hedonic adaptation, and it's also adaptive: the same process that dulls the joy of a windfall also helps people recover emotionally after a serious loss.
+      </div>
+    </section>
+
+    <!-- ============ 5. MONEY ============ -->
+    <section class="block" id="money">
+      <h2><span class="num">05</span>Money and Well-Being</h2>
+
+      <h3 class="sub">The Hedonic Treadmill</h3>
+      <p>Because of hedonic adaptation, chasing material gains is like running on a treadmill — effort without net positional gain. Brickman et al. (1978) proposed two mechanisms: <strong>contrast</strong> (a big positive event makes ordinary pleasures feel smaller by comparison, cancelling out the net gain) and <strong>habituation</strong> (we simply get used to new pleasures, reducing their emotional impact over time). Diener et al. (2006) note adaptation is often only <em>partial</em>, not complete, for both very large positive and negative events.</p>
+
+      <h3 class="sub">Does income have a ceiling? A genuine scientific back-and-forth</h3>
+      <p>This debate is a strong candidate for an exam essay/short-answer question, since it shows how science self-corrects — know the sequence of findings:</p>
+      <table class="compare">
+        <tr><th>Study</th><th>Finding</th></tr>
+        <tr><td>Kahneman &amp; Deaton (2010)</td><td>Income improves happiness only up to ~US$75,000; beyond that, no further gain.</td></tr>
+        <tr><td>Jebb et al. (2018)</td><td>A satiation point does seem to exist, but it varies substantially by country (higher in wealthier nations).</td></tr>
+        <tr><td>Killingsworth (2021)</td><td>Using large-scale experience-sampling data (33,000+ participants), found income kept predicting well-being even past US$80,000 — though larger and larger income gains were needed for equivalent happiness gains at higher levels. The effect was also stronger for people who placed high importance on money.</td></tr>
+        <tr><td>Killingsworth, Kahneman &amp; Mellers (2023) — adversarial collaboration</td><td>The two researchers reanalysed each other's data together. Resolution: the "flattening" effect Kahneman &amp; Deaton found was real, but only applied to the unhappiest ~20% of people — for most people, there is no clear income ceiling. The original 2010 finding was distorted by a <strong>ceiling effect</strong> in their happiness measurement tool, not a true psychological limit.</td></tr>
+      </table>
+      <div class="callout example">
+        <div class="label">Example</div>
+        Imagine two people each get a $20,000 raise: someone already deeply unhappy and struggling may see little emotional benefit (matching the "flattening" pattern for the least-happy 20%), while someone moderately content sees a real, measurable boost in day-to-day well-being — illustrating why averaging across everyone can mask very different patterns for different people.
+      </div>
+
+      <h3 class="sub">Does money causally cause happiness?</h3>
+      <p>Experimental (not just correlational) evidence supports a real causal effect: meta-analytic evidence on cash-transfer programmes shows recipients experience genuinely improved well-being (McGuire et al., 2022).</p>
+      <div class="callout taught">
+        <div class="label">Seminar emphasis</div>
+        Dwyer &amp; Dunn (2022) randomly gave some participants USD$10,000 — recipients showed significantly increased happiness relative to a control group, with especially large gains in lower-income countries, and the increase was still present six months later.
+      </div>
+
+      <h3 class="sub">Psychological aspects: subjective vs. objective money</h3>
+      <p>Subjective evaluations of one's own financial standing often predict life satisfaction, health, and other well-being outcomes <strong>more strongly</strong> than objective income/wealth. Higher materialism is linked to more risky behaviour, lower self-esteem, and lower life satisfaction; prioritising extrinsic goals (money, status) over intrinsic goals (growth, relationships, community) predicts poorer overall well-being (Bradshaw et al., 2023).</p>
+      <div class="callout taught">
+        <div class="label">Seminar emphasis — Oh (2025), a key nuance</div>
+        For <strong>current</strong> well-being, subjective financial satisfaction is a much stronger predictor than income (which was non-significant). But for <strong>future changes</strong> in well-being over time, it flips: objective income predicts healthier future well-being changes, while subjective financial satisfaction does not. In short — how you feel about your money matters most right now, but how much you actually have matters more for how your well-being trends over the years ahead.
+      </div>
+
+      <h3 class="sub">How you spend money matters (seminar-only)</h3>
+      <ul class="plain">
+        <li><strong>Experiential vs. material purchases:</strong> people report more happiness from experiences (e.g., a trip) than possessions (e.g., a TV) (Boven &amp; Gilovich, 2003) — experiences tend to be more social and satisfy eudaimonic needs more effectively. Hedonic adaptation also occurs more slowly for experiences than material goods (Nicolao et al., 2009) — though negative experiences hurt more than negative material purchases do.</li>
+        <li><strong>Person-spending fit:</strong> spending money in ways that match your personality produces more reliable happiness increases (Matz et al., 2016) — echoing the person-activity fit idea from Study Unit 1's PPIs.</li>
+      </ul>
+      <div class="callout example">
+        <div class="label">Example</div>
+        An extraverted person who spends a bonus on a group trip with friends will likely gain more well-being than spending the same amount on a solitary luxury gadget — not because trips are universally superior, but because the purchase fits their personality and social needs.
+      </div>
+
+      <h3 class="sub">The paradox of choice, satisficing vs. maximizing (seminar-only)</h3>
+      <p>Barry Schwartz's argument: having <em>more</em> choices can paradoxically make us less happy — more cognitive effort to choose well, and more regret from comparing your pick against all the rejected options. Evidence is mixed overall (Scheibehenne et al., 2010), and the effect seems strongest when choices are complex and the decision is difficult (Chernev et al., 2015).</p>
+      <table class="compare">
+        <tr><th>Satisficing</th><th>Maximizing</th></tr>
+        <tr><td>Choosing what's "good enough" and stopping the search</td><td>Searching exhaustively until the single best/perfect option is found</td></tr>
+      </table>
+      <p>Schwartz et al. (2002) found maximizers reported lower happiness, more depressive symptoms, more regret, and were more negatively affected by social comparison, across seven studies.</p>
+      <div class="callout example">
+        <div class="label">Example</div>
+        When buying a laptop, a satisficer sets a reasonable budget and feature checklist, picks the first model that meets it, and moves on. A maximizer keeps comparing dozens of models for weeks, and even after buying one, keeps wondering whether a different model would have been better — leaving them less satisfied despite (or because of) more research.
+      </div>
+
+      <h3 class="sub">The problem of miswanting (seminar synthesis)</h3>
+      <p>A useful integrative idea tying several money/self topics together: people are often bad at predicting what will truly make them happy ("miswanting"). We want to feel good about ourselves, yet chasing self-esteem goals can backfire; we think money will fix things, yet chasing money for its own sake is linked to lower well-being; we assume more choice equals more happiness, yet it can paradoxically reduce it; and we believe we know ourselves well, yet affective forecasting research shows we're often wrong about our own future feelings.</p>
+    </section>
+
+    <!-- ============ 6. OPTIMISM & PESSIMISM ============ -->
+    <section class="block" id="optimism">
+      <h2><span class="num">06</span>Optimism and Pessimism</h2>
+      <div class="callout readingonly">
+        <div class="label">Reading only — not yet covered in seminar</div>
+        This chapter is in the Study Unit 2 reading, but the Seminar 2 slides explicitly defer "Optimism, Pessimism, &amp; Cross-cultural Subjective Well-Being" to Seminar 3. Treat this section as reading-based until the next seminar deck is available to cross-check emphasis.
+      </div>
+
+      <p>Optimists expect more positive outcomes in the future; pessimists expect more negative ones. Optimists generally enjoy better health and well-being (Peterson et al., 1988; Rasmussen et al., 2009; Scheier et al., 2001) — not simply because optimism feels pleasant, but because optimists behave differently: expecting good outcomes, they're more willing to actively problem-solve and pursue goals, whereas pessimists are more prone to avoidance or giving up (a kind of self-handicapping).</p>
+
+      <h3 class="sub">Learned Optimism (Seligman, 1998)</h3>
+      <p>Optimism is partly trait-like but also a learnable, malleable explanatory style, built on three dimensions used to explain events:</p>
+      <ul class="plain">
+        <li><strong>Permanent vs. temporary</strong> — is the cause long-lasting or short-term?</li>
+        <li><strong>Pervasive vs. specific</strong> — does it apply broadly, or just to this one situation?</li>
+        <li><strong>Personal vs. external</strong> — is it about me, or about something outside me?</li>
+      </ul>
+      <p>Learned optimism means explaining <strong>positive</strong> events as permanent, pervasive, and personal ("I won because I'm skilled, and that skill will help me in future too") — and explaining <strong>negative</strong> events as temporary, specific, and external ("I lost because of bad luck this one time, not because of who I am").</p>
+      <div class="callout example">
+        <div class="label">Example</div>
+        Two students each fail one exam. Student A (pessimistic style) thinks "I always fail everything, I'm just not smart" (permanent, pervasive, personal — but applied to a negative event, which is the maladaptive direction). Student B (learned-optimism style) thinks "this particular topic was hard and I didn't prepare enough this time" (temporary, specific, external) — and is more likely to try again with effort restored.
+      </div>
+
+      <h3 class="sub">Is optimism always good, and pessimism always bad?</h3>
+      <h4 class="subsub">Defensive pessimism</h4>
+      <p>A distinct sub-type that isn't simply harmful, and can even help: defensive pessimists expect negative outcomes but use this as an <strong>adaptive coping style</strong> for managing anxiety. Crucially, unlike ordinary pessimists, they remain just as hardworking and continue putting in effort (Elliot &amp; Church, 2003) — forcing them into an optimistic explanatory style can actually worsen their performance (Norem, 2008; Norem &amp; Cantor, 1986).</p>
+
+      <h4 class="subsub">Unrealistic optimism / disappointed optimism</h4>
+      <p>Most people hold mild positive illusions (e.g., underestimating their own risk of bad outcomes; Shepperd et al., 2015) — but excessive optimism can backfire when reality doesn't match expectations. A gap between hoped-for and actual social acceptance predicted self-esteem declines in children/adolescents (Poorthuis et al., 2014). This is the idea of <strong>"false hope"</strong>: bigger hopes can mean bigger disappointment. Realists were found to have better well-being than either unrealistic optimists <em>or</em> unrealistic pessimists (de Meza &amp; Dawson, 2021) — suggesting the healthiest position is optimism that is <strong>moderate and realistic</strong>, not maximal.</p>
+      <div class="callout example">
+        <div class="label">Example</div>
+        A job applicant who is unrealistically certain they'll get every role they apply to may not prepare thoroughly for interviews (since failure feels implausible), and experiences a harsher blow when rejected. A moderately optimistic applicant who still prepares seriously, while accepting rejection is a real possibility, tends to fare better across repeated attempts.
+      </div>
+    </section>
+
+    <!-- ============ SELF TEST ============ -->
+    <section class="block" id="selftest">
+      <h2><span class="num">07</span>Self-Test — Short Answer</h2>
+      <p style="color:var(--ink-soft);font-size:0.92rem;">Tap a question to reveal a model short answer. Try answering in your head (or on paper) before revealing.</p>
+
+      <div id="quiz"></div>
+    </section>
+
+    <footer>
+      Built for exam revision from Study Unit 2 (course reading) and Seminar 2 slides. The Optimism &amp; Pessimism section is reading-only pending Seminar 3 — revisit it once that deck is available. Always verify specific citation details against the original materials before an open-book assessment.
+    </footer>
+  </main>
+</div>
+
+<script>
+const quizData = [
+  {
+    topic:"Personality & well-being",
+    q:"Which two Big Five traits most strongly predict well-being, and why those two specifically?",
+    a:"Extraversion and neuroticism. They are the traits most directly tied to positive and negative emotion respectively — extraversion to trait positive affect, neuroticism to trait negative affect — which is why meta-analytic effect sizes for both (Steel et al., 2008) exceed r = .50, unusually large for psychology."
+  },
+  {
+    topic:"Personality & well-being",
+    q:"Why might a highly conscientious person struggle more than others after losing their job?",
+    a:"Conscientious individuals tend to derive a large part of their sense of achievement and identity from productive, disciplined effort. Boyce et al. (2010) found highly conscientious individuals suffer larger drops in life satisfaction following unemployment, likely because that identity/achievement source is suddenly removed."
+  },
+  {
+    topic:"Personality & well-being",
+    q:"Explain the unexpected finding about introverts and social interaction during COVID-19 lockdowns.",
+    a:"Kroencke et al. (2023) found that having more social interaction during lockdowns was more strongly linked to life satisfaction for introverts than extraverts — suggesting introverts need social connection just as much (or more, in this context), contrary to common assumptions. Extraverts' well-being advantage doesn't rest purely on quantity of social contact, so they weren't disproportionately harmed by reduced socialising."
+  },
+  {
+    topic:"Personality change",
+    q:"According to the TESSERA framework, how does someone actually change a personality trait like conscientiousness?",
+    a:"Through repeated exposure to and engagement in situations, cognitions, behaviours, and affective experiences consistent with the target trait. Over time, this repetition becomes ingrained into the person's stable personality, producing genuine (if usually modest) trait change — e.g., consistently behaving in a meticulous, organised way can gradually make someone more conscientious."
+  },
+  {
+    topic:"Personality change",
+    q:"Which specific intervention was found most effective at reducing neuroticism, and which one backfired?",
+    a:"Haehner et al. (2026) found emotional support strategies (prompting people to reach out to others for support) were most effective overall. Cognitive restructuring (identifying and modifying unhelpful thoughts) was not effective and even backfired; behavioural activation helped but had low participant compliance."
+  },
+  {
+    topic:"The self",
+    q:"Distinguish between the trait and state components of self-esteem.",
+    a:"Trait self-esteem is a person's generally stable, dispositional level of self-regard over time. State self-esteem refers to temporary fluctuations driven by specific events — e.g., a short-term boost after a success, or a dip after a failure — layered on top of the more stable trait baseline."
+  },
+  {
+    topic:"The self",
+    q:"What did Crocker & Park (2004) argue about pursuing self-esteem as a goal?",
+    a:"That chasing self-esteem itself (rather than it arising naturally) carries real costs: increased anxiety from pressure to succeed, loss of autonomy and intrinsic motivation, damaged relationships from excessive competitiveness, poorer health/mental health especially after failed pursuits, and poorer self-regulation such as risky coping behaviours."
+  },
+  {
+    topic:"The self",
+    q:"What is relative deprivation, and how did Solnick & Hemenway (1998) demonstrate it?",
+    a:"Relative deprivation is the psychological experience of feeling worse off than others, independent of one's objective circumstances. Participants preferred earning $50,000 while others earned $25,000 over earning $100,000 while others earned $250,000 — choosing lower absolute income for a better relative position, showing that comparative standing can matter more than raw wealth."
+  },
+  {
+    topic:"Know ourselves",
+    q:"What is affective forecasting, and give one example of how people get it wrong.",
+    a:"Affective forecasting is people's prediction of how they will feel in reaction to future events — and people are often inaccurate at it. Example: Eastwick et al. (2008) found people in relationships overestimated how distressed they would feel if the relationship ended; the more in love they claimed to be, the more inaccurate their forecast turned out to be."
+  },
+  {
+    topic:"Money",
+    q:"Summarise how the Kahneman & Deaton (2010) vs. Killingsworth (2021) income-happiness debate was eventually resolved.",
+    a:"Kahneman & Deaton found income stopped predicting happiness past ~$75,000; Killingsworth found it kept predicting happiness even past $80,000. Their 2023 adversarial collaboration reanalysed both datasets together and found the 'flattening' effect Kahneman & Deaton observed was real, but applied only to the unhappiest ~20% of people — for most people there is no clear ceiling. The original 2010 result was distorted by a ceiling effect in their happiness measurement tool."
+  },
+  {
+    topic:"Money",
+    q:"Describe one piece of experimental (causal) evidence that money can increase happiness.",
+    a:"Dwyer & Dunn (2022) randomly assigned participants to receive USD$10,000; recipients showed significantly increased happiness relative to a control group, with especially large gains in lower-income countries, and the increase was still present six months later. Meta-analytic evidence on cash-transfer programmes more broadly supports a real causal benefit (McGuire et al., 2022)."
+  },
+  {
+    topic:"Money",
+    q:"According to Oh (2025), how does the relationship between money and well-being differ for current well-being vs. future changes in well-being?",
+    a:"For current well-being, subjective financial satisfaction is a much stronger predictor than actual income, which was non-significant. For future changes in well-being over time, the pattern reverses: objective income predicts healthier future well-being trajectories, while subjective financial satisfaction does not."
+  },
+  {
+    topic:"Money",
+    q:"Why do experiential purchases tend to produce more lasting happiness than material purchases?",
+    a:"Experiences tend to be more social and satisfy eudaimonic needs (meaning, connection) more effectively than possessions (Boven & Gilovich, 2003). Hedonic adaptation also occurs more slowly for experiences than for material goods (Nicolao et al., 2009), so the positive effect on happiness fades less quickly — though negative experiences hurt more than negative material purchases do."
+  },
+  {
+    topic:"Money",
+    q:"Distinguish satisficing from maximizing, and state which is linked to lower happiness.",
+    a:"Satisficing means choosing an option that is 'good enough' and stopping the search; maximizing means exhaustively searching until the single best/perfect option is found. Maximizing is linked to lower happiness — Schwartz et al. (2002) found maximizers reported lower happiness, more depressive symptoms, more regret, and greater negative sensitivity to social comparison across seven studies."
+  },
+  {
+    topic:"Optimism & pessimism",
+    q:"According to Seligman's learned optimism, how should a person explain a positive event to build optimism?",
+    a:"By attributing it as permanent (long-lasting, not a one-off), pervasive (reflective of things generally, not just this one situation), and personal (due to something about themselves, not external luck) — e.g., attributing a win to one's own skill, which will keep helping in future situations too."
+  },
+  {
+    topic:"Optimism & pessimism",
+    q:"What makes defensive pessimism different from ordinary harmful pessimism?",
+    a:"Defensive pessimists still expect negative outcomes, but they use this expectation as an adaptive coping strategy to manage anxiety, and — critically — they remain just as hardworking and put in real effort toward their goals (Elliot & Church, 2003), unlike ordinary pessimists who tend toward avoidance or giving up. Forcing a defensive pessimist into an optimistic style can actually worsen their performance."
+  },
+  {
+    topic:"Optimism & pessimism",
+    q:"What did de Meza & Dawson (2021) find when comparing realists, unrealistic optimists, and unrealistic pessimists?",
+    a:"Realists generally had better well-being than both unrealistic optimists and unrealistic pessimists — suggesting that for optimism to genuinely benefit well-being, it should be moderate and grounded in reality, rather than maximally positive, since a large gap between hopes and actual outcomes ('false hope') can lead to greater disappointment."
+  }
+];
+
+const quizContainer = document.getElementById('quiz');
+quizData.forEach((item, i) => {
+  const div = document.createElement('div');
+  div.className = 'quiz-item';
+  div.innerHTML = `
+    <div class="quiz-q" data-idx="${i}">
+      <div><span class="qnum">${i+1}.</span>${item.q}</div>
+      <svg class="chevron" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="quiz-a"><div class="quiz-a-inner"><div class="quiz-topic">${item.topic}</div><strong>Model answer:</strong> ${item.a}</div></div>
+  `;
+  quizContainer.appendChild(div);
+});
+
+quizContainer.addEventListener('click', (e) => {
+  const q = e.target.closest('.quiz-q');
+  if(!q) return;
+  q.parentElement.classList.toggle('open');
+});
+
+// Scrollspy for TOC
+const sections = document.querySelectorAll('section.block');
+const tocLinks = document.querySelectorAll('.toc a.link');
+const spy = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      const id = entry.target.getAttribute('id');
+      tocLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    }
+  });
+}, { rootMargin: '-15% 0px -70% 0px' });
+sections.forEach(s => spy.observe(s));
+</script>
+
+</body>
+</html>
