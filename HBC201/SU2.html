@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HBC201 — Study Unit 2 Exam Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f7f7f4;
+    --ink:#1d2321;
+    --ink-soft:#4a534f;
+    --rule:#dcded7;
+    --ch1:#146356;   /* Ch1 teal — orientations */
+    --ch1-tint:#e6efec;
+    --ch2:#3d4a7a;   /* Ch2 indigo — design */
+    --ch2-tint:#e8eaf2;
+    --ch3:#a15c1f;   /* Ch3 amber/rust — measurement */
+    --ch3-tint:#f3e9dc;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    font-size:17px;
+    line-height:1.65;
+  }
+  h1,h2,h3,.serif{font-family:'Lora',Georgia,serif;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 120px;}
+
+  header.masthead{
+    max-width:760px;margin:0 auto;padding:56px 24px 32px;
+    border-bottom:1px solid var(--rule);
+  }
+  .kicker{font-family:'Lora',serif;font-style:italic;color:var(--ink-soft);font-size:15px;margin:0 0 6px;}
+  header.masthead h1{font-size:2.1rem;line-height:1.2;margin:0 0 10px;font-weight:700;}
+  .subhead{color:var(--ink-soft);font-size:16px;max-width:60ch;margin:0;}
+  .source-note{margin-top:22px;font-size:14px;color:var(--ink-soft);display:flex;gap:18px;flex-wrap:wrap;}
+  .source-note span{display:inline-flex;align-items:center;gap:8px;}
+  .dot{width:9px;height:9px;border-radius:50%;display:inline-block;}
+
+  nav.jump{
+    position:sticky;top:0;z-index:10;
+    background:rgba(247,247,244,0.94);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--rule);
+  }
+  nav.jump .inner{
+    max-width:760px;margin:0 auto;padding:12px 24px;
+    display:flex;gap:20px;font-size:14px;overflow-x:auto;
+  }
+  nav.jump a{color:var(--ink-soft);text-decoration:none;white-space:nowrap;font-weight:500;}
+  nav.jump a:hover, nav.jump a:focus-visible{color:var(--ink);}
+
+  .chapter{padding-top:64px;}
+  .chapter-head{display:flex;align-items:baseline;gap:14px;margin-bottom:6px;}
+  .chapter-num{
+    font-family:'Lora',serif;font-weight:600;font-size:1rem;
+    color:#fff;background:var(--accent);
+    width:34px;height:34px;border-radius:50%;
+    display:inline-flex;align-items:center;justify-content:center;
+    flex:none;
+  }
+  .chapter h2{font-size:1.55rem;margin:0;font-weight:700;}
+  .chapter-tag{color:var(--ink-soft);font-size:14.5px;margin:2px 0 34px 48px;}
+
+  #ch1{--accent:var(--ch1);}
+  #ch2{--accent:var(--ch2);}
+  #ch3{--accent:var(--ch3);}
+
+  section.topic{margin-bottom:38px;}
+  section.topic h3{
+    font-size:1.12rem;margin:0 0 4px;font-weight:600;
+    color:var(--accent);
+  }
+  section.topic .lead{margin:0 0 10px;}
+  section.topic ul{margin:8px 0 12px;padding-left:22px;}
+  section.topic li{margin-bottom:5px;}
+
+  .example{
+    background:var(--tint);
+    border-radius:3px;
+    padding:14px 18px;
+    margin-top:10px;
+    font-size:15.5px;
+  }
+  #ch1 .example{--tint:var(--ch1-tint);}
+  #ch2 .example{--tint:var(--ch2-tint);}
+  #ch3 .example{--tint:var(--ch3-tint);}
+  .example .eyebrow{
+    font-family:'Lora',serif;font-style:italic;
+    color:var(--accent);font-size:14px;margin-bottom:4px;display:block;
+  }
+
+  table.compare{width:100%;border-collapse:collapse;margin:14px 0;font-size:15.5px;}
+  table.compare th,table.compare td{
+    text-align:left;padding:9px 12px;border-bottom:1px solid var(--rule);
+    vertical-align:top;
+  }
+  table.compare th{font-family:'Lora',serif;font-weight:600;color:var(--accent);}
+
+  .flow{
+    font-family:'Lora',serif;
+    text-align:center;
+    padding:14px 10px;
+    font-size:15px;
+    color:var(--ink-soft);
+    background:var(--tint);
+    border-radius:3px;
+    margin:14px 0;
+  }
+  #ch1 .flow{--tint:var(--ch1-tint);}
+  #ch2 .flow{--tint:var(--ch2-tint);}
+  #ch3 .flow{--tint:var(--ch3-tint);}
+
+  .case{
+    border-top:1px solid var(--rule);
+    padding-top:14px;margin-top:14px;
+  }
+  .case .case-title{font-weight:600;display:block;margin-bottom:3px;}
+
+  .practice{
+    margin-top:44px;
+    padding:26px 24px 8px;
+    background:#fff;
+    border:1px solid var(--rule);
+    border-radius:4px;
+  }
+  .practice h3{
+    font-size:1.05rem;margin:0 0 4px;
+    color:var(--accent);
+  }
+  .practice > p{margin:0 0 18px;color:var(--ink-soft);font-size:14.5px;}
+  details{
+    border-bottom:1px solid var(--rule);
+    padding:14px 0;
+  }
+  details:last-of-type{border-bottom:none;}
+  summary{
+    cursor:pointer;
+    font-family:'Lora',serif;
+    font-weight:500;
+    font-size:16px;
+    list-style:none;
+    display:flex;
+    gap:10px;
+    align-items:baseline;
+  }
+  summary::-webkit-details-marker{display:none;}
+  summary::before{
+    content:"+";
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    color:var(--accent);
+    flex:none;
+    width:16px;
+  }
+  details[open] summary::before{content:"–";}
+  .answer{
+    margin:10px 0 4px 26px;
+    font-size:15px;
+    color:var(--ink-soft);
+  }
+  .answer strong{color:var(--ink);font-weight:600;}
+
+  .divider{
+    border:none;border-top:1px solid var(--rule);
+    margin:64px 0 0;
+  }
+  footer{
+    max-width:760px;margin:70px auto 0;padding:24px;
+    color:var(--ink-soft);font-size:13.5px;
+    border-top:1px solid var(--rule);
+  }
+  @media (max-width:600px){
+    body{font-size:16px;}
+    header.masthead{padding:40px 20px 28px;}
+    .chapter-tag{margin-left:0;}
+    .chapter-head{flex-wrap:wrap;}
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <p class="kicker">HBC201 · Research Methods for the Social and Behavioural Sciences</p>
+  <h1>Study Unit 2 — Exam Prep Guide</h1>
+  <p class="subhead">Research Orientation, Design, and Measurement: how a study is built, what shapes its design, and how researchers know their measures are any good — organised the way it was taught in Seminar 2, with the Study Unit reading filled in underneath.</p>
+  <div class="source-note">
+    <span><span class="dot" style="background:var(--ch1)"></span>Ch.1 Research Orientations</span>
+    <span><span class="dot" style="background:var(--ch2)"></span>Ch.2 Research Design</span>
+    <span><span class="dot" style="background:var(--ch3)"></span>Ch.3 Measurement</span>
+  </div>
+</header>
+
+<nav class="jump">
+  <div class="inner">
+    <a href="#ch1">1 · Numbers or words</a>
+    <a href="#ch2">2 · Design</a>
+    <a href="#ch3">3 · Measurement</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ===================== CHAPTER 1 ===================== -->
+<div class="chapter" id="ch1">
+  <div class="chapter-head">
+    <span class="chapter-num">1</span>
+    <h2>Research Orientations: Numbers or Words</h2>
+  </div>
+  <p class="chapter-tag">The two broad approaches to doing research, and how they differ in almost every practical respect.</p>
+
+  <section class="topic">
+    <h3>1.1 The quantitative study, stage by stage</h3>
+    <p class="lead">Quantitative studies typically follow the deductive approach from Study Unit 1: theory first, then a hypothesis, then data to test it. Kraska (2012) lays out six stages:</p>
+    <div class="flow">Research Question → Operational Definition → Formulation of Hypothesis → Data Collection → Data Analysis → Conclusion</div>
+    <p class="lead"><strong>Operational definition</strong> has two steps (Mueller, 2011):</p>
+    <ul>
+      <li><strong>Conceptualisation</strong> — defining the construct in words (e.g. "mathematics ability" = a specific set of maths concepts and skills).</li>
+      <li><strong>Operationalisation</strong> — specifying exactly how it will be measured (e.g. a child's score on the TEMA-3 test).</li>
+    </ul>
+    <p class="lead">From here the study deals in <strong>variables</strong> — characteristics that vary in value across people (Agresti & Finlay, 1997):</p>
+    <ul>
+      <li><strong>Dependent variable (DV)</strong> — the outcome of interest (e.g. a child's TEMA-3 score).</li>
+      <li><strong>Independent variable (IV)</strong> — the variable believed to influence the DV (e.g. whether the child is in the maths programme or not).</li>
+      <li><strong>Control variable</strong> — a third variable whose influence you want to rule out (e.g. the child's gender).</li>
+    </ul>
+    <div class="example">
+      <span class="eyebrow">Relatable example</span>
+      You want to know if a new productivity app (IV) improves how many tasks employees complete per week (DV). Since more experienced staff naturally finish more tasks regardless of any app, you might control for years of work experience (control variable) so it doesn't muddy the comparison.
+    </div>
+  </section>
+
+  <section class="topic">
+    <h3>1.2 Formulating a hypothesis</h3>
+    <table class="compare">
+      <tr><th>Form</th><th>Example</th></tr>
+      <tr><td><strong>Null hypothesis</strong></td><td>There is no difference in average maths score between children in the programme and those not in it.</td></tr>
+      <tr><td><strong>Nondirectional alternative</strong></td><td>There is a difference in average maths score between the two groups (direction unspecified).</td></tr>
+      <tr><td><strong>Directional alternative</strong></td><td>Children in the programme score higher on average than those not in it.</td></tr>
+    </table>
+    <p class="lead">In practice, researchers typically state the hypothesis in the <strong>null</strong> form, then test whether the data lets them reject it.</p>
+  </section>
+
+  <section class="topic">
+    <h3>1.3 Data analysis and drawing a conclusion</h3>
+    <ul>
+      <li><strong>Descriptive statistics</strong> summarise sample data (e.g. an average score). Note: a <em>statistic</em> describes a sample; a <em>parameter</em> describes a population.</li>
+      <li><strong>Statistical inference — estimation:</strong> a <em>point estimate</em> is a single best guess at the population value; an <em>interval estimate</em> is a range the true value likely falls within.</li>
+      <li><strong>Statistical inference — hypothesis testing:</strong> produces a <em>test statistic</em> and a <strong>P-value</strong> — the probability of seeing this data if the null hypothesis were actually true. A small P-value means the observed data would be unusual under the null.</li>
+    </ul>
+    <p class="lead">The researcher compares the P-value to a pre-set <strong>α-level</strong> (usually .05): if P ≤ α, reject the null hypothesis (the result is "statistically significant"); if P &gt; α, there isn't strong enough evidence to reject it.</p>
+    <table class="compare">
+      <tr><th></th><th>Reject null hypothesis</th><th>Do not reject null hypothesis</th></tr>
+      <tr><td><strong>Null is actually true</strong></td><td>Type I error</td><td>Correct decision</td></tr>
+      <tr><td><strong>Null is actually false</strong></td><td>Correct decision</td><td>Type II error</td></tr>
+    </table>
+    <div class="example">
+      <span class="eyebrow">Relatable example</span>
+      A <strong>Type I error</strong> is like a smoke alarm going off when there's no fire — you conclude an effect exists when it doesn't. A <strong>Type II error</strong> is the alarm staying silent while the kitchen actually burns — a real effect exists, but your test missed it.
+    </div>
+  </section>
+
+  <section class="topic">
+    <h3>1.4 Qualitative research: a different set of defaults</h3>
+    <ul>
+      <li>Starts with a <strong>broad research question</strong> that may evolve — no fixed hypotheses upfront.</li>
+      <li><strong>Flexible design</strong>, typically inductive.</li>
+      <li>The <strong>researcher is the instrument</strong> — observations and interpretations are filtered through their values and identity, so they're expected to reflect on and disclose their role.</li>
+      <li>Conducted in <strong>real-world settings</strong>, not laboratories.</li>
+      <li><strong>Purposively selected</strong>, smaller samples — not random, large ones.</li>
+      <li>Data is usually <strong>non-numeric</strong> (interviews, observations, documents).</li>
+      <li>Findings are written in <strong>first person</strong>, with rich contextual detail — flexible and value-laden does <em>not</em> mean lower quality; rigour is judged by different criteria (covered in Study Unit 3).</li>
+    </ul>
+    <table class="compare">
+      <tr><th>Quantitative</th><th>Qualitative</th></tr>
+      <tr><td>Objectivism, positivism</td><td>Constructivism, interpretivism</td></tr>
+      <tr><td>Deductive approach</td><td>Inductive approach</td></tr>
+      <tr><td>Objectivity and neutrality</td><td>Value-laden</td></tr>
+      <tr><td>Numeric data</td><td>Non-numeric data</td></tr>
+      <tr><td>Larger sample size</td><td>Smaller sample size</td></tr>
+      <tr><td>Generalise to larger populations</td><td>Understand a specific issue in context</td></tr>
+    </table>
+    <div class="case">
+      <span class="case-title">Case: Identity and mixed race (Rocha, 2018)</span>
+      A narrative-enquiry study on mixed-race identity in Singapore. No hypothesis testing — the researcher's role, method of data collection (interviews/narratives), analysis, and reporting all follow the qualitative pattern above rather than the quantitative one.
+    </div>
+  </section>
+
+  <div class="practice">
+    <h3>Test yourself — Chapter 1</h3>
+    <p>Cover the answer, try to say it in your own words first.</p>
+
+    <details>
+      <summary>What's the difference between conceptualisation and operationalisation?</summary>
+      <div class="answer"><strong>Answer:</strong> Conceptualisation is clearly defining what a construct means in words (e.g. "mathematics ability" = a set of specific skills). Operationalisation is specifying exactly how that construct will be measured (e.g. a score on the TEMA-3 test).</div>
+    </details>
+
+    <details>
+      <summary>In a study comparing test scores between two teaching methods, while accounting for students' prior GPA, identify the DV, IV, and control variable.</summary>
+      <div class="answer"><strong>Answer:</strong> DV = test score; IV = teaching method (group membership); control variable = prior GPA.</div>
+    </details>
+
+    <details>
+      <summary>Why do researchers usually state a hypothesis in the null form rather than the alternative form?</summary>
+      <div class="answer"><strong>Answer:</strong> The null hypothesis (no difference/no association) provides a fixed baseline that statistical tests are built to evaluate directly — the researcher then decides whether the evidence is strong enough to reject it in favour of an alternative.</div>
+    </details>
+
+    <details>
+      <summary>What does a small P-value tell you, and how is it used to reach a conclusion?</summary>
+      <div class="answer"><strong>Answer:</strong> A small P-value means the observed data would be unusual if the null hypothesis were actually true. If it's smaller than or equal to the α-level (commonly .05), the researcher rejects the null hypothesis; if larger, the evidence isn't strong enough to reject it.</div>
+    </details>
+
+    <details>
+      <summary>Distinguish a Type I error from a Type II error.</summary>
+      <div class="answer"><strong>Answer:</strong> A Type I error is rejecting a null hypothesis that is actually true (a false alarm). A Type II error is failing to reject a null hypothesis that is actually false (missing a real effect).</div>
+    </details>
+
+    <details>
+      <summary>List three features that distinguish qualitative research from quantitative research.</summary>
+      <div class="answer"><strong>Answer:</strong> Any three of: broad/evolving research question vs. fixed hypotheses; inductive vs. deductive approach; researcher as instrument (value-laden) vs. objective and neutral; real-world setting vs. controlled/structured setting; small purposive sample vs. large random sample; non-numeric vs. numeric data; understanding a specific context vs. generalising to a population.</div>
+    </details>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ===================== CHAPTER 2 ===================== -->
+<div class="chapter" id="ch2">
+  <div class="chapter-head">
+    <span class="chapter-num">2</span>
+    <h2>Research Design</h2>
+  </div>
+  <p class="chapter-tag">The methodological choices a researcher makes before collecting a single data point.</p>
+
+  <section class="topic">
+    <h3>2.1 Quantitative, qualitative, or triangulation?</h3>
+    <p class="lead">The choice often follows from a researcher's philosophical position (interpretivists tend toward qualitative methods) and the purpose of the study (wanting to generalise to a population points toward quantitative methods). <strong>Triangulation</strong> means using more than one method or data source in the same study; when it combines quantitative and qualitative methods, it's usually called <strong>mixed methods</strong> (Hastings, 2012).</p>
+    <table class="compare">
+      <tr><th>Type of triangulation</th><th>What it means</th></tr>
+      <tr><td>Data</td><td>Multiple sources of data (e.g. interviewing teachers, parents, and students).</td></tr>
+      <tr><td>Investigator</td><td>Multiple investigators/raters, to reduce individual bias.</td></tr>
+      <tr><td>Theory</td><td>Multiple theoretical perspectives used to interpret the same findings.</td></tr>
+      <tr><td>Methodological</td><td>Multiple methods — <em>within-methods</em> (e.g. two surveys) or the stronger <em>between-methods</em> (e.g. a survey plus interviews).</td></tr>
+    </table>
+    <p class="lead">Triangulation isn't a free win, though: it doesn't guarantee data quality, different sources may not actually suit the same research question (a private diary entry and a face-to-face interview can yield very different accounts of the same event), and it costs more time and resources.</p>
+    <div class="example">
+      <span class="eyebrow">Relatable example</span>
+      Evaluating a new anti-bullying programme by (1) comparing incident reports before and after (data), (2) interviewing students and teachers (data + methodological triangulation), and (3) having two independent observers code playground behaviour (investigator triangulation) — each source can confirm, or complicate, what the others show.
+    </div>
+  </section>
+
+  <section class="topic">
+    <h3>2.2 How many time periods: cross-sectional vs. longitudinal</h3>
+    <table class="compare">
+      <tr><th>Cross-sectional</th><th>Longitudinal</th></tr>
+      <tr><td>Data collected at <strong>one</strong> point in time.</td><td>Data collected over <strong>multiple</strong> time periods, allowing study of change.</td></tr>
+    </table>
+    <p class="lead">Four types of longitudinal design (Menard, 2011):</p>
+    <ul>
+      <li><strong>Total population design</strong> — data on the entire population over time (e.g. the FBI's annual Uniform Crime Report).</li>
+      <li><strong>Repeated cross-sectional design</strong> — different samples surveyed at different times, tracking trends (e.g. the General Social Survey).</li>
+      <li><strong>Revolving panel design</strong> — the sample is followed for a while, then partially replaced on a rolling basis (e.g. the National Crime Victimization Survey).</li>
+      <li><strong>Longitudinal panel design</strong> — the <em>same</em> individuals are tracked over an extended period, useful for studying individual-level developmental change (e.g. the National Youth Survey).</li>
+    </ul>
+    <p class="lead"><strong>Trade-off:</strong> longitudinal designs can describe change and support causal claims, but cost more, suffer measurement drift (a measure that fit at Time 1 may not fit at Time 5), and lose participants to attrition — raising doubts about whether the shrinking sample still represents the population.</p>
+  </section>
+
+  <section class="topic">
+    <h3>2.3 Threats to internal and external validity</h3>
+    <table class="compare">
+      <tr><th>Internal validity</th><th>External validity</th></tr>
+      <tr><td>Confidence that the IV — and not something else — actually caused the change in the DV.</td><td>Confidence that findings generalise beyond the sample to the wider population.</td></tr>
+    </table>
+    <p class="lead"><strong>Common threats to internal validity</strong> (Brewer, 2011):</p>
+    <ul>
+      <li><strong>Self-selection</strong> — participants who choose to join a programme may already differ in motivation from those who don't.</li>
+      <li><strong>History</strong> — an outside event between measurements, not the IV, explains the change.</li>
+      <li><strong>Maturation</strong> — participants naturally change over time (e.g. growing older) regardless of the IV.</li>
+      <li><strong>Testing</strong> — taking the same test twice changes scores the second time, independent of the IV.</li>
+      <li><strong>Measurement issues</strong> — inconsistent procedures or unreliable instruments distort results.</li>
+      <li><strong>Experimental mortality</strong> — uneven drop-out across groups skews comparisons.</li>
+    </ul>
+    <p class="lead"><strong>Common threats to external validity</strong> (Ondercin, 2011):</p>
+    <ul>
+      <li><strong>Non-representative sample</strong> — the sample doesn't reflect the population you want to generalise to.</li>
+      <li><strong>Artificial research setting</strong> — lab behaviour may not match real-world behaviour.</li>
+      <li><strong>Testing effects</strong> — being observed or tested changes how people behave.</li>
+    </ul>
+    <div class="example">
+      <span class="eyebrow">Relatable example</span>
+      A researcher studies how campaign ads sway opinion using only university students in their early 20s. Even with a well-controlled lab setup (good internal validity), the finding may not generalise to voters of all ages (poor external validity) — a classic internal-vs-external validity trade-off.
+    </div>
+  </section>
+
+  <div class="practice">
+    <h3>Test yourself — Chapter 2</h3>
+    <p>Cover the answer, try to say it in your own words first.</p>
+
+    <details>
+      <summary>What is triangulation, and name its four types.</summary>
+      <div class="answer"><strong>Answer:</strong> Using more than one method or data source in a study. The four types are data triangulation, investigator triangulation, theory triangulation, and methodological triangulation (within-methods or the stronger between-methods).</div>
+    </details>
+
+    <details>
+      <summary>A study samples a completely new group of respondents every five years to track changing public attitudes. Which type of longitudinal design is this?</summary>
+      <div class="answer"><strong>Answer:</strong> Repeated cross-sectional design.</div>
+    </details>
+
+    <details>
+      <summary>Why might participant attrition in a longitudinal study become a problem?</summary>
+      <div class="answer"><strong>Answer:</strong> If certain kinds of participants are more likely to drop out, the remaining sample may no longer represent the original population, undermining how far the findings can be generalised — and missing data also complicates the analysis.</div>
+    </details>
+
+    <details>
+      <summary>Distinguish internal validity from external validity.</summary>
+      <div class="answer"><strong>Answer:</strong> Internal validity is confidence that the independent variable — rather than some other factor — caused the observed change in the dependent variable. External validity is confidence that the findings generalise to a larger population beyond the sample studied.</div>
+    </details>
+
+    <details>
+      <summary>A study measures employee stress before and after a wellness programme, using the same stress questionnaire both times. Employees' familiarity with the questionnaire the second time around affects their scores. Which threat to internal validity is this?</summary>
+      <div class="answer"><strong>Answer:</strong> Testing — repeated exposure to the same instrument affects later scores, independent of the actual programme's effect.</div>
+    </details>
+
+    <details>
+      <summary>Give an example of the trade-off between internal and external validity.</summary>
+      <div class="answer"><strong>Answer:</strong> Running a study in a tightly controlled laboratory setting improves internal validity (isolating the effect of the variable of interest) but may reduce external validity, since behaviour in an artificial setting may not reflect real-world behaviour.</div>
+    </details>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ===================== CHAPTER 3 ===================== -->
+<div class="chapter" id="ch3">
+  <div class="chapter-head">
+    <span class="chapter-num">3</span>
+    <h2>Measurement</h2>
+  </div>
+  <p class="chapter-tag">Once you've decided what to study, how do you know your measuring instrument is any good?</p>
+
+  <section class="topic">
+    <h3>3.1 Levels of measurement</h3>
+    <table class="compare">
+      <tr><th>Level</th><th>Description</th><th>Example</th></tr>
+      <tr><td><strong>Nominal</strong></td><td>Distinct, unordered categories.</td><td>Gender, marital status</td></tr>
+      <tr><td><strong>Ordinal</strong></td><td>Ordered categories, but distance between them is unknown.</td><td>Political leaning (liberal/moderate/conservative)</td></tr>
+      <tr><td><strong>Interval</strong></td><td>Numeric, with meaningful distances between values, but no true zero.</td><td>Temperature (°C)</td></tr>
+      <tr><td><strong>Ratio</strong></td><td>Numeric, with a true zero — ratios/proportions are meaningful.</td><td>Income</td></tr>
+    </table>
+    <p class="lead">Where possible, measure at the <strong>highest</strong> level you can: a higher level can always be collapsed into a lower one afterwards (e.g. exact age → age brackets), but not the reverse — and higher levels open up more statistical options at the analysis stage.</p>
+  </section>
+
+  <section class="topic">
+    <h3>3.2 Validity: is the measure assessing what it claims to?</h3>
+    <table class="compare">
+      <tr><th>Type</th><th>What it checks</th></tr>
+      <tr><td><strong>Face validity</strong></td><td>Does the measure look, on its face, like it assesses the construct properly?</td></tr>
+      <tr><td><strong>Content validity</strong></td><td>Does it cover <em>all</em> the aspects of the construct as defined?</td></tr>
+      <tr><td><strong>Criterion-related — predictive</strong></td><td>Does it correlate with a <em>future</em> outcome? (e.g. pre-election voting-preference measure vs. actual votes cast)</td></tr>
+      <tr><td><strong>Criterion-related — concurrent</strong></td><td>Does it correlate with an <em>existing, already-validated</em> measure of the same thing?</td></tr>
+      <tr><td><strong>Construct — convergent</strong></td><td>Do different indicators of the <em>same</em> construct correlate strongly with each other?</td></tr>
+      <tr><td><strong>Construct — discriminant</strong></td><td>Do indicators of <em>different</em> constructs correlate weakly, as they should?</td></tr>
+    </table>
+    <div class="example">
+      <span class="eyebrow">Relatable example</span>
+      Measuring household income in Singapore using <em>only</em> the male head-of-household's salary has poor <strong>face validity</strong> — it visibly misses the reality that many households have more than one income earner.<br><br>
+      If self-reports of "extraversion" correlate strongly with a close friend's rating of the same person's extraversion, that's <strong>convergent validity</strong>. If those same self-reports correlate only weakly with self-reports of an unrelated trait like "dominance," that's <strong>discriminant validity</strong>.
+    </div>
+  </section>
+
+  <section class="topic">
+    <h3>3.3 Reliability: is the measure consistent?</h3>
+    <table class="compare">
+      <tr><th>Type</th><th>What it checks</th></tr>
+      <tr><td><strong>Test-retest reliability</strong></td><td>Correlation between two administrations of the <em>same</em> instrument to the same people at different times.</td></tr>
+      <tr><td><strong>Cronbach's Alpha</strong></td><td>Internal consistency — do multiple items measuring the same construct hang together?</td></tr>
+      <tr><td><strong>Interrater reliability</strong></td><td>Agreement between different observers/raters scoring the same thing.</td></tr>
+    </table>
+    <div class="example">
+      <span class="eyebrow">Relatable example</span>
+      Two teachers independently grade the same batch of essays using the same rubric. High agreement between their scores demonstrates good <strong>interrater reliability</strong> — regardless of whether the rubric itself is actually measuring "essay quality" well (that would be a validity question).
+    </div>
+  </section>
+
+  <section class="topic">
+    <h3>3.4 Why use an existing measure instead of building a new one?</h3>
+    <p class="lead">Mueller (2011) gives two practical reasons:</p>
+    <ul>
+      <li>A brand-new measure's validity and reliability are unknown until <em>after</em> data collection — if it turns out to be weak, you may need costly re-collection, or the study may be unsalvageable.</li>
+      <li>Reusing measures with known good validity and reliability lets findings accumulate and be compared across studies in a field.</li>
+    </ul>
+  </section>
+
+  <div class="practice">
+    <h3>Test yourself — Chapter 3</h3>
+    <p>Cover the answer, try to say it in your own words first.</p>
+
+    <details>
+      <summary>Rank the four levels of measurement from lowest to highest, and give an example of each.</summary>
+      <div class="answer"><strong>Answer:</strong> Nominal (e.g. gender) → Ordinal (e.g. political leaning) → Interval (e.g. temperature) → Ratio (e.g. income).</div>
+    </details>
+
+    <details>
+      <summary>Why should a researcher try to measure at the highest level of measurement possible?</summary>
+      <div class="answer"><strong>Answer:</strong> A higher level can always be converted down to a lower one later (e.g. exact age into age brackets), but not the reverse, and it allows a wider range of statistical methods at the analysis stage.</div>
+    </details>
+
+    <details>
+      <summary>What's the difference between predictive validity and concurrent validity?</summary>
+      <div class="answer"><strong>Answer:</strong> Predictive validity checks whether a measure correlates with a future outcome (e.g. a pre-election survey predicting actual votes). Concurrent validity checks whether it correlates with another, already-established measure of the same construct, taken around the same time.</div>
+    </details>
+
+    <details>
+      <summary>Distinguish convergent validity from discriminant validity.</summary>
+      <div class="answer"><strong>Answer:</strong> Convergent validity is evidence that different indicators of the <em>same</em> construct correlate strongly with each other. Discriminant validity is evidence that indicators of <em>different</em> constructs correlate only weakly with each other.</div>
+    </details>
+
+    <details>
+      <summary>Two raters independently score the same set of classroom observations and their scores agree closely. What type of reliability does this demonstrate?</summary>
+      <div class="answer"><strong>Answer:</strong> Interrater reliability.</div>
+    </details>
+
+    <details>
+      <summary>Why is it often better to use an existing, previously validated measure rather than creating a brand-new one?</summary>
+      <div class="answer"><strong>Answer:</strong> A new measure's validity and reliability are unknown until after data is collected, which is risky and can be costly if the measure turns out to be poor; using an established measure also lets findings be compared and accumulated across studies.</div>
+    </details>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  Compiled from HBC201 Seminar 2 slides (18 Aug 2026) and Study Unit 2 — Research Orientation, Design, and Measurement. For exam prep use; always check the Study Guide and Canvas for the current syllabus and formative assessment.
+</footer>
+
+</body>
+</html>
