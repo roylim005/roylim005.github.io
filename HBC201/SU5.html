@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HBC201 – Study Unit 5 Exam Prep: Quantitative Research Methods I</title>
+<style>
+  :root{
+    --navy:#1b2a4a;
+    --blue:#2a5ca8;
+    --accent:#c9770a;
+    --bg:#fbfaf7;
+    --card:#ffffff;
+    --line:#e3ddd3;
+    --text:#26241f;
+    --muted:#6b6558;
+    --exam:#fff4e6;
+    --exam-border:#e0a458;
+    --note:#eef2f8;
+    --noteborder:#c7d3e5;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:"Georgia","Iowan Old Style",serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.55;
+  }
+  header{
+    background:var(--navy);
+    color:#f4f1ea;
+    padding:2.2rem 1.5rem 1.6rem;
+    text-align:center;
+  }
+  header h1{margin:0 0 .3rem; font-size:1.7rem; font-weight:600;}
+  header p{margin:0; color:#c7cfe0; font-size:.95rem;}
+  nav{
+    background:#22314f;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    padding:.4rem 0;
+    position:sticky;
+    top:0;
+    z-index:50;
+  }
+  nav a{
+    color:#dbe2f0;
+    text-decoration:none;
+    font-size:.78rem;
+    font-family:Arial, sans-serif;
+    padding:.5rem .7rem;
+    border-radius:4px;
+  }
+  nav a:hover{background:#324875;}
+  main{max-width:840px; margin:0 auto; padding:1.8rem 1.2rem 4rem;}
+  .chapter-title{
+    margin-top:3rem;
+    padding-bottom:.4rem;
+    border-bottom:3px solid var(--navy);
+    color:var(--navy);
+    font-size:1.5rem;
+  }
+  .chapter-title:first-of-type{margin-top:0;}
+  .chapter-tag{
+    font-family:Arial, sans-serif;
+    font-size:.72rem;
+    text-transform:uppercase;
+    letter-spacing:.05em;
+    color:var(--muted);
+    display:block;
+    margin-top:.6rem;
+  }
+  section.concept{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:1.3rem 1.5rem;
+    margin:1.3rem 0;
+    box-shadow:0 1px 3px rgba(0,0,0,.04);
+  }
+  section.concept h3{margin-top:0; color:var(--blue); font-size:1.18rem;}
+  section.concept h4{
+    font-family:Arial, sans-serif;
+    font-size:.78rem;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    color:var(--muted);
+    margin:1rem 0 .3rem;
+  }
+  .example{
+    background:#f2f6ee;
+    border-left:4px solid #7a9a5c;
+    padding:.7rem 1rem;
+    border-radius:0 6px 6px 0;
+    margin-top:.5rem;
+    font-size:.96rem;
+  }
+  .example b{color:#4e6b39;}
+  .exam-flag{
+    display:inline-block;
+    background:var(--exam);
+    border:1px solid var(--exam-border);
+    color:#8a5a12;
+    font-family:Arial, sans-serif;
+    font-size:.72rem;
+    font-weight:bold;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+    padding:.2rem .55rem;
+    border-radius:20px;
+    margin-left:.5rem;
+    vertical-align:middle;
+  }
+  .exam-note{
+    background:var(--exam);
+    border:1px solid var(--exam-border);
+    border-radius:6px;
+    padding:.6rem .9rem;
+    margin-top:.6rem;
+    font-size:.9rem;
+    font-family:Arial, sans-serif;
+  }
+  .exam-note b{color:#8a5a12;}
+  .study-only-note{
+    background:var(--note);
+    border:1px solid var(--noteborder);
+    border-radius:6px;
+    padding:.5rem .9rem;
+    margin-bottom:1.2rem;
+    font-size:.85rem;
+    font-family:Arial, sans-serif;
+    color:#33415c;
+  }
+  ul{padding-left:1.3rem;}
+  li{margin-bottom:.3rem;}
+  .pair{display:flex; gap:.8rem; flex-wrap:wrap;}
+  .pair > div{flex:1 1 240px;}
+  table{width:100%; border-collapse:collapse; margin-top:.5rem; font-size:.9rem;}
+  th,td{border:1px solid var(--line); padding:.5rem .6rem; text-align:left; vertical-align:top;}
+  th{background:#f0ede4; font-family:Arial, sans-serif; font-size:.8rem;}
+  .quiz-block{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-left:4px solid var(--blue);
+    border-radius:8px;
+    padding:1rem 1.3rem;
+    margin:1rem 0;
+  }
+  .quiz-block p.q{font-weight:bold; margin:0 0 .5rem;}
+  .reveal-btn{
+    font-family:Arial, sans-serif;
+    font-size:.82rem;
+    background:var(--blue);
+    color:#fff;
+    border:none;
+    padding:.4rem .9rem;
+    border-radius:5px;
+    cursor:pointer;
+  }
+  .reveal-btn:hover{background:var(--navy);}
+  .answer{
+    display:none;
+    margin-top:.7rem;
+    padding-top:.7rem;
+    border-top:1px dashed var(--line);
+    font-size:.94rem;
+    color:#34432e;
+    background:#f7faf3;
+    padding:.7rem .9rem;
+    border-radius:6px;
+  }
+  .answer.show{display:block;}
+  .summary-box{
+    background:var(--note);
+    border:1px solid var(--noteborder);
+    border-radius:8px;
+    padding:1rem 1.3rem;
+    margin:1.5rem 0;
+    font-size:.94rem;
+  }
+  footer{text-align:center; color:var(--muted); font-family:Arial, sans-serif; font-size:.78rem; padding:1.5rem;}
+  .toc{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:1rem 1.3rem;
+    font-family:Arial, sans-serif;
+    font-size:.9rem;
+  }
+  .toc a{color:var(--blue); text-decoration:none;}
+  .toc a:hover{text-decoration:underline;}
+  .toc ul{margin:.3rem 0;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>HBC201 · Study Unit 5</h1>
+  <p>Quantitative Research Methods I — Exam Prep Guide (Seminar 5 slides + Study Unit 5 text combined)</p>
+</header>
+
+<nav>
+  <a href="#power">Power</a>
+  <a href="#sampling">Sampling</a>
+  <a href="#experimental">Experimental</a>
+  <a href="#quasi">Quasi-Experimental</a>
+  <a href="#nonexperimental">Nonexperimental</a>
+  <a href="#survey-basics">Survey Basics</a>
+  <a href="#measurement-error">Measurement Error</a>
+  <a href="#nonresponse">Nonresponse</a>
+  <a href="#ethics">Ethics</a>
+  <a href="#quiz">Self-Assessment</a>
+</nav>
+
+<main>
+
+<div class="toc">
+  <b>How this guide is organised</b>
+  <ul>
+    <li><b>Chapter 1 (seminar-taught):</b> Key Considerations — Power, Sampling</li>
+    <li><b>Chapter 2 (seminar-taught):</b> Types of Quantitative Research — Experimental, Quasi-Experimental, Nonexperimental designs</li>
+    <li><b>Chapters 3–5 (study unit reading, not yet covered live in this seminar but examinable):</b> Survey Research Fundamentals, Measurement Error & Nonresponse, Ethics in Survey Research</li>
+  </ul>
+  Items marked <span class="exam-flag">Likely Exam</span> mirror the exact question styles used in the Study Unit 5 formative assessment.
+</div>
+
+<h2 class="chapter-title" id="chapter1">Chapter 1 — Key Considerations in Quantitative Research</h2>
+
+<section class="concept" id="power">
+  <h3>1. Power in a Statistical Test <span class="exam-flag">Likely Exam</span></h3>
+  <p>When a researcher makes a decision based on a hypothesis test, there are four possible outcomes, summarised by whether the null hypothesis is actually true/false and whether it gets rejected or not.</p>
+
+  <table>
+    <tr><th></th><th>Reject null hypothesis</th><th>Do not reject null hypothesis</th></tr>
+    <tr><td><b>Null hypothesis is TRUE</b></td><td>Type I error (α)</td><td>Correct decision (1−α)</td></tr>
+    <tr><td><b>Null hypothesis is FALSE</b></td><td><b>Power</b> (correct decision)</td><td>Type II error (β)</td></tr>
+  </table>
+
+  <h4>Key definitions</h4>
+  <ul>
+    <li><b>Power</b> = the probability of correctly rejecting the null hypothesis when it is indeed false (i.e. correctly detecting a real effect). Power = 1 − β.</li>
+    <li><b>Type I error (α)</b> = rejecting the null hypothesis when it is actually true (a "false alarm"). This is the significance level, typically set at .05.</li>
+    <li><b>Type II error (β)</b> = failing to reject the null hypothesis when it is actually false (a "missed detection").</li>
+  </ul>
+
+  <h4>What increases power?</h4>
+  <table>
+    <tr><th>Factor</th><th>Effect on Power</th></tr>
+    <tr><td>Larger significance level (α)</td><td>Increases power, but also increases risk of Type I error</td></tr>
+    <tr><td>Larger effect size</td><td>Increases power</td></tr>
+    <tr><td>Larger sample size</td><td>Increases power</td></tr>
+  </table>
+  <p>A power of <b>.80</b> is typically considered acceptable, and researchers usually run a power analysis <i>before</i> data collection to determine the sample size needed.</p>
+
+  <div class="example"><b>Relatable example:</b> Think of power as a smoke detector's ability to correctly sound an alarm when there really is a fire. A more sensitive detector (larger effect/larger sample = an obvious, big fire, or many detectors placed around the house) is more likely to catch the real fire (high power). But turn the sensitivity too high (large α) and it also starts going off for burnt toast (Type I error).</div>
+
+  <div class="exam-note"><b>Watch for:</b> a question asking you to match the definition of "power" — remember it's specifically about <b>correctly rejecting</b> the null hypothesis when it's <b>false</b> (not simply "rejecting" it, and not about the null being true).</div>
+</section>
+
+<section class="concept" id="sampling">
+  <h3>2. Sampling in Quantitative Research <span class="exam-flag">Likely Exam</span></h3>
+  <p>Researchers typically study a <b>sample</b> (a subset) rather than the entire population, due to resource constraints, then use statistical inference to generalise findings back to the population.</p>
+
+  <h4>Probability Sampling</h4>
+  <p>Every member of the population has a known, precise probability of being selected — aims for a sample <b>representative</b> of the population.</p>
+  <table>
+    <tr><th>Type</th><th>How it works</th><th>Example</th></tr>
+    <tr><td><b>Simple Random Sample</b></td><td>Every individual has an equal chance of selection; drawn from a full sampling frame using an unbiased method (e.g., random number generator)</td><td>An internet company lists all its customers and uses a random number generator to pick respondents for a satisfaction survey</td></tr>
+    <tr><td><b>Systematic Random Sample</b></td><td>Calculate interval k = population size ÷ sample size; randomly pick a starting point within the first k, then select every kth person after that</td><td>200,000 customers, sample of 200 → k = 1,000: randomly pick someone between position 1–1,000, then every 1,000th person after</td></tr>
+    <tr><td><b>Stratified Random Sample</b></td><td>Divide population into mutually exclusive strata (categories), then randomly sample within each stratum</td><td>Divide customers by job sector (education, finance, etc.), then randomly sample customers within each sector</td></tr>
+    <tr><td><b>Cluster Sample</b></td><td>Identify clusters (e.g., geographic regions), randomly select some clusters, then either include everyone in them (single-stage) or randomly sample within them (two-stage)</td><td>Randomly select a few regions where customers are located, then randomly sample customers within those regions</td></tr>
+  </table>
+
+  <h4>Nonprobability Sampling</h4>
+  <p>Individuals are NOT randomly selected from a predetermined sampling frame.</p>
+  <table>
+    <tr><th>Type</th><th>How it works</th><th>Example</th></tr>
+    <tr><td><b>Convenience Sample</b></td><td>Selected because they're easy to reach/readily available</td><td>A professor recruits research subjects from students already enrolled in their own class</td></tr>
+    <tr><td><b>Quota Sample</b></td><td>Set target categories + a fixed number of participants per category, then recruit until quotas are filled</td><td>Studying pandemic mental health impact: recruit until you have 80 males and 90 females</td></tr>
+    <tr><td><b>Snowball Sample</b></td><td>Identify a few initial cases, then have them refer/identify more qualifying cases</td><td>Studying international students' college experience: find a few, ask them to refer other international students</td></tr>
+    <tr><td><b>Purposive Sample</b></td><td>Use specific criteria to deliberately recruit; often used for hard-to-reach or specialised populations</td><td>Recruiting gang members using "local knowledge" (places they gather) or "local experts" (e.g., police contacts)</td></tr>
+  </table>
+
+  <div class="example"><b>Relatable example to tell them apart:</b> Imagine studying satisfaction among coffee-shop customers. <b>Simple random</b> = pull random names from the full customer database. <b>Systematic</b> = survey every 50th customer who walks in. <b>Stratified</b> = randomly sample within each branch location (strata). <b>Cluster</b> = randomly pick 3 branches (clusters) out of 50 and survey everyone there. <b>Convenience</b> = just survey whoever's in the shop right now. <b>Quota</b> = keep surveying until you hit 50 regulars and 50 first-timers. <b>Snowball</b> = ask a barista's regular customer to bring their coffee-loving friends. <b>Purposive</b> = specifically seek out customers who've complained before.</div>
+
+  <h4>Two common misconceptions <span class="exam-flag">Likely Exam</span></h4>
+  <table>
+    <tr><th>Misconception</th><th>Correct concept</th></tr>
+    <tr><td>A random sample will have identical characteristics (mean, variance) as the population</td><td>False — due to sampling error, a sample and its population rarely match exactly, though a well-planned probability sample can still be highly accurate</td></tr>
+    <tr><td>A larger population needs a larger sample</td><td>False — what matters is the sample's <b>absolute</b> size, not its size <i>relative</i> to the population</td></tr>
+  </table>
+
+  <div class="exam-note"><b>Watch for:</b> scenario questions describing a sampling method and asking you to name it — pay attention to whether categories/strata are involved (stratified) vs. geographic/group clusters (cluster) vs. simply "whoever's easy to reach" (convenience) vs. "asked to refer others" (snowball).</div>
+</section>
+
+<h2 class="chapter-title" id="chapter2">Chapter 2 — Types of Quantitative Research</h2>
+
+<section class="concept" id="experimental">
+  <h3>3. Experimental Design <span class="exam-flag">Likely Exam</span></h3>
+  <p>The <b>most rigorous</b> form of quantitative research — used to examine <b>causal relationships</b> among variables (Kraska, 2012).</p>
+
+  <h4>Core elements</h4>
+  <ul>
+    <li><b>Randomisation</b> — participants are randomly assigned to treatment or control group.</li>
+    <li><b>Experimental control</b> — all other variables are held constant/controlled.</li>
+    <li><b>Experimental treatment</b> — the intervention being tested.</li>
+    <li><b>Comparison between groups</b> — treatment vs. control outcomes are compared.</li>
+    <li><b>Standardised instrument</b> — a consistent measurement tool (e.g., the same test) is used.</li>
+  </ul>
+
+  <h4>Three specific experimental designs</h4>
+  <table>
+    <tr><th>Design</th><th>What happens</th></tr>
+    <tr><td><b>Pretest-Posttest Control Group</b></td><td>Both treatment and control groups are tested before AND after the intervention; the pre-post <i>difference</i> is compared between groups</td></tr>
+    <tr><td><b>Posttest-Only Control Group</b></td><td>Both groups are tested only after the intervention; average scores are compared</td></tr>
+    <tr><td><b>Solomon Four-Group</b></td><td>Combines both designs using 4 groups: Group 1 (treatment, pre+post), Group 2 (control, pre+post), Group 3 (treatment, post-only), Group 4 (control, post-only) — helps rule out whether the pretest itself influenced results</td></tr>
+  </table>
+
+  <div class="example"><b>Relatable example:</b> Testing whether a new maths teaching method beats the traditional one: randomly assign students to "new method" (treatment) or "traditional method" (control) classes, keep everything else the same (same teacher quality, same test), then compare their scores on a standard maths test. If you test students both before AND after the semester, that's pretest-posttest; if you only test at the end, that's posttest-only; doing both versions at once (with 4 groups) is the Solomon four-group design — used to check that the act of taking the pretest itself didn't influence the outcome.</div>
+
+  <div class="exam-note"><b>Watch for:</b> the defining feature of a TRUE experimental design is <b>random assignment</b> to groups — if that's missing, it's not a true experiment (see quasi-experimental below).</div>
+</section>
+
+<section class="concept" id="quasi">
+  <h3>4. Quasi-Experimental Design <span class="exam-flag">Likely Exam</span></h3>
+  <p>Used when it's <b>not feasible to randomly assign</b> participants to treatment/control groups — common in field settings like schools, where existing classes/groups must be used as-is.</p>
+  <ul>
+    <li>Researchers usually don't have full control over all variables that might affect the outcome.</li>
+    <li><b>Key concern:</b> are the treatment and control groups actually equivalent before the study starts?</li>
+    <li><b>Strategy to address this:</b> use a pretest — similar pretest scores suggest the groups were comparable before the intervention.</li>
+  </ul>
+
+  <h4>Specific quasi-experimental designs</h4>
+  <table>
+    <tr><th>Design</th><th>What happens</th></tr>
+    <tr><td><b>Pretest-Posttest (Nonrandomised Control Group)</b></td><td>Like the true-experimental version, but groups are NOT randomly assigned — a pretest is used first to check equivalence</td></tr>
+    <tr><td><b>Time-Series Design</b></td><td>A series of measures on ONE group taken periodically, both before and after an intervention (e.g., interrupted time series)</td></tr>
+    <tr><td><b>Single-Subject Design</b></td><td>Studies the effect of treatment on one/a few behaviours in a single participant; has two phases — baseline measurement (A) then treatment (B)</td></tr>
+  </table>
+
+  <div class="example"><b>Relatable example:</b> A school wants to test a new discipline policy but can't randomly reshuffle students between classes — they use the existing Class A (new policy) vs. Class B (old policy) as-is. That's quasi-experimental. If instead they track ONE particularly disruptive student's behaviour for two weeks before introducing a reward system, then two weeks after, that's a single-subject (A-B) design. If a city tracks crime rates monthly for a year before AND after passing a new ordinance, that's a time-series design.</div>
+
+  <div class="exam-note"><b>Watch for:</b> the key distinguishing question is always "were participants randomly assigned?" — Yes = experimental; No, but still involves an intervention/comparison = quasi-experimental.</div>
+</section>
+
+<section class="concept">
+  <h3>5. Factorial Design</h3>
+  <p>Used when a study has <b>more than one independent variable</b>. Described by how many levels each variable has, e.g. a "2 × 3" design.</p>
+  <div class="example"><b>Example:</b> Testing a maths teaching method (2 levels: new vs. traditional) AND student motivation level (3 levels: low, medium, high) together = a 2×3 factorial design, letting you see how teaching method AND motivation level (and their interaction) affect outcomes.</div>
+</section>
+
+<section class="concept" id="nonexperimental">
+  <h3>6. Nonexperimental Design <span class="exam-flag">Likely Exam</span></h3>
+  <p>Used when researchers <b>cannot manipulate</b> the variables of interest at all.</p>
+  <table>
+    <tr><th>Type</th><th>Description</th><th>Example</th></tr>
+    <tr><td><b>Causal-Comparative Research</b></td><td>Compares groups on an independent variable that already differed <i>before</i> the study, beyond the researcher's control</td><td>Comparing maths achievement between students who happened to use new vs. old textbooks (no control over textbook assignment)</td></tr>
+    <tr><td><b>Survey Research</b></td><td>Collecting data via questionnaires/interviews on behaviours, attitudes, beliefs (see Chapter 3 below)</td><td>—</td></tr>
+    <tr><td><b>Correlation Research</b></td><td>Investigates relationships between variables without manipulation</td><td>See below</td></tr>
+  </table>
+
+  <h4>Types of correlation</h4>
+  <ul>
+    <li><b>Simple correlation:</b> association between two variables</li>
+    <li><b>Partial correlation:</b> association between two variables after controlling for a third variable's influence</li>
+    <li><b>Multiple correlation:</b> one dependent variable and several independent variables</li>
+    <li><b>Canonical correlation:</b> several dependent variables and several independent variables</li>
+  </ul>
+
+  <div class="example"><b>Relatable example:</b> A study finds that children with better verbal skills also tend to have higher play scores. This is correlation research — but critically, <b>correlation does not imply causation</b>: having good verbal skills being related to higher play scores doesn't prove that better verbal skills <i>caused</i> the better play scores (something else, like overall developmental maturity, could explain both).</div>
+
+  <div class="exam-note"><b>Watch for:</b> a classic exam trap is a scenario showing a correlation and then asking you to confirm/reject a causal claim — remember: correlation ≠ causation.</div>
+</section>
+
+<h2 class="chapter-title" id="chapter3">Chapter 3 — Survey Research Fundamentals</h2>
+<div class="study-only-note">This chapter and the two after it come from the Study Unit 5 reading; they had not yet been covered live in this particular seminar, but are part of the assigned material and its formative assessment.</div>
+
+<section class="concept" id="survey-basics">
+  <h3>7. Survey Research Basics <span class="exam-flag">Likely Exam</span></h3>
+  <p>Surveys ask individuals to answer specific questions about their behaviour, attitudes, beliefs, or emotions. They are often used in <b>nonexperimental</b> research (no causal claims possible), though occasionally in experiments too.</p>
+
+  <h4>Types of survey questions</h4>
+  <table>
+    <tr><th>Type</th><th>Description</th></tr>
+    <tr><td><b>Open-ended</b></td><td>Participant constructs their own response in their own words</td></tr>
+    <tr><td><b>Close-ended — Dichotomous</b></td><td>Only two response categories (e.g. Yes/No)</td></tr>
+    <tr><td><b>Close-ended — Nominal</b></td><td>More than two response categories, unordered (e.g. ethnicity: Chinese/Malay/Indian/Other)</td></tr>
+    <tr><td><b>Close-ended — Ordinal</b></td><td>More than two categories that CAN be ordered (e.g. rating 1=Very low to 5=Very good)</td></tr>
+    <tr><td><b>Close-ended — Continuous</b></td><td>Answer placed anywhere on a continuum with end descriptors</td></tr>
+    <tr><td><b>Close-ended — Rank-ordered</b></td><td>Participant ranks response categories against a criterion (e.g. preference)</td></tr>
+  </table>
+  <p>A <b>partially open-ended</b> question mixes both: close-ended options plus an open "specify other" field.</p>
+
+  <div class="example"><b>Relatable example:</b> A restaurant survey asking diners to rate food quality from 1 (Very low) to 5 (Very good) is <b>ordinal</b> (categories can be ranked). Asking their ethnicity from a checklist with no natural order is <b>nominal</b>. Asking "do you enjoy spicy food? Yes/No" is <b>dichotomous</b>.</div>
+
+  <h4>Survey administration modes and their concerns</h4>
+  <table>
+    <tr><th>Mode</th><th>Major concerns</th></tr>
+    <tr><td>Mail</td><td>Researcher can't control how it's completed; nonresponse bias</td></tr>
+    <tr><td>Telephone</td><td>Interviewer bias; sampling bias (e.g. some people have no listed phone number)</td></tr>
+    <tr><td>Internet</td><td>Sampling bias; no control over completion conditions; risk of duplicate submissions</td></tr>
+    <tr><td>In Person (Individual)</td><td>Interviewer bias; discomfort answering sensitive questions face-to-face</td></tr>
+    <tr><td>In Person (Group)</td><td>Peer pressure to participate; confidentiality concerns; less truthful answers in a group setting</td></tr>
+  </table>
+
+  <h4>Methods to evaluate survey quality</h4>
+  <ul>
+    <li><b>Cognitive interview</b> — a researcher interviews a small number of respondents individually to understand their thought process while answering (e.g., "how did you interpret the word 'effective'?").</li>
+    <li><b>Focus group</b> — a small group discusses and critiques the survey questions together.</li>
+    <li><b>Expert panel</b> — content-area and methodology experts review the survey for problems.</li>
+  </ul>
+
+  <h4>Pros and cons of survey research</h4>
+  <table>
+    <tr><th>Pros</th><th>Cons</th></tr>
+    <tr><td>Relatively easy/efficient to collect data; some info (e.g. religious belief) can really only be gathered this way; many format/administration options</td><td>Participants may give invalid answers (misinterpretation, low motivation, faulty memory/self-perception, etc.)</td></tr>
+  </table>
+
+  <div class="exam-note"><b>Watch for:</b> "cognitive interview" vs. "focus group" as survey-evaluation methods — cognitive interview is <b>one-on-one</b>, focus group is a <b>group discussion</b> about the survey itself (different from focus group as its own qualitative research type from SU4!).</div>
+</section>
+
+<h2 class="chapter-title" id="chapter4">Chapter 4 — Major Concerns in Survey Research</h2>
+
+<section class="concept" id="measurement-error">
+  <h3>8. Measurement Error <span class="exam-flag">Likely Exam</span></h3>
+  <table>
+    <tr><th>Type</th><th>Description</th></tr>
+    <tr><td><b>Systematic Error (Bias)</b></td><td>Scores consistently deviate from the true score in ONE direction across repeated trials</td></tr>
+    <tr><td><b>Random Error (Variance)</b></td><td>Scores randomly deviate from the true score — sometimes over, sometimes under — across repeated trials</td></tr>
+  </table>
+
+  <div class="example"><b>Relatable example:</b> If a bathroom scale always shows 2kg heavier than your true weight no matter how many times you step on it, that's <b>systematic error/bias</b>. If a thermometer gives readings that bounce randomly above and below a patient's actual stable temperature (e.g. 38°C, 36°C, 40°C, 35.5°C, 37°C) — with no consistent direction — that's <b>random error/variance</b>, not bias.</div>
+
+  <h4>Common sources of measurement error in surveys</h4>
+  <ul>
+    <li><b>Phrasing of the question</b> — confusing terminology or sentence structure</li>
+    <li><b>Construct-irrelevant burden</b> — asking for hard-to-recall info or unnecessary calculations</li>
+    <li><b>Social desirability</b> — respondents give socially-approved rather than honest answers</li>
+    <li><b>Question format</b> — open-ended questions are hard to articulate; close-ended ones may not fit everyone's real situation</li>
+    <li><b>Context</b> — where a question sits in the survey can shape the response</li>
+    <li><b>Administration method</b> — e.g. low motivation if the respondent dislikes the interviewer</li>
+    <li><b>Data processing errors</b> — mistakes in data entry or coding</li>
+  </ul>
+
+  <div class="exam-note"><b>Watch for:</b> a tricky "NOT a source of measurement error" question — if a student genuinely doesn't understand a maths concept and fails a question testing that exact concept, that's <b>not</b> measurement error (the test accurately reflected their true ability); but failing due to confusing wording IS measurement error.</div>
+</section>
+
+<section class="concept" id="nonresponse">
+  <h3>9. Nonresponse <span class="exam-flag">Likely Exam</span></h3>
+  <p>Nonresponse = sampled cases from which no data was actually collected.</p>
+  <table>
+    <tr><th>Explanation</th><th>Description</th></tr>
+    <tr><td><b>Noncontact</b></td><td>Researchers fail to reach the sampled case</td></tr>
+    <tr><td><b>Refusal</b></td><td>The sampled case declines to take the survey</td></tr>
+    <tr><td><b>Ineligibility</b></td><td>The sampled case doesn't actually qualify for the survey</td></tr>
+  </table>
+
+  <h4>Key nuances</h4>
+  <ul>
+    <li>It's hard to predict who will/won't respond — multiple mixed reasons can be at play.</li>
+    <li><b>A low nonresponse rate does NOT automatically mean good data quality</b> — if the specific people who refuse are exactly the ones the study needed, even a low nonresponse rate can bias results. Conversely, if non-respondents are basically a random subset, a higher nonresponse rate matters less.</li>
+  </ul>
+
+  <h4>Ways to increase response rate</h4>
+  <ul>
+    <li>Increase the number of contact attempts (e.g. calling back non-respondents at different times)</li>
+    <li>Provide incentives to complete the survey</li>
+  </ul>
+
+  <div class="example"><b>Relatable example:</b> Imagine surveying residents about noise complaints, but the loudest, most affected residents are also the ones too busy or annoyed to respond — even a "low" 5% nonresponse rate is a problem here, because those 5% are exactly the voices the study needed most.</div>
+
+  <div class="exam-note"><b>Watch for:</b> the false statement "a low nonresponse rate suggests good data quality" — this is a commonly-tested trap; nonresponse rate alone doesn't guarantee validity.</div>
+</section>
+
+<h2 class="chapter-title" id="chapter5">Chapter 5 — Ethics in Survey Research</h2>
+
+<section class="concept" id="ethics">
+  <h3>10. Ethical Issues in Survey Research <span class="exam-flag">Likely Exam</span></h3>
+  <table>
+    <tr><th>Issue</th><th>Description</th></tr>
+    <tr><td><b>Informed Consent</b></td><td>Participants must be told the survey's purpose, what activities are involved, expected time commitment, and benefits</td></tr>
+    <tr><td><b>Voluntary Participation</b></td><td>Participation must be voluntary; participants can skip any question or withdraw at any time, even after agreeing to join</td></tr>
+    <tr><td><b>Confidentiality/Privacy</b></td><td>Everyone involved (including interviewers) must protect participant confidentiality; participants can refuse intrusive questions</td></tr>
+    <tr><td><b>Incentives</b></td><td>Incentives that are too appealing can undermine truly voluntary participation and raise ethical concerns</td></tr>
+    <tr><td><b>Vulnerable Populations</b></td><td>Extra protections needed for groups like children or people with health conditions (e.g., parental consent for studying young children)</td></tr>
+  </table>
+  <p>Researchers must also report their methods and results truthfully and disclose sponsorship information.</p>
+
+  <div class="example"><b>Relatable example:</b> A researcher studying teenagers' social media habits must get parental consent (vulnerable population), clearly explain the study's purpose and time commitment upfront (informed consent), let teens skip uncomfortable questions or drop out anytime (voluntary participation), and avoid offering an incentive so large that teens feel they can't say no (incentives).</div>
+
+  <div class="exam-note"><b>Watch for:</b> false statements like "a participant is obligated to answer all survey questions once they agree to join" — <b>false</b>, they can always decline specific questions or withdraw.</div>
+</section>
+
+<div class="summary-box">
+  <b>Quick recap map</b><br>
+  Chapter 1: Power (Type I/II errors, factors) + Sampling (probability vs. nonprobability types) → Chapter 2: Research Designs (experimental → quasi-experimental → factorial → nonexperimental/correlational) → Chapters 3–5: Survey Fundamentals → Measurement Error & Nonresponse → Ethics.
+</div>
+
+<h2 class="chapter-title" id="quiz">Self-Assessment: Short-Answer Questions</h2>
+<p style="font-family:Arial, sans-serif; font-size:.9rem; color:var(--muted);">Try answering each in your own words before revealing the model answer.</p>
+
+<div id="quiz-container"></div>
+
+</main>
+
+<footer>HBC201 Study Unit 5 — personal exam-prep aid built from seminar slides + study unit text. Not an official SUSS document.</footer>
+
+<script>
+const questions = [
+  {
+    q: "1. Explain in your own words why increasing sample size increases the power of a statistical test.",
+    a: "A larger sample size gives a more precise/stable estimate of the true population effect, reducing random variability in the sample statistic. This makes it easier for the test to detect a real effect if one exists, increasing the probability of correctly rejecting a false null hypothesis (i.e., increasing power)."
+  },
+  {
+    q: "2. A researcher divides a population into age brackets, then randomly selects participants from each bracket. What sampling technique is this, and how is it different from cluster sampling?",
+    a: "This is stratified random sampling — the population is split into mutually exclusive strata (age brackets), and participants are randomly sampled WITHIN each stratum. This differs from cluster sampling, where the researcher randomly selects entire clusters (e.g., specific age-bracket groups) rather than sampling within every category."
+  },
+  {
+    q: "3. Why is a purposive sample often used for hard-to-reach or specialised populations rather than a simple random sample?",
+    a: "A simple random sample requires a full sampling frame of the population, which may not exist or be accessible for specialised/hidden populations (e.g., gang members). Purposive sampling instead uses deliberate criteria and targeted strategies (e.g., local knowledge, expert referrals) to reach the specific individuals needed."
+  },
+  {
+    q: "4. What is the key difference between an experimental design and a quasi-experimental design?",
+    a: "The key difference is random assignment: in a true experimental design, participants are randomly assigned to treatment and control groups, allowing stronger causal claims. In a quasi-experimental design, random assignment isn't feasible (e.g., existing intact classes are used), so researchers must use strategies like pretests to check group equivalence instead."
+  },
+  {
+    q: "5. Why does the Solomon Four-Group design use four separate groups instead of just two?",
+    a: "It combines the pretest-posttest and posttest-only designs across four groups (two treatment, two control) so researchers can check whether taking the pretest itself influenced participants' posttest scores, something a simple two-group design cannot rule out."
+  },
+  {
+    q: "6. A study observes that students with higher reading scores also tend to have higher maths scores. Can the researcher conclude that better reading skills cause better maths performance? Why or why not?",
+    a: "No. This is correlation research, and correlation does not imply causation. A third variable (e.g., general academic ability, study habits) could be driving both reading and maths scores without either directly causing the other."
+  },
+  {
+    q: "7. Distinguish an ordinal survey question from a nominal survey question, with an example of each.",
+    a: "An ordinal question has more than two response categories that CAN be ranked/ordered (e.g., satisfaction rated 1=Very Low to 5=Very High). A nominal question also has more than two categories, but they CANNOT be meaningfully ordered (e.g., ethnicity: Chinese/Malay/Indian/Other)."
+  },
+  {
+    q: "8. Why might an internet-administered survey raise concerns about sampling bias?",
+    a: "Because only people who have internet access and are comfortable completing online surveys can participate, the sample may systematically exclude certain groups (e.g., those without reliable internet access), making the sample less representative of the broader population."
+  },
+  {
+    q: "9. A thermometer gives a patient wildly different readings each time it's used, sometimes higher and sometimes lower than their actual temperature, with no consistent pattern. Is this systematic error or random error? Explain.",
+    a: "This is random error (variance) — the readings deviate from the true score inconsistently in both directions across repeated trials, rather than consistently deviating in one direction (which would indicate systematic error/bias)."
+  },
+  {
+    q: "10. Why is a low nonresponse rate not automatically a sign of high-quality survey data?",
+    a: "The nonresponse rate alone doesn't reveal whether the people who didn't respond differ meaningfully from those who did. If the non-respondents are exactly the group whose perspective the study most needed, even a low nonresponse rate can bias the results; conversely, a higher nonresponse rate matters less if non-respondents are essentially a random subset of the sample."
+  },
+  {
+    q: "11. A study offers participants a very large cash reward for completing a survey on personal financial struggles. What ethical concern does this raise?",
+    a: "This raises a concern about incentives undermining voluntary participation — an incentive with too strong an appeal can pressure people into participating against their genuine preference, compromising the voluntariness of their consent, especially for a sensitive topic like this."
+  },
+  {
+    q: "12. What is the purpose of a cognitive interview when evaluating a survey, and how is it different from a focus group used for the same purpose?",
+    a: "A cognitive interview aims to understand an individual respondent's thinking process while answering survey questions (e.g., how they interpreted a specific word), conducted one-on-one. A focus group, by contrast, gathers a small group of respondents together to discuss and critique the survey questions collectively."
+  }
+];
+
+const container = document.getElementById('quiz-container');
+questions.forEach((item, i) => {
+  const block = document.createElement('div');
+  block.className = 'quiz-block';
+  block.innerHTML = `
+    <p class="q">${item.q}</p>
+    <button class="reveal-btn" onclick="toggleAnswer(${i})">Show Answer</button>
+    <div class="answer" id="answer-${i}">${item.a}</div>
+  `;
+  container.appendChild(block);
+});
+
+function toggleAnswer(i) {
+  const el = document.getElementById('answer-' + i);
+  const btn = el.previousElementSibling;
+  el.classList.toggle('show');
+  btn.textContent = el.classList.contains('show') ? 'Hide Answer' : 'Show Answer';
+}
+</script>
+
+</body>
+</html>

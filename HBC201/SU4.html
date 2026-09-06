@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HBC201 – Study Unit 4 Exam Prep: Qualitative Research Methods II</title>
+<style>
+  :root{
+    --navy:#1b2a4a;
+    --blue:#2a5ca8;
+    --accent:#c9770a;
+    --bg:#fbfaf7;
+    --card:#ffffff;
+    --line:#e3ddd3;
+    --text:#26241f;
+    --muted:#6b6558;
+    --exam:#fff4e6;
+    --exam-border:#e0a458;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:"Georgia","Iowan Old Style",serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.55;
+  }
+  header{
+    background:var(--navy);
+    color:#f4f1ea;
+    padding:2.2rem 1.5rem 1.6rem;
+    text-align:center;
+  }
+  header h1{
+    margin:0 0 .3rem;
+    font-size:1.7rem;
+    font-weight:600;
+    letter-spacing:.2px;
+  }
+  header p{
+    margin:0;
+    color:#c7cfe0;
+    font-size:.95rem;
+  }
+  nav{
+    background:#22314f;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:0;
+    padding:.4rem 0;
+    position:sticky;
+    top:0;
+    z-index:50;
+  }
+  nav a{
+    color:#dbe2f0;
+    text-decoration:none;
+    font-size:.82rem;
+    font-family:Arial, sans-serif;
+    padding:.55rem .9rem;
+    border-radius:4px;
+  }
+  nav a:hover{background:#324875;}
+  main{
+    max-width:820px;
+    margin:0 auto;
+    padding:1.8rem 1.2rem 4rem;
+  }
+  .chapter-title{
+    margin-top:3rem;
+    padding-bottom:.4rem;
+    border-bottom:3px solid var(--navy);
+    color:var(--navy);
+    font-size:1.5rem;
+  }
+  .chapter-title:first-of-type{margin-top:0;}
+  section.concept{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:1.3rem 1.5rem;
+    margin:1.3rem 0;
+    box-shadow:0 1px 3px rgba(0,0,0,.04);
+  }
+  section.concept h3{
+    margin-top:0;
+    color:var(--blue);
+    font-size:1.18rem;
+  }
+  section.concept h4{
+    font-family:Arial, sans-serif;
+    font-size:.78rem;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    color:var(--muted);
+    margin:1rem 0 .3rem;
+  }
+  .example{
+    background:#f2f6ee;
+    border-left:4px solid #7a9a5c;
+    padding:.7rem 1rem;
+    border-radius:0 6px 6px 0;
+    margin-top:.3rem;
+    font-size:.96rem;
+  }
+  .example b{color:#4e6b39;}
+  .exam-flag{
+    display:inline-block;
+    background:var(--exam);
+    border:1px solid var(--exam-border);
+    color:#8a5a12;
+    font-family:Arial, sans-serif;
+    font-size:.72rem;
+    font-weight:bold;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+    padding:.2rem .55rem;
+    border-radius:20px;
+    margin-left:.5rem;
+    vertical-align:middle;
+  }
+  .exam-note{
+    background:var(--exam);
+    border:1px solid var(--exam-border);
+    border-radius:6px;
+    padding:.6rem .9rem;
+    margin-top:.6rem;
+    font-size:.9rem;
+    font-family:Arial, sans-serif;
+  }
+  .exam-note b{color:#8a5a12;}
+  ul{padding-left:1.3rem;}
+  li{margin-bottom:.3rem;}
+  .pair{
+    display:flex;
+    gap:.8rem;
+    flex-wrap:wrap;
+  }
+  .pair > div{flex:1 1 240px;}
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:.5rem;
+    font-size:.92rem;
+  }
+  th,td{
+    border:1px solid var(--line);
+    padding:.5rem .6rem;
+    text-align:left;
+    vertical-align:top;
+  }
+  th{background:#f0ede4;font-family:Arial, sans-serif;font-size:.82rem;}
+  .quiz-block{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-left:4px solid var(--blue);
+    border-radius:8px;
+    padding:1rem 1.3rem;
+    margin:1rem 0;
+  }
+  .quiz-block p.q{
+    font-weight:bold;
+    margin:0 0 .5rem;
+  }
+  .reveal-btn{
+    font-family:Arial, sans-serif;
+    font-size:.82rem;
+    background:var(--blue);
+    color:#fff;
+    border:none;
+    padding:.4rem .9rem;
+    border-radius:5px;
+    cursor:pointer;
+  }
+  .reveal-btn:hover{background:var(--navy);}
+  .answer{
+    display:none;
+    margin-top:.7rem;
+    padding-top:.7rem;
+    border-top:1px dashed var(--line);
+    font-size:.94rem;
+    color:#34432e;
+    background:#f7faf3;
+    padding:.7rem .9rem;
+    border-radius:6px;
+  }
+  .answer.show{display:block;}
+  .summary-box{
+    background:#eef2f8;
+    border:1px solid #c7d3e5;
+    border-radius:8px;
+    padding:1rem 1.3rem;
+    margin:1.5rem 0;
+    font-size:.94rem;
+  }
+  footer{
+    text-align:center;
+    color:var(--muted);
+    font-family:Arial, sans-serif;
+    font-size:.78rem;
+    padding:1.5rem;
+  }
+  .toc{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:1rem 1.3rem;
+    font-family:Arial, sans-serif;
+    font-size:.9rem;
+  }
+  .toc a{color:var(--blue); text-decoration:none;}
+  .toc a:hover{text-decoration:underline;}
+  .toc ul{margin:.3rem 0;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>HBC201 · Study Unit 4</h1>
+  <p>Qualitative Research Methods II — Exam Prep Guide (Seminar 4 slides + Study Unit 4 text combined)</p>
+</header>
+
+<nav>
+  <a href="#narrative">Narrative</a>
+  <a href="#focusgroup">Focus Group</a>
+  <a href="#action">Action Research</a>
+  <a href="#ethno-concepts">Ethnography Concepts</a>
+  <a href="#ethno-techniques">Ethnography Techniques</a>
+  <a href="#ethno-ethics">Ethics</a>
+  <a href="#quiz">Self-Assessment</a>
+</nav>
+
+<main>
+
+<div class="toc">
+  <b>How this guide is organised</b> — it follows the order your seminar was taught in:
+  <ul>
+    <li><b>Chapter 1:</b> Major Types of Qualitative Research → Narrative Research, Focus Group Research, Action Research</li>
+    <li><b>Chapter 2:</b> Ethnography → Key Concepts, Key Techniques, Ethics</li>
+  </ul>
+  Items marked <span class="exam-flag">Likely Exam</span> map directly onto question styles used in the Study Unit 4 formative assessment (definition-matching, "which is correct/incorrect" style, and concept-vs-concept distinctions).
+</div>
+
+<h2 class="chapter-title" id="chapter1">Chapter 1 — Major Types of Qualitative Research</h2>
+
+<section class="concept" id="narrative">
+  <h3>1. Narrative Research <span class="exam-flag">Likely Exam</span></h3>
+  <p>Researchers ask participants to <i>"tell the story of"</i> a particular event, a significant life period (e.g. a turning point), or their entire life story (Josselson, 2012).</p>
+
+  <h4>Core characteristics</h4>
+  <ul>
+    <li>Focuses on how participants <b>perceive and organise</b> their life events — their account may be subjective, and that's fine.</li>
+    <li>NOT concerned with factuality/objectivity, and NOT interested in generalising to a larger population.</li>
+    <li>Analysis relies on the <b>researcher's interpretation</b>, not statistics.</li>
+    <li>Data collection: individual interviews (most common), sometimes group interviews, or secondary data like diaries. Interviews are recorded and transcribed.</li>
+  </ul>
+
+  <div class="example">
+    <b>Relatable example:</b> Imagine interviewing a retired teacher about "the moment you knew teaching was your calling." You're not fact-checking dates or trying to prove her account is objectively true — you want to understand how she has come to make sense of that turning point in her own life story. That's narrative research. (Real case: Rocha (2018) interviewed mixed-race individuals in Singapore about how they construct their identity — not to "verify" their identity, but to understand how they narrate it.)
+  </div>
+
+  <div class="exam-note"><b>Watch for:</b> a question giving you a scenario and asking you to identify it's narrative research (clue words: "life story," "in-depth individual interview," "turning point," "subjective account"). Also watch for trick options claiming narrative research uses statistical analysis or aims for generalisability — both are <b>false</b>.</div>
+</section>
+
+<section class="concept" id="focusgroup">
+  <h3>2. Focus Group Research <span class="exam-flag">Likely Exam</span></h3>
+  <p>A researcher moderates a discussion among a group of selected participants about a topic of interest (Grumbein & Lowe, 2012).</p>
+
+  <h4>Typical process (5 steps)</h4>
+  <ul>
+    <li>Determine the purpose of the study</li>
+    <li>Determine the moderator and select participants</li>
+    <li>Decide logistics (number of sessions, venue)</li>
+    <li>Prepare a moderation guide</li>
+    <li>Conduct and record the session(s) for analysis</li>
+  </ul>
+
+  <h4>Pros and cons</h4>
+  <table>
+    <tr><th>Advantages</th><th>Disadvantages</th></tr>
+    <tr>
+      <td>Collects data from multiple participants at once; lets them discuss and build on each other's views</td>
+      <td>Logistically challenging to organise; success depends heavily on group dynamics (an uncomfortable atmosphere can derail discussion)</td>
+    </tr>
+  </table>
+
+  <div class="example">
+    <b>Relatable example:</b> A phone brand gathers 8 target customers in a room to react to a new phone prototype and discuss it together — one person's comment ("the camera bump is ugly") sparks others to agree or disagree. That back-and-forth interaction is the whole point — something a one-on-one interview can't produce. (Case: Styśko-Kunkowska et al. (2018) used extended focus groups to study how people interpret nutrition-label colours.)
+  </div>
+
+  <div class="exam-note"><b>Watch for:</b> scenario questions like "a researcher gathers a group of target customers to discuss a new product" → this is <b>focus group research</b>, not narrative research or an interview format. Also know it is different from an <b>unstructured/semi-structured interview</b>, which is one-on-one.</div>
+</section>
+
+<section class="concept" id="action">
+  <h3>3. Action Research <span class="exam-flag">Likely Exam</span></h3>
+  <p>Researchers <b>collaborate with participants</b> to find solutions to a real problem — participants are partners, not just data sources (Adams, 2012).</p>
+
+  <h4>Four characteristics</h4>
+  <ul>
+    <li><b>Reflection</b> — researchers and participants together reflect on the problem and possible interventions.</li>
+    <li><b>Iterancy</b> — multiple cycles of collecting and interpreting data until agreement is reached on what action to take.</li>
+    <li><b>Collaboration</b> — participants are engaged collaborators in the research process, not merely providers of data.</li>
+    <li><b>Role of the researcher</b> — researchers can also be full participants in the activity under study.</li>
+  </ul>
+
+  <div class="example">
+    <b>Relatable example:</b> Picture a school working with teachers to fix low participation in class discussions: teachers and researchers jointly try a new discussion format, review how it went together, tweak it, try again — repeating cycles until something works. Everyone involved is a co-researcher, not a subject being studied. (Case: Rogers et al. (2014) had disadvantaged citizens act as co-researchers, keeping video diaries and using focus groups to jointly interpret findings.)
+  </div>
+
+  <div class="exam-note"><b>Watch for:</b> the phrase "researcher works together with participants to understand an issue or find a solution" = action research. Also: a false statement to spot is "researchers cannot participate in the events under study" — they <b>can</b> be full participants.</div>
+</section>
+
+<h2 class="chapter-title" id="chapter2">Chapter 2 — Ethnography</h2>
+
+<section class="concept" id="ethno-concepts">
+  <h3>4. Key Concepts in Ethnography <span class="exam-flag">Likely Exam</span></h3>
+  <p>Ethnography aims to understand and describe a particular culture or group, typically through extended fieldwork (Fetterman, 2012).</p>
+
+  <h4>a) Culture</h4>
+  <p>Understanding the behaviours and knowledge specific to the group being studied, described from that group's own perspective.</p>
+
+  <h4>b) Holistic Perspective / Contextualisation</h4>
+  <p>Capturing the culture or group as <b>comprehensively</b> as possible — multiple angles, multiple methods, multiple data sources.</p>
+  <div class="example"><b>Example:</b> studying "interactive travel" (couchsurfing, travel blogging, worldschooling) using interviews AND observation, both online and offline data — that breadth is the holistic perspective in action (Molz, 2018).</div>
+
+  <h4>c) Emic vs Etic Perspective</h4>
+  <div class="pair">
+    <div><b>Emic (insider's view):</b> used mainly during <u>data collection</u> — seeing things the way the group sees them.</div>
+    <div><b>Etic (outsider/social-scientist's view):</b> used together with emic during <u>data analysis</u>.</div>
+  </div>
+  <div class="example"><b>Example:</b> a researcher who joins a "worldschooling" family to observe from the inside is using an emic approach; when later analysing the data through a research lens, she brings in the etic perspective too.</div>
+
+  <h4>d) Nonjudgmental Orientation & Cultural Diversity</h4>
+  <ul>
+    <li><b>Nonjudgmental orientation:</b> the ethnographer must "suspend personal valuation" of the cultural practices being studied — no praising or criticising, just describing.</li>
+    <li><b>Intercultural diversity:</b> differences <i>between</i> two different cultures.</li>
+    <li><b>Intracultural diversity:</b> differences <i>within</i> one culture (i.e. between its subcultures).</li>
+  </ul>
+  <div class="example"><b>Example:</b> observing a religious ritual you personally find strange, and describing it factually without judgment = nonjudgmental orientation. Comparing "Singaporean hawker culture" vs. "Japanese izakaya culture" = intercultural diversity; comparing different hawker centre communities within Singapore = intracultural diversity.</div>
+
+  <div class="exam-note"><b>Watch for (this is a recurring exact question style):</b> "A researcher avoids criticising participants' behaviours — this is _____" → <b>Nonjudgmental orientation</b> (NOT holistic or emic perspective). Also: "Intercultural diversity = differences between subcultures" is a commonly-tested <b>false</b> statement — remember intercultural = <i>between cultures</i>, intracultural = <i>within</i> one culture.</div>
+</section>
+
+<section class="concept" id="ethno-techniques">
+  <h3>5. Key Techniques in Ethnography <span class="exam-flag">Likely Exam</span></h3>
+  <ul>
+    <li><b>Participant observation</b> — staying in the field for an extended period to learn the language/behaviours of the group firsthand.</li>
+    <li><b>Interview</b> — usually <b>informal/unstructured</b> (not the structured, questionnaire-style interview).</li>
+    <li><b>Informant interview</b> — talking to "informants"/key actors: people who are especially articulate and culturally knowledgeable within the group.</li>
+    <li><b>Questionnaire</b> — can gather data quickly from many people, but is technically considered a <i>quantitative</i> tool even when used within an ethnographic study.</li>
+    <li><b>Unobtrusive measure</b> — collecting data without disturbing the setting, e.g. observing physical traces like graffiti.</li>
+  </ul>
+
+  <div class="example"><b>Relatable example:</b> Studying a gaming community by (1) actually joining their Discord and playing with them for months (participant observation), (2) chatting informally rather than running a survey (unstructured interview), (3) seeking out the server's most respected veteran player for insight (informant interview), and (4) simply noting what memes/emojis are pinned in the channel without asking anyone (unobtrusive measure).</div>
+
+  <div class="exam-note"><b>Watch for:</b> "It is common for an ethnographer to use structured interview" is <b>false</b> — ethnographers favour unstructured/informal interviews. Also: "observing graffiti is an obtrusive way to collect data" is <b>false</b> — it's the classic example of an <b>unobtrusive</b> measure.</div>
+</section>
+
+<section class="concept" id="ethno-ethics">
+  <h3>6. Ethics in Ethnography <span class="exam-flag">Likely Exam</span></h3>
+  <ul>
+    <li>Respect the culture or group under study.</li>
+    <li>Obtain informed consent before conducting research.</li>
+    <li>Building trust with the group matters for <b>two</b> reasons simultaneously: (1) research ethics, and (2) the <b>quality of the data</b> collected.</li>
+  </ul>
+  <div class="example"><b>Relatable example:</b> In the mobile virtual ethnography case (Molz, 2018), the researcher had to think hard about consent when studying travellers' public blog posts alongside private interview comments — cross-referencing public and private data raised real confidentiality challenges, showing ethics isn't just a formality but shapes what data you can responsibly use.</div>
+  <div class="exam-note"><b>Watch for:</b> the "best" answer among ethics options is usually the one combining <b>both</b> ethics AND data quality — not just one or the other.</div>
+</section>
+
+<div class="summary-box">
+  <b>Quick recap map</b><br>
+  Qualitative research (this unit) → <b>4 types</b>: Narrative (individual stories) · Focus Group (group discussion) · Action Research (collaborative problem-solving) · Ethnography (deep culture study via fieldwork, with its own concepts/techniques/ethics).
+</div>
+
+<h2 class="chapter-title" id="quiz">Self-Assessment: Short-Answer Questions</h2>
+<p style="font-family:Arial, sans-serif; font-size:.9rem; color:var(--muted);">Try answering each in your own words before revealing the model answer.</p>
+
+<div id="quiz-container"></div>
+
+</main>
+
+<footer>HBC201 Study Unit 4 — personal exam-prep aid built from seminar slides + study unit text. Not an official SUSS document.</footer>
+
+<script>
+const questions = [
+  {
+    q: "1. A friend tells you about interviewing elderly residents about 'the most defining moment of your life.' What type of qualitative research is this, and why?",
+    a: "This is narrative research. It asks participants to tell the story of a significant life event/turning point, focuses on how they subjectively perceive and organise that experience, and the analysis will rely on the researcher's interpretation rather than statistics or generalisation."
+  },
+  {
+    q: "2. Why can't a one-on-one interview replace a focus group when a company wants feedback on a new product?",
+    a: "Focus groups deliberately use group interaction — participants react to and build on each other's comments, generating insights (agreement, disagreement, debate) that a single individual interview cannot produce. The trade-off is that focus groups are harder to organise and success depends on group dynamics."
+  },
+  {
+    q: "3. What makes action research different from the other three qualitative approaches in terms of the researcher's role?",
+    a: "In action research, the researcher is not just observing or interviewing but collaborating with participants as partners, and can even become a full participant in the activity under study. It also involves iterative cycles of reflecting, acting, and reassessing — unlike a single round of data collection in narrative or focus group research."
+  },
+  {
+    q: "4. Explain the difference between the emic and etic perspectives, and when each is typically used.",
+    a: "Emic is the insider's perspective — seeing the culture as its members see it — and is typically used during data collection. Etic is the outsider/researcher's analytical perspective, used together with the emic view during data analysis."
+  },
+  {
+    q: "5. A researcher personally disapproves of a ritual they're observing but describes it neutrally in their field notes without commentary. Which ethnographic concept does this illustrate?",
+    a: "Nonjudgmental orientation — the ethnographer suspends personal valuation of the cultural practice being studied."
+  },
+  {
+    q: "6. Distinguish intercultural diversity from intracultural diversity, with an example of each.",
+    a: "Intercultural diversity refers to differences between two separate cultures (e.g., Singaporean vs. Japanese food culture). Intracultural diversity refers to differences within one culture, i.e., between its subcultures (e.g., different hawker communities within Singapore)."
+  },
+  {
+    q: "7. Why do ethnographers usually prefer unstructured interviews over structured ones?",
+    a: "Unstructured/informal interviews allow flexibility to explore the insider's (emic) perspective naturally as it emerges in the field, rather than forcing responses into predetermined categories, which better suits ethnography's goal of holistic, in-depth cultural understanding."
+  },
+  {
+    q: "8. Give an example of an unobtrusive measure and explain why it's called 'unobtrusive.'",
+    a: "Observing graffiti (or other physical traces) in a natural setting is a classic example. It's unobtrusive because the researcher collects data without directly interacting with or disturbing the people or setting being studied."
+  },
+  {
+    q: "9. Why does building trust with a study group matter for both ethics and data quality?",
+    a: "Ethically, trust reflects respect for participants and supports informed, voluntary participation. Practically, participants who trust the researcher are more likely to behave naturally and share honestly, improving the accuracy and richness of the data collected."
+  },
+  {
+    q: "10. A researcher wants a deep, holistic understanding of a specific community's culture over several months of fieldwork. Which qualitative method should they use, and what two techniques might they combine?",
+    a: "Ethnography. They could combine participant observation (living/engaging within the community over time) with informant interviews (talking to knowledgeable key members) to capture the culture comprehensively — reflecting the holistic perspective."
+  }
+];
+
+const container = document.getElementById('quiz-container');
+questions.forEach((item, i) => {
+  const block = document.createElement('div');
+  block.className = 'quiz-block';
+  block.innerHTML = `
+    <p class="q">${item.q}</p>
+    <button class="reveal-btn" onclick="toggleAnswer(${i})">Show Answer</button>
+    <div class="answer" id="answer-${i}">${item.a}</div>
+  `;
+  container.appendChild(block);
+});
+
+function toggleAnswer(i) {
+  const el = document.getElementById('answer-' + i);
+  const btn = el.previousElementSibling;
+  el.classList.toggle('show');
+  btn.textContent = el.classList.contains('show') ? 'Hide Answer' : 'Show Answer';
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HBC201 — Study Unit 3 Exam Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f7f7f4;
+    --ink:#1d2321;
+    --ink-soft:#4a534f;
+    --rule:#dcded7;
+    --ch1:#146356;   /* Ch1 teal — key concepts */
+    --ch1-tint:#e6efec;
+    --ch2:#3d4a7a;   /* Ch2 indigo — interviews */
+    --ch2-tint:#e8eaf2;
+    --ch3:#a15c1f;   /* Ch3 amber/rust — politics of research */
+    --ch3-tint:#f3e9dc;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    font-size:17px;
+    line-height:1.65;
+  }
+  h1,h2,h3,.serif{font-family:'Lora',Georgia,serif;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 120px;}
+
+  header.masthead{
+    max-width:760px;margin:0 auto;padding:56px 24px 32px;
+    border-bottom:1px solid var(--rule);
+  }
+  .kicker{font-family:'Lora',serif;font-style:italic;color:var(--ink-soft);font-size:15px;margin:0 0 6px;}
+  header.masthead h1{font-size:2.1rem;line-height:1.2;margin:0 0 10px;font-weight:700;}
+  .subhead{color:var(--ink-soft);font-size:16px;max-width:60ch;margin:0;}
+  .source-note{margin-top:22px;font-size:14px;color:var(--ink-soft);display:flex;gap:18px;flex-wrap:wrap;}
+  .source-note span{display:inline-flex;align-items:center;gap:8px;}
+  .dot{width:9px;height:9px;border-radius:50%;display:inline-block;}
+
+  nav.jump{
+    position:sticky;top:0;z-index:10;
+    background:rgba(247,247,244,0.94);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--rule);
+  }
+  nav.jump .inner{
+    max-width:760px;margin:0 auto;padding:12px 24px;
+    display:flex;gap:20px;font-size:14px;overflow-x:auto;
+  }
+  nav.jump a{color:var(--ink-soft);text-decoration:none;white-space:nowrap;font-weight:500;}
+  nav.jump a:hover, nav.jump a:focus-visible{color:var(--ink);}
+
+  .chapter{padding-top:64px;}
+  .chapter-head{display:flex;align-items:baseline;gap:14px;margin-bottom:6px;}
+  .chapter-num{
+    font-family:'Lora',serif;font-weight:600;font-size:1rem;
+    color:#fff;background:var(--accent);
+    width:34px;height:34px;border-radius:50%;
+    display:inline-flex;align-items:center;justify-content:center;
+    flex:none;
+  }
+  .chapter h2{font-size:1.55rem;margin:0;font-weight:700;}
+  .chapter-tag{color:var(--ink-soft);font-size:14.5px;margin:2px 0 34px 48px;}
+
+  #ch1{--accent:var(--ch1);}
+  #ch2{--accent:var(--ch2);}
+  #ch3{--accent:var(--ch3);}
+
+  section.topic{margin-bottom:38px;}
+  section.topic h3{
+    font-size:1.12rem;margin:0 0 4px;font-weight:600;
+    color:var(--accent);
+  }
+  section.topic .lead{margin:0 0 10px;}
+  section.topic ul{margin:8px 0 12px;padding-left:22px;}
+  section.topic li{margin-bottom:5px;}
+
+  .example{
+    background:var(--tint);
+    border-radius:3px;
+    padding:14px 18px;
+    margin-top:10px;
+    font-size:15.5px;
+  }
+  #ch1 .example{--tint:var(--ch1-tint);}
+  #ch2 .example{--tint:var(--ch2-tint);}
+  #ch3 .example{--tint:var(--ch3-tint);}
+  .example .eyebrow{
+    font-family:'Lora',serif;font-style:italic;
+    color:var(--accent);font-size:14px;margin-bottom:4px;display:block;
+  }
+
+  table.compare{width:100%;border-collapse:collapse;margin:14px 0;font-size:15.5px;}
+  table.compare th,table.compare td{
+    text-align:left;padding:9px 12px;border-bottom:1px solid var(--rule);
+    vertical-align:top;
+  }
+  table.compare th{font-family:'Lora',serif;font-weight:600;color:var(--accent);}
+
+  .flow{
+    font-family:'Lora',serif;
+    text-align:center;
+    padding:14px 10px;
+    font-size:15px;
+    color:var(--ink-soft);
+    background:var(--tint);
+    border-radius:3px;
+    margin:14px 0;
+  }
+  #ch1 .flow{--tint:var(--ch1-tint);}
+  #ch2 .flow{--tint:var(--ch2-tint);}
+  #ch3 .flow{--tint:var(--ch3-tint);}
+
+  .case{
+    border-top:1px solid var(--rule);
+    padding-top:14px;margin-top:14px;
+  }
+  .case .case-title{font-weight:600;display:block;margin-bottom:3px;}
+
+  .practice{
+    margin-top:44px;
+    padding:26px 24px 8px;
+    background:#fff;
+    border:1px solid var(--rule);
+    border-radius:4px;
+  }
+  .practice h3{
+    font-size:1.05rem;margin:0 0 4px;
+    color:var(--accent);
+  }
+  .practice > p{margin:0 0 18px;color:var(--ink-soft);font-size:14.5px;}
+  details{
+    border-bottom:1px solid var(--rule);
+    padding:14px 0;
+  }
+  details:last-of-type{border-bottom:none;}
+  summary{
+    cursor:pointer;
+    font-family:'Lora',serif;
+    font-weight:500;
+    font-size:16px;
+    list-style:none;
+    display:flex;
+    gap:10px;
+    align-items:baseline;
+  }
+  summary::-webkit-details-marker{display:none;}
+  summary::before{
+    content:"+";
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    color:var(--accent);
+    flex:none;
+    width:16px;
+  }
+  details[open] summary::before{content:"–";}
+  .answer{
+    margin:10px 0 4px 26px;
+    font-size:15px;
+    color:var(--ink-soft);
+  }
+  .answer strong{color:var(--ink);font-weight:600;}
+
+  .divider{
+    border:none;border-top:1px solid var(--rule);
+    margin:64px 0 0;
+  }
+  footer{
+    max-width:760px;margin:70px auto 0;padding:24px;
+    color:var(--ink-soft);font-size:13.5px;
+    border-top:1px solid var(--rule);
+  }
+  @media (max-width:600px){
+    body{font-size:16px;}
+    header.masthead{padding:40px 20px 28px;}
+    .chapter-tag{margin-left:0;}
+    .chapter-head{flex-wrap:wrap;}
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <p class="kicker">HBC201 · Research Methods for the Social and Behavioural Sciences</p>
+  <h1>Study Unit 3 — Exam Prep Guide</h1>
+  <p class="subhead">Qualitative Research Methods I: the core considerations behind a qualitative study, how researchers actually run interviews, and why research itself is never a politically neutral act — organised the way it was taught in Seminar 3, with the Study Unit reading filled in underneath.</p>
+  <div class="source-note">
+    <span><span class="dot" style="background:var(--ch1)"></span>Ch.1 Main Considerations</span>
+    <span><span class="dot" style="background:var(--ch2)"></span>Ch.2 Types of Interview</span>
+    <span><span class="dot" style="background:var(--ch3)"></span>Ch.3 Politics of Research</span>
+  </div>
+</header>
+
+<nav class="jump">
+  <div class="inner">
+    <a href="#ch1">1 · Considerations</a>
+    <a href="#ch2">2 · Interviews</a>
+    <a href="#ch3">3 · Politics</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ===================== CHAPTER 1 ===================== -->
+<div class="chapter" id="ch1">
+  <div class="chapter-head">
+    <span class="chapter-num">1</span>
+    <h2>Main Considerations in Qualitative Research</h2>
+  </div>
+  <p class="chapter-tag">The concepts, sampling logic, and rigour criteria that are distinctive to qualitative work.</p>
+
+  <section class="topic">
+    <h3>1.1 Emic vs. etic perspective</h3>
+    <table class="compare">
+      <tr><th>Emic</th><th>Etic</th></tr>
+      <tr><td>The <strong>insider's</strong> view of reality — how people themselves perceive their world. Note: one person's view may not match what actually happened, and different insiders may see the same reality differently.</td><td>The <strong>external, scientific</strong> perspective on reality — the researcher's analytical lens.</td></tr>
+    </table>
+    <p class="lead">A qualitative researcher typically <strong>collects</strong> data from the emic perspective first, then <strong>interprets</strong> it using both emic and etic perspectives together (Fetterman, 2012).</p>
+    <div class="example">
+      <span class="eyebrow">Relatable example</span>
+      In the mixed-race identity study (Rocha, 2018), the <strong>emic</strong> perspective is how each participant personally makes sense of their own mixed-race identity. The <strong>etic</strong> perspective is the researcher stepping back to analyse those personal accounts through the lens of narrative-identity theory.
+    </div>
+  </section>
+
+  <section class="topic">
+    <h3>1.2 Thick description</h3>
+    <p class="lead">Because the meaning of a behaviour depends heavily on its context, qualitative researchers describe observed behaviours or events in rich, contextual detail rather than reducing them to a simple label (Hammersley, 2011).</p>
+    <div class="example">
+      <span class="eyebrow">Relatable example</span>
+      A single blink could be an involuntary reflex or a deliberate wink — you can't tell which just from "the person blinked." Thick description means capturing the surrounding context (who was there, what was being said, the relationship between the people involved) so the meaning of the blink becomes clear.
+    </div>
+  </section>
+
+  <section class="topic">
+    <h3>1.3 Sampling in qualitative research</h3>
+    <p class="lead">Qualitative researchers typically use <strong>purposive sampling</strong> — deliberately selecting participants who meet specific criteria, rather than random sampling (Morse, 2011). Key characteristics:</p>
+    <ul>
+      <li>Recruitment often <strong>continues throughout</strong> the study rather than being finalised upfront.</li>
+      <li>Selection is <strong>intentional</strong> — e.g. excluding people who aren't articulate enough for an interview, or deliberately seeking out <strong>negative cases</strong> that don't fit the emerging pattern.</li>
+      <li>Researchers may also do <strong>"secondary selection"</strong> — excluding data from certain participants later on if it's judged not useful.</li>
+    </ul>
+    <div class="example">
+      <span class="eyebrow">Relatable example</span>
+      Studying why some employees thrive under remote work, a researcher might deliberately seek out one or two employees who struggled with it — not because they fit the pattern, but precisely because they're the exception that tests whether the emerging explanation actually holds.
+    </div>
+  </section>
+
+  <section class="topic">
+    <h3>1.4 Rigour: how qualitative research is judged instead of "validity" and "reliability"</h3>
+    <p class="lead">Qualitative researchers generally don't use the quantitative validity/reliability toolkit from Study Unit 2 — reality is treated as socially constructed rather than fixed, so "did we measure the one true reality accurately?" isn't quite the right question. Saumure & Given (2012) instead offer five rigour criteria:</p>
+    <table class="compare">
+      <tr><th>Criterion</th><th>What it means</th></tr>
+      <tr><td><strong>Transparency</strong></td><td>Clearly describing every research step, so others can evaluate or attempt to replicate the procedure.</td></tr>
+      <tr><td><strong>Credibility</strong></td><td>Attending to negative cases (not just confirming ones) and checking findings back with participants.</td></tr>
+      <tr><td><strong>Dependability</strong></td><td>Using multiple coders and comparing their results, or discussing interpretations with others.</td></tr>
+      <tr><td><strong>Comparativeness</strong></td><td>Comparing findings across cases within a study, or across different studies.</td></tr>
+      <tr><td><strong>Reflexivity</strong></td><td>The researcher reflecting on how their own presence or background may have shaped the findings.</td></tr>
+    </table>
+    <p class="lead"><strong>Mapping onto the quantitative concepts:</strong> dependability is roughly analogous to <em>reliability</em>, and credibility is roughly analogous to <em>validity</em> (Smith, 2011) — but the philosophical basis differs. Some qualitative researchers argue replication isn't even possible in qualitative inquiry; all a researcher can offer is a careful, transparent account of how the data was gathered and analysed. Similarly, since qualitative researchers may not believe in one single objective reality to "correctly represent," what matters more is whether the researcher <strong>faithfully depicts</strong> the phenomenon as they encountered it.</p>
+    <div class="case">
+      <span class="case-title">Case: Identity and mixed race (Rocha, 2018)</span>
+      The researcher — herself mixed-race — reflects explicitly on how her own background shaped the interviews and analysis (reflexivity), and discusses the strategies she used to strengthen the study's credibility and dependability, while being clear that generalising to a wider population was never the goal.
+    </div>
+  </section>
+
+  <div class="practice">
+    <h3>Test yourself — Chapter 1</h3>
+    <p>Cover the answer, try to say it in your own words first.</p>
+
+    <details>
+      <summary>Define the emic and etic perspectives, and explain the typical order in which a qualitative researcher uses them.</summary>
+      <div class="answer"><strong>Answer:</strong> Emic is the insider's view of reality — how participants themselves perceive their world. Etic is the external, scientific perspective. A researcher typically collects data from the emic perspective first, then interprets it using both emic and etic perspectives.</div>
+    </details>
+
+    <details>
+      <summary>What is "thick description," and why is it necessary?</summary>
+      <div class="answer"><strong>Answer:</strong> Describing observed behaviours or events in rich contextual detail, because the meaning of a behaviour (e.g. a blink) depends on the context it occurs in and can't be understood from the bare action alone.</div>
+    </details>
+
+    <details>
+      <summary>Why do qualitative researchers usually select participants purposively rather than randomly?</summary>
+      <div class="answer"><strong>Answer:</strong> Because not everyone has the characteristics needed (e.g. being articulate enough for an interview), and researchers may need to deliberately seek out specific cases — including negative cases that don't fit the emerging pattern — rather than a representative random sample.</div>
+    </details>
+
+    <details>
+      <summary>Name the five criteria used to evaluate the rigour of qualitative research.</summary>
+      <div class="answer"><strong>Answer:</strong> Transparency, credibility, dependability, comparativeness, and reflexivity.</div>
+    </details>
+
+    <details>
+      <summary>Which qualitative rigour criterion is most analogous to reliability in quantitative research, and which is most analogous to validity?</summary>
+      <div class="answer"><strong>Answer:</strong> Dependability is analogous to reliability; credibility is analogous to validity.</div>
+    </details>
+
+    <details>
+      <summary>Why have some qualitative researchers argued that "replication" isn't a meaningful goal for qualitative inquiry?</summary>
+      <div class="answer"><strong>Answer:</strong> Because qualitative research is grounded in the view that reality is constructed through social interaction rather than stable and fixed, so a study can't be expected to be replicated the way a quantitative study can — the best a researcher can offer is a careful, transparent account of how the data was obtained and analysed.</div>
+    </details>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ===================== CHAPTER 2 ===================== -->
+<div class="chapter" id="ch2">
+  <div class="chapter-head">
+    <span class="chapter-num">2</span>
+    <h2>Types of Interview in Qualitative Research</h2>
+  </div>
+  <p class="chapter-tag">Interviews sit on a spectrum from fully open to fully scripted — where you land depends on what you already know.</p>
+
+  <section class="topic">
+    <h3>2.1 The three types, by how much control the researcher holds</h3>
+    <div class="flow">Unstructured (least control) → Semi-structured → Structured (most control, resembles a verbal survey)</div>
+    <p class="lead">Structured interviews are close enough to the survey method that they're covered separately in Study Unit 5. This chapter focuses on the two more open formats.</p>
+  </section>
+
+  <section class="topic">
+    <h3>2.2 Unstructured interview</h3>
+    <p class="lead">Also called an "open interview." The researcher starts with a broad, open-ended question, and the interviewee's responses — not a prepared list of questions — drive where the conversation goes. Best used to <strong>explore a new field</strong> or understand a topic <strong>in depth</strong> when the researcher doesn't yet know enough to ask more specific questions (Firmin, 2012).</p>
+    <div class="example">
+      <span class="eyebrow">Relatable example</span>
+      A researcher entering a completely unfamiliar community might simply ask, "Tell me about a typical day for you," and let whatever the person brings up shape the follow-up questions — rather than arriving with a fixed checklist.
+    </div>
+  </section>
+
+  <section class="topic">
+    <h3>2.3 Semi-structured interview</h3>
+    <p class="lead">Also called an "in-depth interview." The researcher asks a series of open-ended questions related to a topic, with more control over direction and scope than an unstructured interview, but still uses probes that let interviewees elaborate freely — unlike a structured interview's rigid script (Ayres, 2012). It's typically used when the researcher <strong>already has some background knowledge</strong> of the topic.</p>
+    <p class="lead">A key pitfall: <strong>leading questions</strong>, which push the interviewee toward a particular type of answer.</p>
+    <div class="example">
+      <span class="eyebrow">Relatable example</span>
+      Asking first-year students "How did you <em>benefit</em> from your education here?" is a leading question — it assumes benefit exists, steers attention away from any downsides, and narrows "college experience" down to academics only. A better, non-leading version: "What has your experience of college been like so far?"
+    </div>
+    <div class="case">
+      <span class="case-title">Case: Local food movements (Kennedy, 2018)</span>
+      Semi-structured interviews were used to study consumer and civic activity in Canadian local food movements, combined with <strong>purposive and snowball sampling</strong> — selecting sites partly based on where the researcher had personal connections, and partly to capture variation in the phenomenon of interest.
+    </div>
+  </section>
+
+  <section class="topic">
+    <h3>2.4 Pros and cons of interviews generally</h3>
+    <table class="compare">
+      <tr><th>Pros</th><th>Cons</th></tr>
+      <tr><td>Relatively <strong>easy and cost-effective</strong> compared to methods like field observation.</td><td>The researcher never <strong>directly observes</strong> actual behaviour — only what the interviewee reports and recalls.</td></tr>
+      <tr><td></td><td>Quality depends on the <strong>interviewee's</strong> ability to accurately recall and articulate their experience, and on the <strong>researcher's</strong> skill at drawing out rich, relevant information.</td></tr>
+    </table>
+  </section>
+
+  <div class="practice">
+    <h3>Test yourself — Chapter 2</h3>
+    <p>Cover the answer, try to say it in your own words first.</p>
+
+    <details>
+      <summary>Order the three interview types from least to most structured, and note which is most similar to a survey.</summary>
+      <div class="answer"><strong>Answer:</strong> Unstructured → semi-structured → structured. The structured interview is most similar to a survey, since it follows a predetermined set of questions verbally.</div>
+    </details>
+
+    <details>
+      <summary>When would a researcher choose an unstructured interview over a semi-structured one?</summary>
+      <div class="answer"><strong>Answer:</strong> When exploring a completely new or unfamiliar field, or wanting to understand a topic in depth without prior assumptions about what's relevant — the interviewee's responses, not a prepared list, drive the direction of the conversation.</div>
+    </details>
+
+    <details>
+      <summary>What is a leading question, and why should researchers avoid it in semi-structured interviews?</summary>
+      <div class="answer"><strong>Answer:</strong> A question that pushes the interviewee toward a certain type of answer (e.g. "How did you benefit from X?" assumes a benefit exists). It narrows and biases what the interviewee talks about, distorting the data collected.</div>
+    </details>
+
+    <details>
+      <summary>Name two limitations that apply to interviews as a data collection method.</summary>
+      <div class="answer"><strong>Answer:</strong> Any two of: the researcher cannot directly observe actual behaviour (only what's reported); data quality depends on the interviewee's ability to accurately recall and describe their experience; data quality also depends on the researcher's skill at eliciting rich, relevant information.</div>
+    </details>
+
+    <details>
+      <summary>In the local food movements case study, what two sampling techniques were combined with semi-structured interviews?</summary>
+      <div class="answer"><strong>Answer:</strong> Purposive sampling and snowball sampling.</div>
+    </details>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ===================== CHAPTER 3 ===================== -->
+<div class="chapter" id="ch3">
+  <div class="chapter-head">
+    <span class="chapter-num">3</span>
+    <h2>Politics of Research</h2>
+  </div>
+  <p class="chapter-tag">Research is never a neutral act — it comes from somewhere, and it affects the people it studies.</p>
+
+  <section class="topic">
+    <h3>3.1 Why research is "political"</h3>
+    <p class="lead">Joshee (2012) argues that all research is political, because it always comes from a particular view of the world, makes claims about reality, and supports or refutes existing knowledge claims. Three interrelated topics come up in this discussion:</p>
+  </section>
+
+  <section class="topic">
+    <h3>3.2 The qualitative vs. quantitative debate</h3>
+    <p class="lead">Qualitative and quantitative research differ fundamentally in their underlying philosophy of what reality is, and in how they approach a research question (see Study Units 1–2). These differences have fuelled long-running debates about which orientation is more valuable — but the more defensible position, and the one the formative assessment favours, is that <strong>both have their own benefits and limitations</strong>, not that one is categorically superior.</p>
+  </section>
+
+  <section class="topic">
+    <h3>3.3 The relationship between researcher and researched</h3>
+    <p class="lead">Sometimes called <strong>"the politics of the gaze"</strong> — who holds more power in the research relationship, and what effect that power imbalance has on the people being studied who hold less power (Joshee, 2012).</p>
+    <div class="case">
+      <span class="case-title">Case: Disadvantaged citizens as co-researchers (Rogers et al., 2014)</span>
+      A study on how disadvantaged social housing tenants were depicted in an Australian TV series involved those same disadvantaged citizens working as <strong>co-researchers</strong> alongside academic scholars — directly addressing the power imbalance by giving the "researched" a hand in shaping the research itself.
+    </div>
+  </section>
+
+  <section class="topic">
+    <h3>3.4 Evidence-based research</h3>
+    <p class="lead">Since the 1990s, policy makers and funding agencies in various Western and Northern countries have pushed for "evidence-based research" — and in that push, <strong>quantitative studies are often treated as more valuable or superior</strong> to qualitative studies by those same policy makers and funders (Joshee, 2012). This is presented as a political bias in how research gets funded and valued, not a neutral, objective assessment of research quality.</p>
+    <div class="example">
+      <span class="eyebrow">Relatable example</span>
+      A funding panel might favour a large-scale survey showing "80% of participants reported improved wellbeing" over an equally rigorous qualitative study exploring in rich detail *why* and *how* wellbeing changed for a smaller group — even though the qualitative study may answer a question the numbers alone cannot.
+    </div>
+  </section>
+
+  <div class="practice">
+    <h3>Test yourself — Chapter 3</h3>
+    <p>Cover the answer, try to say it in your own words first.</p>
+
+    <details>
+      <summary>According to Joshee (2012), why is all research considered "political"?</summary>
+      <div class="answer"><strong>Answer:</strong> Because research always comes from a particular view of the world, makes claims about reality, and supports or refutes existing knowledge claims — it's never a fully neutral, view-from-nowhere activity.</div>
+    </details>
+
+    <details>
+      <summary>What is meant by "the politics of the gaze"?</summary>
+      <div class="answer"><strong>Answer:</strong> The power dynamic between researcher and researched — questions of who holds more power in the relationship, and what effect that imbalance has on individuals with less power.</div>
+    </details>
+
+    <details>
+      <summary>What is the "correct" position on the qualitative vs. quantitative debate, based on this unit?</summary>
+      <div class="answer"><strong>Answer:</strong> Neither orientation is categorically superior — quantitative and qualitative research both have their own benefits and limitations.</div>
+    </details>
+
+    <details>
+      <summary>What does "evidence-based research" tend to favour, and why is this itself considered a political issue?</summary>
+      <div class="answer"><strong>Answer:</strong> It tends to favour quantitative studies, which policy makers and funding agencies often regard as more valuable or superior to qualitative studies — a preference that reflects a particular set of values and priorities, not a neutral judgement of research quality.</div>
+    </details>
+
+    <details>
+      <summary>How did the "disadvantaged citizens as co-researchers" case study address the politics of the researcher–researched relationship?</summary>
+      <div class="answer"><strong>Answer:</strong> By having the disadvantaged social housing tenants who were the subject of the study work as co-researchers alongside academic scholars, rather than being studied purely as passive subjects — directly addressing the power imbalance in who conducts and shapes the research.</div>
+    </details>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  Compiled from HBC201 Seminar 3 slides (25 Aug 2026) and Study Unit 3 — Qualitative Research Methods I. For exam prep use; always check the Study Guide and Canvas for the current syllabus and formative assessment.
+</footer>
+
+</body>
+</html>
