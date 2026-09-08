@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PSY265 – Seminar 1 & 2 Exam Prep: Health Psychology Foundations & Health Behaviours</title>
+<style>
+  :root{
+    --navy:#1b2a4a;
+    --blue:#2a5ca8;
+    --accent:#c9770a;
+    --bg:#fbfaf7;
+    --card:#ffffff;
+    --line:#e3ddd3;
+    --text:#26241f;
+    --muted:#6b6558;
+    --exam:#fff4e6;
+    --exam-border:#e0a458;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:"Georgia","Iowan Old Style",serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.55;
+  }
+  header{
+    background:var(--navy);
+    color:#f4f1ea;
+    padding:2.2rem 1.5rem 1.6rem;
+    text-align:center;
+  }
+  header h1{
+    margin:0 0 .3rem;
+    font-size:1.6rem;
+    font-weight:600;
+    letter-spacing:.2px;
+  }
+  header p{
+    margin:0;
+    color:#c7cfe0;
+    font-size:.95rem;
+  }
+  nav{
+    background:#22314f;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:0;
+    padding:.4rem 0;
+    position:sticky;
+    top:0;
+    z-index:50;
+  }
+  nav a{
+    color:#dbe2f0;
+    text-decoration:none;
+    font-size:.78rem;
+    font-family:Arial, sans-serif;
+    padding:.5rem .7rem;
+    border-radius:4px;
+  }
+  nav a:hover{background:#324875;}
+  main{
+    max-width:820px;
+    margin:0 auto;
+    padding:1.8rem 1.2rem 4rem;
+  }
+  .chapter-title{
+    margin-top:3rem;
+    padding-bottom:.4rem;
+    border-bottom:3px solid var(--navy);
+    color:var(--navy);
+    font-size:1.5rem;
+  }
+  .chapter-title:first-of-type{margin-top:0;}
+  section.concept{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:1.3rem 1.5rem;
+    margin:1.3rem 0;
+    box-shadow:0 1px 3px rgba(0,0,0,.04);
+  }
+  section.concept h3{
+    margin-top:0;
+    color:var(--blue);
+    font-size:1.18rem;
+  }
+  section.concept h4{
+    font-family:Arial, sans-serif;
+    font-size:.78rem;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    color:var(--muted);
+    margin:1rem 0 .3rem;
+  }
+  .example{
+    background:#f2f6ee;
+    border-left:4px solid #7a9a5c;
+    padding:.7rem 1rem;
+    border-radius:0 6px 6px 0;
+    margin-top:.3rem;
+    font-size:.96rem;
+  }
+  .example b{color:#4e6b39;}
+  .exam-flag{
+    display:inline-block;
+    background:var(--exam);
+    border:1px solid var(--exam-border);
+    color:#8a5a12;
+    font-family:Arial, sans-serif;
+    font-size:.72rem;
+    font-weight:bold;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+    padding:.2rem .55rem;
+    border-radius:20px;
+    margin-left:.5rem;
+    vertical-align:middle;
+  }
+  .exam-note{
+    background:var(--exam);
+    border:1px solid var(--exam-border);
+    border-radius:6px;
+    padding:.6rem .9rem;
+    margin-top:.6rem;
+    font-size:.9rem;
+    font-family:Arial, sans-serif;
+  }
+  .exam-note b{color:#8a5a12;}
+  ul{padding-left:1.3rem;}
+  li{margin-bottom:.3rem;}
+  .pair{
+    display:flex;
+    gap:.8rem;
+    flex-wrap:wrap;
+  }
+  .pair > div{flex:1 1 240px;}
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:.5rem;
+    font-size:.92rem;
+  }
+  th,td{
+    border:1px solid var(--line);
+    padding:.5rem .6rem;
+    text-align:left;
+    vertical-align:top;
+  }
+  th{background:#f0ede4;font-family:Arial, sans-serif;font-size:.82rem;}
+  .quiz-block{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-left:4px solid var(--blue);
+    border-radius:8px;
+    padding:1rem 1.3rem;
+    margin:1rem 0;
+  }
+  .quiz-block p.q{
+    font-weight:bold;
+    margin:0 0 .5rem;
+  }
+  .reveal-btn{
+    font-family:Arial, sans-serif;
+    font-size:.82rem;
+    background:var(--blue);
+    color:#fff;
+    border:none;
+    padding:.4rem .9rem;
+    border-radius:5px;
+    cursor:pointer;
+  }
+  .reveal-btn:hover{background:var(--navy);}
+  .answer{
+    display:none;
+    margin-top:.7rem;
+    padding-top:.7rem;
+    border-top:1px dashed var(--line);
+    font-size:.94rem;
+    color:#34432e;
+    background:#f7faf3;
+    padding:.7rem .9rem;
+    border-radius:6px;
+  }
+  .answer.show{display:block;}
+  .summary-box{
+    background:#eef2f8;
+    border:1px solid #c7d3e5;
+    border-radius:8px;
+    padding:1rem 1.3rem;
+    margin:1.5rem 0;
+    font-size:.94rem;
+  }
+  footer{
+    text-align:center;
+    color:var(--muted);
+    font-family:Arial, sans-serif;
+    font-size:.78rem;
+    padding:1.5rem;
+  }
+  .toc{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:1rem 1.3rem;
+    font-family:Arial, sans-serif;
+    font-size:.9rem;
+  }
+  .toc a{color:var(--blue); text-decoration:none;}
+  .toc a:hover{text-decoration:underline;}
+  .toc ul{margin:.3rem 0;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>PSY265 · Seminar 1 & 2</h1>
+  <p>Health Psychology Foundations & Health Behaviours — Exam Prep Guide (Seminar slides + Study Unit 1 text combined)</p>
+</header>
+
+<nav>
+  <a href="#definitions">Definitions</a>
+  <a href="#history">History</a>
+  <a href="#biopsychosocial">Biopsychosocial</a>
+  <a href="#need">Need for HP</a>
+  <a href="#research-careers">Research/Careers</a>
+  <a href="#habits">Habits/Prevention</a>
+  <a href="#factors">Factors</a>
+  <a href="#barriers">Barriers</a>
+  <a href="#populations">Populations</a>
+  <a href="#attitude-models">Attitude Models</a>
+  <a href="#cbt">CBT</a>
+  <a href="#cbt-techniques">CBT Techniques</a>
+  <a href="#transtheoretical">Stages of Change</a>
+  <a href="#relapse">Relapse</a>
+  <a href="#social-eng">Social Engineering</a>
+  <a href="#goals">Goal Setting</a>
+  <a href="#obesity">Obesity</a>
+  <a href="#diet">Diet</a>
+  <a href="#eating-disorders">Eating Disorders</a>
+  <a href="#exercise">Exercise</a>
+  <a href="#sleep">Sleep</a>
+  <a href="#quiz">Self-Assessment</a>
+</nav>
+
+<main>
+
+<div class="toc">
+  <b>How this guide is organised</b> — it follows the order your seminars were taught in:
+  <ul>
+    <li><b>Chapter 1 (Seminar 1):</b> What is Health Psychology? → Definitions, History, the Biopsychosocial Model, why the field is needed, research & careers</li>
+    <li><b>Chapter 2 (Seminar 1):</b> Health Behaviours — Foundations → habits, primary prevention, factors, barriers, intervening across populations, attitude-change models</li>
+    <li><b>Chapter 3 (Seminar 2):</b> Changing Health Behaviours → CBT approaches & techniques, the Transtheoretical Model, relapse, social engineering, venues, goal setting</li>
+    <li><b>Chapter 4 (Seminar 2):</b> Weight, Diet, Exercise & Sleep → obesity, healthy diet, eating disorders, exercise, sleep</li>
+  </ul>
+  Items marked <span class="exam-flag">Likely Exam</span> are concepts the slides emphasised with dedicated definition slides, comparison tables, or worked examples — the classic material for definition-matching and scenario-identification questions.
+</div>
+
+<h2 class="chapter-title" id="chapter1">Chapter 1 — What is Health Psychology?</h2>
+
+<section class="concept" id="definitions">
+  <h3>1. Defining Health & Health Psychology <span class="exam-flag">Likely Exam</span></h3>
+  <p><b>Health</b> (WHO, 1948): <i>"a complete state of physical, mental, and social well-being and not merely the absence of disease or infirmity."</i> Also called <b>wellness</b>.</p>
+  <p><b>Health Psychology</b> (Matarazzo, 1982): the field devoted to the <i>promotion and maintenance of health</i>, the <i>prevention and treatment of illness</i>, the <i>identification of etiologic and diagnostic correlates</i> of health, illness and dysfunction, and the <i>analysis and improvement of the health care system</i> and health policy.</p>
+  <h4>Four focus areas of health psychologists</h4>
+  <ul>
+    <li><b>Health promotion and maintenance</b> — e.g. getting children to develop good eating habits, promoting regular exercise, designing media campaigns.</li>
+    <li><b>Prevention and treatment of illness</b> — psychological aspects of prevention/treatment (e.g. stress management).</li>
+    <li><b>Etiology and correlates</b> of health, illness and dysfunction — the behavioural/social factors that contribute to them (e.g. smoking, alcohol, exercise).</li>
+    <li><b>Health care system and health policy</b> — improving the system and formulating policy.</li>
+  </ul>
+  <div class="example"><b>Relatable example:</b> A campaign that gets teens to swap sugary drinks for water is health <i>promotion</i>; a smoking-cessation clinic is <i>treatment</i>; a study asking why teenagers start vaping is <i>etiology</i>; and a proposal to ban vape sales near schools is <i>health policy</i> — all four are health psychology in action.</div>
+  <div class="exam-note"><b>Watch for:</b> the WHO definition of health is a common fill-in-the-blank/true-false item — remember it explicitly rejects "absence of disease" as a sufficient definition. Also know Matarazzo's four focus areas by name, since scenario questions often ask you to classify an example into one of the four.</div>
+</section>
+
+<section class="concept" id="history">
+  <h3>2. Mind-Body Relationships: A Brief History</h3>
+  <ul>
+    <li><b>Pre-history:</b> disease attributed to evil spirits; treatment = exorcism.</li>
+    <li><b>Ancient Greeks:</b> disease from imbalance of the <b>4 humours</b> (black bile, yellow bile, phlegm, blood); personality types linked to each humour.</li>
+    <li><b>Middle Ages:</b> disease as God's punishment for wrongdoing; "cure" involved torturing the body to drive out evil forces.</li>
+    <li><b>1900s — Biomedical model:</b> illness can be cured with medication.</li>
+    <li><b>1930s/1940s — Psychosomatic medicine:</b> Flanders Dunbar (1930s) and Franz Alexander (1940s) argued unconscious conflicts produce anxiety that takes a physiological toll via the autonomic nervous system.</li>
+    <li><b>2000 onwards:</b> researchers no longer believe a single conflict/personality type is sufficient to cause illness.</li>
+    <li><b>Mind-body perspective:</b> growing Western interest in East Asian philosophies (e.g. Chinese medicine treats the whole person and the organ's relation to all body systems, not an isolated diseased organ).</li>
+  </ul>
+  <div class="exam-note"><b>Watch for:</b> matching each era to its explanation of illness — a common question style is "which historical period believed disease was caused by an imbalance of humours?" (Ancient Greece) or by evil spirits (pre-history, NOT the Middle Ages, which attributed it to God's punishment).</div>
+</section>
+
+<section class="concept" id="biopsychosocial">
+  <h3>3. The Biopsychosocial Model vs the Biomedical Model <span class="exam-flag">Likely Exam</span></h3>
+  <p>The <b>biopsychosocial model</b> holds that health and illness result from the interaction of <b>biological, psychological, and social</b> factors (Suls & Rothman, 2004) — the mind and body together determine health.</p>
+  <table>
+    <tr><th>Biomedical Model</th><th>Biopsychosocial Model</th></tr>
+    <tr>
+      <td>Illness explained by aberrant somatic bodily processes — biochemical imbalances, neurophysiological abnormalities</td>
+      <td>Health and illness are consequences of the interplay of biological, psychological and social factors</td>
+    </tr>
+    <tr>
+      <td>Reductionist, single-factor model (disordered cells, chemical imbalances)</td>
+      <td>Both macro-level (social support, depression) and micro-level (cellular disorders) processes interact</td>
+    </tr>
+    <tr>
+      <td>Assumes mind-body dualism — mind and body are separate</td>
+      <td>Mind and body cannot be distinguished in matters of health and illness</td>
+    </tr>
+  </table>
+  <h4>Clinical implications of the biopsychosocial model</h4>
+  <ul>
+    <li>Diagnosis should always weigh biological, psychological and social factors together — needs an <b>interdisciplinary</b> approach.</li>
+    <li>Treatment recommendations must involve all three sets of factors.</li>
+    <li>An effective <b>patient-practitioner relationship</b> improves service use, treatment efficacy, and speed of recovery.</li>
+    <li>Achieving and maintaining health and practising health habits also involves the interaction of all three factor types.</li>
+  </ul>
+  <div class="example"><b>Relatable example (from the seminar's own case):</b> Doctor A tells Jenny her headaches should be checked by a neurologist for an MRI — that's the <b>biomedical</b> model (single biological cause). Doctor B instead asks about Jenny's lifestyle, work, and the events before her headaches started, while still keeping the MRI option in reserve for "worst case" — that's the <b>biopsychosocial</b> model, since it weighs psychological/social triggers alongside a possible biological one.</div>
+  <div class="exam-note"><b>Watch for:</b> a scenario describing a doctor who investigates lifestyle/stress/work <i>in addition to</i> a possible physical cause = biopsychosocial; a doctor who jumps straight to a scan/medication with no mention of psychosocial factors = biomedical. Also: "biopsychosocial model assumes mind-body dualism" is a classic <b>false</b> statement — dualism belongs to the biomedical model.</div>
+</section>
+
+<section class="concept" id="need">
+  <h3>4. Why is Health Psychology Needed? <span class="exam-flag">Likely Exam</span></h3>
+  <ul>
+    <li><b>Changing patterns of illness:</b> acute disorders (e.g. tuberculosis) have been replaced by <b>chronic illnesses</b> (cancer, heart disease) as leading causes of death in developed countries like Singapore. Chronic illnesses are diseases where psychological and social factors are implicated as causes; sufferers may live with them for years, developing psychological issues (e.g. depression in diabetics), family functioning is affected, and many seek unconventional treatments that health psychologists can help evaluate.</li>
+    <li><b>Advances in technology and research:</b> new technology (e.g. genetic testing) identifies risk factors for disorders like breast cancer and heart disease; health psychologists help patients cope with this risk information and make informed decisions.</li>
+    <li><b>Role of epidemiology:</b> morbidity/mortality statistics keep health psychologists informed of major causes of death (e.g. car accidents in children/adolescents → mandatory seat belt laws).</li>
+    <li><b>Expanded health care services:</b> population growth has rapidly expanded health care systems, so nearly everyone interacts with them.</li>
+    <li><b>Increased medical acceptance:</b> health psychologists are increasingly accepted in the medical community; they now develop short-term behavioural interventions (e.g. pain management), beyond just administering psychological tests.</li>
+  </ul>
+  <div class="exam-note"><b>Watch for:</b> "increased medical acceptance" is specifically about health psychologists moving beyond testing/diagnosis into intervention — don't confuse it with "expanded health care services," which is about system growth, not professional acceptance.</div>
+</section>
+
+<section class="concept" id="research-careers">
+  <h3>5. Health Psychology Research & Careers</h3>
+  <p>Health psychologists provide theoretical, methodological and statistical expertise in researching behaviours and illness, using:</p>
+  <ul>
+    <li><b>Experimental designs</b> — manipulating a variable to test cause-effect.</li>
+    <li><b>Correlational studies</b> — examining relationships between variables.</li>
+    <li><b>Prospective designs</b> — studying how two variables change over time (forward-looking).</li>
+    <li><b>Retrospective designs</b> — reconstructing conditions that led to a current situation (backward-looking).</li>
+  </ul>
+  <h4>Careers</h4>
+  <div class="pair">
+    <div><b>Careers in Practice:</b> physicians, nurses, medical social workers, allied health professionals (occupational therapy, dietetics, physical therapy, public health).</div>
+    <div><b>Careers in Research:</b> academics conducting research in public health, psychology and medicine; developing/improving educational interventions; some go on to graduate school.</div>
+  </div>
+  <div class="exam-note"><b>Watch for:</b> distinguishing prospective (forward, over time) from retrospective (backward, reconstructing the past) designs — a common trap is swapping the two definitions.</div>
+</section>
+
+<h2 class="chapter-title" id="chapter2">Chapter 2 — Health Behaviours: Foundations</h2>
+
+<section class="concept" id="habits">
+  <h3>6. Health Behaviours, Health Habits & Primary Prevention <span class="exam-flag">Likely Exam</span></h3>
+  <p><b>Health behaviours</b>: behaviours undertaken by people to enhance or maintain their health. Poor health behaviours are implicated in illness and can become poor health <i>habits</i>.</p>
+  <p><b>Health habits</b>: health-related behaviour that is firmly established and often performed <b>automatically, without awareness</b>. They develop in childhood and begin to <b>stabilise around age 11–12</b>. A habit may start because it's reinforced by a specific positive outcome, but eventually becomes independent of that reinforcement and is maintained by associated environmental factors — making habits <b>highly resistant to change</b>.</p>
+  <div class="example"><b>Belloc & Breslow's (1972) 7 good health habits:</b> 7–8 hours of sleep/night · not smoking · eating breakfast daily · no more than 1–2 alcoholic drinks/day · regular exercise · no eating between meals · being no more than 10% overweight. People who practised these had fewer illnesses and significantly lower mortality 9–12 years later.</div>
+  <p><b>Primary prevention</b>: combating risk factors for illness <i>before</i> illness develops. Two strategies:</p>
+  <ul>
+    <li>Use behaviour-change methods to help people alter existing problematic health behaviours.</li>
+    <li>Prevent people from developing poor health habits in the first place <i>(the more preferred strategy)</i>.</li>
+  </ul>
+  <div class="exam-note"><b>Watch for:</b> the age at which habits stabilise (11–12) is a specific fact worth memorising. Also: between the two primary-prevention strategies, "preventing the habit from forming" is explicitly the preferred one over "changing an existing habit."</div>
+</section>
+
+<section class="concept" id="factors">
+  <h3>7. Factors Affecting Good Health Habits</h3>
+  <ul>
+    <li><b>Demographic factors:</b> younger, more affluent, better-educated people under low stress with high social support tend to practise better health habits.</li>
+    <li><b>Age:</b> habits are good in childhood, deteriorate in adolescence/young adulthood, then improve again in older age.</li>
+    <li><b>Values:</b> e.g. whether exercise is culturally desirable for women differs across cultures.</li>
+    <li><b>Personal control:</b> perceiving one's health as under personal control shapes habits (measured by the <b>Health Locus of Control</b> scale — internal control, control by practitioner, or chance).</li>
+    <li><b>Social influence:</b> family, friends and coworkers influence habits, for better or worse.</li>
+    <li><b>Personal goals and values:</b> people who value fitness/athletic achievement exercise more; focusing on personal values (self-affirmation) improves health habits.</li>
+    <li><b>Perceived symptoms:</b> some habits are controlled by whether symptoms are noticed.</li>
+    <li><b>Access to the health care system:</b> influences practice of health behaviours.</li>
+    <li><b>Cognitive factors:</b> belief that a behaviour is beneficial, or that one is vulnerable without it, predicts the behaviour.</li>
+  </ul>
+  <div class="exam-note"><b>Watch for:</b> the Health Locus of Control scale's three sources of perceived control (internal / practitioner / chance) — a frequent matching item.</div>
+</section>
+
+<section class="concept" id="barriers">
+  <h3>8. Barriers to Modifying Poor Health Behaviours <span class="exam-flag">Likely Exam</span></h3>
+  <h4>No immediate incentives</h4>
+  <p>People develop habits while young and healthy, so there's no felt incentive to change; the payoff (avoiding illness decades later) feels too distant.</p>
+  <h4>Emotional factors</h4>
+  <p>Ingrained bad habits are often enjoyable, automatic, addictive and resistant to change. Affective attitudes (emotional beliefs about a habit) predict its practice; negative affect can undermine receptivity to health messages, producing defensive responses to threat.</p>
+  <h4>Instability of health behaviours</h4>
+  <ul>
+    <li>Habits are unstable over time (e.g. a person quits smoking, then relapses).</li>
+    <li>Different habits are controlled by different factors for the same person (e.g. smoking linked to stress).</li>
+    <li>The same habit can be controlled by different factors in different people (one overeats socially, another when stressed).</li>
+    <li>Controlling factors can change across a person's lifetime (e.g. exercise: mandatory in school, then a personal "must" in adulthood).</li>
+  </ul>
+  <div class="exam-note"><b>Watch for:</b> "instability of health behaviours" has four distinct sub-points — exam questions often ask you to identify which specific instability point a scenario illustrates (same person/different factors over time vs. different people/same behaviour, different factors).</div>
+</section>
+
+<section class="concept" id="populations">
+  <h3>9. Intervening Across the Population <span class="exam-flag">Likely Exam</span></h3>
+  <h4>Children & adolescents (top priority)</h4>
+  <p>Habits are strongly shaped by early socialisation, especially parents as role models/teachers. Adolescents often have an incomplete appreciation of future risk. "Teachable moments" (e.g. a school health talk, a parent explaining seatbelt use) help. "Closing the window of vulnerability" = removing exposure early, e.g. banning fried food in canteens, banning smoking in schools.</p>
+  <h4>At-risk people</h4>
+  <p>Early identification/intervention can prevent poor habits from worsening vulnerability, uses the health budget efficiently (preemptive), and helps spot interacting risk factors.</p>
+  <p><b>Problems of focusing on at-risk people:</b> people misjudge their own risk (overly optimistic); view their own poor habits as "widely shared" but their healthy behaviour as distinctive; a positive risk-factor test can cause needless worry/hypervigilance or defensive avoidance of services; and knowing about genetic susceptibility doesn't tell you <i>which conditions</i> will trigger the disease.</p>
+  <p><b>Ethical issues:</b> <i>timing</i> (when to inform someone, if disease onset timing is unknown), <i>emotional issues</i> (may trigger depression in predisposed individuals), <i>genetic factors</i> (no successful intervention exists for some genetically based risks), and <i>family dynamics</i> (blame/conflict when a risk is inherited).</p>
+  <h4>Older adults</h4>
+  <p>Focus areas: healthy balanced diet, regular exercise, reducing accidents, controlling alcohol/eliminating smoking, reducing inappropriate prescription drug use, influenza vaccination, participating in social activities.</p>
+  <h4>Ethnic & gender differences</h4>
+  <p>Obesity, alcohol and smoking are bigger problems among men than women. In Singapore, obesity is higher among Malays (24.0%) and Indians (16.9%) than Chinese (7.9%). Interventions must be tailored to ethnic groups (even more pronounced in the US/UK).</p>
+  <div class="exam-note"><b>Watch for:</b> the four ethical issues in at-risk intervention (timing, emotional, genetic, family dynamics) are a common list-matching item. Also memorise that children AND adolescents are both labelled "top priority" groups.</div>
+</section>
+
+<section class="concept" id="attitude-models">
+  <h3>10. Attitude-Change Approaches to Health Behaviour <span class="exam-flag">Likely Exam</span></h3>
+  <h4>Educational (persuasive) appeals</h4>
+  <ul>
+    <li>Communications should be colourful, vivid, short, clear, direct, and state conclusions explicitly.</li>
+    <li>Communicator should be expert, prestigious, trustworthy, likeable, and similar to the audience.</li>
+    <li>Strong arguments go at the <b>beginning and end</b> of a message, not the middle.</li>
+    <li>Messages must be sensitive to the audience's cultural norms.</li>
+    <li>Linked to the Transtheoretical Model: for illness-detection behaviour (e.g. mammograms), emphasising the <i>problems of not acting</i> works better; for a receptive audience, present only favourable points; for a resistant audience, present <b>both</b> sides of the issue.</li>
+  </ul>
+  <h4>Fear appeals</h4>
+  <p>Assumes that fear about a habit's harm will drive behaviour change — but the fear–behaviour link doesn't always hold. Message framing (positive vs negative) matters, and effectiveness depends on the person's motivation to change.</p>
+  <h4>The Health Belief Model (HBM)</h4>
+  <p>Whether someone practises a health behaviour depends on two beliefs: (1) <b>perceived health threat</b> — general health values + belief in one's vulnerability + belief the disorder is severe; and (2) <b>perceived threat reduction</b> — belief that the specific health measure will be effective, and that its benefits outweigh its costs.</p>
+  <div class="example"><b>Worked example (trans-fat):</b> "I'm concerned about my health" (general value) + "trans fat raises LDL and heart-attack risk" (vulnerability belief) + "a heart attack could kill me" (severity belief) = perceived threat. "If I stop eating trans fat, I won't develop a heart attack" (effectiveness) + "it's hard but worth it" (benefits > costs) = perceived threat reduction. Together → "I will stop eating food high in trans fat."</div>
+  <h4>The Theory of Planned Behaviour (TPB)</h4>
+  <ul>
+    <li><b>Attitude toward the action</b> — beliefs about its likely outcomes and evaluation of those outcomes.</li>
+    <li><b>Subjective norms</b> — what others think one should do, plus motivation to comply.</li>
+    <li><b>Perceived behavioural control</b> — feeling capable of performing the action and that it will have the intended effect.</li>
+  </ul>
+  <h4>Self-Determination Theory (SDT)</h4>
+  <p>People are <b>autonomously motivated</b> when they experience free will/choice in acting. Behaviour change is more likely when the change is personally important and tied to values the person holds.</p>
+  <h4>Caveats to attitude-based approaches</h4>
+  <ul>
+    <li>Can evoke irrational/defensive processes: unrealistic optimism ("I'm less vulnerable than others"), perceiving oneself as dissimilar to those who got sick, irrational health beliefs, negative mood causing people to ignore/defensively reinterpret risk.</li>
+  </ul>
+  <div class="exam-note"><b>Watch for:</b> HBM has NO self-efficacy component (that gap is what TPB/self-efficacy research later addressed) — a common trick is asking which theory is "missing" self-efficacy. Also distinguish the three TPB components clearly, since scenario questions ask you to label which component a described belief represents.</div>
+</section>
+
+<h2 class="chapter-title" id="chapter3">Chapter 3 — Changing Health Behaviours: CBT & Stage Models</h2>
+
+<section class="concept" id="cbt">
+  <h3>11. Cognitive-Behavioural Approaches (CBT) <span class="exam-flag">Likely Exam</span></h3>
+  <p>Focuses heavily on the <b>beliefs</b> people hold about their health habits. People generate internal monologues that interfere with behaviour change — these monologues must be modified for behaviour to change. A core tool is <b>self-monitoring</b> via an <b>ABC Diary</b> (Antecedent–Behaviour–Consequence).</p>
+  <h4>Building-block techniques</h4>
+  <ul>
+    <li><b>Classical conditioning</b> — not very successful for alcoholism treatment, since it depends heavily on client participation.</li>
+    <li><b>Operant conditioning</b> — positively reinforcing an initial step toward a good habit; as progress builds, greater behaviour change is needed for the same reinforcement.</li>
+    <li><b>Modelling</b> — witnessing someone else perform the behaviour; important in group therapy (e.g. alcohol treatment), where new members watch and model successful members.</li>
+  </ul>
+  <div class="exam-note"><b>Watch for:</b> classical conditioning's weakness (dependence on client participation) as a reason it's less used for alcoholism specifically — a common "why is X NOT effective" question.</div>
+</section>
+
+<section class="concept" id="cbt-techniques">
+  <h3>12. CBT Techniques <span class="exam-flag">Likely Exam</span></h3>
+  <ul>
+    <li><b>Stimulus control</b> — remove discriminative stimuli that evoke the problem behaviour; create new stimuli signalling the new response will be reinforced.</li>
+    <li><b>Self-reinforcement</b> — systematically rewarding oneself to increase/decrease a target behaviour.</li>
+    <li><b>Contingency contracting</b> — e.g. paying a $10 fine for drinking, earning $3/day for abstaining.</li>
+    <li><b>Cognitive restructuring</b> — modifying internal monologues to promote behaviour change.</li>
+    <li><b>Behavioural assignments</b> — e.g. keeping an ABC Diary.</li>
+    <li><b>Social skills / assertiveness training</b> — helps with social anxiety that gives rise to poor habits.</li>
+    <li><b>Motivational interviewing</b> — similar to person-centred counselling; client expresses both positive and negative thoughts, counsellor listens with empathy.</li>
+    <li><b>Relaxation training</b> — teaches relaxation to relieve tension/stress that could lead to, e.g., alcohol abuse.</li>
+    <li><b>Broad-spectrum (multimodal) CBT</b> — combines several techniques for one problem, but using too many methods "in hope some may work" can backfire.</li>
+  </ul>
+  <div class="example"><b>Relatable example:</b> A smoker keeps an ABC diary (behavioural assignment) noting that stress at work (antecedent) triggers smoking (behaviour) followed by relief (consequence). Their therapist helps them reframe "I need this cigarette" into "I can handle stress another way" (cognitive restructuring), removes cigarettes from the house (stimulus control), and has them treat themselves to a movie after a smoke-free week (self-reinforcement).</div>
+  <div class="exam-note"><b>Watch for:</b> matching each named technique (stimulus control, contingency contracting, cognitive restructuring, etc.) to a short scenario — this list is a classic definition-matching bank. Also remember: broad-spectrum CBT can backfire if overloaded with methods.</div>
+</section>
+
+<section class="concept" id="transtheoretical">
+  <h3>13. The Transtheoretical Model of Behaviour Change (Stages of Change) <span class="exam-flag">Likely Exam</span></h3>
+  <p>Analyses the stages and processes people go through when changing behaviour, and suggests matching treatment goals/interventions. Originally developed for addictive disorders; now also used for habits like exercise and mammogram screening.</p>
+  <table>
+    <tr><th>Stage</th><th>Description</th></tr>
+    <tr><td>Pre-contemplation</td><td>No intention to change; often unaware of the problem. Some seek treatment only because pressured by others — they tend to revert to old behaviour.</td></tr>
+    <tr><td>Contemplation</td><td>Aware of the problem, thinking about it, weighing pros and cons — but no commitment to act yet.</td></tr>
+    <tr><td>Preparation</td><td>Intend to change but haven't started; may delay due to past failures or a stressful period. May have partly modified behaviour without full commitment.</td></tr>
+    <tr><td>Action</td><td>Actively modifying behaviour to overcome the problem; requires real commitment of time and energy.</td></tr>
+    <tr><td>Maintenance</td><td>Free of the addictive behaviour for 6+ months; working to prevent relapse and consolidate gains.</td></tr>
+  </table>
+  <div class="exam-note"><b>Watch for:</b> the "6 months" threshold that defines the Maintenance stage is a specific, testable number. Also: distinguishing Contemplation (aware, weighing pros/cons, no commitment) from Preparation (committed, but not yet acting) is a very common trap.</div>
+</section>
+
+<section class="concept" id="relapse">
+  <h3>14. Relapse <span class="exam-flag">Likely Exam</span></h3>
+  <p>The biggest problem in addictive disorders (alcoholism, smoking, drug addiction, obesity) — relapse rates run <b>50–90%</b>, tending to stabilise around <b>3 months</b>. People who abstain now aren't necessarily the same people abstaining two months later — movement runs both ways (abstinence→relapse and relapse→abstinence).</p>
+  <h4>Why relapse happens (knowledge is limited)</h4>
+  <ul>
+    <li>Genetic factors implicated in alcoholism, smoking, obesity.</li>
+    <li>Conditioned cue-response associations trigger urges/cravings (e.g. a party where the person used to smoke); withdrawal effects.</li>
+    <li>More likely when depressed or stressed.</li>
+    <li><b>Abstinence violation effect</b> — a single lapse produces a feeling of lost control that can trigger a serious relapse.</li>
+  </ul>
+  <h4>Consequences of relapse</h4>
+  <p>Negative emotions (disappointment, frustration, anger) → can reduce self-efficacy and shift blame to external forces; can make people feel the habit is beyond their control (bad for future change) — but a relapse can also teach useful information that helps prevent the next one.</p>
+  <h4>Reducing relapse — what does/doesn't work</h4>
+  <ul>
+    <li><b>Booster sessions</b> (extra sessions post-treatment) — largely unsuccessful for maintaining change.</li>
+    <li><b>Adding more intervention components</b> — doesn't increase adherence, may even reduce it.</li>
+    <li><b>Treating abstinence as a lifelong process</b> — successful, but leaves people feeling perpetually "vulnerable" and not fully in control.</li>
+  </ul>
+  <h4>Relapse prevention strategies (must be built in from the outset)</h4>
+  <ul>
+    <li><b>Contingency management</b> — deposit money, returned for attending sessions/changing behaviour.</li>
+    <li><b>Screening techniques</b> — weed out people not truly committed to change.</li>
+    <li><b>Brainstorming coping skills</b> for high-risk situations.</li>
+    <li><b>Cue elimination</b> — restructure the environment to avoid trigger situations (e.g. alcoholics avoiding pubs).</li>
+    <li><b>Lifestyle rebalancing</b> — broader healthy lifestyle changes to reduce relapse likelihood.</li>
+  </ul>
+  <div class="exam-note"><b>Watch for:</b> "abstinence violation effect" as a named term for the loss-of-control feeling after one lapse — frequently tested by name. Also, booster sessions and adding more components are both explicitly called <b>ineffective</b> — a common false-statement trap is claiming either "works well."</div>
+</section>
+
+<section class="concept" id="social-eng">
+  <h3>15. Social Engineering & Venues for Health-Habit Modification <span class="exam-flag">Likely Exam</span></h3>
+  <p><b>Social engineering</b> = modifying the environment to affect people's ability to practise a health behaviour. Called <b>passive measures</b> because they don't require personal action. Examples: banning drugs (heroin, cocaine), compulsory vaccinations, controlling drinks sold in schools/cafeterias, using media (e.g. soap operas) to promote good habits.</p>
+  <h4>Venues for health-habit modification</h4>
+  <table>
+    <tr><th>Venue</th><th>Key point</th></tr>
+    <tr><td>Private therapist's office</td><td>One-to-one CBT; extensive tailoring increases success, but only one person's behaviour changes at a time.</td></tr>
+    <tr><td>Health practitioner's office</td><td>Highly credible source for instituting change.</td></tr>
+    <tr><td>The family</td><td>Children learn habits from parents; families are more routinised than singles; whole-family buy-in improves commitment and provides social support (multiple members are affected by any one member's habits).</td></tr>
+    <tr><td>Managed care facilities</td><td>E.g. smoking-cessation clinics; in Singapore, run by polyclinics.</td></tr>
+    <tr><td>Self-help groups</td><td>Social support through group therapy, e.g. Alcoholics Anonymous.</td></tr>
+    <tr><td>Schools</td><td>Reaches the entire child population; PE, smoking bans, dental clinics, inoculations.</td></tr>
+    <tr><td>Workplace</td><td>Reaches many people, builds social support; e.g. subsidised health checks, workplace smoking bans.</td></tr>
+    <tr><td>Community-based interventions</td><td>Effective for alerting people to risks they wouldn't otherwise know about.</td></tr>
+    <tr><td>Mass media</td><td>Reaches millions cheaply; produces modest attitude change but less long-term behaviour change.</td></tr>
+    <tr><td>Internet</td><td>Low-cost access to health messages for large numbers of people.</td></tr>
+  </table>
+  <div class="example"><b>Singapore examples:</b> HPB talks/roadshows · schools (vaccination drives, PE, canteen food rules, assembly talks) · workplace (designated smoking areas, family day, staff screening) · community (RC walks, community screening, CC-led line dancing) · mass media (social media, radio, print, TV, talks).</div>
+  <div class="exam-note"><b>Watch for:</b> "social engineering = passive measure, no personal action required" is a key defining phrase. Also, mass media/Internet are explicitly linked to attitude change more than long-term <i>behaviour</i> change — a common distinction tested.</div>
+</section>
+
+<section class="concept" id="goals">
+  <h3>16. Goal Setting and Action Plans</h3>
+  <p><b>Goal</b> (Locke & Latham, 2002): "attaining a specific standard of proficiency on a task, usually within a specified time limit." Goal setting gives long-term vision and short-term motivation, and helps organise time/resources.</p>
+  <ul>
+    <li><b>Goals</b> are long-term.</li>
+    <li><b>Action plans</b> are short-term, immediate, and should be progressive steps toward the goal.</li>
+  </ul>
+  <div class="example"><b>Worked examples from the seminar:</b><br>
+  <b>Goal:</b> "Exercise more and be able to run without panting." <b>Action plan:</b> "Buy running shoes and start running more."<br>
+  <b>Goal:</b> "Eat 1 serving of fruit before lunch daily for 3 months." <b>Action plan:</b> "Buy 2 oranges after work on Sat/Mon and 3 apples on Wed from the store near home; if it rains, eat a banana from the office pantry instead."</div>
+  <div class="exam-note"><b>Watch for:</b> being given a goal/action-plan pair and asked which is which, or asked to write an action plan that is concrete, specific and time-bound (unlike the vaguer, longer-term goal).</div>
+</section>
+
+<h2 class="chapter-title" id="chapter4">Chapter 4 — Weight, Diet, Exercise & Sleep</h2>
+
+<section class="concept" id="obesity">
+  <h3>17. Obesity <span class="exam-flag">Likely Exam</span></h3>
+  <p>Obesity is a precursor to hypertension, raises cholesterol (heart disease/failure risk), and is linked to cancers of the colon, rectum, liver, gallbladder, pancreas, kidney and oesophagus.</p>
+  <h4>What causes hunger?</h4>
+  <p>Lowered blood glucose and the liver's lack of bodily fuel send signals to the <b>hypothalamus</b>, which causes the sensation of hunger.</p>
+  <h4>Causes of obesity</h4>
+  <p>Genes, lack of exercise, food intake, culture, and socioeconomic status (social class) — spanning childhood and adulthood.</p>
+  <h4>Treatment</h4>
+  <p>Dieting, surgery (stomach stapling), appetite-suppressing drugs, and — most effectively — a <b>multimodal approach</b> combining healthy diet, exercise, and sleep.</p>
+  <div class="exam-note"><b>Watch for:</b> the hypothalamus as the brain region that translates glucose/liver-fuel signals into hunger — a specific, testable fact. Also remember "multimodal approach" (diet + exercise + sleep together) as the recommended treatment rather than any single method alone.</div>
+</section>
+
+<section class="concept" id="diet">
+  <h3>18. Developing a Healthy Diet <span class="exam-flag">Likely Exam</span></h3>
+  <h4>Why it matters</h4>
+  <p>Diet is <b>controllable</b>. Elevated serum cholesterol is a risk factor for coronary heart disease and hypertension; changing diet can lower cholesterol and reduce risk of several cancers (stomach, colon, pancreas, breast).</p>
+  <h4>Barriers</h4>
+  <ul>
+    <li>Recommended diets can be restrictive, monotonous, expensive, and hard to implement.</li>
+    <li>Stress directly affects eating, especially in adolescents — more stress, more food consumed.</li>
+    <li>Dietary changes can affect mood/personality, in extreme cases linked to suicide, accidents, murder; low cholesterol has been linked to depressive mood.</li>
+  </ul>
+  <h4>Interventions</h4>
+  <p>Self-monitoring · stimulus control · contingency contracting · relapse-prevention techniques · the stages-of-change (transtheoretical) model · theory of planned behaviour · family and community intervention.</p>
+  <div class="exam-note"><b>Watch for:</b> the counterintuitive fact that <i>low</i> cholesterol has been linked to depressive mood — a common "which of these is true/false" trap, since people expect only high cholesterol to be a problem.</div>
+</section>
+
+<section class="concept" id="eating-disorders">
+  <h3>19. Eating Disorders: Anorexia Nervosa <span class="exam-flag">Likely Exam</span></h3>
+  <p>Anorexia nervosa and bulimia nervosa are the extremes of diet control — both are behavioural abnormalities, and anorexia nervosa can be fatal.</p>
+  <table>
+    <tr><th>Domain</th><th>Anorexia Nervosa factors</th></tr>
+    <tr><td>Biological</td><td>Genes involving serotonin, dopamine, and oestrogen systems (implicated in both anxiety and food intake); gene–environment interaction, e.g. early exposure to stress.</td></tr>
+    <tr><td>Psychological</td><td>A behavioural manifestation of coping with stress; sufferers are often depressed, anxious, low in self-esteem, with a poor sense of mastery, and can be suicidal.</td></tr>
+    <tr><td>Social</td><td>Lack of control coupled with a need for approval; conscientious/perfectionistic behaviour; family temperament stressing perfectionism, order, and sensitivity to praise/reward; families with psychopathology/alcoholism or that are extremely close but poor at communicating emotion/handling conflict.</td></tr>
+  </table>
+  <h4>Treatment</h4>
+  <p>Restoring weight (often in a hospital setting), rebuilding self-esteem and motivation, and family therapy.</p>
+  <div class="exam-note"><b>Watch for:</b> classify a described risk factor (genes, perfectionism, family communication style) into biological / psychological / social — a very common item type given how neatly the seminar organised these three categories.</div>
+</section>
+
+<section class="concept" id="exercise">
+  <h3>20. Exercise <span class="exam-flag">Likely Exam</span></h3>
+  <h4>Physical benefits</h4>
+  <p>Increases maximum oxygen consumption, decreases resting heart rate, decreases blood pressure (in some), increases heart strength/efficiency, increases slow-wave sleep, increases HDL (cholesterol unchanged), decreases cardiovascular disease and obesity risk, and increases longevity.</p>
+  <h4>Other benefits</h4>
+  <p>Decreases menstrual cycle length and oestrogen/progesterone levels; decreases risk of some cancers; boosts immune function; decreases negative mood; cardiovascular benefits at every age, including preschoolers; improves physical work capacity, body-weight optimisation, muscle tone/strength, and joint flexibility.</p>
+  <h4>Types</h4>
+  <div class="pair">
+    <div><b>Aerobic (cardio):</b> sustained exercise that strengthens heart/lungs and improves oxygen use; high intensity, high endurance. E.g. jogging, cycling, skipping, swimming.</div>
+    <div><b>Anaerobic:</b> non-endurance, power-focused, short/fast/high-intensity. E.g. sprinting, weightlifting, HIIT.</div>
+  </div>
+  <p><b>Recommended dose:</b> 3 days/week — 50+ minutes moderate intensity, or 25+ minutes vigorous intensity.</p>
+  <h4>Psychological effects</h4>
+  <p>Sedentary behaviour is a risk factor for depression (Stathopoulou et al., 2010). Exercise improves mood/well-being both immediately post-workout and long-term, boosts self-efficacy — partly via social activity/involvement, and social support also helps people maintain exercise programmes.</p>
+  <h4>Exercise and stress</h4>
+  <p>Exercise <b>delays</b> HPA-axis (hypothalamic-pituitary-adrenocortical) involvement, which is heavily responsible for stress's adverse bodily effects — so exercise buffers against stress's damage. It also increases endogenous opioids (natural pain inhibitors) and benefits attention/concentration.</p>
+  <h4>Who is likely / unlikely to exercise</h4>
+  <p><b>More likely:</b> family members who exercise; positive attitude toward exercise; strong exercise self-efficacy and self-perception as athletic; belief in personal responsibility for one's health; boys (more than girls) at a young age; people at cardiovascular risk.</p>
+  <p><b>Less likely:</b> middle-aged/older women (caregiving duties, low energy); overweight people; those with little confidence in their exercise ability.</p>
+  <h4>Intervention strategies & cautions</h4>
+  <p>Convenience/accessibility of the setting and long-term habit strongly determine adherence. CBT strategies (contingency contracting, self-reinforcement, self-monitoring, goal setting) and relapse-prevention techniques promote adherence; stage-of-change targeting helps. Caution: programmes must not inadvertently increase desire for thinness (risking eating disorders); pure "exercise websites" alone often don't work.</p>
+  <div class="exam-note"><b>Watch for:</b> the HPA-axis mechanism (exercise <i>delays</i> HPA activation, reducing stress's adverse effects) is a specific, testable causal chain. Also: know aerobic vs anaerobic by defining feature (endurance/oxygen use vs power/short duration), not just by example.</div>
+</section>
+
+<section class="concept" id="sleep">
+  <h3>21. Sleep, Rest & Renewal <span class="exam-flag">Likely Exam</span></h3>
+  <h4>Sleep stages</h4>
+  <div class="pair">
+    <div><b>Non-REM sleep:</b> Stage 1 — light sleep, theta waves. Stage 2 — sleep spindles, K-complex waves. Stages 3–4 — deep sleep, delta waves.</div>
+    <div><b>REM sleep:</b> rapid eye movement, beta waves — the stage where most vivid dreaming occurs.</div>
+  </div>
+  <p><b>Insufficient sleep</b> reduces immune-cell count and is related to stress and depression.</p>
+  <h4>Sleep apnoea</h4>
+  <p>Breathing stops for as long as 3 minutes during sleep; the person wakes up gasping for air, sometimes without knowing sleep was disrupted. Can lead to nighttime death, heart attacks, and morning exhaustion. Treatment: surgery to cut throat tissue, or a sleep mask that blows air down the throat (CPAP-type device).</p>
+  <h4>Rest, renewal, savouring</h4>
+  <p>Helps people savour positive aspects of life and restore emotional balance — e.g. hobbies, sports, socialising, time in nature.</p>
+  <h4>Good sleep hygiene</h4>
+  <ul>
+    <li>Keep the bedroom cool.</li>
+    <li>Sleep on a comfortable bed.</li>
+    <li>Develop a nightly wind-down routine.</li>
+    <li>Avoid too much alcohol, food or smoking before bed.</li>
+    <li>Cut back on evening caffeine.</li>
+  </ul>
+  <div class="exam-note"><b>Watch for:</b> matching each sleep stage to its brain-wave type (theta = light Stage 1; K-complex = Stage 2; delta = deep Stage 3–4; beta = REM) — a classic matching item. Also, sleep apnoea's "up to 3 minutes without breathing" is a specific, testable figure.</div>
+</section>
+
+<div class="summary-box">
+  <b>Quick recap map</b><br>
+  <b>Ch.1 — What is Health Psychology?</b> Definitions (WHO health; Matarazzo's 4 focus areas) → History (humours → biomedical → psychosomatic → biopsychosocial/mind-body) → Biopsychosocial vs Biomedical model → Why needed (chronic illness, tech, epidemiology, expanded care, medical acceptance) → Research designs & careers.<br><br>
+  <b>Ch.2 — Health Behaviours (Foundations):</b> Habits & primary prevention → Factors affecting habits → Barriers to change → Intervening across populations (children/adolescents, at-risk, older adults, ethnic/gender) → Attitude models (educational/fear appeals, HBM, TPB, SDT).<br><br>
+  <b>Ch.3 — Changing Behaviours:</b> CBT foundations (classical/operant conditioning, modelling) → CBT techniques (stimulus control, contingency contracting, cognitive restructuring...) → Transtheoretical Model stages → Relapse (causes, consequences, prevention) → Social engineering & venues → Goal setting/action plans.<br><br>
+  <b>Ch.4 — Weight, Diet, Exercise, Sleep:</b> Obesity (causes/treatment) → Healthy diet (importance/barriers/interventions) → Anorexia nervosa (bio-psycho-social factors) → Exercise (benefits, types, adherence) → Sleep (stages, apnoea, hygiene).
+</div>
+
+<h2 class="chapter-title" id="quiz">Self-Assessment: Short-Answer Questions</h2>
+<p style="font-family:Arial, sans-serif; font-size:.9rem; color:var(--muted);">Try answering each in your own words before revealing the model answer.</p>
+
+<div id="quiz-container"></div>
+
+</main>
+
+<footer>PSY265 Seminar 1 & 2 — personal exam-prep aid built from seminar slides + Study Unit 1 text. Not an official SUSS document.</footer>
+
+<script>
+const questions = [
+  {
+    q: "1. Using the doctor-and-Jenny headache example, explain the difference between the biomedical and biopsychosocial models.",
+    a: "The biomedical-model doctor focuses only on a single physical cause and refers Jenny straight to a neurologist for an MRI. The biopsychosocial-model doctor also explores Jenny's lifestyle, work and the events preceding her headaches, while still keeping the MRI option open — recognising biological, psychological and social factors interact to produce health and illness, rather than assuming mind and body are separate."
+  },
+  {
+    q: "2. Why has the shift from acute to chronic illness increased the need for health psychology?",
+    a: "Chronic illnesses like cancer and heart disease involve psychological and social causes and consequences: patients may live with them for years, develop depression or family strain, and seek unconventional treatments. Health psychologists help manage these psychosocial dimensions, which acute-disease-focused medicine alone doesn't address."
+  },
+  {
+    q: "3. What is a health habit, and why are health habits so resistant to change?",
+    a: "A health habit is a health-related behaviour that is firmly established and performed automatically, without awareness, typically developed in childhood and stabilising around age 11-12. It becomes resistant to change because although it may start due to positive reinforcement, it eventually becomes independent of that reinforcement and is instead maintained by the environmental factors it's associated with."
+  },
+  {
+    q: "4. A colleague says primary prevention is only about helping people quit an existing bad habit. Correct this misunderstanding.",
+    a: "Primary prevention has two strategies: using behaviour-change methods to alter an existing problematic habit, AND preventing people from developing the poor habit in the first place — and the second (prevention before it starts) is explicitly the more preferred strategy."
+  },
+  {
+    q: "5. Explain the Health Belief Model using an example of your own (not trans fat).",
+    a: "The HBM says a person adopts a health behaviour based on (1) perceived health threat — valuing health, believing they're vulnerable, and believing the disorder is severe — and (2) perceived threat reduction — believing the specific action will reduce the threat and that its benefits outweigh its costs. Example: someone quits vaping because they value their health, believe vaping raises their lung-disease risk (vulnerability), believe lung disease is serious (severity), believe quitting will lower that risk (effectiveness), and judges the difficulty of quitting worth it (benefit > cost)."
+  },
+  {
+    q: "6. What is the abstinence violation effect, and why is it dangerous for someone trying to quit an addictive habit?",
+    a: "It's the feeling of loss of control that results when a person violates a self-imposed rule after one lapse (e.g. one cigarette after quitting). It's dangerous because that single lapse can spiral into a full relapse, since the person may feel they've already 'failed' and lost control entirely."
+  },
+  {
+    q: "7. Compare the Contemplation and Preparation stages of the Transtheoretical Model.",
+    a: "In Contemplation, the person is aware of the problem and weighing its pros and cons, but has made no commitment to change. In Preparation, the person HAS made a commitment to change but hasn't yet started acting on it (possibly delaying due to past failure or a stressful period)."
+  },
+  {
+    q: "8. Give an example of social engineering as a passive measure, and explain why it's called 'passive.'",
+    a: "Example: a smoking ban in restaurants, or compulsory childhood vaccination. It's called passive because it modifies the environment to affect behaviour without requiring the individual to personally decide to act — the health-protective outcome happens regardless of individual motivation."
+  },
+  {
+    q: "9. A friend sets the goal 'I want to be healthier' and stops there. What's missing, and how would you help them turn it into an action plan?",
+    a: "This is a goal (long-term, vague) with no action plan (short-term, specific, immediate steps). I'd help them define a concrete, time-bound step — e.g. 'buy running shoes this week and jog 3 times a week starting Monday' — mirroring the seminar's own examples of turning a vague health goal into a specific, progressive action plan."
+  },
+  {
+    q: "10. Classify these anorexia nervosa risk factors as biological, psychological, or social: (a) low self-esteem, (b) genes affecting serotonin/dopamine, (c) a family that values perfectionism and struggles to discuss emotions.",
+    a: "(a) Psychological — low self-esteem is listed among the psychological manifestations of coping with stress. (b) Biological — genetic factors involving serotonin, dopamine and oestrogen systems. (c) Social — family temperament/communication patterns are a social-domain risk factor."
+  },
+  {
+    q: "11. Explain how exercise helps buffer the effects of stress on the body.",
+    a: "Exercise delays the activation of the hypothalamic-pituitary-adrenocortical (HPA) axis, which is heavily responsible for stress's adverse effects on the body. By slowing HPA involvement, exercise reduces the physiological toll that stress would otherwise take."
+  },
+  {
+    q: "12. What is sleep apnoea, and what risks does it carry if untreated?",
+    a: "Sleep apnoea is when a person stops breathing for as long as 3 minutes during sleep, sometimes waking gasping for air without realising sleep was disrupted. Untreated, it can cause exhaustion, and in severe cases nighttime death and heart attacks."
+  },
+  {
+    q: "13. A public-health team wants to reach the largest possible number of people cheaply, accepting that they'll mainly shift attitudes rather than long-term behaviour. Which venue for health-habit modification fits best, and why?",
+    a: "Mass media (or the Internet). It provides low-cost access to health messages for millions of people and produces modest attitude change, though it is explicitly less effective at producing long-term behaviour change compared to more intensive venues like the family, workplace, or private therapy."
+  },
+  {
+    q: "14. Why might 'adding more components' to a relapse-prevention programme actually backfire?",
+    a: "The seminar notes that adding more intervention components does not increase adherence and may even reduce it — piling on techniques 'in hope that some may work' can overwhelm participants rather than help them, similar to the caution given about overusing broad-spectrum/multimodal CBT."
+  }
+];
+
+const container = document.getElementById('quiz-container');
+questions.forEach((item, i) => {
+  const block = document.createElement('div');
+  block.className = 'quiz-block';
+  block.innerHTML = `
+    <p class="q">${item.q}</p>
+    <button class="reveal-btn" onclick="toggleAnswer(${i})">Show Answer</button>
+    <div class="answer" id="answer-${i}">${item.a}</div>
+  `;
+  container.appendChild(block);
+});
+
+function toggleAnswer(i) {
+  const el = document.getElementById('answer-' + i);
+  const btn = el.previousElementSibling;
+  el.classList.toggle('show');
+  btn.textContent = el.classList.contains('show') ? 'Hide Answer' : 'Show Answer';
+}
+</script>
+
+</body>
+</html>
