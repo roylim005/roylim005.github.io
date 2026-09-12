@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HBC201 – Study Unit 6 Exam Prep: Quantitative Research Methods II</title>
+<style>
+  :root{
+    --navy:#1b2a4a;
+    --blue:#2a5ca8;
+    --accent:#c9770a;
+    --bg:#fbfaf7;
+    --card:#ffffff;
+    --line:#e3ddd3;
+    --text:#26241f;
+    --muted:#6b6558;
+    --exam:#fff4e6;
+    --exam-border:#e0a458;
+    --note:#eef2f8;
+    --noteborder:#c7d3e5;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:"Georgia","Iowan Old Style",serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.55;
+  }
+  header{
+    background:var(--navy);
+    color:#f4f1ea;
+    padding:2.2rem 1.5rem 1.6rem;
+    text-align:center;
+  }
+  header h1{margin:0 0 .3rem; font-size:1.7rem; font-weight:600;}
+  header p{margin:0; color:#c7cfe0; font-size:.95rem;}
+  nav{
+    background:#22314f;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    padding:.4rem 0;
+    position:sticky;
+    top:0;
+    z-index:50;
+  }
+  nav a{
+    color:#dbe2f0;
+    text-decoration:none;
+    font-size:.8rem;
+    font-family:Arial, sans-serif;
+    padding:.5rem .8rem;
+    border-radius:4px;
+  }
+  nav a:hover{background:#324875;}
+  main{max-width:840px; margin:0 auto; padding:1.8rem 1.2rem 4rem;}
+  .chapter-title{
+    margin-top:3rem;
+    padding-bottom:.4rem;
+    border-bottom:3px solid var(--navy);
+    color:var(--navy);
+    font-size:1.5rem;
+  }
+  .chapter-title:first-of-type{margin-top:0;}
+  section.concept{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:1.3rem 1.5rem;
+    margin:1.3rem 0;
+    box-shadow:0 1px 3px rgba(0,0,0,.04);
+  }
+  section.concept h3{margin-top:0; color:var(--blue); font-size:1.18rem;}
+  section.concept h4{
+    font-family:Arial, sans-serif;
+    font-size:.78rem;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    color:var(--muted);
+    margin:1rem 0 .3rem;
+  }
+  .example{
+    background:#f2f6ee;
+    border-left:4px solid #7a9a5c;
+    padding:.7rem 1rem;
+    border-radius:0 6px 6px 0;
+    margin-top:.5rem;
+    font-size:.96rem;
+  }
+  .example b{color:#4e6b39;}
+  .exam-flag{
+    display:inline-block;
+    background:var(--exam);
+    border:1px solid var(--exam-border);
+    color:#8a5a12;
+    font-family:Arial, sans-serif;
+    font-size:.72rem;
+    font-weight:bold;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+    padding:.2rem .55rem;
+    border-radius:20px;
+    margin-left:.5rem;
+    vertical-align:middle;
+  }
+  .exam-note{
+    background:var(--exam);
+    border:1px solid var(--exam-border);
+    border-radius:6px;
+    padding:.6rem .9rem;
+    margin-top:.6rem;
+    font-size:.9rem;
+    font-family:Arial, sans-serif;
+  }
+  .exam-note b{color:#8a5a12;}
+  .study-only-note{
+    background:var(--note);
+    border:1px solid var(--noteborder);
+    border-radius:6px;
+    padding:.5rem .9rem;
+    margin-bottom:1.2rem;
+    font-size:.85rem;
+    font-family:Arial, sans-serif;
+    color:#33415c;
+  }
+  ul{padding-left:1.3rem;}
+  li{margin-bottom:.3rem;}
+  table{width:100%; border-collapse:collapse; margin-top:.5rem; font-size:.9rem;}
+  th,td{border:1px solid var(--line); padding:.5rem .6rem; text-align:left; vertical-align:top;}
+  th{background:#f0ede4; font-family:Arial, sans-serif; font-size:.8rem;}
+  .quiz-block{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-left:4px solid var(--blue);
+    border-radius:8px;
+    padding:1rem 1.3rem;
+    margin:1rem 0;
+  }
+  .quiz-block p.q{font-weight:bold; margin:0 0 .5rem;}
+  .reveal-btn{
+    font-family:Arial, sans-serif;
+    font-size:.82rem;
+    background:var(--blue);
+    color:#fff;
+    border:none;
+    padding:.4rem .9rem;
+    border-radius:5px;
+    cursor:pointer;
+  }
+  .reveal-btn:hover{background:var(--navy);}
+  .answer{
+    display:none;
+    margin-top:.7rem;
+    padding-top:.7rem;
+    border-top:1px dashed var(--line);
+    font-size:.94rem;
+    color:#34432e;
+    background:#f7faf3;
+    padding:.7rem .9rem;
+    border-radius:6px;
+  }
+  .answer.show{display:block;}
+  .summary-box{
+    background:var(--note);
+    border:1px solid var(--noteborder);
+    border-radius:8px;
+    padding:1rem 1.3rem;
+    margin:1.5rem 0;
+    font-size:.94rem;
+  }
+  .decision-tree{
+    background:#fbf7ef;
+    border:1px dashed var(--accent);
+    border-radius:8px;
+    padding:1rem 1.3rem;
+    font-size:.93rem;
+    margin-top:.6rem;
+  }
+  .decision-tree b{color:var(--accent);}
+  footer{text-align:center; color:var(--muted); font-family:Arial, sans-serif; font-size:.78rem; padding:1.5rem;}
+  .toc{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:1rem 1.3rem;
+    font-family:Arial, sans-serif;
+    font-size:.9rem;
+  }
+  .toc a{color:var(--blue); text-decoration:none;}
+  .toc a:hover{text-decoration:underline;}
+  .toc ul{margin:.3rem 0;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>HBC201 · Study Unit 6</h1>
+  <p>Quantitative Research Methods II — Exam Prep Guide (Study Unit 6 text)</p>
+</header>
+
+<nav>
+  <a href="#experimental">Experimental Design</a>
+  <a href="#quasi">Quasi-Experimental</a>
+  <a href="#nonexperimental">Nonexperimental</a>
+  <a href="#decision-guide">Which Design?</a>
+  <a href="#quiz">Self-Assessment</a>
+</nav>
+
+<main>
+
+<div class="toc">
+  <b>How this guide is organised</b> — no seminar slides were provided for this unit, so the structure follows Study Unit 6's own chapter order directly:
+  <ul>
+    <li><b>1.1</b> Experimental Design</li>
+    <li><b>1.2</b> Quasi-Experimental Design</li>
+    <li><b>1.3</b> Nonexperimental Design</li>
+  </ul>
+  Note: this unit largely revisits the "Types of Quantitative Research" content also introduced in your Seminar 5 slides — this guide adds the extra depth SU6 provides (e.g. internal validity, self-selection bias, the formal definition of standardised instruments) plus its own formative-assessment scenarios. Items marked <span class="exam-flag">Likely Exam</span> mirror the exact question styles used in the SU6 formative assessment.
+</div>
+
+<h2 class="chapter-title" id="chapter1">Chapter 1 — Types of Quantitative Research</h2>
+
+<section class="concept" id="experimental">
+  <h3>1. Experimental Design <span class="exam-flag">Likely Exam</span></h3>
+  <p>Considered the <b>most rigorous</b> form of quantitative research — used to examine <b>causal relationships</b> among variables (Kraska, 2012).</p>
+
+  <h4>Five key elements</h4>
+  <table>
+    <tr><th>Element</th><th>Description</th></tr>
+    <tr><td><b>Randomisation</b></td><td>Every participant has an independent, equal chance of being assigned to treatment or control group. This eliminates self-selection bias and boosts internal validity (Brewer, 2011).</td></tr>
+    <tr><td><b>Experimental Control</b></td><td>All other variables are controlled, so the dependent variable is expected to vary only due to the independent variable of interest.</td></tr>
+    <tr><td><b>Experimental Treatment</b></td><td>The treatment group receives the treatment of interest (e.g., a new teaching method); the control group does not. Group membership essentially IS the independent variable.</td></tr>
+    <tr><td><b>Comparison between Groups</b></td><td>This is essentially the hypothesis-testing step — comparing outcomes (e.g., average test scores) between treatment and control groups.</td></tr>
+    <tr><td><b>Standardised Instruments</b></td><td>A measure that "meets certain standards or criteria for technical adequacy in construction, administration, and use" (Kraska, 2012) — i.e., a consistent, well-validated measurement tool.</td></tr>
+  </table>
+
+  <h4>Why randomisation matters <span class="exam-flag">Likely Exam</span></h4>
+  <p>Random assignment eliminates <b>self-selection bias</b> — the risk that participants who choose (or are chosen for) a group differ systematically from the other group in ways that could distort results — and this strengthens <b>internal validity</b> (our confidence that the treatment, not some other factor, caused the observed effect).</p>
+
+  <h4>Three types of experimental design</h4>
+  <table>
+    <tr><th>Type</th><th>What happens</th></tr>
+    <tr><td><b>Pretest-Posttest Control Group Design</b></td><td>Pretest administered before, posttest after; the pre-post difference is compared between treatment and control groups</td></tr>
+    <tr><td><b>Posttest-Only Control Group Design</b></td><td>Only a posttest is administered, after the experiment</td></tr>
+    <tr><td><b>Solomon Four-Group Design</b></td><td>Combines both: Group 1 (treatment, pre+post), Group 2 (control, pre+post), Group 3 (treatment, post-only), Group 4 (control, post-only)</td></tr>
+  </table>
+
+  <div class="example"><b>Relatable example:</b> A researcher testing a cognitive training programme for elderly participants in Singapore randomly assigns them to either the training group or a no-training (control) group — random assignment here rules out the possibility that, say, naturally sharper or more motivated seniors self-selected into the training group. If the researcher measures cognitive scores both before AND after the programme for both groups, that's the pretest-posttest control group design — exactly what the real-world Randomised Controlled Trial (RCT) case study (Sim & Chee, 2018) used.</div>
+
+  <div class="exam-note"><b>Watch for:</b> a scenario describing a study that measures BOTH groups BEFORE and AFTER an intervention → that's the <b>pretest-posttest control group design</b> (this was directly tested using the Cognitive Training case study). Also remember: the single biggest difference between experimental and quasi-experimental design is <b>randomisation</b> — not the presence of a control group, a pretest, or a treatment (those can all appear in both).</div>
+</section>
+
+<section class="concept" id="quasi">
+  <h3>2. Quasi-Experimental Design <span class="exam-flag">Likely Exam</span></h3>
+  <p>Used when it's <b>not feasible to randomly assign</b> participants — very common in field settings like schools, where researchers must work with existing intact groups and usually lack full control over other influencing variables.</p>
+
+  <h4>Strategies to address lack of randomisation</h4>
+  <ul>
+    <li>Try to make treatment and control groups as similar as possible on variables that could affect the outcome (but aren't the study's main focus).</li>
+    <li>Use a <b>pretest</b> to check the groups' equivalence before treatment — similar pretest scores suggest the groups were comparable beforehand.</li>
+  </ul>
+
+  <h4>Types of quasi-experimental design</h4>
+  <table>
+    <tr><th>Type</th><th>What happens</th><th>Distinguishing clue</th></tr>
+    <tr><td><b>Pretest-Posttest (Nonrandomised Control Group) Design</b></td><td>Pretest checks group equivalence (no random assignment); same posttest given to both groups after treatment</td><td>TWO or more groups; NOT randomly assigned; before-and-after measurement</td></tr>
+    <tr><td><b>Time-Series Design</b></td><td>A series of measures taken on ONE group repeatedly, both before and after an intervention</td><td>ONE group; MULTIPLE repeated measurements over time (not just a single before/after pair)</td></tr>
+    <tr><td><b>Single-Subject Design</b></td><td>Studies treatment effect on one/a few behaviours in a SINGLE participant; baseline (A) measured first, then treatment (B) is implemented — A/B phases can be repeated</td><td>ONE individual participant; focuses on their specific behaviour(s)</td></tr>
+  </table>
+
+  <div class="example"><b>Relatable example set:</b>
+    <ul>
+      <li><b>Pretest-posttest nonrandomised:</b> Two existing school classes (can't be reshuffled) are compared — Class A gets a new teaching method, Class B doesn't; both are tested before and after the term.</li>
+      <li><b>Time-series:</b> Tracking senior citizens' mental health scores twice a day, repeatedly, before and throughout an 8-month COVID-19 lockdown — many repeated measurements on the same group over time.</li>
+      <li><b>Single-subject:</b> Measuring one person's smoking behaviour before they join a quit-smoking programme, and again after they finish it — the focus is on that one individual, not a group comparison.</li>
+    </ul>
+  </div>
+
+  <h4>Factorial Design</h4>
+  <p>Used when a study has <b>more than one independent variable</b>. E.g., a 2×3 factorial design might cross a teaching-method variable (2 levels: new vs. traditional) with a motivation variable (3 levels: low, medium, high) to see how both factors — and their interaction — affect outcomes.</p>
+
+  <div class="exam-note"><b>Watch for:</b> the classic distinguishing test between time-series and single-subject design is <b>"how many participants/units, and how many measurement points?"</b> — time-series = one group, MANY repeated measures over time; single-subject = one individual, typically a simpler before(A)/after(B) treatment structure (though it can also repeat).</div>
+</section>
+
+<section class="concept" id="nonexperimental">
+  <h3>3. Nonexperimental Design <span class="exam-flag">Likely Exam</span></h3>
+  <p>Used when researchers <b>cannot manipulate</b> the variables of interest at all.</p>
+
+  <table>
+    <tr><th>Type</th><th>Description</th></tr>
+    <tr><td><b>Causal-Comparative Research</b></td><td>Changes in the independent variable(s) are beyond the researcher's control and already occurred before the study began</td></tr>
+    <tr><td><b>Survey Research</b></td><td>Covered in depth in Study Unit 5 — collecting data via questionnaires/interviews on attitudes, beliefs, behaviours</td></tr>
+    <tr><td><b>Correlation Research</b></td><td>Investigates relationships between two or more variables without manipulating anything</td></tr>
+  </table>
+
+  <h4>Types of correlation</h4>
+  <ul>
+    <li><b>Simple correlation:</b> association between two variables</li>
+    <li><b>Partial correlation:</b> association between two variables after controlling for a third variable's influence</li>
+    <li><b>Multiple correlation:</b> one dependent variable and several independent variables</li>
+    <li><b>Canonical correlation:</b> several dependent variables and several independent variables</li>
+  </ul>
+
+  <div class="example"><b>Relatable example:</b> A study finds that children's verbal play is associated with their language development. Since the researcher didn't manipulate anything (didn't randomly assign some children to "more verbal play" and others to "less"), this is <b>correlation research</b>, a type of <b>nonexperimental design</b> — the classic exam trap being to mistake a strong correlation for a causal claim.</div>
+
+  <div class="exam-note"><b>Watch for:</b> "correlation research is a type of ______ research" → the answer is <b>nonexperimental</b>, not experimental or quasi-experimental. This was directly tested in the SU6 formative assessment.</div>
+</section>
+
+<div class="decision-tree" id="decision-guide">
+  <b>Quick decision guide: which design is it?</b>
+  <ul>
+    <li>Can the researcher randomly assign participants to groups? <b>Yes</b> → Experimental Design (pick pretest-posttest / posttest-only / Solomon four-group based on when tests are given).</li>
+    <li><b>No</b>, but there's still an intervention/comparison being studied → Quasi-Experimental Design:
+      <ul>
+        <li>Two+ groups, not randomised, tested before/after → Pretest-Posttest (Nonrandomised)</li>
+        <li>One group, many repeated measurements over time → Time-Series</li>
+        <li>One individual, before/after treatment → Single-Subject</li>
+        <li>More than one independent variable being crossed → Factorial</li>
+      </ul>
+    </li>
+    <li>The researcher can't manipulate the variable(s) at all, and is just observing/measuring existing differences or relationships → Nonexperimental Design (Causal-Comparative / Survey / Correlation).</li>
+  </ul>
+</div>
+
+<div class="summary-box">
+  <b>Quick recap map</b><br>
+  Experimental (randomised — most rigorous, causal) → Quasi-Experimental (no randomisation but still an intervention — pretest-posttest / time-series / single-subject / factorial) → Nonexperimental (no manipulation at all — causal-comparative / survey / correlation).
+</div>
+
+<h2 class="chapter-title" id="quiz">Self-Assessment: Short-Answer Questions</h2>
+<p style="font-family:Arial, sans-serif; font-size:.9rem; color:var(--muted);">Try answering each in your own words before revealing the model answer.</p>
+
+<div id="quiz-container"></div>
+
+</main>
+
+<footer>HBC201 Study Unit 6 — personal exam-prep aid built from the study unit text. Not an official SUSS document.</footer>
+
+<script>
+const questions = [
+  {
+    q: "1. Why does random assignment strengthen a study's internal validity?",
+    a: "Random assignment eliminates self-selection bias — it ensures that, on average, the treatment and control groups don't systematically differ from each other in ways unrelated to the treatment itself. This makes it much more plausible that any observed difference in outcomes was actually caused by the treatment, rather than by pre-existing differences between participants — which is what internal validity is about."
+  },
+  {
+    q: "2. A researcher tests students' maths scores both before and after introducing a new teaching method, comparing treatment and control groups that were randomly assigned. Which experimental design is this, and how would it differ if only a posttest were given?",
+    a: "This is the pretest-posttest control group design, since both groups are tested before and after the intervention and the difference is compared. If only a posttest were given (no pretest), it would instead be a posttest-only control group design — simpler, but unable to directly confirm the groups started off equivalent (though randomisation still helps ensure this)."
+  },
+  {
+    q: "3. What is the single biggest difference between an experimental design and a quasi-experimental design?",
+    a: "Randomisation. In an experimental design, participants are randomly assigned to treatment or control groups. In a quasi-experimental design, random assignment isn't feasible (e.g., existing intact groups like school classes are used instead), so researchers rely on strategies like pretests to check group equivalence."
+  },
+  {
+    q: "4. A researcher measures senior citizens' mental health twice daily for eight months, spanning both before and during a lockdown period. Which quasi-experimental design is this, and what distinguishes it from a single-subject design?",
+    a: "This is a time-series design — a series of repeated measurements is taken on one group (senior citizens) over time, before and after the intervention (the lockdown). It differs from a single-subject design in that it focuses on a group rather than one individual, and involves many repeated measurement points rather than a simpler before/after pair."
+  },
+  {
+    q: "5. A researcher tracks one participant's smoking behaviour before and after they complete a quit-smoking programme. Which design is this, and why is it not a time-series design?",
+    a: "This is a single-subject design, because it concerns the effect of a treatment on the behaviour of a single individual participant, structured around a baseline (A) measurement before treatment and a treatment (B) phase afterward. It is not a time-series design because time-series designs involve repeated measurements over time on a group rather than one participant."
+  },
+  {
+    q: "6. Why is correlation research classified as nonexperimental rather than quasi-experimental?",
+    a: "In correlation research, the researcher does not manipulate any variables at all — they simply observe and measure existing relationships between variables. Quasi-experimental designs still involve an intervention/treatment being introduced, even without random assignment; correlation research has no such manipulation, which is why it falls under nonexperimental design."
+  },
+  {
+    q: "7. Give an example of causal-comparative research and explain what makes it different from a true experiment.",
+    a: "Example: comparing maths achievement between students who happened to use new textbooks versus those who used old textbooks, where the researcher had no control over which students used which textbook. This differs from a true experiment because the 'treatment' (textbook type) was not assigned by the researcher and had already occurred before the study began — there's no randomisation or researcher-controlled manipulation."
+  },
+  {
+    q: "8. What would a 2×2 factorial design study, and how is it different from studying each independent variable separately?",
+    a: "A 2×2 factorial design examines two independent variables simultaneously, each with two levels (e.g., teaching method: new vs. traditional; and class size: small vs. large). Unlike studying each variable separately, a factorial design also allows researchers to detect interaction effects — e.g., whether the new teaching method works especially well (or poorly) specifically in small classes, an effect that wouldn't be visible if the variables were tested independently."
+  }
+];
+
+const container = document.getElementById('quiz-container');
+questions.forEach((item, i) => {
+  const block = document.createElement('div');
+  block.className = 'quiz-block';
+  block.innerHTML = `
+    <p class="q">${item.q}</p>
+    <button class="reveal-btn" onclick="toggleAnswer(${i})">Show Answer</button>
+    <div class="answer" id="answer-${i}">${item.a}</div>
+  `;
+  container.appendChild(block);
+});
+
+function toggleAnswer(i) {
+  const el = document.getElementById('answer-' + i);
+  const btn = el.previousElementSibling;
+  el.classList.toggle('show');
+  btn.textContent = el.classList.contains('show') ? 'Hide Answer' : 'Show Answer';
+}
+</script>
+
+</body>
+</html>
