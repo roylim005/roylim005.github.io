@@ -1,176 +1,175 @@
-<title>TPB Interview Copilot</title>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HSG Screening Interview Tool</title>
 <style>
   :root{
     --bg:#f6f5f1; --surface:#ffffff; --surface-2:#f0efe9; --border:#e0ddd3;
     --text:#211f1a; --text-dim:#6b6858; --accent:#2f6f52; --accent-ink:#ffffff;
-    --accent-soft:#e4f1e9; --warn:#8a5a12; --warn-soft:#fbeed9;
-    --danger:#a13b2f; --danger-soft:#fbe7e3;
-    --c-attitude:#3d6ea5; --c-attitude-soft:#e4edf7;
-    --c-norms:#7a4f9e; --c-norms-soft:#efe6f5;
-    --c-pbc:#b07a1f; --c-pbc-soft:#f7edd9;
-    --c-intention:#2f6f52; --c-intention-soft:#e4f1e9;
-    --c-barriers:#a13b2f; --c-barriers-soft:#fbe7e3;
-    --c-rapport:#6b6858; --c-rapport-soft:#eeece5;
+    --accent-soft:#e4f1e9; --warn:#8a5a12; --warn-soft:#fbeed9; --danger:#a13b2f; --danger-soft:#fbe7e3;
+    --s-attitude:#3d6ea5; --s-attitude-soft:#e4edf7;
+    --s-norms:#7a4f9e; --s-norms-soft:#efe6f5;
+    --s-pbc:#b07a1f; --s-pbc-soft:#f7edd9;
+    --s-final:#2f6f52; --s-final-soft:#e4f1e9;
+    --s-post:#a13b2f; --s-post-soft:#fbe7e3;
+    --s-demo:#6b6858; --s-demo-soft:#eeece5;
   }
   @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
+    :root{
       --bg:#171613; --surface:#201f1b; --surface-2:#262420; --border:#3a382f;
       --text:#eeece4; --text-dim:#a6a396; --accent:#5fae86; --accent-ink:#0c1410;
-      --accent-soft:#1d3227; --warn:#e0b25c; --warn-soft:#332a15;
-      --danger:#e2887a; --danger-soft:#3a201c;
-      --c-attitude:#7fb0e0; --c-attitude-soft:#1c2c3d;
-      --c-norms:#c3a4e0; --c-norms-soft:#2b2236;
-      --c-pbc:#e0b25c; --c-pbc-soft:#382c14;
-      --c-intention:#5fae86; --c-intention-soft:#1d3227;
-      --c-barriers:#e2887a; --c-barriers-soft:#3a201c;
-      --c-rapport:#a6a396; --c-rapport-soft:#2a2822;
+      --accent-soft:#1d3227; --warn:#e0b25c; --warn-soft:#332a15; --danger:#e2887a; --danger-soft:#3a201c;
+      --s-attitude:#7fb0e0; --s-attitude-soft:#1c2c3d;
+      --s-norms:#c3a4e0; --s-norms-soft:#2b2236;
+      --s-pbc:#e0b25c; --s-pbc-soft:#382c14;
+      --s-final:#5fae86; --s-final-soft:#1d3227;
+      --s-post:#e2887a; --s-post-soft:#3a201c;
+      --s-demo:#a6a396; --s-demo-soft:#2a2822;
     }
   }
-  :root[data-theme="dark"]{
-    --bg:#171613; --surface:#201f1b; --surface-2:#262420; --border:#3a382f;
-    --text:#eeece4; --text-dim:#a6a396; --accent:#5fae86; --accent-ink:#0c1410;
-    --accent-soft:#1d3227; --warn:#e0b25c; --warn-soft:#332a15;
-    --danger:#e2887a; --danger-soft:#3a201c;
-    --c-attitude:#7fb0e0; --c-attitude-soft:#1c2c3d;
-    --c-norms:#c3a4e0; --c-norms-soft:#2b2236;
-    --c-pbc:#e0b25c; --c-pbc-soft:#382c14;
-    --c-intention:#5fae86; --c-intention-soft:#1d3227;
-    --c-barriers:#e2887a; --c-barriers-soft:#3a201c;
-    --c-rapport:#a6a396; --c-rapport-soft:#2a2822;
-  }
-
   *{box-sizing:border-box;}
-  body{background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; padding:20px 16px 64px; max-width:980px; margin:0 auto;}
+  body{background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; margin:0; padding:20px 16px 80px;}
+  .wrap{max-width:940px; margin:0 auto;}
   h1{font-size:1.25rem; margin:0 0 2px;}
-  .sub{color:var(--text-dim); font-size:.85rem; margin:0 0 20px;}
-  .layout{display:grid; grid-template-columns:220px 1fr; gap:18px;}
+  .sub{color:var(--text-dim); font-size:.85rem; margin:0 0 18px;}
+  .layout{display:grid; grid-template-columns:200px 1fr; gap:18px;}
   @media (max-width:720px){ .layout{grid-template-columns:1fr;} }
 
-  .card{background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:16px;}
+  .card{background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:16px; margin-bottom:16px;}
   .sidebar .card{padding:10px;}
   .sess-item{display:flex; align-items:center; justify-content:space-between; padding:9px 8px; border-radius:8px; cursor:pointer; font-size:.88rem;}
   .sess-item:hover{background:var(--surface-2);}
   .sess-item.active{background:var(--accent-soft); color:var(--accent); font-weight:600;}
   .status-dot{width:8px; height:8px; border-radius:50%; display:inline-block; margin-right:6px; background:var(--border);}
-  .status-dot.progress{background:var(--warn);}
-  .status-dot.done{background:var(--accent);}
+  .status-dot.has{background:var(--accent);}
 
   button{font:inherit; cursor:pointer; border-radius:8px; border:1px solid var(--border); background:var(--surface); color:var(--text); padding:9px 14px;}
   button:hover{background:var(--surface-2);}
-  button:disabled{opacity:.45; cursor:not-allowed;}
   button.primary{background:var(--accent); color:var(--accent-ink); border-color:var(--accent);}
   button.primary:hover{filter:brightness(1.05);}
-  button.danger{background:var(--danger-soft); color:var(--danger); border-color:transparent;}
   button.ghost{background:transparent; border-color:transparent; color:var(--text-dim); padding:6px 8px;}
   .row{display:flex; gap:10px; flex-wrap:wrap; align-items:center;}
 
   label{display:block; font-size:.78rem; color:var(--text-dim); margin:0 0 4px;}
-  input[type=text], select, textarea{width:100%; background:var(--surface-2); border:1px solid var(--border); color:var(--text); border-radius:8px; padding:9px 10px; font:inherit;}
-  textarea{resize:vertical;}
+  input[type=text], textarea{width:100%; background:var(--surface-2); border:1px solid var(--border); color:var(--text); border-radius:8px; padding:9px 10px; font:inherit;}
+  textarea{resize:vertical; min-height:56px;}
   .field{margin-bottom:12px;}
   .grid2{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+  @media (max-width:520px){ .grid2{grid-template-columns:1fr;} }
 
-  .tag{display:inline-block; font-size:.72rem; font-weight:600; padding:2px 8px; border-radius:999px; text-transform:uppercase; letter-spacing:.02em;}
-  .tag.attitude{background:var(--c-attitude-soft); color:var(--c-attitude);}
-  .tag.subjective_norms{background:var(--c-norms-soft); color:var(--c-norms);}
-  .tag.pbc{background:var(--c-pbc-soft); color:var(--c-pbc);}
-  .tag.intention{background:var(--c-intention-soft); color:var(--c-intention);}
-  .tag.barriers_motivators{background:var(--c-barriers-soft); color:var(--c-barriers);}
-  .tag.rapport{background:var(--c-rapport-soft); color:var(--c-rapport);}
-  .tag.postbaseline{background:var(--warn-soft); color:var(--warn);}
+  .tag{display:inline-block; font-size:.68rem; font-weight:700; padding:2px 8px; border-radius:999px; text-transform:uppercase; letter-spacing:.03em; margin-bottom:8px;}
+  .tag.demo{background:var(--s-demo-soft); color:var(--s-demo);}
+  .tag.attitude{background:var(--s-attitude-soft); color:var(--s-attitude);}
+  .tag.norms{background:var(--s-norms-soft); color:var(--s-norms);}
+  .tag.pbc{background:var(--s-pbc-soft); color:var(--s-pbc);}
+  .tag.final{background:var(--s-final-soft); color:var(--s-final);}
+  .tag.post{background:var(--s-post-soft); color:var(--s-post);}
 
-  .coverage{display:flex; flex-wrap:wrap; gap:6px; margin:10px 0 0;}
-  .chip{font-size:.72rem; padding:4px 9px; border-radius:999px; border:1px solid var(--border); color:var(--text-dim);}
-  .chip.on{border-color:transparent; background:var(--accent-soft); color:var(--accent); font-weight:600;}
+  .qblock{border-bottom:1px solid var(--border); padding:14px 0;}
+  .qblock:last-child{border-bottom:none;}
+  .qnum{font-weight:600; font-size:.94rem; margin:0 0 8px;}
 
-  .qcard{background:var(--accent-soft); border:1px solid transparent; border-radius:12px; padding:18px; margin-bottom:14px;}
-  .qcard .tag{margin-bottom:8px;}
-  .qcard textarea{background:var(--surface); font-size:1.05rem; line-height:1.5; min-height:64px; font-weight:500;}
-  .qcard .hint{font-size:.76rem; color:var(--text-dim); margin-top:6px;}
-
-  .transcript{max-height:340px; overflow-y:auto; display:flex; flex-direction:column; gap:12px; margin-top:14px; padding-right:4px;}
-  .turn{border-bottom:1px solid var(--border); padding-bottom:10px;}
-  .turn:last-child{border-bottom:none;}
-  .turn .q{font-weight:600; font-size:.92rem; margin:4px 0 2px;}
-  .turn .a{color:var(--text-dim); font-size:.9rem; white-space:pre-wrap;}
-
-  .banner{font-size:.82rem; padding:9px 12px; border-radius:8px; margin-bottom:12px;}
-  .banner.info{background:var(--surface-2); color:var(--text-dim);}
-  .banner.warn{background:var(--warn-soft); color:var(--warn);}
-  .banner.danger{background:var(--danger-soft); color:var(--danger);}
-
-  .thinking{display:inline-flex; align-items:center; gap:6px; color:var(--text-dim); font-size:.85rem;}
-  .dot{width:5px; height:5px; border-radius:50%; background:var(--text-dim); animation:pulse 1s infinite ease-in-out;}
-  .dot:nth-child(2){animation-delay:.15s;} .dot:nth-child(3){animation-delay:.3s;}
-  @keyframes pulse{0%,80%,100%{opacity:.25;} 40%{opacity:1;}}
-
-  .footerlinks{display:flex; gap:8px; flex-wrap:wrap; margin-top:14px;}
-  h2{font-size:1rem; margin:0 0 10px;}
-  h3{font-size:.85rem; margin:0 0 8px; color:var(--text-dim); font-weight:600; text-transform:uppercase; letter-spacing:.02em;}
+  h2{font-size:1rem; margin:0 0 4px;}
+  h3{font-size:.78rem; margin:18px 0 4px; color:var(--text-dim); font-weight:700; text-transform:uppercase; letter-spacing:.03em;}
   .muted{color:var(--text-dim); font-size:.85rem;}
-  .export-box{white-space:pre-wrap; font-size:.8rem; background:var(--surface-2); border:1px solid var(--border); border-radius:8px; padding:10px; max-height:300px; overflow:auto;}
+  .savebar{position:sticky; top:0; z-index:5; background:var(--bg); padding:8px 0 12px; margin-bottom:4px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;}
+  .savestate{font-size:.8rem; color:var(--text-dim);}
+  .savestate.ok{color:var(--accent);}
+  .footerbar{display:flex; gap:8px; flex-wrap:wrap; margin-top:16px; border-top:1px solid var(--border); padding-top:16px;}
+  #fileInput{display:none;}
+  .banner{font-size:.82rem; padding:9px 12px; border-radius:8px; margin-bottom:14px; background:var(--warn-soft); color:var(--warn);}
 </style>
+</head>
+<body>
+<div class="wrap">
+  <h1>HSG Screening Interview Tool</h1>
+  <p class="sub">PSY265 GBA01 — type answers in live during the interview. Autosaves to this browser as you go; use "Export backup" regularly so you never lose data if the browser is cleared or you switch devices.</p>
 
-<h1>TPB Interview Copilot</h1>
-<p class="sub">PSY265 GBA01 — live-interview aid. You ask the questions out loud; this suggests the next one based on what was just said, so nothing sounds scripted or repeated.</p>
-
-<div id="capBanner"></div>
-
-<div class="layout">
-  <div class="sidebar">
-    <div class="card">
-      <h3>Interviewees</h3>
-      <div id="sessList"></div>
-      <button class="ghost" id="addSessBtn" style="width:100%; margin-top:6px; text-align:left;">+ Add interviewee</button>
+  <div class="layout">
+    <div class="sidebar">
+      <div class="card">
+        <h3 style="margin-top:0;">Interviewees</h3>
+        <div id="sessList"></div>
+        <button class="ghost" id="addSessBtn" style="width:100%; margin-top:6px; text-align:left;">+ Add interviewee</button>
+      </div>
     </div>
-  </div>
 
-  <div id="main"></div>
+    <div id="main"></div>
+  </div>
 </div>
+
+<input type="file" id="fileInput" accept="application/json">
 
 <script>
 (function(){
   "use strict";
 
+  const STORAGE_KEY = "hsg-tpb-interview-data-v1";
   const IDS_DEFAULT = ["P1","P2","P3","P4","P5"];
-  const CONSTRUCTS = ["attitude","subjective_norms","pbc","intention","barriers_motivators"];
-  const CONSTRUCT_LABEL = {
-    attitude:"Attitude", subjective_norms:"Subjective Norms", pbc:"Perceived Control",
-    intention:"Intention", barriers_motivators:"Barriers / Motivators", rapport:"Rapport", postbaseline:"Post-baseline"
-  };
-  const OPENING_QUESTION = "To start, when you hear \"health screening\" — basic health checks or cancer screening — what comes to mind for you?";
-  const POST_BASELINE_TEXT = "Just to check something — if you knew that a basic screening costs about $X and takes around Y minutes at a nearby HSG clinic, would that change how you feel about it, or would your main concern still be there?";
-  const FALLBACK_BANK = [
-    {q:"Have you ever gone for any kind of health screening before, even a long time ago? What was that like?", construct:"rapport"},
-    {q:"What do you see as the benefits, if any, of going for a health screening at this point in your life?", construct:"attitude"},
-    {q:"What concerns or downsides do you associate with screening?", construct:"attitude"},
-    {q:"Are there people in your life who think you should go for screening?", construct:"subjective_norms"},
-    {q:"Has anyone close to you ever brought up screening with you directly?", construct:"subjective_norms"},
-    {q:"If you decided today you wanted to go, how easy or difficult would that be to actually arrange?", construct:"pbc"},
-    {q:"What tends to get in the way?", construct:"pbc"},
-    {q:"Do you think you'll go for a screening in the next 6-12 months? What would need to happen for that to be a yes?", construct:"intention"},
-    {q:"Thinking back over everything, what's the single biggest reason you haven't gone in the past three years?", construct:"barriers_motivators"},
-    {q:"What would motivate or encourage you to finally go?", construct:"barriers_motivators"}
-  ];
 
-  let sample = null, db = null, downloads = null;
-  let sessions = {};        // id -> session object (mirrors db doc)
+  const QUESTIONS = [
+    {n:2, section:"attitude", label:"Attitude towards checkups", text:"Is there a reason you have not gone for health screening in the past three years?"},
+    {n:3, section:"attitude", label:"Attitude towards checkups", text:"Do you see any benefits of going for a health screening at this point in your life?"},
+    {n:4, section:"attitude", label:"Attitude towards checkups", text:"Are there any concerns or downsides do you associate with screening (— for example discomfort, waiting for results, cost, or something else)? If yes, please elaborate."},
+    {n:5, section:"attitude", label:"Attitude towards checkups", text:"Overall, would you say you feel positive, negative, or neutral about health screening? What makes you feel that way?"},
+    {n:6, section:"norms", label:"Subjective norms", text:"Are there people in your life — family, friends, colleagues, or your doctor, who think you should go for screening? If yes, why you no go?"},
+    {n:7, section:"norms", label:"Subjective norms", text:"Do you know people around your age who've gone for screening? Does knowing that affect how you think about it, one way or another?"},
+    {n:8, section:"norms", label:"Subjective norms", text:"If someone important to you strongly wanted you to go for screening, would that change your decision? Why or why not?"},
+    {n:9, section:"pbc", label:"Perceived behavioural control", text:"Have you ever tried or planned to book a screening before? What happened?"},
+    {n:10, section:"pbc", label:"Perceived behavioural control", text:"How confident are you that you could get a screening done in the next 3 months if you decided to? What would make you more confident?"},
+    {n:11, section:"final", label:"Final confirmation", text:"Thinking back over everything we've discussed, what's the single biggest reason you haven't gone for screening in the past three years?"},
+    {n:12, section:"final", label:"Final confirmation", text:"What would motivate or encourage you to finally go — a person, a reminder, cost subsidy, convenience, something else?"},
+    {n:13, section:"post", label:"Post question", text:"Just to check something — if you knew that a basic screening costs about $5 and takes around 15 minutes at [a nearby HSG clinic], would that change how you feel about it, or would your main concern still be there?"}
+  ];
+  const SECTION_LABEL = {demo:"Demographics", attitude:"Attitude towards checkups", norms:"Subjective norms", pbc:"Perceived behavioural control", final:"Final confirmation", post:"Post question"};
+
+  let state = {};       // id -> {demographics:{}, answers:{n:text}}
   let activeId = null;
-  let fallbackIdx = {};     // id -> index into FALLBACK_BANK
-  let inFlight = false;
+  let saveTimer = null;
 
   function newSession(){
-    return {
-      demographics:{age:"",gender:"",race:"",profession:"",education:""},
-      transcript:[],           // {question, answer, construct, technique}
-      coverage:[],             // covered construct names
-      status:"not_started",    // not_started | in_progress | done
-      postBaselineAsked:false,
-      postBaselineAnswer:"",
-      summary:null,
-      pendingQuestion:OPENING_QUESTION,
-      pendingConstruct:"rapport"
-    };
+    return { demographics:{age:"",gender:"",race:"",profession:"",education:""}, answers:{} };
+  }
+
+  function loadState(){
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if(raw) state = JSON.parse(raw);
+    }catch(e){ state = {}; }
+    IDS_DEFAULT.forEach(id => { if(!state[id]) state[id] = newSession(); });
+  }
+
+  function persist(){
+    try{
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      setSaveState(true);
+    }catch(e){
+      setSaveState(false, "Couldn't autosave to this browser — export a backup now.");
+    }
+  }
+
+  function scheduleSave(){
+    setSaveState(null, "Saving…");
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(persist, 400);
+  }
+
+  function setSaveState(ok, msg){
+    const el = document.getElementById("saveState");
+    if(!el) return;
+    if(ok === true){
+      el.textContent = "Saved " + new Date().toLocaleTimeString();
+      el.className = "savestate ok";
+    } else if(ok === false){
+      el.textContent = msg || "Not saved";
+      el.className = "savestate";
+      el.style.color = "var(--danger)";
+    } else {
+      el.textContent = msg || "Saving…";
+      el.className = "savestate";
+    }
   }
 
   function render(){
@@ -181,12 +180,12 @@
   function renderSidebar(){
     const el = document.getElementById("sessList");
     el.innerHTML = "";
-    Object.keys(sessions).forEach(id=>{
-      const s = sessions[id];
+    Object.keys(state).forEach(id=>{
+      const s = state[id];
+      const hasData = Object.values(s.answers||{}).some(v=>v && v.trim()) || (s.demographics && s.demographics.age);
       const div = document.createElement("div");
       div.className = "sess-item" + (id===activeId ? " active" : "");
-      const dotClass = s.status === "done" ? "done" : (s.status === "in_progress" ? "progress" : "");
-      div.innerHTML = `<span><span class="status-dot ${dotClass}"></span>${id}</span><span class="muted" style="font-size:.72rem;">${s.status.replace("_"," ")}</span>`;
+      div.innerHTML = `<span><span class="status-dot ${hasData?'has':''}"></span>${id}</span>`;
       div.onclick = () => { activeId = id; render(); };
       el.appendChild(div);
     });
@@ -194,321 +193,149 @@
 
   function renderMain(){
     const main = document.getElementById("main");
-    if(!activeId){
-      main.innerHTML = `<div class="card"><p class="muted">Select or add an interviewee on the left to begin.</p></div>`;
-      return;
-    }
-    const s = sessions[activeId];
-    if(s.status === "not_started" || !s.demographics.filledOnce){
-      main.innerHTML = setupHTML(s);
-      wireSetup(s);
-      return;
-    }
-    main.innerHTML = interviewHTML(s);
-    wireInterview(s);
-  }
-
-  function setupHTML(s){
+    if(!activeId){ main.innerHTML = `<div class="card"><p class="muted">Select or add an interviewee on the left.</p></div>`; return; }
+    const s = state[activeId];
     const d = s.demographics;
-    return `
-      <div class="card">
-        <h2>${activeId} — quick intake</h2>
-        <p class="muted" style="margin-top:-6px;">No names. Confirm eligibility first (40+, no screening in the past 3 years), then jot the demographics before you start.</p>
-        <div class="grid2">
-          <div class="field"><label>Age</label><input type="text" id="f_age" value="${d.age||""}"></div>
-          <div class="field"><label>Gender</label><input type="text" id="f_gender" value="${d.gender||""}"></div>
-          <div class="field"><label>Race</label><input type="text" id="f_race" value="${d.race||""}"></div>
-          <div class="field"><label>Profession</label><input type="text" id="f_profession" value="${d.profession||""}"></div>
-        </div>
-        <div class="field"><label>Highest education</label><input type="text" id="f_education" value="${d.education||""}"></div>
-        <button class="primary" id="startBtn">Start interview</button>
-      </div>`;
-  }
 
-  function wireSetup(s){
-    document.getElementById("startBtn").onclick = () => {
-      s.demographics = {
-        age: document.getElementById("f_age").value.trim(),
-        gender: document.getElementById("f_gender").value.trim(),
-        race: document.getElementById("f_race").value.trim(),
-        profession: document.getElementById("f_profession").value.trim(),
-        education: document.getElementById("f_education").value.trim(),
-        filledOnce:true
-      };
-      s.status = "in_progress";
-      save(s);
-      render();
-    };
-  }
+    const questionBlocks = QUESTIONS.map(q => `
+      <div class="qblock" data-n="${q.n}">
+        <span class="tag ${q.section}">${SECTION_LABEL[q.section]}</span>
+        <div class="qnum">${q.n}. ${escapeHTML(q.text)}</div>
+        <textarea data-answer="${q.n}" placeholder="Type the interviewee's answer...">${escapeHTML(s.answers[q.n]||"")}</textarea>
+      </div>`).join("");
 
-  function interviewHTML(s){
-    const capNote = sample ? "" : `<div class="banner warn">AI suggestions aren't available in this view — falling back to a fixed question bank. You can still type answers and log everything normally.</div>`;
-    const coverageChips = CONSTRUCTS.map(c=>{
-      const on = s.coverage.includes(c);
-      return `<span class="chip${on?" on":""}">${CONSTRUCT_LABEL[c]}</span>`;
-    }).join("");
-    const transcriptHTML = s.transcript.map((t,i)=>`
-      <div class="turn">
-        <span class="tag ${t.construct}">${CONSTRUCT_LABEL[t.construct]||t.construct}</span>
-        <div class="q">Q${i+1}. ${escapeHTML(t.question)}</div>
-        <div class="a">${escapeHTML(t.answer)}</div>
-      </div>`).join("") || `<p class="muted">No answers logged yet.</p>`;
-
-    const readyBanner = (s.status==="in_progress" && s.readyToClose && !s.postBaselineAsked)
-      ? `<div class="banner info">The core constructs look reasonably covered. When you're ready, use "Ask post-baseline probe" below before wrapping up.</div>` : "";
-
-    return `
-      <div class="card">
-        <div class="row" style="justify-content:space-between;">
-          <h2 style="margin:0;">${activeId} — ${escapeHTML(s.demographics.age||"")}${s.demographics.gender? ", "+escapeHTML(s.demographics.gender):""}${s.demographics.profession? ", "+escapeHTML(s.demographics.profession):""}</h2>
-          <button class="ghost" id="editIntakeBtn">Edit intake</button>
-        </div>
-        <div class="coverage">${coverageChips}</div>
-        ${capNote}
-        ${readyBanner}
-
-        <div class="qcard" id="qcard">
-          <span class="tag ${s.pendingConstruct}">${CONSTRUCT_LABEL[s.pendingConstruct]||s.pendingConstruct}</span>
-          <textarea id="pendingQ">${escapeHTML(s.pendingQuestion)}</textarea>
-          <div class="hint">Read this aloud (edit the wording first if you'd say it differently). Then type what they said below.</div>
-        </div>
-
-        <div class="field">
-          <label>Interviewee's answer</label>
-          <textarea id="answerBox" rows="3" placeholder="Type what they said..."></textarea>
-        </div>
-        <div class="row">
-          <button class="primary" id="submitBtn">Log answer &amp; get next question</button>
-          <button class="ghost" id="skipBtn">Skip this question</button>
-          <span id="thinking" style="display:none;" class="thinking"><span class="dot"></span><span class="dot"></span><span class="dot"></span> thinking</span>
-        </div>
-
-        <div class="row" style="margin-top:16px;">
-          <button id="postBaselineBtn" ${s.postBaselineAsked ? "disabled" : ""}>Ask post-baseline probe</button>
-          <button class="danger" id="endBtn">End &amp; save interview</button>
-        </div>
-
-        <h3 style="margin-top:22px;">Transcript</h3>
-        <div class="transcript" id="transcript">${transcriptHTML}</div>
+    main.innerHTML = `
+      <div class="savebar">
+        <h2 style="margin:0;">${activeId}</h2>
+        <span class="savestate" id="saveState"></span>
       </div>
 
-      ${s.status==="done" ? summaryCard(s) : ""}
-    `;
-  }
-
-  function summaryCard(s){
-    return `
-      <div class="card" style="margin-top:16px;">
-        <h2>Findings summary</h2>
-        <p class="muted" style="margin-top:-4px;">AI-drafted from the transcript — review and edit before pasting into your findings log. Disclose per your assignment's GenAI policy.</p>
-        <button id="summarizeBtn" ${sample ? "" : "disabled"}>Summarize for findings table</button>
-        <div id="summaryOut" style="margin-top:12px;">${s.summary ? renderSummary(s.summary) : ""}</div>
-        <div class="footerlinks">
-          <button id="exportBtn">Export transcript (.md)</button>
-          <button id="copyRowBtn">Copy findings-log row</button>
+      <div class="card">
+        <span class="tag demo">1. Demographics</span>
+        <div class="grid2">
+          <div class="field"><label>Age</label><input type="text" data-demo="age" value="${escapeAttr(d.age)}"></div>
+          <div class="field"><label>Gender</label><input type="text" data-demo="gender" value="${escapeAttr(d.gender)}"></div>
+          <div class="field"><label>Race</label><input type="text" data-demo="race" value="${escapeAttr(d.race)}"></div>
+          <div class="field"><label>Profession</label><input type="text" data-demo="profession" value="${escapeAttr(d.profession)}"></div>
         </div>
-        <div id="exportPreview"></div>
-      </div>`;
+        <div class="field"><label>Highest education status</label><input type="text" data-demo="education" value="${escapeAttr(d.education)}"></div>
+      </div>
+
+      <div class="card">
+        ${questionBlocks}
+      </div>
+
+      <div class="footerbar">
+        <button class="primary" id="exportJsonBtn">Export backup (.json — all interviewees)</button>
+        <button id="importJsonBtn">Import backup (.json)</button>
+        <button id="exportCsvBtn">Export demographics table (.csv)</button>
+        <button id="exportTranscriptBtn">Export this interview (.md)</button>
+      </div>
+      <div id="exportPreview"></div>
+    `;
+    setSaveState(true);
+    wireMain();
   }
 
-  function renderSummary(sum){
-    return `
-      <div class="grid2">
-        <div><strong>Attitude</strong><p class="muted">${escapeHTML(sum.attitude||"")}</p></div>
-        <div><strong>Subjective norms</strong><p class="muted">${escapeHTML(sum.subjective_norms||"")}</p></div>
-        <div><strong>Perceived control</strong><p class="muted">${escapeHTML(sum.pbc||"")}</p></div>
-        <div><strong>Main barrier(s)</strong><p class="muted">${escapeHTML(sum.barriers||"")}</p></div>
-        <div><strong>Main motivator(s)</strong><p class="muted">${escapeHTML(sum.motivators||"")}</p></div>
-        <div><strong>Post-baseline shift?</strong><p class="muted">${escapeHTML(sum.postbaseline_shift||"")}</p></div>
-      </div>`;
+  function wireMain(){
+    document.querySelectorAll('[data-demo]').forEach(inp=>{
+      inp.addEventListener('input', () => {
+        state[activeId].demographics[inp.getAttribute('data-demo')] = inp.value;
+        scheduleSave();
+        renderSidebar();
+      });
+    });
+    document.querySelectorAll('[data-answer]').forEach(ta=>{
+      ta.addEventListener('input', () => {
+        state[activeId].answers[ta.getAttribute('data-answer')] = ta.value;
+        scheduleSave();
+        renderSidebar();
+      });
+    });
+    document.getElementById("exportJsonBtn").onclick = exportJSON;
+    document.getElementById("importJsonBtn").onclick = () => document.getElementById("fileInput").click();
+    document.getElementById("exportCsvBtn").onclick = exportCSV;
+    document.getElementById("exportTranscriptBtn").onclick = exportTranscript;
   }
 
-  function wireInterview(s){
-    document.getElementById("editIntakeBtn").onclick = () => { s.demographics.filledOnce=false; render(); };
-    document.getElementById("skipBtn").onclick = () => nextQuestion(s, true);
-    document.getElementById("submitBtn").onclick = () => submitAnswer(s);
-    document.getElementById("postBaselineBtn").onclick = () => askPostBaseline(s);
-    document.getElementById("endBtn").onclick = () => { s.status="done"; save(s); render(); };
-    const sumBtn = document.getElementById("summarizeBtn");
-    if(sumBtn) sumBtn.onclick = () => summarize(s);
-    const expBtn = document.getElementById("exportBtn");
-    if(expBtn) expBtn.onclick = () => exportTranscript(s);
-    const copyBtn = document.getElementById("copyRowBtn");
-    if(copyBtn) copyBtn.onclick = () => copyRow(s);
+  function downloadBlob(filename, text, type){
+    const blob = new Blob([text], {type: type || "text/plain"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(()=>URL.revokeObjectURL(url), 2000);
   }
 
-  function submitAnswer(s){
-    if(inFlight) return;
-    const answer = document.getElementById("answerBox").value.trim();
-    const question = document.getElementById("pendingQ").value.trim();
-    if(!answer){ document.getElementById("answerBox").focus(); return; }
-    s.transcript.push({question, answer, construct:s.pendingConstruct});
-    if(s.pendingConstruct !== "rapport" && !s.coverage.includes(s.pendingConstruct)){
-      s.coverage.push(s.pendingConstruct);
-    }
-    save(s);
-    render();
-    nextQuestion(s, false);
+  function exportJSON(){
+    downloadBlob("hsg-interview-backup.json", JSON.stringify(state, null, 2), "application/json");
   }
 
-  function nextQuestion(s, skip){
-    const activeSnapshot = activeId;
-    inFlight = true;
-    const thinkingEl = document.getElementById("thinking");
-    if(thinkingEl) thinkingEl.style.display = "inline-flex";
-    const btn = document.getElementById("submitBtn");
-    if(btn) btn.disabled = true;
-
-    const done = (q, construct, ready) => {
-      inFlight = false;
-      if(activeId !== activeSnapshot) return; // user switched away
-      s.pendingQuestion = q;
-      s.pendingConstruct = construct;
-      s.readyToClose = !!ready;
-      save(s);
-      render();
+  document.getElementById("fileInput").addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      try{
+        const imported = JSON.parse(reader.result);
+        Object.keys(imported).forEach(id => { state[id] = imported[id]; });
+        persist();
+        render();
+        alert("Backup imported.");
+      }catch(err){
+        alert("That file didn't look like a valid backup.");
+      }
     };
+    reader.readAsText(file);
+    e.target.value = "";
+  });
 
-    if(!sample){
-      const idx = (fallbackIdx[activeSnapshot] = (fallbackIdx[activeSnapshot]||0));
-      const item = FALLBACK_BANK[idx % FALLBACK_BANK.length];
-      fallbackIdx[activeSnapshot] = idx+1;
-      done(item.q, item.construct, idx >= FALLBACK_BANK.length-2);
-      return;
-    }
+  function csvEscape(v){
+    const s = String(v==null ? "" : v);
+    return '"' + s.replace(/"/g,'""') + '"';
+  }
 
-    sample.json(buildPrompt(s), {modelTier:"default", cache:false}).then(data=>{
-      const q = (data && data.next_question) ? String(data.next_question) : FALLBACK_BANK[0].q;
-      const c = (data && CONSTRUCTS.concat(["rapport"]).includes(data.construct)) ? data.construct : "attitude";
-      done(q, c, data && data.ready_to_close);
-    }).catch(err=>{
-      const idx = (fallbackIdx[activeSnapshot] = (fallbackIdx[activeSnapshot]||0));
-      const item = FALLBACK_BANK[idx % FALLBACK_BANK.length];
-      fallbackIdx[activeSnapshot] = idx+1;
-      done(item.q + "  (AI suggestion unavailable — using backup question)", item.construct, false);
+  function exportCSV(){
+    const header = ["ID","Age","Gender","Race","Profession","Highest Education"];
+    const rows = Object.keys(state).map(id=>{
+      const d = state[id].demographics;
+      return [id, d.age, d.gender, d.race, d.profession, d.education].map(csvEscape).join(",");
     });
+    const csv = header.map(csvEscape).join(",") + "\n" + rows.join("\n") + "\n";
+    downloadBlob("hsg-demographics.csv", csv, "text/csv");
   }
 
-  function buildPrompt(s){
-    const d = s.demographics;
-    const lines = s.transcript.map((t,i)=>`Q${i+1} [${t.construct}]: ${t.question}\nA${i+1}: ${t.answer}`).join("\n\n");
-    return `You are helping a student researcher conduct a LIVE, in-person semi-structured qualitative interview for a university health psychology assignment. Goal: understand, through the Theory of Planned Behaviour (TPB), why this interviewee (40+, has NOT had a basic health screening or cancer screening in the past 3 years) has not gone for screening under Singapore's Healthier SG (HSG) programme.
-
-TPB constructs that need genuine coverage by the end of the interview:
-- attitude: personal beliefs/feelings about screening, perceived pros and cons.
-- subjective_norms: perceived social pressure or support from family, friends, doctors, peers.
-- pbc: perceived behavioural control — how easy/hard THEY believe it would be, self-efficacy, logistical barriers.
-- intention: whether they intend to go, and what would change that.
-- barriers_motivators: a synthesised, concrete statement of their main barrier(s) and what might motivate them.
-
-STRICT RULES:
-- Never mention, hint at, or correct with facts about cost, price, convenience, or how easy/quick screening actually is. You are eliciting THEIR current unprompted beliefs, not informing or persuading them. A separate fixed question about cost/convenience is asked manually later by the researcher — do not anticipate or duplicate it.
-- Never ask something already substantively answered in the transcript below. If a construct already has real coverage, move to whichever construct is least covered.
-- If the most recent answer is thin or surface-level, prefer DEEPENING it (why, can-you-give-an-example, how-did-that-feel, echoing their own words back) over jumping to a new construct.
-- One question at a time, natural spoken register, 1-2 sentences, no filler or acknowledgement text (the human researcher adds their own).
-- Demographics: age ${d.age||"unstated"}, gender ${d.gender||"unstated"}, profession ${d.profession||"unstated"}.
-
-Transcript so far:
-${lines || "(none yet - this is the first substantive question)"}
-
-Reply with ONLY this JSON object, no other text:
-{"next_question": string, "construct": "attitude"|"subjective_norms"|"pbc"|"intention"|"barriers_motivators", "technique": "new_topic"|"ladder_why"|"specificity"|"affect"|"synthesis"|"clarify", "rationale": string, "ready_to_close": boolean}`;
-  }
-
-  function askPostBaseline(s){
-    s.pendingQuestion = POST_BASELINE_TEXT;
-    s.pendingConstruct = "barriers_motivators";
-    s.postBaselineAsked = true;
-    save(s);
-    render();
-  }
-
-  function summarize(s){
-    if(!sample) return;
-    const btn = document.getElementById("summarizeBtn");
-    btn.disabled = true; btn.textContent = "Summarizing...";
-    const lines = s.transcript.map((t,i)=>`Q${i+1} [${t.construct}]: ${t.question}\nA${i+1}: ${t.answer}`).join("\n\n");
-    const prompt = `Summarize this TPB qualitative interview transcript into short findings-log entries (a few words to one short sentence each, plain language, no jargon). Base every field ONLY on what's actually in the transcript below - never invent detail.
-
-Transcript:
-${lines}
-
-Reply with ONLY this JSON object:
-{"attitude": string, "subjective_norms": string, "pbc": string, "barriers": string, "motivators": string, "postbaseline_shift": string}`;
-    sample.json(prompt, {modelTier:"default", cache:false}).then(data=>{
-      s.summary = data;
-      save(s);
-      render();
-    }).catch(()=>{
-      btn.disabled=false; btn.textContent="Summarize for findings table";
-      alert("Couldn't generate a summary right now — you can still fill the findings log by hand from the transcript.");
+  function exportTranscript(){
+    const s = state[activeId], d = s.demographics;
+    let md = `# Interview ${activeId}\n\nAge ${d.age||"?"} | Gender ${d.gender||"?"} | Race ${d.race||"?"} | Profession ${d.profession||"?"} | Education ${d.education||"?"}\n\n`;
+    QUESTIONS.forEach(q=>{
+      md += `**${q.n}. [${SECTION_LABEL[q.section]}] ${q.text}**\n${s.answers[q.n]||"(no answer logged)"}\n\n`;
     });
-  }
-
-  function exportTranscript(s){
-    const lines = s.transcript.map((t,i)=>`**Q${i+1} [${CONSTRUCT_LABEL[t.construct]||t.construct}].** ${t.question}\n${t.answer}`).join("\n\n");
-    const post = s.postBaselineAsked ? `\n\n**Post-baseline probe.** ${POST_BASELINE_TEXT}\n${s.postBaselineAnswer||"(not separately logged - see transcript above)"}` : "";
-    const d = s.demographics;
-    const md = `# Interview ${activeId}\nAge ${d.age||"?"} | Gender ${d.gender||"?"} | Race ${d.race||"?"} | Profession ${d.profession||"?"} | Education ${d.education||"?"}\n\n${lines}${post}\n`;
-    const box = document.getElementById("exportPreview");
-    box.innerHTML = `<div class="export-box" id="exportText">${escapeHTML(md)}</div>`;
-    if(downloads){
-      downloads.save({filename:`interview-${activeId}.md`, data:new Blob([md],{type:"text/markdown"})}).catch(()=>{});
-    }
-  }
-
-  function copyRow(s){
-    const d = s.demographics, sum = s.summary || {};
-    const row = `| ${activeId} | ${d.age||""}, ${d.gender||""}, ${d.race||""}, ${d.profession||""}, ${d.education||""} | ${sum.attitude||""} | ${sum.subjective_norms||""} | ${sum.pbc||""} | ${sum.barriers||""} | ${sum.motivators||""} | ${sum.postbaseline_shift||""} |`;
-    const box = document.getElementById("exportPreview");
-    box.innerHTML = `<div class="export-box">${escapeHTML(row)}</div><p class="muted" style="margin-top:6px;">Select and copy the row above into your findings log table.</p>`;
+    downloadBlob(`interview-${activeId}.md`, md, "text/markdown");
   }
 
   function escapeHTML(str){
     return String(str||"").replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
   }
-
-  function save(s){
-    if(!db) return;
-    db.doc("interviews/"+activeId).set(JSON.parse(JSON.stringify(s))).catch(()=>{});
-  }
-
-  function loadAll(){
-    IDS_DEFAULT.forEach(id => { if(!sessions[id]) sessions[id] = newSession(); });
-    if(!db){ activeId = activeId || IDS_DEFAULT[0]; render(); return; }
-    db.collection("interviews").get().then(snap=>{
-      snap.docs.forEach(doc=>{
-        if(doc.exists) sessions[doc.id] = Object.assign(newSession(), doc.data());
-      });
-      activeId = activeId || IDS_DEFAULT[0];
-      render();
-    }).catch(()=>{ activeId = activeId || IDS_DEFAULT[0]; render(); });
-  }
+  function escapeAttr(str){ return escapeHTML(str); }
 
   document.getElementById("addSessBtn").onclick = () => {
     const id = prompt("Interviewee ID (e.g. P6):");
     if(!id) return;
     const clean = id.trim().slice(0,20);
     if(!clean) return;
-    if(!sessions[clean]) sessions[clean] = newSession();
+    if(!state[clean]) state[clean] = newSession();
     activeId = clean;
+    persist();
     render();
   };
 
-  async function boot(){
-    try{ sample = await claude.use("sample"); }catch(e){ sample = null; }
-    try{ db = await claude.use("db"); }catch(e){ db = null; }
-    try{ downloads = await claude.use("downloads"); }catch(e){ downloads = null; }
+  window.addEventListener("beforeunload", () => { try{ persist(); }catch(e){} });
 
-    const capBanner = document.getElementById("capBanner");
-    if(!sample){
-      capBanner.innerHTML = `<div class="banner warn">AI-assisted next-question suggestions are off in this view (not granted, or unavailable here). The tool still works with a fixed backup question bank.</div>`;
-    }
-    if(!db){
-      capBanner.innerHTML += `<div class="banner info">Progress won't be saved between visits in this view — finish each interview in one sitting, or export the transcript before closing.</div>`;
-    }
-    loadAll();
-  }
-  boot();
+  loadState();
+  activeId = IDS_DEFAULT[0];
+  render();
 })();
 </script>
+</body>
+</html>
