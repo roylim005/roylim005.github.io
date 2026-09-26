@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PSY213 Seminar 2 – Revision Notes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6F7F5; --ink:#1E2A38; --muted:#5B6673; --line:#D3D9D6;
+  --teal:#2F7D72; --teal-soft:#E3F0EC;
+  --plum:#6B4E71; --plum-soft:#EFE8F0;
+  --amber:#A8700F; --amber-soft:#FBF1DE;
+  --red:#A6423A; --card:#FFFFFF;
+  --serif:"Newsreader", Georgia, "Times New Roman", serif;
+  --sans:"Instrument Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#141A21; --ink:#E4E8EC; --muted:#9AA6B2; --line:#2E3842;
+    --teal:#6CC1B3; --teal-soft:#1B2E2B; --plum:#C7A6CE; --plum-soft:#2A2230;
+    --amber:#E3B45C; --amber-soft:#2E2616; --red:#E08A82; --card:#1A222B;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#141A21; --ink:#E4E8EC; --muted:#9AA6B2; --line:#2E3842;
+  --teal:#6CC1B3; --teal-soft:#1B2E2B; --plum:#C7A6CE; --plum-soft:#2A2230;
+  --amber:#E3B45C; --amber-soft:#2E2616; --red:#E08A82; --card:#1A222B;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:1.075rem;line-height:1.62}
+.wrap{display:grid;grid-template-columns:250px minmax(0,1fr);gap:3rem;max-width:1180px;margin:0 auto;padding:2rem 1.5rem 5rem}
+nav.toc{position:sticky;top:calc(1.5rem + env(safe-area-inset-top,0px));align-self:start;font-family:var(--sans);font-size:.88rem;max-height:calc(100vh - 3rem);overflow:auto;padding-right:.5rem}
+nav.toc p{font-weight:700;margin:0 0 .6rem}
+nav.toc ol{list-style:none;padding:0;margin:0;counter-reset:t}
+nav.toc li{margin:.15rem 0}
+nav.toc a{color:var(--muted);text-decoration:none;display:block;padding:.2rem .5rem;border-left:2px solid transparent}
+nav.toc a:hover,nav.toc a:focus-visible{color:var(--ink);border-left-color:var(--teal)}
+main{max-width:74ch}
+header.hero{border-bottom:1px solid var(--line);padding-bottom:1.5rem;margin-bottom:2rem}
+.course{font-family:var(--sans);color:var(--teal);font-weight:600;margin:0}
+h1{font-family:var(--sans);font-size:clamp(2rem,4.5vw,3rem);line-height:1.08;letter-spacing:-.02em;margin:.3rem 0 .8rem}
+h2{font-family:var(--sans);font-size:1.6rem;letter-spacing:-.01em;line-height:1.2;margin:3.2rem 0 .8rem;padding-top:1rem;border-top:3px solid var(--ink)}
+h3{font-family:var(--sans);font-size:1.15rem;margin:2rem 0 .5rem}
+h4{font-family:var(--sans);font-size:1rem;margin:1.2rem 0 .3rem}
+p{margin:.6rem 0}
+a{color:var(--teal)}
+:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.src{font-family:var(--sans);font-size:.72rem;font-weight:600;padding:.1rem .45rem;border-radius:3px;vertical-align:.15em;white-space:nowrap}
+.s-sem{background:var(--teal-soft);color:var(--teal)}
+.s-su{background:var(--plum-soft);color:var(--plum)}
+.s-out{background:var(--amber-soft);color:var(--amber);border:1px dashed var(--amber)}
+.legend{font-family:var(--sans);font-size:.88rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:.8rem 1.2rem;align-items:center}
+.eg{border-left:3px solid var(--plum);background:var(--plum-soft);padding:.7rem 1rem;margin:1rem 0;border-radius:0 4px 4px 0}
+.eg b:first-child{font-family:var(--sans);color:var(--plum)}
+.trap{border-left:3px solid var(--red);padding:.6rem 1rem;margin:1rem 0;background:var(--card)}
+.trap b:first-child{font-family:var(--sans);color:var(--red)}
+.outside{border:1px dashed var(--amber);background:var(--amber-soft);padding:.8rem 1rem;margin:1rem 0;border-radius:4px}
+table{border-collapse:collapse;width:100%;font-size:.95rem;margin:1rem 0}
+.tbl{overflow-x:auto}
+th,td{border:1px solid var(--line);padding:.5rem .65rem;vertical-align:top;text-align:left}
+th{font-family:var(--sans);font-size:.88rem;background:var(--card)}
+ul,ol{padding-left:1.3rem}
+li{margin:.25rem 0}
+.stat{font-family:var(--sans);font-weight:700;color:var(--teal)}
+/* continuum band */
+.band{display:grid;grid-template-columns:repeat(4,1fr);margin:1.2rem 0 .4rem;font-family:var(--sans);font-size:.85rem;border-radius:4px;overflow:hidden}
+.band div{padding:.7rem .6rem;color:#11202a}
+.band div strong{display:block;font-size:1rem}
+.b1{background:#8FD0B6}.b2{background:#F1DC7A}.b3{background:#F2A96B}.b4{background:#E38479}
+.quad{display:grid;grid-template-columns:auto 1fr 1fr;gap:4px;font-family:var(--sans);font-size:.88rem;margin:1rem 0}
+.quad div{background:var(--card);border:1px solid var(--line);padding:.6rem}
+.quad .ax{background:transparent;border:none;color:var(--muted);font-weight:600;display:flex;align-items:center}
+/* scenario */
+.scenario{border:2px solid var(--ink);border-radius:6px;padding:1rem 1.2rem;margin:1.6rem 0;background:var(--card)}
+.scenario h3{margin-top:.2rem}
+.prompt{font-style:italic}
+details{margin-top:.8rem;border-top:1px solid var(--line);padding-top:.6rem}
+summary{font-family:var(--sans);font-weight:600;cursor:pointer;color:var(--teal)}
+.steps{counter-reset:s;list-style:none;padding:0}
+.steps li{counter-increment:s;padding-left:2.4rem;position:relative;margin:.8rem 0}
+.steps li::before{content:counter(s);position:absolute;left:0;top:.05rem;width:1.7rem;height:1.7rem;border-radius:50%;background:var(--ink);color:var(--paper);font-family:var(--sans);font-weight:700;font-size:.9rem;display:grid;place-items:center}
+.toolbar{font-family:var(--sans);display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
+button{font-family:var(--sans);font-size:.88rem;font-weight:600;background:var(--ink);color:var(--paper);border:none;border-radius:4px;padding:.5rem .9rem;cursor:pointer}
+button.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.small{font-size:.9rem;color:var(--muted)}
+@media (max-width:860px){
+  .wrap{grid-template-columns:1fr;gap:1rem}
+  nav.toc{position:static;max-height:none;border:1px solid var(--line);padding:1rem;border-radius:4px}
+  .band{grid-template-columns:1fr 1fr}
+}
+@media print{
+  nav.toc,.toolbar{display:none}
+  .wrap{display:block;padding:0}
+  body{font-size:10.5pt;background:#fff;color:#000}
+  .scenario{break-inside:avoid-page}
+  h2{break-after:avoid}
+}
+</style>
+<style>
+.bps{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;font-family:var(--sans);font-size:.9rem;margin:1rem 0}
+.bps div{padding:.8rem;border-radius:4px;border:1px solid var(--line);background:var(--card)}
+.bps strong{display:block;font-size:1rem;margin-bottom:.2rem}
+.bps .bio{border-top:4px solid var(--teal)}.bps .psy{border-top:4px solid var(--plum)}.bps .soc{border-top:4px solid var(--amber)}
+.chain{font-family:var(--sans);font-size:.92rem;display:flex;flex-wrap:wrap;gap:.3rem;align-items:center;margin:.8rem 0}
+.chain span{padding:.3rem .6rem;border-radius:3px;background:var(--card);border:1px solid var(--line)}
+.chain span.b{border-left:4px solid var(--teal)}.chain span.p{border-left:4px solid var(--plum)}.chain span.s{border-left:4px solid var(--amber)}
+.chain i{color:var(--muted);font-style:normal}
+@media (max-width:860px){.bps{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="toc" aria-label="Contents">
+<p>Contents</p>
+<ol>
+<li><a href="#method">Answering scenario questions</a></li>
+<li><a href="#bps">Biopsychosocial model</a></li>
+<li><a href="#brain">Brain and behaviour</a></li>
+<li><a href="#interv">Biological interventions</a></li>
+<li><a href="#socmodels">Social models</a></li>
+<li><a href="#class">Social class</a></li>
+<li><a href="#race">Race</a></li>
+<li><a href="#gender">Gender/sex</a></li>
+<li><a href="#age">Age across the lifespan</a></li>
+<li><a href="#scen">Worked scenarios</a></li>
+<li><a href="#checks">Discrepancies to know</a></li>
+<li><a href="#refs">Citation bank</a></li>
+</ol>
+</nav>
+
+<main>
+<header class="hero">
+<p class="course">PSY213 Mental Health and Wellbeing in Singapore</p>
+<h1>Seminar 2: Factors influencing mental health and wellbeing</h1>
+<p>Revision notes built on the Seminar 2 slides, backed up by Study Unit 2. The biopsychosocial model is the backbone of this unit. Almost every scenario answer should be organised around it.</p>
+<div class="legend">
+<span><span class="src s-sem">Seminar</span> in the slides</span>
+<span><span class="src s-su">SU2</span> Study Unit 2 backup</span>
+<span><span class="src s-out">Outside course</span> standard theory to strengthen answers; cite carefully</span>
+</div>
+<div class="toolbar">
+<button type="button" id="openAll">Show all model answers</button>
+<button type="button" class="ghost" id="closeAll">Hide all</button>
+<button type="button" class="ghost" onclick="window.print()">Print</button>
+</div>
+</header>
+
+<!-- METHOD -->
+<section id="method">
+<h2>Answering scenario questions for this unit</h2>
+<p>Seminar 2's closing message is to apply a holistic lens to individual cases. For a scenario, that means a four-step routine:</p>
+<ol class="steps">
+<li><strong>Sort</strong> the cues in the scenario into biological, psychological and social factors. Put each fact in one box.</li>
+<li><strong>Link</strong> them. Show how one factor leads to another, e.g. illness → can't go out → lonely → depressed. The interactions are what earn marks, not the list.</li>
+<li><strong>Explain</strong> with course theory: social drift, stress-vulnerability, help-seeking differences, parenting stress, and so on, with a citation.</li>
+<li><strong>Protect and intervene</strong> at each level. Then evaluate: warn against bio-reductionism and socio-reductionism, and note the limits of the model.</li>
+</ol>
+<div class="trap"><b>Common mistake.</b> Listing "Bio: arthritis. Psycho: sad. Social: alone." and stopping. That is sorting, not analysis. The seminar's own examples are <em>chains</em> of cause and effect. Build chains.</div>
+<h3>Cue-to-concept lookup</h3>
+<div class="tbl"><table>
+<tr><th>If the scenario mentions…</th><th>Reach for…</th></tr>
+<tr><td>Illness, genes, brain injury, medication, sleep, pain</td><td>Biological dimension; brain–behaviour interaction; medication side effects</td></tr>
+<tr><td>Beliefs, coping style, grief, self-esteem, loneliness</td><td>Psychological dimension</td></tr>
+<tr><td>Money, job, family conflict, discrimination, living alone</td><td>Social dimension; social class hypotheses; Rogers &amp; Pilgrim's social models</td></tr>
+<tr><td>Low income and a mental illness: which came first?</td><td>Social causation vs social drift vs stress-vulnerability</td></tr>
+<tr><td>A minority person, racial teasing, skin colour</td><td>Pillai &amp; Sündermann; Basu et al.; Ng et al.; the ST interracial couple article</td></tr>
+<tr><td>A man who won't talk about his feelings; "be a man"</td><td>Gender and help-seeking (Rickwood &amp; Braithwaite, 1994)</td></tr>
+<tr><td>A woman facing abuse, body-image pressure</td><td>Gender-specific social stressors</td></tr>
+<tr><td>A child who is aggressive, withdrawn, or has stressed parents</td><td>Bayer et al. (2008); internalising vs externalising; ACEs; Bronfenbrenner</td></tr>
+<tr><td>An older person who is bereaved, ill, isolated</td><td>Older-adult biopsychosocial chain; Clayton (1998); Subramaniam et al. (2016)</td></tr>
+<tr><td>Treatment-resistant depression</td><td>ECT, TMS, DBS</td></tr>
+</table></div>
+</section>
+
+<!-- BPS -->
+<section id="bps">
+<h2>The biopsychosocial model</h2>
+<p><span class="src s-su">SU2</span> Proposed by psychiatrist George Engel (1977). He argued that medicine had a narrow view of disease that ignored patients' psychological states and sociocultural backgrounds. The model contrasts with the <strong>biomedical model</strong>, which focuses only on faulty physiological systems. It treats illness as the combined outcome of biology, psychology and social factors, which gives each patient a unique, multi-level picture (Engel, 1980).</p>
+<div class="bps">
+<div class="bio"><strong>Biological</strong>Physiological health, organ and tissue function, genetic predispositions</div>
+<div class="psy"><strong>Psychological</strong>Emotions, lived experiences, cognition, beliefs, attitudes</div>
+<div class="soc"><strong>Social</strong>Relationships, social support, socioeconomic status, cultural nuances</div>
+</div>
+<div class="trap"><b>Formative quiz trap.</b> <em>Cognition</em> is psychological, not social. Culture, relationships and SES are social.</div>
+<p><strong>Bio-reductionism</strong> <span class="src s-su">SU2</span> explains an illness only in terms of its smallest biological parts, such as molecules and neurotransmitters. The biopsychosocial model is the holistic alternative.</p>
+<div class="eg"><b>Example (Activity 1 / Reflect 2.1).</b> Poor sleep before a TMA deadline (biological) makes it harder to concentrate and fuels thoughts like "I'm going to fail" (psychological). You cancel dinner with friends to catch up (social), which removes your usual stress relief, and you sleep even worse. A fix at any one level, such as a sleep routine, a reframing thought or a quick call with a friend, can break the loop.</div>
+
+<h3>Criticisms of the model</h3>
+<div class="tbl"><table>
+<tr><th>Criticism</th><th>Explanation and example</th></tr>
+<tr><td>How the dimensions relate is still unclear <span class="src s-sem">Seminar</span></td><td>The model says everything matters but not how much, or through what mechanism (McLaren, 2006). That makes it hard to test or to prioritise interventions.</td></tr>
+<tr><td>Clinicians can't fix the social component <span class="src s-sem">Seminar</span></td><td>An illness caused by poor sanitation in a slum needs political and costly large-scale change, not a prescription (Álvarez et al., 2012).</td></tr>
+<tr><td>Doctors may not know the full psychological and social picture <span class="src s-sem">Seminar</span></td><td>Confidentiality and non-disclosure get in the way. A patient sees a GP for insomnia but does not mention a recent depression diagnosis.</td></tr>
+<tr><td>Hard for clinicians trained in bio-reductionist medicine to adopt <span class="src s-su">SU2</span></td><td>This is changing as person-centred care gains ground.</td></tr>
+</table></div>
+</section>
+
+<!-- BRAIN -->
+<section id="brain">
+<h2>Biological factors: the brain and behaviour</h2>
+<ul>
+<li><span class="src s-sem">Seminar</span> Mental health is linked to how the brain functions, but it is not just biology.</li>
+<li>Some conditions show brain differences. In schizophrenia, the prefrontal and limbic systems function in a disorganised way (Rubinov &amp; Bullmore). ADHD is classified as a neurodevelopmental disorder in DSM-5-TR.</li>
+<li><span class="src s-su">SU2</span> Despite this, <strong>no brain or biological markers are endorsed by the DSM</strong> for diagnosing mental disorders. This is a formative quiz answer.</li>
+<li><span class="src s-sem">Seminar</span> <strong>Neural plasticity</strong>: the brain's structure and function are shaped by behaviour and environment.</li>
+</ul>
+<h3>A two-way relationship</h3>
+<div class="tbl"><table>
+<tr><th>Brain → behaviour</th><th>Behaviour → brain</th></tr>
+<tr><td>A brain injury or tumour can change personality <span class="src s-sem">Seminar</span>.<br><br>Autism <span class="src s-su">SU2</span>: Hazlett et al. (2005) followed 302 children from birth, 113 of whom were later diagnosed with ASD. Head size and brain volume were the same at birth, began to diverge at about 12 months, and were significantly larger in the ASD group by age 2.</td><td>Stroking a pet, a hug, or walking the dog lowers stress <span class="src s-sem">Seminar</span>.<br><br>Chronic anxiety damages the structure of the amygdala and prefrontal cortex (Mah et al., 2016).<br><br><span class="src s-su">SU2</span> answer to Activity 2.2: chronic stress can harm the hippocampus, affecting memory; deep breathing may support prefrontal function.</td></tr>
+</table></div>
+<div class="outside"><p><span class="src s-out">Outside course</span> For Activity 2 (the slide invites you to look up studies): an eight-week mindfulness programme was linked to increased grey-matter density in the hippocampus and other regions (Hölzel et al., 2011, <em>Psychiatry Research: Neuroimaging, 191</em>(1), 36–43). Regular aerobic exercise has also been linked to growth in hippocampal volume in older adults (Erickson et al., 2011, <em>PNAS</em>).</p></div>
+<p><strong>Exam use:</strong> the two-way link is your defence against bio-reductionism. A brain difference in a patient does not prove that biology <em>caused</em> the problem. Their stressful environment may have shaped their brain.</p>
+</section>
+
+<!-- INTERVENTIONS -->
+<section id="interv">
+<h2>Biological interventions</h2>
+<h3>Medication</h3>
+<p><span class="src s-sem">Seminar</span> Medication is common and sometimes the first line of treatment, but there is no "magic pill". Drugs target specific symptoms and are named after them: antipsychotics, antidepressants, anxiolytics. Side effects can be serious and affect quality of life.</p>
+<div class="tbl"><table>
+<tr><th></th><th>Benzodiazepines (anxiolytics)</th><th>Antipsychotics</th></tr>
+<tr><td>Used for</td><td>Reducing anxiety, improving sleep</td><td>Treating psychosis</td></tr>
+<tr><td>Limitations</td><td>Effective only short term (a few weeks); <strong>risk of addiction</strong></td><td>(1) Tardive dyskinesia: involuntary muscle, face, tongue and eye movements. (2) Tardive dystonia: intense muscle cramps. (3) Parkinsonism: slow, rigid, tremor-like movement.</td></tr>
+</table></div>
+<div class="trap"><b>Formative quiz trap.</b> Addiction is a side effect of benzodiazepines, <em>not</em> antipsychotics.</div>
+<div class="eg"><b>Example.</b> A patient given a benzodiazepine for panic attacks feels better at first, but by week six needs a higher dose for the same effect and feels anxious when a dose is late. That shows both limitations: benefits that fade, and dependence. Pairing medication with psychotherapy tackles the psychological causes that the drug cannot reach.</div>
+
+<h3>Brain stimulation</h3>
+<div class="tbl"><table>
+<tr><th></th><th>ECT</th><th>DBS</th><th>TMS</th></tr>
+<tr><td>What</td><td>A small electric current induces a controlled seizure</td><td>Electrodes implanted in brain regions that function abnormally</td><td>A magnetic field applied from outside the head to change activity in a region</td></tr>
+<tr><td>Invasive?</td><td>Yes <span class="src s-su">SU2</span></td><td>Yes (surgery)</td><td>No</td></tr>
+<tr><td>Used for</td><td>In Singapore: severe depression, bipolar disorder, schizophrenia (IMH) <span class="src s-sem">Seminar</span>. Usually third line for depression, after medication and therapy, when those fail (Spaans et al., 2015; Liang et al., 2018)</td><td>Being researched: limbic system for major depression; motor and limbic pathways for OCD; executive and reward systems for schizophrenia</td><td>In Singapore: depression in patients who don't respond to or can't tolerate antidepressants (SingHealth) <span class="src s-sem">Seminar</span>. RCTs exist for OCD, anorexia, schizophrenia and PTSD <span class="src s-su">SU2</span></td></tr>
+<tr><td>Concerns</td><td>Limited research and understanding; patients find it frightening</td><td>Efficacy and safety are still being studied (Lozano et al., 2019)</td><td>Evidence is still building for conditions other than depression</td></tr>
+</table></div>
+<p><strong>Why psychosurgery is controversial</strong> (Reflect 2.3) <span class="src s-su">SU2</span>. In the 1950s, lobotomy cut parts of the brain and often left lasting cognitive impairment. The problems are that it is irreversible, the evidence was weak, patients often could not give meaningful consent, and it has a history of misuse. DBS is its modern, more refined and adjustable successor, but it is still experimental.</p>
+</section>
+
+<!-- SOCIAL MODELS -->
+<section id="socmodels">
+<h2>Social models of mental health</h2>
+<p><span class="src s-sem">Seminar</span> Mental health problems can affect anyone, whatever their status, age or race. But social factors shape (1) the <strong>risk</strong> of developing problems and (2) the <strong>ways people cope</strong>.</p>
+<p><strong>Beware socio-reductionism.</strong> Not every person on a low income is depressed. Individual differences such as psychological resilience and biology interact with social context, and social context alone does not decide the outcome.</p>
+<div class="eg"><b>Example (SU2).</b> Two odd-job workers earn the same low income. Worker A goes home to a loving family. Worker B lives alone with no close relationships and is biologically prone to anxiety. B is far more likely to become depressed. The social factor, poverty, is the same for both; the psychological and biological factors make the difference.</div>
+
+<h3>Rogers and Pilgrim's (2014) five social models</h3>
+<p><span class="src s-su">SU2</span> These are not on the slides, but they are in the study unit and formative quiz.</p>
+<div class="tbl"><table>
+<tr><th>Theory</th><th>Core idea</th><th>Example</th></tr>
+<tr><td><strong>Social causationism</strong></td><td>An adverse social factor is the main cause of the disorder, alone or together with a non-social factor</td><td>Losing his job and home causes a man's depression</td></tr>
+<tr><td><strong>Critical theory</strong></td><td>Freudian roots: external social factors interact with inner, possibly unconscious, psychological experience</td><td>A daughter raised under harsh criticism internalises it unconsciously and later develops anxiety under a demanding boss</td></tr>
+<tr><td><strong>Social constructivism</strong></td><td>Society decides how much weight different social problems get, which shapes how we perceive our problems</td><td>Where academic failure is framed as a disaster, a bad grade becomes a mental health crisis</td></tr>
+<tr><td><strong>Social realism</strong></td><td>Misery and madness are real, but how they are <em>defined</em> is shaped by society</td><td>Depression is real suffering, but whether it is called "depression", "weak character" or "spiritual imbalance" depends on culture</td></tr>
+<tr><td><strong>Social reaction / labelling theory</strong></td><td>Focuses on deviance from social norms. How much deviance is tolerated depends on the social context</td><td>Talking loudly to oneself is tolerated at a spirit-medium ritual but may lead to a psychiatric referral on the MRT</td></tr>
+</table></div>
+<p class="small">Activity 2.4 matching: 1 → social reaction/labelling; 2 → critical theory; 3 → social constructivism; 4 → social causationism; 5 → social realism.</p>
+</section>
+
+<!-- CLASS -->
+<section id="class">
+<h2>Social class and mental health</h2>
+<p><span class="src s-sem">Seminar</span> A century ago, societies were shaped like a <strong>pyramid</strong>, with a large low-wage working class at the bottom. Today they look more like a <strong>diamond</strong>, with a large middle class. Singapore has a diamond structure, with about 80% of people living in HDB flats.</p>
+<ul>
+<li>Most mental illnesses, including depression, anxiety, schizophrenia and antisocial personality disorder, are diagnosed significantly more in <strong>lower-SES</strong> groups.</li>
+<li>Lower-SES challenges include job insecurity, low pay, little control and high stress. These link back to Karasek's model from Seminar 1.</li>
+<li>Some disorders are more common in <strong>higher-SES</strong> groups: obsessive-compulsive personality disorder (OCPD) and eating disorders.</li>
+<li>Across all classes, women are diagnosed more often than men.</li>
+</ul>
+
+<h3>Three hypotheses about direction of cause</h3>
+<div class="tbl"><table>
+<tr><th>Hypothesis</th><th>Direction</th><th>Example</th></tr>
+<tr><td><strong>Social causation</strong> (stress of lower class causes illness)</td><td>Low SES → mental illness</td><td>A cleaner juggling ad-hoc jobs can barely cover rent, utilities and food. The constant financial strain leads to anxiety and depression.</td></tr>
+<tr><td><strong>Social drift</strong></td><td>Mental illness → low SES</td><td>An engineer develops schizophrenia in his 20s, can no longer keep a demanding job, moves to lower-paid part-time work, and "drifts" down the class ladder.</td></tr>
+<tr><td><strong>Stress-vulnerability</strong> (reconciles the two)</td><td>Everyone faces stress; protective factors decide who becomes ill</td><td>Two families are both hit by a parent's retrenchment. The higher-SES family has savings, private counselling and a spacious home. The lower-SES family has none of these buffers, so the same stressor is more likely to lead to illness.</td></tr>
+</table></div>
+<div class="trap"><b>Formative quiz trap.</b> Stress-vulnerability does <em>not</em> say poor people are more stressed. It says that, <em>given the same stressor</em>, they are more vulnerable because they have fewer protective factors.</div>
+<div class="outside"><p><span class="src s-out">Outside course</span> The general version of this idea is the <strong>diathesis-stress model</strong>: illness results from a vulnerability (the diathesis: genetic, psychological or social) combined with a stressor. It links neatly to the biopsychosocial model.</p></div>
+<p><strong>Protective factors of higher SES</strong> (Activity 3A / Reflect 2.5): financial buffers and savings; stable and secure jobs with more autonomy; better housing with space and privacy; access to private healthcare and counselling without long waits; higher health literacy; time for leisure and exercise; influential social networks; better schools and enrichment for children.</p>
+</section>
+
+<!-- RACE -->
+<section id="race">
+<h2>Race and mental health</h2>
+<p><span class="src s-sem">Seminar</span> Race categories have no genetic basis, but race is real as a <strong>social construct</strong>. Singapore has used the CMIO framework (Chinese, Malay, Indian, Others) for over a century. Research in Singapore and elsewhere shows associations between race and mental health.</p>
+<h3>Three Singapore studies</h3>
+<div class="tbl"><table>
+<tr><th>Study</th><th>Finding</th><th>What it suggests</th></tr>
+<tr><td>Ng et al. (2005)</td><td>Indian participants reported greater psychological wellbeing than Chinese participants, even after controlling for SES, income and medical health</td><td>Ethnic and cultural factors matter beyond economics, e.g. community ties, religious practice, family structure</td></tr>
+<tr><td>Pillai &amp; Sündermann (2019/2020)</td><td>Malay and Indian participants reported more distress about body image and skin colour. Racial teasing was linked to more body dysmorphic disorder (BDD) symptoms in minority participants</td><td>Racism is a social stressor with measurable psychological effects</td></tr>
+<tr><td>Basu et al. (2015)</td><td>Indian patients had a longer duration of untreated psychosis than Chinese patients</td><td>Possible differences in help-seeking, explanations of illness, stigma or access to care</td></tr>
+</table></div>
+<p><span class="src s-su">SU2</span> Taken together, the studies show associations, but the <strong>explanations are still unknown</strong>. State this in evaluation, and avoid claiming causes the studies did not test.</p>
+<div class="eg"><b>Example: explaining Basu et al.</b> A family might first interpret a son's hallucinations in spiritual terms and consult a religious healer, then try to handle it within the family to avoid stigma. By the time he reaches IMH, months have passed. Cultural explanations of illness and stigma can both lengthen the time before treatment.</div>
+<h3>The ST interracial couple article (Activity 4 / Reflect 2.6)</h3>
+<p>This is the same article used in your Seminar 1 notes. In this unit, frame it as <strong>race as a social factor</strong>. Being publicly targeted led to feelings of embarrassment, humiliation and hurt. Repeated experiences like this act as chronic social stressors, in the same way racial teasing was linked to BDD symptoms in Pillai and Sündermann's study. In biopsychosocial terms, the racist encounter (social) leads to shame and hypervigilance (psychological), and chronic stress may then affect the body and brain (biological, cf. Mah et al., 2016).</p>
+<div class="trap"><b>Answer carefully.</b> Formative Q9 says differences cannot be due to "genetic differences across races". The safe exam wording is that <em>race categories have no genetic basis</em>, so explanations should focus on culture, lived experience, such as racial teasing, and differences in how symptoms are presented and perceived.</div>
+</section>
+
+<!-- GENDER -->
+<section id="gender">
+<h2>Gender/sex and mental health</h2>
+<p><span class="src s-sem">Seminar</span> <strong>Sex</strong> is the physiological distinction based on sex organs and chromosomes. <strong>Gender</strong> is a social construct based on societal expectations and roles (Oakley, 2015). The unit treats the two terms as interchangeable for simplicity.</p>
+<div class="tbl"><table>
+<tr><th>More often diagnosed in women</th><th>More often diagnosed in men</th><th>About equal</th></tr>
+<tr><td>Depressive, anxiety, personality and eating-related disorders</td><td>Sex-related offences, antisocial personality disorder. This is why most residents of forensic and residential facilities are male <span class="src s-su">SU2</span></td><td>Bipolar disorder, schizophrenia</td></tr>
+</table></div>
+<p><span class="src s-su">SU2</span> Which disorders a study includes can inflate or shrink the apparent gender gap.</p>
+
+<h3>Explanation 1: help-seeking differences</h3>
+<p>Do women really suffer more? Partly, the gap reflects the fact that <strong>women are more likely to confide voluntarily in their family doctor</strong>, while men are less open (Rickwood &amp; Braithwaite, 1994). Norms such as "boys don't cry" and "be a man" discourage men from showing vulnerability. In voluntary settings like clinics, the people who come forward are the ones who get diagnosed.</p>
+<div class="eg"><b>Example.</b> A husband and wife are both struggling after their business fails. She tells her polyclinic doctor she can't sleep and cries daily, and is screened for depression. He says he's "fine", works longer hours and drinks more with friends. Only she appears in the diagnosis statistics. His distress is present but hidden, and may surface later as alcohol problems.</div>
+<p class="small">Link to Seminar 1: the NPHS 2021 found women slightly more willing to seek help (59.8%) than men (56.8%).</p>
+
+<h3>Explanation 2: gender-specific social stressors</h3>
+<p>If the stressors are specific to one gender, the conditions they produce are likely to be more common in that gender too.</p>
+<ul>
+<li><strong>Beauty standards and eating disorders.</strong> Women face unrealistic beauty standards, amplified by social media. Women report more vomiting, body-checking, binging and fasting, and more loss of control while eating (Striegel-Moore et al., 2009). Men have these symptoms too, just less often.</li>
+<li><strong>Domestic violence.</strong> Women are disproportionately the victims. Family violence rose sharply during Singapore's Circuit Breaker lockdown (Kourti et al., 2021). Chronic abuse can lead to trauma or PTSD and then anxiety and depression (Kofman &amp; Garfin, 2020; Olding et al., 2021).</li>
+</ul>
+</section>
+
+<!-- AGE -->
+<section id="age">
+<h2>Age: mental health across the lifespan</h2>
+<h3>Early childhood</h3>
+<ul>
+<li><span class="src s-sem">Seminar</span> In Singapore, the number of 5–9-year-olds seeking professional help rose <span class="stat">fivefold</span> from 2017 to 2019 (Qing, 2022).</li>
+<li><strong>Bronfenbrenner's ecological systems theory</strong>: the child sits at the centre of nested environments, such as family and school, all of which shape development.</li>
+</ul>
+<div class="outside"><p><span class="src s-out">Outside course</span> The full set of layers is: microsystem (family, school, peers) → mesosystem (links between them, e.g. parent–teacher contact) → exosystem (settings that affect the child indirectly, e.g. a parent's workplace) → macrosystem (culture, values, policy) → chronosystem (change over time). Bronfenbrenner, U. (1979). <em>The ecology of human development</em>. Harvard University Press.</p></div>
+<p><span class="src s-sem">Seminar</span> Parenting and family factors predict child problems (Bayer et al., 2008):</p>
+<div class="tbl"><table>
+<tr><th>Parenting factor</th><th>Predicts</th><th>What it looks like</th></tr>
+<tr><td>Parenting <strong>stress</strong> and <strong>punitive discipline</strong></td><td><strong>Externalising</strong> behaviour, expressed outwardly</td><td>Disobedience, aggression, tantrums, fighting</td></tr>
+<tr><td>Parenting <strong>distress</strong>, e.g. a parent's own low mood</td><td><strong>Internalising</strong> behaviour, experienced inwardly</td><td>Anxiety, withdrawal, fear, clinginess</td></tr>
+</table></div>
+<ul>
+<li>Conditions mostly diagnosed in childhood include neurodevelopmental disorders (ASD, ADHD) and learning disabilities.</li>
+<li><strong>Trauma and maltreatment</strong> are central predictors, assessed with the <strong>Adverse Childhood Experiences (ACE)</strong> questionnaire. Simply giving paediatricians a child's ACE record helps them screen for at-risk children (Marie-Mitchell et al., 2016) <span class="src s-su">SU2</span>.</li>
+</ul>
+<div class="trap"><b>Formative quiz trap.</b> Parent–child <em>bonding</em> is protective. It is not a predictor of psychopathology.</div>
+
+<h3>From childhood to adulthood</h3>
+<ul>
+<li><span class="src s-sem">Seminar</span> Mulraney et al. (2021), a systematic review of over 40 longitudinal studies, found that a diagnosis before age 14 means a higher risk of disorder in adulthood. <strong>Symptoms predicted adult disorder better than formal diagnosis did.</strong></li>
+<li>Why? Only <span class="stat">3–6%</span> of children are diagnosed, but about <span class="stat">30%</span> show distress (Costello et al., 1988). Many children with symptoms are never diagnosed and fall through the gaps.</li>
+<li>McLaughlin et al. (N = 5,692): financial difficulty in childhood predicted <em>early-onset</em> diagnoses, while <strong>low parental education</strong> strongly predicted whether childhood disorders <em>persisted and worsened</em> into adulthood.</li>
+</ul>
+<div class="trap"><b>Formative quiz trap.</b> A childhood diagnosis raises the risk of adult disorder but does <em>not</em> guarantee it. Not everyone diagnosed as a child is diagnosed as an adult.</div>
+<div class="eg"><b>Example: why parental education might matter.</b> Two children develop anxiety. One set of parents, with more education, recognises the signs, researches options, pushes the school for support and follows through with therapy. The other parents want to help but don't recognise the signs and trust that the child will "grow out of it". The difference in persistence can come from recognition and navigating services, not from caring less.</div>
+
+<h3>Older adults</h3>
+<p><span class="src s-sem">Seminar</span> Key statistics:</p>
+<ul>
+<li>Among people over 70, depression is twice as common as dementia.</li>
+<li>About 97% figure for elderly men; the slide and SU word it differently (see <a href="#checks">discrepancies</a>). The SU wording is that nearly 97% of elderly men already have a medical illness when they seek help for mental health problems.</li>
+<li>Risk of depression is significantly higher in the oldest group (over 75), and elderly Singaporeans from minority groups (Malay, Indian) are up to <strong>five times</strong> more likely to develop depression than Chinese elderly (Subramaniam et al., 2016, ages 60–84) <span class="src s-su">SU2</span>.</li>
+</ul>
+<p>Old age brings several changes at once: reduced mobility and agency, chronic illness and pain, cognitive decline, grief and isolation, and mental health conditions. Hence the biopsychosocial model is essential. The seminar's two interaction chains are worth memorising:</p>
+<div class="chain"><span class="b">Reduced mobility from illness</span><i>→</i><span class="s">Hard to meet family and friends</span><i>→</i><span class="p">Loneliness, isolation</span><i>→</i><span class="p">Depression</span></div>
+<div class="chain"><span class="s">Loss of closest support (spouse)</span><i>→</i><span class="p">Grief, bereavement</span><i>→</i><span class="p">Maladaptive coping (e.g. alcohol)</span><i>→</i><span class="b">Illness</span></div>
+<p class="small">Colour key: teal = biological, plum = psychological, amber = social.</p>
+<p><span class="src s-su">SU2</span> Social contact protects against mental illness across the whole life course (Murphy, 1982), so losing it matters. Men have more difficulty than women after losing a spouse (Clayton, 1998). The formative quiz also stresses that older adults <em>still need</em> social interaction.</p>
+</section>
+
+<!-- SCENARIOS -->
+<section id="scen">
+<h2>Worked scenarios</h2>
+<p>The first two are the seminar's own Activity 6 vignettes, so expect something very similar. Try each one using sort, link, explain, protect before opening the model answer.</p>
+
+<div class="scenario">
+<h3>Vignette 1 (Seminar Activity 6) – Siti, 7</h3>
+<p class="prompt">Siti is 7 and often refuses to go to school. Her parents are stressed about finances and sometimes argue in front of her. At school she gets into fights and struggles to focus. Recently her teacher noticed she seems withdrawn during group activities. Apply the biopsychosocial model: identify the factors, explain how they interact, and suggest protective factors and interventions.</p>
+<details><summary>Model answer</summary>
+<div class="tbl"><table>
+<tr><th>Biological</th><th>Psychological</th><th>Social</th></tr>
+<tr><td>Difficulty focusing: possible neurodevelopmental factors (e.g. ADHD) that should be assessed rather than assumed. Chronic stress in a developing brain. Sleep disrupted by arguments at home?</td><td>Anxiety (school refusal), withdrawal: <em>internalising</em>. Fighting: <em>externalising</em>. Possibly feeling insecure or blaming herself for her parents' conflict.</td><td>Financial strain (low-SES stressor); parental conflict in front of her; peer conflict at school</td></tr>
+</table></div>
+<p><strong>Interactions.</strong> Following Bayer et al. (2008), her parents' <em>stress</em> and conflict predict <em>externalising</em> behaviour, such as her fighting. Their <em>distress</em> predicts <em>internalising</em> behaviour, such as her withdrawal and reluctance to go to school. So Siti shows both. Financial difficulty (social) drives the parents' stress, which reaches her through family interactions. This is Bronfenbrenner's point that the family microsystem is shaped by wider economic conditions. Her poor focus and fights then damage her peer relationships and her teacher's view of her (social), which deepens her withdrawal (psychological), creating a loop. Repeated exposure to parental conflict could count as an adverse childhood experience, raising future risk.</p>
+<p><strong>Why act now.</strong> Mulraney et al. (2021) found that symptoms before age 14 predict adult disorder, and that symptoms predict better than diagnosis. Siti may never receive a diagnosis, since only 3–6% of distressed children do, yet her symptoms still matter. McLaughlin et al. found childhood financial difficulty predicts early-onset problems.</p>
+<p><strong>Protective factors and interventions.</strong> <em>Biological:</em> assessment for attention difficulties; a sleep routine. <em>Psychological:</em> school counsellor support to help her express feelings; teaching her emotion-regulation skills. <em>Social:</em> parenting support that replaces punitive discipline and reduces conflict in front of her; linking the family to financial assistance, which reduces the root stressor; a warm relationship with her teacher and structured peer activities. A strong parent–child bond is protective.</p>
+<p><strong>Evaluation.</strong> Avoid socio-reductionism: not every child in a financially stressed family struggles, and her own temperament plays a part. Avoid labelling her "a problem child", which links to labelling theory. A limitation of the biopsychosocial model is that it doesn't say which factor to tackle first. In practice, reducing parental stress may help most, because it drives several other factors.</p>
+</details>
+</div>
+
+<div class="scenario">
+<h3>Vignette 2 (Seminar Activity 6) – Mr Lim, 78</h3>
+<p class="prompt">Mr Lim is 78 and has lived alone since his wife died. He has chronic arthritis that limits his mobility, and he rarely meets friends. He feels lonely and has started feeling sad and unmotivated. He sometimes drinks more than usual to cope. Apply the biopsychosocial model.</p>
+<details><summary>Model answer</summary>
+<div class="tbl"><table>
+<tr><th>Biological</th><th>Psychological</th><th>Social</th></tr>
+<tr><td>Age 78; chronic arthritis and pain; reduced mobility; alcohol's effect on the body</td><td>Grief; loneliness; sadness and lack of motivation (possible depression); using alcohol as a maladaptive coping strategy</td><td>Widowed and living alone; rarely meets friends; lost his closest source of support</td></tr>
+</table></div>
+<p><strong>Interactions.</strong> Mr Lim fits both of the seminar's chains. First, his arthritis (biological) limits his mobility, so he rarely sees friends (social), leading to loneliness (psychological) and then sadness and low motivation (psychological). Second, losing his wife (social) caused grief (psychological), which he copes with by drinking (maladaptive), which risks further physical illness (biological). The chains feed each other: drinking can worsen his mood and health, which further reduces his mobility and contact with others.</p>
+<p><strong>Risk factors from course evidence.</strong> Depression risk is significantly higher in people over 75 (Subramaniam et al., 2016). Men find it harder than women to cope after losing a spouse (Clayton, 1998). Social contact protects against mental illness throughout life (Murphy, 1982), so its loss matters. From Seminar 1, men and people aged 60–74 are least willing to seek professional help. That makes it more likely his problems go unnoticed or are seen as "just old age".</p>
+<p><strong>Protective factors and interventions.</strong> <em>Biological:</em> pain management and physiotherapy for his arthritis, which also allows him to get out more; a GP review of his alcohol use and screening for depression. <em>Psychological:</em> grief support; replacing drinking with healthier coping. <em>Social:</em> befriending visits; transport or activities at an Active Ageing Centre; regular calls or visits from family; volunteers or peers trained in listening skills (Growth Circle skills). Evaluation: treating only his arthritis, or only prescribing antidepressants, would be bio-reductionist. His isolation and grief need direct attention. He also needs to be involved in choices about his own life, respecting his autonomy.</p>
+</details>
+</div>
+
+<div class="scenario">
+<h3>Scenario 3 – Which came first?</h3>
+<p class="prompt">Daniel, 34, lives in a one-room rental flat and does irregular delivery work. He was diagnosed with schizophrenia at 24, while working as an accountant. His social worker says, "Poverty is clearly what made Daniel ill." Evaluate this claim.</p>
+<details><summary>Model answer</summary>
+<p><strong>Claim = social causation.</strong> The social worker assumes low SES caused Daniel's illness. Social causationism holds that adverse social factors are the main cause of disorder (Rogers &amp; Pilgrim, 2014), and most disorders, including schizophrenia, are diagnosed more in lower-SES groups.</p>
+<p><strong>But the timeline supports social drift.</strong> Daniel was diagnosed at 24 while working as an accountant, which is <em>before</em> his drop in status. The drift hypothesis says illness disrupts functioning, making it hard to keep a job, so the person drifts into a lower class. His move from accountant to irregular delivery work fits this pattern.</p>
+<p><strong>A better synthesis: stress-vulnerability.</strong> Today, his poverty, insecure work and cramped housing are real stressors. With few protective factors, they may worsen his symptoms and make relapse more likely. So the relationship probably runs both ways: illness led to drift, and poverty now keeps him vulnerable. Seminar 1 content supports this: insecure employment is a stronger predictor of poor mental health than unemployment (Rogers &amp; Pilgrim, 2003).</p>
+<p><strong>Biopsychosocial evaluation.</strong> The social worker's claim is socio-reductionist. Schizophrenia also involves biological factors, such as disorganised prefrontal and limbic functioning (Rubinov &amp; Bullmore). If he takes antipsychotics, side effects such as tardive dyskinesia may affect his ability to work and how others treat him. Stigma, the belief that people with mental illness are violent, may also restrict his job options. Interventions should combine medication management, supported employment and housing support.</p>
+</details>
+</div>
+
+<div class="scenario">
+<h3>Scenario 4 – The man who is "fine"</h3>
+<p class="prompt">Ahmad, 45, and his wife Nurul both lost their jobs in the same restructuring. Nurul sees a polyclinic doctor about low mood and is diagnosed with depression. Ahmad insists he is "fine", works late at a part-time job and drinks more. His friends tease him about "being soft" when he mentions stress. Explain the gender differences in this couple's outcomes.</p>
+<details><summary>Model answer</summary>
+<p><strong>Same stressor, different paths.</strong> Both faced the same stressor, job loss. The difference in diagnosis doesn't necessarily mean Nurul is more affected.</p>
+<p><strong>Help-seeking.</strong> Women are more likely to confide voluntarily in a family doctor, while men are less open about mental health struggles (Rickwood &amp; Braithwaite, 1994). Social expectations such as "be a man", seen in the friends' teasing, discourage men from showing vulnerability. Because diagnoses happen in voluntary settings like clinics, Nurul is counted and Ahmad is not. This illustrates the SU2 argument that the gender gap in depression partly reflects who seeks help.</p>
+<p><strong>Different expressions.</strong> Ahmad's overworking and drinking may be his distress coming out through avoidance and substances. It is less likely to be recognised as depression.</p>
+<p><strong>Biopsychosocial and social-model links.</strong> Social: job loss, masculine norms, peer teasing. Psychological: denial, maladaptive coping. Biological: alcohol's effect on mood and health. Social constructivism and social realism both apply: Ahmad's distress is real, but his social circle defines it as weakness, which shapes how he responds to it.</p>
+<p><strong>Interventions.</strong> Services that suit men's preferences, such as practical, activity-based or workplace programmes; a GP who asks about stress during a routine physical check-up; and friends using curious, non-judgemental questions instead of teasing. Evaluation: this is a general pattern, not a rule. Some men seek help readily, and some women hide their distress.</p>
+</details>
+</div>
+
+<div class="scenario">
+<h3>Scenario 5 – Skin colour and self-image</h3>
+<p class="prompt">Kavitha, 19, a Singaporean Indian student, has been teased about her dark skin since primary school. She now checks her appearance for hours, avoids photos and uses skin-lightening products. She hasn't told anyone because her family says such matters should stay private. Using course concepts, explain Kavitha's situation.</p>
+<details><summary>Model answer</summary>
+<p><strong>Race as a social factor.</strong> Race has no genetic basis but is a powerful social construct in Singapore's CMIO system. Pillai and Sündermann found that Malay and Indian participants experienced more distress about body image and skin colour than Chinese participants. They also found racial teasing was linked to more symptoms of body dysmorphic disorder, such as Kavitha's appearance-checking and avoidance.</p>
+<p><strong>Gender adds another layer.</strong> Women are held to unrealistic beauty standards, amplified by social media (SU2). So Kavitha faces a combination of ethnic and gendered appearance pressures.</p>
+<p><strong>Help-seeking.</strong> Her family's norm of keeping such matters private may delay help. This parallels Basu et al. (2015), who found longer untreated psychosis among Indian patients. The explanation there is unknown, but cultural attitudes to help-seeking are one possibility. Be careful not to overgeneralise from these studies. Ng et al. (2005) actually found Indian participants reported <em>greater</em> psychological wellbeing, which shows that culture can protect as well as harm.</p>
+<p><strong>Biopsychosocial chain.</strong> Years of teasing (social) led to internalised shame and distorted self-image (psychological), then compulsive checking and avoidance. Lightening products may carry physical risks (biological). Chronic stress may also affect the brain (Mah et al., 2016).</p>
+<p><strong>Interventions.</strong> Anti-teasing and anti-racism programmes in schools; a trusted, culturally sensitive listener; campus counselling framed as confidential; assessment for BDD. Link to the 2021 ST interracial couple case, where public condemnation reinforced the norm that racism is unacceptable.</p>
+</details>
+</div>
+
+<div class="scenario">
+<h3>Scenario 6 – Treatment-resistant depression</h3>
+<p class="prompt">Mdm Chua, 52, has had severe depression for two years. She has tried two antidepressants and a course of psychotherapy without improvement. Her psychiatrist mentions ECT and TMS. Her son asks, "Isn't this just treating her brain like a machine?" Discuss the options and respond to her son's concern.</p>
+<details><summary>Model answer</summary>
+<p><strong>Where these treatments fit.</strong> Medication and psychotherapy are the two most common treatments for depression. ECT typically comes third, used when those fail (SU2). ECT has been found to relieve depressive symptoms in non-responders (Spaans et al., 2015; Liang et al., 2018). In Singapore, IMH uses ECT for severe depression, and SingHealth offers TMS for patients who don't respond to or can't tolerate antidepressants.</p>
+<p><strong>Comparing them.</strong> ECT induces a controlled seizure with an electric current. It has an evidence base for severe depression, but research on it is limited and many patients find it frightening. TMS applies a magnetic field non-invasively, which is less intimidating. DBS is still experimental for depression (Lozano et al., 2019).</p>
+<p><strong>Responding to her son.</strong> His concern is really about bio-reductionism, which is a fair question. But brain treatment doesn't have to be reductionist. Brain and behaviour affect each other, so improving brain function can make it easier for her to re-engage socially and benefit from therapy. The best approach combines stimulation treatment with psychological support and social support, such as her family and gradually returning to activities. That is the biopsychosocial model in practice.</p>
+<p><strong>Evaluation.</strong> Informed consent and addressing her fears matter, especially given the history of psychosurgery. The team should also check for untreated social stressors, such as caregiving strain or money worries, that might explain why treatment hasn't worked. This reflects the confidentiality and disclosure criticism of the biopsychosocial model.</p>
+</details>
+</div>
+</section>
+
+<!-- DISCREPANCIES -->
+<section id="checks">
+<h2>Discrepancies to know</h2>
+<p>These are places where the slides and study unit disagree, or where the materials contain an error. Where two versions exist, use the study unit wording and cite carefully.</p>
+<div class="tbl"><table>
+<tr><th>Item</th><th>Slides</th><th>SU2</th><th>What to do</th></tr>
+<tr><td>97% of elderly men statistic</td><td>97% "suffer from mental health problems when they seek help for a medical illness"</td><td>97% "suffer from a medical illness" when they seek help for mental health problems</td><td>These are opposite statements. The SU version fits the text around it (physical illness leading to depression). Use it.</td></tr>
+<tr><td>Pillai &amp; Sündermann year</td><td>2019</td><td>2019 in the text, 2020 in the reading list</td><td>The journal article is 2020 (published online late 2019). Cite 2020.</td></tr>
+<tr><td>McLaughlin et al. study</td><td>2011, N = 5,692</td><td>2011 in the text; the reference list gives a different 2013 paper on adolescent PTSD</td><td>Cite as McLaughlin et al. (2011) as the course does. The reference list entry doesn't match.</td></tr>
+<tr><td>Rubinov &amp; Bullmore year</td><td>not given</td><td>2022 in the text, 2013 in the references</td><td>Cite 2013.</td></tr>
+<tr><td>Circuit Breaker date</td><td>not given</td><td>"2021"</td><td>Singapore's Circuit Breaker was April–June 2020. Say "the COVID-19 Circuit Breaker" without a year, or use 2020.</td></tr>
+</table></div>
+</section>
+
+<!-- REFS -->
+<section id="refs">
+<h2>Citation bank</h2>
+<div class="tbl"><table>
+<tr><th>Concept</th><th>Cite</th></tr>
+<tr><td>Biopsychosocial model</td><td>Engel (1977, 1980); Borrell-Carrió et al. (2004)</td></tr>
+<tr><td>Criticisms of the model</td><td>McLaren (2006); Álvarez et al. (2012)</td></tr>
+<tr><td>Schizophrenia brain networks</td><td>Rubinov &amp; Bullmore (2013)</td></tr>
+<tr><td>ASD brain growth</td><td>Hazlett et al. (2005)</td></tr>
+<tr><td>Anxiety damages the brain</td><td>Mah et al. (2016)</td></tr>
+<tr><td>Mental disorders as brain disorders?</td><td>Bolton (2013)</td></tr>
+<tr><td>ECT for depression</td><td>Spaans et al. (2015); Liang et al. (2018)</td></tr>
+<tr><td>DBS</td><td>Lozano et al. (2019)</td></tr>
+<tr><td>TMS trials</td><td>Carmi et al. (2019) OCD; McClelland et al. (2016) anorexia; Dlabac-de Lange et al. (2015) schizophrenia; Yan et al. (2017) PTSD</td></tr>
+<tr><td>Five social models</td><td>Rogers &amp; Pilgrim (2014)</td></tr>
+<tr><td>Social determinants</td><td>Compton &amp; Shim (2015)</td></tr>
+<tr><td>Social factors and psychopathology</td><td>Coyne &amp; Downey (1991); Ayer &amp; Hudziak (2009)</td></tr>
+<tr><td>Race and wellbeing</td><td>Ng et al. (2005)</td></tr>
+<tr><td>Racial teasing and BDD</td><td>Pillai &amp; Sündermann (2020)</td></tr>
+<tr><td>Ethnicity and untreated psychosis</td><td>Basu et al. (2015)</td></tr>
+<tr><td>Gender, ethnicity, self-rated health</td><td>Lim et al. (2007)</td></tr>
+<tr><td>Sex vs gender</td><td>Oakley (2015)</td></tr>
+<tr><td>Gender and diagnoses</td><td>Gelder et al. (2001)</td></tr>
+<tr><td>Help-seeking by gender</td><td>Rickwood &amp; Braithwaite (1994)</td></tr>
+<tr><td>Eating disorder symptoms by gender</td><td>Striegel-Moore et al. (2009)</td></tr>
+<tr><td>Domestic violence during COVID</td><td>Kourti et al. (2021); Kofman &amp; Garfin (2020); Olding et al. (2021)</td></tr>
+<tr><td>Children seeking help (5×)</td><td>Qing (2022)</td></tr>
+<tr><td>Childhood distress vs diagnosis</td><td>Costello et al. (1988)</td></tr>
+<tr><td>Parenting and child behaviour</td><td>Bayer et al. (2008)</td></tr>
+<tr><td>ACE screening</td><td>Marie-Mitchell et al. (2016)</td></tr>
+<tr><td>Early environment</td><td>Humphreys &amp; Zeanah (2015)</td></tr>
+<tr><td>Persistence into adulthood</td><td>Mulraney et al. (2021)</td></tr>
+<tr><td>Childhood SES and persistence</td><td>McLaughlin et al. (2011)</td></tr>
+<tr><td>Elderly depression in Singapore</td><td>Subramaniam et al. (2016)</td></tr>
+<tr><td>Social origins of depression in old age</td><td>Murphy (1982)</td></tr>
+<tr><td>Bereavement by gender</td><td>Clayton (1998)</td></tr>
+<tr><td>Cognition, aging and psychopathology</td><td>Harvey et al. (2006)</td></tr>
+<tr><td><span class="src s-out">Outside</span> Mindfulness and grey matter</td><td>Hölzel et al. (2011)</td></tr>
+<tr><td><span class="src s-out">Outside</span> Exercise and hippocampus</td><td>Erickson et al. (2011)</td></tr>
+<tr><td><span class="src s-out">Outside</span> Ecological systems layers</td><td>Bronfenbrenner (1979)</td></tr>
+</table></div>
+</section>
+</main>
+</div>
+<script>
+(function(){
+  const all = () => document.querySelectorAll('details');
+  document.getElementById('openAll').addEventListener('click', () => all().forEach(d => d.open = true));
+  document.getElementById('closeAll').addEventListener('click', () => all().forEach(d => d.open = false));
+  window.addEventListener('beforeprint', () => all().forEach(d => d.open = true));
+})();
+</script>
+</body>
+</html>
