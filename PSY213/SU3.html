@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PSY213 Seminar 3 – Revision Notes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6F7F5; --ink:#1E2A38; --muted:#5B6673; --line:#D3D9D6;
+  --teal:#2F7D72; --teal-soft:#E3F0EC;
+  --plum:#6B4E71; --plum-soft:#EFE8F0;
+  --amber:#A8700F; --amber-soft:#FBF1DE;
+  --red:#A6423A; --card:#FFFFFF;
+  --serif:"Newsreader", Georgia, "Times New Roman", serif;
+  --sans:"Instrument Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#141A21; --ink:#E4E8EC; --muted:#9AA6B2; --line:#2E3842;
+    --teal:#6CC1B3; --teal-soft:#1B2E2B; --plum:#C7A6CE; --plum-soft:#2A2230;
+    --amber:#E3B45C; --amber-soft:#2E2616; --red:#E08A82; --card:#1A222B;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#141A21; --ink:#E4E8EC; --muted:#9AA6B2; --line:#2E3842;
+  --teal:#6CC1B3; --teal-soft:#1B2E2B; --plum:#C7A6CE; --plum-soft:#2A2230;
+  --amber:#E3B45C; --amber-soft:#2E2616; --red:#E08A82; --card:#1A222B;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:1.075rem;line-height:1.62}
+.wrap{display:grid;grid-template-columns:250px minmax(0,1fr);gap:3rem;max-width:1180px;margin:0 auto;padding:2rem 1.5rem 5rem}
+nav.toc{position:sticky;top:calc(1.5rem + env(safe-area-inset-top,0px));align-self:start;font-family:var(--sans);font-size:.88rem;max-height:calc(100vh - 3rem);overflow:auto;padding-right:.5rem}
+nav.toc p{font-weight:700;margin:0 0 .6rem}
+nav.toc ol{list-style:none;padding:0;margin:0;counter-reset:t}
+nav.toc li{margin:.15rem 0}
+nav.toc a{color:var(--muted);text-decoration:none;display:block;padding:.2rem .5rem;border-left:2px solid transparent}
+nav.toc a:hover,nav.toc a:focus-visible{color:var(--ink);border-left-color:var(--teal)}
+main{max-width:74ch}
+header.hero{border-bottom:1px solid var(--line);padding-bottom:1.5rem;margin-bottom:2rem}
+.course{font-family:var(--sans);color:var(--teal);font-weight:600;margin:0}
+h1{font-family:var(--sans);font-size:clamp(2rem,4.5vw,3rem);line-height:1.08;letter-spacing:-.02em;margin:.3rem 0 .8rem}
+h2{font-family:var(--sans);font-size:1.6rem;letter-spacing:-.01em;line-height:1.2;margin:3.2rem 0 .8rem;padding-top:1rem;border-top:3px solid var(--ink)}
+h3{font-family:var(--sans);font-size:1.15rem;margin:2rem 0 .5rem}
+h4{font-family:var(--sans);font-size:1rem;margin:1.2rem 0 .3rem}
+p{margin:.6rem 0}
+a{color:var(--teal)}
+:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.src{font-family:var(--sans);font-size:.72rem;font-weight:600;padding:.1rem .45rem;border-radius:3px;vertical-align:.15em;white-space:nowrap}
+.s-sem{background:var(--teal-soft);color:var(--teal)}
+.s-su{background:var(--plum-soft);color:var(--plum)}
+.s-out{background:var(--amber-soft);color:var(--amber);border:1px dashed var(--amber)}
+.legend{font-family:var(--sans);font-size:.88rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:.8rem 1.2rem;align-items:center}
+.eg{border-left:3px solid var(--plum);background:var(--plum-soft);padding:.7rem 1rem;margin:1rem 0;border-radius:0 4px 4px 0}
+.eg b:first-child{font-family:var(--sans);color:var(--plum)}
+.trap{border-left:3px solid var(--red);padding:.6rem 1rem;margin:1rem 0;background:var(--card)}
+.trap b:first-child{font-family:var(--sans);color:var(--red)}
+.outside{border:1px dashed var(--amber);background:var(--amber-soft);padding:.8rem 1rem;margin:1rem 0;border-radius:4px}
+table{border-collapse:collapse;width:100%;font-size:.95rem;margin:1rem 0}
+.tbl{overflow-x:auto}
+th,td{border:1px solid var(--line);padding:.5rem .65rem;vertical-align:top;text-align:left}
+th{font-family:var(--sans);font-size:.88rem;background:var(--card)}
+ul,ol{padding-left:1.3rem}
+li{margin:.25rem 0}
+.stat{font-family:var(--sans);font-weight:700;color:var(--teal)}
+/* continuum band */
+.band{display:grid;grid-template-columns:repeat(4,1fr);margin:1.2rem 0 .4rem;font-family:var(--sans);font-size:.85rem;border-radius:4px;overflow:hidden}
+.band div{padding:.7rem .6rem;color:#11202a}
+.band div strong{display:block;font-size:1rem}
+.b1{background:#8FD0B6}.b2{background:#F1DC7A}.b3{background:#F2A96B}.b4{background:#E38479}
+.quad{display:grid;grid-template-columns:auto 1fr 1fr;gap:4px;font-family:var(--sans);font-size:.88rem;margin:1rem 0}
+.quad div{background:var(--card);border:1px solid var(--line);padding:.6rem}
+.quad .ax{background:transparent;border:none;color:var(--muted);font-weight:600;display:flex;align-items:center}
+/* scenario */
+.scenario{border:2px solid var(--ink);border-radius:6px;padding:1rem 1.2rem;margin:1.6rem 0;background:var(--card)}
+.scenario h3{margin-top:.2rem}
+.prompt{font-style:italic}
+details{margin-top:.8rem;border-top:1px solid var(--line);padding-top:.6rem}
+summary{font-family:var(--sans);font-weight:600;cursor:pointer;color:var(--teal)}
+.steps{counter-reset:s;list-style:none;padding:0}
+.steps li{counter-increment:s;padding-left:2.4rem;position:relative;margin:.8rem 0}
+.steps li::before{content:counter(s);position:absolute;left:0;top:.05rem;width:1.7rem;height:1.7rem;border-radius:50%;background:var(--ink);color:var(--paper);font-family:var(--sans);font-weight:700;font-size:.9rem;display:grid;place-items:center}
+.toolbar{font-family:var(--sans);display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
+button{font-family:var(--sans);font-size:.88rem;font-weight:600;background:var(--ink);color:var(--paper);border:none;border-radius:4px;padding:.5rem .9rem;cursor:pointer}
+button.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.small{font-size:.9rem;color:var(--muted)}
+@media (max-width:860px){
+  .wrap{grid-template-columns:1fr;gap:1rem}
+  nav.toc{position:static;max-height:none;border:1px solid var(--line);padding:1rem;border-radius:4px}
+  .band{grid-template-columns:1fr 1fr}
+}
+@media print{
+  nav.toc,.toolbar{display:none}
+  .wrap{display:block;padding:0}
+  body{font-size:10.5pt;background:#fff;color:#000}
+  .scenario{break-inside:avoid-page}
+  h2{break-after:avoid}
+}
+</style>
+<style>
+.chain{font-family:var(--sans);font-size:.92rem;display:flex;flex-wrap:wrap;gap:.3rem;align-items:center;margin:.8rem 0}
+.chain span{padding:.3rem .6rem;border-radius:3px;background:var(--card);border:1px solid var(--line)}
+.chain span.b{border-left:4px solid var(--teal)}.chain span.p{border-left:4px solid var(--plum)}.chain span.s{border-left:4px solid var(--amber)}
+.chain i{color:var(--muted);font-style:normal}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;font-family:var(--sans);font-size:.9rem;margin:1rem 0}
+.three div{padding:.8rem;border-radius:4px;border:1px solid var(--line);background:var(--card)}
+.three strong{display:block;font-size:1rem;margin-bottom:.2rem}
+.three .x1{border-top:4px solid var(--teal)}.three .x2{border-top:4px solid var(--plum)}.three .x3{border-top:4px solid var(--amber)}
+@media (max-width:860px){.three{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="toc" aria-label="Contents">
+<p>Contents</p>
+<ol>
+<li><a href="#method">Answering scenario questions</a></li>
+<li><a href="#why">Why strategies matter</a></li>
+<li><a href="#phys">Physical health</a></li>
+<li><a href="#exercise">Exercise and its pathways</a></li>
+<li><a href="#pleasure">Pleasure</a></li>
+<li><a href="#spirit">Spirituality and religion</a></li>
+<li><a href="#links">Links to Seminars 1 and 2</a></li>
+<li><a href="#scen">Worked scenarios</a></li>
+<li><a href="#checks">Discrepancies to know</a></li>
+<li><a href="#refs">Citation bank</a></li>
+</ol>
+</nav>
+
+<main>
+<header class="hero">
+<p class="course">PSY213 Mental Health and Wellbeing in Singapore</p>
+<h1>Seminar 3: Strategies for mental health</h1>
+<p>Revision notes built on the Seminar 3 slides, backed up by Study Unit 3. This unit moves from <em>what affects</em> mental health (Seminars 1–2) to <em>what we can do</em> about it, so expect scenario questions that ask you to recommend and justify strategies.</p>
+<div class="legend">
+<span><span class="src s-sem">Seminar</span> in the slides</span>
+<span><span class="src s-su">SU3</span> Study Unit 3 backup</span>
+<span><span class="src s-out">Outside course</span> standard theory to strengthen answers; cite carefully</span>
+</div>
+<div class="toolbar">
+<button type="button" id="openAll">Show all model answers</button>
+<button type="button" class="ghost" id="closeAll">Hide all</button>
+<button type="button" class="ghost" onclick="window.print()">Print</button>
+</div>
+</header>
+
+<!-- METHOD -->
+<section id="method">
+<h2>Answering strategy questions</h2>
+<p>A weak strategy answer says "she should exercise, find a hobby and pray". A strong one explains <em>why</em> each strategy works for <em>this</em> person, naming the mechanism. Use this routine:</p>
+<ol class="steps">
+<li><strong>Diagnose the link.</strong> Is physical illness hurting mental health, mental illness hurting physical health, or both? Is there a psychosomatic overlap? Is pleasure missing (anhedonia) or excessive?</li>
+<li><strong>Match a strategy to the problem.</strong> Physical activity, pleasure, or spirituality/religion. Pick the ones this person can actually use.</li>
+<li><strong>Name the mechanism.</strong> For exercise: biochemical (endorphins, endocannabinoids, serotonin, HPA axis) or psychological (distraction, self-efficacy). For pleasure: reprieve, meaning, self-esteem, mastery, agency. For religion: meaning, indirect control, social support, accessibility.</li>
+<li><strong>Tailor and caution.</strong> Adapt to the person's age, illness or beliefs. Note limits: too much pleasure harms, exercise alone won't treat severe illness, and religion only helps if it fits the person.</li>
+</ol>
+<h3>Cue-to-concept lookup</h3>
+<div class="tbl"><table>
+<tr><th>If the scenario mentions…</th><th>Reach for…</th></tr>
+<tr><td>Weight gain, poor sleep or dry mouth after starting psychiatric medication</td><td>Mental illness → physical health, pathway 1: medication side effects</td></tr>
+<tr><td>Stopped exercising, stopped going out, since becoming depressed</td><td>Mental illness → physical health, pathway 2: poor maintenance; Ohrnberger et al. (2017)</td></tr>
+<tr><td>A new diagnosis such as diabetes, chronic pain or amputation, followed by low mood</td><td>Physical illness → mental health: three reasons</td></tr>
+<tr><td>Stomach problems, IBS, high blood pressure linked to stress or trauma</td><td>Psychosomatic diseases; mind–body overlap</td></tr>
+<tr><td>Convinced a minor symptom is serious, with no medical explanation</td><td>Psychogenic diagnosis (e.g. hypochondriasis)</td></tr>
+<tr><td>"Nothing is enjoyable any more"</td><td>Anhedonia; pleasure as a strategy; Davidson et al. (2006)</td></tr>
+<tr><td>Bingeing on alcohol, gambling or gaming "because it feels good"</td><td>Too much pleasure impedes wellbeing</td></tr>
+<tr><td>Faith, prayer, a temple, church or mosque community</td><td>Religion: meaning, indirect control, social support, accessibility; Koenig (2009)</td></tr>
+</table></div>
+</section>
+
+<!-- WHY -->
+<section id="why">
+<h2>Why strategies matter</h2>
+<p><span class="src s-sem">Seminar</span> The slides give three reasons:</p>
+<ul>
+<li><strong>Mental health can be nurtured, not just treated.</strong> This follows from Seminar 1's positive view of mental health, which is more than the absence of illness.</li>
+<li><strong>Strategies are protective.</strong> They reduce the risk of mental illness, acting as the protective factors the stress-vulnerability hypothesis from Seminar 2 talks about.</li>
+<li><strong>They promote resilience and coping</strong> in everyday life.</li>
+</ul>
+<p>The unit covers three umbrella strategies:</p>
+<div class="three">
+<div class="x1"><strong>Physical health</strong>Exercise, and managing the two-way mind–body link</div>
+<div class="x2"><strong>Pleasure</strong>Enjoyable, meaningful activities, in the right dose</div>
+<div class="x3"><strong>Spirituality and religion</strong>Meaning and community</div>
+</div>
+</section>
+
+<!-- PHYSICAL -->
+<section id="phys">
+<h2>Physical health and wellbeing</h2>
+<p><span class="src s-su">SU3</span> Physical health can be defined as the absence of disease or, on a spectrum, as fitness up to peak condition. It is closely tied to mental health.</p>
+<p><span class="src s-sem">Seminar</span> Three associations:</p>
+<ul>
+<li>Physical health is a <strong>strong predictor</strong> of mental wellbeing.</li>
+<li>Poor physical health can predict the <strong>onset</strong> of psychological problems.</li>
+<li>People with psychiatric conditions are at greater risk of <strong>co-morbid physical conditions</strong>, such as heart disease.</li>
+</ul>
+<div class="trap"><b>Formative quiz trap.</b> "Physical and mental health are separate and do not overlap" is FALSE.</div>
+
+<h3>How mental illness harms physical health</h3>
+<div class="tbl"><table>
+<tr><th>Pathway</th><th>Detail</th><th>Example</th></tr>
+<tr><td><strong>1. Medication side effects</strong></td><td><span class="src s-su">SU3</span> Psychotropic drugs can cause insomnia, dry mouth, changes in gait and mobility, blood conditions and weight gain. The effects are worse with several drugs at once and at higher doses.</td><td>A man on antipsychotics gains 10 kg in six months and develops blood-sugar problems. His worry about his body then adds to his low mood.</td></tr>
+<tr><td><strong>2. Poor maintenance of physical health</strong></td><td>Depression reduces exercise and self-care. <span class="src s-su">SU3</span> Ohrnberger et al. (2017), with over 10,000 adults aged 50+, found depressive symptoms (CES-D) predicted poorer physical activity, and this link was <strong>mediated by social interaction</strong>: depression leads to isolation, which leads to less activity.</td><td>A depressed retiree stops his morning walks with neighbours at the park. The walk was not just exercise; it was his social routine. Once the social contact goes, the exercise goes too.</td></tr>
+</table></div>
+<div class="chain"><span class="p">Depression</span><i>→</i><span class="s">Less social interaction</span><i>→</i><span class="b">Less physical activity</span><i>→</i><span class="b">Poorer physical health</span></div>
+<p class="small">Mediation means the middle factor explains the link. So a practical implication is that increasing <em>social</em> contact may restore physical activity. Group exercise hits both at once.</p>
+
+<h3>How physical illness harms mental health</h3>
+<div class="tbl"><table>
+<tr><th>Reason</th><th>Detail</th><th>Example</th></tr>
+<tr><td><strong>1. Psychological effects of physical disease</strong></td><td>Worry about diet, medication and symptoms. <span class="src s-su">SU3</span> Hormonal changes, e.g. in diabetes, can cause irritability and low mood. Nervous-system diseases can bring memory loss or hallucinations. Having several illnesses at once takes a heavy toll, especially in the elderly.</td><td>A 55-year-old newly diagnosed with diabetes must give up hawker favourites, check her blood sugar daily and inject insulin. The constant vigilance and loss of food pleasures leave her irritable and low.</td></tr>
+<tr><td><strong>2. Pain</strong></td><td>Chronic pain directly wears down mental health</td><td>Years of back pain lead to poor sleep, irritability and withdrawal from friends</td></tr>
+<tr><td><strong>3. Drastic changes in the body</strong></td><td>E.g. amputation. <span class="src s-su">SU3</span> Very distressing and difficult to cope with; the SU calls these "somato-psychological" cases</td><td>A delivery rider loses a leg after a road accident, along with his livelihood and his sense of self as independent</td></tr>
+</table></div>
+
+<h3>Overlap between physical and psychological symptoms</h3>
+<p><span class="src s-sem">Seminar</span> Mind and body symptoms often overlap.</p>
+<ul>
+<li><strong>Pain</strong> <span class="src s-su">SU3</span>: in severe depression, psychological pain can feel physical, and people may believe they have a bodily disease.</li>
+<li><strong>IBS</strong>: trauma and stress can show up physically. There is a strong correlation between traumatic or abusive experiences and later onset of irritable bowel syndrome.</li>
+</ul>
+<p><strong>Psychosomatic diseases</strong> have both a physical and a psychological component:</p>
+<div class="tbl"><table>
+<tr><th>Link</th><th>Mechanism <span class="src s-su">SU3</span></th></tr>
+<tr><td><strong>Stress → hypertension</strong></td><td>Stress releases cortisol and other stress hormones for fight or flight. Heart rate rises and blood vessels constrict. This evolved to escape predators but now fires for work deadlines. Chronic activation keeps blood pressure high, raising cardiovascular risk.</td></tr>
+<tr><td><strong>Anxiety → stomach ulcers</strong></td><td>Taha et al. (2014) followed 2,101 people for 10 years. Those diagnosed with anxiety disorders were at increased risk of later ulcers.</td></tr>
+</table></div>
+<p><strong>Psychogenic diagnoses</strong> <span class="src s-su">SU3</span> are a subset of psychosomatic illness. They involve <em>exaggerating</em> a slight physical symptom, as in hypochondriasis, or symptoms with no medical cause.</p>
+<div class="eg"><b>Example: psychosomatic vs psychogenic.</b> An auditor's blood pressure climbs through audit season, year after year, until she is diagnosed with hypertension. That is psychosomatic: a real physical disease with a clear psychological driver. Her colleague has a harmless skin mole but is convinced it is cancer, checks it daily and visits several doctors despite clear results. That is psychogenic: a minor symptom made much bigger by anxiety.</div>
+</section>
+
+<!-- EXERCISE -->
+<section id="exercise">
+<h2>Exercise and mental health</h2>
+<p><span class="src s-sem">Seminar</span> The evidence (Mikkelsen et al., 2017):</p>
+<ul>
+<li>Regular exercise improves mood and may help reduce <strong>low-to-moderate</strong> anxiety and mood disorders (Khanzada et al., 2015).</li>
+<li><strong>Exercise combined with prescribed medication</strong> gives better outcomes for anxiety (Jayakody et al., 2014).</li>
+<li>Exercise also boosts <strong>cognitive functioning, sleep, mood and wellbeing</strong>, including in people without a disorder and in older adults (Geirsdottir et al., 2012).</li>
+<li><span class="src s-su">SU3</span> Both cardio exercise such as jogging and strength exercise such as weightlifting reduced anxiety symptoms (Martinsen et al., 1989).</li>
+</ul>
+
+<h3>Two pathways</h3>
+<div class="trap"><b>Formative quiz trap.</b> Exercise works through <em>both</em> pathways, not just one.</div>
+<div class="tbl"><table>
+<tr><th>Biochemical pathway</th><th>Psychological pathway</th></tr>
+<tr><td>
+<p><strong>"Runner's high"</strong>: euphoria after intense exercise, from the release of <strong>endorphins</strong> and <strong>endocannabinoids</strong>. Endocannabinoids are small molecules that can cross from the blood into the brain. Their levels rise significantly after intense exercise, which may reduce depressive symptoms (Heyman et al., 2012). Antunes et al. (2016) linked endorphin changes to running in mildly depressed men.</p>
+<p><strong>Serotonin</strong>: serotonin imbalance is linked to depression (Maletic et al., 2007), and SSRI antidepressants target this system. Exercise produces similar effects: serotonin rose after exercise alongside a drop in depressive symptoms (Wipfli et al., 2011).</p>
+<p><strong>HPA axis</strong>: the hypothalamic–pituitary–adrenal axis is the body's stress command centre. In depression and anxiety it is overactive, releasing too much or too little cortisol. Exercise improves its regulation, which is linked to less anxiety and depression (Anderson &amp; Shivakumar, 2013).</p>
+</td><td>
+<p><strong>Distraction hypothesis</strong>: the mental break matters more than the physical effect. Exercise takes attention away from worry and negative thoughts. <em>Active</em> distraction, such as exercise, reduced depressive symptoms more than passive distraction (Nolen-Hoeksema et al., 1993).</p>
+<p><strong>Mastery / self-efficacy hypothesis</strong>: completing an effortful activity builds <strong>self-efficacy</strong>, the belief that you can succeed at a task. Higher self-esteem and self-efficacy make people less vulnerable to depression. Older women recovering from heart failure who took part in a walking programme reported less depression and greater wellbeing than a control group (Gary, 2006).</p>
+</td></tr>
+</table></div>
+<div class="trap"><b>Formative quiz trap.</b> Exercise <em>increases</em> endocannabinoids; it does not reduce them. And the distraction hypothesis says the mental break <em>benefits</em> mental health.</div>
+<div class="eg"><b>Example: one run, both pathways.</b> After a bad week at work, Wei Ming runs 5 km at MacRitchie. <em>Biochemical</em>: endorphins and endocannabinoids give a lift at the end, and his stress hormones settle. <em>Psychological (distraction)</em>: for 30 minutes he thinks about his breathing and the trail, not his manager. <em>Psychological (mastery)</em>: he beats last week's time and thinks "I can do hard things", a feeling he carries back into Monday.</div>
+<div class="eg"><b>Example: why self-efficacy transfers.</b> A woman recovering from depression starts by walking one bus stop's distance, then two, then a full loop of her estate. Each goal she meets is evidence against the belief "I can't do anything". This is why small, achievable exercise goals work better than ambitious ones for someone with low mood: failure would undermine self-efficacy.</div>
+</section>
+
+<!-- PLEASURE -->
+<section id="pleasure">
+<h2>Pleasure</h2>
+<p><span class="src s-sem">Seminar</span> Pleasure is a state of <strong>positive emotions, thoughts and actions</strong>. Too much or too little can signal mental health problems:</p>
+<div class="tbl"><table>
+<tr><th>Too much</th><th>Too little</th></tr>
+<tr><td><strong>Mania</strong> in bipolar disorder: excessive pleasure and energy. <span class="src s-su">SU3</span> It can feel enjoyable, but excessive mania is stressful and leads to extreme fatigue.</td><td><strong>Anhedonia</strong>: inability to feel pleasure. A core symptom of major depression, also seen in schizophrenia and schizoid personality disorder <span class="src s-su">SU3</span>.</td></tr>
+</table></div>
+<p><span class="src s-su">SU3</span> The WHO encourages pursuing enjoyable, satisfying activities. Examples include rewarding work, sex, social interaction and hobbies such as films, sport, music, art and cooking. The value placed on pleasure grew with humanistic psychology, which sees positive traits, including pleasure-seeking, as part of reaching one's highest potential.</p>
+
+<h3>Five ways pleasure improves wellbeing</h3>
+<p><span class="src s-sem">Seminar</span> From Davidson et al.'s (2006) review of qualitative interview studies with people recovering from mental illness. Pleasure is a <strong>protective factor</strong>, not just something nice to have.</p>
+<div class="tbl"><table>
+<tr><th>How it helps</th><th>Explanation</th><th>Example</th></tr>
+<tr><td><strong>1. Reprieve from symptoms</strong></td><td>A break from the condition, and something rewarding to look forward to</td><td>A man with depression looks forward all week to Saturday football, which gives the week a bright spot</td></tr>
+<tr><td><strong>2. Meaning and purpose</strong></td><td>People with mental illness often search for meaning, and they find it in joyful experiences</td><td>A woman with anxiety joins a community choir and feels part of something that matters</td></tr>
+<tr><td><strong>3. Self-esteem and sense of value</strong></td><td>Especially through giving to others, e.g. volunteering</td><td>A man recovering from psychosis volunteers at a food bank and sees that others rely on him</td></tr>
+<tr><td><strong>4. Self-efficacy and mastery</strong></td><td>Activities you are good at reveal competence. This is empowering</td><td>A former chef with depression cooks for her family again and remembers "I'm good at this"</td></tr>
+<tr><td><strong>5. Personal agency</strong></td><td>Severe illness can erode a person's sense of being someone who makes choices and achieves things. Choosing and pursuing a pleasure restores it</td><td>A long-term patient chooses which art class to join and finishes a painting: a decision he made and a result he achieved</td></tr>
+</table></div>
+
+<h3>Too much pleasure impedes wellbeing</h3>
+<p><span class="src s-su">SU3</span> Brief, harmful enjoyment undermines long-term wellbeing. Examples include intoxication and addiction to substances or alcohol, and unprotected sex. Heroin produces a warm, pleasant sensation but leads to serious psychological and physical disorders. <strong>Seeking pleasure at the expense of optimal functioning is harmful.</strong></p>
+<div class="trap"><b>Formative quiz trap.</b> "Excessive pleasurable activity greatly enhances mental health" is FALSE.</div>
+<div class="eg"><b>Example: the dose matters (Activity 3.2).</b> An hour of online gaming with friends after class gives reprieve, mastery and social connection. Twelve hours a day, skipping meals, lectures and sleep, is pleasure bought at the cost of functioning. The <em>same activity</em> helps or harms depending on dose and what it pushes aside.</div>
+<p><strong>Connect to Seminar 1.</strong> This mirrors hedonism vs eudaimonia. Harmful pleasure is hedonic without meaning, like the intoxication example on the Seminar 1 slides. The helpful pleasures in Davidson's list are the ones that also bring meaning, self-worth and agency, which is where hedonic and eudaimonic wellbeing overlap.</p>
+<div class="outside"><p><span class="src s-out">Outside course</span> Scheduling pleasurable and mastery activities is the core of <strong>behavioural activation</strong>, an evidence-based therapy for depression. It works from the outside in: action first, motivation follows. This is useful when a scenario person says "I'll do things when I feel better". Cite, e.g., Dimidjian, S., et al. (2011). The origins and current status of behavioral activation treatments for depression. <em>Annual Review of Clinical Psychology, 7</em>, 1–38.</p></div>
+</section>
+
+<!-- SPIRITUALITY -->
+<section id="spirit">
+<h2>Spirituality and religion</h2>
+<div class="tbl"><table>
+<tr><th>Spirituality</th><th>Religion</th></tr>
+<tr><td><span class="src s-sem">Seminar</span> A personal search for meaning, purpose or connection. <span class="src s-su">SU3</span> Subjective and non-rational; it acknowledges transcendent forces and has few associated behaviours. You don't need a religion to be spiritual.</td><td><span class="src s-sem">Seminar</span> A structured framework for meaning and social support. <span class="src s-su">SU3</span> It involves tangible behaviours, such as rituals and prayer, and moral frameworks, such as scriptures.</td></tr>
+</table></div>
+<p class="small">The SU treats the two terms as interchangeable for the rest of the unit.</p>
+<p><span class="src s-su">SU3</span> <strong>A historical shift:</strong> spirituality was once linked to hysteria and mania and seen as a sign of illness. That view has been revised as evidence of its benefits has grown. This is another example of Seminar 1's point that the line between normal and pathological moves over time.</p>
+
+<h3>Two key benefits</h3>
+<p><span class="src s-sem">Seminar</span> Members of religious groups gain (1) <strong>a framework from which to derive the meaning of life</strong>, and (2) <strong>social capital</strong>: an interpersonal support system. So religion can act both as a coping strategy and as a protective factor.</p>
+<h3>The evidence</h3>
+<p><span class="src s-su">SU3</span></p>
+<ul>
+<li>Koenig's (2009) review: over 60 studies report religion used as a way of coping with illnesses, including mental disorders.</li>
+<li>Tepper et al. (2001): among over 400 patients with persistent mental illness, at least four in five used religious coping such as prayer.</li>
+<li>Russinova et al. (2002): people with serious mental illness, such as bipolar disorder and schizophrenia, used spiritual practices <em>alongside</em> their treatment.</li>
+</ul>
+
+<h3>Why religion helps people with mental health problems (Activity 3.3)</h3>
+<div class="tbl"><table>
+<tr><th>Reason</th><th>Explanation</th><th>Example</th></tr>
+<tr><td><strong>1. Meaning and hope</strong></td><td>An existential anchor. Scriptures about suffering offer another view of pain and help people reinterpret, process and accept their struggles</td><td>A Christian woman with chronic depression draws on the Book of Job to see her suffering as something she can endure, not proof she is worthless</td></tr>
+<tr><td><strong>2. Indirect control</strong></td><td>Belief in a higher, ever-present being gives a sense of control over situations that feel uncontrollable, easing the loss of personal control</td><td>A Muslim man facing redundancy finds calm in <em>tawakkul</em> (trust in God): he does what he can and entrusts the rest</td></tr>
+<tr><td><strong>3. Social support</strong></td><td>A religious community provides support and reduces loneliness</td><td>After her husband's death, a Buddhist widow's temple friends bring food, visit and chant with her</td></tr>
+<tr><td><strong>4. Accessibility</strong></td><td>Available to anyone at any time, whatever their situation</td><td>A Hindu student prays silently in the exam hall before a paper. No appointment, cost or location needed</td></tr>
+</table></div>
+<div class="trap"><b>Formative quiz trap.</b> "Religion is not always accessible because you need to be at a place of worship" is FALSE. Accessibility is one of its strengths.</div>
+<p><span class="src s-su">SU3</span> Koenig (2009) argues religion is so widely used that it <strong>should be built into psychological interventions</strong>.</p>
+<div class="outside"><p><span class="src s-out">Outside course</span> <strong>For evaluation marks:</strong> religious coping is not always positive. Pargament's research separates <em>positive</em> religious coping, such as seeking spiritual support or finding meaning, from <em>negative</em> religious coping, such as feeling punished or abandoned by God, or conflict with one's religious community. Negative coping is linked to <em>worse</em> outcomes. Religion also cannot help someone for whom it holds no meaning, and a community can sometimes carry stigma, e.g. seeing mental illness as spiritual weakness, which can delay treatment. This links to Basu et al. (2015) from Seminar 2. Cite: Pargament, K. I., et al. (1998). Patterns of positive and negative religious coping with major life stressors. <em>Journal for the Scientific Study of Religion, 37</em>(4), 710–724.</p></div>
+</section>
+
+<!-- LINKS -->
+<section id="links">
+<h2>Links to Seminars 1 and 2</h2>
+<p>Scenario questions often reward answers that draw on more than one unit. Here are the strongest connections:</p>
+<div class="tbl"><table>
+<tr><th>Seminar 3 idea</th><th>Connects to</th></tr>
+<tr><td>The two-way link between physical and mental health</td><td>Seminar 2: the biopsychosocial model and the two-way link between brain and behaviour (Mah et al., 2016)</td></tr>
+<tr><td>Physical illness → depression in the elderly (pain, several illnesses at once)</td><td>Seminar 2: the chain from reduced mobility to isolation to depression in older adults; Subramaniam et al. (2016)</td></tr>
+<tr><td>Ohrnberger: social interaction mediates the link</td><td>Seminar 2: social contact protects against mental illness throughout life (Murphy, 1982)</td></tr>
+<tr><td>Exercise raises serotonin like SSRIs do</td><td>Seminar 2: biological interventions (medication) and their side effects. Exercise is a biological strategy without the side effects</td></tr>
+<tr><td>Pleasure vs harmful pleasure</td><td>Seminar 1: hedonism vs eudaimonia; the hedonic treadmill</td></tr>
+<tr><td>Pleasure builds meaning; religion gives meaning</td><td>Seminar 1: humanistic psychology; Frankl's meaning-seeking model; Myers (2000)</td></tr>
+<tr><td>Strategies as protective factors</td><td>Seminar 2: stress-vulnerability. Strategies are protective factors people can build, whatever their social class</td></tr>
+<tr><td>Spirituality once seen as pathological</td><td>Seminar 1: definitions of normal change with time and culture (the hallucination and homosexuality examples)</td></tr>
+</table></div>
+</section>
+
+<!-- SCENARIOS -->
+<section id="scen">
+<h2>Worked scenarios</h2>
+<p>Try each one yourself: diagnose the link, match strategies, name the mechanism, then tailor and caution.</p>
+
+<div class="scenario">
+<h3>Scenario 1 – A new diagnosis</h3>
+<p class="prompt">Mdm Rahimah, 56, was diagnosed with type 2 diabetes six months ago. She must monitor her blood sugar, has given up many favourite foods and feels irritable and low. She has stopped attending her weekly line-dancing group because she "doesn't feel like it". Explain the link between her physical and mental health, and recommend strategies.</p>
+<details><summary>Model answer</summary>
+<p><strong>Physical illness harming mental health.</strong> Her diabetes shows the psychological effects of physical disease. The constant vigilance over diet, monitoring and medication is a psychological burden, and the SU notes that hormonal changes in diabetes can themselves cause irritability and low mood. Giving up favourite foods also removes a source of everyday pleasure.</p>
+<p><strong>A two-way loop.</strong> Her low mood has led her to stop line-dancing, which shows mental health harming physical health through poor maintenance. Ohrnberger et al. (2017) found depressive symptoms predict lower physical activity, <em>mediated by reduced social interaction</em>. That is exactly what happened: losing the group meant losing both exercise and social contact. Less activity may worsen her blood-sugar control, feeding back into her physical illness.</p>
+<div class="chain"><span class="b">Diabetes</span><i>→</i><span class="p">Burden, irritability, low mood</span><i>→</i><span class="s">Drops dance group</span><i>→</i><span class="b">Less exercise, worse sugar control</span><i>→</i><span class="p">Lower mood</span></div>
+<p><strong>Strategies with mechanisms.</strong> (1) <em>Return to line-dancing</em>, perhaps gradually. Biochemically, exercise releases endorphins and endocannabinoids and helps regulate the HPA axis. Psychologically, it distracts her from health worries and rebuilds a sense of mastery. Because it is a group activity, it also restores the social interaction that Ohrnberger's study suggests is the key link. (2) <em>Pleasure</em>: find diabetes-friendly foods she enjoys cooking, which brings back pleasure and gives her mastery and agency over her illness rather than feeling controlled by it (Davidson et al., 2006). (3) If she is religious, prayer and her community can give meaning and support. For example, a mosque women's group could offer both companionship and encouragement.</p>
+<p><strong>Caution.</strong> If her low mood persists or deepens, she should be screened for depression. The strategies support treatment but do not replace it. Exercise is best evidenced for <em>low-to-moderate</em> symptoms (Mikkelsen et al., 2017).</p>
+</details>
+</div>
+
+<div class="scenario">
+<h3>Scenario 2 – Medication and weight gain</h3>
+<p class="prompt">Jun, 24, has been taking medication for depression for a year. He has gained a lot of weight, sleeps badly and feels ashamed of his body. He has stopped going to the gym, saying "What's the point?" Using Study Unit 3 concepts, explain Jun's situation and suggest how exercise could help.</p>
+<details><summary>Model answer</summary>
+<p><strong>Mental illness harming physical health: both pathways.</strong> (1) <em>Medication side effects</em>: psychotropic medication can cause weight gain and insomnia, and the effects are worse at higher doses or with several drugs. (2) <em>Poor maintenance</em>: his depression has led him to stop exercising, and "What's the point?" sounds like anhedonia, the loss of pleasure that is a core symptom of depression. The weight gain then causes shame, which worsens his mood. That is the physical feeding back into the mental.</p>
+<p><strong>How exercise helps.</strong> <em>Biochemical pathway</em>: exercise raises serotonin, with effects similar to SSRIs (Wipfli et al., 2011). It releases endocannabinoids that may reduce depressive symptoms (Heyman et al., 2012), and it regulates an overactive HPA axis (Anderson &amp; Shivakumar, 2013). Exercise alongside medication improves outcomes (Jayakody et al., 2014). Exercise also improves sleep (Geirsdottir et al., 2012) and can offset some weight gain. <em>Psychological pathway</em>: active distraction reduces depressive symptoms more than passive distraction (Nolen-Hoeksema et al., 1993). Completing small workouts rebuilds self-efficacy, and higher self-efficacy is linked to less vulnerability to depression.</p>
+<p><strong>Tailoring.</strong> Because of his shame, the gym may feel threatening. Start with activities he is comfortable with, such as evening walks, home workouts, or a sport he used to enjoy with a friend, which adds pleasure and social contact. Set small, achievable goals so each one is a success, since early failure would undermine self-efficacy.</p>
+<p><strong>Caution.</strong> Jun should raise the side effects with his psychiatrist rather than stop medication on his own. His doctor may be able to adjust the dose or switch drugs. Exercise complements medical treatment; it does not replace it.</p>
+</details>
+</div>
+
+<div class="scenario">
+<h3>Scenario 3 – Stomach pain with no clear cause</h3>
+<p class="prompt">Clara, 30, has had recurring abdominal pain and bowel problems for two years and has been diagnosed with IBS. Her doctor learns she survived an abusive relationship three years ago. She also worries constantly at work, and a recent check-up found high blood pressure. Explain the mind–body links in Clara's case.</p>
+<details><summary>Model answer</summary>
+<p><strong>Overlap between physical and psychological symptoms.</strong> Seminar 3 stresses that mind and body symptoms often overlap, and that trauma and stress can show up physically. IBS, with intense abdominal pain as its main feature, is strongly correlated with traumatic or abusive experiences (SU3). The timing of Clara's IBS, starting after her abusive relationship, fits this pattern. Her psychological pain may be expressed partly through her body.</p>
+<p><strong>Psychosomatic disease.</strong> Her high blood pressure shows how stress becomes hypertension. Chronic worry repeatedly triggers the fight-or-flight response: cortisol is released, her heart rate rises and her blood vessels constrict. Over time, blood pressure stays raised, increasing cardiovascular risk. Her ongoing anxiety also puts her at risk of stomach ulcers: Taha et al.'s (2014) 10-year study found anxiety disorders predicted later ulcers.</p>
+<p><strong>Not psychogenic.</strong> Her symptoms are real diagnosed conditions with a psychological component. They are not a slight symptom that anxiety has exaggerated, as in hypochondriasis. This distinction matters because it means her pain should not be dismissed as "all in her head".</p>
+<p><strong>Implications.</strong> Treating only her gut or her blood pressure would miss the psychological driver; treating only her trauma would leave the physical disease. She needs both: medical care, plus trauma-focused psychological support. Exercise can help regulate her HPA axis and reduce anxiety (Anderson &amp; Shivakumar, 2013), acting on both the mental and physical sides. A domestic abuse history is also a gender-specific social stressor linked to trauma and anxiety (Seminar 2; Kofman &amp; Garfin, 2020).</p>
+</details>
+</div>
+
+<div class="scenario">
+<h3>Scenario 4 – Nothing is fun any more</h3>
+<p class="prompt">Mr Goh, 67, retired last year from 40 years as a carpenter. He used to love making furniture for his grandchildren but now sits at home watching TV all day. He says nothing feels enjoyable and he feels useless. His daughter wonders whether "finding a hobby" would help. Evaluate the role of pleasure in Mr Goh's wellbeing.</p>
+<details><summary>Model answer</summary>
+<p><strong>A sign of anhedonia.</strong> Mr Goh's statement that nothing feels enjoyable suggests anhedonia, the inability to feel pleasure, which is a core symptom of depression. His passive TV watching is not the same as real engagement.</p>
+<p><strong>Why pleasure would help, using Davidson et al.'s (2006) five themes.</strong> Taking up woodworking again, perhaps at a community workshop or Men's Shed-type group, could: (1) give <em>reprieve</em> from his low mood and something to look forward to; (2) restore <em>meaning and purpose</em> after losing his work role; (3) raise <em>self-esteem</em>, especially if he makes things for others, such as toys for his grandchildren or repairs for neighbours; (4) rebuild <em>mastery</em>, since carpentry is something he is highly skilled at, which directly counters "I feel useless"; and (5) restore <em>agency</em>, as he chooses and completes his own projects.</p>
+<p><strong>Adding other strategies.</strong> Woodworking is also light physical activity, so it brings in the exercise pathways too: endorphins, distraction, and self-efficacy. A group setting gives social interaction, which Ohrnberger et al. (2017) show links low mood to physical activity. From Seminar 2, retirement-related isolation is a known risk for depression in older adults.</p>
+<p><strong>Evaluation.</strong> His daughter's idea is sound but needs tailoring. A <em>meaningful</em> activity that uses his identity and skills will work better than a random new hobby. With anhedonia, motivation often follows action rather than coming first, so she might start small, for example one project together, rather than waiting for him to "feel like it". If his low mood persists, he should be assessed for depression. Pleasure is protective but may not be enough by itself.</p>
+</details>
+</div>
+
+<div class="scenario">
+<h3>Scenario 5 – When pleasure harms</h3>
+<p class="prompt">Ravi, 21, a polytechnic student, drinks heavily with friends four nights a week. He says it's the only time he feels happy and that "enjoying life is good for mental health". His grades are falling and he often misses morning classes. Critically evaluate Ravi's claim.</p>
+<details><summary>Model answer</summary>
+<p><strong>What's right about his claim.</strong> Pleasure, defined as positive emotions, thoughts and actions, does support wellbeing. The WHO encourages enjoyable activities, and social interaction is one of them. Davidson et al. (2006) show pleasure can offer reprieve, meaning and connection.</p>
+<p><strong>What's wrong: pleasure at the cost of functioning.</strong> SU3 warns that brief, harmful enjoyment such as intoxication and substance or alcohol addiction undermines long-term wellbeing. Pleasure that comes at the expense of optimal functioning is harmful. Ravi's falling grades and missed classes show exactly that cost. Excessive pleasurable activity does <em>not</em> enhance mental health.</p>
+<p><strong>A warning sign.</strong> His statement that drinking is "the only time I feel happy" is concerning. It may point to low mood outside drinking, which could be anhedonia being masked by alcohol. From Seminar 1, this is hedonic pleasure without meaning, and like the hedonic treadmill, it needs repeating to maintain the effect.</p>
+<p><strong>Better strategies.</strong> Keep the social pleasure but change its form, e.g. a sports team or futsal with the same friends. That brings social connection plus exercise's biochemical effects (endorphins, endocannabinoids) and psychological effects (distraction, mastery), without the harm. Activities that build self-efficacy, like improving at a sport or skill, give the lasting benefits Davidson describes. Evaluation: if his drinking is compulsive, he may need professional help, not just alternatives. Harmful pleasure can become addiction.</p>
+</details>
+</div>
+
+<div class="scenario">
+<h3>Scenario 6 – Faith as coping</h3>
+<p class="prompt">Mrs Lee, 72, has lived with bipolar disorder for decades. Since her husband died, her church friends visit weekly, pray with her and drive her to Sunday service. She says her faith "gives her pain a purpose" and that "God is in control". Her grandson thinks religion is "just a crutch". Discuss the role of religion in Mrs Lee's mental health.</p>
+<details><summary>Model answer</summary>
+<p><strong>Two key benefits of religious affiliation.</strong> Mrs Lee has both of the benefits highlighted in Seminar 3. First, a framework for meaning: her sense that faith gives her pain a purpose shows religion's existential anchor. Scriptures about suffering help people reinterpret and accept their struggles, and give hope. Second, social capital: weekly visits and lifts to church give her a support system at a time of bereavement, reducing loneliness.</p>
+<p><strong>Indirect control.</strong> Her belief that "God is in control" gives a sense of indirect control over situations she cannot control herself. This eases the feeling of losing personal control, which matters when living with a lifelong condition and a major loss.</p>
+<p><strong>Evidence.</strong> Religious coping is common among people with serious mental illness: at least four in five of over 400 patients in Tepper et al.'s (2001) study used it. Russinova et al. (2002) found people with bipolar disorder and schizophrenia used spiritual practices alongside treatment. Koenig (2009) argues religion should be built into interventions.</p>
+<p><strong>Responding to "just a crutch".</strong> A crutch is exactly what helps someone move while they heal, so the metaphor isn't really a criticism. More importantly, her faith is working as a <em>protective factor</em>. From Seminar 2, older, bereaved adults are at high risk of depression through loss of support and isolation (Clayton, 1998; Murphy, 1982), and her church community directly counters both. Religion is also always accessible to her, even when she is housebound.</p>
+<p><strong>Balanced evaluation.</strong> Religion should complement, not replace, her bipolar treatment, and Russinova's participants used it as a complement. Religious coping can sometimes be negative, e.g. feeling punished by God (Pargament et al., 1998, outside course). From SU3, intense spiritual experiences were once seen as signs of mania, so her care team should be culturally sensitive enough to tell healthy religious experience apart from symptoms, without dismissing her faith.</p>
+</details>
+</div>
+
+<div class="scenario">
+<h3>Scenario 7 – Design a wellbeing plan</h3>
+<p class="prompt">A secondary school counsellor asks you to design a wellbeing programme for Secondary 4 students who are stressed about national exams. Using all three strategies from Seminar 3, propose and justify the programme.</p>
+<details><summary>Model answer</summary>
+<p><strong>Rationale.</strong> Mental health can be nurtured, not just treated. Strategies are protective and build resilience (Seminar 3). Around 30% of Singapore youths have mental health symptoms (Ang, 2022, Seminar 1). Exam stress is common and fits the "reacting" zone of the continuum, where early action works best.</p>
+<p><strong>1. Physical activity: short, regular movement breaks and a weekly games session.</strong> Biochemically, exercise regulates the stress-response (HPA) axis and releases endorphins and endocannabinoids. Psychologically, it offers active distraction from exam worries (Nolen-Hoeksema et al., 1993) and mastery. It also boosts cognitive functioning and sleep (Geirsdottir et al., 2012), which directly supports studying. Framing: "Exercise is part of revision, not a break from it."</p>
+<p><strong>2. Pleasure: protected "joy time" and student-led clubs.</strong> Students often cut hobbies during exam season. Davidson et al.'s (2006) themes explain why protecting some pleasure matters: reprieve, meaning, self-esteem (e.g. peer mentoring younger students), mastery and agency, since students choose their own activities. Include a lesson on the <em>dose</em>: late-night gaming or scrolling that cuts into sleep is pleasure at the cost of functioning.</p>
+<p><strong>3. Spirituality and meaning: inclusive reflection.</strong> In a multi-religious school, don't promote any religion. Instead, offer reflection on purpose and values, e.g. "Why does this matter to me?" or gratitude practices. Spirituality as a personal search for meaning doesn't need religious affiliation. Signpost students who are religious to their own faith community as a source of social support.</p>
+<p><strong>Evaluation.</strong> Tailor the programme: not every student likes sport, so offer choices. Provide a pathway to the school counsellor for students with more severe symptoms, since strategies support but don't replace treatment. Consider social factors from Seminar 2. Students from lower-SES families may have fewer protective resources, such as a quiet space or money for tuition, so school-based strategies may matter most for them (stress-vulnerability).</p>
+</details>
+</div>
+</section>
+
+<!-- DISCREPANCIES -->
+<section id="checks">
+<h2>Discrepancies to know</h2>
+<div class="tbl"><table>
+<tr><th>Item</th><th>Issue</th><th>What to do</th></tr>
+<tr><td>Anhedonia slide</td><td>The slide says anhedonia is a "lack of pressure". This is a typo for "pleasure"</td><td>Write "lack of pleasure"</td></tr>
+<tr><td>How severe a depression exercise helps</td><td>The slides say "low-to-moderate". One SU3 sentence says exercise is prescribed for "mild-to-severe" depression</td><td>Use "low-to-moderate", which matches the review cited (Mikkelsen et al., 2017). This is also the safer claim</td></tr>
+<tr><td>Distraction study</td><td>The text cites "Hoeksema (1987)"; the reference list has only Nolen-Hoeksema et al. (1993)</td><td>Cite Nolen-Hoeksema et al. (1993)</td></tr>
+<tr><td>Self-efficacy and depression</td><td>Chen et al. (2015) is cited for self-esteem protecting against depression, but the reference is a walking-exercise trial in lung cancer patients</td><td>Use it as support for walking reducing anxiety and depression, not as a self-esteem study</td></tr>
+<tr><td>HPA axis dysfunction</td><td>Dishman et al. (2006) is cited for HPA dysfunction, but the reference is about physical self-concept in adolescent girls</td><td>Cite Anderson &amp; Shivakumar (2013) for exercise and the HPA axis</td></tr>
+<tr><td>Physical → mental, reason 3</td><td>The slide says "drastic changes in physiology (e.g., amputation)". The SU's list says "somatoform-related conditions", then describes amputation as "somato-psychological"</td><td>Use the slide's wording</td></tr>
+</table></div>
+</section>
+
+<!-- REFS -->
+<section id="refs">
+<h2>Citation bank</h2>
+<div class="tbl"><table>
+<tr><th>Concept</th><th>Cite</th></tr>
+<tr><td>Depression → less activity, mediated by social interaction</td><td>Ohrnberger et al. (2017)</td></tr>
+<tr><td>Anxiety → ulcers (10-year study)</td><td>Taha et al. (2014)</td></tr>
+<tr><td>Exercise and mental health review</td><td>Mikkelsen et al. (2017)</td></tr>
+<tr><td>Exercise and low-to-moderate anxiety and depression</td><td>Khanzada et al. (2015)</td></tr>
+<tr><td>Cardio and strength exercise both reduce anxiety</td><td>Martinsen et al. (1989)</td></tr>
+<tr><td>Exercise + medication for anxiety</td><td>Jayakody et al. (2014)</td></tr>
+<tr><td>Exercise, cognition and quality of life in the elderly</td><td>Geirsdottir et al. (2012)</td></tr>
+<tr><td>Endorphins and running</td><td>Antunes et al. (2016)</td></tr>
+<tr><td>Endocannabinoids after exercise</td><td>Heyman et al. (2012)</td></tr>
+<tr><td>Serotonin and depression</td><td>Maletic et al. (2007)</td></tr>
+<tr><td>Exercise raises serotonin</td><td>Wipfli et al. (2011)</td></tr>
+<tr><td>Exercise and the HPA axis</td><td>Anderson &amp; Shivakumar (2013)</td></tr>
+<tr><td>Active distraction</td><td>Nolen-Hoeksema et al. (1993)</td></tr>
+<tr><td>Walking, self-efficacy, depression in older women</td><td>Gary (2006)</td></tr>
+<tr><td>Walking exercise in lung cancer patients</td><td>Chen et al. (2015)</td></tr>
+<tr><td>Five ways pleasure aids recovery</td><td>Davidson et al. (2006)</td></tr>
+<tr><td>Religion and mental health review</td><td>Koenig (2009); Koenig et al. (2012)</td></tr>
+<tr><td>Religious coping in persistent mental illness</td><td>Tepper et al. (2001)</td></tr>
+<tr><td>Spiritual practices alongside treatment</td><td>Russinova et al. (2002)</td></tr>
+<tr><td><span class="src s-out">Outside</span> Behavioural activation</td><td>Dimidjian et al. (2011)</td></tr>
+<tr><td><span class="src s-out">Outside</span> Positive vs negative religious coping</td><td>Pargament et al. (1998)</td></tr>
+</table></div>
+</section>
+</main>
+</div>
+<script>
+(function(){
+  const all = () => document.querySelectorAll('details');
+  document.getElementById('openAll').addEventListener('click', () => all().forEach(d => d.open = true));
+  document.getElementById('closeAll').addEventListener('click', () => all().forEach(d => d.open = false));
+  window.addEventListener('beforeprint', () => all().forEach(d => d.open = true));
+})();
+</script>
+</body>
+</html>

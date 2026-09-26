@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PSY213 Seminar 4 – Revision Notes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6F7F5; --ink:#1E2A38; --muted:#5B6673; --line:#D3D9D6;
+  --teal:#2F7D72; --teal-soft:#E3F0EC;
+  --plum:#6B4E71; --plum-soft:#EFE8F0;
+  --amber:#A8700F; --amber-soft:#FBF1DE;
+  --red:#A6423A; --card:#FFFFFF;
+  --serif:"Newsreader", Georgia, "Times New Roman", serif;
+  --sans:"Instrument Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#141A21; --ink:#E4E8EC; --muted:#9AA6B2; --line:#2E3842;
+    --teal:#6CC1B3; --teal-soft:#1B2E2B; --plum:#C7A6CE; --plum-soft:#2A2230;
+    --amber:#E3B45C; --amber-soft:#2E2616; --red:#E08A82; --card:#1A222B;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#141A21; --ink:#E4E8EC; --muted:#9AA6B2; --line:#2E3842;
+  --teal:#6CC1B3; --teal-soft:#1B2E2B; --plum:#C7A6CE; --plum-soft:#2A2230;
+  --amber:#E3B45C; --amber-soft:#2E2616; --red:#E08A82; --card:#1A222B;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:1.075rem;line-height:1.62}
+.wrap{display:grid;grid-template-columns:250px minmax(0,1fr);gap:3rem;max-width:1180px;margin:0 auto;padding:2rem 1.5rem 5rem}
+nav.toc{position:sticky;top:calc(1.5rem + env(safe-area-inset-top,0px));align-self:start;font-family:var(--sans);font-size:.88rem;max-height:calc(100vh - 3rem);overflow:auto;padding-right:.5rem}
+nav.toc p{font-weight:700;margin:0 0 .6rem}
+nav.toc ol{list-style:none;padding:0;margin:0;counter-reset:t}
+nav.toc li{margin:.15rem 0}
+nav.toc a{color:var(--muted);text-decoration:none;display:block;padding:.2rem .5rem;border-left:2px solid transparent}
+nav.toc a:hover,nav.toc a:focus-visible{color:var(--ink);border-left-color:var(--teal)}
+main{max-width:74ch}
+header.hero{border-bottom:1px solid var(--line);padding-bottom:1.5rem;margin-bottom:2rem}
+.course{font-family:var(--sans);color:var(--teal);font-weight:600;margin:0}
+h1{font-family:var(--sans);font-size:clamp(2rem,4.5vw,3rem);line-height:1.08;letter-spacing:-.02em;margin:.3rem 0 .8rem}
+h2{font-family:var(--sans);font-size:1.6rem;letter-spacing:-.01em;line-height:1.2;margin:3.2rem 0 .8rem;padding-top:1rem;border-top:3px solid var(--ink)}
+h3{font-family:var(--sans);font-size:1.15rem;margin:2rem 0 .5rem}
+h4{font-family:var(--sans);font-size:1rem;margin:1.2rem 0 .3rem}
+p{margin:.6rem 0}
+a{color:var(--teal)}
+:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.src{font-family:var(--sans);font-size:.72rem;font-weight:600;padding:.1rem .45rem;border-radius:3px;vertical-align:.15em;white-space:nowrap}
+.s-sem{background:var(--teal-soft);color:var(--teal)}
+.s-su{background:var(--plum-soft);color:var(--plum)}
+.s-out{background:var(--amber-soft);color:var(--amber);border:1px dashed var(--amber)}
+.legend{font-family:var(--sans);font-size:.88rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:.8rem 1.2rem;align-items:center}
+.eg{border-left:3px solid var(--plum);background:var(--plum-soft);padding:.7rem 1rem;margin:1rem 0;border-radius:0 4px 4px 0}
+.eg b:first-child{font-family:var(--sans);color:var(--plum)}
+.trap{border-left:3px solid var(--red);padding:.6rem 1rem;margin:1rem 0;background:var(--card)}
+.trap b:first-child{font-family:var(--sans);color:var(--red)}
+.outside{border:1px dashed var(--amber);background:var(--amber-soft);padding:.8rem 1rem;margin:1rem 0;border-radius:4px}
+table{border-collapse:collapse;width:100%;font-size:.95rem;margin:1rem 0}
+.tbl{overflow-x:auto}
+th,td{border:1px solid var(--line);padding:.5rem .65rem;vertical-align:top;text-align:left}
+th{font-family:var(--sans);font-size:.88rem;background:var(--card)}
+ul,ol{padding-left:1.3rem}
+li{margin:.25rem 0}
+.stat{font-family:var(--sans);font-weight:700;color:var(--teal)}
+/* continuum band */
+.band{display:grid;grid-template-columns:repeat(4,1fr);margin:1.2rem 0 .4rem;font-family:var(--sans);font-size:.85rem;border-radius:4px;overflow:hidden}
+.band div{padding:.7rem .6rem;color:#11202a}
+.band div strong{display:block;font-size:1rem}
+.b1{background:#8FD0B6}.b2{background:#F1DC7A}.b3{background:#F2A96B}.b4{background:#E38479}
+.quad{display:grid;grid-template-columns:auto 1fr 1fr;gap:4px;font-family:var(--sans);font-size:.88rem;margin:1rem 0}
+.quad div{background:var(--card);border:1px solid var(--line);padding:.6rem}
+.quad .ax{background:transparent;border:none;color:var(--muted);font-weight:600;display:flex;align-items:center}
+/* scenario */
+.scenario{border:2px solid var(--ink);border-radius:6px;padding:1rem 1.2rem;margin:1.6rem 0;background:var(--card)}
+.scenario h3{margin-top:.2rem}
+.prompt{font-style:italic}
+details{margin-top:.8rem;border-top:1px solid var(--line);padding-top:.6rem}
+summary{font-family:var(--sans);font-weight:600;cursor:pointer;color:var(--teal)}
+.steps{counter-reset:s;list-style:none;padding:0}
+.steps li{counter-increment:s;padding-left:2.4rem;position:relative;margin:.8rem 0}
+.steps li::before{content:counter(s);position:absolute;left:0;top:.05rem;width:1.7rem;height:1.7rem;border-radius:50%;background:var(--ink);color:var(--paper);font-family:var(--sans);font-weight:700;font-size:.9rem;display:grid;place-items:center}
+.toolbar{font-family:var(--sans);display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
+button{font-family:var(--sans);font-size:.88rem;font-weight:600;background:var(--ink);color:var(--paper);border:none;border-radius:4px;padding:.5rem .9rem;cursor:pointer}
+button.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.small{font-size:.9rem;color:var(--muted)}
+@media (max-width:860px){
+  .wrap{grid-template-columns:1fr;gap:1rem}
+  nav.toc{position:static;max-height:none;border:1px solid var(--line);padding:1rem;border-radius:4px}
+  .band{grid-template-columns:1fr 1fr}
+}
+@media print{
+  nav.toc,.toolbar{display:none}
+  .wrap{display:block;padding:0}
+  body{font-size:10.5pt;background:#fff;color:#000}
+  .scenario{break-inside:avoid-page}
+  h2{break-after:avoid}
+}
+</style>
+<style>
+.chain{font-family:var(--sans);font-size:.92rem;display:flex;flex-wrap:wrap;gap:.3rem;align-items:center;margin:.8rem 0}
+.chain span{padding:.3rem .6rem;border-radius:3px;background:var(--card);border:1px solid var(--line)}
+.chain i{color:var(--muted);font-style:normal}
+.spectrum{display:grid;grid-template-columns:1fr 1fr 1fr;margin:1rem 0;font-family:var(--sans);font-size:.85rem;border-radius:4px;overflow:hidden}
+.spectrum div{padding:.7rem .6rem;color:#11202a}
+.spectrum strong{display:block;font-size:.95rem}
+.sp1{background:#8FD0B6}.sp2{background:#F1DC7A}.sp3{background:#E38479}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="toc" aria-label="Contents">
+<p>Contents</p>
+<ol>
+<li><a href="#method">Answering scenario questions</a></li>
+<li><a href="#social">Social media</a></li>
+<li><a href="#mass">Mass media</a></li>
+<li><a href="#ext">Externalising behaviours</a></li>
+<li><a href="#adhd">ADHD</a></li>
+<li><a href="#oddcd">ODD and conduct disorder</a></li>
+<li><a href="#pd">Personality disorders</a></li>
+<li><a href="#sud">Substance use</a></li>
+<li><a href="#links">Links to Seminars 1–3</a></li>
+<li><a href="#scen">Worked scenarios</a></li>
+<li><a href="#checks">Discrepancies to know</a></li>
+<li><a href="#refs">Citation bank</a></li>
+</ol>
+</nav>
+
+<main>
+<header class="hero">
+<p class="course">PSY213 Mental Health and Wellbeing in Singapore</p>
+<h1>Seminar 4: Technology and externalising behaviours</h1>
+<p>Revision notes built on the Seminar 4 slides, backed up by two study units: <strong>Study Unit 4</strong> covers the technology half (social and mass media), and <strong>Study Unit 5</strong> covers the externalising-behaviours half (ADHD, ODD, CD, personality disorders, substance use).</p>
+<div class="legend">
+<span><span class="src s-sem">Seminar</span> in the slides</span>
+<span><span class="src s-su">SU4</span> / <span class="src s-su">SU5</span> Study Unit 4 or 5 backup</span>
+<span><span class="src s-out">Outside course</span> standard theory to strengthen answers; cite carefully</span>
+</div>
+<div class="toolbar">
+<button type="button" id="openAll">Show all model answers</button>
+<button type="button" class="ghost" id="closeAll">Hide all</button>
+<button type="button" class="ghost" onclick="window.print()">Print</button>
+</div>
+</header>
+
+<!-- METHOD -->
+<section id="method">
+<h2>Answering scenario questions for this unit</h2>
+<p>This unit produces two types of question, and each needs a different approach.</p>
+<h3>Type 1: "Is technology good or bad for this person?"</h3>
+<p>The seminar's debate activity ends in a synthesis: <strong>"it depends on…"</strong>. Your answer should too.</p>
+<ol class="steps">
+<li><strong>Name the risks</strong> in the case: sleep, FoMO, social comparison, body image, harmful interactions, addiction.</li>
+<li><strong>Name the benefits</strong> available: information, social and emotional support, relationships, self-expression.</li>
+<li><strong>Apply the moderators</strong>: age and developmental stage, active vs passive use, platform culture, supportive vs toxic peers.</li>
+<li><strong>Recommend</strong> changes in <em>how</em> they use it, not just how much. Limiting time is one option (Hunt et al., 2018), but shifting from passive to active use matters too.</li>
+</ol>
+<h3>Type 2: "Is this behaviour a disorder?"</h3>
+<p>The seminar's behaviour-sorting activity asks you to judge four criteria. Use them for any child or adult conduct scenario:</p>
+<div class="tbl"><table>
+<tr><th>Criterion</th><th>Question to ask</th></tr>
+<tr><td><strong>Frequency</strong></td><td>Occasional, or "frequently", "daily", "repeatedly"?</td></tr>
+<tr><td><strong>Persistence</strong></td><td>Does it meet the duration: 6 months (ADHD, ODD), 12 months (CD), enduring (PD)?</td></tr>
+<tr><td><strong>Severity</strong></td><td>Mild defiance, or aggression, cruelty, law-breaking?</td></tr>
+<tr><td><strong>Impact</strong></td><td>Does it significantly disrupt school, work, relationships or daily functioning? Is it in two or more settings (ADHD)?</td></tr>
+</table></div>
+<p>Then add <strong>developmental appropriateness</strong> (is this normal for the child's age?) and <strong>alternative explanations</strong> (context, trauma, culture, another condition). Always <strong>hedge a diagnosis</strong>: "possible traits of…", "would need assessment". Activity 4 explicitly asks for diagnoses "with caveats".</p>
+
+<h3>Cue-to-concept lookup</h3>
+<div class="tbl"><table>
+<tr><th>If the scenario mentions…</th><th>Reach for…</th></tr>
+<tr><td>Scrolling late at night, tired at school</td><td>Sleep problems (Azhari et al., 2022); passive use</td></tr>
+<tr><td>Anxious about being left out of friends' plans</td><td>FoMO; Hunt et al. (2018)</td></tr>
+<tr><td>Comparing looks or life with influencers; editing photos</td><td>Upward social comparison (Vogel et al., 2015); body image (Tiggemann &amp; Slater, 2014)</td></tr>
+<tr><td>Nasty comments, group-chat exclusion</td><td>Cyberbullying and harmful interactions</td></tr>
+<tr><td>Finds support in an online community</td><td>Benefits: support, information; Gibson &amp; Trnka (2020)</td></tr>
+<tr><td>A TV show or news story linking mental illness with crime</td><td>Cultivation theory; Parrott &amp; Parrott (2015); stigma; self-stigma</td></tr>
+<tr><td>Can't sit still, careless errors, forgetful, at home and at school</td><td>ADHD criteria and presentations</td></tr>
+<tr><td>A woman diagnosed with ADHD in adulthood</td><td>ADHD in women</td></tr>
+<tr><td>Angry, argues with adults, spiteful</td><td>ODD</td></tr>
+<tr><td>Fights, steals, cruelty, truancy, vandalism</td><td>Conduct disorder; developmental pathways</td></tr>
+<tr><td>Enduring adult pattern of relating to others</td><td>Personality disorders and clusters</td></tr>
+<tr><td>Drug use with paranoia or hallucinations</td><td>Substance-induced disorder; SUD criteria</td></tr>
+</table></div>
+</section>
+
+<!-- SOCIAL MEDIA -->
+<section id="social">
+<h2>Social media and mental health</h2>
+<h3>How social media changed our lives</h3>
+<ul>
+<li><span class="src s-sem">Seminar</span> Nearly universal: over 70% of people have an account (Ellison &amp; Vitak, 2015). Youths spend many hours a day online. <span class="src s-su">SU4</span> gives up to 12 hours a day (Nielsen, 2018).</li>
+<li>It has transformed how we <strong>connect and build relationships</strong>, <strong>get instant news of friends and family</strong>, and <strong>perceive and present ourselves</strong>.</li>
+<li><span class="src s-su">SU4</span> Online communication is displacing meeting and calling, which may reduce interpersonal skills (Subramanian, 2017). "Selfies" normalise narcissistic tendencies. Users <strong>curate a self-presentation</strong> that may lack authenticity or be an entirely artificial persona.</li>
+</ul>
+<div class="trap"><b>Formative quiz trap.</b> Social media has <em>increased</em>, not reduced, the importance of managing self-presentation.</div>
+
+<h3>Risks</h3>
+<div class="tbl"><table>
+<tr><th>Risk</th><th>Evidence and mechanism <span class="src s-su">SU4</span></th><th>Example</th></tr>
+<tr><td><strong>Sleep problems</strong></td><td>Excessive users sleep less, especially on weekdays. Causes include constant information intake, overstimulation, and preoccupation with one's own posts (Azhari et al., 2022). Lack of sleep harms cognition and raises the risk of medical and psychological disorders.</td><td>A JC student checks how many likes her post got until 2 a.m., then struggles through morning lectures</td></tr>
+<tr><td><strong>FoMO</strong> (fear of missing out)</td><td>Perceiving that you are being left out of a social activity triggers anxiety, which drives compulsive behaviour to preserve the relationship. Limiting social media to 30 minutes a day reduced FoMO and anxiety (Hunt et al., 2018; see <a href="#checks">discrepancies</a>).</td><td>Seeing friends' Instagram stories from a gathering he wasn't invited to, a boy keeps refreshing and messaging them to stay "in"</td></tr>
+<tr><td><strong>Social comparison</strong></td><td>Upward comparisons on social media stir negative emotions and lower self-worth and self-esteem (Vogel et al., 2015)</td><td>A fresh graduate scrolls LinkedIn posts of peers' promotions and feels she is failing</td></tr>
+<tr><td><strong>Body image concerns</strong></td><td>About 90% of girls and young women are dissatisfied with their bodies. Social media users are more dissatisfied than non-users (Tiggemann &amp; Slater, 2014). Photo-editing focuses attention on disliked features, which can lead to body dysmorphic disorder or eating disorders.</td><td>A teen slims her face with a filter before every post and starts skipping meals</td></tr>
+<tr><td><strong>Harmful interactions</strong> (cyberbullying)</td><td>Cyberbullying, harassment and malicious interactions cause distress, isolation and depression, and increase suicide risk</td><td>A student is mocked in a class group chat and removed from it</td></tr>
+</table></div>
+<p><span class="src s-su">SU4</span> Other risks:</p>
+<ul>
+<li><strong>Social media disorder (SMD)</strong>: addiction-like excessive use, linked to loneliness and poor sleep. Where normal use ends and addiction begins is still unclear.</li>
+<li><strong>Anxiety</strong> (Barry et al., 2017), and a positive correlation between hours on social media and self-harm risk (Hartas).</li>
+<li><strong>Loneliness and depression</strong>: online relationships are usually <em>poorer in quality</em> than real-world ones, which give stronger support.</li>
+</ul>
+<div class="trap"><b>Formative quiz traps.</b> Loneliness is linked to the poorer quality of online relationships, and to <em>upward</em> (not downward) comparison. Body dissatisfaction is <em>not</em> part of FoMO.</div>
+
+<h3>Benefits</h3>
+<div class="tbl"><table>
+<tr><th>Benefit</th><th>Evidence <span class="src s-su">SU4</span></th><th>Example</th></tr>
+<tr><td><strong>Obtaining information</strong></td><td>People learn from others' experiences and expert advice (Sadagheyani &amp; Tatari, 2021). Nearly half of youths say social media has benefited their wellbeing, and most of them changed their lifestyle after seeing health content (Goodyear et al., 2018). <em>Caveat</em>: reliability varies, so users need media and health literacy.</td><td>A teen learns about panic attacks from a psychologist's TikTok and recognises what she's been having</td></tr>
+<tr><td><strong>Social and emotional support</strong></td><td>Youths often feel too exposed sharing emotions face to face, and online exchanges feel more open (Gibson &amp; Trnka, 2020). Over half of respondents used social media for health or social counselling (Antheunis et al., 2013). 70% of youths turn to social media to manage emotions in hard times.</td><td>A student who can't tell his parents he's struggling finds a moderated peer-support community</td></tr>
+<tr><td><strong>Fostering relationships</strong></td><td>Active engagement through comments and messages strengthens relationships, overcomes distance, and protects against depression (Verduyn et al., 2017)</td><td>A worker posted overseas keeps close to her family through a daily group chat</td></tr>
+<tr><td><strong>Self-expression and self-esteem</strong></td><td>Creating content about your interests expresses identity. Likes and shares shape emerging identities in youth and reinforce them in adults (Orehek &amp; Human, 2017)</td><td>A shy teen shares her digital art online and builds confidence from positive feedback</td></tr>
+</table></div>
+<div class="trap"><b>Formative quiz trap.</b> Information on social media is <em>not</em> always valid.</div>
+
+<h3>Moderating factors: "it depends on…"</h3>
+<p><span class="src s-sem">Seminar</span> These are what turn a list of risks and benefits into an evaluation.</p>
+<div class="tbl"><table>
+<tr><th>Moderator</th><th>How it changes the effect</th></tr>
+<tr><td><strong>Age and developmental stage</strong></td><td>Adolescents are forming their identities and are more sensitive to peer approval and comparison. The same use may affect a 13-year-old more than a 35-year-old.</td></tr>
+<tr><td><strong>Active vs passive use</strong> <span class="src s-su">SU4</span></td><td><em>Active</em> use, such as messaging and commenting, builds connectedness. <em>Passive</em> use, such as scrolling without interacting, raises loneliness and FoMO (Frison &amp; Eggermont, 2015).</td></tr>
+<tr><td><strong>Platform culture</strong></td><td>Image-focused platforms like Instagram invite appearance comparison. Interest-based community platforms like Discord centre on shared hobbies and conversation.</td></tr>
+<tr><td><strong>Supportive vs toxic peers</strong></td><td>The same platform can host a supportive recovery community or a cyberbullying group chat. The people matter more than the app.</td></tr>
+</table></div>
+<div class="eg"><b>Example: same hours, opposite effects.</b> Two 15-year-olds each spend two hours a day online. Aisyah scrolls through influencers' holiday and beauty posts on her own late at night: passive use, an image-focused platform, upward comparison, lost sleep. Ben chats on a gaming Discord with school friends after homework: active use, an interest-based platform, a supportive peer group. Screen time is the same, but the mental health outcomes are likely very different.</div>
+<p class="small">Activity 1 synthesis in one sentence: <strong>social media is neither good nor bad by itself. Its effect depends on who is using it, how, where, and with whom.</strong></p>
+</section>
+
+<!-- MASS MEDIA -->
+<section id="mass">
+<h2>Mass media and mental health</h2>
+<h3>Infotainment and cultivation theory</h3>
+<ul>
+<li><span class="src s-sem">Seminar</span> <strong>Infotainment</strong> mixes entertainment with information to capture audiences. The risk is that it reinforces stereotypes of mental illness.</li>
+<li><strong>Cultivation theory</strong> (Morgan et al.): long-term media exposure shapes how viewers see the real world. <span class="src s-su">SU4</span> Fictional portrayals of mental illness come to feel true of real people.</li>
+<li>In the Law &amp; Order study (Parrott &amp; Parrott, 2015), characters with mental illness were more likely to be shown as criminals and as violent rather than benign.</li>
+</ul>
+<div class="eg"><b>Example: cultivation.</b> Someone who has watched years of crime dramas where "the killer turns out to be schizophrenic" has never knowingly met a person with schizophrenia. When a new neighbour mentions his diagnosis, she feels afraid. Her "knowledge" of schizophrenia came entirely from television, and it now shapes how she treats a real person.</div>
+
+<h3>Consequences of negative portrayals</h3>
+<div class="tbl"><table>
+<tr><th>Who is affected</th><th>Effect</th></tr>
+<tr><td><strong>The audience</strong></td><td>More stigma, which can harden into discriminatory behaviour (Granello &amp; Pauley, 2000)</td></tr>
+<tr><td><strong>Viewers with mental illness</strong></td><td><strong>Self-stigma</strong>: they internalise negative images, which damages self-worth and self-concept (Watson et al., 2007)</td></tr>
+</table></div>
+<div class="trap"><b>Formative quiz trap.</b> Audiences have <em>not</em> been found to question negative stereotypes critically. That is why the stereotypes are harmful.</div>
+
+<h3>The violence stereotype vs reality</h3>
+<p><span class="src s-sem">Seminar</span></p>
+<ul>
+<li><strong>Most people with mental illness are not violent</strong> (Corrigan &amp; Watson, 2005).</li>
+<li>Violence risk is complex and has many factors (Silverstein et al., 2015). Severe psychosis carries a <em>somewhat</em> higher risk, and psychoactive drug use increases risk significantly.</li>
+<li><strong>Correlation ≠ causation</strong> <span class="src s-su">SU4</span>: it is unclear whether mental illness causes violence or whether violent people are more prone to mental illness. Laypeople rarely grasp how carefully clinicians assess violence risk.</li>
+<li>Mass media <strong>oversimplifies</strong> this, spreading the "mentally ill = violent" myth worldwide. <span class="src s-su">SU4</span> TV characters with mental illness are more violent than both real-world rates and TV characters without mental illness.</li>
+</ul>
+<p class="small">Link to Seminar 1: Pescosolido et al. (2019) found the US public increasingly associated mental illness with violence over 22 years. Mass media is one likely driver.</p>
+
+<h3>Positive impacts of mass media</h3>
+<p><span class="src s-sem">Seminar</span> Media plays a dual role: it can spread harmful stereotypes or build awareness and empathy. Its influence depends on three things:</p>
+<div class="tbl"><table>
+<tr><th>Factor</th><th>Shapes…</th><th>Example</th></tr>
+<tr><td><strong>Tone</strong></td><td>Perceived accuracy</td><td>Warm and sympathetic vs mocking or frightening</td></tr>
+<tr><td><strong>Context</strong></td><td>How accuracy and validity are interpreted</td><td>A character's depression shown alongside their life, relationships and triggers, vs appearing from nowhere to drive the plot</td></tr>
+<tr><td><strong>Representation</strong></td><td>How complete the picture is</td><td>Showing recovery, treatment and ordinary functioning, not only crisis</td></tr>
+</table></div>
+<p><strong>Examples.</strong> <span class="src s-sem">Seminar</span> (modern): <em>Thunderbolts</em> (2025), <em>Bel-Air</em> (Black teen mental health), <em>Rose</em> (a compassionate portrayal of schizophrenia), <em>Bob Trevino Likes It</em>, and therapy TV going mainstream. <span class="src s-su">SU4</span> (classic): <em>A Beautiful Mind</em> (John Nash and schizophrenia, portrayed sympathetically), <em>Good Will Hunting</em>, <em>Girl, Interrupted</em>, and BBC Radio's <em>All in the Mind</em>, where patients and clinicians discuss mental health objectively.</p>
+
+<h3>Activity 2: pitching a mental health show</h3>
+<p><span class="src s-sem">Seminar</span> The slide's ethics and accuracy checklist doubles as a set of criteria for evaluating any portrayal: avoid sensationalising or glamorising struggles; include realistic experiences, support resources or routes to help; balance entertainment with responsible messaging.</p>
+<div class="eg"><b>Sample pitch using the slide's template.</b> "Our show is a <em>short-form docu-series</em> for <em>Singaporean teens and their parents</em>. It focuses on <em>exam stress and anxiety</em>, by <em>following four Sec 4 students from different backgrounds through the O-Level year, with a school counsellor's segment at the end of each episode</em>. We chose this because <em>about a third of Singapore youths report mental health symptoms, and real, relatable stories with clear help-seeking pathways normalise getting support without sensationalising distress</em>." This uses a sympathetic tone, a full context, and representation that includes recovery.</div>
+</section>
+
+<!-- EXTERNALISING -->
+<section id="ext">
+<h2>Externalising behaviours (challenging conduct)</h2>
+<p><span class="src s-sem">Seminar</span> <strong>Externalising behaviours</strong> are directed outward and may create difficulties for the individual and for others. They lie <strong>on a spectrum</strong>:</p>
+<div class="spectrum" role="img" aria-label="Spectrum from low-level misbehaviour to clinically significant behaviour">
+<div class="sp1"><strong>Normative</strong>Age-typical mischief that responds to boundaries</div>
+<div class="sp2"><strong>Mild / concerning</strong>More frequent or persistent; worth watching</div>
+<div class="sp3"><strong>Clinically significant</strong>Meets criteria; severe and impairing</div>
+</div>
+<p>The seminar covers three groups across the lifespan:</p>
+<ol>
+<li><strong>ADHD</strong>: neurodevelopmental problems with regulation</li>
+<li><strong>ODD and CD</strong>: behavioural and social problems in children</li>
+<li><strong>Personality disorders</strong>: relational and personality problems in adults</li>
+</ol>
+<p>It also covers <strong>substance misuse</strong>.</p>
+<p class="small">Link to Seminar 1: this spectrum is the dimensional approach applied to behaviour. Link to Seminar 2: parenting stress and punitive discipline predict externalising behaviour (Bayer et al., 2008).</p>
+</section>
+
+<!-- ADHD -->
+<section id="adhd">
+<h2>ADHD</h2>
+<p><span class="src s-sem">Seminar</span> A neurodevelopmental disorder, usually diagnosed in childhood. Its core features are <strong>inattention, hyperactivity and impulsivity</strong>. Symptoms often <strong>persist into adulthood</strong>. It affects school performance, relationships and daily functioning.</p>
+<h3>Diagnostic criteria</h3>
+<div class="tbl"><table>
+<tr><th>Requirement</th><th>Detail</th></tr>
+<tr><td>Inattention</td><td>6+ symptoms (children up to 16) or 5+ (age 17+), for at least 6 months</td></tr>
+<tr><td>Hyperactivity / impulsivity</td><td>6+ (children) or 5+ (age 17+), for at least 6 months</td></tr>
+<tr><td>Settings</td><td>Symptoms in <strong>2 or more settings</strong>, e.g. home and school or work</td></tr>
+<tr><td>Impact</td><td>Significantly disrupts daily functioning</td></tr>
+<tr><td>Presentations</td><td><strong>Predominantly inattentive</strong>, <strong>predominantly hyperactive/impulsive</strong>, or <strong>combined</strong></td></tr>
+</table></div>
+<p><span class="src s-su">SU5</span> further requirements not on the slides:</p>
+<ul>
+<li>Several symptoms must have been present <strong>before age 12</strong>. This matters for adult diagnoses, which have to look back at childhood.</li>
+<li>Symptoms must be <strong>inappropriate for the person's developmental stage</strong>. Young children are naturally somewhat inattentive and impulsive, but in ADHD these behaviours continue at a level that doesn't fit the child's age.</li>
+<li>Symptoms must <strong>not be better explained by another mental disorder</strong>.</li>
+</ul>
+<p><span class="src s-su">SU5</span> <strong>Causes span several levels</strong> (Killeen et al.): neurophysiology, brain development, genetics, epigenetics, and prenatal risks such as exposure to lead, alcohol or tobacco during pregnancy. ADHD affects brain processes involved in self-control.</p>
+<div class="trap"><b>Formative quiz traps.</b> ADHD is <em>not</em> caused by poor parenting. It <em>can</em> be diagnosed in adults. It has <em>three</em> presentations, not two. Fidgeting is a <em>hyperactivity</em> symptom; struggling to concentrate is an <em>inattention</em> symptom; aggression and defiance are CD/ODD features, not ADHD.</div>
+<div class="tbl"><table>
+<tr><th>Inattention symptoms <span class="src s-sem">Seminar</span></th><th>Hyperactivity / impulsivity symptoms <span class="src s-sem">Seminar</span></th></tr>
+<tr><td>
+<ul>
+<li>Careless errors; misses details</li>
+<li>Struggles to sustain attention on tasks</li>
+<li>Seems not to listen when spoken to</li>
+<li>Doesn't follow instructions or finish tasks</li>
+<li>Struggles to organise tasks</li>
+<li>Avoids tasks that need sustained mental effort</li>
+<li>Loses items needed for tasks</li>
+<li>Easily distracted</li>
+<li>Forgetful in daily activities</li>
+</ul>
+</td><td>
+<ul>
+<li>Fidgets, taps, squirms</li>
+<li>Leaves seat when expected to stay seated</li>
+<li>Runs or climbs inappropriately (restlessness in adults)</li>
+<li>Can't do leisure activities quietly</li>
+<li>"On the go", as if "driven by a motor"</li>
+<li>Talks excessively</li>
+<li>Blurts out answers before the question is finished</li>
+<li>Struggles to wait their turn</li>
+<li>Interrupts or intrudes on others</li>
+</ul>
+</td></tr>
+</table></div>
+<div class="eg"><b>Example: the settings rule matters.</b> An 8-year-old is restless and can't focus in maths class but is calm and focused at home building LEGO and at weekend football. That is one setting, so it does not meet criteria. It may point to a problem with the class, the teacher or the subject, or to anxiety about maths, rather than ADHD. Compare a child who loses homework, can't wait his turn and interrupts constantly at school, at home <em>and</em> at tuition for over a year, and whose grades and friendships are suffering. That child fits the pattern.</div>
+
+<h3>ADHD in women</h3>
+<p><span class="src s-sem">Seminar</span> Presentation often differs from males: <strong>less hyperactivity, more inattention</strong>. Symptoms are often <strong>internalised</strong>: forgetfulness, disorganisation, quiet restlessness. Women are often <strong>diagnosed later</strong>, sometimes in adulthood, and are at risk of <strong>secondary problems</strong> such as anxiety, low self-esteem and depression.</p>
+<div class="eg"><b>Example.</b> As a schoolgirl, Mei was called "dreamy" and "careless". She wasn't disruptive, so no one referred her. By working twice as hard she got through university, but at 32, managing a job and two children, she is overwhelmed, anxious and convinced she is "just bad at life". Her ADHD diagnosis finally explains the pattern. Her anxiety and low self-esteem are secondary problems built up over years of unexplained struggle.</div>
+<p class="small">Link to Seminar 2: this is another gender difference in diagnosis. Here it is not about help-seeking, but because the typical presentation, the "hyperactive boy", doesn't match how many girls present.</p>
+
+<h3>Treatment</h3>
+<p><span class="src s-sem">Seminar</span> A <strong>combination</strong> of medication, such as psychostimulants, with behavioural therapy and parent training. Side effects of psychostimulants include <strong>sleep problems, reduced appetite and mood swings</strong>.</p>
+<p><span class="src s-su">SU5</span> About <strong>30%</strong> of people diagnosed with ADHD receive psychostimulants. Side effects also include <strong>raised blood pressure in children</strong> (Poulton et al., 2013). For <strong>preschool children</strong>, parent training plus behavioural therapy is the main treatment, <em>before</em> medication is considered. Plans are tailored to the child and family.</p>
+<div class="eg"><b>Activity 5.1 answers.</b> <em>Rola, 10</em>: can't concentrate on homework, looks like she's daydreaming when spoken to, easily distracted, doesn't follow requests. These are <strong>inattentive</strong> symptoms. <em>Gary, 12</em>: climbs chairs, can't sit still, interrupts, fidgets constantly. These are <strong>hyperactive/impulsive</strong> symptoms. Note that Rola's "not complying" is distraction, not defiance, which is the same point made in Scenario 4 below.</div>
+<p><span class="src s-su">SU5</span> <strong>Reflect 5.1: difference or disorder?</strong> A TEDx talk in the study unit argues ADHD is "a difference in cognition, not a disorder". This is a neurodiversity view. For evaluation marks, weigh both sides. For: framing it as a difference reduces stigma and self-blame and recognises strengths such as energy and creativity. This fits Seminar 1's point that the line between normal and abnormal is set by social context: a classroom that demands long periods of stillness makes ADHD traits more impairing. Against: the diagnostic criteria require <em>significant impairment</em> in functioning, and calling it only a difference could block access to treatment that helps. A balanced answer: ADHD is a real neurodevelopmental condition, and how disabling it is depends partly on the environment.</p>
+<p class="small">Link to Seminar 2: another example of a biological intervention with side effects, and why combined biopsychosocial treatment is preferred.</p>
+</section>
+
+<!-- ODD / CD -->
+<section id="oddcd">
+<h2>Oppositional defiant disorder and conduct disorder</h2>
+<p><span class="src s-sem">Seminar</span> A key skill is to <strong>tell normal childhood mischief apart from clinical disorder</strong>.</p>
+<h3>ODD</h3>
+<p>Features: anger/irritability, defiance, vindictiveness. Criteria: <strong>4 or more symptoms over 6 months</strong>. Rated mild, moderate or severe.</p>
+<p><span class="src s-su">SU5</span> Further requirements: the behaviour must be shown <strong>with at least one person who is not a sibling</strong>, and it must cause distress to the child or others, or harm functioning. <strong>Frequency is critical</strong> in telling ODD apart from normal defiance. ODD is common before CD develops.</p>
+<div class="tbl"><table>
+<tr><th>Anger / irritable mood</th><th>Argumentative / defiant behaviour</th><th>Vindictiveness</th></tr>
+<tr><td>Loses temper quickly; easily annoyed; often angry and resentful</td><td>Argues with adults and authority figures; refuses rules and requests; deliberately annoys others; blames others for own mistakes</td><td>Spiteful or vindictive at least twice in the past 6 months</td></tr>
+</table></div>
+<h3>Conduct disorder (CD)</h3>
+<p>Features: aggression toward people or animals, property destruction, deceit, serious rule violations. Prevalence: <strong>2–10% of children</strong>, with a pooled estimate of about 3%, and <strong>2.6 times higher in boys</strong> (Ayano et al., 2024). Criteria: <strong>3 or more symptoms in the past 12 months, with at least 1 in the last 6 months</strong>. Causes impairment in social, academic and occupational life.</p>
+<div class="tbl"><table>
+<tr><th>Aggression to people and animals</th><th>Property destruction</th><th>Deceit or theft</th><th>Serious rule violations</th></tr>
+<tr><td>Bullying and threats; starting fights; using weapons; physical cruelty to people; cruelty to animals; stealing with confrontation (mugging); forced sexual activity</td><td>Fire-setting to cause damage; deliberately destroying others' property</td><td>Breaking into a house or car; conning people; stealing without confrontation (shoplifting)</td><td>Staying out past curfew before age 13; running away overnight twice, or once for a long period; truancy before age 13</td></tr>
+</table></div>
+
+<h3>ODD vs CD</h3>
+<div class="tbl"><table>
+<tr><th>Feature</th><th>ODD</th><th>CD</th></tr>
+<tr><td>Core behaviour</td><td>Anger, defiance, vindictiveness</td><td>Aggression, destruction, deceit, law-breaking</td></tr>
+<tr><td>Onset</td><td>Usually before CD; preschool to early childhood</td><td>Middle childhood to adolescence</td></tr>
+<tr><td>Duration</td><td>4+ symptoms over 6 months</td><td>3+ over 12 months, 1+ in last 6 months</td></tr>
+<tr><td>Impact</td><td>Relationships and school; mild to moderate</td><td>Severe: social, academic, legal</td></tr>
+<tr><td>Gender</td><td>Slightly more common in boys</td><td>More common in boys</td></tr>
+</table></div>
+<p><strong>Rule of thumb:</strong> ODD is mostly about <em>relationships with authority</em>, like arguing and defying. CD is about <em>violating other people's rights</em> and the law, like hurting, stealing and destroying.</p>
+
+<h3>Developmental pathways</h3>
+<p><span class="src s-sem">Seminar</span> Risk factors are a difficult early temperament, family stressors, ADHD symptoms and low SES. From there, three pathways are possible:</p>
+<ul>
+<li><strong>ODD → CD → antisocial outcomes</strong>. This is a <em>minority</em> path.</li>
+<li><strong>ODD that resolves, or persists without CD</strong>.</li>
+<li><strong>CD without prior ODD</strong>.</li>
+</ul>
+<p>What shapes the path: <strong>parenting, peer influence, emotion regulation and social skills, and comorbid ADHD</strong>.</p>
+<div class="trap"><b>Don't overstate it.</b> Most children with ODD do <em>not</em> go on to develop CD or antisocial outcomes. This echoes Seminar 2's point that a childhood diagnosis raises risk but does not guarantee adult disorder (Mulraney et al., 2021).</div>
+
+<h3>Activity 3: behaviour sorting</h3>
+<p>Suggested classifications. The judgement matters less than justifying it with the four criteria.</p>
+<div class="tbl"><table>
+<tr><th>#</th><th>Behaviour</th><th>Classification</th><th>Reasoning</th></tr>
+<tr><td>1</td><td>12-year-old persistently lies to avoid punishment and takes classmates' things</td><td>Mild–concerning; possible CD features</td><td>"Persistently" suggests frequency. Lying and theft are CD symptom types (deceit, theft), but that is only about two symptom types. Would need 3+ over 12 months. Monitor and assess.</td></tr>
+<tr><td>2</td><td>9-year-old refuses minor instructions, but improves with consistent boundaries</td><td>Normative</td><td>Minor, and <em>responds to parenting</em>. Improving with boundaries is strong evidence against a disorder.</td></tr>
+<tr><td>3</td><td>6-year-old occasionally interrupts peers during play</td><td>Normative</td><td>"Occasionally", age-typical impulse control, no impairment</td></tr>
+<tr><td>4</td><td>11-year-old repeatedly bullies peers, steals and manipulates others</td><td>Clinically significant; likely CD</td><td>Bullying (aggression), theft and conning (deceit): 3 symptom types, "repeatedly", harming others. Check duration.</td></tr>
+<tr><td>5</td><td>13-year-old truants, vandalises property, fights peers</td><td>Clinically significant; likely CD</td><td>Fights (aggression), vandalism (destruction), truancy (rule violation; counts as CD if it began before age 13): 3+ symptoms across categories. High severity.</td></tr>
+<tr><td>6</td><td>10-year-old refuses homework, argues with teachers, sometimes blames peers</td><td>Mild–concerning; possible ODD</td><td>Arguing with authority, defying rules, blaming others: 3 ODD symptoms. ODD needs 4 over 6 months, and "occasionally" lowers the frequency. Monitor.</td></tr>
+<tr><td>7</td><td>9-year-old repeatedly teases younger sibling but otherwise behaves normally</td><td>Normative to mild</td><td>Sibling rivalry is common. Confined to one relationship, with no wider impairment. SU5 also says ODD behaviour must show up with at least one person <em>other than a sibling</em>, so behaviour aimed only at a sibling cannot meet ODD criteria.</td></tr>
+<tr><td>8</td><td>7-year-old argues with parents daily over minor tasks</td><td>Mild–concerning</td><td>"Daily" is a high frequency, but it involves only one symptom type. Look for temper, spitefulness, other settings and duration before calling it ODD. Also consider parenting context and family stress.</td></tr>
+</table></div>
+</section>
+
+<!-- PD -->
+<section id="pd">
+<h2>Personality disorders</h2>
+<p><span class="src s-sem">Seminar</span> <strong>Personality</strong> is a stable pattern of thinking, feeling and behaving. A <strong>personality disorder</strong> is an <strong>enduring pattern</strong> of thought, emotion and behaviour that <strong>deviates significantly from social norms</strong>, may distress others and causes dysfunction.</p>
+<ul>
+<li>Onset: late adolescence or early adulthood.</li>
+<li>Diagnosis: 18 or over; the patterns must be pervasive and persistent.</li>
+<li>Treatment: primarily psychotherapy.</li>
+</ul>
+<p><span class="src s-su">SU5</span> Personality is shaped by individual experience, situation and environment, and inherited traits. Once established in early adulthood it tends to be enduring. The study unit also gives the <strong>18+ rule</strong>, because younger people's personalities are still developing. There are <strong>10 personality disorders in DSM-5-TR</strong>. Only a <strong>trained clinician</strong> should diagnose them. People with personality disorders often <strong>don't realise</strong> they have a psychological condition, so encourage them to see a clinician. Psychotherapy aims to build awareness of symptoms and better ways of managing them.</p>
+<p class="small"><span class="src s-out">Outside course</span> Strictly, DSM-5-TR allows most personality disorders to be diagnosed under 18 if traits have lasted at least a year. Antisocial PD, however, requires age 18+ and evidence of conduct disorder before age 15. The latter is useful for linking CD to adult outcomes. In the exam, use the course's 18+ rule.</p>
+<div class="tbl"><table>
+<tr><th>Cluster</th><th>Theme</th><th>Disorders</th></tr>
+<tr><td><strong>A</strong></td><td>Odd / eccentric</td><td><strong>Paranoid</strong>: suspicious, distrustful. <strong>Schizoid</strong>: detached, limited emotion. <strong>Schizotypal</strong>: eccentric thinking, social discomfort.</td></tr>
+<tr><td><strong>B</strong></td><td>Dramatic / emotional / erratic: impulsivity, emotional instability, attention-seeking, lack of empathy</td><td><strong>Antisocial</strong>: disregard for others' rights. <strong>Borderline</strong>: unstable relationships, self-image and emotions. <strong>Histrionic</strong>: attention-seeking, dramatic emotion. <strong>Narcissistic</strong>: grandiosity, need for admiration, low empathy.</td></tr>
+<tr><td><strong>C</strong></td><td>Anxious / fearful: withdrawal, clinginess, perfectionism, rigidity</td><td><strong>Avoidant</strong>: avoids others out of fear of criticism. <strong>Dependent</strong>: clingy, needs to be cared for. <strong>Obsessive-compulsive (OCPD)</strong>: perfectionism, rigidity, control.</td></tr>
+</table></div>
+<p><span class="src s-su">SU5</span> Fuller descriptions from the study unit:</p>
+<div class="tbl"><table>
+<tr><th>Disorder</th><th>Hallmarks</th></tr>
+<tr><td>Paranoid</td><td>Very suspicious; sees others as unkind and malicious; avoids closeness and self-disclosure to protect themselves</td></tr>
+<tr><td>Schizoid</td><td>Socially detached; limited emotional expression; prefers being alone; unmoved by criticism or praise</td></tr>
+<tr><td>Schizotypal</td><td>Odd thoughts, speech and behaviour; unusual worldviews; intense social anxiety</td></tr>
+<tr><td>Antisocial</td><td>Disregards laws (may lead to crime); lies and deceives for amusement; impulsive, irritable and aggressive; irresponsible; <strong>no guilt or remorse</strong></td></tr>
+<tr><td>Borderline</td><td>Unstable relationships and emotions; poor self-image; <strong>intense fear of abandonment</strong>; feeling empty; intense anger; may make multiple suicide attempts</td></tr>
+<tr><td>Histrionic</td><td>Excessive attention-seeking; uncomfortable when not the centre of attention; exaggerated emotion; uses physical appearance to gain attention</td></tr>
+<tr><td>Narcissistic</td><td>Constant need for admiration; <strong>lack of empathy</strong>; inflated sense of importance and entitlement; may exploit others</td></tr>
+<tr><td>Avoidant</td><td>Feels incompetent; very timid; highly sensitive to criticism; avoids relationships for fear of rejection; sees own social skills as inadequate</td></tr>
+<tr><td>Dependent</td><td>Excessively clingy and submissive; lacks confidence in caring for self; struggles with everyday decisions; feels helpless alone; needs constant reassurance</td></tr>
+<tr><td>Obsessive-compulsive</td><td>Obsessed with control and perfection; excessive attention to schedules and plans; morally rigid; overworks at the expense of relationships and leisure</td></tr>
+</table></div>
+<div class="eg"><b>Activity 5.2 answers.</b> <em>Nurul</em> (clingy, submissive, thinks she can't care for herself): <strong>dependent</strong>. <em>Kate</em> (unstable relationships and emotions, poor self-image, fear of abandonment, repeated suicide attempts): <strong>borderline</strong>. <em>Mingze</em> (disregards laws, devious and deceitful): <strong>antisocial</strong>.</div>
+<p class="small">Memory aid: <strong>A = weird, B = wild, C = worried</strong>. Link to Seminar 2: OCPD is more often diagnosed in higher-SES groups, and antisocial PD in lower-SES groups and in men.</p>
+<div class="trap"><b>Don't confuse them.</b> <strong>OCPD</strong> (a personality disorder: a lifelong style of perfectionism and control that the person usually sees as "the right way") is not the same as <strong>OCD</strong> (an anxiety-related disorder with unwanted intrusive thoughts and compulsions the person experiences as distressing).</div>
+
+<h3>Activity 4: behind the label</h3>
+<p>The activity asks for possible traits, alternative explanations, and caveats. Here are model responses:</p>
+<div class="tbl"><table>
+<tr><th>Vignette</th><th>Possible PD traits</th><th>Alternative explanations and caveats</th></tr>
+<tr><td>1. Man, 35: believes coworkers are "out to get him", won't share project details, reads a neutral comment as mocking. Functions at work, no close friends</td><td><strong>Paranoid PD</strong> (Cluster A): pervasive distrust and suspicion, reading hostility into neutral cues</td><td>Is his workplace actually hostile, or has he been mistreated before? Could this be a psychotic disorder with delusions? (Check whether beliefs are fixed and bizarre.) Cultural or occupational norms around information-sharing. He still functions at work: how <em>pervasive</em> is it?</td></tr>
+<tr><td>2. Woman, 27: alternates between adoring and despising partner, repeated suicidal threats after arguments, feels "empty". Articulate and insightful at times</td><td><strong>Borderline PD</strong> (Cluster B): unstable relationships (idealising then devaluing), suicidal behaviour, chronic emptiness</td><td>Trauma history or PTSD; bipolar disorder (are mood shifts in episodes or reactive?); an abusive or unstable relationship; depression. <strong>Suicidal threats must always be taken seriously</strong>, never dismissed as "attention-seeking". Her insight is a strength and a good sign for therapy. Avoid the stigma often attached to this label.</td></tr>
+<tr><td>3. Manager, 42: demands admiration, belittles subordinates, crumbles at negative feedback, avoids close relationships outside work</td><td><strong>Narcissistic PD</strong> (Cluster B): need for admiration, low empathy, fragile self-esteem beneath grandiosity</td><td>Workplace culture may reward dominance. Stress or burnout. Insecurity or depression. Is it only at work (a role) or across all settings (a personality)? Belittling could also reflect poor management skills rather than a disorder.</td></tr>
+<tr><td>4. Woman, 30: avoids parties, turns down promotions for fear of criticism, believes others will judge her harshly, longs for connection but stays isolated</td><td><strong>Avoidant PD</strong> (Cluster C): social inhibition, feelings of inadequacy, extreme sensitivity to criticism, <em>while wanting</em> connection</td><td><strong>Social anxiety disorder</strong> overlaps heavily. Past bullying or rejection. Cultural norms of modesty. Contrast with schizoid PD: she <em>wants</em> connection, while schizoid people are indifferent to it.</td></tr>
+<tr><td>5. Law student, 28: spends 6 hours formatting assignments perfectly, misses deadlines, insists groupmates follow her rigid schedules</td><td><strong>OCPD</strong> (Cluster C): perfectionism that gets in the way of finishing tasks, rigidity, controlling others</td><td>OCD (are there intrusive thoughts and compulsions she finds distressing?); anxiety; a highly demanding academic culture where perfectionism is rewarded. Is it pervasive or limited to high-stakes study?</td></tr>
+</table></div>
+<p class="small">The key nuance the activity wants: <strong>labels describe patterns, not people</strong>. Context, culture and other diagnoses must be considered. This connects to Seminar 1 (social norms define "abnormal"; classification can stigmatise) and Seminar 2 (social reaction/labelling theory).</p>
+</section>
+
+<!-- SUD -->
+<section id="sud">
+<h2>Substance use</h2>
+<h3>Substance use disorders (SUDs)</h3>
+<p><span class="src s-sem">Seminar</span> A pattern of substance use that causes functional impairment. <strong>Most at risk in Singapore: youths aged 20–29, with methamphetamine the most common drug.</strong> (Central Narcotics Bureau, 2022)</p>
+<div class="tbl"><table>
+<tr><th>Category</th><th>What it covers</th><th>Examples</th></tr>
+<tr><td><strong>Risky use</strong></td><td>Using in harmful ways</td><td>Larger doses than intended; failed attempts to cut down</td></tr>
+<tr><td><strong>Impaired control</strong></td><td>Difficulty regulating use</td><td>Excessive time getting, using or recovering; strong cravings</td></tr>
+<tr><td><strong>Social difficulties</strong></td><td>Harm to relationships or roles</td><td>Family conflict; missed school or work; giving up hobbies</td></tr>
+<tr><td><strong>Physical dependence</strong></td><td>The body adapts to the substance</td><td><strong>Tolerance</strong> (needing more for the same effect); <strong>withdrawal</strong> symptoms</td></tr>
+</table></div>
+<p><span class="src s-su">SU5</span> Singapore has <strong>zero tolerance</strong> for drugs by law, but SUDs still apply here: to illegal drugs, and to misuse of legal substances such as alcohol and medication. The at-risk figures come from the Central Narcotics Bureau (2022). All these drugs share a mechanism: they <strong>activate the brain's reward pathways</strong>, producing an intense "high" that can crowd out the rest of daily life (Grant &amp; Chamberlain, 2016). SUD means use <strong>continues despite the problems it causes</strong>.</p>
+<p><span class="src s-su">SU5</span> <strong>The 11 DSM-5-TR criteria</strong>, grouped by the slide's categories:</p>
+<div class="tbl"><table>
+<tr><th>Category</th><th>Criteria</th></tr>
+<tr><td>Impaired control</td><td>(1) Using for longer or in larger doses than intended; (2) wanting to cut down but failing; (3) spending a lot of time getting, using or recovering; (4) strong cravings</td></tr>
+<tr><td>Social difficulties</td><td>(5) Failing at home, school or work; (6) continuing despite relationship problems; (7) giving up leisure and social activities</td></tr>
+<tr><td>Risky use</td><td>(8) Using even when it endangers personal safety; (9) continuing despite causing or worsening psychological or physical conditions</td></tr>
+<tr><td>Physical dependence</td><td>(10) Tolerance; (11) withdrawal that is relieved only by using more</td></tr>
+</table></div>
+<p class="small">The grouping above follows DSM-5-TR. The slide places the first two criteria under "risky use"; either grouping is acceptable if you name the criteria. <span class="src s-out">Outside course</span> The DSM grades severity by number of criteria met: 2–3 = mild, 4–5 = moderate, 6+ = severe.</p>
+<div class="trap"><b>Formative quiz traps.</b> SUD <em>does</em> occur in Singapore. It has <em>four</em> categories of symptoms, not three. It affects the brain's <em>reward pathway</em>. It should <em>not</em> be treated without professional help.</div>
+
+<h3>Substance-induced disorders</h3>
+<div class="chain"><span>Substance use</span><i>→</i><span>Intoxication</span><i>→</i><span>Withdrawal</span><i>→</i><span>Substance-induced disorder</span></div>
+<p><span class="src s-sem">Seminar</span> These arise <strong>after using or withdrawing from</strong> a substance and are <strong>not pre-existing</strong> psychiatric conditions. Examples:</p>
+<ul>
+<li>Cocaine: euphoria, then anxiety and paranoia.</li>
+<li>Methamphetamine: short-term euphoria, then hallucinations and delusions.</li>
+<li>Alcohol: withdrawal tremors and agitation.</li>
+</ul>
+<p>The resulting behaviour may look like <strong>externalising traits</strong>, such as impulsivity and aggression.</p>
+<p><span class="src s-su">SU5</span> Key definitions (Activity 5.3):</p>
+<div class="tbl"><table>
+<tr><th>Term</th><th>Meaning</th></tr>
+<tr><td><strong>Substance use disorder</strong></td><td>An ongoing <em>pattern</em> of use with psychological and physical symptoms, continued despite problems (the 11 criteria)</td></tr>
+<tr><td><strong>Substance-induced disorder</strong></td><td>A condition <em>produced by</em> the substance: a substance-induced mental disorder, intoxication, or withdrawal</td></tr>
+<tr><td>Substance-induced psychotic disorder</td><td>Delusions or hallucinations that appear <strong>within a month</strong> of using or withdrawing, in someone with no prior symptoms</td></tr>
+<tr><td>Substance-induced anxiety disorder</td><td>Panic attacks and anxiety caused by substance use</td></tr>
+<tr><td><strong>Intoxication</strong></td><td>The psychological and physical experience <em>while using</em>. It differs by drug: cocaine causes bloodshot eyes, sensitivity to light and sound, and euphoria followed by low mood; methamphetamine causes short-term euphoria, then paranoia, hallucinations and delusions in the longer term</td></tr>
+<tr><td><strong>Withdrawal</strong></td><td>Physical, behavioural and psychological symptoms when the dose is <em>reduced or stopped</em>. It can be acute, e.g. for alcohol; with opioids it can occur even after short-term use</td></tr>
+</table></div>
+<div class="trap"><b>Formative quiz trap.</b> "Wanting to cut down but failing" is an SUD criterion, <em>not</em> a substance-induced disorder.</div>
+<p><span class="src s-su">SU5</span> <strong>Recovery</strong> depends on the substance and severity. Seek professional help early. <strong>Strong social support is critical</strong> during recovery. For Reflect 5.3, a friend addicted to prescribed medication: listen without judgement, avoid shaming (stigma deters help-seeking), encourage them to speak to their doctor rather than stop suddenly, since withdrawal can be dangerous, and stay involved as ongoing support.</p>
+<div class="eg"><b>Example: why the distinction matters.</b> A 23-year-old is brought in paranoid and hearing voices after a three-day methamphetamine binge. If the psychosis clears within days to weeks of stopping, it is <em>substance-induced</em>. If it persists long after he stops using, a primary psychotic disorder such as schizophrenia becomes more likely. The two have different treatment and outlook. It also matters for stigma: the <em>drug use</em>, not "mental illness" as such, is what raises violence risk (Silverstein et al., 2015).</div>
+<p class="small">Link to Seminar 3: substance use is the clearest case of "too much pleasure impedes wellbeing". Short-term euphoria costs long-term functioning.</p>
+</section>
+
+<!-- LINKS -->
+<section id="links">
+<h2>Links to Seminars 1–3</h2>
+<div class="tbl"><table>
+<tr><th>Seminar 4 idea</th><th>Connects to</th></tr>
+<tr><td>Mass media's violence stereotype; cultivation theory</td><td>Seminar 1: lay views equate mental illness with violence (Pescosolido et al., 2019); stigma; the interracial couple article as a parallel for stereotyping</td></tr>
+<tr><td>Self-stigma from media images</td><td>Seminar 1: patients distance themselves from their disorder; the downside of labels in classification</td></tr>
+<tr><td>Upward social comparison online</td><td>Seminar 1: upward social comparisons and the wealth–wellbeing paradox (Wilkinson &amp; Pickett, 2009)</td></tr>
+<tr><td>Body image on social media</td><td>Seminar 2: gender-specific stressors (beauty standards, eating disorders); racial teasing and BDD (Pillai &amp; Sündermann)</td></tr>
+<tr><td>Poorer-quality online relationships; loneliness</td><td>Seminar 2: social support protects throughout life; Seminar 3: social interaction mediates physical activity (Ohrnberger et al., 2017)</td></tr>
+<tr><td>Externalising behaviour on a spectrum</td><td>Seminar 1: dimensional vs categorical diagnosis; the normative threshold is set by social context</td></tr>
+<tr><td>Parenting, SES and ADHD as risks for ODD/CD</td><td>Seminar 2: Bayer et al. (2008), parenting stress leading to externalising; low SES; Bronfenbrenner; the biopsychosocial model</td></tr>
+<tr><td>CD 2.6× more common in boys; ADHD missed in women; antisocial PD more common in men</td><td>Seminar 2: gender differences in diagnosis and help-seeking</td></tr>
+<tr><td>Psychostimulant side effects</td><td>Seminar 2: side effects of medication</td></tr>
+<tr><td>Substance use</td><td>Seminar 3: too much pleasure; Seminar 2: maladaptive coping, e.g. alcohol in bereaved older adults</td></tr>
+<tr><td>Social media as a place for support and information</td><td>Seminar 1: help-seeking via informal networks (NPHS 69.1%)</td></tr>
+</table></div>
+</section>
+
+<!-- SCENARIOS -->
+<section id="scen">
+<h2>Worked scenarios</h2>
+
+<div class="scenario">
+<h3>Scenario 1 – The late-night scroller</h3>
+<p class="prompt">Chloe, 15, spends about four hours a night on Instagram and TikTok in bed, mostly scrolling through influencers' posts. She edits her selfies before posting, feels anxious when she sees friends hanging out without her, and is exhausted at school. Her mother wants to confiscate her phone. Evaluate the impact of social media on Chloe's mental health and recommend an approach.</p>
+<details><summary>Model answer</summary>
+<p><strong>Risks present.</strong> (1) <em>Sleep</em>: excessive use is linked to less sleep, especially on weekdays, through overstimulation and preoccupation with content (Azhari et al., 2022). Her exhaustion at school fits, and lack of sleep harms cognition and raises the risk of psychological disorders. (2) <em>FoMO</em>: anxiety when she sees friends out without her is the core of FoMO, which drives compulsive checking. (3) <em>Upward social comparison</em> with influencers lowers self-worth (Vogel et al., 2015). (4) <em>Body image</em>: social media users show more body dissatisfaction (Tiggemann &amp; Slater, 2014), and editing selfies focuses attention on disliked features, a risk for BDD or eating disorders.</p>
+<p><strong>Moderators that raise her risk.</strong> She is 15, at an identity-forming stage where she is sensitive to peer comparison. Her use is <em>passive</em> scrolling, which is linked to loneliness and FoMO rather than connection (Frison &amp; Eggermont, 2015). She uses <em>image-focused</em> platforms, at night, alone.</p>
+<p><strong>Evaluating her mother's plan.</strong> Taking the phone away entirely would also remove the benefits: staying in touch with friends, support, self-expression. It may worsen FoMO and damage trust. A better approach is to <em>change how and when</em> she uses it. (1) Keep phones out of the bedroom at night, which targets sleep directly. (2) Limit time: restricting use to about 30 minutes a day reduced FoMO and anxiety (Hunt et al., 2018). (3) Shift from passive to <em>active</em> use, such as messaging friends and joining interest communities. (4) Unfollow comparison-heavy accounts and follow ones that are supportive or skill-based. (5) Build media literacy, e.g. talking together about how influencer images are edited.</p>
+<p><strong>Links.</strong> From Seminar 3, protecting sleep and adding exercise and offline pleasures gives an alternative source of reprieve and mastery. If her body-image concerns become restrictive eating, she should be referred to professional help.</p>
+</details>
+</div>
+
+<div class="scenario">
+<h3>Scenario 2 – "Social media is ruining youth mental health"</h3>
+<p class="prompt">A newspaper columnist argues that social media is the main cause of rising youth mental health problems and should be banned for under-16s. Critically evaluate this claim using course concepts.</p>
+<details><summary>Model answer</summary>
+<p><strong>Evidence supporting concern.</strong> Social media use is linked to anxiety (Barry et al., 2017), loneliness and depression (Kelly et al., 2018), sleep problems (Azhari et al., 2022), and body dissatisfaction (Tiggemann &amp; Slater, 2014). Hours of use correlate with self-harm risk (Hartas). Cyberbullying raises the risk of depression and suicide.</p>
+<p><strong>Problems with the claim.</strong> (1) <em>Correlation ≠ causation</em>: most of these findings are correlational. Distressed youths may use social media <em>more</em>, as 70% turn to it to manage their emotions. (2) <em>It ignores benefits</em>: information (nearly half of youths report benefits; Goodyear et al., 2018), support that many youths find easier online (Gibson &amp; Trnka, 2020), relationships (Verduyn et al., 2017), and self-expression. A ban removes these, possibly most for isolated youths who rely on online support. (3) <em>It ignores moderators</em>: effects depend on age, active vs passive use, platform, and peer culture. (4) <em>It is socio-reductionist</em>: from Seminar 2, youth mental health has many causes, including academic pressure, family, SES and biology. Singapore's 30% youth figure (Ang, 2022) cannot be pinned on one factor.</p>
+<p><strong>A balanced conclusion.</strong> Social media is a risk factor whose effect depends on how it is used, not a single cause. Better responses than a blanket ban: age-appropriate design and moderation, digital and media literacy in schools, protecting sleep, encouraging active over passive use, tackling cyberbullying, and promoting reliable mental health information on the platforms young people already use.</p>
+</details>
+</div>
+
+<div class="scenario">
+<h3>Scenario 3 – Headlines after an attack</h3>
+<p class="prompt">After a violent incident, an online news outlet runs the headline "Mentally ill man goes on rampage" and a TV drama that week features a "psychotic killer". Wei Jie, 26, who has well-managed bipolar disorder, stops telling friends about his diagnosis and feels "like a monster". Discuss the impact of mass media on Wei Jie and on the public.</p>
+<details><summary>Model answer</summary>
+<p><strong>How the media shapes public views.</strong> Both outlets use a style of mixing entertainment with information that reinforces stereotypes. Cultivation theory suggests repeated exposure makes viewers see the world through media content (Morgan et al.). Research on Law &amp; Order found characters with mental illness disproportionately shown as violent criminals (Parrott &amp; Parrott, 2015). Such portrayals increase stigma and can lead to discrimination (Granello &amp; Pauley, 2000), and audiences tend not to question them.</p>
+<p><strong>Reality vs stereotype.</strong> Most people with mental illness are not violent (Corrigan &amp; Watson, 2005). Violence risk is complex and has many factors. Severe psychosis carries only a somewhat higher risk, psychoactive drug use raises it significantly, and the link is correlational, not proven causal (Silverstein et al., 2015). By labelling the attacker only by his mental illness, the headline implies a causal link the evidence does not support.</p>
+<p><strong>Impact on Wei Jie: self-stigma.</strong> Feeling "like a monster" shows internalised stigma. People with mental illness absorb negative media images, which damages self-worth (Watson et al., 2007). Concealing his diagnosis cuts him off from informal support, which is Singaporeans' main source of help (69.1%, NPHS; Seminar 1). That puts his wellbeing and recovery at risk.</p>
+<p><strong>What could be done.</strong> Responsible reporting that avoids naming a diagnosis as the cause and gives context; portrayals that use a sympathetic <em>tone</em>, full <em>context</em> and complete <em>representation</em>, such as <em>Rose</em> or <em>A Beautiful Mind</em>; and platforms where people with lived experience speak for themselves, like the BBC's <em>All in the Mind</em>. For Wei Jie, a trusted friend using listening skills, contact with peer-support groups, and possibly counselling to address self-stigma.</p>
+</details>
+</div>
+
+<div class="scenario">
+<h3>Scenario 4 – ADHD, ODD, or just being eight?</h3>
+<p class="prompt">Ryan, 8, is described by his teacher as "impossible". He can't stay seated, calls out answers, loses his worksheets and often ignores instructions. At home, his parents report he is restless, forgetful and argues about bedtime. This has gone on for over a year and his grades are falling. His parents ask whether he has ADHD, ODD, or is "just a naughty boy". Discuss.</p>
+<details><summary>Model answer</summary>
+<p><strong>Apply the criteria.</strong> <em>Hyperactivity/impulsivity</em>: can't stay seated, calls out answers, restless. <em>Inattention</em>: loses worksheets, doesn't follow instructions, forgetful. For an 8-year-old, ADHD requires 6 or more symptoms in either domain for at least 6 months, in two or more settings, with significant disruption to functioning. Ryan's symptoms have lasted over a year, appear <em>at school and at home</em>, and are affecting his grades. A full assessment would count symptoms, but his profile suggests a possible <strong>combined presentation</strong>.</p>
+<p><strong>ODD?</strong> ODD requires 4 or more symptoms of anger, defiance or vindictiveness over 6 months. Arguing about bedtime alone is common at his age. Ignoring instructions could look like defiance, but in ADHD it more often reflects inattention: he didn't process the instruction, rather than choosing to refuse. There is no mention of temper, spitefulness or deliberately annoying others. So ODD is not supported yet, though ADHD and ODD often occur together and the pathway slide lists ADHD symptoms as a risk for ODD/CD.</p>
+<p><strong>"Just naughty"?</strong> Behaviour lies on a spectrum from normal mischief to clinically significant. Frequency, persistence (over a year), pervasiveness (two settings) and impact (falling grades) move Ryan beyond normal. Calling him "naughty" risks labelling him in a way that harms his self-esteem and ignores a neurodevelopmental cause.</p>
+<p><strong>Biopsychosocial view and treatment.</strong> <em>Biological</em>: ADHD is neurodevelopmental. <em>Psychological</em>: repeated failure and criticism may damage his self-esteem. <em>Social</em>: the teacher's frustration and family conflict. Parenting stress and harsh discipline are linked to externalising behaviour (Bayer et al., 2008). If diagnosed, the recommended treatment is <strong>combined</strong>: psychostimulant medication (watch for sleep problems, reduced appetite and mood swings) plus behavioural therapy and <strong>parent training</strong>. Classroom supports, such as seating near the teacher, short tasks and movement breaks, also help.</p>
+</details>
+</div>
+
+<div class="scenario">
+<h3>Scenario 5 – A pathway toward conduct disorder</h3>
+<p class="prompt">Jayden, 14, was a "difficult baby" and had untreated ADHD symptoms in primary school. His father lost his job two years ago and there is frequent shouting and harsh punishment at home. Jayden now truants, has been caught shoplifting twice, and got into several fights with a group of older boys this year. Analyse Jayden's situation.</p>
+<details><summary>Model answer</summary>
+<p><strong>Clinical picture.</strong> In the past 12 months: truancy (rule violation; counts as a CD symptom only if it started before age 13, which should be checked), shoplifting (theft without confrontation), and starting fights (aggression). That is three symptoms in 12 months with recent ones, which meets the threshold for <strong>conduct disorder</strong>. CD causes serious social, academic and legal impairment, and it is about 2.6 times more common in boys (Ayano et al., 2024).</p>
+<p><strong>Developmental pathway.</strong> Jayden shows almost every early risk factor on the pathways slide: <em>difficult early temperament</em>, <em>ADHD symptoms</em> (untreated), <em>family stressors</em>, and a likely <em>SES</em> drop after his father's job loss. The factors that shape the path are also unfavourable: <em>harsh parenting</em>, <em>peer influence</em> from older boys, and probably weak <em>emotion regulation</em>.</p>
+<p><strong>Biopsychosocial interactions.</strong> His father's job loss (social) raised parental stress. Parenting stress and punitive discipline predict externalising behaviour (Bayer et al., 2008; Seminar 2). Untreated ADHD (biological) impairs impulse control, so he is more likely to react aggressively. Seminar 2's social causation idea helps explain how financial strain reaches him through his family.</p>
+<p><strong>Prognosis: avoid determinism.</strong> The ODD → CD → antisocial outcome path is a <em>minority</em> trajectory. Jayden is at risk, but not destined. <span class="small">(Outside course: antisocial PD in adulthood requires evidence of CD before age 15, which is why early intervention now matters.)</span></p>
+<p><strong>Interventions.</strong> Assessment and treatment for ADHD; parent training to replace harsh punishment with consistent, warm boundaries; financial and employment support for the family, which tackles the root stressor; school engagement and mentoring to counter negative peer influence; emotion-regulation and social-skills training; and structured pleasures and sport (Seminar 3) for mastery and a positive peer group.</p>
+</details>
+</div>
+
+<div class="scenario">
+<h3>Scenario 6 – Diagnosed at 32</h3>
+<p class="prompt">Farah, 32, was a quiet, "daydreamy" student who was never disruptive. She has always lost keys, missed deadlines and felt restless inside. After years of feeling anxious and "stupid", she was recently diagnosed with ADHD. Why might her diagnosis have come so late, and what are the implications?</p>
+<details><summary>Model answer</summary>
+<p><strong>Why late.</strong> ADHD in women often looks different: <em>less hyperactivity, more inattention</em>, with symptoms that are <em>internalised</em>, such as forgetfulness, disorganisation and <em>quiet restlessness</em>. Farah fits this exactly: losing keys, missing deadlines, "restless inside", "daydreamy". Because she was never disruptive, teachers had no reason to refer her. The typical image of ADHD, a hyperactive boy, hid her difficulties. Women are therefore frequently diagnosed late, sometimes in adulthood.</p>
+<p><strong>Secondary problems.</strong> Years of unexplained struggle put women with undiagnosed ADHD at risk of <em>anxiety, low self-esteem and depression</em>. Farah's feeling of being "stupid" shows how she blamed herself for a neurodevelopmental condition.</p>
+<p><strong>Links.</strong> This is another route to gender differences in diagnosis. Seminar 2 showed women are diagnosed <em>more</em> with depression and anxiety partly because they seek help more; here, women are diagnosed <em>less</em> or later because their presentation doesn't match the typical one. It also illustrates Seminar 1's point about the limits of categorical diagnosis: criteria built on typical (often male) presentations can miss people. SU5 requires several symptoms before age 12, so an adult diagnosis looks back at childhood history, e.g. school reports.</p>
+<p><strong>Implications.</strong> The diagnosis can relieve self-blame. Treatment combines medication (watch for sleep problems, reduced appetite and mood swings) with psychological strategies, such as organisational systems. Her secondary anxiety also needs attention. Wider implications: teachers and GPs need training to recognise inattentive, internalised presentations in girls.</p>
+</details>
+</div>
+
+<div class="scenario">
+<h3>Scenario 7 – Methamphetamine and paranoia</h3>
+<p class="prompt">Kai, 24, has used methamphetamine at weekend parties for two years. He now uses more to get the same high, feels shaky and low when he stops, and has lost his part-time job. After a recent binge he became convinced people were following him and heard voices. His family fears he "has schizophrenia and is dangerous". Discuss.</p>
+<details><summary>Model answer</summary>
+<p><strong>Substance use disorder.</strong> Kai is in the most at-risk group: aged 20–29, using methamphetamine, the most common drug among that group. He shows several SUD categories: <em>physical dependence</em> (tolerance, since he needs more; and withdrawal, since he feels shaky and low when he stops) and <em>social difficulties</em> (lost his job). Ask about <em>impaired control</em> (cravings, time spent) and <em>risky use</em> (failed attempts to cut down) as well.</p>
+<p><strong>Substance-induced vs primary disorder.</strong> Methamphetamine can cause short-term euphoria followed by hallucinations and delusions. Kai's paranoia and voices appeared <em>after a binge</em>, so the first hypothesis is a <strong>substance-induced psychotic disorder</strong>, not pre-existing schizophrenia. If his symptoms clear after he stops using, that supports substance-induced psychosis. If they persist, a primary psychotic disorder needs assessment. Substance-induced states can also look like externalising traits such as impulsivity and aggression.</p>
+<p><strong>Addressing the "dangerous" fear.</strong> Most people with mental illness are not violent (Corrigan &amp; Watson, 2005). The evidence says psychoactive drug use significantly raises violence risk, and severe psychosis only somewhat raises it (Silverstein et al., 2015). So any risk here is tied to his <em>drug use</em>, not to "having schizophrenia". His family's fear reflects the media stereotype of mental illness and violence. That stigma could discourage Kai from seeking help.</p>
+<p><strong>Links and interventions.</strong> From Seminar 3, this is "too much pleasure": short-term euphoria that costs functioning. Biopsychosocially: <em>biological</em> dependence and withdrawal; <em>psychological</em> cravings and low mood; <em>social</em> party peer group and job loss (a possible social drift, Seminar 2). He needs supervised treatment for withdrawal and psychosis, psychological therapy for the addiction, family support without stigma, and alternative sources of reward and mastery such as exercise, work and healthy pleasures.</p>
+</details>
+</div>
+</section>
+
+<!-- DISCREPANCIES -->
+<section id="checks">
+<h2>Discrepancies to know</h2>
+<div class="tbl"><table>
+<tr><th>Item</th><th>Issue</th><th>What to do</th></tr>
+<tr><td>Hunt et al. (2018) finding</td><td>SU4 says limiting use to 30 minutes a day "greatly reduces FoMO and anxiety". The paper's own title says limiting social media decreases <em>loneliness and depression</em>. As I understand the study, FoMO and anxiety fell in both the limited group and the control group (likely an effect of self-monitoring), while loneliness and depression fell specifically in the limited group.</td><td>Safest wording: "limiting social media to about 30 minutes a day reduced loneliness and depression, and self-monitoring use reduced FoMO and anxiety (Hunt et al., 2018)." Check the paper if you plan to rely on it heavily.</td></tr>
+<tr><td>Hartas year</td><td>Cited as 2019 in the text; the reference list gives 2021</td><td>Cite Hartas (2021)</td></tr>
+<tr><td>Cyberbullying citation</td><td>Power et al. (2017) is cited for cyberbullying and suicide risk, but the reference is a paper on young people's sleep and bedtime routines</td><td>State the cyberbullying point without that citation, or cite Sadagheyani &amp; Tatari (2021), the review the section draws on</td></tr>
+<tr><td>Cultivation theory citation</td><td>The slides say Morgan et al. (2014); the SU reference list gives Morgan (2015)</td><td>Cite Morgan (2015) to match the reference list</td></tr>
+<tr><td>Hours on social media</td><td>The slides say "many hours daily"; SU4 says "up to 12 hours" (Nielsen, 2018). Nielsen's report measures total media use, not social media alone</td><td>Say "many hours a day"</td></tr>
+<tr><td>ADHD age cut-off</td><td>The slide says "under age 16". SU5 and DSM-5-TR say <em>16 or under</em> need 6+ symptoms, and 17+ need 5+</td><td>Write "16 or under / 17 and over"</td></tr>
+<tr><td>PD diagnosis age</td><td>The slide and SU5 both say 18+. Strictly in DSM-5-TR, that applies to antisocial PD; other PDs can be diagnosed under 18 if traits last at least a year</td><td>Use the course rule (18+) in the exam</td></tr>
+<tr><td>Killeen et al. year</td><td>Cited as 2011 in the SU5 text; the reference list gives 2012</td><td>Cite Killeen et al. (2012)</td></tr>
+<tr><td>CD prevalence source</td><td>The slides cite Ayano et al. (2024) for 2–10% and a pooled 3%; SU5 cites DSM-5-TR for 2–10%</td><td>Both are fine. Use Ayano for the 3% and the 2.6× male ratio</td></tr>
+</table></div>
+</section>
+
+<!-- REFS -->
+<section id="refs">
+<h2>Citation bank</h2>
+<div class="tbl"><table>
+<tr><th>Concept</th><th>Cite</th></tr>
+<tr><td>Over 70% have a social media account</td><td>Ellison &amp; Vitak (2015)</td></tr>
+<tr><td>Hours spent online</td><td>Nielsen (2018)</td></tr>
+<tr><td>Reduced interpersonal skills</td><td>Subramanian (2017)</td></tr>
+<tr><td>Social media and mental health review</td><td>Sadagheyani &amp; Tatari (2021)</td></tr>
+<tr><td>SMD, loneliness, sleep</td><td>Azhari et al. (2022)</td></tr>
+<tr><td>Anxiety</td><td>Barry et al. (2017)</td></tr>
+<tr><td>Hours and self-harm risk</td><td>Hartas (2021)</td></tr>
+<tr><td>Limiting social media</td><td>Hunt et al. (2018)</td></tr>
+<tr><td>Loneliness and depression</td><td>Kelly et al. (2018)</td></tr>
+<tr><td>Upward comparison</td><td>Vogel et al. (2015)</td></tr>
+<tr><td>Active vs passive use</td><td>Frison &amp; Eggermont (2015)</td></tr>
+<tr><td>Body dissatisfaction</td><td>Tiggemann &amp; Slater (2014)</td></tr>
+<tr><td>Health information benefits</td><td>Goodyear et al. (2018)</td></tr>
+<tr><td>Online support feels safer for youths</td><td>Gibson &amp; Trnka (2020)</td></tr>
+<tr><td>Social media for counselling</td><td>Antheunis et al. (2013)</td></tr>
+<tr><td>Relationships and wellbeing</td><td>Verduyn et al. (2017)</td></tr>
+<tr><td>Self-expression</td><td>Orehek &amp; Human (2017)</td></tr>
+<tr><td>Cultivation theory</td><td>Morgan (2015)</td></tr>
+<tr><td>Law &amp; Order study</td><td>Parrott &amp; Parrott (2015)</td></tr>
+<tr><td>TV and stigma</td><td>Granello &amp; Pauley (2000)</td></tr>
+<tr><td>Self-stigma</td><td>Watson et al. (2007)</td></tr>
+<tr><td>Most people with mental illness not violent</td><td>Corrigan &amp; Watson (2005)</td></tr>
+<tr><td>Violence risk is complex</td><td>Silverstein et al. (2015)</td></tr>
+<tr><td>CD prevalence and gender ratio</td><td>Ayano et al. (2024)</td></tr>
+<tr><td>ODD and CD predictive validity</td><td>Burke et al. (2010)</td></tr>
+<tr><td>ODD–CD relationship</td><td>Rowe et al. (2002)</td></tr>
+<tr><td>ODD, CD and psychopathic features</td><td>Loeber et al. (2009)</td></tr>
+<tr><td>Childhood disorders predicting adult disorders</td><td>Copeland et al. (2009)</td></tr>
+<tr><td>CD research needs</td><td>Moffitt et al. (2008)</td></tr>
+<tr><td>Diagnostic criteria (ADHD, CD, ODD, PDs, SUD)</td><td>American Psychiatric Association (2022)</td></tr>
+<tr><td>Multi-level causes of ADHD</td><td>Killeen et al. (2012)</td></tr>
+<tr><td>Stimulant side effects in children</td><td>Poulton et al. (2013)</td></tr>
+<tr><td>Personality disorders in DSM-5</td><td>Skodol (2012); Hopwood et al. (2012)</td></tr>
+<tr><td>Drug use in Singapore (20–29, methamphetamine)</td><td>Central Narcotics Bureau (2022)</td></tr>
+<tr><td>Addiction and reward pathways</td><td>Grant &amp; Chamberlain (2016)</td></tr>
+</table></div>
+</section>
+</main>
+</div>
+<script>
+(function(){
+  const all = () => document.querySelectorAll('details');
+  document.getElementById('openAll').addEventListener('click', () => all().forEach(d => d.open = true));
+  document.getElementById('closeAll').addEventListener('click', () => all().forEach(d => d.open = false));
+  window.addEventListener('beforeprint', () => all().forEach(d => d.open = true));
+})();
+</script>
+</body>
+</html>

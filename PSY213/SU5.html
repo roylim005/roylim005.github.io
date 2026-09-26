@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PSY213 Seminar 5 – Revision Notes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6F7F5; --ink:#1E2A38; --muted:#5B6673; --line:#D3D9D6;
+  --teal:#2F7D72; --teal-soft:#E3F0EC;
+  --plum:#6B4E71; --plum-soft:#EFE8F0;
+  --amber:#A8700F; --amber-soft:#FBF1DE;
+  --red:#A6423A; --card:#FFFFFF;
+  --serif:"Newsreader", Georgia, "Times New Roman", serif;
+  --sans:"Instrument Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#141A21; --ink:#E4E8EC; --muted:#9AA6B2; --line:#2E3842;
+    --teal:#6CC1B3; --teal-soft:#1B2E2B; --plum:#C7A6CE; --plum-soft:#2A2230;
+    --amber:#E3B45C; --amber-soft:#2E2616; --red:#E08A82; --card:#1A222B;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#141A21; --ink:#E4E8EC; --muted:#9AA6B2; --line:#2E3842;
+  --teal:#6CC1B3; --teal-soft:#1B2E2B; --plum:#C7A6CE; --plum-soft:#2A2230;
+  --amber:#E3B45C; --amber-soft:#2E2616; --red:#E08A82; --card:#1A222B;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:1.075rem;line-height:1.62}
+.wrap{display:grid;grid-template-columns:250px minmax(0,1fr);gap:3rem;max-width:1180px;margin:0 auto;padding:2rem 1.5rem 5rem}
+nav.toc{position:sticky;top:calc(1.5rem + env(safe-area-inset-top,0px));align-self:start;font-family:var(--sans);font-size:.88rem;max-height:calc(100vh - 3rem);overflow:auto;padding-right:.5rem}
+nav.toc p{font-weight:700;margin:0 0 .6rem}
+nav.toc ol{list-style:none;padding:0;margin:0;counter-reset:t}
+nav.toc li{margin:.15rem 0}
+nav.toc a{color:var(--muted);text-decoration:none;display:block;padding:.2rem .5rem;border-left:2px solid transparent}
+nav.toc a:hover,nav.toc a:focus-visible{color:var(--ink);border-left-color:var(--teal)}
+main{max-width:74ch}
+header.hero{border-bottom:1px solid var(--line);padding-bottom:1.5rem;margin-bottom:2rem}
+.course{font-family:var(--sans);color:var(--teal);font-weight:600;margin:0}
+h1{font-family:var(--sans);font-size:clamp(2rem,4.5vw,3rem);line-height:1.08;letter-spacing:-.02em;margin:.3rem 0 .8rem}
+h2{font-family:var(--sans);font-size:1.6rem;letter-spacing:-.01em;line-height:1.2;margin:3.2rem 0 .8rem;padding-top:1rem;border-top:3px solid var(--ink)}
+h3{font-family:var(--sans);font-size:1.15rem;margin:2rem 0 .5rem}
+h4{font-family:var(--sans);font-size:1rem;margin:1.2rem 0 .3rem}
+p{margin:.6rem 0}
+a{color:var(--teal)}
+:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.src{font-family:var(--sans);font-size:.72rem;font-weight:600;padding:.1rem .45rem;border-radius:3px;vertical-align:.15em;white-space:nowrap}
+.s-sem{background:var(--teal-soft);color:var(--teal)}
+.s-su{background:var(--plum-soft);color:var(--plum)}
+.s-out{background:var(--amber-soft);color:var(--amber);border:1px dashed var(--amber)}
+.legend{font-family:var(--sans);font-size:.88rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:.8rem 1.2rem;align-items:center}
+.eg{border-left:3px solid var(--plum);background:var(--plum-soft);padding:.7rem 1rem;margin:1rem 0;border-radius:0 4px 4px 0}
+.eg b:first-child{font-family:var(--sans);color:var(--plum)}
+.trap{border-left:3px solid var(--red);padding:.6rem 1rem;margin:1rem 0;background:var(--card)}
+.trap b:first-child{font-family:var(--sans);color:var(--red)}
+.outside{border:1px dashed var(--amber);background:var(--amber-soft);padding:.8rem 1rem;margin:1rem 0;border-radius:4px}
+table{border-collapse:collapse;width:100%;font-size:.95rem;margin:1rem 0}
+.tbl{overflow-x:auto}
+th,td{border:1px solid var(--line);padding:.5rem .65rem;vertical-align:top;text-align:left}
+th{font-family:var(--sans);font-size:.88rem;background:var(--card)}
+ul,ol{padding-left:1.3rem}
+li{margin:.25rem 0}
+.stat{font-family:var(--sans);font-weight:700;color:var(--teal)}
+/* continuum band */
+.band{display:grid;grid-template-columns:repeat(4,1fr);margin:1.2rem 0 .4rem;font-family:var(--sans);font-size:.85rem;border-radius:4px;overflow:hidden}
+.band div{padding:.7rem .6rem;color:#11202a}
+.band div strong{display:block;font-size:1rem}
+.b1{background:#8FD0B6}.b2{background:#F1DC7A}.b3{background:#F2A96B}.b4{background:#E38479}
+.quad{display:grid;grid-template-columns:auto 1fr 1fr;gap:4px;font-family:var(--sans);font-size:.88rem;margin:1rem 0}
+.quad div{background:var(--card);border:1px solid var(--line);padding:.6rem}
+.quad .ax{background:transparent;border:none;color:var(--muted);font-weight:600;display:flex;align-items:center}
+/* scenario */
+.scenario{border:2px solid var(--ink);border-radius:6px;padding:1rem 1.2rem;margin:1.6rem 0;background:var(--card)}
+.scenario h3{margin-top:.2rem}
+.prompt{font-style:italic}
+details{margin-top:.8rem;border-top:1px solid var(--line);padding-top:.6rem}
+summary{font-family:var(--sans);font-weight:600;cursor:pointer;color:var(--teal)}
+.steps{counter-reset:s;list-style:none;padding:0}
+.steps li{counter-increment:s;padding-left:2.4rem;position:relative;margin:.8rem 0}
+.steps li::before{content:counter(s);position:absolute;left:0;top:.05rem;width:1.7rem;height:1.7rem;border-radius:50%;background:var(--ink);color:var(--paper);font-family:var(--sans);font-weight:700;font-size:.9rem;display:grid;place-items:center}
+.toolbar{font-family:var(--sans);display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
+button{font-family:var(--sans);font-size:.88rem;font-weight:600;background:var(--ink);color:var(--paper);border:none;border-radius:4px;padding:.5rem .9rem;cursor:pointer}
+button.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.small{font-size:.9rem;color:var(--muted)}
+@media (max-width:860px){
+  .wrap{grid-template-columns:1fr;gap:1rem}
+  nav.toc{position:static;max-height:none;border:1px solid var(--line);padding:1rem;border-radius:4px}
+  .band{grid-template-columns:1fr 1fr}
+}
+@media print{
+  nav.toc,.toolbar{display:none}
+  .wrap{display:block;padding:0}
+  body{font-size:10.5pt;background:#fff;color:#000}
+  .scenario{break-inside:avoid-page}
+  h2{break-after:avoid}
+}
+</style>
+<style>
+.support{border:2px solid var(--teal);border-radius:6px;padding:.8rem 1rem;margin:1.2rem 0;background:var(--teal-soft);font-family:var(--sans);font-size:.92rem}
+.support strong{color:var(--teal)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:4px;font-family:var(--sans);font-size:.88rem;margin:1rem 0;position:relative}
+.grid2 div{background:var(--card);border:1px solid var(--line);padding:.7rem}
+@media (max-width:860px){.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="toc" aria-label="Contents">
+<p>Contents</p>
+<ol>
+<li><a href="#method">Answering scenario questions</a></li>
+<li><a href="#myths">Myths and facts</a></li>
+<li><a href="#defs">Definitions and statistics</a></li>
+<li><a href="#risk">Risk factors</a></li>
+<li><a href="#warn">Warning signs</a></li>
+<li><a href="#sh">Self-harm</a></li>
+<li><a href="#respond">Responding</a></li>
+<li><a href="#links">Links to Seminars 1–4</a></li>
+<li><a href="#scen">Worked scenarios</a></li>
+<li><a href="#checks">Notes and discrepancies</a></li>
+<li><a href="#refs">Citation bank</a></li>
+</ol>
+</nav>
+
+<main>
+<header class="hero">
+<p class="course">PSY213 Mental Health and Wellbeing in Singapore</p>
+<h1>Seminar 5: Internalising behaviours (1) – self-harm and suicide</h1>
+<p>Revision notes built on the Seminar 5 slides. <strong>Study Unit 5 does not cover this seminar</strong>: it covers externalising behaviours, which backs up Seminar 4 instead. So these notes rely on the slides and the seminar's own references (WHO, Klonsky et al., 2013; Centre for Suicide Prevention, 2016), with a few clearly labelled outside sources. A later study unit on internalising behaviours may add more.</p>
+<div class="legend">
+<span><span class="src s-sem">Seminar</span> in the slides</span>
+<span><span class="src s-out">Outside course</span> standard evidence to strengthen answers; cite carefully</span>
+</div>
+<div class="support"><strong>Singapore support services (from the slides).</strong> SOS 24-hour Hotline: <strong>1767</strong>. SOS 24-hour CareText (WhatsApp): <strong>9151 1767</strong>. IMH Mental Health Helpline: <strong>6389 2222</strong>. If someone is in immediate danger, call <strong>995</strong>.</div>
+<div class="toolbar">
+<button type="button" id="openAll">Show all model answers</button>
+<button type="button" class="ghost" id="closeAll">Hide all</button>
+<button type="button" class="ghost" onclick="window.print()">Print</button>
+</div>
+</header>
+
+<!-- METHOD -->
+<section id="method">
+<h2>Answering scenario questions for this unit</h2>
+<p>Scenarios on this topic almost always ask two things: <em>what do you notice?</em> and <em>how would you respond?</em> Activity 2 has this structure (warning signs → response in the moment → next steps), and the TMA01 brief follows the same pattern of identifying the concern, the risk factors, the support options and the skills to apply.</p>
+<ol class="steps">
+<li><strong>Identify the behaviour precisely.</strong> Is it self-harm (no intent to die), suicidal ideation, or a suicide attempt? Intent to die is the key distinction. Don't assume self-harm is attention-seeking or that it is a suicide attempt.</li>
+<li><strong>Map the risk factors.</strong> Separate <em>predisposing</em> (background vulnerability, often <em>static</em>) from <em>precipitating</em> (recent triggers, often <em>dynamic</em>). Stress that risk <em>fluctuates</em> and comes from several interacting factors.</li>
+<li><strong>List the warning signs</strong> in the three slide categories: thoughts expressed, mood, and behaviour.</li>
+<li><strong>Respond</strong> using the slide's three steps: <em>listen to understand</em>, <em>encourage help-seeking</em>, <em>refer</em> (SOS 1767, CareText, IMH). Apply the do's and don'ts and the Growth Circle skills. Ensure safety if risk is immediate.</li>
+<li><strong>Evaluate</strong>: challenge myths, recognise your limits as a supporter ("you don't have to fix it"), and consider culture and stigma.</li>
+</ol>
+<div class="trap"><b>Common mistakes.</b> Promising to keep suicidal intent secret; jumping straight to advice; describing self-harm as manipulation; leaving someone alone when risk is imminent. The slides name every one of these as a "don't", in substance.</div>
+</section>
+
+<!-- MYTHS -->
+<section id="myths">
+<h2>Myths and facts</h2>
+<p><span class="src s-sem">Seminar</span> These five myths make good material for "evaluate this statement" questions.</p>
+<div class="tbl"><table>
+<tr><th>Myth</th><th>Fact</th><th>Why it matters for responding</th></tr>
+<tr><td>1. Most suicides happen suddenly, without warning</td><td>Most are preceded by <strong>verbal or behavioural warning signs</strong>, though some occur without warning. IMH found many who died by suicide showed signs such as mood changes in the week before.</td><td>Learning the warning signs lets people act early</td></tr>
+<tr><td>2. Talking about suicide is a bad idea and may encourage it</td><td>Because of stigma, most people considering suicide don't know who to talk to. Talking openly <strong>gives them options and time to rethink</strong>, which helps prevent suicide.</td><td>It is safe, and helpful, to ask directly</td></tr>
+<tr><td>3. Someone who is suicidal is determined to die</td><td>Suicidal people are often <strong>ambivalent</strong> about living or dying. Some act impulsively and would have wanted to live. Emotional support at the right moment can prevent suicide.</td><td>Ambivalence is the opening for intervention</td></tr>
+<tr><td>4. Suicide only happens to people who seem moody, sad or depressed</td><td>Suicide has no "look". People who seem to be <strong>functioning well</strong> can be suicidal.</td><td>Watch for <em>changes</em> in emotion or behaviour, not just visible sadness</td></tr>
+<tr><td>5. Self-harm is just for attention</td><td>Self-harm is usually a <strong>way of coping with internal distress</strong>, not attention-seeking.</td><td>Respond with empathy, not judgement</td></tr>
+</table></div>
+<div class="outside"><p><span class="src s-out">Outside course</span> Support for Myth 2: a systematic review found that asking about suicide does <strong>not</strong> increase suicidal thoughts and may reduce them (Dazzi, T., Gribble, R., Wessely, S., &amp; Fear, N. T. (2014). Does asking about suicide and related behaviours induce suicidal ideation? What is the evidence? <em>Psychological Medicine, 44</em>(16), 3361–3363).</p></div>
+</section>
+
+<!-- DEFINITIONS -->
+<section id="defs">
+<h2>Definitions and statistics</h2>
+<h3>Key definitions</h3>
+<div class="tbl"><table>
+<tr><th>Term</th><th>Definition <span class="src s-sem">Seminar</span></th></tr>
+<tr><td><strong>Suicide</strong></td><td>Death caused by self-directed injurious behaviour <strong>with intent to die</strong></td></tr>
+<tr><td><strong>Suicide attempt</strong></td><td>Non-fatal, self-directed, potentially injurious behaviour <strong>with intent to die</strong>. It may not result in injury</td></tr>
+<tr><td><strong>Suicidal ideation</strong></td><td>Thinking about, considering or planning suicide</td></tr>
+<tr><td><strong>Self-harm</strong> (also called self-injurious behaviour, self-mutilation, or non-suicidal self-injury, NSSI)</td><td>Deliberate, non-accidental self-injury <strong>not intended to cause death</strong></td></tr>
+</table></div>
+<p>The dividing line is <strong>intent</strong>. An attempt that causes no injury is still an attempt if the person intended to die. A serious self-injury is still self-harm if there was no intent to die.</p>
+
+<h3>Global statistics</h3>
+<p><span class="src s-sem">Seminar</span> WHO (2025):</p>
+<ul>
+<li>About <strong>727,000</strong> suicide deaths a year worldwide, roughly <strong>9 per 100,000</strong>.</li>
+<li>The <strong>third leading cause of death among 15–29-year-olds</strong>.</li>
+<li>The global age-standardised rate fell from about 10.5 per 100,000 in 2000 to 8.9 in 2021, a <strong>15.2% decrease</strong> over 21 years. But regional differences persist, and rates are rising in some groups.</li>
+</ul>
+
+<h3>Singapore (Activity 1)</h3>
+<p><span class="src s-sem">Seminar</span> The class article (<em>The Straits Times</em>, July 2025) reported <strong>314 suicides in 2024</strong>. Suicide remained the <strong>leading cause of death for young people aged 10–29</strong> for the sixth year running. The largest increase was among adults <strong>aged 30–39</strong>. SOS linked this group to pressures around family, job stability and mental health. The suicide rate was 5.91 per 100,000 residents, and about two-thirds of deaths were male.</p>
+<div class="outside"><p><span class="src s-out">Updated figures, outside course materials</span> The 314 was a <em>provisional</em> figure. In July 2026, SOS reported that ICA had finalised 2024 at <strong>441 suicides</strong>, a 1.6% rise on 2023. Suicide was the leading cause of death for ages 10–29 for the <strong>seventh</strong> consecutive year, and 65.8% of deaths were male. The provisional figure for 2025 is 256, but SOS cautions the final figure may differ substantially. SOS reported that 30–39-year-olds face pressures around family, employment and social isolation, while youths aged 10–29 face stressors around family, education and relationships (Mothership, 28 July 2026, citing SOS).</p>
+<p><strong>Exam use:</strong> provisional figures can be revised sharply upward. The 2023 figure went from 322 to 434, and 2024 from 314 to 441. So avoid claiming suicides "fell" based on provisional data. If you quote a number, say whether it is provisional or final.</p></div>
+<p><strong>Q2: Do the factors differ by age?</strong> Yes. That links to Seminar 2's lifespan view:</p>
+<div class="tbl"><table>
+<tr><th>Age group</th><th>Typical stressors</th><th>Link</th></tr>
+<tr><td>Youths (10–29)</td><td>Academic pressure, family conflict, relationships, identity, cyberbullying and social media</td><td>Seminar 4: social media and self-harm correlation (Hartas, 2021); Seminar 1: 30% of youths report symptoms</td></tr>
+<tr><td>Adults (30–39)</td><td>Job stability, finances, family and caregiving responsibilities, social isolation</td><td>Seminar 1: work, insecure employment; Seminar 2: social class and stress-vulnerability</td></tr>
+<tr><td>Older adults</td><td>Bereavement, chronic illness and pain, isolation, loss of role</td><td>Seminar 2: older-adult biopsychosocial chain; men cope worse after losing a spouse (Clayton, 1998)</td></tr>
+</table></div>
+</section>
+
+<!-- RISK -->
+<section id="risk">
+<h2>Risk factors</h2>
+<p><span class="src s-sem">Seminar</span> Two ways of classifying risk factors:</p>
+<div class="tbl"><table>
+<tr><th>By role</th><th>By changeability</th></tr>
+<tr><td><strong>Predisposing</strong>: make someone vulnerable to suicide, e.g. past abuse<br><strong>Precipitating</strong>: recent triggers of suicidal behaviour, e.g. stressful events</td><td><strong>Static</strong>: fixed, historical, cannot change<br><strong>Dynamic</strong>: changeable, can go up or down</td></tr>
+</table></div>
+<p>Suicide risk <strong>fluctuates over time</strong> and results from <strong>several interacting factors</strong>. No single factor predicts suicide.</p>
+<div class="grid2">
+<div><strong>Static (predisposing) factors</strong><ul>
+<li>Chronic psychological disorders, e.g. depression</li>
+<li>Previous exposure to suicide, directly or indirectly</li>
+<li>Family history of psychological disorders, substance use or suicide</li>
+<li>History of violence or abuse</li>
+</ul></div>
+<div><strong>Dynamic (often precipitating) factors</strong><ul>
+<li>Psychological and physical pain</li>
+<li>Recent stressful events: financial, relationship, career</li>
+<li>Access to lethal means</li>
+<li>Emotional dysregulation or impaired decision-making</li>
+<li>Fluctuating substance use</li>
+</ul></div>
+</div>
+<div class="eg"><b>Example: static and dynamic together.</b> Mr Tan, 45, has had depression for ten years and lost his brother to suicide. These are <em>static</em> factors: they raise his baseline risk but won't change. This month he was retrenched, his marriage is under strain, and he has started drinking heavily. These are <em>dynamic</em> factors that have pushed his current risk up. Dynamic factors are where intervention works: job support, relationship counselling, reducing alcohol use, and restricting access to means can all bring his risk back down, even though his history stays the same.</div>
+<p><strong>Why the distinction matters:</strong> static factors tell you <em>who</em> needs closer attention. Dynamic factors tell you <em>when</em> risk is rising and <em>what</em> can be changed.</p>
+<div class="outside"><p><span class="src s-out">Outside course</span> Useful for explaining the warning sign "feeling like a burden": the <strong>interpersonal theory of suicide</strong> proposes that suicidal desire arises when a person feels both <em>perceived burdensomeness</em> ("everyone would be better off without me") and <em>thwarted belongingness</em> (isolation, not fitting in) (Van Orden, K. A., et al. (2010). The interpersonal theory of suicide. <em>Psychological Review, 117</em>(2), 575–600). This is also why social connection is protective.</p></div>
+</section>
+
+<!-- WARNING SIGNS -->
+<section id="warn">
+<h2>Warning signs</h2>
+<p><span class="src s-sem">Seminar</span> The slides group warning signs into three categories:</p>
+<div class="tbl"><table>
+<tr><th>Thoughts expressed</th><th>Mood and emotion</th><th>Actions and behaviour</th></tr>
+<tr><td>
+<ul>
+<li>Talking about wanting to die or kill themselves</li>
+<li>Hopelessness, emptiness, no sense of purpose</li>
+<li>Feeling trapped, with no solutions</li>
+<li>Feeling like a burden to others</li>
+<li>Shame or guilt</li>
+<li>Talking about severe psychological or physical pain</li>
+</ul></td><td>
+<ul>
+<li>Intense emotional outbursts</li>
+<li>Severe distress or agitation</li>
+<li>Persistent sadness, hopelessness or emptiness</li>
+</ul></td><td>
+<ul>
+<li>Withdrawing socially</li>
+<li>Giving away valued belongings</li>
+<li>Saying goodbye to loved ones</li>
+<li>Putting affairs in order, e.g. writing a will</li>
+<li>Risky behaviour, e.g. reckless driving</li>
+<li>Searching for methods or acquiring means</li>
+</ul></td></tr>
+</table></div>
+<div class="eg"><b>Example: what warning signs sound like.</b> "I'm so tired of everything." "You'd all be better off without me." "There's no way out of this." In a Singapore context, distress may also be phrased indirectly or through physical complaints, e.g. "I just want to sleep and not wake up" or "My head is always so heavy." Seminar 1 noted older adults especially may express distress through physical symptoms.</div>
+<div class="trap"><b>Watch for sudden calm.</b> Myth 4 says suicide has no "look". A person who has been very distressed and suddenly seems calm or at peace, alongside behaviours like giving things away, may have made a decision. Focus on <em>changes</em> from the person's usual behaviour.</div>
+</section>
+
+<!-- SELF-HARM -->
+<section id="sh">
+<h2>Self-harm</h2>
+<h3>Key points</h3>
+<ul>
+<li><span class="src s-sem">Seminar</span> <strong>Most people who self-harm do not have suicidal intent.</strong></li>
+<li><strong>Functions</strong>: coping with emotional pain, releasing tension, and "feeling something" instead of numbness.</li>
+<li><strong>It still carries risk</strong>: injuries can be severe, and accidental death can occur.</li>
+<li>It is often linked to <strong>underlying conditions</strong> such as depression, trauma and personality disorders. Seminar 4: borderline PD involves self-harm and suicidal behaviour.</li>
+</ul>
+
+<h3>Self-harm vs suicide</h3>
+<p><span class="src s-sem">Seminar</span> A two-way model from the Centre for Suicide Prevention (2016) places self-directed behaviour on two axes: <strong>intent to die</strong> (low to high) and <strong>outcome</strong> (injury vs death).</p>
+<div class="tbl"><table>
+<tr><th></th><th>Low intent to die</th><th>High intent to die</th></tr>
+<tr><th>Outcome: injury</th><td><strong>Self-harm</strong></td><td><strong>Attempted suicide</strong></td></tr>
+<tr><th>Outcome: death</th><td><strong>Unintentional suicide</strong> (death from self-harm without intent to die)</td><td><strong>Suicide</strong></td></tr>
+</table></div>
+<p>This shows that <em>intent</em> and <em>outcome</em> are separate. Self-harm without intent to die can still end in death, which is why self-harm is never "just" harmless coping.</p>
+
+<h3>Comparing self-harm and suicide attempts</h3>
+<p><span class="src s-sem">Seminar</span> Adapted from Klonsky, May and Glenn (2013):</p>
+<div class="tbl"><table>
+<tr><th></th><th>Self-harm</th><th>Suicide attempts</th></tr>
+<tr><td>Frequency</td><td>Often repetitive</td><td>Less frequent</td></tr>
+<tr><td>Methods</td><td>Usually less lethal</td><td>Usually more lethal</td></tr>
+<tr><td>Severity</td><td>Injuries usually survivable</td><td>Often severe, sometimes fatal</td></tr>
+<tr><td>Purpose</td><td>To cope with or manage distress, <em>including</em> suicidal thoughts</td><td>To end life</td></tr>
+</table></div>
+<p class="small">The slide lists specific methods; these notes summarise them by lethality instead.</p>
+<div class="trap"><b>Don't treat them as unrelated.</b> The "purpose" row says self-harm can be a way of managing suicidal thoughts. Klonsky et al. (2013) found NSSI is strongly associated with later suicide attempts. Self-harm is a <em>risk marker</em>: most people who self-harm aren't suicidal, but a history of self-harm raises suicide risk. So always ask gently about suicidal thoughts when someone self-harms.</div>
+<div class="eg"><b>Example: the function of self-harm.</b> A 16-year-old describes cutting as "the only thing that makes the pressure stop" after fights at home. That is the <em>tension-release</em> function. Another says, "I feel nothing, and at least this is real," which is the <em>feeling something instead of numbness</em> function. Neither mentions wanting to die. Both need support for the <em>underlying distress</em>, not just instructions to stop, because the behaviour is doing a job for them.</div>
+</section>
+
+<!-- RESPOND -->
+<section id="respond">
+<h2>Responding to self-harm and suicidal thoughts</h2>
+<p><span class="src s-sem">Seminar</span> Three steps:</p>
+<ol class="steps">
+<li><strong>Listen to understand.</strong> Recognise their struggle, and let them keep talking.</li>
+<li><strong>Encourage them to seek help.</strong> Tell them it's all right to seek help.</li>
+<li><strong>Make a referral.</strong> SOS 24-hour Hotline 1767; SOS CareText 9151 1767 (WhatsApp); IMH 6389 2222.</li>
+</ol>
+<div class="tbl"><table>
+<tr><th>Do: be present and listen</th><th>Do: encourage help and act</th><th>Don't</th></tr>
+<tr><td>
+<ul>
+<li>Stay calm and present</li>
+<li>Listen actively, without interrupting</li>
+<li>Show empathy and concern</li>
+<li>Validate feelings without judgement</li>
+<li>Ask open-ended questions</li>
+</ul></td><td>
+<ul>
+<li>Encourage professional help</li>
+<li>Refer to crisis services (SOS 1767, IMH 6389 2222)</li>
+<li>Ensure safety if risk is immediate</li>
+</ul></td><td>
+<ul>
+<li>Minimise or dismiss feelings</li>
+<li>Judge, blame or lecture</li>
+<li>Assume you have to fix the problem</li>
+<li>Leave them alone if risk is imminent</li>
+<li>Argue, or tell them to "snap out of it"</li>
+</ul></td></tr>
+</table></div>
+
+<h3>Linking to the Growth Circle skills</h3>
+<p>The TMA and the exam reward explicitly naming the Growth Circle roles:</p>
+<div class="tbl"><table>
+<tr><th>Growth Circle skill</th><th>In a suicide or self-harm conversation</th><th>Example line</th></tr>
+<tr><td>Being present</td><td>Stay calm, give full attention, tolerate silence; don't rush to solve</td><td>"I'm here. Take your time."</td></tr>
+<tr><td>Be curious</td><td>Open questions; ask directly about suicide (Myth 2)</td><td>"When you say you're done, are you thinking about ending your life?"</td></tr>
+<tr><td>Encourage</td><td>Validate the courage it took to share; encourage help-seeking</td><td>"Thank you for telling me. It makes sense that you feel overwhelmed. Can we call SOS together?"</td></tr>
+<tr><td>Paraphrase</td><td>Reflect back feelings, so they feel understood rather than judged</td><td>"So the pressure builds up and cutting feels like the only way to release it."</td></tr>
+</table></div>
+<div class="trap"><b>Don't promise secrecy.</b> If someone asks you to keep their suicidal plans secret, you can't agree. Say you care too much to keep that to yourself, and involve help. This follows from "ensure safety if risk is immediate" and "don't leave them alone if risk is imminent".</div>
+<p class="small">Link to Seminar 1: most Singaporeans turn to informal networks first (NPHS, 69.1%). That puts friends, family, teachers and community staff in the position of first responder, which is why these skills are taught to laypeople.</p>
+</section>
+
+<!-- LINKS -->
+<section id="links">
+<h2>Links to Seminars 1–4</h2>
+<div class="tbl"><table>
+<tr><th>Seminar 5 idea</th><th>Connects to</th></tr>
+<tr><td>Stigma stops people talking about suicide (Myth 2)</td><td>Seminar 1: stigma and lay views; Seminar 4: media stereotypes and self-stigma (Watson et al., 2007)</td></tr>
+<tr><td>Myth 5: self-harm is "just for attention"</td><td>Seminar 4: labels describe patterns, not people; the stigma often attached to borderline PD</td></tr>
+<tr><td>About two-thirds of suicides are male</td><td>Seminar 2: men are less likely to seek help ("boys don't cry"; Rickwood &amp; Braithwaite, 1994)</td></tr>
+<tr><td>Predisposing and precipitating factors interact</td><td>Seminar 2: biopsychosocial model; stress-vulnerability (the same stressor affects people with fewer protective factors more)</td></tr>
+<tr><td>History of abuse as a static risk</td><td>Seminar 2: adverse childhood experiences predict later psychopathology; domestic violence as a gender-specific stressor</td></tr>
+<tr><td>Substance use as a dynamic risk</td><td>Seminar 4: substance use disorders; Seminar 3: harmful pleasure; Seminar 2: alcohol in bereaved older adults</td></tr>
+<tr><td>Psychological and physical pain as a dynamic risk</td><td>Seminar 3: physical illness and pain harm mental health</td></tr>
+<tr><td>Self-harm and social media</td><td>Seminar 4: hours on social media correlate with self-harm risk; cyberbullying raises suicide risk</td></tr>
+<tr><td>Isolation as a warning sign</td><td>Seminar 3: social interaction as a mediator; religion and community as social capital; Seminar 2: social contact protects throughout life</td></tr>
+<tr><td>Warning signs appear on a spectrum of distress</td><td>Seminar 1: the continuum; early intervention in the "reacting" and "injured" zones</td></tr>
+</table></div>
+</section>
+
+<!-- SCENARIOS -->
+<section id="scen">
+<h2>Worked scenarios</h2>
+<p>Scenarios A and B are the seminar's own Activity 2. Try each one yourself: identify, list risk factors and warning signs, respond, evaluate.</p>
+
+<div class="scenario">
+<h3>Scenario A (Activity 2) – Hidden cuts</h3>
+<p class="prompt">A teenager at your community centre has fresh cuts on their wrist and tries to hide them. What warning signs do you notice, how would you respond in the moment, and what next steps would you take?</p>
+<details><summary>Model answer</summary>
+<p><strong>What I notice.</strong> Fresh cuts suggest recent self-harm, a deliberate, non-accidental injury. Hiding them suggests shame or fear of being judged, which is common given stigma. I shouldn't assume intent in either direction. Most people who self-harm are not suicidal, and self-harm usually serves to cope with internal distress (Myth 5). But self-harm can be used to manage suicidal thoughts, and NSSI is associated with later suicide attempts (Klonsky et al., 2013). So I need to ask gently.</p>
+<p><strong>In the moment.</strong> Choose a private, calm moment. Don't confront them in front of peers. <em>Being present</em>: stay calm and avoid showing shock. <em>Curious, open question</em>: "I noticed your arm. I'm not upset with you. How are things going for you at the moment?" <em>Validate</em>: "It sounds like things have been really hard." <em>Paraphrase</em>: reflect what they share. <em>Ask directly</em>, since it doesn't increase risk (Myth 2): "Sometimes when people hurt themselves, they're also having thoughts of ending their life. Is that happening for you?" <em>Avoid</em> lecturing, demanding they stop, calling it attention-seeking, or minimising it.</p>
+<p><strong>Next steps.</strong> (1) Check the injuries are cared for; seek medical attention if needed. (2) Encourage professional help, e.g. a school counsellor or GP, and tell them it's all right to seek help. (3) Share SOS 1767 and CareText 9151 1767, which may feel easier for a teenager (Seminar 4: youths often find online or text contact less exposing). (4) Because they are a minor, follow the centre's safeguarding procedures and involve a supervisor. Be honest with the teen that you can't keep their safety secret, while involving them in the decisions. (5) If they disclose suicidal intent or a plan, <strong>don't leave them alone</strong>, and get immediate help.</p>
+<p><strong>Evaluation.</strong> The goal is not for me to "fix" the problem (a "don't" on the slide) but to connect them to support. The underlying distress, e.g. family conflict, bullying or depression, is the real target, because the self-harm is doing a coping job for them.</p>
+</details>
+</div>
+
+<div class="scenario">
+<h3>Scenario B (Activity 2) – "I'm done"</h3>
+<p class="prompt">A friend texts you: "I'm done, I just want to end it all." What warning signs do you notice, how would you respond, and what next steps would you take?</p>
+<details><summary>Model answer</summary>
+<p><strong>What I notice.</strong> This is an <em>expressed thought</em> warning sign: talking about wanting to die, with a sense of being trapped or hopeless ("I'm done"). It could be suicidal ideation, possibly with intent. Take it seriously. Myth 3 reminds us that people are often ambivalent, and reaching out to me is a sign part of them wants help.</p>
+<p><strong>Respond now.</strong> Reply straight away and warmly: "I'm really glad you told me. I'm here." Ask directly: "Are you thinking about killing yourself?" and "Are you safe right now?" Asking doesn't plant the idea; it opens the door (Myth 2). Then ask whether they have a plan or means, since having means is a <em>dynamic</em> risk factor. <em>Listen</em> without interrupting or arguing, and <em>validate</em>: "It sounds like you're in so much pain." Don't say "snap out of it", "think of your family", or "you have so much to live for". These minimise and dismiss.</p>
+<p><strong>Next steps.</strong> If they indicate <em>immediate</em> risk (a plan, means, or they won't confirm they're safe): <strong>call 995</strong>, or get someone to them, and don't leave them alone. Stay in contact until help arrives. If risk is not immediate: encourage them to contact SOS (1767 or CareText 9151 1767) or IMH (6389 2222), offer to call together, and help remove access to means where possible. Follow up the next day, since risk fluctuates.</p>
+<p><strong>Evaluation.</strong> Text removes tone and body language, so ask clarifying questions rather than guessing. Also look after yourself: supporting a suicidal friend is heavy, and you don't have to carry it alone.</p>
+</details>
+</div>
+
+<div class="scenario">
+<h3>Scenario 3 – The widower giving things away</h3>
+<p class="prompt">Mr Ong, 74, lost his wife eight months ago. He has chronic back pain and has stopped going to his morning kopi sessions. His daughter notices he has given his watch collection to his grandsons, updated his will, and recently said, "I'm just a burden to all of you now." He insists he is "fine" and seems calmer than usual. Analyse the risk and recommend how his daughter should respond.</p>
+<details><summary>Model answer</summary>
+<p><strong>Risk factors.</strong> <em>Dynamic and precipitating</em>: bereavement (a recent stressful event), chronic physical pain, and social withdrawal. <em>Demographic context</em>: older men cope less well than women after losing a spouse (Clayton, 1998; Seminar 2). About two-thirds of suicides in Singapore are male, and men are less likely to seek help (Seminar 2).</p>
+<p><strong>Warning signs across all three categories.</strong> <em>Thoughts</em>: feeling like a burden. <em>Behaviour</em>: withdrawing socially, giving away valued possessions, putting affairs in order (updating his will). <em>Mood</em>: he seems unusually calm, which is a change from his usual state. Myth 4 applies: he says he's "fine" and doesn't look obviously depressed, but suicide has no "look". This combination of signs is serious. <span class="small">(Outside course: perceived burdensomeness plus withdrawal fits the interpersonal theory of suicide.)</span></p>
+<p><strong>How his daughter should respond.</strong> Find a quiet time. <em>Be present</em> and <em>curious</em>: "Pa, you said you feel like a burden. I've also noticed you gave away your watches. I'm worried. Are you thinking of ending your life?" Asking directly is safe (Myth 2). <em>Validate</em> his grief and pain without dismissing them ("don't say that, lah"). If he confirms thoughts or a plan, don't leave him alone, and contact SOS (1767) or IMH (6389 2222), or 995 if risk is immediate.</p>
+<p><strong>Longer term.</strong> Treat his pain (Seminar 3: pain harms mental health); arrange grief support; rebuild social contact, e.g. bring him back to his kopi group or an Active Ageing Centre (Seminar 2: social contact protects); screen for depression through his GP, a less stigmatising route for older adults (Seminar 1). Evaluation: older adults are the group least willing to seek professional help (Seminar 1, NPHS), so the family's informal support is critical, alongside professional help rather than instead of it.</p>
+</details>
+</div>
+
+<div class="scenario">
+<h3>Scenario 4 – The high achiever</h3>
+<p class="prompt">A colleague, Priya, 34, is known as the office's top performer: always cheerful, organised, and helping others. After a promotion falls through and a relationship ends, you notice she has started working until 2 a.m., drinking more, and recently joked, "If I disappeared, the team wouldn't even notice." Others laugh it off. Discuss.</p>
+<details><summary>Model answer</summary>
+<p><strong>Challenge the assumption.</strong> Others laugh because Priya "doesn't seem depressed". Myth 4 says suicide can happen to anyone, including people who appear to function well. What matters is <em>change</em>: new late nights, more drinking, and a remark about disappearing.</p>
+<p><strong>Risk factors.</strong> Dynamic and precipitating: two recent stressful events, one career and one relationship; rising substance use; possible emotional dysregulation and exhaustion. Context: SOS reports that adults aged 30–39 recorded the largest increase in suicides, with pressures around family, job stability and isolation (Activity 1 article). This is also a Seminar 1 work link: loss of reward and recognition, and high demands (Karasek).</p>
+<p><strong>Warning signs.</strong> A remark about being unimportant or invisible is close to "feeling like a burden" or "lack of purpose", even as a joke. Humour can be a way of testing whether anyone will respond. Risky behaviour: increased drinking.</p>
+<p><strong>Response.</strong> Don't join the laughter or ignore it. Privately: "You mentioned disappearing the other day. I wanted to check in, because it sounded like a lot has been hard lately." Ask directly about suicidal thoughts if she opens up. Listen, validate and paraphrase. Encourage support, e.g. the company EAP, a GP, or SOS, and follow up. Evaluation: high performers may feel especially unable to show vulnerability, which links to the stigma and help-seeking barriers covered earlier.</p>
+</details>
+</div>
+
+<div class="scenario">
+<h3>Scenario 5 – Evaluate the myths</h3>
+<p class="prompt">A parent at a school talk says: "We shouldn't talk to teenagers about suicide – it will put ideas in their heads. And kids who self-harm are just seeking attention." Critically evaluate these statements and propose a better approach.</p>
+<details><summary>Model answer</summary>
+<p><strong>Statement 1 is a myth.</strong> Because of stigma, most people considering suicide don't know who to talk to. Talking openly gives them options and time to rethink, which helps prevent suicide (Seminar 5). <span class="small">(Outside course: a systematic review found asking about suicide does not increase ideation; Dazzi et al., 2014.)</span> Silence leaves teenagers alone with their thoughts. That matters in Singapore, where suicide is the leading cause of death for people aged 10–29.</p>
+<p><strong>Statement 2 is a myth.</strong> Self-harm is usually a way of coping with internal distress, such as releasing tension or feeling something instead of numbness, not attention-seeking. Most who self-harm are not suicidal, but self-harm is linked to underlying conditions such as depression and trauma, and it predicts later suicide attempts (Klonsky et al., 2013). Dismissing it as attention-seeking adds to the stigma that stops young people disclosing. It also mirrors the stigma process from Seminars 1 and 4, where a label replaces understanding of the person.</p>
+<p><strong>The attitude has consequences.</strong> A teenager who hears this is less likely to tell a parent, which cuts off the informal support most Singaporeans rely on first (NPHS, 69.1%).</p>
+<p><strong>A better approach.</strong> Teach parents the warning signs in all three categories, and that the key signal is <em>change</em>. Give them practical skills: listen to understand, ask directly, validate, don't lecture. Explain when and how to refer (SOS 1767, CareText, IMH, school counsellor). Normalise help-seeking in the family. Link to Seminar 4: discuss social media use and cyberbullying, which are linked to self-harm risk among youths.</p>
+</details>
+</div>
+
+<div class="scenario">
+<h3>Scenario 6 – Why the rise? (Activity 1)</h3>
+<p class="prompt">Using the biopsychosocial model, discuss factors that may contribute to suicide in Singapore and whether they differ across age groups.</p>
+<details><summary>Model answer</summary>
+<p><strong>Framing.</strong> Suicide risk comes from several interacting factors and fluctuates over time (Seminar 5). The biopsychosocial model (Engel, 1977; Seminar 2) organises them well.</p>
+<p><strong>Biological.</strong> Chronic mental disorders such as depression; physical illness and pain; substance use; family history.</p>
+<p><strong>Psychological.</strong> Hopelessness, feeling trapped or a burden, shame, emotional dysregulation, perfectionism and fear of failure.</p>
+<p><strong>Social.</strong> Academic and work pressure; job insecurity and financial stress; relationship breakdown; social isolation; stigma that discourages help-seeking; exposure to suicide; cyberbullying.</p>
+<p><strong>Differences by age.</strong> Youths (10–29): education, family conflict, relationships and online harms. Suicide is the leading cause of death in this group. Adults (30–39): the largest increase in the class article, linked by SOS to family, job stability and isolation. Older adults: bereavement, chronic illness and loneliness. Across ages, men are over-represented, which links to gender differences in help-seeking (Seminar 2).</p>
+<p><strong>Evaluating "the rise".</strong> Be careful with the data. Singapore's figures are first released as <em>provisional</em> and later revised: the class article's 314 for 2024 was later finalised at 441 (SOS, July 2026). Rises or falls between years may partly reflect how the data are reported. Also, factors like stress and isolation are <em>correlates</em>: they raise risk but don't determine outcomes. Individual protective factors matter (stress-vulnerability).</p>
+<p><strong>Implications.</strong> Prevention should be tailored by age: school programmes and online safety for youths; workplace mental health and financial support for adults; befriending and grief support for older adults. It should also include community training so that more laypeople can recognise warning signs and refer.</p>
+</details>
+</div>
+</section>
+
+<!-- CHECKS -->
+<section id="checks">
+<h2>Notes and discrepancies</h2>
+<div class="tbl"><table>
+<tr><th>Item</th><th>Issue</th><th>What to do</th></tr>
+<tr><td>No study unit backup</td><td>SU5 covers externalising behaviours (Seminar 4), not self-harm and suicide</td><td>Rely on the slides and their references. Check whether SU6 covers internalising behaviours. The seminar title says "(1)", so a Part 2 is likely</td></tr>
+<tr><td>Singapore 2024 figure</td><td>The class article's 314 was provisional; the final figure is 441</td><td>Quote the article's figure as provisional, or cite the final figure with its source</td></tr>
+<tr><td>Global statistics slide</td><td>It is headed "2019 to 2021" but describes a change from 2000 to 2021</td><td>Write "from 2000 to 2021, the global age-standardised rate fell by 15.2%"</td></tr>
+<tr><td>TMA01 slide</td><td>The deadline on the slide says 8 October <strong>2025</strong>, while Seminar 1 gave 8 October <strong>2026</strong></td><td>Probably a leftover from last run's slides. Check Canvas for your actual deadline</td></tr>
+</table></div>
+</section>
+
+<!-- REFS -->
+<section id="refs">
+<h2>Citation bank</h2>
+<div class="tbl"><table>
+<tr><th>Concept</th><th>Cite</th></tr>
+<tr><td>Global suicide statistics</td><td>World Health Organization (2025); WHO, Fleischmann et al. (2025), <em>Suicide worldwide in 2021</em></td></tr>
+<tr><td>Suicide prevention framework</td><td>World Health Organization (n.d.), <em>Preventing suicide: A global imperative</em></td></tr>
+<tr><td>Self-harm vs suicide model</td><td>Centre for Suicide Prevention (2016)</td></tr>
+<tr><td>Self-harm vs suicide attempts; NSSI and suicide attempts</td><td>Klonsky, May &amp; Glenn (2013)</td></tr>
+<tr><td>Singapore 2024 suicides (provisional)</td><td><em>The Straits Times</em> (2025), citing SOS and ICA</td></tr>
+<tr><td>Warning signs in the week before death</td><td><em>The Straits Times</em>, IMH study (slide link)</td></tr>
+<tr><td><span class="src s-out">Outside</span> Asking about suicide is safe</td><td>Dazzi et al. (2014)</td></tr>
+<tr><td><span class="src s-out">Outside</span> Burdensomeness and belongingness</td><td>Van Orden et al. (2010)</td></tr>
+<tr><td><span class="src s-out">Outside</span> Singapore 2024 finalised figure (441)</td><td>Samaritans of Singapore press release, 28 July 2026 (reported by Mothership)</td></tr>
+</table></div>
+</section>
+</main>
+</div>
+<script>
+(function(){
+  const all = () => document.querySelectorAll('details');
+  document.getElementById('openAll').addEventListener('click', () => all().forEach(d => d.open = true));
+  document.getElementById('closeAll').addEventListener('click', () => all().forEach(d => d.open = false));
+  window.addEventListener('beforeprint', () => all().forEach(d => d.open = true));
+})();
+</script>
+</body>
+</html>
