@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PSY213 Seminar 1 – Revision Notes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6F7F5; --ink:#1E2A38; --muted:#5B6673; --line:#D3D9D6;
+  --teal:#2F7D72; --teal-soft:#E3F0EC;
+  --plum:#6B4E71; --plum-soft:#EFE8F0;
+  --amber:#A8700F; --amber-soft:#FBF1DE;
+  --red:#A6423A; --card:#FFFFFF;
+  --serif:"Newsreader", Georgia, "Times New Roman", serif;
+  --sans:"Instrument Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#141A21; --ink:#E4E8EC; --muted:#9AA6B2; --line:#2E3842;
+    --teal:#6CC1B3; --teal-soft:#1B2E2B; --plum:#C7A6CE; --plum-soft:#2A2230;
+    --amber:#E3B45C; --amber-soft:#2E2616; --red:#E08A82; --card:#1A222B;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#141A21; --ink:#E4E8EC; --muted:#9AA6B2; --line:#2E3842;
+  --teal:#6CC1B3; --teal-soft:#1B2E2B; --plum:#C7A6CE; --plum-soft:#2A2230;
+  --amber:#E3B45C; --amber-soft:#2E2616; --red:#E08A82; --card:#1A222B;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:1.075rem;line-height:1.62}
+.wrap{display:grid;grid-template-columns:250px minmax(0,1fr);gap:3rem;max-width:1180px;margin:0 auto;padding:2rem 1.5rem 5rem}
+nav.toc{position:sticky;top:calc(1.5rem + env(safe-area-inset-top,0px));align-self:start;font-family:var(--sans);font-size:.88rem;max-height:calc(100vh - 3rem);overflow:auto;padding-right:.5rem}
+nav.toc p{font-weight:700;margin:0 0 .6rem}
+nav.toc ol{list-style:none;padding:0;margin:0;counter-reset:t}
+nav.toc li{margin:.15rem 0}
+nav.toc a{color:var(--muted);text-decoration:none;display:block;padding:.2rem .5rem;border-left:2px solid transparent}
+nav.toc a:hover,nav.toc a:focus-visible{color:var(--ink);border-left-color:var(--teal)}
+main{max-width:74ch}
+header.hero{border-bottom:1px solid var(--line);padding-bottom:1.5rem;margin-bottom:2rem}
+.course{font-family:var(--sans);color:var(--teal);font-weight:600;margin:0}
+h1{font-family:var(--sans);font-size:clamp(2rem,4.5vw,3rem);line-height:1.08;letter-spacing:-.02em;margin:.3rem 0 .8rem}
+h2{font-family:var(--sans);font-size:1.6rem;letter-spacing:-.01em;line-height:1.2;margin:3.2rem 0 .8rem;padding-top:1rem;border-top:3px solid var(--ink)}
+h3{font-family:var(--sans);font-size:1.15rem;margin:2rem 0 .5rem}
+h4{font-family:var(--sans);font-size:1rem;margin:1.2rem 0 .3rem}
+p{margin:.6rem 0}
+a{color:var(--teal)}
+:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.src{font-family:var(--sans);font-size:.72rem;font-weight:600;padding:.1rem .45rem;border-radius:3px;vertical-align:.15em;white-space:nowrap}
+.s-sem{background:var(--teal-soft);color:var(--teal)}
+.s-su{background:var(--plum-soft);color:var(--plum)}
+.s-out{background:var(--amber-soft);color:var(--amber);border:1px dashed var(--amber)}
+.legend{font-family:var(--sans);font-size:.88rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:.8rem 1.2rem;align-items:center}
+.eg{border-left:3px solid var(--plum);background:var(--plum-soft);padding:.7rem 1rem;margin:1rem 0;border-radius:0 4px 4px 0}
+.eg b:first-child{font-family:var(--sans);color:var(--plum)}
+.trap{border-left:3px solid var(--red);padding:.6rem 1rem;margin:1rem 0;background:var(--card)}
+.trap b:first-child{font-family:var(--sans);color:var(--red)}
+.outside{border:1px dashed var(--amber);background:var(--amber-soft);padding:.8rem 1rem;margin:1rem 0;border-radius:4px}
+table{border-collapse:collapse;width:100%;font-size:.95rem;margin:1rem 0}
+.tbl{overflow-x:auto}
+th,td{border:1px solid var(--line);padding:.5rem .65rem;vertical-align:top;text-align:left}
+th{font-family:var(--sans);font-size:.88rem;background:var(--card)}
+ul,ol{padding-left:1.3rem}
+li{margin:.25rem 0}
+.stat{font-family:var(--sans);font-weight:700;color:var(--teal)}
+/* continuum band */
+.band{display:grid;grid-template-columns:repeat(4,1fr);margin:1.2rem 0 .4rem;font-family:var(--sans);font-size:.85rem;border-radius:4px;overflow:hidden}
+.band div{padding:.7rem .6rem;color:#11202a}
+.band div strong{display:block;font-size:1rem}
+.b1{background:#8FD0B6}.b2{background:#F1DC7A}.b3{background:#F2A96B}.b4{background:#E38479}
+.quad{display:grid;grid-template-columns:auto 1fr 1fr;gap:4px;font-family:var(--sans);font-size:.88rem;margin:1rem 0}
+.quad div{background:var(--card);border:1px solid var(--line);padding:.6rem}
+.quad .ax{background:transparent;border:none;color:var(--muted);font-weight:600;display:flex;align-items:center}
+/* scenario */
+.scenario{border:2px solid var(--ink);border-radius:6px;padding:1rem 1.2rem;margin:1.6rem 0;background:var(--card)}
+.scenario h3{margin-top:.2rem}
+.prompt{font-style:italic}
+details{margin-top:.8rem;border-top:1px solid var(--line);padding-top:.6rem}
+summary{font-family:var(--sans);font-weight:600;cursor:pointer;color:var(--teal)}
+.steps{counter-reset:s;list-style:none;padding:0}
+.steps li{counter-increment:s;padding-left:2.4rem;position:relative;margin:.8rem 0}
+.steps li::before{content:counter(s);position:absolute;left:0;top:.05rem;width:1.7rem;height:1.7rem;border-radius:50%;background:var(--ink);color:var(--paper);font-family:var(--sans);font-weight:700;font-size:.9rem;display:grid;place-items:center}
+.toolbar{font-family:var(--sans);display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
+button{font-family:var(--sans);font-size:.88rem;font-weight:600;background:var(--ink);color:var(--paper);border:none;border-radius:4px;padding:.5rem .9rem;cursor:pointer}
+button.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.small{font-size:.9rem;color:var(--muted)}
+@media (max-width:860px){
+  .wrap{grid-template-columns:1fr;gap:1rem}
+  nav.toc{position:static;max-height:none;border:1px solid var(--line);padding:1rem;border-radius:4px}
+  .band{grid-template-columns:1fr 1fr}
+}
+@media print{
+  nav.toc,.toolbar{display:none}
+  .wrap{display:block;padding:0}
+  body{font-size:10.5pt;background:#fff;color:#000}
+  .scenario{break-inside:avoid-page}
+  h2{break-after:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="toc" aria-label="Contents">
+<p>Contents</p>
+<ol>
+<li><a href="#method">Answering scenario questions</a></li>
+<li><a href="#mh">What is mental health?</a></li>
+<li><a href="#cont">The mental health continuum</a></li>
+<li><a href="#wb">Wellbeing</a></li>
+<li><a href="#wealth">Wealth and wellbeing</a></li>
+<li><a href="#work">Work and mental health</a></li>
+<li><a href="#class">Psychiatric classification</a></li>
+<li><a href="#lay">Lay views and help-seeking</a></li>
+<li><a href="#stigma">Stigma and discrimination</a></li>
+<li><a href="#skills">Support skills (Growth Circles)</a></li>
+<li><a href="#scen">Worked scenarios</a></li>
+<li><a href="#refs">Citation bank</a></li>
+</ol>
+</nav>
+
+<main>
+<header class="hero">
+<p class="course">PSY213 Mental Health and Wellbeing in Singapore</p>
+<h1>Seminar 1: The mental health landscape in Singapore</h1>
+<p>Revision notes built on the Seminar 1 slides, backed up by Study Unit 1 and the two Straits Times articles. Every point is tagged with where it comes from, so you know what you can cite as course content.</p>
+<div class="legend">
+<span><span class="src s-sem">Seminar</span> in the slides</span>
+<span><span class="src s-su">SU1</span> Study Unit 1 backup</span>
+<span><span class="src s-out">Outside course</span> standard theory to strengthen answers; cite carefully</span>
+</div>
+<div class="toolbar">
+<button type="button" id="openAll">Show all model answers</button>
+<button type="button" class="ghost" id="closeAll">Hide all</button>
+<button type="button" class="ghost" onclick="window.print()">Print</button>
+</div>
+</header>
+
+<!-- ============ METHOD ============ -->
+<section id="method">
+<h2>Answering open scenario questions</h2>
+<p>Scenario questions reward <em>application</em>, not recall. The marker wants to see that you can spot which concept is at work in the case, name it precisely with a citation, and tie it to specific details in the scenario. Use this four-move structure for each point you make.</p>
+<ol class="steps">
+<li><strong>Spot</strong> the cue in the scenario. Quote or point to the detail, e.g. "Mr Tan works 12-hour shifts but cannot choose his rota."</li>
+<li><strong>Name</strong> the concept and its source, e.g. "This fits Karasek's (1979) high-strain job: high demands with low decision latitude."</li>
+<li><strong>Apply</strong> the concept by explaining the mechanism in this person's case: why it leads to strain, poorer help-seeking or lower wellbeing.</li>
+<li><strong>Recommend or evaluate</strong>: what could be done, or a limitation of the concept. Evaluation is usually what lifts an answer from pass to distinction.</li>
+</ol>
+<div class="trap"><b>Common mistake.</b> Writing everything you know about a model before touching the scenario. Lead with the case detail, then bring in the theory, one concept per paragraph.</div>
+<h3>Cue-to-concept lookup</h3>
+<div class="tbl"><table>
+<tr><th>If the scenario mentions…</th><th>Reach for…</th></tr>
+<tr><td>Long hours, no say over tasks, contract or gig work, retrenchment</td><td>Karasek job demand/control; three factors of work; insecure employment vs unemployment; Subramaniam et al. (2021)</td></tr>
+<tr><td>Rich but unhappy, constant upgrading, comparing with peers</td><td>Wealth–wellbeing curve (Inglehart et al., 2008); upward social comparison; hedonic treadmill (Layard, 2005); Barber (2007)</td></tr>
+<tr><td>Chasing fun vs finding purpose; meaning through hardship</td><td>Hedonism vs eudaimonia; Frankl's meaning-seeking model; humanistic psychology</td></tr>
+<tr><td>Someone "not mentally ill but not doing well", or stressed but coping</td><td>Mental health continuum; dual-continua model; mental health as more than absence of illness</td></tr>
+<tr><td>Diagnosis, labels, "Is this a disorder?"</td><td>ICD/DSM; categorical vs dimensional; pros and cons of classification; cultural and historical relativity</td></tr>
+<tr><td>Reluctance to see a professional, prefers family, older person</td><td>NPHS help-seeking data; lay views; stigma; age differences</td></tr>
+<tr><td>Racist, stereotyping or excluding remarks</td><td>Stigma and discrimination as a social determinant; parallels with mental illness stigma; social support</td></tr>
+<tr><td>"How would you support this person?"</td><td>Growth Circles skills: being present, curiosity, encouraging, paraphrasing; psychological first aid</td></tr>
+</table></div>
+</section>
+
+<!-- ============ MENTAL HEALTH ============ -->
+<section id="mh">
+<h2>What is mental health?</h2>
+<p><span class="src s-sem">Seminar</span> About <span class="stat">30%</span> of youths in Singapore have at least one mental health problem (Ang, 2022). Two lenses are contrasted:</p>
+<div class="tbl"><table>
+<tr><th>Mental health</th><th>Mental disorder</th></tr>
+<tr><td>Positive realm of wellbeing: functioning, relationships, influence on one's situation</td><td>Problem-centric lens: symptoms, deficits, diagnosis</td></tr>
+</table></div>
+<p><span class="src s-su">SU1</span> In 1951 the WHO made mental health a core part of overall health. A person with good mental health relates positively to others and has a constructive influence on their social situation (WHO, 1951). A paradox: although "mental health" is meant to be a positive idea, the term is often paired with negative words like "mental health problems".</p>
+
+<h3>Why defining mental health is hard</h3>
+<p><strong>1. Tying it to Maslow's self-actualisation is contested</strong> <span class="src s-su">SU1</span>. Self-actualisation sits at the top of Maslow's (1968) hierarchy, above physiological, safety, belonging and esteem needs. But one person can self-actualise at the cost of other people's mental health.</p>
+<div class="eg"><b>Example (SU1).</b> Sam builds his dream e-commerce business, which is self-actualisation for him. He gets there by making his small team work very long hours. If mental health simply means self-actualisation, Sam is "mentally healthy" while his employees burn out. So the definition leaves out the social side.</div>
+<p><strong>2. It shifts across cultures</strong> <span class="src s-sem">Seminar</span>. Clinicians usually treat hallucinations as a sign of psychosis. However, how often they happen, what form they take and what they mean all differ between cultures (Larøi et al., 2014).</p>
+<div class="eg"><b>Example.</b> A grieving widow hears her late husband's voice comforting her, or someone reports a vision during a religious festival. In some communities this is expected and meaningful. In others it would be flagged as a symptom. The same experience can be normal or pathological depending on context.</div>
+<p><strong>3. It shifts over time</strong> <span class="src s-sem">Seminar</span>. Homosexuality was listed as a psychological disorder in the DSM and removed by the APA in 1973 (Bayer, 1981).</p>
+<p><strong>Takeaway:</strong> mental health is not fixed. It keeps changing with time and society. This is a direct answer to Seminar Activity 2 ("Is mental health today the same as in the past?").</p>
+<div class="eg"><b>Reflect 1.1: why use a positive lens rather than "absence of illness"?</b> Someone can have no diagnosis and still be languishing: flat, unmotivated, disconnected. Someone else can have a diagnosis and still be doing well, with meaning, good relationships and good functioning. A positive lens lets us promote wellbeing in everyone, not only treat the ill. It also reduces the "us vs them" split that feeds stigma.</div>
+</section>
+
+<!-- ============ CONTINUUM ============ -->
+<section id="cont">
+<h2>The mental health continuum</h2>
+<p><span class="src s-sem">Seminar</span> "Explain the mental health continuum" is a course learning outcome, but the seminar slide for it is a blank image in your PDF. The idea that the course materials do state is below. The two models after it are standard ones to fill the gap.</p>
+<p><span class="src s-su">SU1</span> Mental disorders are seen as lying at one end of a continuum of ordinary human experience. Anxiety before a presentation is normal. When anxiety goes beyond what is normal and disrupts everyday life, a diagnosis may be warranted. This dimensional view clashes with categorical diagnosis (see <a href="#class">classification</a>).</p>
+
+<div class="outside">
+<p><span class="src s-out">Outside course</span> <strong>Model A – The single-continuum (four-zone) model.</strong> This is widely used in workplace and military mental health training, and similar colour-coded versions appear in Singapore mental health literacy material. People move back and forth along it. It describes current states, not fixed identities.</p>
+<div class="band" role="img" aria-label="Continuum from healthy to ill">
+<div class="b1"><strong>Healthy</strong>Normal mood swings, sleeping well, socially active, performing</div>
+<div class="b2"><strong>Reacting</strong>Irritable, nervous, trouble sleeping, procrastinating; common and reversible</div>
+<div class="b3"><strong>Injured</strong>Persistent anxiety or low mood, withdrawal, reduced performance</div>
+<div class="b4"><strong>Ill</strong>Severe distress, unable to function; may meet diagnostic criteria</div>
+</div>
+<p class="small">Move towards the right: accumulated stressors, poor sleep, isolation. Move towards the left: rest, social support, early help.</p>
+
+<p><strong>Model B – The dual-continua model (Keyes, 2002; also Tudor, 1996).</strong> Mental health and mental illness are two separate but related axes, not two ends of one line.</p>
+<div class="quad" role="img" aria-label="Dual continua quadrants">
+<div class="ax"></div><div class="ax">No / minimal mental illness</div><div class="ax">Diagnosable mental illness</div>
+<div class="ax">High wellbeing</div>
+<div><strong>Flourishing</strong><br>e.g. a student who is engaged, connected and purposeful</div>
+<div><strong>Coping / thriving with illness</strong><br>e.g. a person with well-managed bipolar disorder who has a meaningful career and a strong support network</div>
+<div class="ax">Low wellbeing</div>
+<div><strong>Languishing</strong><br>e.g. an employee with no diagnosis who feels empty and is "just going through the motions"</div>
+<div><strong>Struggling</strong><br>e.g. untreated depression with isolation</div>
+</div>
+<p class="small">Cite as outside reading, e.g. Keyes, C. L. M. (2002). The mental health continuum: From languishing to flourishing in life. <em>Journal of Health and Social Behavior, 43</em>(2), 207–222.</p>
+</div>
+
+<div class="eg"><b>Example: moving along the continuum.</b> In week 1 a SUSS student feels mildly stressed about her TMA but sleeps fine (healthy). With the TMA, work deadlines and a sick parent all at once, she becomes irritable and loses sleep (reacting). After three weeks she stops replying to friends and cannot concentrate (injured). This is where early support and rest can stop her from sliding into illness. The same framework explains why the course promotes <em>everyone</em> learning basic support skills: most people pass through the middle zones at some point.</div>
+<p><strong>Why the continuum matters in an exam answer:</strong> it normalises distress, which reduces stigma. It supports early intervention by catching people at the reacting or injured stage. It also links neatly to the dimensional critique of the DSM and ICD.</p>
+</section>
+
+<!-- ============ WELLBEING ============ -->
+<section id="wb">
+<h2>Wellbeing</h2>
+<p><span class="src s-sem">Seminar</span> Wellbeing has no single definition. It is associated with mental health, happiness, meaning, self-actualisation, maturity, personal fulfilment, quality of life and, overall, positive overall health (Frankl, 1958; Maslow, 1968; Rogers, 1962).</p>
+
+<h3>The Rainbow Model (Dahlgren &amp; Whitehead, 1993)</h3>
+<p><span class="src s-sem">Seminar</span> Wellbeing is treated as positive overall health, because the social determinants of mental health also shape physical health. The model shows determinants in layers, from the individual outward:</p>
+<div class="tbl"><table>
+<tr><th>Layer (inside → outside)</th><th>Examples</th></tr>
+<tr><td>Core: age, sex, constitutional (hereditary) factors</td><td>Genetic vulnerability, being older</td></tr>
+<tr><td>Individual lifestyle factors</td><td>Smoking, alcohol, sedentary living</td></tr>
+<tr><td>Social and community networks</td><td>Family, friends, neighbours, religious groups</td></tr>
+<tr><td>Living and working conditions</td><td>Work environment, education, unemployment, housing, health care, water and sanitation, food production</td></tr>
+<tr><td>General socio-economic, cultural and environmental conditions</td><td>Inequality, national policy, cultural norms</td></tr>
+</table></div>
+<div class="eg"><b>Example.</b> A 55-year-old retrenched technician (core: age and sex) starts drinking more and exercising less (lifestyle). He withdraws from friends out of shame (networks), loses income and struggles with his HDB loan (living and working conditions), in a society where job identity carries high status (cultural conditions). Each layer adds to the next. This is why an answer that focuses only on "he should exercise" is thin.</div>
+
+<h3>Hedonism vs eudaimonia</h3>
+<p><span class="src s-sem">Seminar</span> Wellbeing is viewed through two lenses (Ackrill, 2006):</p>
+<ul>
+<li><strong>Hedonism</strong>: the pursuit of pleasure and happiness.</li>
+<li><strong>Eudaimonia</strong> (spelled "eudemonia" in the slides): the pursuit of deeper meaning and personal contentment.</li>
+</ul>
+<p>They do not always happen together:</p>
+<div class="tbl"><table>
+<tr><th></th><th>Low pleasure</th><th>High pleasure</th></tr>
+<tr><th>High meaning</th><td><strong>Meaning without pleasure</strong>: a caregiver looking after a parent with dementia. It is exhausting, but deeply purposeful. People can find meaning in their darkest days (Andrews &amp; Thomson, 2009).</td><td><strong>Both</strong>: a facilitator whose work is enjoyable <em>and</em> meaningful.</td></tr>
+<tr><th>Low meaning</th><td>Neither: disengaged and flat, like languishing.</td><td><strong>Pleasure without meaning</strong>: a weekend binge on alcohol or drugs. The mood lift is temporary and adds no lasting contentment.</td></tr>
+</table></div>
+<p><span class="src s-su">SU1</span> Memento mori ("remember you must die"): because people know their time is limited, meaning matters. Religious faith can provide meaning that supports wellbeing (Myers, 2000).</p>
+
+<h3>Three psychological positions on wellbeing</h3>
+<p><strong>Humanistic psychology</strong> <span class="src s-sem">Seminar</span> puts personal growth, meaning and fulfilment at the centre of wellbeing.</p>
+<ul>
+<li><strong>Frankl's (1958) meaning-seeking model.</strong> This is a 2×2 grid of success vs failure crossed with meaning vs emptiness.
+<div class="tbl"><table>
+<tr><th></th><th>Failure</th><th>Success</th></tr>
+<tr><th>Meaning</th><td><strong>Sacrificial life</strong>: e.g. a volunteer who earns little but finds purpose</td><td><strong>Ideal life</strong></td></tr>
+<tr><th>Emptiness</th><td><strong>Wasted life</strong></td><td><strong>Shallow life</strong>: e.g. a high-flying banker who feels empty</td></tr>
+</table></div>
+Frankl's key point is that success needs meaning to become an ideal life. Failures are inevitable, but when they carry meaning they can lead to new and fulfilling activities.</li>
+<li><strong>Maslow (1968)</strong> <span class="src s-su">SU1</span>: self-actualisation is the path to meaning and contentment.</li>
+<li><strong>Rogers (1962)</strong> <span class="src s-su">SU1</span>: the quest for inner peace and contentment.</li>
+</ul>
+<p><strong>Behavioural psychology</strong> <span class="src s-su">SU1</span> (the seminar slide is blank). Skinner's (1948) <em>Walden Two</em> imagines wellbeing for society achieved through an <em>external</em> system: reward for desirable behaviour and punishment for undesirable behaviour.</p>
+<div class="eg"><b>Example.</b> A company improves wellbeing purely through incentives. It gives step-count rewards, bonuses for zero MC days, and penalties for lateness. This is Skinnerian. The humanistic critique is that people may comply without feeling any more meaning or fulfilment. Some may even come to work sick to protect their bonus.</div>
+<p><strong>Psychosocial (intermediate) position</strong> <span class="src s-su">SU1</span>. This combines internal factors (personal meaning and fulfilment) with external and social factors (relationships and social activities). It is usually the most defensible stance to take in an evaluation.</p>
+</section>
+
+<!-- ============ WEALTH ============ -->
+<section id="wealth">
+<h2>Wealth and wellbeing</h2>
+<p><span class="src s-sem">Seminar</span> Activity 3 asks whether citizens of wealthy nations report greater wellbeing. The answer is <strong>not in a straight line</strong>. Inglehart et al. (2008) plotted GDP per capita against subjective wellbeing (SWB) and found a <strong>curvilinear</strong> pattern. Wellbeing rises steeply with wealth among poorer countries, then flattens out: past a point, extra wealth adds little.</p>
+<ul>
+<li>Less wealthy Latin American countries (e.g. Puerto Rico, Mexico, Colombia) report higher SWB than their wealth predicts. Denmark also reports higher SWB than the US.</li>
+<li>Former communist countries (e.g. Russia, Ukraine, Moldova) sit below the curve.</li>
+</ul>
+<h3>Why wealth ≠ wellbeing</h3>
+<ul>
+<li><strong>Upward social comparison and inequality</strong> <span class="src s-sem">Seminar</span>. Bigger socioeconomic divides in rich countries encourage comparison with those better off, which lowers happiness (Wilkinson &amp; Pickett, 2009).</li>
+<li><strong>Consumption as a shallow metric</strong> <span class="src s-su">SU1</span>. Endless consumption makes possessions the yardstick for life, which normalises comparison and envy (Barber, 2007).</li>
+<li><strong>The hedonic treadmill</strong> <span class="src s-su">SU1</span>. A new purchase gives a boost, but happiness quickly returns to baseline, so the person buys again (Layard, 2005).</li>
+</ul>
+<div class="eg"><b>Example: the hedonic treadmill.</b> An executive upgrades from a condo to a landed house. For three months she is thrilled. Then it becomes "normal", and her reference group becomes neighbours with bigger houses. Her baseline happiness is back where it started, but her mortgage and working hours are higher. Hedonic gains wear off; eudaimonic sources such as relationships and purpose tend to last longer.</div>
+
+<h3>Singapore and the wealth–happiness paradox (Activity 4)</h3>
+<p><span class="src s-sem">Seminar</span> On the Inglehart graph, Singapore sits at roughly USD 20k GDP per capita with an SWB index of about 2.6. That is slightly <em>below</em> the curve, and well below richer but happier countries such as Denmark, Switzerland and Iceland.</p>
+<p>Factors you can argue, linking each to a concept:</p>
+<div class="tbl"><table>
+<tr><th>Factor</th><th>Link to concept</th></tr>
+<tr><td>Competitive, high-stakes education and meritocracy; "kiasu" culture</td><td>Upward social comparison; achievement over meaning (shallow life)</td></tr>
+<tr><td>Long working hours; burnout (see Activity 1.3 CNA article)</td><td>Karasek high strain; work as a source of negative mental health</td></tr>
+<tr><td>High cost of living; income inequality</td><td>Wilkinson &amp; Pickett (2009) inequality; Rainbow Model outer layers</td></tr>
+<tr><td>Materialism and status goods (cars, condos)</td><td>Hedonic treadmill; Barber (2007)</td></tr>
+<tr><td>Stigma around mental health; prefer to "tahan" (endure)</td><td>Lay views; low help-seeking</td></tr>
+</table></div>
+<p class="small">Evaluation point: SWB is self-reported. Cultural norms about modesty and how people use rating scales may make East Asian respondents report lower scores, so part of the "paradox" could be a measurement artefact. This is a good critical point to add. The SWB data is also from 2008 and may be outdated.</p>
+
+<h3>State of Happiness Study (Activity 5 / SU1 Activity 1.2)</h3>
+<p class="small">The SOHS report itself isn't among your uploads, so I have not written up its findings. Add two key findings and the recommendations from the Canvas copy here, and link them to the work–wellbeing concepts below, as the debrief asked.</p>
+</section>
+
+<!-- ============ WORK ============ -->
+<section id="work">
+<h2>Work and mental health</h2>
+<p><span class="src s-sem">Seminar</span> Work has two purposes: (1) income to meet survival needs such as food and shelter, and (2) a source of both positive <em>and</em> negative mental health. Freud proposed that adult mental health comes from work and love (affection). Rewarding work at a manageable level of difficulty protects mental health <span class="src s-su">SU1</span>.</p>
+<h3>Three factors that decide whether work helps or harms</h3>
+<div class="tbl"><table>
+<tr><th>Factor</th><th>Positive when…</th><th>Negative when…</th></tr>
+<tr><td>Financial / income reward</td><td>Higher income</td><td>Paid poorly</td></tr>
+<tr><td>Job satisfaction</td><td>Rewarding, meaningful, manageable</td><td>No personal satisfaction</td></tr>
+<tr><td>Control over tasks</td><td>Autonomy over day-to-day tasks</td><td>Little or no control</td></tr>
+</table></div>
+<div class="trap"><b>Formative quiz trap.</b> Job <em>industry</em> is NOT one of the three factors. Industry varies too much internally to predict anything by itself.</div>
+
+<h3>Karasek's (1979) job demand–control model</h3>
+<div class="tbl"><table>
+<tr><th></th><th>Low demands</th><th>High demands</th></tr>
+<tr><th>High control (decision latitude)</th><td><strong>Low strain</strong>: e.g. a librarian with a steady workload who sets her own schedule</td><td><strong>Active job</strong>: e.g. a surgeon or entrepreneur. The work is demanding but they have autonomy, so it is challenging but motivating, with growth and learning.</td></tr>
+<tr><th>Low control</th><td><strong>Passive job</strong>: e.g. a security guard monitoring a quiet lobby. Skills and motivation can wither.</td><td><strong>High strain</strong>: e.g. a call-centre agent with strict call quotas and a scripted, monitored workflow, or a food-delivery rider under algorithmic control. This is the highest risk of psychological strain.</td></tr>
+</table></div>
+<p>Key application: the problem is not high demands alone, but high demands <em>combined with</em> low control. So a practical recommendation is often to increase control (flexible hours, input on how tasks are done) rather than only cutting the workload.</p>
+
+<h3>Unemployment vs insecure employment</h3>
+<p><span class="src s-sem">Seminar</span> Unemployment leads to financial insecurity. That threatens the ability to meet basic survival needs, which undermines mental health.</p>
+<p>Singapore data: people diagnosed with mental health conditions had an unemployment rate of <span class="stat">11.5%</span>, compared with <span class="stat">4.8%</span> among those without (Subramaniam et al., 2021).</p>
+<div class="trap"><b>Interpretation trap.</b> This is an association, and the direction can run both ways. Unemployment can worsen mental health, and mental health conditions can make it harder to get or keep a job. Say this in evaluation.</div>
+<p><strong>Insecure employment is a stronger predictor of poor mental health than unemployment</strong> (Rogers &amp; Pilgrim, 2003). Insecure jobs combine low task control, low income and no security. That lack of predictability is especially harmful.</p>
+<div class="eg"><b>Example.</b> Two people are made redundant. Aaron gets a severance package and knows he has six months to job-hunt: he is unemployed, but the situation is predictable. Ben moves to rolling three-month contracts and private-hire driving: technically employed, but never sure of next month's income, with no say over his hours. On this evidence, Ben is at greater risk.</div>
+</section>
+
+<!-- ============ CLASSIFICATION ============ -->
+<section id="class">
+<h2>Psychiatric classification</h2>
+<p><span class="src s-sem">Seminar</span> There are two systems, developed in parallel and broadly consistent with each other:</p>
+<div class="tbl"><table>
+<tr><th></th><th>ICD</th><th>DSM</th></tr>
+<tr><td>Full name</td><td>International Classification of Diseases</td><td>Diagnostic and Statistical Manual of Mental Disorders</td></tr>
+<tr><td>By</td><td>World Health Organization (WHO)</td><td>American Psychiatric Association (APA)</td></tr>
+<tr><td>Mental disorders first included</td><td>ICD-6, 1949</td><td>DSM-I, 1952</td></tr>
+<tr><td>Notes</td><td>Covers all diseases; mental disorders were added late because they lack visible physical signs <span class="src s-su">SU1</span></td><td>Early editions were influenced by psychoanalysis (Freud) and Meyer's biopsychosocial approach. The latest version is the DSM-5-TR (March 2022) <span class="src s-su">SU1</span></td></tr>
+</table></div>
+<p><span class="src s-su">SU1</span> History, for context: Cullen (1769) coined "neuroses", the idea that mental afflictions injure the nervous system. This was the first time a cause was proposed. Boissier de Sauvages (1771) listed mental disease as one of ten illness categories.</p>
+
+<h3>Problems with psychiatric classification</h3>
+<ul>
+<li><strong>No clear cause</strong> <span class="src s-sem">Seminar</span>. Diagnosis rests on a "basket of symptoms" rather than a known biological cause, unlike most medical diseases.</li>
+<li><strong>Heterogeneity</strong> <span class="src s-su">SU1</span> (Feczko et al., 2019). Two people with the same diagnosis can share few symptoms.
+<div class="eg"><b>Example.</b> Under DSM criteria, depression can be diagnosed from five of nine symptoms. One patient may oversleep, overeat and feel worthless. Another may have insomnia, weight loss and poor concentration. They have the same label but very different presentations and needs.</div></li>
+<li><strong>Categorical vs dimensional</strong> <span class="src s-su">SU1</span>. Psychology sees distress on a continuum, but diagnosis draws a hard line between disorder and no disorder. The British Psychological Society (2011) questioned diagnosis altogether and favoured person-centred <em>formulation</em> in context.
+<div class="eg"><b>Example.</b> A cut-off of five symptoms for two weeks means someone with four symptoms for three weeks gets no diagnosis, and possibly no subsidised treatment, despite real suffering.</div></li>
+<li><strong>Based on social norms</strong> <span class="src s-su">SU1</span>. Behaviour is judged against what is normal for that context. Losing pleasure in a much-loved hobby is a warning sign. Yet behaviour that looks abnormal can be accepted in certain roles: Burton (1621) wrote that all poets are mad.</li>
+<li><strong>Emerging biological approaches</strong> <span class="src s-sem">Seminar</span>. fMRI brain imaging combined with AI machine learning can diagnose autism spectrum disorder with up to 97% accuracy (Liu et al., 2021). This points to future diagnosis based on causes, not just symptoms.</li>
+</ul>
+
+<h3>Advantages vs disadvantages (Activity 6 / Reflect 1.2)</h3>
+<div class="tbl"><table>
+<tr><th>Advantages</th><th>Disadvantages</th></tr>
+<tr><td>A common language for clinicians and researchers, and more reliable communication</td><td>Labels can stigmatise and shape identity ("I am depressive")</td></tr>
+<tr><td>Gateway to treatment, insurance and subsidies, workplace or school accommodations</td><td>Arbitrary cut-offs ignore the continuum; below the threshold means no help</td></tr>
+<tr><td>Guides evidence-based treatment choice</td><td>Heterogeneity: one label covers very different people</td></tr>
+<tr><td>Validation: "this has a name; I'm not weak"</td><td>Culturally biased: mostly Western norms (e.g. hallucinations)</td></tr>
+<tr><td>Enables prevalence studies and service planning (e.g. IMH studies)</td><td>Changes over time (e.g. homosexuality), showing it is partly social</td></tr>
+<tr><td></td><td>Can overlook context and the person (the BPS formulation critique)</td></tr>
+</table></div>
+<p>Debrief angle: "Does classification help or hinder help-seeking?" <strong>Both.</strong> A diagnosis unlocks care, but fear of being labelled stops people coming forward in the first place.</p>
+</section>
+
+<!-- ============ LAY VIEWS ============ -->
+<section id="lay">
+<h2>Lay views and help-seeking</h2>
+<h3>How non-experts see mental health</h3>
+<ul>
+<li><span class="src s-sem">Seminar</span> Laypeople tend to define mental health as the absence of mental illness (Rogers &amp; Pilgrim, 1997). They did, however, name ways to manage stress.</li>
+<li><span class="src s-su">SU1</span> Lay views depend on whether the person has experienced mental health problems first-hand (this was a formative quiz answer).</li>
+<li><span class="src s-sem">Seminar</span> Diagnosed patients struggle with stigma and exclusion. <span class="src s-su">SU1</span> Many explain their disorder in biological or spiritual terms, which can be read as a way to put distance between themselves and the disorder.
+<div class="eg"><b>Example.</b> "It's just a chemical imbalance, it's not <em>me</em>", or "It's a spiritual test". Both place the problem outside the self. That may reduce self-blame, but it can also reduce a person's sense of agency over recovery.</div></li>
+<li><span class="src s-sem">Seminar</span> "Mental disorder" often serves as shorthand for violent, deranged or aggressive. <span class="src s-su">SU1</span> Over 22 years of US data, the public linked mental illness, and schizophrenia most of all, more and more with violence. Even depression and everyday work stress were seen as somewhat dangerous (Pescosolido et al., 2019). The authors argue policy should target the real drivers of violence, such as gun laws, rather than scapegoating people with mental illness.</li>
+</ul>
+
+<h3>The ST article: help-seeking during the pandemic (Activity 7)</h3>
+<p>Source: <em>The Straits Times</em>, Dec 2022, reporting the National Population Health Survey (NPHS) 2021, which polled residents aged 18–74 from July 2020 to June 2021.</p>
+<div class="tbl"><table>
+<tr><th>Indicator</th><th>2019</th><th>2021</th></tr>
+<tr><td>Willing to seek help from mental health professionals</td><td class="stat">47.8%</td><td class="stat">58.3% ↑</td></tr>
+<tr><td>Seeking help from informal networks (friends, family)</td><td class="stat">74.5%</td><td class="stat">69.1% ↓</td></tr>
+</table></div>
+<ul>
+<li>By gender, women were slightly more willing to seek help (59.8%) than men (56.8%).</li>
+<li>By age, those aged 60–74 were least willing to seek professional help (45.8%), and those aged 30–39 were most willing (67.7%).</li>
+<li>A separate IMH study (May 2020 – June 2021, over 1,000 participants) found about 13% had anxiety or depression symptoms: 8.7% met criteria for clinical depression, 9.4% for anxiety and 4.8% for both. In addition, 9.3% met criteria for mild-to-severe stress and 7.6% for clinical insomnia.</li>
+<li>MOH responses included community mental health services, awareness efforts, early identification and assessment, and the Interagency Taskforce on Mental Health and Well-being (July 2021).</li>
+</ul>
+
+<div class="trap"><b>Read the question carefully.</b> Activity 7 Q1 asks why <em>more</em> Singaporeans turned to informal support. But the data shows reliance on informal networks <em>fell</em>, from 74.5% to 69.1%. It remained the <em>most common</em> source of help. In an exam, point out this nuance: informal support was still the main route, but it declined. MOH's explanation was that heightened vigilance about personal health during the pandemic made people keep more to themselves. Similarly, Q2 attributes the elderly figure to an IMH study, whereas the article reports it from the NPHS. Cite the NPHS.</div>
+
+<h4>Q1: Why is informal support preferred, and why did it dip?</h4>
+<ul>
+<li><strong>Preferred</strong> because of trust, familiarity, no cost, no queue, no record or label, and a way to avoid the stigma of "seeing a psychiatrist" (lay views, stigma).</li>
+<li><strong>Dipped</strong> because of distancing and lockdowns (the Circuit Breaker), fewer face-to-face interactions, and people keeping to themselves out of health vigilance (MOH's explanation). Families were also under strain themselves.</li>
+<li><strong>Professional help rose</strong> because the pandemic made mental health a mainstream topic, which normalised help-seeking, and because online and tele-counselling became more available.</li>
+</ul>
+<h4>Q2: Why are older adults (60–74) least likely to seek professional help? What can be done?</h4>
+<div class="tbl"><table>
+<tr><th>Barrier</th><th>Possible response</th></tr>
+<tr><td>Generational stigma; mental illness seen as "madness", weakness or family shame (face)</td><td>Psychoeducation through trusted channels such as Active Ageing Centres, religious groups and community leaders</td></tr>
+<tr><td>Low mental health literacy; distress expressed as physical complaints (e.g. poor sleep, aches)</td><td>Screen for mental health during GP and polyclinic visits, where they already go</td></tr>
+<tr><td>Language and dialect barriers; digital exclusion from online services</td><td>Materials in dialect and mother tongue; in-person rather than app-based services</td></tr>
+<tr><td>Cost and fear of being a burden on their children</td><td>Highlight subsidised community services; involve family carefully</td></tr>
+<tr><td>Preference for self-reliance, religion or traditional remedies</td><td>Work with these rather than against them, e.g. train religious leaders as gatekeepers</td></tr>
+</table></div>
+<p class="small">The specific services in the right column are general Singapore examples, not from your course materials. The barriers map onto the lay-views and stigma content.</p>
+</section>
+
+<!-- ============ STIGMA / DISCRIMINATION ============ -->
+<section id="stigma">
+<h2>Stigma and discrimination</h2>
+<p><span class="src s-sem">Seminar</span> The course covers stigma under lay views: people with mental illness face exclusion, and the public associates mental disorder with violence. The second ST article (June 2021) was used to illustrate stigma and discrimination.</p>
+<h3>The incident</h3>
+<p>A 60-year-old man was filmed confronting a mixed-race couple, Mr Dave Parkash and his girlfriend. He accused Mr Parkash of preying on a Chinese woman and said people should date only within their own race. Police investigated. Mr Parkash described feeling embarrassed, humiliated and hurt. Minister K. Shanmugam called it quite unacceptable and very worrying. Other ministers and MPs condemned it, stressing that racial harmony cannot be taken for granted, and noting that the public support for the couple suggested such views are held by a minority.</p>
+
+<h3>How to use it in an answer</h3>
+<p><strong>1. Discrimination as a determinant of mental health.</strong> In the Rainbow Model, discrimination sits in the social, community and cultural layers. Being targeted produces shame, humiliation and hurt, which are direct emotional costs. Repeated experiences can move a person along the continuum towards the injured zone.</p>
+<div class="outside"><p><span class="src s-out">Outside course</span> <strong>Minority stress theory</strong> (Meyer, 2003) holds that stigmatised groups face extra, chronic stressors on top of ordinary life stress: prejudice events, expecting rejection, and concealment. These accumulate and raise the risk of mental health problems. This is useful if a scenario involves a minority person facing repeated discrimination.</p></div>
+
+<p><strong>2. The same mechanism as mental illness stigma.</strong> Racism and mental illness stigma work in the same way. A <em>label</em> (race, diagnosis) triggers a <em>stereotype</em> ("preying", "violent"), which leads to <em>separation</em> ("stick to your own kind", "stay away from them") and to <em>exclusion or loss of status</em>.</p>
+<div class="outside"><p><span class="src s-out">Outside course</span> This four-step sequence (labelling → stereotyping → separation → status loss and discrimination) comes from Link and Phelan (2001), "Conceptualizing stigma", <em>Annual Review of Sociology, 27</em>, 363–385.</p></div>
+<div class="eg"><b>Example: parallel.</b> The man's assumption that an Indian man must be "preying" on a Chinese woman mirrors the assumption Pescosolido et al. (2019) documented, that a person with schizophrenia must be dangerous. In both cases a group label replaces knowledge of the actual person.</div>
+
+<p><strong>3. Stigma is socially constructed and changeable.</strong> This mirrors the earlier point that mental health norms change over time and culture. Leaders publicly calling out the behaviour and the wave of public support show how social norms can be reinforced. This is relevant to anti-stigma strategies for mental health too: public figures sharing their own mental health stories, for example.</p>
+
+<p><strong>4. Social support as a buffer.</strong> The couple shared their experience and received an outpouring of support. The article does not measure their wellbeing, so don't overclaim. But you can connect this to informal networks being the main source of help in Singapore (NPHS: 69.1%), and to the support skills below.</p>
+<div class="trap"><b>Don't overreach.</b> The article is about racism, not mental illness. Frame it as an analogy or as a social determinant. Do not claim the couple developed a disorder.</div>
+</section>
+
+<!-- ============ SKILLS ============ -->
+<section id="skills">
+<h2>Support skills from Growth Circles</h2>
+<p><span class="src s-sem">Seminar</span> These draw on the AIC mental health framework, which aims to give every individual the foundational skills to support 1–5 people. The skills are rapport-building, active listening, effective questioning, emotional intelligence and psychological first aid. The four roles practised in Growth Circles are below. Use them when a scenario asks how you, as a friend, colleague or facilitator, would respond.</p>
+<div class="tbl"><table>
+<tr><th>Role</th><th>What it looks like</th><th>Example line</th></tr>
+<tr><td>Being present</td><td>Full attention, no phone, open body language; allow silence</td><td>(Nodding, eye contact) "Take your time."</td></tr>
+<tr><td>Be curious</td><td>Open questions that explore, not interrogate</td><td>"What has the past month been like for you?"</td></tr>
+<tr><td>Encourage</td><td>Affirm effort and strengths; invite them to continue</td><td>"It took courage to share that. Tell me more."</td></tr>
+<tr><td>Paraphrase</td><td>Reflect content and feeling back to check understanding</td><td>"So you feel stuck because the rota changes weekly and you can't plan anything. Is that right?"</td></tr>
+</table></div>
+<p>A good scenario answer moves from <strong>informal</strong> support (listening, being present) to <strong>signposting professional help</strong> when the person is at the injured or ill end of the continuum. This fits the NPHS finding that people go to friends first: friends are the bridge to professional care.</p>
+</section>
+
+<!-- ============ SCENARIOS ============ -->
+<section id="scen">
+<h2>Worked scenarios</h2>
+<p>Try each one yourself using spot, name, apply, recommend before opening the model answer. The answers are written as dense exam-style paragraphs; adjust the length to your exam's word limit.</p>
+
+<div class="scenario">
+<h3>Scenario 1 – The logistics supervisor</h3>
+<p class="prompt">Mr Lim, 48, is a warehouse supervisor on a one-year renewable contract. His manager sets daily targets that change without notice, and he has no say in staffing. He earns less than peers in permanent roles. Lately he sleeps badly, snaps at his teenage children and says, "I'm not sick, I'm just tired." Using concepts from Study Unit 1, discuss the factors affecting Mr Lim's mental health.</p>
+<details><summary>Model answer</summary>
+<p><strong>Work as a source of negative mental health.</strong> Mr Lim's job fails on all three factors that make work protective: lower income than his peers, little satisfaction, and no control over staffing or targets. In Karasek's (1979) job demand–control model, his role is a <em>high-strain job</em>: shifting daily targets are high demands, and his lack of decision latitude is low control. Karasek predicts psychological strain from exactly this combination, which fits his poor sleep and irritability.</p>
+<p><strong>Insecure employment.</strong> His one-year renewable contract matters. Rogers and Pilgrim (2003) argue that insecure employment is a <em>stronger</em> predictor of poor mental health than unemployment, because it combines low control, low pay and unpredictability. Not knowing whether his contract will be renewed is a chronic stressor.</p>
+<p><strong>Where he sits on the continuum.</strong> His statement "I'm not sick" reflects the lay view that mental health simply means the absence of illness (Rogers &amp; Pilgrim, 1997). A continuum view suggests he is not ill but has moved into the "reacting" or "injured" zone: sleep problems and irritability are showing, but he is still functioning. That is exactly the stage where early action works best.</p>
+<p><strong>Wider determinants.</strong> Using the Rainbow Model (Dahlgren &amp; Whitehead, 1993), his working conditions affect his family networks, as seen in his snapping at his children. At 48, an age linked to job-market vulnerability, he may also feel his options are limited.</p>
+<p><strong>Recommendations and evaluation.</strong> The Karasek model implies that raising control, for example involving him in setting targets, may help as much as reducing workload. At a personal level, a trusted friend could use active listening and paraphrasing to help him name the stress, then signpost workplace EAP or community services. One limitation: Karasek's model omits social support at work, which could also buffer his strain.</p>
+</details>
+</div>
+
+<div class="scenario">
+<h3>Scenario 2 – Auntie won't see a doctor</h3>
+<p class="prompt">Madam Wong, 68, has seemed withdrawn since her husband died a year ago. She complains of headaches and poor sleep but refuses to see "a mental doctor", saying only mad people go there. Her daughter wants to help. Explain why Madam Wong may be reluctant to seek professional help and suggest what can be done.</p>
+<details><summary>Model answer</summary>
+<p><strong>Age and help-seeking.</strong> Madam Wong belongs to the group least willing to seek professional mental health help in Singapore. According to the National Population Health Survey reported by the Straits Times (2022), only 45.8% of 60–74-year-olds were willing, compared with 67.7% of those aged 30–39.</p>
+<p><strong>Stigma and lay views.</strong> Her remark that "only mad people go there" shows the stigma in which mental disorder stands for being deranged or dangerous (Pescosolido et al., 2019). Seeking help would risk that label, and possibly family shame. She describes her distress through physical symptoms, headaches and sleep, which fits the tendency to explain distress in biological rather than psychological terms (SU1). This may keep the problem at a distance from her sense of self.</p>
+<p><strong>Continuum and culture.</strong> Grief is a normal response, so a continuum view avoids immediately labelling her. Still, a year of withdrawal suggests she may have moved beyond "reacting". Where the line between normal grief and disorder falls also depends on culture (Larøi et al., 2014).</p>
+<p><strong>What can be done.</strong> (1) Use informal networks first. Most Singaporeans turn to family and friends first (69.1%), so her daughter is the natural bridge. She can be present, be curious ("What are the nights like now?") and paraphrase rather than push. (2) Reframe professional help as something ordinary, for example by raising sleep and headaches with her regular GP or polyclinic doctor, who can screen for depression. (3) Use community channels she trusts, such as ageing centres and religious groups, and materials in her preferred language. (4) At a policy level, MOH's plans for community mental health services and early identification (ST, 2022) are aimed at exactly this gap. Evaluation: forcing a diagnosis could backfire by confirming her fear of the label, so a gradual approach that respects her pace is better.</p>
+</details>
+</div>
+
+<div class="scenario">
+<h3>Scenario 3 – The successful but empty banker</h3>
+<p class="prompt">Jason, 35, earns a high salary, recently bought a luxury car and plans to upgrade to a bigger condo. He says the thrill of each purchase fades within weeks, and he keeps comparing himself with former classmates who seem even more successful. He wonders, "Why am I not happier?" Using theories of wellbeing, explain Jason's experience.</p>
+<details><summary>Model answer</summary>
+<p><strong>Wealth does not rise with wellbeing in a straight line.</strong> Inglehart et al. (2008) found a curvilinear relationship: beyond a certain level of wealth, extra income adds little wellbeing. Jason is well past that point.</p>
+<p><strong>The hedonic treadmill.</strong> His car and condo purchases give short bursts of pleasure that fade within weeks, after which he seeks the next one. This is Layard's (2005) hedonic treadmill: happiness returns to baseline after each purchase. Barber (2007) would add that consumption has become his yardstick for how well his life is going.</p>
+<p><strong>Upward social comparison.</strong> Comparing himself with more successful classmates lowers his satisfaction. Wilkinson and Pickett (2009) link this to societies with wide socioeconomic divides. It also helps explain Singapore sitting slightly below the curve on the Inglehart graph.</p>
+<p><strong>Hedonism vs eudaimonia.</strong> Jason is pursuing a hedonic route to wellbeing, pleasure, without the eudaimonic route of meaning and contentment (Ackrill, 2006). In Frankl's (1958) meaning-seeking model he is living a <em>shallow life</em>: success without meaning. Frankl argues that success needs meaning to become an ideal life.</p>
+<p><strong>Recommendation and evaluation.</strong> Rather than more purchases, Jason could invest in sources of meaning such as relationships, volunteering or purposeful projects, in line with humanistic views (Maslow, 1968; Rogers, 1962). A psychosocial view would also look at his work culture and social environment rather than blaming him alone. A limitation is that the Inglehart data compares countries; applying it to one person needs caution.</p>
+</details>
+</div>
+
+<div class="scenario">
+<h3>Scenario 4 – To be diagnosed or not?</h3>
+<p class="prompt">Priya, 22, has felt low for three weeks, sleeps poorly and has lost interest in dance, which she used to love. A counsellor says she has four of the symptoms listed for major depression but not five, so she "doesn't meet criteria". Priya feels dismissed. Discuss the strengths and limitations of psychiatric classification using Priya's case.</p>
+<details><summary>Model answer</summary>
+<p><strong>The classification systems.</strong> Mental disorders are classified by the WHO's ICD and the APA's DSM (currently DSM-5-TR). Both diagnose from a set of symptoms rather than a known biological cause.</p>
+<p><strong>Limitations shown by Priya's case.</strong> (1) <em>Categorical vs dimensional</em>. Her distress is real but falls below an arbitrary threshold. The dimensional view holds that distress lies on a continuum, so a hard cut-off misses people like Priya, who may be in the "injured" zone. (2) <em>Normativity</em>. Losing pleasure in a hobby she normally enjoys is exactly the kind of departure from her own norms that signals trouble (SU1), yet the system does not register it. (3) <em>Heterogeneity</em>. Even people who meet criteria vary widely (Feczko et al., 2019), so a label says little about individual needs. (4) The British Psychological Society (2011) argues for person-centred <em>formulation</em> instead: understanding Priya's own story and context.</p>
+<p><strong>Strengths.</strong> Classification gives professionals a shared language and guides evidence-based treatment. A diagnosis can open access to subsidised care or academic accommodations. It can also validate that the suffering is real. Emerging methods such as fMRI combined with machine learning, with up to 97% accuracy for ASD (Liu et al., 2021), suggest classification may become more cause-based and objective in future.</p>
+<p><strong>Evaluation and recommendation.</strong> The ideal is to use classification alongside a continuum perspective. Priya should still be offered support such as counselling, monitoring and self-care, because mental health is more than the absence of a disorder. Waiting until she meets criteria goes against early intervention.</p>
+</details>
+</div>
+
+<div class="scenario">
+<h3>Scenario 5 – A friend faces racist abuse</h3>
+<p class="prompt">Your colleague Farid, who is in an interracial relationship, tells you a stranger shouted at him and his partner on the MRT that they should "stick to their own race". Since then he avoids going out with his partner in public and says he feels ashamed and on edge. Discuss how this experience may affect Farid's mental health and how you would support him.</p>
+<details><summary>Model answer</summary>
+<p><strong>Discrimination as a determinant of mental health.</strong> In the Rainbow Model (Dahlgren &amp; Whitehead, 1993), discrimination operates at the social and cultural layers and affects individual wellbeing. Farid's shame and feeling on edge mirror what Mr Parkash reported after a similar incident in Singapore: being embarrassed, humiliated and hurt (Straits Times, 2021). If Farid keeps avoiding going out, it could isolate him and push him along the continuum from "reacting" towards "injured".</p>
+<p><strong>The mechanism of stigma.</strong> The stranger reduced Farid to a racial label, attached a stereotype, and demanded separation. This is the same process that drives mental illness stigma, where a diagnostic label triggers assumptions of violence (Pescosolido et al., 2019) and leads to exclusion. <span class="small">(Optional outside theory: Link &amp; Phelan's 2001 model; Meyer's 2003 minority stress, where chronic expectation of rejection explains his being "on edge".)</span></p>
+<p><strong>Norms are socially constructed.</strong> As with changing definitions of mental health, what is tolerated is set by society. Public condemnation by leaders in 2021, who stressed that racial harmony cannot be taken for granted, shows how norms are actively maintained. It also reassures targets like Farid that such views are held by a minority.</p>
+<p><strong>How I would support him.</strong> Since most Singaporeans seek help from informal networks first (69.1%; ST, 2022), I am in a good position to help. I would be present, giving him full attention in private. I would be curious, asking "What's been hardest since then?", and paraphrase: "It sounds like you feel unsafe being seen together, and that's affecting your relationship." I would encourage what he is already doing well, such as talking about it. If his avoidance or distress persists, I would gently signpost professional support. If he wishes, he could also report the incident, since police investigated the 2021 case.</p>
+<p><strong>Evaluation.</strong> A single incident does not mean disorder. The aim is to protect wellbeing and stop the problem building up, rather than to pathologise a normal reaction to mistreatment.</p>
+</details>
+</div>
+
+<div class="scenario">
+<h3>Scenario 6 – "Is she mentally ill?"</h3>
+<p class="prompt">During the Hungry Ghost Festival, Mei Ling, 30, tells friends she felt her late grandmother's presence and heard her voice at the family altar. She is otherwise working, sleeping well and socially active. A friend who studies psychology says, "Hearing voices is a sign of psychosis." Critically evaluate this claim.</p>
+<details><summary>Model answer</summary>
+<p><strong>Culture shapes what counts as disorder.</strong> Clinicians often treat hallucinations as psychotic, but how often they occur, their form and their meaning vary across cultures (Larøi et al., 2014). Researchers urge clinicians to consider a person's cultural background before labelling such experiences as pathological. In the setting of ancestor veneration during the festival, hearing a deceased relative can be culturally meaningful rather than a symptom.</p>
+<p><strong>Normativity.</strong> Diagnosis depends on social norms (SU1). Mei Ling's experience fits the norms of her context, and she shows no disruption to functioning, which is a key criterion for concern under the continuum view.</p>
+<p><strong>The continuum.</strong> Mei Ling is working, sleeping well and socially active, which places her in the healthy zone. Under a dual-continua view she could even be flourishing: her experience may bring comfort and meaning (eudaimonia).</p>
+<p><strong>Classification critique.</strong> The friend is applying a symptom-checklist logic, the categorical approach, without context. This is the weakness the BPS (2011) raised in calling for contextual formulation. Just as homosexuality was once classified as a disorder and later removed (Bayer, 1981), labels reflect time and culture.</p>
+<p><strong>Balanced conclusion.</strong> The claim is too simplistic. However, if the voices became distressing, frequent or commanding, or if her functioning declined, professional assessment would be appropriate. Cultural sensitivity should not become a reason to ignore genuine warning signs.</p>
+</details>
+</div>
+</section>
+
+<!-- ============ REFS ============ -->
+<section id="refs">
+<h2>Citation bank</h2>
+<p class="small">APA 7 in-text citations from your materials, plus the outside sources used above (marked). Check the full references against the SU1 reference list before submitting. The Straits Times articles are dated 21 December 2022 (Soh) and 6 June 2021 (Tan).</p>
+<div class="tbl"><table>
+<tr><th>Concept</th><th>Cite</th></tr>
+<tr><td>30% youths with mental health symptoms</td><td>Ang (2022)</td></tr>
+<tr><td>Mental health as part of overall health</td><td>WHO (1951)</td></tr>
+<tr><td>Self-actualisation</td><td>Maslow (1968)</td></tr>
+<tr><td>Cultural variation in hallucinations</td><td>Larøi et al. (2014)</td></tr>
+<tr><td>Homosexuality removed from DSM</td><td>Bayer (1981)</td></tr>
+<tr><td>Mental health as a recent, contested concept</td><td>Rogers &amp; Pilgrim (2014)</td></tr>
+<tr><td>Rainbow Model</td><td>Dahlgren &amp; Whitehead (1993)</td></tr>
+<tr><td>Hedonism and eudaimonia</td><td>Ackrill (2006)</td></tr>
+<tr><td>Meaning in adversity</td><td>Andrews &amp; Thomson (2009)</td></tr>
+<tr><td>Religion and meaning</td><td>Myers (2000)</td></tr>
+<tr><td>Meaning-seeking model</td><td>Frankl (1958); Wong (2014)</td></tr>
+<tr><td>Inner peace and contentment</td><td>Rogers (1962)</td></tr>
+<tr><td>Walden Two / behaviourism</td><td>Skinner (1948)</td></tr>
+<tr><td>Wealth–wellbeing curve</td><td>Inglehart et al. (2008)</td></tr>
+<tr><td>Inequality and social comparison</td><td>Wilkinson &amp; Pickett (2009)</td></tr>
+<tr><td>Consumption</td><td>Barber (2007)</td></tr>
+<tr><td>Hedonic treadmill</td><td>Layard (2005)</td></tr>
+<tr><td>Job demand–control</td><td>Karasek (1979)</td></tr>
+<tr><td>Unemployment in Singapore (11.5% vs 4.8%)</td><td>Subramaniam et al. (2021)</td></tr>
+<tr><td>Insecure employment</td><td>Rogers &amp; Pilgrim (2003)</td></tr>
+<tr><td>Meyer's biopsychosocial approach</td><td>Meyer (1952)</td></tr>
+<tr><td>Heterogeneity of diagnoses</td><td>Feczko et al. (2019)</td></tr>
+<tr><td>fMRI + ML for ASD (97%)</td><td>Liu et al. (2021)</td></tr>
+<tr><td>Lay views = absence of illness</td><td>Rogers &amp; Pilgrim (1997)</td></tr>
+<tr><td>Violence stigma</td><td>Pescosolido et al. (2019)</td></tr>
+<tr><td>NPHS help-seeking data</td><td>Soh (2022), <em>The Straits Times</em>; Ministry of Health (2022)</td></tr>
+<tr><td>Racist remarks incident</td><td>Tan (2021), <em>The Straits Times</em></td></tr>
+<tr><td><span class="src s-out">Outside</span> Dual-continua model</td><td>Keyes (2002)</td></tr>
+<tr><td><span class="src s-out">Outside</span> Stigma process</td><td>Link &amp; Phelan (2001)</td></tr>
+<tr><td><span class="src s-out">Outside</span> Minority stress</td><td>Meyer (2003)</td></tr>
+</table></div>
+</section>
+</main>
+</div>
+<script>
+(function(){
+  const all = () => document.querySelectorAll('details');
+  document.getElementById('openAll').addEventListener('click', () => all().forEach(d => d.open = true));
+  document.getElementById('closeAll').addEventListener('click', () => all().forEach(d => d.open = false));
+  window.addEventListener('beforeprint', () => all().forEach(d => d.open = true));
+})();
+</script>
+</body>
+</html>
