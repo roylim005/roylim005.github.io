@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PSY213 Seminar 6 (SU6) – Revision Notes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6F7F5; --ink:#1E2A38; --muted:#5B6673; --line:#D3D9D6;
+  --teal:#2F7D72; --teal-soft:#E3F0EC;
+  --plum:#6B4E71; --plum-soft:#EFE8F0;
+  --amber:#A8700F; --amber-soft:#FBF1DE;
+  --red:#A6423A; --card:#FFFFFF;
+  --serif:"Newsreader", Georgia, "Times New Roman", serif;
+  --sans:"Instrument Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#141A21; --ink:#E4E8EC; --muted:#9AA6B2; --line:#2E3842;
+    --teal:#6CC1B3; --teal-soft:#1B2E2B; --plum:#C7A6CE; --plum-soft:#2A2230;
+    --amber:#E3B45C; --amber-soft:#2E2616; --red:#E08A82; --card:#1A222B;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#141A21; --ink:#E4E8EC; --muted:#9AA6B2; --line:#2E3842;
+  --teal:#6CC1B3; --teal-soft:#1B2E2B; --plum:#C7A6CE; --plum-soft:#2A2230;
+  --amber:#E3B45C; --amber-soft:#2E2616; --red:#E08A82; --card:#1A222B;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:1.075rem;line-height:1.62}
+.wrap{display:grid;grid-template-columns:250px minmax(0,1fr);gap:3rem;max-width:1180px;margin:0 auto;padding:2rem 1.5rem 5rem}
+nav.toc{position:sticky;top:calc(1.5rem + env(safe-area-inset-top,0px));align-self:start;font-family:var(--sans);font-size:.88rem;max-height:calc(100vh - 3rem);overflow:auto;padding-right:.5rem}
+nav.toc p{font-weight:700;margin:0 0 .6rem}
+nav.toc ol{list-style:none;padding:0;margin:0;counter-reset:t}
+nav.toc li{margin:.15rem 0}
+nav.toc a{color:var(--muted);text-decoration:none;display:block;padding:.2rem .5rem;border-left:2px solid transparent}
+nav.toc a:hover,nav.toc a:focus-visible{color:var(--ink);border-left-color:var(--teal)}
+main{max-width:74ch}
+header.hero{border-bottom:1px solid var(--line);padding-bottom:1.5rem;margin-bottom:2rem}
+.course{font-family:var(--sans);color:var(--teal);font-weight:600;margin:0}
+h1{font-family:var(--sans);font-size:clamp(2rem,4.5vw,3rem);line-height:1.08;letter-spacing:-.02em;margin:.3rem 0 .8rem}
+h2{font-family:var(--sans);font-size:1.6rem;letter-spacing:-.01em;line-height:1.2;margin:3.2rem 0 .8rem;padding-top:1rem;border-top:3px solid var(--ink)}
+h3{font-family:var(--sans);font-size:1.15rem;margin:2rem 0 .5rem}
+h4{font-family:var(--sans);font-size:1rem;margin:1.2rem 0 .3rem}
+p{margin:.6rem 0}
+a{color:var(--teal)}
+:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.src{font-family:var(--sans);font-size:.72rem;font-weight:600;padding:.1rem .45rem;border-radius:3px;vertical-align:.15em;white-space:nowrap}
+.s-sem{background:var(--teal-soft);color:var(--teal)}
+.s-su{background:var(--plum-soft);color:var(--plum)}
+.s-out{background:var(--amber-soft);color:var(--amber);border:1px dashed var(--amber)}
+.legend{font-family:var(--sans);font-size:.88rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:.8rem 1.2rem;align-items:center}
+.eg{border-left:3px solid var(--plum);background:var(--plum-soft);padding:.7rem 1rem;margin:1rem 0;border-radius:0 4px 4px 0}
+.eg b:first-child{font-family:var(--sans);color:var(--plum)}
+.trap{border-left:3px solid var(--red);padding:.6rem 1rem;margin:1rem 0;background:var(--card)}
+.trap b:first-child{font-family:var(--sans);color:var(--red)}
+.outside{border:1px dashed var(--amber);background:var(--amber-soft);padding:.8rem 1rem;margin:1rem 0;border-radius:4px}
+table{border-collapse:collapse;width:100%;font-size:.95rem;margin:1rem 0}
+.tbl{overflow-x:auto}
+th,td{border:1px solid var(--line);padding:.5rem .65rem;vertical-align:top;text-align:left}
+th{font-family:var(--sans);font-size:.88rem;background:var(--card)}
+ul,ol{padding-left:1.3rem}
+li{margin:.25rem 0}
+.stat{font-family:var(--sans);font-weight:700;color:var(--teal)}
+/* continuum band */
+.band{display:grid;grid-template-columns:repeat(4,1fr);margin:1.2rem 0 .4rem;font-family:var(--sans);font-size:.85rem;border-radius:4px;overflow:hidden}
+.band div{padding:.7rem .6rem;color:#11202a}
+.band div strong{display:block;font-size:1rem}
+.b1{background:#8FD0B6}.b2{background:#F1DC7A}.b3{background:#F2A96B}.b4{background:#E38479}
+.quad{display:grid;grid-template-columns:auto 1fr 1fr;gap:4px;font-family:var(--sans);font-size:.88rem;margin:1rem 0}
+.quad div{background:var(--card);border:1px solid var(--line);padding:.6rem}
+.quad .ax{background:transparent;border:none;color:var(--muted);font-weight:600;display:flex;align-items:center}
+/* scenario */
+.scenario{border:2px solid var(--ink);border-radius:6px;padding:1rem 1.2rem;margin:1.6rem 0;background:var(--card)}
+.scenario h3{margin-top:.2rem}
+.prompt{font-style:italic}
+details{margin-top:.8rem;border-top:1px solid var(--line);padding-top:.6rem}
+summary{font-family:var(--sans);font-weight:600;cursor:pointer;color:var(--teal)}
+.steps{counter-reset:s;list-style:none;padding:0}
+.steps li{counter-increment:s;padding-left:2.4rem;position:relative;margin:.8rem 0}
+.steps li::before{content:counter(s);position:absolute;left:0;top:.05rem;width:1.7rem;height:1.7rem;border-radius:50%;background:var(--ink);color:var(--paper);font-family:var(--sans);font-weight:700;font-size:.9rem;display:grid;place-items:center}
+.toolbar{font-family:var(--sans);display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
+button{font-family:var(--sans);font-size:.88rem;font-weight:600;background:var(--ink);color:var(--paper);border:none;border-radius:4px;padding:.5rem .9rem;cursor:pointer}
+button.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.small{font-size:.9rem;color:var(--muted)}
+@media (max-width:860px){
+  .wrap{grid-template-columns:1fr;gap:1rem}
+  nav.toc{position:static;max-height:none;border:1px solid var(--line);padding:1rem;border-radius:4px}
+  .band{grid-template-columns:1fr 1fr}
+}
+@media print{
+  nav.toc,.toolbar{display:none}
+  .wrap{display:block;padding:0}
+  body{font-size:10.5pt;background:#fff;color:#000}
+  .scenario{break-inside:avoid-page}
+  h2{break-after:avoid}
+}
+</style>
+<style>
+.support{border:2px solid var(--teal);border-radius:6px;padding:.8rem 1rem;margin:1.2rem 0;background:var(--teal-soft);font-family:var(--sans);font-size:.92rem}
+.support strong{color:var(--teal)}
+.spectrum{display:grid;grid-template-columns:1fr 1fr 1fr;margin:1rem 0;font-family:var(--sans);font-size:.85rem;border-radius:4px;overflow:hidden}
+.spectrum div{padding:.7rem .6rem;color:#11202a}
+.spectrum strong{display:block;font-size:.95rem}
+.sp1{background:#8FD0B6}.sp2{background:#F1DC7A}.sp3{background:#E38479}
+.eq{font-family:var(--sans);text-align:center;margin:1.2rem auto;max-width:420px}
+.eq .num,.eq .den{padding:.4rem}
+.eq .num{border-bottom:2px solid var(--ink)}
+.eq .lhs{font-weight:700;margin-bottom:.4rem}
+.notice{border-left:4px solid var(--amber);background:var(--amber-soft);padding:.8rem 1rem;margin:1rem 0;font-family:var(--sans);font-size:.92rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="toc" aria-label="Contents">
+<p>Contents</p>
+<ol>
+<li><a href="#method">Answering scenario questions</a></li>
+<li><a href="#sad">Sadness and depression</a></li>
+<li><a href="#fear">Fear and anxiety</a></li>
+<li><a href="#ocd">OCD</a></li>
+<li><a href="#mad">Madness and schizophrenia</a></li>
+<li><a href="#trauma">Trauma and PTSD</a></li>
+<li><a href="#child">Childhood trauma</a></li>
+<li><a href="#help">Help-seeking and barriers</a></li>
+<li><a href="#reach">Reaching out</a></li>
+<li><a href="#promo">Mental health promotion</a></li>
+<li><a href="#links">Links to Seminars 1–5</a></li>
+<li><a href="#scen">Worked scenarios</a></li>
+<li><a href="#checks">Discrepancies to know</a></li>
+<li><a href="#refs">Citation bank</a></li>
+</ol>
+</nav>
+
+<main>
+<header class="hero">
+<p class="course">PSY213 Mental Health and Wellbeing in Singapore</p>
+<h1>Seminar 6: Internalising behaviours (2)</h1>
+<div class="notice"><strong>Built from Study Unit 6 only.</strong> You don't have the Seminar 6 slides yet, so these notes follow SU6's structure. SU6's chapter on self-harm and suicide has been added to the Seminar 5 notes instead. When you get the slides, send them and I'll realign these notes to what the seminar emphasises, the same way the earlier notes were built.</div>
+<div class="legend">
+<span><span class="src s-su">SU6</span> Study Unit 6</span>
+<span><span class="src s-out">Outside course</span> standard theory to strengthen answers; cite carefully</span>
+</div>
+<div class="support"><strong>Crisis contacts.</strong> IMH Mental Health Helpline (24 hours): <strong>6389 2222</strong>. SOS 24-hour Hotline: <strong>1767</strong>; CareText (WhatsApp): <strong>9151 1767</strong>. Emergency: <strong>995</strong> or the nearest A&amp;E. (SU6 lists an older SOS number; see <a href="#checks">discrepancies</a>.)</div>
+<div class="toolbar">
+<button type="button" id="openAll">Show all model answers</button>
+<button type="button" class="ghost" id="closeAll">Hide all</button>
+<button type="button" class="ghost" onclick="window.print()">Print</button>
+</div>
+</header>
+
+<!-- METHOD -->
+<section id="method">
+<h2>Answering scenario questions for this unit</h2>
+<p>SU6's first two learning outcomes set the framing: sadness, fear, madness, trauma and adversity are <strong>universal human experiences that lie on a spectrum</strong>. Only when they are excessive do they become disorders. So nearly every scenario asks: <em>is this normal or clinical, and what should be done?</em></p>
+<div class="spectrum" role="img" aria-label="From normal experience to disorder">
+<div class="sp1"><strong>Normal human experience</strong>Fits the situation, proportionate, eases with time or coping</div>
+<div class="sp2"><strong>Concerning</strong>Stronger or longer than expected; starting to interfere</div>
+<div class="sp3"><strong>Disorder</strong>Meets criteria; marked distress or impaired functioning</div>
+</div>
+<ol class="steps">
+<li><strong>Normal or clinical?</strong> Apply the tests: context (does the reaction fit the situation?), proportion (is the intensity reasonable?), time (is it easing?), and impact (is functioning impaired?). SU6 builds these tests for sadness (Horwitz &amp; Wakefield, 2007) and fear (Rosen &amp; Schulkin, 1998).</li>
+<li><strong>Name the likely condition</strong> by matching symptoms to criteria: MDD, a specific anxiety disorder, OCD, schizophrenia, PTSD. Always hedge: <em>possible</em>, and <em>would need a clinician's assessment</em>. SU6 stresses that laypeople shouldn't diagnose.</li>
+<li><strong>Explain</strong> using biopsychosocial factors, e.g. HPA-axis stress hormones in PTSD, or disadvantaged and minority groups being more exposed to trauma.</li>
+<li><strong>Identify barriers to help-seeking</strong> for this person: stigma, belief that treatment won't help, self-reliance, withdrawal, lack of insight.</li>
+<li><strong>Respond and refer</strong> with the SU6 supporting-others points and the Growth Circle skills. Use crisis procedures if needed. Close with a promotion point (Albee's equation) if the question is wide-ranging.</li>
+</ol>
+<h3>Cue-to-concept lookup</h3>
+<div class="tbl"><table>
+<tr><th>If the scenario mentions…</th><th>Reach for…</th></tr>
+<tr><td>Grief, break-up or job loss with low mood</td><td>Normal sadness tests vs MDD criteria</td></tr>
+<tr><td>Two weeks or more of low mood or loss of pleasure, plus sleep, appetite, energy, guilt or concentration changes</td><td>MDD: 5 of 9 symptoms, including mood or anhedonia</td></tr>
+<tr><td>Nerves before an event that pass afterwards</td><td>Normal anxiety</td></tr>
+<tr><td>Worrying about everything for months</td><td>GAD</td></tr>
+<tr><td>Fear of being judged; avoids social settings</td><td>Social anxiety disorder</td></tr>
+<tr><td>Sudden attacks of racing heart and fear of dying</td><td>Panic disorder</td></tr>
+<tr><td>Avoids malls, MRT or crowds because escape feels hard</td><td>Agoraphobia</td></tr>
+<tr><td>Intrusive thoughts plus rituals that relieve anxiety</td><td>OCD, not OCPD</td></tr>
+<tr><td>Withdrawal, suspicion and loss of motivation in a young adult</td><td>Early stage of schizophrenia; anosognosia</td></tr>
+<tr><td>Voices, fixed false beliefs, incoherent speech</td><td>Active stage of schizophrenia: five domains</td></tr>
+<tr><td>Flashbacks, avoidance and hypervigilance after an accident or assault</td><td>PTSD criteria A–H; acute stress disorder if under a month</td></tr>
+<tr><td>A child who was abused or neglected</td><td>Effects of childhood trauma; long-term risks</td></tr>
+<tr><td>"I can handle it myself", or fear of being called crazy</td><td>Barriers to help-seeking</td></tr>
+<tr><td>A question about programmes or policy</td><td>Albee's promotion equation; "It's OKAY to Reach Out"; MindSG</td></tr>
+</table></div>
+</section>
+
+<!-- SADNESS -->
+<section id="sad">
+<h2>Sadness and depression</h2>
+<h3>What is sadness?</h3>
+<p><span class="src s-su">SU6</span> Sadness is a universal emotion: low mood, melancholy, despondency. Matsumoto and Ekman (1989) found American and Japanese participants agreed on facial expressions of sadness, but <em>not necessarily</em> on other emotions such as fear. So some emotions are universal while others vary by culture. Some languages have words for emotions that others lack, e.g. German <em>schadenfreude</em>, joy at someone else's misfortune.</p>
+<p>Sadness is healthy. It helps us appreciate life, understand other perspectives, and connect with others (the SU uses the film <em>Inside Out</em> to make this point).</p>
+
+<h3>Three tests for normal sadness (Horwitz &amp; Wakefield, 2007)</h3>
+<div class="tbl"><table>
+<tr><th>Test</th><th>Meaning</th><th>Example</th></tr>
+<tr><td><strong>1. Appropriate context</strong></td><td>There is a fitting reason: loss of a close relationship (break-up, falling-out, death); non-social losses (job, status, goals); chronic stressors (financial difficulty, ongoing conflict)</td><td>Feeling low after a breakup, or after failing to get a hoped-for promotion</td></tr>
+<tr><td><strong>2. Proportionate intensity</strong></td><td>The size of the loss matches the intensity: small loss, mild sadness; major loss, deep sorrow</td><td>Mild disappointment at a lost badminton match; deep grief at a parent's death</td></tr>
+<tr><td><strong>3. Eases with time</strong></td><td>It fades through a change in circumstances or through coping, e.g. reframing a breakup as a chance to meet someone better suited. Permanent losses take longer but still ease</td><td>Grief after a death is intense for months, then gradually becomes bearable</td></tr>
+</table></div>
+<div class="trap"><b>Two nuances.</b> (1) A fitting context alone doesn't make sadness normal: it may be out of proportion or fail to lift, which can predispose someone to depression. (2) Normal sadness <em>can</em> persist if the stressor continues unchanged, e.g. an unhappy marriage or ongoing poverty. So lasting sadness is not automatically disorder: check whether the cause is still present.</div>
+<p class="small">Formative quiz trap: normal sadness is <em>not</em> a psychological disorder.</p>
+
+<h3>Major depressive disorder (MDD)</h3>
+<p><span class="src s-su">SU6</span> Sadness lies on a spectrum. Past a certain threshold it becomes clinical depression. MDD has been called the "common cold" of mental disorders because of rising diagnoses (Lambert, 2006; Wilson &amp; Dumornay, 2022). It is a mood disorder of persistent deep sadness, loss of pleasure, and physical symptoms such as sleep and digestive problems.</p>
+<p><strong>DSM-5-TR criteria:</strong> <strong>5 or more symptoms over 2 weeks</strong>, at least one of which must be <strong>depressed mood</strong> or <strong>loss of pleasure (anhedonia)</strong>.</p>
+<div class="tbl"><table>
+<tr><th>#</th><th>Symptom</th><th>How it might look</th></tr>
+<tr><td>1</td><td>Depressed mood most of the day, nearly every day</td><td>"I feel heavy and hopeless from the moment I wake up"</td></tr>
+<tr><td>2</td><td>Markedly reduced interest or pleasure</td><td>Stops playing guitar, which they used to love</td></tr>
+<tr><td>3</td><td>Significant weight or appetite change (up or down)</td><td>Skips meals, loses 5 kg in a month</td></tr>
+<tr><td>4</td><td>Slowed thinking and movement, <em>noticed by others</em></td><td>Colleagues notice slow speech and responses</td></tr>
+<tr><td>5</td><td>Fatigue, low energy</td><td>Exhausted after a full night's sleep</td></tr>
+<tr><td>6</td><td>Excessive worthlessness or misplaced guilt</td><td>"It's my fault the project failed; I'm useless"</td></tr>
+<tr><td>7</td><td>Poor concentration or indecision</td><td>Rereads the same email; can't choose what to eat</td></tr>
+<tr><td>8</td><td>Recurrent thoughts of death or suicide, a suicide attempt, or a specific plan</td><td>"I hope I don't wake up"</td></tr>
+</table></div>
+<p>Symptoms must cause <strong>marked distress or impaired functioning</strong> and must <strong>not be due to substances or a medical condition</strong>.</p>
+<p class="small">SU6 lists 8 numbered items. DSM-5-TR lists 9 symptoms, but the SU merges weight and appetite change into one item. Either way, the rule is 5 or more, including mood or anhedonia.</p>
+<p><strong>Specifiers:</strong> <em>with mixed features</em> means some manic symptoms, but not enough for a manic episode. <em>With anxious distress</em> means anxiety symptoms, which matters because anxiety can affect how well treatment works.</p>
+<p><strong>Risk:</strong> MDD carries high mortality from suicide. If someone says things like "I will kill myself" or "I hope I don't wake up", encourage them to see a clinician <strong>immediately</strong>.</p>
+<div class="trap"><b>Formative quiz trap.</b> Severe fear of social situations and scrutiny is social anxiety disorder, not MDD.</div>
+<div class="eg"><b>Example: grief vs depression.</b> Two weeks after his father's death, Kumar cries daily and struggles at work. That fits the context, is proportionate to a major loss, and is still within an expected period: <em>normal grief</em>. Four months later, he has stopped eating properly, can't get out of bed, feels he "should have done more" and "doesn't deserve to be happy", and has missed weeks of work. His sadness now extends to worthlessness and guilt, isn't easing, and is impairing his functioning. He now meets several MDD criteria and should be assessed.</div>
+</section>
+
+<!-- FEAR -->
+<section id="fear">
+<h2>Fear and anxiety</h2>
+<h3>Normal vs pathological anxiety</h3>
+<p><span class="src s-su">SU6</span></p>
+<ul>
+<li><strong>Fear</strong> is a strong, biologically adaptive emotion that triggers defensive behaviour (fight or flight) in response to real or perceived threat (Rosen &amp; Schulkin, 1998).</li>
+<li><strong>Anxiety</strong> is anticipation, apprehension and worry about events that may or may not happen.</li>
+</ul>
+<div class="tbl"><table>
+<tr><th>Normal anxiety</th><th>Pathological anxiety</th></tr>
+<tr><td>A response to real or perceived threat, e.g. public speaking. <strong>Temporary</strong>: it fades after the event and can be coped with, e.g. by rehearsing. Doesn't impair functioning.</td><td>Apprehension <strong>out of proportion</strong> to the situation that <strong>interferes with daily functioning</strong>. Symptoms are cognitive (poor focus, excessive worry), emotional (irritability, "free-floating" dread) and physical (palpitations, sweating, hyperventilation, muscle tension, sleep problems).</td></tr>
+</table></div>
+<p>As with sadness, fear and anxiety lie on a spectrum. Past a threshold, anxiety becomes a disorder.</p>
+
+<h3>Core anxiety criteria</h3>
+<p><span class="src s-su">SU6</span> Excessive worry about several activities, <strong>most days for at least 6 months</strong>, causing marked distress or impairment, with <strong>at least 3</strong> of: restlessness; fatigue; poor concentration; irritability; muscle tension; sleep problems.</p>
+<p class="small">These are actually the criteria for <strong>generalised anxiety disorder</strong>. SU6 presents them as general anxiety criteria; see <a href="#checks">discrepancies</a>.</p>
+
+<h3>Types of anxiety disorder</h3>
+<div class="tbl"><table>
+<tr><th>Disorder</th><th>Hallmark <span class="src s-su">SU6</span></th><th>Example</th></tr>
+<tr><td><strong>Separation anxiety disorder</strong></td><td>Persistent fear of being away from home or an attachment figure; distress so strong it affects school or work; nightmares; excessive worry that harm will come to the attachment figure</td><td>A 9-year-old refuses school every day, convinced something will happen to her mother while she is away</td></tr>
+<tr><td><strong>Selective mutism</strong></td><td>Consistently unable to speak in certain social settings. Usually detected in preschool; at least 1 month; can persist into adulthood untreated</td><td>A child who chats freely at home but says nothing at kindergarten for months</td></tr>
+<tr><td><strong>Specific phobia</strong></td><td>Intense anxiety when facing or anticipating a feared object. Five categories: <em>animals</em>; <em>natural environment</em> (e.g. heights); <em>blood-injection</em> (e.g. needles); <em>situational</em> (e.g. enclosed spaces, flying); <em>other</em></td><td>Refuses vaccinations because of needle phobia</td></tr>
+<tr><td><strong>Social anxiety disorder</strong></td><td>Severe fear of social settings and of scrutiny, criticism or ridicule; avoidance that impairs relationships, work or school</td><td>A graduate turns down interviews because she fears being judged</td></tr>
+<tr><td><strong>Panic disorder</strong></td><td>Repeated panic attacks, possibly without a trigger, leading to a sense of losing control. Attack symptoms: nausea, dizziness, racing heart, trembling, chills or sweating, choking, breathlessness, chest or abdominal pain, fear of losing control or dying</td><td>A man rushes to A&amp;E convinced he's having a heart attack; tests are normal; it keeps happening</td></tr>
+<tr><td><strong>Generalised anxiety disorder (GAD)</strong></td><td>Persistent, excessive worry about everyday things, out of proportion to the threat; imagining worst outcomes; poor concentration; hard to control the worry</td><td>Worries daily about work, health, the children and money, always expecting the worst</td></tr>
+<tr><td><strong>Agoraphobia</strong></td><td>"Fear of the marketplace". Excessive fear of places where escape or help is difficult (malls, lifts, crowds, markets). May involve panic attacks; may stop leaving home</td><td>Hasn't taken the MRT or entered a mall in a year; now rarely leaves the flat</td></tr>
+<tr><td><strong>Substance/medication-induced</strong></td><td>Anxiety only after using drugs, medication or alcohol, with no anxiety before</td><td>Panic after heavy caffeine or stimulant use (links to Seminar 4)</td></tr>
+<tr><td><strong>Due to another medical condition</strong></td><td>Anxiety caused directly by a medical condition, e.g. heart arrhythmia, breathing problems, encephalitis. Needs medical evaluation (Aquin et al., 2017)</td><td>An overactive thyroid causing racing heart and nervousness</td></tr>
+<tr><td><strong>Other specified</strong></td><td>Most but not all criteria met</td><td>—</td></tr>
+</table></div>
+<div class="eg"><b>Activity 6.3 answers.</b> <em>Jane</em> (anxious about work, avoids colleagues, fears scrutiny, criticism and ridicule): <strong>social anxiety disorder</strong>. <em>Adam</em> (constant worry about what might go wrong, overthinking worst cases, struggles to focus): <strong>generalised anxiety disorder</strong>.</div>
+<div class="trap"><b>Commonly confused.</b> <em>Panic disorder vs agoraphobia</em>: panic disorder is fear of the attacks themselves; agoraphobia is fear of <em>places</em> where escape or help would be difficult. <em>Social anxiety vs avoidant PD</em> (Seminar 4): they overlap heavily, but avoidant PD is a pervasive personality pattern. <em>Anxiety due to a medical condition</em>: rule out physical causes first, a Seminar 3 link.</div>
+<p><strong>Reflect 6.4: managing your stress response.</strong> Activities that calm the nervous system include slow deep breathing, exercise (Seminar 3: regulates the HPA axis; releases endorphins), sleep, mindfulness, time in nature, social connection and limiting caffeine.</p>
+</section>
+
+<!-- OCD -->
+<section id="ocd">
+<h2>Obsessive-compulsive disorder</h2>
+<p><span class="src s-su">SU6</span> People often say "I'm so OCD", but clinical OCD goes well beyond normal checking. The Singapore Mental Health Study (2016) found OCD among the <strong>three most common mental disorders</strong> in Singapore, affecting about <strong>1 in 28</strong> people. DSM-5-TR places OCD in its own category.</p>
+<div class="tbl"><table>
+<tr><th>Obsessions</th><th>Compulsions</th></tr>
+<tr><td>Intrusive, unwanted, persistent thoughts or urges that cause intense anxiety. Examples: fear of germs; needing things perfectly symmetrical; constant doubt about whether doors are locked or appliances are off</td><td>Actions performed in response to obsessions that give <em>temporary</em> relief. Examples: excessive handwashing; arranging objects precisely; repeated checking; compulsive counting</td></tr>
+</table></div>
+<ul>
+<li>People with OCD can't control the thoughts and urges, and spend <strong>an hour or more a day</strong> on them.</li>
+<li>Compulsions are done for <strong>relief from anxiety, not pleasure</strong>.</li>
+<li>OCD had the <strong>longest median treatment delay: 11 years</strong> (see <a href="#help">help-seeking</a>).</li>
+</ul>
+<div class="eg"><b>Example: the anxiety–relief cycle.</b> Leaving home, Wen has an intrusive thought: "What if the gas is on and the flat burns down?" (obsession, anxiety rising). She goes back and checks the stove (compulsion), and feels relief. Ten minutes later the doubt returns and she checks again. The relief <em>reinforces</em> the checking, so the cycle strengthens. By now she is late to work most days, which counts as functional impairment.</div>
+<div class="trap"><b>OCD vs OCPD</b> (Seminar 4). In OCD, the thoughts are <em>unwanted</em> and distressing: the person wishes they would stop. In OCPD, perfectionism and control are a lifelong personality style the person usually sees as "the right way". Wen is distressed by her checking (OCD). A colleague who insists everyone follows her schedule, and sees nothing wrong with it, is closer to OCPD.</div>
+</section>
+
+<!-- MADNESS -->
+<section id="mad">
+<h2>Madness and schizophrenia</h2>
+<h3>What is "madness"?</h3>
+<p><span class="src s-su">SU6</span> "Mad" usually implies incoherent speech and living in a separate reality. But there are positive cultural stories of madness too: hallucinations, revelation and ecstasy celebrated in religious leaders, poets and artists. The SU opens with quotes from Aristotle, Poe and Graham Greene linking genius and madness. Today the word is typically a <strong>derogatory</strong> lay term for psychological disorder.</p>
+<p class="small">Links to Seminar 1: Burton's claim that "all poets are mad", cultural variation in hallucinations (Larøi et al., 2014), and normality being defined by social context. Link to Seminar 4: media portrayals and the violence stereotype.</p>
+
+<h3>Schizophrenia spectrum disorders</h3>
+<div class="tbl"><table>
+<tr><th>Early stage</th><th>Active stage</th></tr>
+<tr><td>Changes in emotion, relationships, behaviour and thinking that are concerning but <strong>not yet severe enough to diagnose</strong>: paranoia, fear, distrust; social withdrawal; poor concentration; reduced emotion; low motivation, e.g. for work</td><td>Five domains of abnormality:
+<ol>
+<li><strong>Delusions</strong></li>
+<li><strong>Hallucinations</strong></li>
+<li><strong>Disorganised thinking or speech</strong></li>
+<li><strong>Abnormal or grossly disorganised motor behaviour</strong></li>
+<li><strong>Negative symptoms</strong></li>
+</ol></td></tr>
+</table></div>
+<p><strong>Diagnosis:</strong> <strong>2 or more</strong> of the five domains for <strong>1 month</strong>, and <strong>at least one must be delusions, hallucinations or disorganised speech</strong>. Signs of disturbance last <strong>6 months</strong> in total: at least 1 month of active symptoms, with milder versions possible for the remaining period. Significant disruption in at least one major area: relationships, work or self-care.</p>
+
+<div class="tbl"><table>
+<tr><th>Domain</th><th>Meaning</th><th>Example</th></tr>
+<tr><td><strong>Delusions</strong></td><td>Fixed beliefs that don't change despite contradicting evidence. <em>Persecutory</em>: being spied on or plotted against. <em>Grandiose</em>: believing one has made major achievements in a field without any background in it. This differs from ordinary narcissism</td><td>Keeps curtains shut and avoids the phone, convinced neighbours are government spies. Or, with no acting experience, is certain of winning the next Oscar</td></tr>
+<tr><td><strong>Hallucinations</strong></td><td>Sensory perceptions experienced as real with no stimulus: visual, auditory or tactile</td><td>Hears voices commenting on them when alone</td></tr>
+<tr><td><strong>Disorganised thinking or speech</strong></td><td>Shown in speech: abrupt topic switches, incoherence, stopping mid-sentence</td><td>"I went to the market because the birds know the frequency, and my cousin's car is blue…"</td></tr>
+<tr><td><strong>Abnormal motor behaviour</strong></td><td>Erratic irritability, jerky movements, restlessness, or greatly reduced movement (catatonia); disrupts goal-directed activity</td><td>Stands frozen in one posture for hours</td></tr>
+<tr><td><strong>Negative symptoms</strong></td><td>The <em>absence</em> of normal behaviour: flat affect, monotone speech, very low energy, lack of motivation, lack of enjoyment. <strong>Can be mistaken for depression</strong></td><td>Can't manage buying groceries; speaks without expression</td></tr>
+</table></div>
+<div class="eg"><b>Activity 6.4 answers.</b> (1) A <em>delusion</em> is a false <strong>belief</strong>, a problem of thought. A <em>hallucination</em> is a false <strong>perception</strong>, a problem of the senses. Someone who hears voices has a hallucination; someone who believes those voices are the government transmitting into their head also has a delusion. (2) The five domains: delusions, hallucinations, disorganised thinking or speech, abnormal or disorganised motor behaviour, and negative symptoms.</div>
+<div class="trap"><b>Formative quiz trap.</b> The five domains are <em>not</em> "visual, auditory and tactile hallucinations plus two delusion types", and <em>not</em> a list of related disorders.</div>
+
+<h3>In Singapore; getting help early</h3>
+<ul>
+<li><span class="src s-su">SU6</span> Subramaniam et al. (2021), with over 6,000 participants: lifetime prevalence of schizophrenia and related psychotic disorders is about <strong>2.3%</strong>, with an average age of onset of <strong>23.1 years</strong>.</li>
+<li>It is severe, so early consultation and treatment matter.</li>
+<li><strong>Lack of insight (anosognosia)</strong>: most people with schizophrenia don't recognise they are unwell. This makes treatment hard. Efforts to help can feed delusions and be seen as a plot against them.</li>
+</ul>
+<div class="trap"><b>Formative quiz traps.</b> Schizophrenia has an early stage <em>and</em> an active stage. It <em>is</em> severe. People usually <em>lack</em> insight.</div>
+<p><strong>Reflect 6.5: helping someone in the early stage.</strong> Approach calmly and without confrontation. Focus on what they experience as distressing, such as poor sleep, stress or fear, rather than labelling it "psychosis". Don't argue about their beliefs, which may make you part of the "plot". Keep contact and trust. Suggest a GP visit framed around sleep or stress. Involve family. Use the IMH helpline (6389 2222) for advice, or in a crisis. Early help matters: Seminar 2 noted that a longer duration of untreated psychosis is associated with worse outcomes (Basu et al., 2015).</p>
+</section>
+
+<!-- TRAUMA -->
+<section id="trauma">
+<h2>Trauma and PTSD</h2>
+<h3>What is trauma?</h3>
+<p><span class="src s-su">SU6</span> Traumatic events are severe adverse events, either <strong>collective</strong> (war, natural disaster) or <strong>individual</strong> (rape, road accident). Immediate reactions include shock, distress, numbness and denial. Longer-term effects include strained relationships, hypervigilance, nightmares, flashbacks and irritability. A subset of people can't return to daily life and may be diagnosed with PTSD.</p>
+
+<h3>How common is PTSD?</h3>
+<ul>
+<li>About <strong>5–10%</strong> of people receive a PTSD diagnosis in their lifetime; <strong>women at twice the rate of men</strong> (Yehuda et al., 2015).</li>
+<li>Trauma exposure is very common: most people experience at least one traumatic event (Kessler et al., 1995; Mills et al., 2011). In the US, over two-thirds of women have been exposed (Resnick et al., 1993).</li>
+<li>But <strong>most people exposed to trauma do not develop PTSD</strong>. It is not inevitable, and resilience is the norm.</li>
+<li>Risk depends on the <strong>type of trauma</strong>. Combat, rape and childhood trauma carry much higher risk.</li>
+</ul>
+<div class="trap"><b>Formative quiz traps.</b> PTSD is <em>not</em> diagnosed in everyone exposed to trauma. It does <em>not</em> occur at the same rate across trauma types. It <em>requires</em> changes in arousal.</div>
+
+<h3>DSM-5-TR criteria (A–H)</h3>
+<div class="tbl"><table>
+<tr><th>Criterion</th><th>Requirement</th><th>Examples</th></tr>
+<tr><td><strong>A</strong> Exposure</td><td>Trauma experienced directly or indirectly</td><td>Surviving an accident; witnessing one; learning a loved one was assaulted</td></tr>
+<tr><td><strong>B</strong> Intrusion</td><td>At least 1</td><td>Nightmares, flashbacks</td></tr>
+<tr><td><strong>C</strong> Avoidance</td><td>At least 1</td><td>Avoiding thoughts or reminders of the trauma</td></tr>
+<tr><td><strong>D</strong> Negative changes in mood and thinking</td><td>At least 2</td><td>Fear, guilt, shame; fewer positive emotions; feeling detached from people</td></tr>
+<tr><td><strong>E</strong> Changes in arousal</td><td>At least 2</td><td>Hypervigilance, irritability, heightened startle, sleep problems</td></tr>
+<tr><td><strong>F</strong> Duration</td><td>More than 1 month</td><td>Under 1 month = <strong>acute stress disorder</strong></td></tr>
+<tr><td><strong>G–H</strong></td><td>Significant distress or impairment; not due to substances or illness</td><td>—</td></tr>
+</table></div>
+<p class="small">SU6 describes A to F plus severity. G and H follow the standard DSM-5-TR structure shown in SU6's table (Yehuda et al., 2015).</p>
+<p><strong>Memory aid for the core symptom clusters:</strong> <em>Relive (B), Avoid (C), Feel bad (D), On edge (E)</em>.</p>
+<div class="eg"><b>Example.</b> Six weeks after a serious car crash on the PIE, Hafiz has nightmares about the collision (B, intrusion). He refuses to travel by car and changes the subject when it comes up (C, avoidance). He blames himself, feels numb, and has pulled away from friends (D, two symptoms). He is jumpy at loud noises and sleeps badly (E, two symptoms). It has lasted more than a month (F), and he has stopped working (G). He likely meets PTSD criteria. Had it been two weeks, acute stress disorder would fit better.</div>
+
+<h3>Biological and social factors in PTSD</h3>
+<p>The traumatic event is the trigger, but the onset and severity of PTSD depend on biological and psychosocial factors. This is the biopsychosocial model from Seminar 2.</p>
+<div class="tbl"><table>
+<tr><th>Biological</th><th>Social</th></tr>
+<tr><td>The HPA axis regulates stress hormones such as cortisol and catecholamines, which drive the fight-or-flight response. People with PTSD often show an unusual profile: <strong>low baseline cortisol with high catecholamines</strong> (Zoladz &amp; Diamond, 2013). PTSD shares biological risk factors with substance use disorders and depression (Hoge et al., 2007; Kessler et al., 2005), probably through overlapping problems in the autonomic nervous system, brain and hormone systems.</td><td>Trauma is more common among <strong>disadvantaged groups</strong>, such as ethnic minorities and people in conflict zones (Drožđek &amp; Bolwerk, 2010). These groups often have the <strong>weakest social support structures</strong>, leaving them most exposed to large-scale trauma (Hobfoll, 2014). Minority groups also report more domestic and sexual violence (Alegría et al., 2013).</td></tr>
+</table></div>
+<div class="trap"><b>Formative quiz trap.</b> A risk factor for PTSD is <em>belonging to a disadvantaged ethnic minority group</em>. It is <em>not</em> high baseline cortisol, a well-functioning HPA axis, or living in a conflict-free country.</div>
+<p class="small">Links: Seminar 2 (race and social class; stress-vulnerability, where fewer protective factors mean higher risk). Seminar 3 (the HPA axis and exercise; trauma linked to IBS).</p>
+</section>
+
+<!-- CHILD TRAUMA -->
+<section id="child">
+<h2>Childhood trauma and adversity</h2>
+<p><span class="src s-su">SU6</span> Childhood trauma can come from <strong>outside the family</strong> (war, poverty) or <strong>within the family</strong> (abuse and neglect, which is common). Because childhood is a critical period of development, maltreatment can stunt psychosocial, physical and intellectual development and damage the parent–child relationship.</p>
+<ul>
+<li><strong>Prevalence</strong> (Gilbert et al., 2009): about 16% of children experience neglect and physical abuse. In developed countries, about 10% of girls and 5% of boys experience serious sexual abuse, and about 10% experience emotional abuse such as degradation and humiliation.</li>
+<li><strong>Effects in childhood</strong>: social withdrawal; delays in language and intellectual development; emotional distress (flashbacks, depression, anxiety); conduct problems (aggression, impulsivity, defiance).</li>
+<li><strong>Long-term effects</strong>: increased risk of criminality and adult psychological disorders. People abused or neglected in childhood are <strong>over-represented</strong> in clinical and prison populations (Sergentanis et al., 2014). Maltreatment predisposes to eating disorders, personality disorders, depression and anxiety (Al Odhayani et al., 2013; Hayes, 2009). Childhood sexual abuse can undermine later relationships (Roberts et al., 2004).</li>
+</ul>
+<div class="trap"><b>Formative quiz trap.</b> Adults abused in childhood are <em>over</em>-represented, not under-represented, in clinical and prison settings.</div>
+<p class="small">Links: Seminar 2 (adverse childhood experiences; parenting stress and externalising behaviour, Bayer et al., 2008). Seminar 4 (conduct problems; the pathway to ODD and CD). Seminar 5 (history of abuse as a static suicide risk factor). A child showing aggression may be a traumatised child, not simply a "conduct" case.</p>
+</section>
+
+<!-- HELP-SEEKING -->
+<section id="help">
+<h2>Help-seeking and its barriers</h2>
+<h3>Singapore data</h3>
+<div class="tbl"><table>
+<tr><th>Finding</th><th>Source</th></tr>
+<tr><td>Willing to seek professional help: 58.3% (up from 47.8% in 2019). Least likely: ages 60–74. Most likely: ages 30–39 (67.7%)</td><td>National Population Health Survey. SU6 labels it 2022; it is the 2021 NPHS released in 2022 (same data as Seminar 1)</td></tr>
+<tr><td><strong>Treatment gap</strong>: 75% of people with a mood or anxiety condition sought <em>no</em> professional help</td><td>Singapore Mental Health Study 2016 (n = 6,126)</td></tr>
+<tr><td><strong>Treatment delay</strong> (time from symptom onset to treatment) varies. <strong>OCD has the longest median delay: 11 years</strong></td><td>Singapore Mental Health Study 2016</td></tr>
+</table></div>
+
+<h3>What promotes help-seeking</h3>
+<p><span class="src s-su">SU6</span> Awareness of symptoms alone isn't enough. A person also needs to see the problem as needing help, to feel that seeking help is normal and acceptable, and to have access to services (Rickwood &amp; Braithwaite, 1994). Promoting factors fall into two groups (Barker et al., 2005):</p>
+<div class="tbl"><table>
+<tr><th>Individual factors</th><th>Structural factors</th></tr>
+<tr><td>
+<ol>
+<li><strong>Mental health literacy</strong>: recognising the problem, seeing it as a risk, believing it needs intervention (Jorm et al.)</li>
+<li><strong>Socio-emotional competence</strong>: being able to identify and express emotions, which enables informal help from family and friends, most Singaporeans' first port of call</li>
+<li><strong>Skills</strong> to seek information and professional help</li>
+</ol></td><td>Support infrastructure: <strong>referral pathways</strong> and <strong>access to mental health resources</strong></td></tr>
+</table></div>
+
+<h3>What blocks help-seeking</h3>
+<div class="tbl"><table>
+<tr><th>Barrier</th><th>Explanation</th><th>Example</th></tr>
+<tr><td><strong>Fear of stigma</strong></td><td>Fear of being labelled "crazy" or "unstable" if others find out (Shafie et al., 2021; Wisdom et al., 2006)</td><td>Won't be seen entering a psychiatric clinic in case colleagues find out</td></tr>
+<tr><td><strong>Negative attitudes to services</strong></td><td>Belief that treatment won't help; misunderstanding what "professional help" involves; believing only medical approaches work; past bad experiences (Rickwood et al., 2007)</td><td>A child who felt misunderstood by a school counsellor distrusts all counsellors as an adult</td></tr>
+<tr><td><strong>Self-reliance</strong></td><td>Belief that you should solve your own problems. This is especially strong in young adults</td><td>"I'm an adult; I should be able to handle this myself"</td></tr>
+<tr><td><strong>The illness itself</strong></td><td>Withdrawal and suicidal thinking in depression make reaching out <em>less</em> likely (Rickwood et al., 2005)</td><td>A depressed student stops answering messages from everyone, including the counsellor</td></tr>
+</table></div>
+<div class="trap"><b>Formative quiz trap.</b> Self-reliance beliefs are a <em>barrier</em>. Literacy, socio-emotional competence and good infrastructure <em>promote</em> help-seeking.</div>
+<div class="outside"><p><span class="src s-out">Add for Singapore (Reflect 6.7)</span> Other barriers worth raising include cultural emphasis on "face" and family privacy; concerns about how a diagnosis might affect jobs or insurance; spiritual or physical explanations of distress; language barriers for older adults; cost and waiting times; and gendered norms such as "be a man" (Seminar 2). Link each to course evidence where you can, e.g. the NPHS age gap, Basu et al.'s (2015) delay in untreated psychosis, and Rickwood and Braithwaite on gender.</p></div>
+</section>
+
+<!-- REACHING OUT -->
+<section id="reach">
+<h2>"Are you okay?" Reaching out</h2>
+<h3>Where people seek help</h3>
+<div class="tbl"><table>
+<tr><th>Source</th><th>Key point <span class="src s-su">SU6</span></th></tr>
+<tr><td><strong>Family and friends</strong></td><td>The first source of help for most people, including in Singapore, because the relationship is trusted and familiar. For men, <strong>romantic partners</strong> often decide whether professional help is sought (Cusack et al., 2004). For adolescents, <strong>parents and peers</strong> are key.</td></tr>
+<tr><td><strong>Schools</strong></td><td>Strong infrastructure. Performance, behaviour and attendance are indicators. Teachers, counsellors, parents and pastoral care staff act as <strong>gatekeepers</strong> for early identification.</td></tr>
+<tr><td><strong>GPs</strong></td><td>Often the first professional contact, e.g. for insomnia caused by depression, which allows recognition and referral. But patients may not disclose psychological problems unless they trust the GP, since clinics are seen as for physical illness (Wisdom et al., 2006).</td></tr>
+<tr><td><strong>Hotlines</strong></td><td>Available 24 hours, convenient and <strong>anonymous</strong>, which can make it easier to express emotions. A good first step.</td></tr>
+</table></div>
+
+<h3>Supporting someone with mental health issues</h3>
+<p><span class="src s-su">SU6</span> Seven points (Singapore Association for Mental Health, 2018; Mental Health Foundation, 2022), mapped to Growth Circle skills:</p>
+<div class="tbl"><table>
+<tr><th>#</th><th>Point</th><th>Growth Circle skill</th></tr>
+<tr><td>1</td><td>Be present; provide a safe space without judgement or distraction</td><td>Being present</td></tr>
+<tr><td>2</td><td>Let them lead; don't force them to share</td><td>Being present, respect</td></tr>
+<tr><td>3</td><td>Don't diagnose or offer solutions too early</td><td>Curiosity before advice</td></tr>
+<tr><td>4</td><td>Ask gently and openly: "How does that make you feel?" rather than "You're sad about this"</td><td>Be curious</td></tr>
+<tr><td>5</td><td>Listen actively; paraphrase to show understanding; validate their emotions</td><td>Paraphrase</td></tr>
+<tr><td>6</td><td>Encourage professional help without deciding for them, e.g. offer to go with them to the GP</td><td>Encourage</td></tr>
+<tr><td>7</td><td>Know your limits; rest and process for yourself</td><td>Self-care</td></tr>
+</table></div>
+
+<h3>Supporting someone in crisis</h3>
+<p><span class="src s-su">SU6</span> A crisis may involve an altered sense of reality or suicidal thinking. <strong>Stay calm.</strong></p>
+<ol>
+<li>Listen actively in a safe, non-judgemental space.</li>
+<li>Ask what would help them feel better.</li>
+<li>Ask whether there is anyone they'd like you to contact.</li>
+<li>Reassure them by pointing to resources and information.</li>
+<li><strong>Psychosis</strong>: don't reinforce delusions or hallucinations, but <strong>don't reject their reality</strong> either. Validate the <em>emotions</em> and acknowledge how the experience affects them.</li>
+<li>Mental health crisis: <strong>IMH 24-hour helpline, 6389 2222</strong>.</li>
+<li>Suicidal: contact someone trained. Call <strong>995</strong> or go to the nearest A&amp;E, or call <strong>SOS 1767</strong>.</li>
+</ol>
+<div class="eg"><b>Example: point 5 in practice.</b> A friend in psychosis says, terrified, "They've put cameras in my ceiling." Rejecting it ("That's ridiculous") breaks trust. Reinforcing it ("Let's find the cameras") feeds the delusion. Instead, validate the feeling: "That sounds really frightening. You must feel like you're never safe. What would help you feel a bit safer right now?" Then help them connect to IMH.</div>
+<div class="trap"><b>Formative quiz trap.</b> In a crisis: provide a safe space and call a crisis hotline. Don't reject their reality, diagnose them, or leave them to recover alone.</div>
+<div class="eg"><b>Activity 6.7: a friend with possible depression</b> (low mood, poor concentration, insomnia, social withdrawal). Be present in a private, unhurried setting. Let her lead. Don't diagnose ("you have depression") or rush to fix things. Ask openly: "How long have you been feeling this way?" "What's been hardest?" Paraphrase: "So it's been hard to sleep, hard to focus, and you haven't felt like seeing anyone." Validate the feeling. Gently ask about hopelessness or thoughts of death, since MDD carries suicide risk. Encourage a GP or counsellor visit and offer to go with her. Share hotlines. Follow up later. Look after yourself too.</div>
+</section>
+
+<!-- PROMOTION -->
+<section id="promo">
+<h2>Promoting mental health in Singapore</h2>
+<p><span class="src s-su">SU6</span> In 1986 the WHO endorsed mental health as a right: people should have the opportunity to develop and use their health potential to live socially and economically productive lives. This led to a global campaign for health for all by 2000 (WHO, 1991).</p>
+<h3>Albee's (1993) promotion equation</h3>
+<div class="eq" role="img" aria-label="Albee's equation">
+<div class="lhs">Mental health promotion =</div>
+<div class="num">coping skills + social support + self-esteem</div>
+<div class="den">stress + exploitation + organic factors</div>
+</div>
+<p>Promotion works by <strong>increasing the top</strong> (protective factors) and <strong>reducing the bottom</strong> (risk factors).</p>
+<div class="tbl"><table>
+<tr><th>Component</th><th>Meaning</th><th>Example intervention</th></tr>
+<tr><td colspan="3"><strong>Reduce (the bottom of the equation)</strong></td></tr>
+<tr><td><strong>Stress</strong></td><td>Less exposure to acute or chronic stress means lower risk</td><td>Workplace policies on workload and flexibility (Seminar 1: Karasek)</td></tr>
+<tr><td><strong>Exploitation</strong></td><td>Sexual, physical, emotional or financial exploitation, including at a societal level (discriminatory laws or behaviour, war, hunger)</td><td>Anti-discrimination measures; protection from abuse (Seminar 1 racism article; Seminar 2 domestic violence)</td></tr>
+<tr><td><strong>Organic factors</strong></td><td>Environmental stressors that cause physical vulnerability: pollution, stressful environments leading to hypertension</td><td>Physical health programmes (Seminar 3: the mind–body link)</td></tr>
+<tr><td colspan="3"><strong>Increase (the top of the equation)</strong></td></tr>
+<tr><td><strong>Coping skills</strong></td><td>Strategies for dealing with adversity</td><td>Stress-management and emotion-regulation workshops; exercise and pleasure (Seminar 3)</td></tr>
+<tr><td><strong>Social support</strong></td><td>One of the most important protective factors. Isolation worsens depression</td><td>Peer support, community groups, Growth Circles</td></tr>
+<tr><td><strong>Self-esteem</strong></td><td>Starts in childhood with affirmation. In adulthood, supportive relationships build confidence</td><td>Positive parenting programmes; mentoring</td></tr>
+</table></div>
+<h3>Singapore initiatives</h3>
+<ul>
+<li>The <strong>Interagency Taskforce on Mental Health and Well-being</strong> (also in Seminar 1's ST article).</li>
+<li>HPB's <strong>"It's OKAY to Reach Out"</strong> campaign (2021–2022): workshops, seminars, talk shows and community activities to encourage open conversation, coping strategies and reaching out. Seminar 1's SU also had an "OKAY tips" video.</li>
+<li>The <strong>MindSG</strong> online portal for mental health resources.</li>
+<li>Recommended reading: the Northwest CDC and SUSS <em>Mental Wellness Toolkit @ Northwest</em> (2023).</li>
+</ul>
+<div class="eg"><b>Example: using the equation to evaluate a programme.</b> A company runs a one-off resilience webinar. In Albee's terms, it adds a little to <em>coping skills</em> but leaves <em>stress</em> unchanged: long hours, low control. The equation shows why this is weak. A stronger programme also reduces the bottom of the equation, through workload and flexible hours, and increases <em>social support</em> through peer supporters and manager training.</div>
+</section>
+
+<!-- LINKS -->
+<section id="links">
+<h2>Links to Seminars 1–5</h2>
+<div class="tbl"><table>
+<tr><th>Seminar 6 idea</th><th>Connects to</th></tr>
+<tr><td>Sadness, fear and madness on a spectrum</td><td>Seminar 1: the mental health continuum; dimensional vs categorical; the threshold set by social context</td></tr>
+<tr><td>Cultural variation in emotion; positive cultural views of madness</td><td>Seminar 1: hallucinations vary across cultures (Larøi et al., 2014); Burton on poets</td></tr>
+<tr><td>MDD with anhedonia</td><td>Seminar 3: anhedonia; pleasure and exercise as strategies</td></tr>
+<tr><td>Anxiety due to a medical condition; the HPA axis in PTSD</td><td>Seminar 3: the mind–body link; exercise regulates the HPA axis</td></tr>
+<tr><td>Schizophrenia</td><td>Seminar 2: prefrontal and limbic dysfunction; duration of untreated psychosis (Basu et al., 2015); Seminar 4: the violence stereotype; substance-induced psychosis</td></tr>
+<tr><td>OCD</td><td>Seminar 4: OCPD vs OCD</td></tr>
+<tr><td>Social anxiety</td><td>Seminar 4: avoidant PD; FoMO and social comparison online</td></tr>
+<tr><td>Women twice as likely to develop PTSD</td><td>Seminar 2: gender-specific stressors (domestic violence); women diagnosed more with internalising disorders</td></tr>
+<tr><td>Trauma more common in disadvantaged and minority groups</td><td>Seminar 2: race and SES; stress-vulnerability</td></tr>
+<tr><td>Childhood maltreatment</td><td>Seminar 2: ACEs; Seminar 4: conduct problems; Seminar 5: abuse as a static suicide risk</td></tr>
+<tr><td>Help-seeking data and barriers</td><td>Seminar 1: NPHS; lay views; stigma; Seminar 2: gender and help-seeking</td></tr>
+<tr><td>Romantic partners drive men's help-seeking</td><td>Seminar 2: men seek help less</td></tr>
+<tr><td>Albee's equation</td><td>Seminar 1: Rainbow Model; Seminar 2: biopsychosocial and stress-vulnerability; Seminar 3: strategies as protective factors</td></tr>
+</table></div>
+</section>
+
+<!-- SCENARIOS -->
+<section id="scen">
+<h2>Worked scenarios</h2>
+
+<div class="scenario">
+<h3>Scenario 1 – Grief or depression?</h3>
+<p class="prompt">Mdm Siti, 58, lost her husband five months ago. She still cries most days, has lost 6 kg, sleeps poorly, has stopped attending her mosque group, and says she feels "useless" and that "Allah should have taken me instead". Her children say, "It's just grief, she'll get over it." Evaluate.</p>
+<details><summary>Model answer</summary>
+<p><strong>Normal sadness tests</strong> (Horwitz &amp; Wakefield, 2007). <em>Context</em>: losing her husband is an entirely fitting reason for sadness. <em>Proportion</em>: deep sorrow is proportionate to such a loss. <em>Easing with time</em>: permanent losses cause longer sadness, but five months on, her sadness does not seem to be easing and appears to be getting worse.</p>
+<p><strong>Beyond normal grief.</strong> Several features point to possible MDD: depressed mood most days; loss of interest (stopped attending her mosque group); significant weight loss; sleep problems; feelings of worthlessness ("useless"); and a wish to have died. That is at least 5 symptoms including depressed mood, well beyond 2 weeks, with impaired functioning. Only a clinician can diagnose, but she should be assessed.</p>
+<p><strong>Risk.</strong> Her statement about wishing to have been taken instead is a thought about death, the eighth MDD symptom and a suicide warning sign (Seminar 5). Someone should gently ask directly whether she has thoughts of ending her life. MDD carries high mortality from suicide.</p>
+<p><strong>Response to her children's view.</strong> Their assumption that it will pass reflects the lay view that sadness always resolves. It also risks delaying help. Older adults are already the least willing to seek professional help (NPHS). Recommend a GP visit, since physical symptoms like weight loss and poor sleep make this an acceptable entry point. Re-engage her social support, including her mosque community (Seminar 3: religion offers meaning and social capital). Grief support; encourage her gently rather than forcing her.</p>
+</details>
+</div>
+
+<div class="scenario">
+<h3>Scenario 2 – Which anxiety?</h3>
+<p class="prompt">Three people: (a) Ben, 26, had sudden episodes of a racing heart, chest pain and fear of dying on the MRT. He now avoids the MRT, malls and crowded hawker centres, and rarely leaves home. (b) Chloe, 8, screams and clings every morning at school drop-off, and has nightmares about her mother being hurt. (c) Mr Lee, 40, has worried for a year about his job, health, children and finances, feels tense and exhausted, and can't concentrate. Suggest possible diagnoses and justify them.</p>
+<details><summary>Model answer</summary>
+<p><strong>(a) Ben: panic disorder with agoraphobia.</strong> His episodes match panic attack symptoms: racing heart, chest pain, fear of dying. His avoidance now extends to <em>places where escape or help would be difficult</em> (the MRT, malls, crowds), and he rarely leaves home. That is the hallmark of agoraphobia, which SU6 notes often co-occurs with panic attacks. Rule out a heart condition first ("anxiety due to another medical condition").</p>
+<p><strong>(b) Chloe: separation anxiety disorder.</strong> She shows persistent distress at separation from her attachment figure, struggles to attend school, has nightmares, and fears harm coming to her mother. Consider context, such as recent family illness, divorce or trauma. Some separation distress is normal in young children, so frequency, persistence and impairment decide.</p>
+<p><strong>(c) Mr Lee: generalised anxiety disorder.</strong> He worries excessively about many everyday areas for more than 6 months, with at least 3 associated symptoms: muscle tension, fatigue, poor concentration. It is out of proportion and hard to control.</p>
+<p><strong>Evaluation.</strong> Anxiety lies on a spectrum. Each case moves from normal to pathological because it is disproportionate, persistent and impairing (Rosen &amp; Schulkin, 1998). Helpful strategies include exercise, which regulates the HPA axis and reduces anxiety (Seminar 3), alongside professional treatment.</p>
+</details>
+</div>
+
+<div class="scenario">
+<h3>Scenario 3 – "I'm a bit OCD"</h3>
+<p class="prompt">Grace, 24, spends two to three hours a day washing her hands until they bleed, driven by thoughts that she will infect her family. She knows this is excessive but can't stop. She jokes about being "a bit OCD" and has never sought help. Discuss.</p>
+<details><summary>Model answer</summary>
+<p><strong>Clinical OCD, not everyday habit.</strong> <em>Obsession</em>: an intrusive, unwanted, persistent thought about infecting her family, causing intense anxiety. <em>Compulsion</em>: excessive handwashing that gives temporary relief. She spends well over an hour a day, can't control it, and is harming herself physically. She washes for <em>relief</em>, not pleasure. Recognising that the behaviour is excessive distinguishes this from OCPD, where perfectionism feels "right" (Seminar 4).</p>
+<p><strong>How common.</strong> OCD is among Singapore's three most common mental disorders, at about 1 in 28 people (Singapore Mental Health Study, 2016).</p>
+<p><strong>Why she hasn't sought help.</strong> OCD has the longest median treatment delay in Singapore, 11 years. Casual "I'm so OCD" talk <em>trivialises</em> the condition, so she may not see it as a real problem needing help (weak mental health literacy). She may also feel shame about the content of her thoughts, fearing stigma, or believe she should manage it herself.</p>
+<p><strong>Response.</strong> Be present and curious, not mocking. Encourage a GP or counsellor visit; her damaged skin could be a practical starting point. Reassure her that effective treatment exists. More widely, promotion efforts should improve literacy about what OCD actually is.</p>
+</details>
+</div>
+
+<div class="scenario">
+<h3>Scenario 4 – Early psychosis</h3>
+<p class="prompt">Daniel, 21, a university student, has become withdrawn over six months. He skips classes, stopped gaming with friends, and seems flat. Recently he told a friend that lecturers are "recording him through his laptop" and that he hears voices at night criticising him. He refuses to see a doctor, saying "they're in on it". How would you understand and respond to this?</p>
+<details><summary>Model answer</summary>
+<p><strong>From early to active stage.</strong> Over six months he has shown early-stage changes: social withdrawal, poor motivation, reduced emotion, falling functioning. He now shows active-stage symptoms: a <em>persecutory delusion</em> (being recorded by lecturers) and <em>auditory hallucinations</em> (critical voices). These are two domains, including the required delusions or hallucinations. His flat affect may be a <em>negative symptom</em>. This pattern is consistent with possible schizophrenia, which needs clinical assessment. His age fits the Singapore average age of onset, 23.1 years (Subramaniam et al., 2021).</p>
+<p><strong>Why he refuses help.</strong> <em>Lack of insight (anosognosia)</em> is typical, and attempts to help can feed the delusion ("they're in on it"). Stigma and fear of the "mad" label add to this.</p>
+<p><strong>Responding.</strong> Stay calm and non-judgemental. Don't argue with the delusion, and don't agree with it either. <em>Validate the emotion</em>: "That sounds terrifying, and exhausting to deal with at night." Ask what would help, e.g. better sleep. Suggest help framed around what <em>he</em> finds distressing, such as sleep, stress or the voices. Involve family and university counselling. Call the IMH helpline (6389 2222) for guidance, or in a crisis.</p>
+<p><strong>Why act early.</strong> A longer duration of untreated psychosis is associated with worse outcomes (Basu et al., 2015; Seminar 2). Also counter the stereotype: most people with mental illness are not violent (Seminar 4). Daniel is more likely to be frightened than dangerous.</p>
+</details>
+</div>
+
+<div class="scenario">
+<h3>Scenario 5 – After the accident</h3>
+<p class="prompt">Two colleagues, Ahmad and Wei, were in the same serious bus accident three months ago. Wei was shaken for a few weeks but is now back to normal. Ahmad has nightmares, avoids buses, feels guilty that a passenger died, has pulled away from his family, and startles at loud noises. Explain why their outcomes differ.</p>
+<details><summary>Model answer</summary>
+<p><strong>Ahmad likely meets PTSD criteria.</strong> A: exposure. B: intrusion (nightmares). C: avoidance (buses). D: negative mood and thinking, with at least two symptoms (guilt, detachment from family). E: changes in arousal, with at least two (exaggerated startle, plus others to check, such as sleep problems or irritability). F: more than one month. He also shows impairment. Wei's early reaction, if under a month, fits a normal response or at most acute stress disorder, which has since resolved.</p>
+<p><strong>Why the difference.</strong> SU6 stresses that PTSD is not inevitable. Most people exposed to trauma do not develop it; resilience is the norm (Yehuda et al., 2015). Differences come from several levels. <em>Biological</em>: variation in HPA-axis stress hormones (low baseline cortisol, high catecholamines in PTSD; Zoladz &amp; Diamond, 2013). Shared vulnerability with depression and substance use. <em>Psychological</em>: Ahmad's guilt about the death is a known amplifier. <em>Social</em>: available support and resources (Hobfoll, 2014). <em>Trauma-specific</em>: their experiences within the same event may differ, e.g. who witnessed the death.</p>
+<p><strong>Response.</strong> Recognise his symptoms without judgement. Encourage professional help through a GP or company EAP. Workplace flexibility, e.g. alternative transport for now. Family support. Exercise to help regulate stress responses (Seminar 3). Watch for depression or substance use, which share biological risk factors with PTSD.</p>
+</details>
+</div>
+
+<div class="scenario">
+<h3>Scenario 6 – Barriers for a young man</h3>
+<p class="prompt">Marcus, 27, an engineer, has had low mood and poor sleep for months. He thinks therapy is "just talking" and "for weak people", and says he'll "sort it out himself". His girlfriend is worried. Analyse the barriers and suggest how he could be helped to seek help.</p>
+<details><summary>Model answer</summary>
+<p><strong>Barriers.</strong> (1) <em>Negative attitudes to services</em>: "just talking" shows a misunderstanding of what professional help involves, and a belief that treatment is futile (Rickwood et al., 2007). (2) <em>Self-reliance</em>: "I'll sort it out myself", which is especially common in young adults. (3) <em>Stigma</em>: "for weak people" (Shafie et al., 2021). (4) <em>Gender norms</em>: men seek help less ("be a man"; Rickwood &amp; Braithwaite, 1994; Seminar 2). (5) Possibly the depression itself, if he withdraws.</p>
+<p><strong>Promoting factors to strengthen.</strong> <em>Mental health literacy</em>: help him see his symptoms as a treatable problem (Jorm et al.). <em>Socio-emotional competence</em>: help him name and express how he feels. <em>Structural access</em>: practical, low-stigma routes such as a GP visit for sleep, the company EAP, or a hotline.</p>
+<p><strong>His girlfriend's role.</strong> SU6 says romantic partners often play the <strong>most crucial role</strong> in whether men seek professional help (Cusack et al., 2004). She can be present, ask openly ("What's been weighing on you?"), validate him, share accurate information about what therapy actually involves, frame help-seeking as a practical, solution-focused step (which may suit his engineering mindset), offer to go with him to the GP, and look after herself too.</p>
+</details>
+</div>
+
+<div class="scenario">
+<h3>Scenario 7 – The aggressive child</h3>
+<p class="prompt">A Primary 3 teacher reports that Aiden, 9, hits classmates, has delayed reading, flinches when adults raise their voices, and is often hungry and unwashed. The school wants to discipline him for aggression. Discuss.</p>
+<details><summary>Model answer</summary>
+<p><strong>Look beyond the conduct.</strong> Aggression could suggest a conduct problem (Seminar 4). But SU6 shows that maltreated children often display <em>conduct problems</em> (aggression, impulsivity, defiance), <em>language and intellectual delays</em>, <em>emotional distress</em> and <em>social withdrawal</em>. Aiden's hunger and poor hygiene suggest possible <strong>neglect</strong>, and his flinching suggests possible exposure to <strong>abuse</strong>. About 16% of children experience neglect and physical abuse (Gilbert et al., 2009).</p>
+<p><strong>Why it matters.</strong> Discipline alone treats the symptom and could re-traumatise him. Maltreatment predisposes children to long-term psychological disorders and criminality. People maltreated as children are over-represented in clinical and prison populations (Sergentanis et al., 2014). Early identification changes that trajectory.</p>
+<p><strong>Response.</strong> Schools act as <em>gatekeepers</em> (SU6). The teacher should document observations and follow the school's child protection procedures, involving the school counsellor and relevant agencies. Aiden should not be interrogated. Provide a safe, predictable environment and trauma-informed support (a trusted adult, calm tone), plus learning support for his reading. Biopsychosocially: <em>biological</em> nutrition and development; <em>psychological</em> trauma responses; <em>social</em> family circumstances, which may involve poverty and parental stress (Seminar 2: Bayer et al., 2008).</p>
+</details>
+</div>
+
+<div class="scenario">
+<h3>Scenario 8 – Design a community programme</h3>
+<p class="prompt">A Community Development Council asks you to propose a mental health promotion programme for a heartland estate with many older residents living alone and young families under financial strain. Use Albee's equation.</p>
+<details><summary>Model answer</summary>
+<p><strong>Framework.</strong> Albee (1993) sees promotion as increasing <em>coping skills + social support + self-esteem</em> and reducing <em>stress + exploitation + organic factors</em>.</p>
+<p><strong>Reduce the bottom.</strong> <em>Stress</em>: financial counselling and linking families to assistance schemes. This tackles the stressor, not just the reaction (Seminar 2: social causation). <em>Exploitation</em>: scam-awareness sessions for older residents, and family violence awareness with referral pathways. <em>Organic factors</em>: health screenings and chronic disease support for older adults (Seminar 3: physical illness harms mental health).</p>
+<p><strong>Increase the top.</strong> <em>Social support</em>: befriending and door-knocking for seniors living alone; intergenerational activities; peer-support volunteers trained in Growth Circle listening skills. Isolation worsens depression, and older adults are least likely to seek professional help (NPHS). <em>Coping skills</em>: stress-management workshops; exercise groups such as morning walks and qigong (Seminar 3: exercise, pleasure). <em>Self-esteem</em>: positive-parenting sessions for young families; volunteering roles for seniors (Seminar 3: helping others builds self-worth).</p>
+<p><strong>Help-seeking pathways.</strong> Build literacy and access: signpost MindSG, GP screening, IMH 6389 2222 and SOS 1767, in several languages, in line with HPB's "It's OKAY to Reach Out" campaign.</p>
+<p><strong>Evaluation.</strong> Measure participation and wellbeing. Tailor activities to culture and language. Recognise limits: a CDC programme can't remove structural causes such as housing costs, so it should work with policy.</p>
+</details>
+</div>
+</section>
+
+<!-- CHECKS -->
+<section id="checks">
+<h2>Discrepancies to know</h2>
+<div class="tbl"><table>
+<tr><th>Item</th><th>Issue</th><th>What to do</th></tr>
+<tr><td>SOS hotline number</td><td>SU6 lists SOS as 1800-221 4444. Seminar 5 gives 1767 (with CareText 9151 1767)</td><td>Use <strong>1767</strong>, the current number from the more recent slides</td></tr>
+<tr><td>Anxiety criteria</td><td>SU6 presents "worry about several activities for 6 months plus 3 of 6 symptoms" as general anxiety criteria. These are the criteria for <strong>GAD</strong>. Other anxiety disorders have their own criteria</td><td>Attach these criteria to GAD in answers</td></tr>
+<tr><td>MDD symptom count</td><td>SU6 lists 8 items; DSM-5-TR lists 9 (weight and appetite are merged in SU6)</td><td>Say "5 or more symptoms over 2 weeks, including depressed mood or anhedonia"</td></tr>
+<tr><td>NPHS year</td><td>SU6 says "NPHS (2022)"; Seminar 1 called the same 58.3% figure NPHS 2021 (surveyed 2020–21, released 2022)</td><td>Say "NPHS 2021 (released 2022)"</td></tr>
+<tr><td>Jorm et al. year</td><td>1994 in the text; 1997 in the reference list</td><td>Cite Jorm et al. (1997)</td></tr>
+<tr><td>Suicide model citation</td><td>SU6 writes "Nock &amp; Connor (2014)"; the reference is Nock &amp; O'Connor (2014)</td><td>Cite Nock &amp; O'Connor (2014)</td></tr>
+<tr><td>HPA axis wording</td><td>SU6 says "the HPA axis in our sympathetic nervous system". The HPA axis is a hormonal (endocrine) system that works alongside the sympathetic nervous system</td><td>Say "the HPA axis and sympathetic nervous system regulate stress hormones"</td></tr>
+<tr><td>Schizophrenia prevalence</td><td>The 2.3% covers <em>schizophrenia and related psychotic disorders</em> (lifetime), not schizophrenia alone</td><td>Keep the full phrase</td></tr>
+<tr><td>Suicide statistics in SU6</td><td>SU6's chapter 2 uses older global figures and gives "476 suicides in 2023". Its own reference says 476 was the <strong>2022</strong> figure</td><td>Covered in the Seminar 5 notes: use the slides' WHO 2025 figures and the correct year</td></tr>
+</table></div>
+</section>
+
+<!-- REFS -->
+<section id="refs">
+<h2>Citation bank</h2>
+<div class="tbl"><table>
+<tr><th>Concept</th><th>Cite</th></tr>
+<tr><td>Universality of sadness in facial expressions</td><td>Matsumoto &amp; Ekman (1989)</td></tr>
+<tr><td>Normal sadness tests</td><td>Horwitz &amp; Wakefield (2007)</td></tr>
+<tr><td>Sadness vs depression and medicalisation</td><td>Bröer &amp; Besseling (2017)</td></tr>
+<tr><td>Rising depression</td><td>Lambert (2006); Wilson &amp; Dumornay (2022)</td></tr>
+<tr><td>Diagnostic criteria</td><td>American Psychiatric Association (2022)</td></tr>
+<tr><td>Normal vs pathological fear</td><td>Rosen &amp; Schulkin (1998)</td></tr>
+<tr><td>Anxiety and medical conditions</td><td>Aquin et al. (2017)</td></tr>
+<tr><td>OCD prevalence; treatment gap and delay</td><td>Singapore Mental Health Study (2016)</td></tr>
+<tr><td>Schizophrenia in Singapore</td><td>Subramaniam et al. (2021)</td></tr>
+<tr><td>PTSD overview and criteria</td><td>Yehuda et al. (2015)</td></tr>
+<tr><td>Trauma exposure prevalence</td><td>Kessler et al. (1995); Mills et al. (2011); Resnick et al. (1993)</td></tr>
+<tr><td>Cortisol and catecholamines in PTSD</td><td>Zoladz &amp; Diamond (2013)</td></tr>
+<tr><td>Shared biological risk factors</td><td>Hoge et al. (2007); Kessler et al. (2005)</td></tr>
+<tr><td>Trauma and disadvantaged groups</td><td>Drožđek &amp; Bolwerk (2010); Hobfoll (2014); Alegría et al. (2013)</td></tr>
+<tr><td>Child maltreatment prevalence</td><td>Gilbert et al. (2009)</td></tr>
+<tr><td>Long-term effects of maltreatment</td><td>Sergentanis et al. (2014); Roberts et al. (2004); Al Odhayani et al. (2013); Hayes (2009)</td></tr>
+<tr><td>What drives help-seeking</td><td>Rickwood &amp; Braithwaite (1994); Barker et al. (2005); Jorm et al. (1997)</td></tr>
+<tr><td>Barriers to help-seeking</td><td>Shafie et al. (2021); Wisdom et al. (2006); Rickwood et al. (2007)</td></tr>
+<tr><td>Partners and men's help-seeking</td><td>Cusack et al. (2004)</td></tr>
+<tr><td>Supporting others</td><td>Singapore Association for Mental Health (2018); Mental Health Foundation (2022); NCSS (2015)</td></tr>
+<tr><td>Promotion equation</td><td>Albee (1993)</td></tr>
+<tr><td>WHO health promotion</td><td>World Health Organization (1991)</td></tr>
+<tr><td>"It's OKAY to Reach Out"; MindSG</td><td>Health Promotion Board (2022)</td></tr>
+<tr><td>Community toolkit</td><td>Northwest CDC &amp; SUSS (2023)</td></tr>
+</table></div>
+</section>
+</main>
+</div>
+<script>
+(function(){
+  const all = () => document.querySelectorAll('details');
+  document.getElementById('openAll').addEventListener('click', () => all().forEach(d => d.open = true));
+  document.getElementById('closeAll').addEventListener('click', () => all().forEach(d => d.open = false));
+  window.addEventListener('beforeprint', () => all().forEach(d => d.open = true));
+})();
+</script>
+</body>
+</html>
