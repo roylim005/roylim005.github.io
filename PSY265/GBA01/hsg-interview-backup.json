@@ -1,0 +1,117 @@
+{
+  "P1": {
+    "demographics": {
+      "age": "52",
+      "gender": "Male",
+      "race": "Malay",
+      "profession": "Marketing",
+      "education": "Degree"
+    },
+    "answers": {
+      "2": "There are only two outcomes. Either it is good and I just waste my money or bad, which I mean I will waste more money.",
+      "3": "No",
+      "4": "Waste of money",
+      "5": "Negative. Waste of money.",
+      "6": "Yes. Because it is a waste of money.",
+      "7": "Of course. No.",
+      "8": "Depends on how important. If my spouse and kids really insist that I do and it hurts them if I don't, then I may consider. But I still think it is a waste of money.",
+      "9": "No. Because I have never intended to.",
+      "10": "Pretty confident if the process is easy.",
+      "11": "Waste of money",
+      "12": "If it is free, I may think about it because if the result is not good, it may not be free to follow up for more checks and I have too much to stress about now.",
+      "13": "$5 is affordable and 15 mins sound good. Still I have too much stress and I do not want to add another stress if my health is found to be no good."
+    }
+  },
+  "P2": {
+    "demographics": {
+      "age": "72",
+      "gender": "Male",
+      "race": "Chinese",
+      "profession": "Retiree",
+      "education": "O Level"
+    },
+    "answers": {
+      "2": "So old already. Don't see a point.",
+      "3": "Already I have chronic issues. I rather die than suffer in the hospital and bankrupt my family.",
+      "4": "NA",
+      "5": "Negative. Not necessary. I already know what is wrong.",
+      "6": "No.",
+      "7": "No. ",
+      "8": "No. Because I am so old already and I do not think any treatment will help and also it just waste money. Rather take the money and enjoy myself.",
+      "9": "No. Have never thought of.",
+      "10": "Don't know. Unless you pay for me. Forget it, I so old, go hospital sure won't come out. Better not go.",
+      "11": "I am old and I do not think it is necessary.",
+      "12": "Nothing.",
+      "13": "No. "
+    }
+  },
+  "P3": {
+    "demographics": {
+      "age": "45",
+      "gender": "Female",
+      "race": "Chinese",
+      "profession": "Freelancer",
+      "education": "Degree"
+    },
+    "answers": {
+      "2": "I went many years back and I remember it cost my company $400 for an executive health screening and I have to fast and wait for almost half a day to complete the screening. I got no time and no money since I am a freelancer.",
+      "3": "Yes.",
+      "4": "Cost and time.",
+      "5": "Positive. It is good to know how my body is doing.",
+      "6": "Yes. I want to go but no money and time.",
+      "7": "Yes. No. ",
+      "8": "I already want to go. Just no money and time.",
+      "9": "Yes. It was very long ago when working with the company. ",
+      "10": "Very confident. ",
+      "11": "It is just too expensive to just find out everything is fine. Also the time.",
+      "12": "If it is affordable, convenience and less wait time.",
+      "13": "Oh? I got no idea about this. I may take a look at it."
+    }
+  },
+  "P4": {
+    "demographics": {
+      "age": "52",
+      "gender": "Male",
+      "race": "Chinese",
+      "profession": "Auditor",
+      "education": "Diploma"
+    },
+    "answers": {
+      "2": "Company never cover and it is costly to do it with own pocket money.",
+      "3": "Yes.",
+      "4": "Cost.",
+      "5": "Positive. It is good to know but just too expensive to know.",
+      "6": "No. ",
+      "7": "Yes. No because my reason is cost and if it is cheaper, I will go.",
+      "8": "Yes. I will do t for their sake.",
+      "9": "No. Because I have to pay.",
+      "10": "Very confident.",
+      "11": "Cost.",
+      "12": "If it is cheaper and convenient.",
+      "13": "I will definitely consider."
+    }
+  },
+  "P5": {
+    "demographics": {
+      "age": "50",
+      "gender": "Female",
+      "race": "Chinese",
+      "profession": "Home maker",
+      "education": "Diploma"
+    },
+    "answers": {
+      "2": "Do not want to affect insurance. The last screen show that I have fatty liver and that affect my insurance. I do not want more premium to be added on.",
+      "3": "No.",
+      "4": "More negative outcome of the result.",
+      "5": "Negative. Will affect my premium.",
+      "6": "I think so. Not bother about their concern. I decide what I want.",
+      "7": "Yes. No.",
+      "8": "Depend on what is the leverage. If it is to save a life, I will do it to sacrifice.",
+      "9": "No. Didn't cross my mind.",
+      "10": "Don't know. But should be easy right? ",
+      "11": "Do not want to affect my insurance premium.",
+      "12": "If I do not need to declare more negative results to my insurance company.",
+      "13": "No. Same concern."
+    }
+  }
+}
