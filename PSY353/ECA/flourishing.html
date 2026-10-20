@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Flourishing Scale</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌱</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F2F5F7; --surface:#FFFFFF; --ink:#1C2632; --muted:#596574; --line:#D3DAE1;
+  --accent:#2E5A87; --accent-ink:#FFFFFF; --accent-soft:#E3ECF5; --warn:#8A4B12; --warn-soft:#FBEEDC; --ok:#2D6A4F;
+  --serif:"Source Serif 4", Georgia, "Times New Roman", serif;
+  --sans:"Atkinson Hyperlegible", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color-scheme: light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121820; --surface:#1A222C; --ink:#E6EBF0; --muted:#A3AEBA; --line:#2E3946;
+    --accent:#86B2DE; --accent-ink:#0F1A26; --accent-soft:#22324A; --warn:#F0B878; --warn-soft:#3A2A17; --ok:#7CC4A0;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121820; --surface:#1A222C; --ink:#E6EBF0; --muted:#A3AEBA; --line:#2E3946;
+  --accent:#86B2DE; --accent-ink:#0F1A26; --accent-soft:#22324A; --warn:#F0B878; --warn-soft:#3A2A17; --ok:#7CC4A0;
+  color-scheme: dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:1.0625rem;line-height:1.55;-webkit-text-size-adjust:100%}
+main{max-width:46rem;margin:0 auto;padding:2.5rem 1.25rem 7rem}
+h1{font-family:var(--serif);font-weight:600;font-size:2.1rem;line-height:1.15;margin:0 0 .5rem;letter-spacing:-.01em}
+h2{font-family:var(--serif);font-weight:600;font-size:1.45rem;line-height:1.25;margin:2.5rem 0 .5rem}
+h3{font-size:1.05rem;margin:1.5rem 0 .4rem}
+p{margin:.5rem 0 1rem}
+.lede{color:var(--muted);max-width:38rem}
+a{color:var(--accent)}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1.25rem 1.25rem;margin:1rem 0}
+.legend-list{margin:.25rem 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));gap:.25rem 1rem;color:var(--muted);font-size:.95rem}
+.legend-list b{color:var(--ink);display:inline-block;min-width:1.6rem}
+label.field{display:block;font-weight:700;margin:.75rem 0 .3rem}
+input[type=text],input[type=date],input[type=time],textarea{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:.6rem .75rem}
+textarea{min-height:7rem;resize:vertical;line-height:1.5}
+textarea.short{min-height:4rem}
+input:focus-visible,textarea:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.hint{color:var(--muted);font-size:.92rem;margin:.2rem 0 0}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));gap:0 1rem}
+
+/* survey items */
+fieldset.item{border:0;margin:0;padding:1.4rem 0 1.5rem;border-bottom:1px solid var(--line)}
+fieldset.item legend{padding:0;display:flex;gap:.75rem;font-family:var(--serif);font-size:1.25rem;line-height:1.4;margin-bottom:.9rem}
+.qnum{font-family:var(--sans);font-size:.95rem;color:var(--muted);min-width:1.8rem;padding-top:.3rem;font-variant-numeric:tabular-nums}
+.scale{display:grid;gap:.35rem;margin-left:2.55rem}
+.scale label{position:relative;display:block;cursor:pointer}
+.scale input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.tile{display:flex;align-items:center;justify-content:center;height:3rem;border:1.5px solid var(--line);border-radius:10px;background:var(--surface);font-weight:700;font-variant-numeric:tabular-nums;transition:background-color .15s, border-color .15s, transform .15s}
+.scale label:hover .tile{border-color:var(--accent)}
+.scale input:focus-visible + .tile{outline:3px solid var(--accent);outline-offset:2px}
+.scale input:checked + .tile{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);transform:translateY(-2px)}
+.ends{display:flex;justify-content:space-between;gap:1rem;margin:.45rem 0 0 2.55rem;color:var(--muted);font-size:.9rem}
+.ends span:last-child{text-align:right}
+.chosen{margin:.5rem 0 0 2.55rem;font-size:.95rem;color:var(--ok);min-height:1.4em}
+fieldset.item.missing legend .qnum{color:var(--warn)}
+fieldset.item.missing .tile{border-color:var(--warn)}
+
+/* footer bar */
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--line);padding:.75rem 1.25rem calc(.75rem + env(safe-area-inset-bottom,0px));z-index:20}
+.bar-inner{max-width:46rem;margin:0 auto;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.progress{flex:1 1 12rem}
+.progress-text{font-size:.95rem;color:var(--muted);margin-bottom:.3rem}
+.track{height:6px;background:var(--line);border-radius:6px;overflow:hidden}
+.fill{height:100%;width:0;background:var(--accent);transition:width .25s}
+button{font:inherit;font-weight:700;border-radius:10px;padding:.65rem 1.1rem;cursor:pointer;border:1.5px solid var(--accent);background:var(--accent);color:var(--accent-ink)}
+button.secondary{background:transparent;color:var(--accent)}
+button.quiet{background:transparent;border-color:var(--line);color:var(--muted)}
+.actions{display:flex;gap:.6rem;flex-wrap:wrap;margin:1rem 0}
+.notice{border-radius:10px;padding:.75rem 1rem;background:var(--warn-soft);color:var(--warn);margin:1rem 0;display:none}
+.notice.show{display:block}
+.toast{position:fixed;left:50%;bottom:6.5rem;transform:translateX(-50%) translateY(1rem);background:var(--ink);color:var(--bg);padding:.6rem 1rem;border-radius:10px;opacity:0;pointer-events:none;transition:opacity .2s, transform .2s;z-index:30;max-width:90vw}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+details.interviewer{margin-top:2rem}
+details.interviewer summary{cursor:pointer;font-weight:700;color:var(--muted)}
+table{border-collapse:collapse;width:100%;font-size:.95rem;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:.45rem .5rem;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:700}
+.tablewrap{overflow-x:auto}
+.thanks{display:none}
+.thanks.show{display:block}
+
+/* interview */
+.section-head{margin-top:3rem;padding-top:1rem;border-top:3px solid var(--accent)}
+.meta{display:grid;grid-template-columns:auto 1fr;gap:.2rem .75rem;font-size:.95rem;color:var(--muted);margin:.5rem 0 1rem}
+.meta dt{font-weight:700;color:var(--ink)}
+.meta dd{margin:0}
+.q{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1.1rem 1.25rem 1.25rem;margin:1rem 0}
+.q h3{font-family:var(--serif);font-weight:600;font-size:1.2rem;line-height:1.4;margin:0 0 .75rem;display:flex;gap:.6rem}
+.probes{list-style:none;margin:0 0 .5rem;padding:0}
+.probes li{margin:.3rem 0}
+.probes label{display:flex;gap:.6rem;align-items:flex-start;cursor:pointer}
+.probes input{width:1.15rem;height:1.15rem;margin-top:.22rem;accent-color:var(--accent);flex:none}
+.note-tip{font-style:italic;color:var(--muted);font-size:.95rem;margin:.25rem 0 .5rem}
+.checkline{display:flex;gap:.6rem;align-items:flex-start;margin:.5rem 0}
+.checkline input{width:1.15rem;height:1.15rem;margin-top:.22rem;accent-color:var(--accent)}
+.savestate{font-size:.9rem;color:var(--muted)}
+.cards{display:grid;gap:1rem;margin-top:1.5rem}
+.cards a{display:block;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1.1rem 1.25rem}
+.cards a:hover{border-color:var(--accent)}
+.cards a strong{font-family:var(--serif);font-size:1.25rem;font-weight:600;display:block;margin-bottom:.2rem}
+.cards a span{color:var(--muted)}
+@media (max-width:520px){
+  h1{font-size:1.75rem}
+  .scale,.ends,.chosen{margin-left:0}
+  .tile{height:2.75rem;font-size:.95rem}
+  fieldset.item legend{font-size:1.12rem}
+}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+<p class="hint"><a href="index.html">All instruments</a></p>
+<h1>Flourishing Scale</h1>
+<p class="lede">Here are eight statements. Choose the number that shows how much you agree with each one.</p>
+<div class="panel">
+  <label class="field" for="pseudonym">Participant pseudonym</label>
+  <input type="text" id="pseudonym" autocomplete="off" placeholder="e.g. Mei">
+  <p class="hint">Use the pseudonym only. Answers save on this device until you clear them.</p>
+</div>
+<div class="panel"><p style="margin-top:0"><strong>Scale</strong></p><ul class="legend-list"><li><b>1</b>Strongly disagree</li><li><b>2</b>Disagree</li><li><b>3</b>Slightly disagree</li><li><b>4</b>Mixed, or neither agree nor disagree</li><li><b>5</b>Slightly agree</li><li><b>6</b>Agree</li><li><b>7</b>Strongly agree</li></ul></div>
+<form id="items" onsubmit="return false"></form>
+<div id="notice" class="notice" role="alert"></div>
+<div id="thanks" class="thanks panel"><p><strong>All questions answered. Thank you.</strong></p><p class="hint">Please hand the device back to the interviewer.</p></div>
+<details class="interviewer">
+  <summary>Scores and export (interviewer)</summary>
+  <div class="panel tablewrap" id="scores"></div>
+  <div class="actions">
+    <button type="button" class="secondary" id="copy">Copy JSON</button>
+    <button type="button" class="quiet" id="reset">Clear answers</button>
+  </div>
+</details>
+</main>
+<div class="bar"><div class="bar-inner">
+  <div class="progress"><div class="progress-text" id="ptext" aria-live="polite"></div><div class="track"><div class="fill" id="pfill"></div></div></div>
+  <button type="button" id="export">Download JSON</button>
+</div></div>
+<div class="toast" id="toast" role="status"></div>
+<script>
+window.SURVEY = {"id": "flourishing", "name": "Flourishing Scale (FS)", "citation": "Diener, E., Wirtz, D., Tov, W., Kim-Prieto, C., Choi, D., Oishi, S., & Biswas-Diener, R. (2010). New well-being measures: Short scales to assess flourishing and positive and negative feelings. Social Indicators Research, 97(2), 143–156.", "min": 1, "max": 7, "labels": {"1": "Strongly disagree", "2": "Disagree", "3": "Slightly disagree", "4": "Mixed, or neither agree nor disagree", "5": "Slightly agree", "6": "Agree", "7": "Strongly agree"}, "items": [{"code": "FS1", "text": "I lead a purposeful and meaningful life."}, {"code": "FS2", "text": "My social relationships are supportive and rewarding."}, {"code": "FS3", "text": "I am engaged and interested in my daily activities."}, {"code": "FS4", "text": "I actively contribute to the happiness and well-being of others."}, {"code": "FS5", "text": "I am competent and capable in the activities that are important to me."}, {"code": "FS6", "text": "I am a good person and live a good life."}, {"code": "FS7", "text": "I am optimistic about my future."}, {"code": "FS8", "text": "People respect me."}]};
+window.SURVEY.labels = (function(o){ var r = {}; Object.keys(o).forEach(function(k){ r[+k] = o[k]; }); return r; })(window.SURVEY.labels);
+window.SURVEY.score = function(R){
+  var vals = [1,2,3,4,5,6,7,8].map(function(i){ return R[i]; });
+  var complete = vals.every(function(v){ return v !== undefined; });
+  var total = complete ? vals.reduce(function(a,b){ return a+b; }, 0) : null;
+  return { total: total, range: [8,56], comparison: { hungarian_adult_mean: 44.60, hungarian_adult_sd: 8.24, source: 'Varga et al. (2025), N = 1540, mean age 52' }, note: 'Scale is less precise above the mean (Varga et al., 2025); interpret high scores cautiously.' };
+};
+window.SURVEY.renderScores = function(s){
+  return '<table><tr><th>Measure</th><th>Value</th></tr>' +
+    '<tr><td>Total (8 to 56)</td><td>' + (s.total === null ? 'Incomplete' : s.total) + '</td></tr>' +
+    '<tr><td>Comparison</td><td>Hungarian adults 44.60 (SD 8.24), mean age 52 (Varga et al., 2025)</td></tr></table>';
+};
+
+(function(){
+  'use strict';
+  var CFG = window.SURVEY;
+  var KEY = 'psy353-' + CFG.id + '-v1';
+  var state = {pseudonym:'', started_at:null, responses:{}, answered_at:{}};
+  function load(){ try{ var s = localStorage.getItem(KEY); if(s){ var o = JSON.parse(s); if(o && o.responses) state = o; } }catch(e){} }
+  function save(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} }
+  load();
+
+  var form = document.getElementById('items');
+  var nItems = CFG.items.length;
+
+  function labelFor(item, v){
+    var L = item.labels || CFG.labels;
+    if (L && L[v] !== undefined) return L[v];
+    return null;
+  }
+
+  CFG.items.forEach(function(item, i){
+    var n = i + 1;
+    var fs = document.createElement('fieldset');
+    fs.className = 'item'; fs.id = 'item-' + n;
+    var lg = document.createElement('legend');
+    lg.innerHTML = '<span class="qnum">' + n + '</span><span></span>';
+    lg.lastChild.textContent = item.text;
+    fs.appendChild(lg);
+    var sc = document.createElement('div');
+    sc.className = 'scale';
+    var count = CFG.max - CFG.min + 1;
+    sc.style.gridTemplateColumns = 'repeat(' + count + ', minmax(0, 1fr))';
+    for (var v = CFG.min; v <= CFG.max; v++){
+      var lab = document.createElement('label');
+      var inp = document.createElement('input');
+      inp.type = 'radio'; inp.name = 'q' + n; inp.value = v;
+      var full = labelFor(item, v);
+      inp.setAttribute('aria-label', v + (full ? ' – ' + full : ''));
+      if (full) lab.title = full;
+      if (state.responses[n] === v) inp.checked = true;
+      var t = document.createElement('span'); t.className = 'tile'; t.textContent = v;
+      lab.appendChild(inp); lab.appendChild(t); sc.appendChild(lab);
+    }
+    fs.appendChild(sc);
+    var ends = document.createElement('div'); ends.className = 'ends';
+    var lo = document.createElement('span'), hi = document.createElement('span');
+    lo.textContent = CFG.min + ' = ' + (item.lo || labelFor(item, CFG.min));
+    hi.textContent = CFG.max + ' = ' + (item.hi || labelFor(item, CFG.max));
+    ends.appendChild(lo); ends.appendChild(hi); fs.appendChild(ends);
+    var ch = document.createElement('div'); ch.className = 'chosen'; ch.setAttribute('aria-live','polite'); fs.appendChild(ch);
+    form.appendChild(fs);
+    updateChosen(n);
+  });
+
+  function updateChosen(n){
+    var item = CFG.items[n-1];
+    var el = document.querySelector('#item-' + n + ' .chosen');
+    var v = state.responses[n];
+    if (v === undefined || v === null){ el.textContent = ''; return; }
+    var full = labelFor(item, v);
+    el.textContent = 'Answer: ' + v + (full ? ' (' + full + ')' : '');
+  }
+
+  form.addEventListener('change', function(e){
+    var t = e.target; if (t.type !== 'radio') return;
+    var n = parseInt(t.name.slice(1), 10);
+    if (!state.started_at) state.started_at = new Date().toISOString();
+    state.responses[n] = parseInt(t.value, 10);
+    state.answered_at[n] = new Date().toISOString();
+    document.getElementById('item-' + n).classList.remove('missing');
+    updateChosen(n); save(); refresh();
+  });
+
+  var pseud = document.getElementById('pseudonym');
+  pseud.value = state.pseudonym || '';
+  pseud.addEventListener('input', function(){ state.pseudonym = pseud.value; save(); });
+
+  function missing(){ var m = []; for (var i = 1; i <= nItems; i++){ if (state.responses[i] === undefined) m.push(i); } return m; }
+
+  function refresh(){
+    var done = nItems - missing().length;
+    document.getElementById('ptext').textContent = done + ' of ' + nItems + ' answered';
+    document.getElementById('pfill').style.width = (100 * done / nItems) + '%';
+    document.getElementById('scores').innerHTML = CFG.renderScores(CFG.score(state.responses));
+    document.getElementById('thanks').classList.toggle('show', done === nItems);
+  }
+
+  function buildJSON(){
+    var m = missing();
+    var now = new Date();
+    var started = state.started_at ? new Date(state.started_at) : null;
+    return {
+      schema_version: '1.0',
+      instrument: {
+        id: CFG.id, name: CFG.name, citation: CFG.citation,
+        n_items: nItems, response_min: CFG.min, response_max: CFG.max,
+        response_labels: CFG.labels || null
+      },
+      participant: { pseudonym: (state.pseudonym || '').trim() || null },
+      session: {
+        started_at: state.started_at,
+        exported_at: now.toISOString(),
+        duration_seconds: started ? Math.round((now - started) / 1000) : null
+      },
+      complete: m.length === 0,
+      missing_items: m,
+      responses: CFG.items.map(function(item, i){
+        var n = i + 1, v = state.responses[n];
+        var r = { item: n, code: item.code, text: item.text, value: (v === undefined ? null : v) };
+        if (item.domain) r.domain = item.domain;
+        if (item.lo) { r.anchor_min = item.lo; r.anchor_max = item.hi; }
+        else if (v !== undefined && CFG.labels) { r.label = CFG.labels[v]; }
+        r.answered_at = state.answered_at[n] || null;
+        return r;
+      }),
+      scores: CFG.score(state.responses)
+    };
+  }
+
+  function fileName(){
+    var p = (state.pseudonym || 'participant').trim().replace(/[^a-z0-9_-]+/gi, '-').replace(/^-+|-+$/g,'') || 'participant';
+    var d = new Date().toISOString().slice(0,10);
+    return CFG.id + '_' + p + '_' + d + '.json';
+  }
+
+  var toastEl = document.getElementById('toast'), toastTimer;
+  function toast(msg){ toastEl.textContent = msg; toastEl.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(function(){ toastEl.classList.remove('show'); }, 2600); }
+
+  function checkMissing(){
+    var m = missing(), note = document.getElementById('notice');
+    document.querySelectorAll('fieldset.item').forEach(function(f){ f.classList.remove('missing'); });
+    if (m.length){
+      m.forEach(function(n){ document.getElementById('item-' + n).classList.add('missing'); });
+      note.textContent = m.length + ' question' + (m.length > 1 ? 's are' : ' is') + ' unanswered (' + m.join(', ') + '). The export will mark the survey as incomplete.';
+      note.classList.add('show');
+      return confirm(note.textContent + '\n\nExport anyway?');
+    }
+    note.classList.remove('show');
+    return true;
+  }
+
+  document.getElementById('export').addEventListener('click', function(){
+    if (!checkMissing()) { var first = document.querySelector('fieldset.item.missing'); if (first) first.scrollIntoView({behavior:'smooth', block:'center'}); return; }
+    var blob = new Blob([JSON.stringify(buildJSON(), null, 2)], {type:'application/json'});
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob); a.download = fileName();
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); }, 1000);
+    toast('Downloaded ' + fileName());
+  });
+
+  document.getElementById('copy').addEventListener('click', function(){
+    var text = JSON.stringify(buildJSON(), null, 2);
+    function fallback(){ var ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); try{ document.execCommand('copy'); toast('JSON copied'); }catch(e){ toast('Copy failed. Use Download JSON instead.'); } ta.remove(); }
+    if (navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(function(){ toast('JSON copied'); }, fallback); } else fallback();
+  });
+
+  document.getElementById('reset').addEventListener('click', function(){
+    if (!confirm('Clear all answers on this device? Download the JSON first if you need it.')) return;
+    state = {pseudonym:'', started_at:null, responses:{}, answered_at:{}};
+    try{ localStorage.removeItem(KEY); }catch(e){}
+    document.querySelectorAll('.scale input').forEach(function(i){ i.checked = false; });
+    for (var n = 1; n <= nItems; n++) updateChosen(n);
+    pseud.value = ''; document.getElementById('notice').classList.remove('show');
+    document.querySelectorAll('fieldset.item').forEach(function(f){ f.classList.remove('missing'); });
+    refresh(); window.scrollTo({top:0, behavior:'smooth'}); toast('Answers cleared');
+  });
+
+  refresh();
+})();
+
+</script>
+</body>
+</html>
