@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PSY213 Seminar 7 – Revision Notes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6F7F5; --ink:#1E2A38; --muted:#5B6673; --line:#D3D9D6;
+  --teal:#2F7D72; --teal-soft:#E3F0EC;
+  --plum:#6B4E71; --plum-soft:#EFE8F0;
+  --amber:#A8700F; --amber-soft:#FBF1DE;
+  --red:#A6423A; --card:#FFFFFF;
+  --serif:"Newsreader", Georgia, "Times New Roman", serif;
+  --sans:"Instrument Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#141A21; --ink:#E4E8EC; --muted:#9AA6B2; --line:#2E3842;
+    --teal:#6CC1B3; --teal-soft:#1B2E2B; --plum:#C7A6CE; --plum-soft:#2A2230;
+    --amber:#E3B45C; --amber-soft:#2E2616; --red:#E08A82; --card:#1A222B;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#141A21; --ink:#E4E8EC; --muted:#9AA6B2; --line:#2E3842;
+  --teal:#6CC1B3; --teal-soft:#1B2E2B; --plum:#C7A6CE; --plum-soft:#2A2230;
+  --amber:#E3B45C; --amber-soft:#2E2616; --red:#E08A82; --card:#1A222B;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:1.075rem;line-height:1.62}
+.wrap{display:grid;grid-template-columns:250px minmax(0,1fr);gap:3rem;max-width:1180px;margin:0 auto;padding:2rem 1.5rem 5rem}
+nav.toc{position:sticky;top:calc(1.5rem + env(safe-area-inset-top,0px));align-self:start;font-family:var(--sans);font-size:.88rem;max-height:calc(100vh - 3rem);overflow:auto;padding-right:.5rem}
+nav.toc p{font-weight:700;margin:0 0 .6rem}
+nav.toc ol{list-style:none;padding:0;margin:0;counter-reset:t}
+nav.toc li{margin:.15rem 0}
+nav.toc a{color:var(--muted);text-decoration:none;display:block;padding:.2rem .5rem;border-left:2px solid transparent}
+nav.toc a:hover,nav.toc a:focus-visible{color:var(--ink);border-left-color:var(--teal)}
+main{max-width:74ch}
+header.hero{border-bottom:1px solid var(--line);padding-bottom:1.5rem;margin-bottom:2rem}
+.course{font-family:var(--sans);color:var(--teal);font-weight:600;margin:0}
+h1{font-family:var(--sans);font-size:clamp(2rem,4.5vw,3rem);line-height:1.08;letter-spacing:-.02em;margin:.3rem 0 .8rem}
+h2{font-family:var(--sans);font-size:1.6rem;letter-spacing:-.01em;line-height:1.2;margin:3.2rem 0 .8rem;padding-top:1rem;border-top:3px solid var(--ink)}
+h3{font-family:var(--sans);font-size:1.15rem;margin:2rem 0 .5rem}
+h4{font-family:var(--sans);font-size:1rem;margin:1.2rem 0 .3rem}
+p{margin:.6rem 0}
+a{color:var(--teal)}
+:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.src{font-family:var(--sans);font-size:.72rem;font-weight:600;padding:.1rem .45rem;border-radius:3px;vertical-align:.15em;white-space:nowrap}
+.s-sem{background:var(--teal-soft);color:var(--teal)}
+.s-su{background:var(--plum-soft);color:var(--plum)}
+.s-out{background:var(--amber-soft);color:var(--amber);border:1px dashed var(--amber)}
+.legend{font-family:var(--sans);font-size:.88rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:.8rem 1.2rem;align-items:center}
+.eg{border-left:3px solid var(--plum);background:var(--plum-soft);padding:.7rem 1rem;margin:1rem 0;border-radius:0 4px 4px 0}
+.eg b:first-child{font-family:var(--sans);color:var(--plum)}
+.trap{border-left:3px solid var(--red);padding:.6rem 1rem;margin:1rem 0;background:var(--card)}
+.trap b:first-child{font-family:var(--sans);color:var(--red)}
+.outside{border:1px dashed var(--amber);background:var(--amber-soft);padding:.8rem 1rem;margin:1rem 0;border-radius:4px}
+table{border-collapse:collapse;width:100%;font-size:.95rem;margin:1rem 0}
+.tbl{overflow-x:auto}
+th,td{border:1px solid var(--line);padding:.5rem .65rem;vertical-align:top;text-align:left}
+th{font-family:var(--sans);font-size:.88rem;background:var(--card)}
+ul,ol{padding-left:1.3rem}
+li{margin:.25rem 0}
+.stat{font-family:var(--sans);font-weight:700;color:var(--teal)}
+/* continuum band */
+.band{display:grid;grid-template-columns:repeat(4,1fr);margin:1.2rem 0 .4rem;font-family:var(--sans);font-size:.85rem;border-radius:4px;overflow:hidden}
+.band div{padding:.7rem .6rem;color:#11202a}
+.band div strong{display:block;font-size:1rem}
+.b1{background:#8FD0B6}.b2{background:#F1DC7A}.b3{background:#F2A96B}.b4{background:#E38479}
+.quad{display:grid;grid-template-columns:auto 1fr 1fr;gap:4px;font-family:var(--sans);font-size:.88rem;margin:1rem 0}
+.quad div{background:var(--card);border:1px solid var(--line);padding:.6rem}
+.quad .ax{background:transparent;border:none;color:var(--muted);font-weight:600;display:flex;align-items:center}
+/* scenario */
+.scenario{border:2px solid var(--ink);border-radius:6px;padding:1rem 1.2rem;margin:1.6rem 0;background:var(--card)}
+.scenario h3{margin-top:.2rem}
+.prompt{font-style:italic}
+details{margin-top:.8rem;border-top:1px solid var(--line);padding-top:.6rem}
+summary{font-family:var(--sans);font-weight:600;cursor:pointer;color:var(--teal)}
+.steps{counter-reset:s;list-style:none;padding:0}
+.steps li{counter-increment:s;padding-left:2.4rem;position:relative;margin:.8rem 0}
+.steps li::before{content:counter(s);position:absolute;left:0;top:.05rem;width:1.7rem;height:1.7rem;border-radius:50%;background:var(--ink);color:var(--paper);font-family:var(--sans);font-weight:700;font-size:.9rem;display:grid;place-items:center}
+.toolbar{font-family:var(--sans);display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
+button{font-family:var(--sans);font-size:.88rem;font-weight:600;background:var(--ink);color:var(--paper);border:none;border-radius:4px;padding:.5rem .9rem;cursor:pointer}
+button.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.small{font-size:.9rem;color:var(--muted)}
+@media (max-width:860px){
+  .wrap{grid-template-columns:1fr;gap:1rem}
+  nav.toc{position:static;max-height:none;border:1px solid var(--line);padding:1rem;border-radius:4px}
+  .band{grid-template-columns:1fr 1fr}
+}
+@media print{
+  nav.toc,.toolbar{display:none}
+  .wrap{display:block;padding:0}
+  body{font-size:10.5pt;background:#fff;color:#000}
+  .scenario{break-inside:avoid-page}
+  h2{break-after:avoid}
+}
+</style>
+<style>
+.support{border:2px solid var(--teal);border-radius:6px;padding:.8rem 1rem;margin:1.2rem 0;background:var(--teal-soft);font-family:var(--sans);font-size:.92rem}
+.support strong{color:var(--teal)}
+.spectrum{display:grid;grid-template-columns:1fr 1fr 1fr;margin:1rem 0;font-family:var(--sans);font-size:.85rem;border-radius:4px;overflow:hidden}
+.spectrum div{padding:.7rem .6rem;color:#11202a}
+.spectrum strong{display:block;font-size:.95rem}
+.sp1{background:#8FD0B6}.sp2{background:#F1DC7A}.sp3{background:#E38479}
+.eq{font-family:var(--sans);text-align:center;margin:1.2rem auto;max-width:420px}
+.eq .num,.eq .den{padding:.4rem}
+.eq .num{border-bottom:2px solid var(--ink)}
+.eq .lhs{font-weight:700;margin-bottom:.4rem}
+.notice{border-left:4px solid var(--amber);background:var(--amber-soft);padding:.8rem 1rem;margin:1rem 0;font-family:var(--sans);font-size:.92rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="toc" aria-label="Contents">
+<p>Contents</p>
+<ol>
+<li><a href="#method">Answering scenario questions</a></li>
+<li><a href="#data">The data: willingness, gap, delay</a></li>
+<li><a href="#youth">Youth: the NYMHS</a></li>
+<li><a href="#model">Why people seek help</a></li>
+<li><a href="#barriers">Why people don't</a></li>
+<li><a href="#act2">Activity 2: tackling a barrier</a></li>
+<li><a href="#help">SU6: help-seeking detail</a></li>
+<li><a href="#reach">Reaching out</a></li>
+<li><a href="#promo">Mental health promotion</a></li>
+<li><a href="#eca">ECA map</a></li>
+<li><a href="#links">Links to Seminars 1–6</a></li>
+<li><a href="#scen">Worked scenarios</a></li>
+<li><a href="#checks">Discrepancies to know</a></li>
+<li><a href="#refs">Citation bank</a></li>
+</ol>
+</nav>
+
+<main>
+<header class="hero">
+<p class="course">PSY213 Mental Health and Wellbeing in Singapore</p>
+<h1>Seminar 7: Barriers to seeking help</h1>
+<p>Revision notes built on the Seminar 7 slides, backed up by Study Unit 6, chapters 6–8 (barriers to help-seeking, reaching out, mental health promotion). Those chapters were previously parked in the Seminar 6 notes; they now live here.</p>
+<div class="legend">
+<span><span class="src s-sem">Seminar</span> in the slides</span>
+<span><span class="src s-su">SU6</span> Study Unit 6 backup</span>
+<span><span class="src s-out">Outside course</span> current Singapore data and initiatives; verify before citing</span>
+</div>
+<div class="support"><strong>Help in Singapore.</strong> IMH Mental Health Helpline (24 hours): <strong>6389 2222</strong>. SOS 24-hour Hotline: <strong>1767</strong>; CareText (WhatsApp): <strong>9151 1767</strong>. Emergency: <strong>995</strong> or the nearest A&amp;E.</div>
+<div class="toolbar">
+<button type="button" id="openAll">Show all model answers</button>
+<button type="button" class="ghost" id="closeAll">Hide all</button>
+<button type="button" class="ghost" onclick="window.print()">Print</button>
+</div>
+</header>
+
+<!-- METHOD -->
+<section id="method">
+<h2>Answering scenario questions for this unit</h2>
+<p>The seminar presents help-seeking as a <strong>staged process</strong>. That gives you a precise way to analyse any "why won't they get help?" scenario: find the <em>stage</em> where the process breaks down, then match the fix to that stage.</p>
+<ol class="steps">
+<li><strong>Locate the breakdown.</strong> Does the person not recognise the problem (<em>awareness</em>)? Recognise it but think it's not serious (<em>appraisal</em>)? Think help-seeking is shameful or pointless (<em>acceptability</em>)? Or want help but can't get it (<em>access</em>)?</li>
+<li><strong>Name the barrier</strong> from the slide's four: stigma, negative attitudes to services, self-reliance, condition-related barriers. Often more than one applies.</li>
+<li><strong>Split individual from structural.</strong> Is the gap in the person (literacy, appraisal, socio-emotional competence, motivation) or in their environment (services, referral pathways, cultural norms, social networks)?</li>
+<li><strong>Recommend a targeted fix.</strong> Match the intervention to the stage. A literacy campaign does nothing for someone who already knows they're depressed but can't afford a psychologist. Activity 2 warns against broad statements: name <em>who</em>, <em>what</em>, <em>where</em>.</li>
+<li><strong>Evaluate.</strong> Consider culture, age and gender (Seminar 2), and the limits of the fix.</li>
+</ol>
+<div class="trap"><b>Common mistake.</b> "Raise awareness and reduce stigma" as a catch-all answer. Awareness only fixes stage 1. If the scenario person already knows they're unwell, awareness is not the barrier.</div>
+</section>
+
+<!-- DATA -->
+<section id="data">
+<h2>The data: willingness, treatment gap, treatment delay</h2>
+<div class="tbl"><table>
+<tr><th>Measure</th><th>Finding</th><th>Source</th></tr>
+<tr><td><strong>Willingness to seek professional help</strong> <span class="src s-sem">Seminar</span></td><td>47.8% (2019) → 58.3% (the slide labels it 2022). Lowest: <strong>ages 60–74</strong>. Highest: <strong>ages 30–39 (67.7%)</strong></td><td>National Population Health Survey</td></tr>
+<tr><td><strong>Treatment gap</strong> <span class="src s-sem">Seminar</span></td><td><strong>75%</strong> of people with a mood or anxiety disorder did <em>not</em> seek professional help; 25% did</td><td>Singapore Mental Health Study 2016 (n = 6,126)</td></tr>
+<tr><td><strong>Treatment delay</strong> <span class="src s-sem">Seminar</span></td><td>Time from symptom onset to treatment often spans <strong>years</strong>. Longest: <strong>OCD, 11-year median delay</strong></td><td>Singapore Mental Health Study 2016</td></tr>
+</table></div>
+<p><strong>Key distinction:</strong> <em>willingness</em> is an attitude ("I would seek help"); the <em>treatment gap</em> is behaviour ("I didn't"). A 58% willingness rate alongside a 75% gap shows that attitude doesn't reliably turn into action. That gap between intention and behaviour is exactly what the staged model explains.</p>
+<div class="eg"><b>Example: why OCD's delay is so long.</b> Each stage leaks. <em>Awareness</em>: "I'm a bit OCD" talk trivialises it, so people don't see it as an illness. <em>Appraisal</em>: rituals feel like habits, not symptoms. <em>Acceptability</em>: obsessions can be embarrassing (e.g. intrusive violent or taboo thoughts), so people hide them. <em>Access</em>: few know OCD has specific, effective treatment. Eleven years is what happens when every stage is blocked a little.</div>
+</section>
+
+<!-- YOUTH -->
+<section id="youth">
+<h2>Youth mental health: the National Youth Mental Health Study</h2>
+<div class="outside"><p><span class="src s-out">Outside course</span> The ECA asks about the NYMHS, which isn't in the slides or study units. Key published findings from IMH's study (2,600 residents aged 15–35, surveyed October 2022 to June 2023, reported September 2024), with sources so you can check and cite them:</p>
+<ul>
+<li><strong>Prevalence:</strong> about <strong>1 in 3 (30.6%)</strong> reported severe or extremely severe symptoms of depression, anxiety and/or stress. <strong>Anxiety was the most common</strong> problem. Prevalence was higher among those aged <strong>15–24</strong>.</li>
+<li><strong>Risk factors:</strong> about 1 in 4 (27%) used social media for <strong>more than three hours a day</strong>, and these youths were more likely to report severe symptoms. Youths who had been <strong>cyberbullied</strong> were about <strong>twice as likely</strong> to report severe symptoms. <strong>Body-shape concerns</strong> were also linked.</li>
+<li><strong>Protective factors:</strong> higher <strong>resilience, perceived social support and self-esteem</strong>.</li>
+<li><strong>Help-seeking:</strong> about <strong>1 in 3 youths with severe symptoms did not seek help</strong>, through either informal or professional means (about 69% did).</li>
+</ul>
+<p class="small">Sources: IMH press release, 19 September 2024; reported by <em>The Straits Times</em> and others. Search "National Youth Mental Health Study IMH 2024".</p></div>
+<div class="trap"><b>Critical-examination points the ECA rewards.</b> (1) The NYMHS measured <strong>self-reported symptoms</strong> on the DASS scales over the past week, <em>not diagnoses</em>. IMH itself cautions that severe symptoms don't necessarily mean a disorder. So "1 in 3 youths are mentally ill" is wrong; "1 in 3 report severe symptoms" is right. (2) The links with social media and cyberbullying are <strong>correlational</strong> (Seminar 4). (3) It's a single snapshot in time. (4) Compare it with other studies: NUS's YEAR study found about 1 in 3 aged 10–18 reported internalising symptoms. SU1 also cites "about 30% of youths" (Ang, 2022), which reported a different study; check which study a figure comes from.</div>
+<p class="small">Link to the continuum: severe symptoms on a self-report scale place youths toward the "injured" end of the continuum, but not necessarily across the clinical threshold. That makes the continuum model (Seminar 1) a natural frame for the ECA's Question 1a.</p>
+<p class="small">Notice that the protective factors (resilience, social support, self-esteem) map closely onto the top half of Albee's promotion equation (<a href="#promo">below</a>).</p>
+</section>
+
+<!-- MODEL -->
+<section id="model">
+<h2>Why do people seek help?</h2>
+<p><span class="src s-sem">Seminar</span> Help-seeking is a <strong>complex, staged process</strong>. It happens when <strong>individual and structural conditions</strong> together support awareness, emotional readiness and access.</p>
+<div class="chain" style="font-family:var(--sans);font-size:.92rem;display:flex;flex-wrap:wrap;gap:.3rem;align-items:center;margin:.8rem 0">
+<span style="padding:.3rem .6rem;border-radius:3px;background:var(--card);border:1px solid var(--line)">Recognise a mental health issue</span><i style="color:var(--muted);font-style:normal">→</i>
+<span style="padding:.3rem .6rem;border-radius:3px;background:var(--card);border:1px solid var(--line)"><strong>Awareness</strong></span><i style="color:var(--muted);font-style:normal">→</i>
+<span style="padding:.3rem .6rem;border-radius:3px;background:var(--card);border:1px solid var(--line)"><strong>Appraisal</strong></span><i style="color:var(--muted);font-style:normal">→</i>
+<span style="padding:.3rem .6rem;border-radius:3px;background:var(--card);border:1px solid var(--line)"><strong>Acceptability</strong></span><i style="color:var(--muted);font-style:normal">→</i>
+<span style="padding:.3rem .6rem;border-radius:3px;background:var(--card);border:1px solid var(--line)"><strong>Access</strong></span><i style="color:var(--muted);font-style:normal">→</i>
+<span style="padding:.3rem .6rem;border-radius:3px;background:var(--card);border:1px solid var(--line)">Seek help</span>
+</div>
+<p class="small">This matches SU6's description (Rickwood &amp; Braithwaite, 1994): awareness of symptoms, seeing them as a problem needing help, the normality and acceptability of seeking help, and access to services.</p>
+
+<div class="tbl"><table>
+<tr><th>Individual elements <span class="src s-sem">Seminar</span></th><th>Structural elements <span class="src s-sem">Seminar</span></th></tr>
+<tr><td>
+<ul>
+<li><strong>Mental health literacy</strong>: recognising symptoms and understanding that they signal a possible mental health issue</li>
+<li><strong>Problem appraisal</strong>: seeing the issue as <em>serious enough</em> to need professional support</li>
+<li><strong>Socio-emotional competence</strong>: identifying, managing and expressing emotions; communicating distress clearly</li>
+<li><strong>Motivation and readiness</strong>: believing that seeking help is worthwhile and improvement is possible</li>
+</ul></td><td>
+<ul>
+<li><strong>Accessible services</strong>: available, affordable, convenient</li>
+<li><strong>Clear referral pathways</strong>: knowing where and how to get help</li>
+<li><strong>Supportive cultural norms</strong>: social acceptance of mental health struggles and of professional help</li>
+<li><strong>Encouraging social networks</strong>: family, peers or workplaces that normalise reaching out and validate the person</li>
+</ul></td></tr>
+</table></div>
+<p class="small"><strong>New on the slides</strong> compared with SU6: <em>motivation and readiness</em> as a fourth individual element, and <em>supportive cultural norms</em> and <em>encouraging social networks</em> as structural elements. SU6 lists only services and referral pathways under "structural".</p>
+
+<div class="eg"><b>Example: one element at each stage.</b> Nadia, 19, has panic attacks. <em>Literacy</em>: after a school talk, she recognises them as panic attacks, not a heart problem. <em>Appraisal</em>: when they start stopping her from taking the MRT, she decides it's serious. <em>Socio-emotional competence</em>: she can put it into words for her sister. <em>Motivation</em>: a friend's recovery convinces her treatment works. <em>Structurally</em>: her poly has a free counselling service (access), her lecturer knows how to refer her (pathway), her sister encourages her (network), and her peers talk openly about counselling (norms). Remove any one of these and the pathway can stall.</div>
+</section>
+
+<!-- BARRIERS -->
+<section id="barriers">
+<h2>Why don't people seek help?</h2>
+<p><span class="src s-sem">Seminar</span> Four barriers, each mapped here to the stage it blocks:</p>
+<div class="tbl"><table>
+<tr><th>Barrier</th><th>What it is</th><th>Stage it blocks</th><th>Example</th></tr>
+<tr><td><strong>1. Fear of stigma</strong></td><td>Dread of being labelled "crazy" or "unstable" (Shafie et al., 2021; Wisdom et al., 2006)</td><td>Acceptability</td><td>A JC student won't see the school counsellor because classmates will see her walk in</td></tr>
+<tr><td><strong>2. Negative attitudes to services</strong></td><td>Belief that treatment is futile or ineffective; past poor experiences (Rickwood et al., 2007)</td><td>Motivation; acceptability</td><td>"Talking to a stranger won't fix my problems"; or a bad counselling experience at 14 that still puts him off at 30</td></tr>
+<tr><td><strong>3. Strong self-reliance</strong></td><td>Feeling you should handle problems alone; especially common in young adults</td><td>Appraisal; acceptability</td><td>"I should be able to handle this myself"</td></tr>
+<tr><td><strong>4. Condition-related barriers</strong></td><td>Social withdrawal or severe symptoms (e.g. depression, suicidal ideation) make reaching out less likely (Rickwood et al., 2005)</td><td>All stages, especially motivation</td><td>Depression's hopelessness says "nothing will help", while withdrawal cuts off the friends who'd push for help</td></tr>
+</table></div>
+<div class="trap"><b>Barrier 4 is the cruellest.</b> The illness attacks the very abilities needed to seek help: motivation, hope, social contact. Schizophrenia's lack of insight (Seminar 6) is the extreme case. This is why <em>others</em> reaching out, and gatekeepers noticing, matter so much: the person most in need may be least able to start the process.</div>
+<p class="small">Add for Singapore (Seminar 6 schools activity): cost, parental consent, and confidentiality and privacy concerns kept children and youth from help. These are <em>structural</em> barriers to <em>access</em>.</p>
+</section>
+
+<!-- ACTIVITY 2 -->
+<section id="act2">
+<h2>Activity 2: to seek or not to seek help</h2>
+<p><span class="src s-sem">Seminar</span> Choose <strong>one barrier</strong> (mental health literacy, socio-emotional competence, social infrastructure, stigma, or negative attitudes to services) and explain how Singapore could tackle it, <strong>avoiding broad, general statements</strong>.</p>
+<h3>What "specific" looks like</h3>
+<div class="tbl"><table>
+<tr><th>Too broad</th><th>Specific</th></tr>
+<tr><td>"Raise awareness of mental health."</td><td>"Train secondary school form teachers to recognise three warning signs (attendance drops, withdrawal, falling grades) and to refer students to the school counsellor within a week."</td></tr>
+<tr><td>"Reduce stigma."</td><td>"Run contact-based sessions in polytechnics, where young people with lived experience share their recovery stories, because direct contact with people who have recovered is one of the more effective ways of reducing stigma (Corrigan et al., 2012)."</td></tr>
+<tr><td>"Make services accessible."</td><td>"Offer free, walk-in youth counselling at community clubs in the evenings, with text-based booking and no parental consent needed for an initial chat, so cost, consent and stigma are removed together."</td></tr>
+</table></div>
+<p>A strong answer to any barrier has four parts: <strong>the barrier and its evidence</strong> (cite it) → <strong>the target group</strong> → <strong>the specific intervention and mechanism</strong> (which stage it unblocks, and why) → <strong>a limitation</strong>.</p>
+<div class="outside"><p><span class="src s-out">Outside course</span> Existing Singapore initiatives to know (check current details before citing):</p>
+<ul>
+<li><strong>National Mental Health and Well-being Strategy</strong> (October 2023): a whole-of-government, whole-of-society approach.</li>
+<li><strong>CHAT</strong> (IMH's Centre of Excellence for Youth Mental Health): youth-friendly assessment and support.</li>
+<li><strong>mindline.sg</strong>: a digital mental health resource; it appeared in SU6's self-harm resources.</li>
+<li><strong>"It's OKAY to Reach Out"</strong> (HPB, 2021–2022) and the <strong>MindSG</strong> portal, both in SU6.</li>
+<li>NCSS's <strong>"Beyond the Label"</strong> anti-stigma campaign.</li>
+<li>The <strong>Tripartite Advisory on Mental Well-being at Workplaces</strong>.</li>
+<li>School-based <strong>peer support</strong> and counselling.</li>
+</ul>
+<p>Use these as evidence that a barrier is already being addressed, then argue what is <em>still missing</em>. That shows critical evaluation rather than description.</p></div>
+</section>
+
+<!-- SU6 HELP-SEEKING -->
+<section id="help">
+<h2>SU6: help-seeking in detail</h2>
+<h3>Singapore data</h3>
+<div class="tbl"><table>
+<tr><th>Finding</th><th>Source</th></tr>
+<tr><td>Willing to seek professional help: 58.3% (up from 47.8% in 2019). Least likely: ages 60–74. Most likely: ages 30–39 (67.7%)</td><td>National Population Health Survey. SU6 labels it 2022; it is the 2021 NPHS released in 2022 (same data as Seminar 1)</td></tr>
+<tr><td><strong>Treatment gap</strong>: 75% of people with a mood or anxiety condition sought <em>no</em> professional help</td><td>Singapore Mental Health Study 2016 (n = 6,126)</td></tr>
+<tr><td><strong>Treatment delay</strong> (time from symptom onset to treatment) varies. <strong>OCD has the longest median delay: 11 years</strong></td><td>Singapore Mental Health Study 2016</td></tr>
+</table></div>
+
+<h3>What promotes help-seeking</h3>
+<p><span class="src s-su">SU6</span> Awareness of symptoms alone isn't enough. A person also needs to see the problem as needing help, to feel that seeking help is normal and acceptable, and to have access to services (Rickwood &amp; Braithwaite, 1994). Promoting factors fall into two groups (Barker et al., 2005):</p>
+<div class="tbl"><table>
+<tr><th>Individual factors</th><th>Structural factors</th></tr>
+<tr><td>
+<ol>
+<li><strong>Mental health literacy</strong>: recognising the problem, seeing it as a risk, believing it needs intervention (Jorm et al.)</li>
+<li><strong>Socio-emotional competence</strong>: being able to identify and express emotions, which enables informal help from family and friends, most Singaporeans' first port of call</li>
+<li><strong>Skills</strong> to seek information and professional help</li>
+</ol></td><td>Support infrastructure: <strong>referral pathways</strong> and <strong>access to mental health resources</strong></td></tr>
+</table></div>
+
+<h3>What blocks help-seeking</h3>
+<div class="tbl"><table>
+<tr><th>Barrier</th><th>Explanation</th><th>Example</th></tr>
+<tr><td><strong>Fear of stigma</strong></td><td>Fear of being labelled "crazy" or "unstable" if others find out (Shafie et al., 2021; Wisdom et al., 2006)</td><td>Won't be seen entering a psychiatric clinic in case colleagues find out</td></tr>
+<tr><td><strong>Negative attitudes to services</strong></td><td>Belief that treatment won't help; misunderstanding what "professional help" involves; believing only medical approaches work; past bad experiences (Rickwood et al., 2007)</td><td>A child who felt misunderstood by a school counsellor distrusts all counsellors as an adult</td></tr>
+<tr><td><strong>Self-reliance</strong></td><td>Belief that you should solve your own problems. This is especially strong in young adults</td><td>"I'm an adult; I should be able to handle this myself"</td></tr>
+<tr><td><strong>The illness itself</strong></td><td>Withdrawal and suicidal thinking in depression make reaching out <em>less</em> likely (Rickwood et al., 2005)</td><td>A depressed student stops answering messages from everyone, including the counsellor</td></tr>
+</table></div>
+<div class="trap"><b>Formative quiz trap.</b> Self-reliance beliefs are a <em>barrier</em>. Literacy, socio-emotional competence and good infrastructure <em>promote</em> help-seeking.</div>
+<div class="outside"><p><span class="src s-out">Add for Singapore (Reflect 6.7)</span> Other barriers worth raising include cultural emphasis on "face" and family privacy; concerns about how a diagnosis might affect jobs or insurance; spiritual or physical explanations of distress; language barriers for older adults; cost and waiting times; and gendered norms such as "be a man" (Seminar 2). Link each to course evidence where you can, e.g. the NPHS age gap, Basu et al.'s (2015) delay in untreated psychosis, and Rickwood and Braithwaite on gender.</p></div>
+</section>
+
+<!-- REACHING OUT -->
+<section id="reach">
+<h2>"Are you okay?" Reaching out</h2>
+<h3>Where people seek help</h3>
+<div class="tbl"><table>
+<tr><th>Source</th><th>Key point <span class="src s-su">SU6</span></th></tr>
+<tr><td><strong>Family and friends</strong></td><td>The first source of help for most people, including in Singapore, because the relationship is trusted and familiar. For men, <strong>romantic partners</strong> often decide whether professional help is sought (Cusack et al., 2004). For adolescents, <strong>parents and peers</strong> are key.</td></tr>
+<tr><td><strong>Schools</strong></td><td>Strong infrastructure. Performance, behaviour and attendance are indicators. Teachers, counsellors, parents and pastoral care staff act as <strong>gatekeepers</strong> for early identification.</td></tr>
+<tr><td><strong>GPs</strong></td><td>Often the first professional contact, e.g. for insomnia caused by depression, which allows recognition and referral. But patients may not disclose psychological problems unless they trust the GP, since clinics are seen as for physical illness (Wisdom et al., 2006).</td></tr>
+<tr><td><strong>Hotlines</strong></td><td>Available 24 hours, convenient and <strong>anonymous</strong>, which can make it easier to express emotions. A good first step.</td></tr>
+</table></div>
+
+<h3>Supporting someone with mental health issues</h3>
+<p><span class="src s-su">SU6</span> Seven points (Singapore Association for Mental Health, 2018; Mental Health Foundation, 2022), mapped to Growth Circle skills:</p>
+<div class="tbl"><table>
+<tr><th>#</th><th>Point</th><th>Growth Circle skill</th></tr>
+<tr><td>1</td><td>Be present; provide a safe space without judgement or distraction</td><td>Being present</td></tr>
+<tr><td>2</td><td>Let them lead; don't force them to share</td><td>Being present, respect</td></tr>
+<tr><td>3</td><td>Don't diagnose or offer solutions too early</td><td>Curiosity before advice</td></tr>
+<tr><td>4</td><td>Ask gently and openly: "How does that make you feel?" rather than "You're sad about this"</td><td>Be curious</td></tr>
+<tr><td>5</td><td>Listen actively; paraphrase to show understanding; validate their emotions</td><td>Paraphrase</td></tr>
+<tr><td>6</td><td>Encourage professional help without deciding for them, e.g. offer to go with them to the GP</td><td>Encourage</td></tr>
+<tr><td>7</td><td>Know your limits; rest and process for yourself</td><td>Self-care</td></tr>
+</table></div>
+
+<h3>Supporting someone in crisis</h3>
+<p><span class="src s-su">SU6</span> A crisis may involve an altered sense of reality or suicidal thinking. <strong>Stay calm.</strong></p>
+<ol>
+<li>Listen actively in a safe, non-judgemental space.</li>
+<li>Ask what would help them feel better.</li>
+<li>Ask whether there is anyone they'd like you to contact.</li>
+<li>Reassure them by pointing to resources and information.</li>
+<li><strong>Psychosis</strong>: don't reinforce delusions or hallucinations, but <strong>don't reject their reality</strong> either. Validate the <em>emotions</em> and acknowledge how the experience affects them.</li>
+<li>Mental health crisis: <strong>IMH 24-hour helpline, 6389 2222</strong>.</li>
+<li>Suicidal: contact someone trained. Call <strong>995</strong> or go to the nearest A&amp;E, or call <strong>SOS 1767</strong>.</li>
+</ol>
+<div class="eg"><b>Example: point 5 in practice.</b> A friend in psychosis says, terrified, "They've put cameras in my ceiling." Rejecting it ("That's ridiculous") breaks trust. Reinforcing it ("Let's find the cameras") feeds the delusion. Instead, validate the feeling: "That sounds really frightening. You must feel like you're never safe. What would help you feel a bit safer right now?" Then help them connect to IMH.</div>
+<div class="trap"><b>Formative quiz trap.</b> In a crisis: provide a safe space and call a crisis hotline. Don't reject their reality, diagnose them, or leave them to recover alone.</div>
+<div class="eg"><b>Activity 6.7: a friend with possible depression</b> (low mood, poor concentration, insomnia, social withdrawal). Be present in a private, unhurried setting. Let her lead. Don't diagnose ("you have depression") or rush to fix things. Ask openly: "How long have you been feeling this way?" "What's been hardest?" Paraphrase: "So it's been hard to sleep, hard to focus, and you haven't felt like seeing anyone." Validate the feeling. Gently ask about hopelessness or thoughts of death, since MDD carries suicide risk. Encourage a GP or counsellor visit and offer to go with her. Share hotlines. Follow up later. Look after yourself too.</div>
+</section>
+
+<!-- PROMOTION -->
+<section id="promo">
+<h2>Promoting mental health in Singapore</h2>
+<p><span class="src s-su">SU6</span> In 1986 the WHO endorsed mental health as a right: people should have the opportunity to develop and use their health potential to live socially and economically productive lives. This led to a global campaign for health for all by 2000 (WHO, 1991).</p>
+<h3>Albee's (1993) promotion equation</h3>
+<div class="eq" role="img" aria-label="Albee's equation">
+<div class="lhs">Mental health promotion =</div>
+<div class="num">coping skills + social support + self-esteem</div>
+<div class="den">stress + exploitation + organic factors</div>
+</div>
+<p>Promotion works by <strong>increasing the top</strong> (protective factors) and <strong>reducing the bottom</strong> (risk factors).</p>
+<div class="tbl"><table>
+<tr><th>Component</th><th>Meaning</th><th>Example intervention</th></tr>
+<tr><td colspan="3"><strong>Reduce (the bottom of the equation)</strong></td></tr>
+<tr><td><strong>Stress</strong></td><td>Less exposure to acute or chronic stress means lower risk</td><td>Workplace policies on workload and flexibility (Seminar 1: Karasek)</td></tr>
+<tr><td><strong>Exploitation</strong></td><td>Sexual, physical, emotional or financial exploitation, including at a societal level (discriminatory laws or behaviour, war, hunger)</td><td>Anti-discrimination measures; protection from abuse (Seminar 1 racism article; Seminar 2 domestic violence)</td></tr>
+<tr><td><strong>Organic factors</strong></td><td>Environmental stressors that cause physical vulnerability: pollution, stressful environments leading to hypertension</td><td>Physical health programmes (Seminar 3: the mind–body link)</td></tr>
+<tr><td colspan="3"><strong>Increase (the top of the equation)</strong></td></tr>
+<tr><td><strong>Coping skills</strong></td><td>Strategies for dealing with adversity</td><td>Stress-management and emotion-regulation workshops; exercise and pleasure (Seminar 3)</td></tr>
+<tr><td><strong>Social support</strong></td><td>One of the most important protective factors. Isolation worsens depression</td><td>Peer support, community groups, Growth Circles</td></tr>
+<tr><td><strong>Self-esteem</strong></td><td>Starts in childhood with affirmation. In adulthood, supportive relationships build confidence</td><td>Positive parenting programmes; mentoring</td></tr>
+</table></div>
+<h3>Singapore initiatives</h3>
+<ul>
+<li>The <strong>Interagency Taskforce on Mental Health and Well-being</strong> (also in Seminar 1's ST article).</li>
+<li>HPB's <strong>"It's OKAY to Reach Out"</strong> campaign (2021–2022): workshops, seminars, talk shows and community activities to encourage open conversation, coping strategies and reaching out. Seminar 1's SU also had an "OKAY tips" video.</li>
+<li>The <strong>MindSG</strong> online portal for mental health resources.</li>
+<li>Recommended reading: the Northwest CDC and SUSS <em>Mental Wellness Toolkit @ Northwest</em> (2023).</li>
+</ul>
+<div class="eg"><b>Example: using the equation to evaluate a programme.</b> A company runs a one-off resilience webinar. In Albee's terms, it adds a little to <em>coping skills</em> but leaves <em>stress</em> unchanged: long hours, low control. The equation shows why this is weak. A stronger programme also reduces the bottom of the equation, through workload and flexible hours, and increases <em>social support</em> through peer supporters and manager training.</div>
+</section>
+
+<!-- ECA -->
+<section id="eca">
+<h2>ECA map</h2>
+<p><span class="src s-sem">Seminar</span> The ECA is due <strong>6 November 2026, 12:00 noon</strong>, as a single Word file with the cover page. It needs at least <strong>5 academic references</strong> across both questions. This map shows where the relevant material sits across your seminar notes. The analysis, argument and poster design need to be your own.</p>
+<div class="tbl"><table>
+<tr><th>ECA requirement</th><th>Where the material is</th></tr>
+<tr><td><strong>1a</strong> (30 marks, 800 words): apply the <strong>mental health continuum</strong></td><td>Seminar 1 notes: the continuum, the dimensional vs categorical approach, the normative threshold, Keyes' dual-continua model (outside course)</td></tr>
+<tr><td>1a: critically examine youth <strong>prevalence</strong></td><td>This page: NYMHS findings and their limits (self-report, correlational, a single snapshot). Seminar 1: Ang (2022). Seminar 5: suicide as the leading cause of death for ages 10–29. Seminar 6: the Duke-NUS/IMH figures on missed school days and undiagnosed symptoms</td></tr>
+<tr><td>1a: <strong>risk factors</strong></td><td>NYMHS (social media, cyberbullying, body image). Seminar 2: biopsychosocial model, SES, race, gender, childhood factors. Seminar 4: social media risks and moderators. Seminar 6: trauma and adversity</td></tr>
+<tr><td>1a: <strong>help-seeking behaviour</strong></td><td>This page: the NPHS age gap, the treatment gap, NYMHS's "1 in 3 didn't seek help", the staged model. Seminar 1: preference for informal networks (69.1%)</td></tr>
+<tr><td>1a: <strong>conditions with the highest prevalence</strong> in the NYMHS</td><td>NYMHS: anxiety most common, alongside depression and stress. Seminar 6 notes: anxiety disorders and MDD criteria for the brief descriptions</td></tr>
+<tr><td><strong>1b</strong> (25 marks, 600 words): <strong>three barriers</strong> for youths</td><td>This page: the four barriers and the stage each blocks; the Seminar 6 schools barriers (cost, parental consent, confidentiality); Seminar 4: online support feels safer for youths</td></tr>
+<tr><td>1b: two <strong>evidence-based, culturally appropriate interventions</strong></td><td>This page: Activity 2's "what specific looks like" and the existing Singapore initiatives; Albee's equation; SU6 sources of help (family, schools, GPs, hotlines)</td></tr>
+<tr><td><strong>Q2 poster</strong> (40 marks): youth <strong>risk factors</strong></td><td>As for 1a, rewritten in plain language for a general audience</td></tr>
+<tr><td>Poster: <strong>Growth Circle competencies</strong> with examples</td><td>This page: SU6's seven supporting-others points mapped to Growth Circle skills. Seminar 1 and Seminar 5 notes: Growth Circle roles with example lines</td></tr>
+<tr><td>Poster: <strong>what to avoid</strong> saying or doing</td><td>Seminar 5: the don'ts. SU6 (this page): don't diagnose, don't force sharing, don't reject the person's reality in a crisis</td></tr>
+<tr><td>Poster: <strong>where to seek help locally</strong></td><td>Helplines on this page; initiatives in the Activity 2 section. Check every number and service is current before printing</td></tr>
+</table></div>
+<div class="trap"><b>Watch the word budgets.</b> 1a is 800 words for four tasks, so the continuum should <em>frame</em> the answer, not be a separate essay. 1b has 600 words for three barriers and two interventions; the specificity guidance in Activity 2 is what will set your answer apart.</div>
+</section>
+
+<!-- LINKS -->
+<section id="links">
+<h2>Links to Seminars 1–6</h2>
+<div class="tbl"><table>
+<tr><th>Seminar 7 idea</th><th>Connects to</th></tr>
+<tr><td>NPHS willingness data</td><td>Seminar 1: the same NPHS data (47.8% → 58.3%); preference for informal networks</td></tr>
+<tr><td>Stigma as a barrier</td><td>Seminar 1: lay views, stigma, the violence stereotype; Seminar 4: media portrayals and self-stigma</td></tr>
+<tr><td>Self-reliance; gender norms</td><td>Seminar 2: men seek help less ("be a man"; Rickwood &amp; Braithwaite, 1994); SU6: partners influence men's help-seeking</td></tr>
+<tr><td>Older adults least willing</td><td>Seminar 1: barriers for older adults; Seminar 2: bereavement and isolation in older adults</td></tr>
+<tr><td>Condition-related barriers</td><td>Seminar 6: depression's withdrawal; schizophrenia's lack of insight; Seminar 5: suicidal people often don't know who to talk to</td></tr>
+<tr><td>Treatment delay</td><td>Seminar 2: longer untreated psychosis among Indian patients (Basu et al., 2015); Seminar 6: OCD's 11-year delay</td></tr>
+<tr><td>Structural access</td><td>Seminar 2: stress-vulnerability (fewer resources means less access); Seminar 6: cost and consent barriers for youths</td></tr>
+<tr><td>Encouraging social networks</td><td>Seminar 3: religion as social capital; Seminar 4: supportive online peers; Growth Circle skills throughout</td></tr>
+<tr><td>Promotion equation</td><td>Seminar 3: strategies as protective factors; NYMHS protective factors (resilience, support, self-esteem)</td></tr>
+</table></div>
+</section>
+<!-- SCENARIOS -->
+<section id="scen">
+<h2>Worked scenarios</h2>
+
+<div class="scenario">
+<h3>Scenario 1 – Wanting help but stuck</h3>
+<p class="prompt">Ryan, 15, has had panic attacks before tests for months. He looked up his symptoms, knows it's anxiety, and wants to see someone. His parents say counselling is "for problem kids" and refuse to sign a consent form for an external referral. Private psychologists are too expensive for the family. Analyse the barriers and suggest targeted solutions.</p>
+<details><summary>Model answer</summary>
+<p><strong>Where the process breaks down.</strong> Ryan's individual elements are largely in place. <em>Literacy</em>: he recognises anxiety. <em>Appraisal</em>: he sees it as serious. <em>Motivation</em>: he wants help. The breakdown is <strong>structural</strong>, at the <em>acceptability</em> and <em>access</em> stages. So literacy campaigns aimed at Ryan would miss the point.</p>
+<p><strong>Barriers.</strong> (1) <em>Stigma</em> held by his parents ("problem kids"), which is a lack of <em>supportive cultural norms</em> and an unsupportive <em>social network</em>. In adolescents, parents are key to whether help is sought (SU6). (2) <em>Parental consent</em>, (3) <em>cost</em>: exactly the deterrents the Duke-NUS/IMH study identified for Singapore youth (Seminar 6), which also found 84.8% of symptomatic children had no formal diagnosis.</p>
+<p><strong>Targeted solutions.</strong> <em>Immediate</em>: the school counsellor is free and usually doesn't need an external referral, which addresses cost and consent. Schools are an important gatekeeping infrastructure (SU6). <em>Parents</em>: the counsellor or teacher can engage them with psychoeducation that reframes counselling as like seeing a tutor for a subject, a normal skill-building step. This tackles their stigma directly. <em>Low-cost access</em>: subsidised youth services and text-based or anonymous options (SU6: hotlines offer anonymity). <em>Coping now</em>: exercise and breathing to calm the stress response (Seminar 3).</p>
+<p><strong>Evaluation.</strong> Respect the family's role while protecting Ryan's access to care; the two can be in tension. A system-level fix would be clearer guidance on when youths can access initial counselling without parental consent. This needs careful balancing of safeguarding and family rights.</p>
+</details>
+</div>
+
+<div class="scenario">
+<h3>Scenario 2 – "Old people are like that"</h3>
+<p class="prompt">Mr Koh, 66, retired a year ago. He sleeps badly, has lost interest in his old hobbies, and spends most days alone. When his son suggests seeing a doctor about his mood, he says, "Old people are like that lah, nothing to see doctor for." Analyse using the staged model.</p>
+<details><summary>Model answer</summary>
+<p><strong>The breakdown is at awareness and appraisal.</strong> Mr Koh attributes his symptoms (poor sleep, anhedonia, withdrawal) to ageing rather than to a possible mental health problem. That is a <em>mental health literacy</em> gap. He also doesn't think it's <em>serious enough</em> to need help, which is the <em>appraisal</em> stage. Seeing these symptoms as normal for his age prevents him from even entering the help-seeking process.</p>
+<p><strong>Context.</strong> Ages 60–74 are the group least willing to seek professional help (NPHS). Retirement means loss of role and social contact, which are risk factors for depression in older adults (Seminar 2). His withdrawal is also a <em>condition-related barrier</em>: if this is depression, the illness itself reduces his motivation to seek help. His anhedonia and poor sleep are possible MDD symptoms (Seminar 6) that need assessment.</p>
+<p><strong>Targeted solutions.</strong> <em>Use an acceptable entry point</em>: a GP visit framed around sleep, since GPs are often the first professional contact for physical symptoms of mental health issues (SU6). The GP can screen for depression. <em>His son as the encouraging network</em>: use Growth Circle skills, and let Mr Koh lead rather than lecturing him. <em>Social re-engagement</em>: an Active Ageing Centre or volunteering, which rebuilds the social support that protects mental health.</p>
+<p><strong>Evaluation.</strong> Literacy campaigns for older adults need to come through trusted channels and in suitable languages. A poster telling him "depression is treatable" won't help if he doesn't think he has it.</p>
+</details>
+</div>
+
+<div class="scenario">
+<h3>Scenario 3 – "Help-seeking is solved"</h3>
+<p class="prompt">A commentator argues: "Willingness to seek professional help rose from 47.8% to 58.3%, so Singapore's help-seeking problem is largely solved." Critically evaluate this claim.</p>
+<details><summary>Model answer</summary>
+<p><strong>What's right.</strong> The rise is real progress. It suggests more <em>acceptability</em>, likely linked to the pandemic's normalising of mental health talk, and to campaigns such as "It's OKAY to Reach Out" (SU6).</p>
+<p><strong>Problems with the claim.</strong> (1) <strong>Willingness isn't behaviour.</strong> The Singapore Mental Health Study found 75% of people with mood or anxiety disorders sought no professional help. Intentions often don't become action; the staged model shows why. (2) <strong>Averages hide gaps.</strong> Willingness is lowest among those aged 60–74 and much higher among 30–39-year-olds. Among youths, about 1 in 3 with severe symptoms didn't seek help at all (NYMHS, outside course). (3) <strong>Treatment delay persists</strong>: OCD's median delay is 11 years. (4) <strong>Nearly half are still unwilling</strong>, and 58% means 42% wouldn't seek professional help. (5) <strong>Structural barriers</strong> remain: cost, consent, waiting times. Willingness can't overcome a lack of access. (6) <strong>Condition-related barriers</strong> mean those most unwell may be least able to act, whatever their stated attitudes.</p>
+<p><strong>Conclusion.</strong> The data show improving attitudes, not a solved problem. Next steps should target the stages that still leak: literacy and appraisal for older adults, access and consent for youths, and outreach for people whose illness stops them reaching out.</p>
+</details>
+</div>
+<div class="scenario">
+<h3>Scenario 4 – Barriers for a young man</h3>
+<p class="prompt">Marcus, 27, an engineer, has had low mood and poor sleep for months. He thinks therapy is "just talking" and "for weak people", and says he'll "sort it out himself". His girlfriend is worried. Analyse the barriers and suggest how he could be helped to seek help.</p>
+<details><summary>Model answer</summary>
+<p><strong>Barriers.</strong> (1) <em>Negative attitudes to services</em>: "just talking" shows a misunderstanding of what professional help involves, and a belief that treatment is futile (Rickwood et al., 2007). (2) <em>Self-reliance</em>: "I'll sort it out myself", which is especially common in young adults. (3) <em>Stigma</em>: "for weak people" (Shafie et al., 2021). (4) <em>Gender norms</em>: men seek help less ("be a man"; Rickwood &amp; Braithwaite, 1994; Seminar 2). (5) Possibly the depression itself, if he withdraws.</p>
+<p><strong>Promoting factors to strengthen.</strong> <em>Mental health literacy</em>: help him see his symptoms as a treatable problem (Jorm et al.). <em>Socio-emotional competence</em>: help him name and express how he feels. <em>Structural access</em>: practical, low-stigma routes such as a GP visit for sleep, the company EAP, or a hotline.</p>
+<p><strong>His girlfriend's role.</strong> SU6 says romantic partners often play the <strong>most crucial role</strong> in whether men seek professional help (Cusack et al., 2004). She can be present, ask openly ("What's been weighing on you?"), validate him, share accurate information about what therapy actually involves, frame help-seeking as a practical, solution-focused step (which may suit his engineering mindset), offer to go with him to the GP, and look after herself too.</p>
+</details>
+</div>
+
+<div class="scenario">
+<h3>Scenario 5 – Design a community programme</h3>
+<p class="prompt">A Community Development Council asks you to propose a mental health promotion programme for a heartland estate with many older residents living alone and young families under financial strain. Use Albee's equation.</p>
+<details><summary>Model answer</summary>
+<p><strong>Framework.</strong> Albee (1993) sees promotion as increasing <em>coping skills + social support + self-esteem</em> and reducing <em>stress + exploitation + organic factors</em>.</p>
+<p><strong>Reduce the bottom.</strong> <em>Stress</em>: financial counselling and linking families to assistance schemes. This tackles the stressor, not just the reaction (Seminar 2: social causation). <em>Exploitation</em>: scam-awareness sessions for older residents, and family violence awareness with referral pathways. <em>Organic factors</em>: health screenings and chronic disease support for older adults (Seminar 3: physical illness harms mental health).</p>
+<p><strong>Increase the top.</strong> <em>Social support</em>: befriending and door-knocking for seniors living alone; intergenerational activities; peer-support volunteers trained in Growth Circle listening skills. Isolation worsens depression, and older adults are least likely to seek professional help (NPHS). <em>Coping skills</em>: stress-management workshops; exercise groups such as morning walks and qigong (Seminar 3: exercise, pleasure). <em>Self-esteem</em>: positive-parenting sessions for young families; volunteering roles for seniors (Seminar 3: helping others builds self-worth).</p>
+<p><strong>Help-seeking pathways.</strong> Build literacy and access: signpost MindSG, GP screening, IMH 6389 2222 and SOS 1767, in several languages, in line with HPB's "It's OKAY to Reach Out" campaign.</p>
+<p><strong>Evaluation.</strong> Measure participation and wellbeing. Tailor activities to culture and language. Recognise limits: a CDC programme can't remove structural causes such as housing costs, so it should work with policy.</p>
+</details>
+</div>
+</section>
+
+<!-- CHECKS -->
+<section id="checks">
+<h2>Discrepancies to know</h2>
+<div class="tbl"><table>
+<tr><th>Item</th><th>Issue</th><th>What to do</th></tr>
+<tr><td>NPHS year</td><td>The slide chart labels the 58.3% bar "2022". Seminar 1's ST article reports it as the 2021 survey (polled July 2020 – June 2021, released 2022)</td><td>Write "NPHS 2021 (released 2022)"</td></tr>
+<tr><td>Age of the treatment-gap data</td><td>The 75% gap and 11-year OCD delay come from the 2016 Singapore Mental Health Study, now about ten years old. A third SMHS is under way</td><td>Note the date when citing; it's a fair limitation to raise in the ECA</td></tr>
+<tr><td>NYMHS</td><td>Required for the ECA but not in the slides or study units</td><td>Cite IMH's published findings (19 September 2024 release, or the study's journal publications) directly, not these notes</td></tr>
+<tr><td>Structural elements</td><td>The slides list four (services, referral pathways, cultural norms, social networks); SU6 lists two</td><td>Use the slides' four</td></tr>
+<tr><td>Individual elements</td><td>The slides add "motivation and readiness"; SU6 has three</td><td>Use the slides' four</td></tr>
+<tr><td>Jorm et al. year</td><td>1994 in the SU6 text; 1997 in the reference list</td><td>Cite Jorm et al. (1997)</td></tr>
+</table></div>
+</section>
+
+<!-- REFS -->
+<section id="refs">
+<h2>Citation bank</h2>
+<div class="tbl"><table>
+<tr><th>Concept</th><th>Cite</th></tr>
+<tr><td>Willingness to seek help</td><td>Ministry of Health, National Population Health Survey 2021 (released 2022)</td></tr>
+<tr><td>Treatment gap and delay</td><td>Singapore Mental Health Study (2016); Shafie et al. (2021)</td></tr>
+<tr><td>Staged help-seeking process</td><td>Rickwood &amp; Braithwaite (1994)</td></tr>
+<tr><td>Individual and structural elements</td><td>Barker et al. (2005)</td></tr>
+<tr><td>Mental health literacy</td><td>Jorm et al. (1997)</td></tr>
+<tr><td>Stigma as a barrier</td><td>Shafie et al. (2021); Wisdom et al. (2006)</td></tr>
+<tr><td>Negative attitudes to services</td><td>Rickwood et al. (2007)</td></tr>
+<tr><td>Condition-related barriers</td><td>Rickwood et al. (2005)</td></tr>
+<tr><td>Partners and men's help-seeking</td><td>Cusack et al. (2004)</td></tr>
+<tr><td>Supporting others</td><td>Singapore Association for Mental Health (2018); Mental Health Foundation (2022); NCSS (2015)</td></tr>
+<tr><td>Promotion equation</td><td>Albee (1993)</td></tr>
+<tr><td>Singapore campaigns</td><td>Health Promotion Board (2022)</td></tr>
+<tr><td><span class="src s-out">Outside</span> Youth prevalence, risk and protective factors</td><td>Institute of Mental Health (2024), National Youth Mental Health Study press release</td></tr>
+<tr><td><span class="src s-out">Outside</span> Contact-based stigma reduction</td><td>Corrigan, P. W., et al. (2012). Challenging the public stigma of mental illness: A meta-analysis of outcome studies. <em>Psychiatric Services, 63</em>(10), 963–973</td></tr>
+</table></div>
+</section>
+</main>
+</div>
+<script>
+(function(){
+  const all = () => document.querySelectorAll('details');
+  document.getElementById('openAll').addEventListener('click', () => all().forEach(d => d.open = true));
+  document.getElementById('closeAll').addEventListener('click', () => all().forEach(d => d.open = false));
+  window.addEventListener('beforeprint', () => all().forEach(d => d.open = true));
+})();
+</script>
+</body>
+</html>
