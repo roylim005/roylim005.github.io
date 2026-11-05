@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PSY265 – Seminars 4-8 Exam Prep: Coping, Pain, CAM, Terminal Illness & Chronic/Immune Disorders</title>
+<style>
+  :root{
+    --navy:#1b2a4a;
+    --blue:#2a5ca8;
+    --accent:#c9770a;
+    --bg:#fbfaf7;
+    --card:#ffffff;
+    --line:#e3ddd3;
+    --text:#26241f;
+    --muted:#6b6558;
+    --exam:#fff4e6;
+    --exam-border:#e0a458;
+    --gap:#fdeef0;
+    --gap-border:#d98a95;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Georgia","Iowan Old Style",serif;background:var(--bg);color:var(--text);line-height:1.55;}
+  header{background:var(--navy);color:#f4f1ea;padding:2.2rem 1.5rem 1.6rem;text-align:center;}
+  header h1{margin:0 0 .3rem;font-size:1.45rem;font-weight:600;letter-spacing:.2px;}
+  header p{margin:0;color:#c7cfe0;font-size:.92rem;}
+  nav{background:#22314f;display:flex;flex-wrap:wrap;justify-content:center;gap:0;padding:.4rem 0;position:sticky;top:0;z-index:50;}
+  nav a{color:#dbe2f0;text-decoration:none;font-size:.72rem;font-family:Arial, sans-serif;padding:.4rem .55rem;border-radius:4px;}
+  nav a:hover{background:#324875;}
+  main{max-width:820px;margin:0 auto;padding:1.8rem 1.2rem 4rem;}
+  .chapter-title{margin-top:3rem;padding-bottom:.4rem;border-bottom:3px solid var(--navy);color:var(--navy);font-size:1.5rem;}
+  .chapter-title:first-of-type{margin-top:0;}
+  section.concept{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:1.3rem 1.5rem;margin:1.3rem 0;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  section.concept h3{margin-top:0;color:var(--blue);font-size:1.15rem;}
+  section.concept h4{font-family:Arial, sans-serif;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:1rem 0 .3rem;}
+  .example{background:#f2f6ee;border-left:4px solid #7a9a5c;padding:.7rem 1rem;border-radius:0 6px 6px 0;margin-top:.3rem;font-size:.96rem;}
+  .example b{color:#4e6b39;}
+  .exam-flag{display:inline-block;background:var(--exam);border:1px solid var(--exam-border);color:#8a5a12;font-family:Arial, sans-serif;font-size:.7rem;font-weight:bold;text-transform:uppercase;letter-spacing:.04em;padding:.2rem .55rem;border-radius:20px;margin-left:.5rem;vertical-align:middle;}
+  .gap-flag{display:inline-block;background:var(--gap);border:1px solid var(--gap-border);color:#8a2a3a;font-family:Arial, sans-serif;font-size:.7rem;font-weight:bold;text-transform:uppercase;letter-spacing:.04em;padding:.2rem .55rem;border-radius:20px;margin-left:.5rem;vertical-align:middle;}
+  .exam-note{background:var(--exam);border:1px solid var(--exam-border);border-radius:6px;padding:.6rem .9rem;margin-top:.6rem;font-size:.9rem;font-family:Arial, sans-serif;}
+  .exam-note b{color:#8a5a12;}
+  .gap-note{background:var(--gap);border:1px solid var(--gap-border);border-radius:6px;padding:.6rem .9rem;margin-top:.6rem;font-size:.9rem;font-family:Arial, sans-serif;}
+  .gap-note b{color:#8a2a3a;}
+  ul{padding-left:1.3rem;}
+  li{margin-bottom:.3rem;}
+  .pair{display:flex;gap:.8rem;flex-wrap:wrap;}
+  .pair > div{flex:1 1 240px;}
+  table{width:100%;border-collapse:collapse;margin-top:.5rem;font-size:.9rem;}
+  th,td{border:1px solid var(--line);padding:.5rem .6rem;text-align:left;vertical-align:top;}
+  th{background:#f0ede4;font-family:Arial, sans-serif;font-size:.8rem;}
+  .quiz-block{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:8px;padding:1rem 1.3rem;margin:1rem 0;}
+  .quiz-block p.q{font-weight:bold;margin:0 0 .5rem;}
+  .reveal-btn{font-family:Arial, sans-serif;font-size:.82rem;background:var(--blue);color:#fff;border:none;padding:.4rem .9rem;border-radius:5px;cursor:pointer;}
+  .reveal-btn:hover{background:var(--navy);}
+  .answer{display:none;margin-top:.7rem;padding-top:.7rem;border-top:1px dashed var(--line);font-size:.94rem;color:#34432e;background:#f7faf3;padding:.7rem .9rem;border-radius:6px;}
+  .answer.show{display:block;}
+  .summary-box{background:#eef2f8;border:1px solid #c7d3e5;border-radius:8px;padding:1rem 1.3rem;margin:1.5rem 0;font-size:.92rem;}
+  footer{text-align:center;color:var(--muted);font-family:Arial, sans-serif;font-size:.78rem;padding:1.5rem;}
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:1rem 1.3rem;font-family:Arial, sans-serif;font-size:.88rem;}
+  .toc a{color:var(--blue); text-decoration:none;}
+  .toc a:hover{text-decoration:underline;}
+  .toc ul{margin:.3rem 0;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>PSY265 · Seminars 4–8</h1>
+  <p>Coping & Social Support, Pain Management, CAM, Terminal Illness, Chronic Disorders & Psychoneuroimmunology — Exam Prep (Seminar slides + Study Unit 3 combined)</p>
+</header>
+
+<nav>
+  <a href="#coping-process">Coping Process</a>
+  <a href="#coping-personality">Personality/Resources</a>
+  <a href="#coping-style-recap">Coping Styles</a>
+  <a href="#social-support-2">Social Support</a>
+  <a href="#coping-interventions-2">Coping Interventions</a>
+  <a href="#pain-nature">Nature of Pain</a>
+  <a href="#pain-measure">Measuring Pain</a>
+  <a href="#pain-physiology">Physiology</a>
+  <a href="#pain-acute-chronic">Acute/Chronic</a>
+  <a href="#pain-control">Pain Control</a>
+  <a href="#pain-programs">Programs/Placebo</a>
+  <a href="#patient-comm">Patient Comm</a>
+  <a href="#cam">CAM</a>
+  <a href="#death-lifespan">Death/Lifespan</a>
+  <a href="#terminal-issues">Terminal Illness</a>
+  <a href="#kubler-ross">Kübler-Ross</a>
+  <a href="#terminal-mgmt">Terminal Mgmt</a>
+  <a href="#hospice">Hospice/Survivors</a>
+  <a href="#chd">CHD</a>
+  <a href="#stroke">Stroke</a>
+  <a href="#hypertension">Hypertension</a>
+  <a href="#diabetes">Diabetes</a>
+  <a href="#pni">PNI</a>
+  <a href="#aids">AIDS</a>
+  <a href="#cancer">Cancer</a>
+  <a href="#arthritis">Arthritis/Gout/Lupus</a>
+  <a href="#gaps">Gaps</a>
+  <a href="#quiz">Self-Assessment</a>
+</nav>
+
+<main>
+
+<div class="toc">
+  <b>How this guide is organised</b> — following the Study Unit 3 chapter structure, with all five seminars (4–8) folded in:
+  <ul>
+    <li><b>Ch.5:</b> Coping, Resilience & Social Support (builds on your Seminar 3 "Moderators of Stress" notes — this adds SU3's process model, external resources, coping outcomes, and coping-effectiveness training)</li>
+    <li><b>Ch.6:</b> The Management of Pain and Discomfort — nature/measurement/physiology of pain, acute vs chronic, pain control techniques, pain programmes, placebo, patient-practitioner communication</li>
+    <li><b>Ch.7:</b> Complementary and Alternative Medicine (CAM)</li>
+    <li><b>Ch.8:</b> Psychological Issues in Advancing and Terminal Illness</li>
+    <li><b>Ch.9:</b> Heart Disease, Hypertension, Stroke, and Diabetes</li>
+    <li><b>Ch.10:</b> Psychoneuroimmunology, AIDS, Cancer and Arthritis</li>
+  </ul>
+  <span class="exam-flag">Likely Exam</span> = strong slide/SU3 emphasis. <span class="gap-flag">SU-only</span> = detail from SU3 not explicit on slides. See the <a href="#gaps">gap summary</a> before the quiz.
+</div>
+
+<h2 class="chapter-title" id="chapter5">Chapter 5 — Coping, Resilience and Social Support</h2>
+
+<section class="concept" id="coping-process">
+  <h3>1. The Stress-Coping Process <span class="exam-flag">Likely Exam</span></h3>
+  <p><b>Stress</b> (SU3 definition): a negative emotional state producing physiological, behavioural, and cognitive changes in reaction to a stressful event. A <b>stressor</b> is any event that causes stress.</p>
+  <p>Responses to stress are shaped by <b>primary appraisal</b> ("Is this situation threatening?") and <b>secondary appraisal</b> ("What are my coping resources?"). The impact of a stressful situation depends on the relationship between one's appraisal of it and the coping resources available. Coping responses are then shaped by:</p>
+  <div class="pair">
+    <div><b>External resources:</b> tangible resources (money, time), social support, other co-occurring life stressors.</div>
+    <div><b>Internal resources:</b> usual coping style, personality factors.</div>
+  </div>
+  <p>All of this feeds into <b>coping outcomes</b>.</p>
+  <h4>External resources in more detail <span class="gap-flag">SU-only</span></h4>
+  <p>Money, education, employment, family and friends all matter — people with higher income, higher education, and more close friends experience <i>less</i> distress from a major stressor like divorce (Booth & Amato, 1991). Opportunities for positive life events, positive emotions, and relaxation help build <b>psychological resilience</b> — the ability to recover quickly from stressful events.</p>
+  <h4>Coping outcomes <span class="gap-flag">SU-only</span></h4>
+  <p>Successful coping = reduced physiological arousal (heart rate, pulse) and reduced <b>catecholamine and corticosteroid</b> levels, plus resumption of usual activities / better quality of life with less psychological distress.</p>
+  <div class="exam-note"><b>Watch for:</b> the two-appraisal model (primary = "is it threatening", secondary = "do I have resources") is a specific, name-matchable pair — don't swap which is which.</div>
+</section>
+
+<section class="concept" id="coping-personality">
+  <h3>2. Personality & Coping Resources — Recap + New Detail <span class="gap-flag">SU-only</span></h3>
+  <p><i>(Core neuroticism/optimism/control content is in your Seminar 3 notes; SU3 adds the following.)</i></p>
+  <ul>
+    <li>Neuroticism/negative affectivity is called a <b>"disease-prone personality"</b> that elicits distress, physical symptoms, and illness behaviours — tied to higher cortisol secretion (Polk, Cohen, Doyle, Skoner, & Kirschbaum, 2005), a biopsychosocial pathway to poorer health outcomes.</li>
+    <li>Optimism helps by prompting <b>favourable appraisals</b> of the situation and better use of available resources (Chang, 1998; Segerstrom, 2006).</li>
+    <li><b>Control-enhancing interventions</b> — giving information about an upcoming event/procedure, relaxation, and CBT techniques — are effective in helping people cope with unpleasant medical procedures.</li>
+  </ul>
+</section>
+
+<section class="concept" id="coping-style-recap">
+  <h3>3. Coping Styles — Recap + Concrete Examples <span class="gap-flag">SU-only</span></h3>
+  <p><i>(Approach/avoidance and problem-/emotion-focused definitions are in your Seminar 3 notes; here are SU3's sharper examples.)</i></p>
+  <ul>
+    <li>Avoidant coping can work for <b>short-term</b> threats but is linked to <b>more severe psychological distress</b> in the long run; approach coping is linked to lower distress and success with long-term problems.</li>
+    <li><b>Problem-focused coping</b> is commonly used where constructive action is possible — e.g. <i>fixing a broken computer</i>.</li>
+    <li><b>Emotion-focused coping</b> is used where the situation requires mere acceptance — e.g. <i>waiting for a medical report</i>.</li>
+  </ul>
+  <div class="exam-note"><b>Watch for:</b> being given a scenario ("waiting for biopsy results" vs "negotiating a return-to-work plan") and asked which coping focus fits — the deciding factor is whether constructive action is actually possible.</div>
+</section>
+
+<section class="concept" id="social-support-2">
+  <h3>4. Social Support — Recap + New Nuance <span class="gap-flag">SU-only</span></h3>
+  <p><i>(Types of support, direct-effect vs buffering hypotheses are in your Seminar 3 notes.)</i></p>
+  <ul>
+    <li>Receiving support can sometimes <b>increase</b> distress — needing others can produce guilt and lower self-esteem. Because of this, merely <b>perceiving that support is available</b> is sometimes enough to help someone face a stressor, without ever actually using it.</li>
+    <li>Effective support requires a <b>match</b> between a person's need and the support offered (e.g. someone needing a confidant won't benefit much from material aid) — and it matters that support comes from the <b>right person</b> (emotional support is most beneficial from loved ones).</li>
+    <li><b>Support providers</b> can themselves be adversely affected while helping others cope — support benefits both the giver and receiver's physical/mental health.</li>
+  </ul>
+</section>
+
+<section class="concept" id="coping-interventions-2">
+  <h3>5. Coping Interventions <span class="exam-flag">Likely Exam</span></h3>
+  <p><i>(Mindfulness and disclosure are recapped from Seminar 3; the items below — coping effectiveness training and the full stress-management skill set — are SU3 additions.)</i></p>
+  <ul>
+    <li><b>Coping effectiveness training</b> <span class="gap-flag">SU-only</span> — a CBT-based method teaching people to appraise a stressful event and classify it as a <b>specific</b> or <b>global</b> stressor, so they can develop coping techniques matched to that specific stressor.</li>
+    <li><b>Stress management</b> (3 phases, recapped from Seminar 3): 1) identification of stressors, 2) acquisition of coping techniques, 3) practice and monitoring.</li>
+    <li><b>Relaxation training</b> — deep breathing, progressive muscle relaxation, guided imagery, other forms of meditation; reduces physiological symptoms of stress.</li>
+    <li><b>Supplementary skills:</b> time management, good health habits, social skills, assertiveness training.</li>
+    <li><b>Acceptance & Commitment Therapy (ACT)</b> <span class="gap-flag">SU-only</span> — named in SU3 as an additional example of a coping intervention.</li>
+  </ul>
+  <div class="exam-note"><b>Watch for:</b> coping effectiveness training's defining feature is classifying a stressor as <b>specific vs global</b> before choosing a coping technique — don't confuse it with generic stress management, which follows the fixed 3-phase structure instead.</div>
+</section>
+
+<h2 class="chapter-title" id="chapter6">Chapter 6 — The Management of Pain and Discomfort</h2>
+
+<section class="concept" id="pain-nature">
+  <h3>6. The Significance & Elusive Nature of Pain <span class="exam-flag">Likely Exam</span></h3>
+  <p>Pain is an unpleasant body sensation and emotional experience associated with tissue damage — a complex <b>biopsychosocial</b> event (physiological + behavioural + psychological). It can be minor or so major it overwhelms basic needs.</p>
+  <ul>
+    <li><b>Adaptive function:</b> pain gives low-level feedback about body functioning, prompting unconscious adjustments (e.g. shifting a bad sitting posture) — critical for survival.</li>
+    <li><b>But:</b> pain can exacerbate illness and hamper recovery from medical procedures, and its link to the underlying medical problem is often weak — a cancerous lump is often painless. To the patient it's a central problem; to providers it's often just a by-product/symptom of an underlying disorder.</li>
+    <li><b>Psychological significance:</b> anxiety and depression can worsen the experience of pain.</li>
+    <li><b>Elusive nature:</b> pain is fundamentally a <i>psychological</i> experience — how much it hurts and how incapacitating it is depends largely on interpretation and context (stress/distress can aggravate it). It also has a <b>cultural component</b> — no ethnic/racial difference exists in the ability to <i>discriminate</i> painful stimuli, but members of some cultures report pain sooner and react more intensely.</li>
+  </ul>
+  <div class="exam-note"><b>Watch for:</b> "pain intensity always matches tissue damage severity" is <b>false</b> — the cancerous-lump example is the classic counter-example. Also: cultural differences affect pain <i>reporting/reaction</i>, not the ability to <i>discriminate</i> painful stimuli.</div>
+</section>
+
+<section class="concept" id="pain-measure">
+  <h3>7. Measuring Pain <span class="exam-flag">Likely Exam</span></h3>
+  <p>No objective referents exist for pain, which is a major barrier to effective treatment. Measurement methods:</p>
+  <ul>
+    <li><b>Verbal reports</b> — informal vocabulary (throbbing, shooting, dull ache); formal tools like the <b>McGill Pain Questionnaire</b>. Other measures target psychosocial components like fear or catastrophising (exaggerating the pain's meaning/threat).</li>
+    <li><b>Pain behaviour</b> — observable/measurable signs: distorted posture or gait, distressed facial expressions, avoidance of activity. Used to characterise different pain syndromes and to assess how much pain has disrupted a patient's life.</li>
+  </ul>
+  <div class="exam-note"><b>Watch for:</b> "catastrophising" as the specific term for exaggerating the threat/meaning of pain — a common definition-matching item.</div>
+</section>
+
+<section class="concept" id="pain-physiology">
+  <h3>8. The Physiology of Pain <span class="exam-flag">Likely Exam</span></h3>
+  <h4>Three types of pain perception</h4>
+  <table>
+    <tr><th>Type</th><th>Cause</th></tr>
+    <tr><td>Mechanical nociception</td><td>Mechanical damage to body tissue.</td></tr>
+    <tr><td>Thermal damage</td><td>High-temperature exposure.</td></tr>
+    <tr><td>Polymodal nociception</td><td>Chemical reactions from damaged tissue.</td></tr>
+  </table>
+  <h4>Pathway</h4>
+  <p>Nociceptors in peripheral nerves sense injury and release chemical messengers → signal travels to the spinal cord → some of it triggers an immediate reflex (motor nerve, e.g. withdrawing an arm) that bypasses the brain → the rest travels up through the reticular formation and <b>thalamus</b> into the cerebral cortex, where pain is consciously perceived, the injury site identified, and a return signal sent down the spinal column (triggering muscle contractions that help block pain and alter other bodily functions like breathing).</p>
+  <h4>Peripheral nerve fibres</h4>
+  <div class="pair">
+    <div><b>A-delta fibres:</b> small, <b>myelinated</b> — transmit sharp, brief pain rapidly (mechanical/thermal pain). Myelination = faster transmission.</div>
+    <div><b>C-fibres:</b> <b>unmyelinated</b> — transmit dull, aching (polymodal) pain, more slowly.</div>
+  </div>
+  <p>Motivational/affective elements of pain are influenced more strongly by C-fibres, which project to thalamic, hypothalamic, and cortical areas. The overall pain experience reflects the <b>balance of activity</b> across these fibre types.</p>
+  <h4>Modulation of pain</h4>
+  <p>The <b>periaqueductal/periductal gray</b> (a midbrain structure) is tied to pain relief — its neurons connect to the reticular formation in the medulla and to the substantia gelatinosa of the spinal cord's dorsal horn. Sensations are modulated both by the dorsal horn and by downward pathways from the brain that interpret the pain experience. Peripheral inflammation can be amplified as it's conveyed to the spinal dorsal horn; the cerebral cortex processes the cognitive judgement/meaning of the pain — this "secondary affect" (unpleasantness + negative emotion + future concern) is a critical part of the pain experience.</p>
+  <h4>Endogenous opioid peptides (the body's own pain suppressors)</h4>
+  <table>
+    <tr><th>Family</th><th>Key facts</th></tr>
+    <tr><td>Beta-endorphins</td><td>Peptides projecting to the limbic system and brain stem.</td></tr>
+    <tr><td>Proenkephalin</td><td>Widespread neuronal, endocrine, and CNS distribution.</td></tr>
+    <tr><td>Prodynorphins</td><td>Found in the gut, posterior pituitary, and brain.</td></tr>
+  </table>
+  <p>Each family has multiple forms with different potencies/receptor selectivities (one receptor may respond to beta-endorphins but not the others). This pain-suppression system isn't always active — it must be triggered. <b>Stress-induced analgesia (SIA):</b> acute stress reduces pain sensitivity by increasing endogenous opioid peptides.</p>
+  <div class="exam-note"><b>Watch for:</b> A-delta (myelinated, sharp/fast) vs C-fibres (unmyelinated, dull/slow) is a frequent matching item. Also memorise "stress-induced analgesia" by name — acute stress <i>reducing</i> pain sensitivity is counter-intuitive and thus testable.</div>
+</section>
+
+<section class="concept" id="pain-acute-chronic">
+  <h3>9. Acute vs Chronic Pain, and the Chronic Pain Lifestyle <span class="exam-flag">Likely Exam</span></h3>
+  <table>
+    <tr><th>Acute pain</th><th>Chronic pain</th></tr>
+    <tr><td>From a specific injury (cut, broken limb); self-limiting, resolves as tissue heals; short (≤6 months); can cause substantial anxiety and urgent relief-seeking.</td><td>Doesn't improve with treatment/time; usually starts as an acute episode.</td></tr>
+  </table>
+  <h4>Three types of chronic pain</h4>
+  <ul>
+    <li><b>Chronic benign pain</b> — persists ≥6 months, unresponsive to treatment, varies in severity (e.g. chronic low back pain, myofascial pain syndrome).</li>
+    <li><b>Recurrent acute pain</b> — intermittent episodes, acute in character but the underlying condition persists >6 months (e.g. migraines, TMJ, trigeminal neuralgia).</li>
+    <li><b>Chronic progressive pain</b> — persists >6 months and <b>worsens</b> over time; usually tied to malignancies/degenerative disorders (e.g. cancer, rheumatoid arthritis).</li>
+  </ul>
+  <h4>Why chronic pain is harder to treat</h4>
+  <p>Chronic pain carries an overlay of psychological distress that complicates diagnosis/treatment: realising pain interferes with desired activities, and perceiving little control over it, both cause distress; depression/anger can worsen pain; some patients develop maladaptive coping. Chronic pain is best understood not as "a pain that goes on a long time" but as an <b>unfolding physiological-psychological-behavioural experience that evolves into a syndrome</b>.</p>
+  <h4>Who becomes a chronic pain patient?</h4>
+  <p>Almost always someone who was first an <b>acute</b> pain patient. Functional disability plays a key role in the acute-to-chronic transition. High sensitivity to noxious stimulation, impaired pain-regulatory systems, and a psychological-distress overlay make pain feel especially strong. Inappropriate prior treatment, misdiagnosis, or inappropriate medication can worsen chronic pain.</p>
+  <h4>The lifestyle of chronic pain</h4>
+  <p>Sufferers often leave jobs, withdraw socially, and build an entire lifestyle around the pain — straining marriages; income/standard of living can drop, sometimes requiring public assistance.</p>
+  <h4>Pain and personality</h4>
+  <p>No single personality profile explains pain, but chronic pain reliably correlates with <b>neuroticism, introversion, and passive coping strategies</b>. Building a psychological profile of a patient helps guide treatment — e.g. a patient whose ankle pain led them to stop a beloved hobby (and become depressed) needs the depression addressed before/alongside the pain itself.</p>
+  <div class="exam-note"><b>Watch for:</b> matching each chronic-pain type (benign / recurrent acute / progressive) to its example — "worsens over time" = progressive is the most distinctive clue. Also: functional disability, not pain severity alone, is what's emphasised as central to the acute→chronic transition.</div>
+</section>
+
+<section class="concept" id="pain-control">
+  <h3>10. Pain Control Techniques <span class="exam-flag">Likely Exam</span></h3>
+  <table>
+    <tr><th>Technique</th><th>Key points</th></tr>
+    <tr><td>Pharmacological</td><td>Most traditional/common (e.g. morphine) — risk of addiction. Antidepressants act on higher brain regions to reduce anxiety, improve mood, and modulate pain. Nerve-blocking agents can cause limb paralysis/loss of bladder control, and pain often returns quickly.</td></tr>
+    <tr><td>Surgical</td><td>Cutting/creating lesions in pain fibres. Only <b>temporary</b> — nerves can regenerate new pathways. Costly, with possible side effects.</td></tr>
+    <tr><td>Sensory control / counter-irritation</td><td>Oldest known sensory technique — inhibits pain in one area by stimulating/mildly irritating another. Effective for acute pain, not chronic (though exercise/mobility can relieve chronic pain).</td></tr>
+    <tr><td>Biofeedback</td><td>Gives a patient real-time feedback on an unconscious bodily process so they can learn to control it. Modest effectiveness; expensive (machine-dependent) — relaxation techniques can substitute as "biofeedback without the machine."</td></tr>
+    <tr><td>Relaxation</td><td>Relaxing tense muscles; deep breathing is key. Modest effect on acute pain; helpful for chronic pain combined with other methods.</td></tr>
+    <tr><td>Hypnosis</td><td>One of the oldest techniques; effective for both acute pain (childbirth, dental, burns) and chronic pain (cancer) — but not everyone is easily hypnotisable. Works via relaxation, reinterpretation, distraction, and often alongside drugs.</td></tr>
+    <tr><td>Acupuncture</td><td>Mechanism unclear; may work as counter-irritation and/or by triggering endorphin release. Effective for short-term/acute pain; weak evidence for chronic pain.</td></tr>
+    <tr><td>Distraction</td><td>Shifting attention to an irrelevant/absorbing stimulus. Effective for acute and low-level pain, not chronic.</td></tr>
+    <tr><td>Coping techniques</td><td>Cognitive coping and problem-solving skills; beneficial specifically for <b>chronic</b> pain sufferers.</td></tr>
+    <tr><td>Guided imagery</td><td>Visualising a peaceful (or even aggressive/distracting) image; usually paired with other methods. Effectiveness not well established.</td></tr>
+    <tr><td>Cognitive-behavioural techniques</td><td>Reframe the problem from unmanageable to manageable; shift patient from passive to active/resourceful; teach thought/behaviour monitoring, adaptive responses, attributing success to one's own effort, and relapse prevention. Found successful for chronic back pain.</td></tr>
+  </table>
+  <div class="exam-note"><b>Watch for:</b> the recurring pattern that most sensory/physical techniques (counter-irritation, distraction, acupuncture, surgery) work best for <b>acute</b> pain, while coping techniques and CBT work best for <b>chronic</b> pain — relaxation and hypnosis are the exceptions that help with both. This acute-vs-chronic fit is a favourite exam angle.</div>
+</section>
+
+<section class="concept" id="pain-programs">
+  <h3>11. Pain Management Programmes & the Placebo Effect <span class="exam-flag">Likely Exam</span></h3>
+  <h4>Pain management programme components</h4>
+  <ol>
+    <li><b>Initial evaluation</b> — quantitative/qualitative assessment: onset, location, severity, duration, previous coping strategies, emotional/mental functioning.</li>
+    <li><b>Individualised treatment</b> — goal setting (e.g. reduce pain intensity, increase physical activity, adopt self-management).</li>
+    <li><b>Patient education & coping strategies</b> — condition education, coping methods (social skills, relaxation), CBT for maladaptive thoughts.</li>
+    <li><b>Family involvement</b> — helps the patient feel supported and see loved ones more positively.</li>
+    <li><b>Relapse prevention</b> — necessary to maintain gains; <b>relapse rates in successful pain programmes range from 30% to 60%</b> (Turk & Rudy, 1991a).</li>
+  </ol>
+  <h4>The placebo effect</h4>
+  <p>Any medical procedure that produces an effect due to its <b>therapeutic intent</b> rather than its specific chemical/physical nature. Influenced by:</p>
+  <ul>
+    <li><b>Provider behaviour</b> (warm, confident).</li>
+    <li><b>Patient characteristics</b> (easily persuadable, lower self-esteem — no single "placebo personality," but anxious/low-self-esteem people show stronger effects).</li>
+    <li><b>Situational determinants</b> (staff confidence, formal setting, number/size/taste of medication).</li>
+    <li><b>Social norms</b> (e.g. the belief "if ill, take medication, you'll feel better").</li>
+  </ul>
+  <div class="exam-note"><b>Watch for:</b> the 30–60% relapse-rate range for pain programmes is a specific testable figure. Also: there is <b>no single "placebo personality"</b> — this is a common true/false trap, since anxious/low-esteem individuals show a stronger (not universal) effect.</div>
+</section>
+
+<section class="concept" id="patient-comm">
+  <h3>12. Patient–Practitioner Communication <span class="exam-flag">Likely Exam</span></h3>
+  <p>Communication is the primary tool of information exchange between patient and provider, and it powerfully shapes patient behaviour, wellbeing, and even how pain is perceived.</p>
+  <h4>Problems on the practitioner side</h4>
+  <ul>
+    <li>Inattentiveness.</li>
+    <li>Use of jargon — linked to poor understanding of the patient's health literacy.</li>
+    <li>"Baby talk."</li>
+    <li>Non-person treatment — treating the patient as a task to clear, not a person.</li>
+    <li>Stereotyping patients (SES, language barriers, personal biases).</li>
+  </ul>
+  <h4>Problems on the patient side</h4>
+  <p>Exaggerating or under-reporting symptoms; poor health literacy.</p>
+  <h4>Why it matters</h4>
+  <p><b>85% of patients fail to adhere completely</b> to prescribed medications when communication breaks down — leading to poorer patient outcomes, more readmissions, and no reduction in overall healthcare costs.</p>
+  <h4>How to improve it</h4>
+  <ul>
+    <li>Prioritise <b>health literacy</b>.</li>
+    <li>Use "analogue patients" (role-play/standardised patients) for provider training.</li>
+    <li>Attend to <b>non-verbal cues</b> — a forward lean and direct eye contact reinforce a supportive atmosphere.</li>
+    <li>Recognise that some patient groups prefer a more <b>doctor-centred</b> communication style rather than a patient-centred one.</li>
+  </ul>
+  <div class="exam-note"><b>Watch for:</b> the 85% non-adherence figure is a specific, testable statistic. Also: "all patients prefer patient-centred communication" is <b>false</b> — some groups actually prefer doctor-centred styles.</div>
+</section>
+
+<h2 class="chapter-title" id="chapter7">Chapter 7 — Complementary and Alternative Medicine (CAM)</h2>
+
+<section class="concept" id="cam">
+  <h3>13. CAM: Origins, Treatments, Users & Evaluation <span class="exam-flag">Likely Exam</span></h3>
+  <p><b>CAM</b> = a diverse group of therapies/products/treatments not presently part of conventional medicine (herbal medicines, medicinal teas, vitamins, minerals, etc.), used to alleviate stress, reduce pain/anxiety, manage symptoms, and promote wellbeing. CAM is largely <b>unevaluated</b> by formal health standards — this doesn't mean it doesn't work, just that it hasn't been formally tested.</p>
+  <h4>Roots: holistic medicine from Asian cultures</h4>
+  <table>
+    <tr><th>Branch</th><th>Origin & core idea</th></tr>
+    <tr><td>Traditional Chinese Medicine (TCM)</td><td>China, 2000+ years ago. Vital force <b>"qi"</b> flows through <b>meridians</b>; balancing <b>yin</b> (cold/passive/slow) and <b>yang</b> (hot/active/rapid) is key to health. Uses acupuncture, massage, diet (ginseng, wolfberry, gingerroot, etc.), exercise, meditation.</td></tr>
+    <tr><td>Ayurvedic Medicine</td><td>India, ~2000 years ago. Balances body/mind/spirit via diet, exercise, massage, herbs, spices, oils, minerals.</td></tr>
+    <tr><td>Homeopathy</td><td>Europe, 1700s. Disease = disturbance in a vital life force; treats with diluted preparations that mimic the patient's own symptoms.</td></tr>
+    <tr><td>Naturopathy</td><td>1800s. Core belief: the body heals itself through diet, exercise, sunlight, fresh air.</td></tr>
+  </table>
+  <p><i>Note: the three older branches (TCM, Ayurveda, Homeopathy/Naturopathy) use broadly similar treatment methods — mainly the name/cultural framing differs.</i></p>
+  <h4>Mind-body CAM treatments (selected notes)</h4>
+  <ul>
+    <li><b>Dietary supplements:</b> little systematic evidence that high-dose vitamins prevent illness; iron supplements linked to <b>increased mortality risk in older women</b>; clearest benefit is for people with an actual symptomatic nutrient deficiency. Vegetarian/macrobiotic diets risk inadequate protein/nutrients.</li>
+    <li><b>Prayer:</b> may help coping and is tied to better health practices, but does <b>not</b> reliably slow chronic illness progression or speed recovery — benefit mainly comes via calm/relaxation and the social support of religious attendance.</li>
+    <li><b>Acupuncture:</b> 2000+ years old; some patients in China have undergone surgery using only acupuncture analgesia while fully conscious; broad healing claims not scientifically proven.</li>
+    <li><b>Yoga:</b> 5000+ years old (India); used for chronic pain, bronchitis, menopause symptoms, stress/anxiety/depression, cancer-related fatigue — but no strong evidence it improves physical health per se.</li>
+    <li><b>Hypnosis:</b> oldest CAM technique; benefits may stem from relaxation + reinterpretation + distraction + any drugs used alongside it, not hypnosis alone; use for non-pain health issues is not formally evaluated.</li>
+    <li><b>Meditation:</b> mindfulness meditation teaches present-moment awareness without distress; may help pain management, but evidence quality is inconsistent.</li>
+    <li><b>Guided imagery:</b> used especially for cancer-related discomfort; too few rigorous randomised trials to confirm effectiveness.</li>
+    <li><b>Chiropractic medicine:</b> founded by Daniel Palmer, 1895; spine/joint adjustments; evidence limited to small/modest studies.</li>
+    <li><b>Osteopathy:</b> relies on the body's self-healing ability; little evidence except for managing <b>lower back pain</b>.</li>
+    <li><b>Massage:</b> ("tui na" in TCM) manipulates soft tissue/"qi" flow; reduces stress, may boost immunity; some support for persistent back pain, but studies are limited by small samples/weak design.</li>
+  </ul>
+  <h4>Who uses CAM?</h4>
+  <p>Most people use only <b>one</b> form; multi-CAM users typically combine herbal/dietary supplements with prayer or meditation. People turn to CAM when conventional medicine hasn't successfully treated their condition — chronic fatigue syndrome, cancer, intractable pain (back/neck), depression, anxiety, stress, insomnia, severe headaches, GI disorders.</p>
+  <h4>Evaluating CAM</h4>
+  <p>Currently insufficient evidence overall — studies (where they exist) often have small samples, poor controls, weak designs; CAM is highly individualised, and often has a placebo component. Despite this, CAM is now a standard part of care given its massive worldwide use — more people use self-care/CAM to treat themselves when ill than use traditional medicine (Suzuki, 2004). Continued evaluation of effectiveness/safety is essential.</p>
+  <div class="exam-note"><b>Watch for:</b> "CAM has been proven ineffective" is <b>false</b> — the correct framing is that it is largely <i>unevaluated</i>, not disproven. Also: osteopathy's one area of decent evidence is specifically <b>lower back pain</b> — a common specific-fact question.</div>
+</section>
+
+<h2 class="chapter-title" id="chapter8">Chapter 8 — Psychological Issues in Advancing and Terminal Illness</h2>
+
+<section class="concept" id="death-lifespan">
+  <h3>14. Death across the Lifespan <span class="exam-flag">Likely Exam</span></h3>
+  <table>
+    <tr><th>Life stage</th><th>Main causes of death</th></tr>
+    <tr><td>Infancy</td><td>Congenital abnormalities, Sudden Infant Death Syndrome (SIDS) — SIDS deaths cut by 30% once safe sleep positions became known (NYT, 1995); leukaemia (survival rates now +5 years thanks to treatment advances).</td></tr>
+    <tr><td>Childhood (under 15)</td><td>Accidents (poisoning, falls, automobile) account for ~40% of deaths; leukaemia.</td></tr>
+    <tr><td>Young adulthood</td><td>Automobile accidents, homicide, suicide, cancer, AIDS.</td></tr>
+    <tr><td>Middle age</td><td>Premature death (before age 77) — often heart attack or stroke; chronic health problems.</td></tr>
+    <tr><td>Old age</td><td>Degenerative diseases — heart failure, cancer, stroke.</td></tr>
+  </table>
+  <p>Children develop an understanding of death between ages <b>5 and 9</b>. Accepting death may be harder for younger people than for the elderly, who may have already come to terms with it.</p>
+  <div class="exam-note"><b>Watch for:</b> the specific "40% of deaths under 15 from accidents" and "SIDS reduced by 30%" figures, and the 5–9 age range for children's understanding of death developing.</div>
+</section>
+
+<section class="concept" id="terminal-issues">
+  <h3>15. Psychological Issues in Advancing Illness <span class="exam-flag">Likely Exam</span></h3>
+  <ul>
+    <li><b>Continue-or-discontinue treatment dilemma:</b> repeated surgery/intervention may prevent deterioration but bring new risks/discomfort — the decision should be based on thoughtful consideration, not depression or other psychological distress (though that consideration can be hard for terminally ill patients to reach).</li>
+    <li><b>The right to die:</b> euthanasia/physician-assisted suicide raises moral/legal issues and has seen falling support (Emanuel et al., 2000). The <b>living will</b> (a legal document requesting no life-sustaining procedures, drawn up at diagnosis) has gained more traction. In Singapore, this is formalised as the <b>Advance Medical Directive</b>. Full moral/legal clarity is still lacking, due to: limited understanding of new life-sustaining tech, unequal access to it, insufficient cost-effectiveness guidelines, and no consensus on the right-to-die issue itself.</li>
+    <li><b>Threats to self-concept:</b> difficulty maintaining biological (e.g. vomiting, weight loss), cognitive (inability to concentrate), and social functioning.</li>
+    <li><b>Social withdrawal:</b> patients often still want social contact but may withdraw for fear of upsetting others — families should understand this rather than assume the patient wants to be left alone.</li>
+    <li><b>Communication breakdown:</b> common between medical staff and family once prognosis turns unfavourable — death remains a topic people want to avoid or fear addressing.</li>
+    <li><b>Non-traditional treatment:</b> patients may desperately seek unconventional cures and risk losing significant money — this doesn't mean they shouldn't try alternatives, but they should make an <b>informed</b> decision first.</li>
+  </ul>
+  <div class="exam-note"><b>Watch for:</b> distinguishing "the right to die" (euthanasia/living wills, a legal-ethical issue) from "psychological management" (a clinical-support issue) — exam questions sometimes blend these two but they're conceptually separate.</div>
+</section>
+
+<section class="concept" id="kubler-ross">
+  <h3>16. Kübler-Ross's Five-Stage Theory <span class="exam-flag">Likely Exam</span></h3>
+  <table>
+    <tr><th>Stage</th><th>Description</th></tr>
+    <tr><td>1. Denial</td><td>Denying/minimising the illness's severity — a natural (if primitive, ultimately unsuccessful) self-defence mechanism/psychological shelter from reality.</td></tr>
+    <tr><td>2. Anger</td><td>"Why me and not others?" — resentment toward healthy people, hospital staff, family, friends.</td></tr>
+    <tr><td>3. Bargaining</td><td>Trading good behaviour for good health — e.g. praying to see a milestone event (a child's wedding, graduation, a grandchild's birth); may suddenly take up charitable activities in exchange for health.</td></tr>
+    <tr><td>4. Depression</td><td>Acknowledging deterioration; a period of mourning / anticipatory grief that helps the patient prepare for death.</td></tr>
+    <tr><td>5. Acceptance</td><td>Coming to terms with illness/death; too weak to be angry, accustomed to the idea of dying; feels tired and peaceful; makes preparations, says goodbyes.</td></tr>
+  </table>
+  <h4>Limitations</h4>
+  <ul>
+    <li>Patients don't necessarily go through all five stages, or in this order.</li>
+    <li>A patient may experience a stage more than once.</li>
+    <li>The theory doesn't address <b>anxiety</b>, or explain <i>how</i> people cope with grief within each stage.</li>
+    <li>The "depression" stage can range widely — from ordinary sadness to clinical depression.</li>
+  </ul>
+  <div class="exam-note"><b>Watch for:</b> "patients always progress through all 5 stages in order" is a <b>false</b> statement frequently tested — a core critique of the theory. Also memorise anxiety as the specific emotion the theory is criticised for omitting.</div>
+</section>
+
+<section class="concept" id="terminal-mgmt">
+  <h3>17. Psychological Management of the Terminally Ill <span class="exam-flag">Likely Exam</span></h3>
+  <p>Medical staff are very significant to terminally ill patients, who need substantial support from them — but staff (especially in <b>palliative care</b>, focused on comfort rather than cure) face a real risk of <b>burnout</b>.</p>
+  <h4>Achieving an "appropriate death" (5 components)</h4>
+  <ul>
+    <li><b>Informed consent</b> — patients told the nature of their condition/treatment and involved in decisions.</li>
+    <li><b>Safe conduct</b> — staff act as helpful guides through this frightening new stage of life.</li>
+    <li><b>Significant survival</b> — staff help the patient use remaining time as well as possible.</li>
+    <li><b>Anticipatory grief</b> — helping both patient and family work through the sense of impending loss.</li>
+    <li><b>Timely and appropriate death</b> — allowing the patient to die when/how they want, with dignity, as much as possible.</li>
+  </ul>
+  <h4>Counselling & therapy</h4>
+  <ul>
+    <li><b>Individual counselling</b> — short-term; timing/nature of visits depends on the patient's energy; helps resolve "unfinished business."</li>
+    <li><b>Family therapy</b> — therapist interprets what patient and family are each trying to express, ensuring mutual understanding before death.</li>
+    <li><b>Terminally ill children</b> — communicated with in ways they understand, often through <b>drawing</b>, to access and understand their feelings; therapists focus on what the child wants to talk about, and help both child and parents build coping strategies.</li>
+  </ul>
+  <div class="exam-note"><b>Watch for:</b> matching each of the 5 "appropriate death" components to a short description — a classic list-matching item. Also: burnout risk is specifically tied to <b>palliative</b> care staff (comfort-focused, not cure-focused) work.</div>
+</section>
+
+<section class="concept" id="hospice">
+  <h3>18. Hospice & Home Care, and Problems of Survivors <span class="exam-flag">Likely Exam</span></h3>
+  <div class="pair">
+    <div><b>Hospice care:</b> painful/curative therapies usually discontinued; focus on psychological comfort. Patients can personalise rooms, wear own clothes, keep their own routine; family can stay over. Palliative quality is comparable to hospitals, and hospices are increasingly integrated into hospitals due to their success. In Singapore, the <b>Singapore Hospice Council (SHC)</b> is the umbrella body (registered 1995 with 5 members; now 8), coordinating care, family support, caregiver training, and public awareness.</div>
+    <div><b>Home care:</b> better for the patient's sense of control (familiar environment, own choices about meals/clothing, family availability) but can be very <b>stressful for family members</b> who lack training and must devote all their time to nursing.</div>
+  </div>
+  <h4>Grief</h4>
+  <p>A psychological response to bereavement — hollowness, intrusive images of the deceased, expressions of hostility toward others, and guilt over the death.</p>
+  <h4>Problems of survivors</h4>
+  <ul>
+    <li><b>Women:</b> short-term difficulty adjusting to widowhood, but most do well with good social support — <b>financial strain</b> is the biggest burden.</li>
+    <li><b>Men:</b> household management can cause distress.</li>
+    <li><b>Children:</b> may feel <b>guilty</b> (believing they caused the death, or that a parent "left" because the child was "bad"); may become depressed, angry, hostile, or frustrated, affecting school results and social withdrawal. Counselling aims to correct these faulty thoughts, though it can help even more to <b>prepare</b> the child before the death happens rather than only counselling afterward.</li>
+    <li><b>General adult impact:</b> low immune functioning, higher disease risk, alcohol/drug abuse can follow unresolved bereavement (Aiken & Max, 1987; Stroebe & Stroebe, 1987).</li>
+    <li><b>Death education</b> helps people understand death, set realistic expectations, and choose their preferred type of care — but carries a risk of attracting people with suicidal or self-destructive tendencies.</li>
+  </ul>
+  <div class="exam-note"><b>Watch for:</b> widowed women's biggest burden is specifically <b>financial</b>, widowed men's is <b>household management</b> — don't swap these. Also: preparing a child <i>before</i> a death is framed as more beneficial than counselling only after it happens.</div>
+</section>
+
+<h2 class="chapter-title" id="chapter9">Chapter 9 — Heart Disease, Hypertension, Stroke, and Diabetes</h2>
+
+<section class="concept" id="chd">
+  <h3>19. Coronary Heart Disease (CHD) <span class="exam-flag">Likely Exam</span></h3>
+  <p>CHD is the <b>#1 killer in the US</b>, <b>#2 in Singapore</b> — caused by <b>atherosclerosis</b> (narrowing of the coronary arteries), which obstructs oxygen/nutrient flow to the heart. Temporary shortages cause <b>angina pectoris</b> (radiating chest/arm pain); severe deprivation causes a <b>heart attack (myocardial infarction)</b>. In Singapore, cardiovascular disease (heart disease + stroke) caused ~32% of all deaths in 2018 — roughly 1 in 3 deaths, ~21 people/day. Called the "disease of modernisation" (diet changes, less activity — e.g. lifts, online shopping).</p>
+  <h4>Biological risk factors</h4>
+  <ul>
+    <li><b>Inflammation markers:</b> pro-inflammatory cytokine IL-6 contributes to atherosclerotic plaque buildup; <b>C-reactive protein</b> (produced in the liver, released during inflammation) is a strong predictor of CHD.</li>
+    <li>High blood pressure, diabetes, smoking, obesity, high cholesterol, low physical activity, air-pollution exposure, and metabolic syndrome (5 abnormalities occurring together).</li>
+  </ul>
+  <h4>The role of stress</h4>
+  <p><b>Cardiovascular reactivity</b> (stress-driven changes in cardiovascular activity) damages endothelial cells (facilitating lipid deposits), increases inflammation, and contributes to atherosclerotic lesions. Acute mental stress activates the <b>sympathetic-adrenal-medullary (SAM) axis</b>, releasing catecholamines (norepinephrine, epinephrine) and raising heart rate/blood pressure; combined psychological + physical stress worsens this — partly explaining elevated CVD risk in occupations like firefighting and law enforcement. Acute emotional stress (anger, extreme excitement, sudden activity) can itself trigger a heart attack, angina, or death via exaggerated platelet/hemodynamic reactivity contributing to plaque rupture and clot formation (thrombogenesis).</p>
+  <h4>Social/occupational risk factors</h4>
+  <p>More common in low-SES individuals (especially males); linked to <b>job strain</b> (high demand + low control), a mismatch between education level and occupation, low job security, little workplace social support, and high work pressure.</p>
+  <h4>Depression & CHD</h4>
+  <p>An <b>independent</b> risk factor — elevates C-reactive protein, promotes inflammation. Serotonin reuptake inhibitors may reduce clotting by limiting platelet aggregation.</p>
+  <h4>Women and CHD</h4>
+  <p>Typically occurs ~10 years later than in men; much less research exists on CHD in women. <b>Pre-menopause,</b> higher oestrogen (and HDL) is protective, though blood pressure rises slightly. <b>Post-menopause,</b> risk rises due to weight gain, higher BP, higher cholesterol. Women are also less likely to learn about the benefits of exercise/nutrition/weight loss, and less likely to receive heart-disease medication — but active women have lower CHD risk, just like active men.</p>
+  <h4>Personality: hostility</h4>
+  <p><b>Cynical hostility</b> (suspiciousness, resentment, frequent anger, antagonism, distrust) raises CHD risk; men and low-SES individuals show higher hostility levels. <b>Expressing</b> hostile emotions (anger, cynicism) is more reliably linked to cardiovascular reactivity than <b>harbouring</b> unexpressed anger — though in women, anger suppression AND hostile attitudes have both been linked to atherosclerosis. Hostile individuals tend to have more interpersonal conflict, less social support, greater/longer physiological reactivity to stress, and are more prone to high-risk behaviours (caffeine, higher weight/lipids, smoking, alcohol, hypertension) and higher LDL ("bad") cholesterol.</p>
+  <h4>Mechanisms linking reactivity to heart disease</h4>
+  <p>Vasorestriction in peripheral heart areas accelerates heart rate → wear/tear on coronary arteries → atherosclerotic lesions; rising/falling catecholamine levels prompt blood-pressure changes that undermine vessel resilience; stress/anxiety can also affect heart disease via blood coagulation and fibrinolysis.</p>
+  <h4>Impact of CHD & management</h4>
+  <p><b>Biologically:</b> damaged arteries, possible CABG (coronary artery bypass graft), long-term medication. <b>Psychologically:</b> lowered self-esteem, anxiety (uncertainty), stress-related depression. <b>Socially:</b> lifestyle change, social isolation, inability to perform former tasks — also affects caregivers.</p>
+  <p><b>Management:</b> delay in treatment is a major cause of high mortality. Initial treatment includes CABG and <b>cardiac rehabilitation</b> (an active, progressive process toward optimal physical/medical/psychological/social/emotional/vocational/economic status — relieving symptoms, reducing severity, limiting progression, promoting adjustment). Medication: clot-dissolving drugs, beta-adrenergic blockers (can cause impotence/fatigue), aspirin, statins (targeting LDL). Diet/activity: restricted diet, exercise (brisk walking/jogging 3x/week, 30–45 min). Stress management and depression treatment (counselling + medication) are also key. <b>Cardiac invalidism:</b> when patient and spouse rate the patient's abilities as lower than they actually are.</p>
+  <div class="exam-note"><b>Watch for:</b> the distinction between <i>expressing</i> hostility (more consistently linked to CHD) and <i>harbouring</i> it — except the women's-atherosclerosis exception, where BOTH suppression and hostile attitudes matter. Also: "cardiac invalidism" as the specific named phenomenon of under-rating a recovering patient's abilities.</div>
+</section>
+
+<section class="concept" id="stroke">
+  <h3>20. Stroke <span class="exam-flag">Likely Exam</span></h3>
+  <p>Stroke results from interrupted blood flow to localised brain areas — caused by cerebral haemorrhage (blood leaks into the brain, compressing tissue against the skull — can be fatal, ~30% mortality in the first month) or by arteriosclerotic plaque damage to cerebral blood vessels. In Singapore it was the 4th principal cause of death (2011 data, 1,622 deaths including cerebrovascular disease). <b>Aspirin</b> can reduce stroke risk by preventing blood coagulation.</p>
+  <h4>Risk factors</h4>
+  <p>High blood pressure, heart disease, smoking, high red blood cell count, transient ischemic attacks, family history, diabetes; negative emotions — anger, sudden posture change during a startling event, psychological distress, depression — can also trigger stroke.</p>
+  <h4>Consequences</h4>
+  <ul>
+    <li><b>Motor problems</b> — depends on which brain side/area is damaged.</li>
+    <li><b>Cognitive problems</b> — difficulty with speech/understanding others.</li>
+    <li><b>Emotional problems</b> — <b>left-brain</b> damage → anxiety/depression; <b>right-brain</b> damage → <b>alexithymia</b> (difficulty identifying/describing feelings).</li>
+    <li><b>Relationship problems</b> — especially with cumulative small strokes causing <b>multi-infarct dementia</b> (Alzheimer's-like symptoms).</li>
+  </ul>
+  <p><b>Biologically:</b> partial/full paralysis, possible loss of speech. <b>Psychologically:</b> lowered self-esteem (e.g. can't wash/dress self), anxiety about future attacks, stress-related depression. <b>Socially:</b> full lifestyle change, isolation, inability to perform former tasks — caregivers are also affected, sometimes forced to give up work, causing financial strain and their own risk of depression.</p>
+  <p><b>Interventions:</b> psychotherapy (especially for depression), cognitive remedial training, movement therapies (restoring physical function), and structured, stimulating environments (helping regain lost capabilities).</p>
+  <div class="exam-note"><b>Watch for:</b> left-brain vs right-brain stroke damage effects — left = anxiety/depression, right = alexithymia — is a precise, frequently-tested pairing. Also: "alexithymia" as the exact term for difficulty identifying/describing one's own feelings.</div>
+</section>
+
+<section class="concept" id="hypertension">
+  <h3>21. Hypertension <span class="exam-flag">Likely Exam</span></h3>
+  <p>High blood pressure (a cardiovascular disease) — occurs when blood supply through the vessels is excessive, when cardiac output is too high (pressuring arterial walls), or due to peripheral resistance (resistance to blood flow in small arteries). Untreated, it can impair learning, memory, attention, abstract reasoning, and mental flexibility.</p>
+  <h4>Measurement</h4>
+  <p><b>Systolic</b> pressure = greatest force during heart-ventricle contraction (sensitive to blood volume leaving the heart and arterial elasticity). <b>Diastolic</b> pressure = pressure when the heart is relaxed (related to vessel resistance to flow). Measured via <b>sphygmomanometer</b>.</p>
+  <table>
+    <tr><th>Category (Singapore)</th><th>Reading</th></tr>
+    <tr><td>Normal</td><td>120/80</td></tr>
+    <tr><td>Borderline</td><td>130–139 / 80–89</td></tr>
+    <tr><td>High</td><td>140+ / 90+</td></tr>
+  </table>
+  <p>Recommended check frequency: every 6–12 months if normal, monthly if hypertensive. Hypertension is characterised by greater reactivity to stress and slower recovery.</p>
+  <h4>Causes</h4>
+  <p>~5% is due to kidney failure to regulate blood pressure; ~95% is "essential" (unknown origin). Risk factors: childhood emotional excitability (promotes adolescent central weight gain, predicting CVD); before age 50, men are at greater risk than women; genetics — <b>45% offspring risk if one parent has hypertension, 90% if both do</b>. Also: depression, hostility, frequent intense arousal, cynical distrust, suppressed hostility, excessive striving against odds, and a family environment that fosters anger. Children/adolescents with strong social skills have reduced risk.</p>
+  <h4>Stress link</h4>
+  <p>Repeated stressful events with heightened BP reactivity can contribute to chronic hypertension over time; chronic social conflict, job strain (high demand + low control), and crowded/noisy/high-stress environments are implicated. Studied via lab tasks (measuring BP responses to stress) and <b>ambulatory monitoring</b> (a wearable BP cuff tracking readings throughout a normal day).</p>
+  <h4>Psychosocial factors</h4>
+  <p>Anger and hostility potential are linked to exaggerated BP; <b>ruminating</b> on anger's source (whether suppressed or expressed) is linked to elevated BP; positive emotion and social support may be protective.</p>
+  <h4>Treatment</h4>
+  <p><b>Lifestyle:</b> low-sodium diet, weight reduction, caffeine restriction. <b>Drugs:</b> diuretics (excrete sodium — best type, causes frequent urination especially at night), beta-adrenergic blockers (↓ cardiac output/plasma renin), central adrenergic inhibitors, vasodilators, ACE inhibitors, calcium channel blockers — though drug treatment is controversial since lowering BP this way can raise CHD risk. <b>CBT approaches:</b> biofeedback, progressive muscle relaxation, hypnosis, meditation, stress management, exercise, weight loss — helps some patients reduce drug reliance, though not everyone benefits; diuretics remain effective on their own.</p>
+  <div class="exam-note"><b>Watch for:</b> the exact genetic risk figures (45% one parent / 90% both parents) and the Singapore BP thresholds (120/80 normal; 140/90+ high) are precise, testable numbers. Also: hypertension is famously a <b>"symptomless disease"</b> — often only caught during routine checkups (this phrase reappears from the earlier SU2 note too).</div>
+</section>
+
+<section class="concept" id="diabetes">
+  <h3>22. Diabetes <span class="exam-flag">Likely Exam</span></h3>
+  <p>A chronic condition of impaired carbohydrate/protein/fat metabolism from insufficient insulin or insulin resistance. In Singapore (2017): 1 in 9 adults aged 18–69 is diabetic (up from 1 in 11 in 1998); 12–15% have pre-diabetes. By ethnicity: <b>Indians 17.2%, Malays 16.6%, Chinese 9.7%</b>.</p>
+  <p><b>Insulin</b> (produced by pancreatic beta cells) lets glucose enter cells. Without enough insulin, or with insulin resistance, glucose stays in the blood (<b>hyperglycaemia</b>) — cells still lack the glucose they need, so the body signals the hypothalamus that more food is needed, making diabetics feel hungry easily.</p>
+  <table>
+    <tr><th>Type 1 (insulin-dependent)</th><th>Type 2 (non-insulin-dependent)</th></tr>
+    <tr><td>Autoimmune disorder — immune system destroys pancreatic beta cells (sometimes following viral infection; genetic contribution). Abrupt onset, typically age 5–6 or 10–13. More severe than Type 2.</td><td>Cells in muscle/fat/liver lose responsiveness to insulin (insulin resistance); pancreas initially over-produces insulin, then insulin-producing cells may fail — dysregulating the insulin action/secretion balance. Typically strikes after age 40; obesity is a major contributor.</td></tr>
+    <tr><td><b>Early symptoms:</b> frequent urination, unusual thirst, excess fluid intake, weight loss, fatigue, weakness, irritability, nausea, cravings (esp. sweets), fainting — body starts feeding off its own fat/protein. Untreated → coma. Managed primarily by insulin injection.</td><td><b>Risk factors:</b> overweight, low exercise, high blood pressure, family history. <b>Symptoms:</b> frequent urination, fatigue, dry mouth, impotence, irregular menstruation, loss of sensation, frequent skin/gum/urinary infections, leg/foot/finger pain or cramps, slow wound healing, itching, drowsiness.</td></tr>
+    <tr><td><b>Hyperglycaemia risk:</b> flushed/dry skin, drowsiness, deep laboured breathing, vomiting, dry tongue, rare hunger but common thirst, abdominal pain, sugar in urine — requires hospitalisation/medication.</td><td>—</td></tr>
+  </table>
+  <h4>Complications</h4>
+  <p>Leading cause of blindness in adults; nervous system damage, pain/loss of sensation, arterial thickening (→ high CHD rates), foot ulcers (sometimes requiring amputation).</p>
+  <h4>Diabetes and stress</h4>
+  <p>People at high risk for diabetes show abnormal glycaemic responsiveness to stress; both Type 1 and Type 2 are sensitive to stress effects. Stress hormones (cortisol) reduce insulin effectiveness → contributes to insulin resistance. Depression is common among diabetics.</p>
+  <h4>Self-management</h4>
+  <p><b>Type 1:</b> self-monitoring glucose, regular insulin injections, dietary/weight control, exercise, problem-solving, stress management — but adherence is often poor, partly because complications don't show up until 15–20 years after onset, removing urgency. <b>Type 2:</b> patient education, reducing sugar/carb intake, medication — patients are often unaware of the health risks they face. <b>Over-control risk:</b> can cause <b>hypoglycaemia</b> (blood sugar too low).</p>
+  <h4>Adolescent diabetes — special problems</h4>
+  <p>Usually more severe (often Type 1); poor adherence to strict diet; may skip/forget self-injections; fear of stigma can lead to skipping dietary restrictions/injections; risk of depression as a result.</p>
+  <h4>Why exercise and regular screening matter</h4>
+  <p>Active muscle cells become more insulin-sensitive and take up glucose without needing insulin during contraction; benefits can lower blood glucose for 24+ hours post-workout. Annual <b>diabetic retinal photography (DRP)</b> screens for diabetic retinopathy (prevents blindness); annual <b>diabetic foot screening (DFS)</b> catches peripheral neuropathy (nerve damage from high sugar) before it worsens.</p>
+  <div class="exam-note"><b>Watch for:</b> the Singapore ethnic prevalence ranking (Indians > Malays > Chinese) and the "complications don't appear for 15–20 years" fact as an explanation for poor Type 1 adherence — both are specific, testable details.</div>
+</section>
+
+<h2 class="chapter-title" id="chapter10">Chapter 10 — Psychoneuroimmunology, AIDS, Cancer and Arthritis</h2>
+
+<section class="concept" id="pni">
+  <h3>23. Psychoneuroimmunology & the Immune System <span class="exam-flag">Likely Exam</span></h3>
+  <p><b>Psychoneuroimmunology (PNI):</b> the study of interactions among behavioural, neuroendocrine, and immunological processes of adaptation. Three disorders linked to immune functioning: AIDS, cancer, arthritis.</p>
+  <h4>Natural (innate) immunity</h4>
+  <p>Defends against a range of pathogens; the largest cell group involved is <b>granulocytes</b>, including <b>neutrophils</b> and <b>macrophages</b> — both <b>phagocytic</b> cells (engulf/destroy foreign particles). Neutrophils and macrophages gather at injury/infection sites, releasing toxic substances and cytokines (causing inflammation/fever — side effects that actually promote wound healing). <b>Natural killer (NK) cells</b> recognise viral infection and <b>lyse</b> (break apart) infected cells — important in signalling potential malignancies and limiting early viral infection.</p>
+  <h4>Specific (adaptive) immunity — slower than natural immunity</h4>
+  <p><b>Lymphocytes</b> have receptor sites matching only one specific antigen; activation triggers cell division (the "proliferative response").</p>
+  <table>
+    <tr><th>Humoral immunity</th><th>Cell-mediated immunity</th></tr>
+    <tr><td>Mediated by <b>B lymphocytes</b>; protects against bacteria by neutralising bacterial toxins.</td><td>Involves <b>T lymphocytes</b> (from the thymus gland); operates at the cellular level. <b>Cytotoxic T cells (Tc)</b> respond to specific antigens and kill by producing toxic substances against virally infected cells. <b>Helper T cells (Th)</b> enhance the functioning of T cells, B cells, and macrophages by producing lymphokines.</td></tr>
+  </table>
+  <p>Natural immunity contains infection rapidly and early; specific immunity takes up to several days to mount a full defence.</p>
+  <h4>Assessing immune functioning</h4>
+  <ul>
+    <li>Counting T, B, NK cell numbers; circulating lymphokine/antibody levels.</li>
+    <li>Functional tests: ability of lymphocytes to kill invading cells, to reproduce when chemically stimulated (mitogen), and phagocytic activity (ingesting foreign particles).</li>
+    <li>Antibody response to a latent virus (e.g. herpes simplex) carried by most people — antibody production here signals the immune system isn't fully controlling the latent virus.</li>
+    <li>Antibody response to a vaccine — a good response signals healthy immune functioning.</li>
+    <li>Wound healing speed (e.g. a forearm puncture test) — faster healing = more vigorous immune function.</li>
+  </ul>
+  <h4>Stress and immune functioning</h4>
+  <table>
+    <tr><th>Stress duration</th><th>Immune effect</th></tr>
+    <tr><td>Short-term (minutes) — fight-or-flight</td><td>Anticipatory immune response preparing for injury/infection; marked ↑ in NK cells and large granular lymphocytes; ↓ some specific immunity measures.</td></tr>
+    <tr><td>Naturalistic short stressors (a few days, e.g. exam prep)</td><td>Mobilises immune function (changes in cytokine production); shifts <b>away from cellular</b> toward <b>humoral</b> immunity, to ward off pathogen threats.</td></tr>
+    <tr><td>Chronic stress (e.g. unemployment)</td><td>Adverse effects on almost all immune measures (both cellular and humoral down-regulated) — leaves the person vulnerable to disease. Effects are stronger in those with pre-existing vulnerabilities (old age, existing disease).</td></tr>
+  </table>
+  <p><b>Mechanism:</b> stress activates the sympathetic nervous system and the <b>HPA axis</b> (hypothalamic-pituitary-adrenocortical), increasing NK cell activity in the short term but also increasing <b>cortisol</b> release, which reduces white blood cell counts, reduces cytokine release, and reduces communication between immune components. Cortisol can trigger <b>apoptosis</b> (programmed cell death) of white blood cells. Adults and children under stress show more vulnerability to colds, flu, herpes (cold sores), chicken pox, shingles. Depression can compromise cellular immunity further. Impaired immunity is also linked to bereavement, loneliness, marital conflict, and caregiving strain.</p>
+  <p><b>Protective factors:</b> social support, optimism, self-efficacy, and relaxation buffer against adverse immune changes and mute stress's effects on the immune system.</p>
+  <div class="exam-note"><b>Watch for:</b> the shift from cellular to <b>humoral</b> immunity under short naturalistic stress (like exam prep) is a specific, counterintuitive, testable detail — don't assume all stress uniformly suppresses everything. Also: cortisol's specific downstream effects (↓ white blood cells, ↓ cytokines, ↓ communication, triggers apoptosis) are worth memorising as a chain.</div>
+</section>
+
+<section class="concept" id="aids">
+  <h3>24. AIDS <span class="exam-flag">Likely Exam</span></h3>
+  <p>Acquired Immune Deficiency Syndrome — the <b>4th leading cause of death worldwide</b>. Caused by <b>HIV</b> (a retrovirus), transmitted via exchange of cell-containing bodily fluids (semen, blood). HIV attacks <b>helper T cells and macrophages</b>. Viral growth is rapid in the first few weeks post-transmission, then slows/becomes more controlled after 3–6 weeks.</p>
+  <h4>Symptoms</h4>
+  <p>Chronic diarrhoea, wasting, skeletal pain, blindness, CNS impairment (forgetfulness, poor concentration, psychomotor retardation, decreased alertness, diminished work interest). Advanced stage: confusion, disorientation, seizures, profound dementia, coma.</p>
+  <h4>Transmission risk factors</h4>
+  <p>Needle sharing among drug users; sex with anonymous partners without a condom. <b>Women appear more at-risk than men</b> for transmission via vaginal intercourse. In Singapore: most infected men contract it through sex with casual partners/sex workers; most infected women contract it through sex with their own husbands/boyfriends.</p>
+  <h4>Prevention & treatment</h4>
+  <ul>
+    <li><b>Pre-intervention (primary prevention):</b> education targeting sexual activity, safe-sex practice, HIV-and-pregnancy education. Education is an effective <b>secondary</b> prevention method for people already HIV+, but <b>not</b> an effective <b>primary</b> prevention method for uninfected individuals (Weinhardt, Carey, Johnson, & Bickman, 1999).</li>
+    <li>Interventions raising perceived self-efficacy (over risk-related activity), changing sexual-practice norms, and improving sexual negotiation skills; CBT with a motivational component helps at-risk groups change risky behaviour. Adolescent HIV-prevention programmes are also key. The Health Belief Model and stage model of behaviour can both guide intervention design.</li>
+    <li><b>Post-infection:</b> <b>Highly Active Antiretroviral Therapy (HAART)</b> — a combination of antiretroviral medications, but highly expensive. CBT helps treat the psychological distress of learning one's HIV+ status and adhering to HAART. Good coping skills and social support both improve wellbeing/quality of life for people with HIV/AIDS.</li>
+  </ul>
+  <div class="exam-note"><b>Watch for:</b> "education prevents HIV transmission equally well for infected and uninfected people" is <b>false</b> — it's effective as secondary prevention (for the already-infected) but not as primary prevention (for the uninfected). Also: the Singapore gendered transmission pattern (men via casual/sex-worker contact; women via their own partners) is a specific local fact.</div>
+</section>
+
+<section class="concept" id="cancer">
+  <h3>25. Cancer <span class="exam-flag">Likely Exam</span></h3>
+  <p>Cancer is caused by malfunctioning DNA leading to excessively rapid cell growth/proliferation that saps the body's resources. It is the <b>#1 killer disease in Singapore</b> and among the leading causes of death in developed countries; more than 100 distinct diseases fall under "cancer." Roughly <b>1 in 4 people</b> will develop cancer. Risk factors: genetics (e.g. colon, breast cancer), infectious agents (e.g. HPV → cervical cancer), lifestyle, diet, socioeconomic status.</p>
+  <h4>Psychological links</h4>
+  <p><b>Depression</b> is strongly associated with cancer — elevated neuroendocrine responses from depression may promote cancer progression via immune-system impact. Stress from lack of social support may influence cancer onset/progression; psychological distress can impair <b>NK cells'</b> ability to destroy tumours.</p>
+  <h4>Living with cancer</h4>
+  <p>More than a third of cancer patients live at least 5 years post-diagnosis. Adjustment issues include vulnerability to other illnesses (e.g. respiratory infections), debilitating chemotherapy side effects, depression, social withdrawal, strained marital/sexual relationships, and job discrimination. Coping via <b>seeking social support, optimism, and distancing</b> is linked to less psychological distress; both problem-focused and emotion-focused coping are linked to better functioning/health. Some patients report genuine post-diagnosis growth and greater life satisfaction.</p>
+  <h4>Treatment</h4>
+  <p>Surgery, chemotherapy (oral or IV — side effects: nausea, vomiting, hair loss), radiotherapy (side effect: skin burns in the treated area).</p>
+  <h4>Coping/intervention approaches</h4>
+  <ul>
+    <li><b>Behavioural:</b> relaxation techniques, pain management techniques.</li>
+    <li><b>Psychotherapeutic:</b> individual counselling, group therapy, family therapy, support groups.</li>
+  </ul>
+  <p><i>Singapore support groups named in the seminar:</i> Singapore Cancer Society, Children's Cancer Foundation, Tumour Patient Care Group, Breast Cancer Foundation, The Revival Connection.</p>
+  <div class="exam-note"><b>Watch for:</b> "1 in 4 people will develop cancer" and "cancer is Singapore's #1 killer disease" (versus CHD at #2) are specific, testable ranking facts — keep the two rankings (cancer #1, CHD #2 in Singapore) straight.</div>
+</section>
+
+<section class="concept" id="arthritis">
+  <h3>26. Arthritis, Gout & Lupus <span class="exam-flag">Likely Exam</span></h3>
+  <table>
+    <tr><th>Condition</th><th>Key facts</th></tr>
+    <tr><td>Rheumatoid arthritis (RA)</td><td>Inflammation of joints/connective tissue caused by an <b>autoimmune</b> process — immune agents attack the thin membranes protecting the joints instead of protecting the body, causing pain, stiffness, inflammation. Affects hands/feet, wrists, knees, ankles, neck; in severe cases, the heart muscle, blood vessels, and subdermal tissue. Typically affects ages <b>40–60</b> (though can affect any age group). <b>Stress can aggravate RA.</b> Treatment: medication (e.g. aspirin), supervised exercise (occupational therapy, physiotherapy), rest, surgery; CBT teaches stress/pain-management and self-management skills, with modest success.</td></tr>
+    <tr><td>Osteoarthritis</td><td>Commonly affects women aged 45+. Caused by deterioration/wear of the <b>articular cartilage</b> (hip, knees, spine) from overuse/injury. Depression is also common here. Treated with anti-inflammatory drugs, steroids, exercise, psychosocial interventions; weight control also helps.</td></tr>
+    <tr><td>Gout</td><td>Build-up of <b>uric acid crystals</b> in the joints. Treatment: dietary changes (eating less liver, kidney, brain), exercise.</td></tr>
+    <tr><td>Lupus</td><td>Chronic inflammatory skin rash causing pain, heat, redness, swelling — can be <b>life-threatening</b>. Managed with anti-inflammatory or immunosuppressive medication.</td></tr>
+  </table>
+  <p><b>Arthritis is one of the most preventable diseases</b> — active self-care (pain control, dietary control, stress management, exercise) is central to managing it.</p>
+  <div class="exam-note"><b>Watch for:</b> RA (autoimmune, 40–60 age range) vs osteoarthritis (wear-related, women 45+) is the classic distinguishing pair — RA attacks joint membranes via the immune system, while osteoarthritis is cartilage breakdown from mechanical wear.</div>
+</section>
+
+<div class="summary-box" id="gaps">
+  <b>Study-Unit-vs-Slides gap summary</b><br>
+  Concepts/detail in <b>SU3</b> not explicitly on the Seminar 4–8 slides: the full external-resources research (Booth & Amato, 1991 on income/education/friends and divorce distress), the specific coping-outcomes physiological markers (catecholamines, corticosteroids), <b>coping effectiveness training</b> as a named technique, and Acceptance & Commitment Therapy as a named example.<br><br>
+  Conversely, several rich details were <b>on the slides but not in SU3's prose</b>: the detailed pain-pathway physiology (periaqueductal gray, spinal dorsal horn modulation), the three named opioid-peptide families with their specific distributions, patient-practitioner communication (the whole topic — inattentiveness, jargon, 85% non-adherence figure — is slide-only), the Singapore-specific CHD/stroke/hypertension/diabetes statistics (32% of SG deaths, ethnic diabetes prevalence, BP thresholds), and the full PNI immune-cell mechanics (neutrophils, macrophages, NK cells, humoral vs cell-mediated pathways).
+</div>
+
+<div class="summary-box">
+  <b>Quick recap map</b><br>
+  <b>Ch.5:</b> Stress-coping process (appraisal → resources → outcomes) → Personality/resources → Coping styles → Social support → Coping interventions (mindfulness, disclosure, coping-effectiveness training, stress management, ACT).<br><br>
+  <b>Ch.6:</b> Nature/measurement of pain → Physiology (nociception types, fibres, pathway, opioids) → Acute vs chronic pain & lifestyle → Pain control techniques → Pain programmes & placebo → Patient-practitioner communication.<br><br>
+  <b>Ch.7:</b> CAM origins (TCM, Ayurveda, Homeopathy/Naturopathy) → treatments → who uses it → evaluation.<br><br>
+  <b>Ch.8:</b> Death across the lifespan → Psychological issues in advancing illness → Kübler-Ross 5 stages → Psychological management → Hospice/home care → Survivor problems.<br><br>
+  <b>Ch.9:</b> CHD (biology, stress, hostility, women, management) → Stroke → Hypertension → Diabetes (Type 1 & 2).<br><br>
+  <b>Ch.10:</b> Immune system basics (natural vs specific, humoral vs cell-mediated) → Stress-immunity link → AIDS → Cancer → Arthritis/Gout/Lupus.
+</div>
+
+<h2 class="chapter-title" id="quiz">Self-Assessment: Short-Answer Questions</h2>
+<p style="font-family:Arial, sans-serif; font-size:.9rem; color:var(--muted);">Try answering each in your own words before revealing the model answer.</p>
+
+<div id="quiz-container"></div>
+
+</main>
+
+<footer>PSY265 Seminars 4–8 — personal exam-prep aid built from seminar slides + Study Unit 3 text. Not an official SUSS document.</footer>
+
+<script>
+const questions = [
+  {
+    q: "1. A patient says fixing their broken laptop themselves helped them feel less stressed, while waiting for a biopsy result just made them anxious no matter what they did. Which coping focus fits each situation, and why?",
+    a: "Fixing the laptop is a problem-focused coping situation — constructive action is possible and effective. Waiting for a biopsy result calls for emotion-focused coping — the situation can't be changed by action, so managing the emotional reaction is what's actually available."
+  },
+  {
+    q: "2. Why might simply knowing that support is available be enough to help someone cope, even if they never use it?",
+    a: "Because actually seeking/receiving support can sometimes increase distress (needing others can trigger guilt or lower self-esteem). The mere perception that support is available can be sufficient to help a person confront a stressful situation without incurring that cost."
+  },
+  {
+    q: "3. Explain why a cancerous lump being painless is used as an example in the pain lecture.",
+    a: "It shows that the relationship between pain and the underlying medical problem is often weak — pain is not a reliable indicator of how serious an illness is, which is part of why pain is described as an 'elusive' and fundamentally psychological experience rather than a direct readout of tissue damage."
+  },
+  {
+    q: "4. Distinguish A-delta fibres from C-fibres in the physiology of pain.",
+    a: "A-delta fibres are small, myelinated fibres that rapidly transmit sharp, brief pain from mechanical or thermal sources. C-fibres are unmyelinated and transmit dull, aching (polymodal) pain more slowly. Myelination is why A-delta signals travel faster."
+  },
+  {
+    q: "5. What is stress-induced analgesia, and why is it a useful survival mechanism?",
+    a: "It's the reduction in pain sensitivity caused by acute stress, driven by an increase in the brain's endogenous opioid peptides. It's useful because in a genuine emergency (e.g. fleeing danger), reduced pain sensitivity lets the body keep functioning despite injury rather than being overwhelmed by pain in the moment."
+  },
+  {
+    q: "6. A therapist tells a chronic-pain patient to keep a diary tracking their pain-related thoughts, attribute their progress to their own effort, and plan ahead for situations that might trigger a setback. Which pain-control technique is this, and what population does it work best for?",
+    a: "This is the cognitive-behavioural technique for pain control, including its self-monitoring, attribution, and relapse-prevention components. It has been found successful specifically for chronic pain, such as chronic back pain."
+  },
+  {
+    q: "7. Why is it misleading to say CAM therapies 'don't work'?",
+    a: "The accurate description is that most CAM therapies are largely unevaluated by formal scientific standards, not that they've been tested and shown ineffective. Lack of evidence is different from evidence of no effect — and many CAM therapies remain widely used and valued by patients regardless."
+  },
+  {
+    q: "8. A terminally ill patient suddenly begins donating heavily to charity and praying to live to see their child's wedding. Which Kübler-Ross stage is this, and what is the patient essentially doing?",
+    a: "This is the Bargaining stage. The patient is trading good behaviour for good health/more time — attempting to negotiate, often with a higher power, for a specific milestone or extension of life."
+  },
+  {
+    q: "9. What is the key criticism of the Kübler-Ross Five-Stage Theory regarding how patients actually move through the stages?",
+    a: "Patients don't necessarily go through all five stages, and not necessarily in the given order — some may skip stages or repeat a stage more than once. The theory is also criticised for not addressing anxiety, and for not explaining how people specifically cope with grief while in each stage."
+  },
+  {
+    q: "10. Why can home care be a double-edged option for a terminally ill patient's family?",
+    a: "Home care gives the patient a stronger sense of control (familiar surroundings, choice over meals/clothing, family presence), but it can be highly stressful for family members who are not trained to provide palliative care yet must devote all their time to nursing the patient."
+  },
+  {
+    q: "11. Explain why expressing hostility is more consistently linked to CHD than harbouring it — with the noted exception.",
+    a: "Expressing hostile emotions like anger and cynicism is more reliably associated with enhanced cardiovascular reactivity than harbouring (suppressing) anger. The exception is women, where BOTH anger suppression and hostile attitudes have been linked to atherosclerosis — so the express-vs-harbour distinction doesn't hold as cleanly for women as it does for men."
+  },
+  {
+    q: "12. A patient has right-brain stroke damage and struggles to describe how they're feeling, even though they clearly are experiencing emotion. What is this symptom called, and how does it differ from what left-brain damage typically produces?",
+    a: "This is alexithymia — difficulty identifying and describing one's feelings — and it's associated with right-brain damage. Left-brain damage, by contrast, is more typically associated with anxiety and depression as emotional consequences of the stroke."
+  },
+  {
+    q: "13. Why is hypertension often called a 'symptomless disease,' and what problem does that create for treatment?",
+    a: "Because hypertension usually produces no noticeable symptoms, many patients are only diagnosed incidentally during a routine medical exam. This creates a treatment-adherence problem, since patients who don't feel unwell have little intrinsic motivation to stick with lifestyle changes or medication — patient education about the disease's seriousness becomes especially important."
+  },
+  {
+    q: "14. Why is adherence often poor among Type 1 diabetics despite the seriousness of the disease?",
+    a: "Complications from diabetes typically don't become evident until 15–20 years after onset, so the lack of immediate, visible consequences fails to frighten people into consistent self-management — even though the eventual complications (blindness, nerve damage, CHD, foot ulcers) are severe."
+  },
+  {
+    q: "15. During a few days of exam stress, does immune function generally go up, down, or shift in a specific direction? Explain.",
+    a: "Naturalistic short-term stress like exam preparation mobilises the immune system and shifts it away from cellular immunity and toward humoral immunity, as the body prepares to ward off pathogen threats — it's not simply 'suppressed,' but redirected, unlike the broad down-regulation seen under chronic stress."
+  },
+  {
+    q: "16. Why is education alone not enough to prevent HIV transmission among uninfected people, even though it helps those who are already HIV-positive?",
+    a: "Research (Weinhardt, Carey, Johnson, & Bickman, 1999) found education to be an effective secondary prevention method for HIV-positive individuals — helping them manage their condition and avoid further transmission — but not an effective primary prevention method for uninfected individuals, who need additional interventions like self-efficacy building, changing sexual norms, and negotiation-skills training to actually reduce risk behaviour."
+  },
+  {
+    q: "17. Distinguish rheumatoid arthritis from osteoarthritis in terms of cause and typical age/gender pattern.",
+    a: "Rheumatoid arthritis is an autoimmune process — the immune system attacks the joint-protecting membranes — and typically affects people aged 40-60. Osteoarthritis is caused by mechanical wear and deterioration of the articular cartilage (from overuse or injury) and commonly affects women aged 45 and above."
+  }
+];
+
+const container = document.getElementById('quiz-container');
+questions.forEach((item, i) => {
+  const block = document.createElement('div');
+  block.className = 'quiz-block';
+  block.innerHTML = `
+    <p class="q">${item.q}</p>
+    <button class="reveal-btn" onclick="toggleAnswer(${i})">Show Answer</button>
+    <div class="answer" id="answer-${i}">${item.a}</div>
+  `;
+  container.appendChild(block);
+});
+
+function toggleAnswer(i) {
+  const el = document.getElementById('answer-' + i);
+  const btn = el.previousElementSibling;
+  el.classList.toggle('show');
+  btn.textContent = el.classList.contains('show') ? 'Hide Answer' : 'Show Answer';
+}
+</script>
+
+</body>
+</html>

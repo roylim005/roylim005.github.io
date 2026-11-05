@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PSY265 – July 2025 Exam Paper: Questions and Model Answers</title>
+<style>
+  :root{
+    --navy:#1b2a4a; --blue:#2a5ca8; --bg:#fbfaf7; --card:#ffffff; --line:#e3ddd3;
+    --text:#26241f; --muted:#6b6558; --exam:#fff4e6; --exam-border:#e0a458;
+    --gap:#fdeef0; --gap-border:#d98a95;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Georgia","Iowan Old Style",serif;background:var(--bg);color:var(--text);line-height:1.55;}
+  header{background:var(--navy);color:#f4f1ea;padding:2.2rem 1.5rem 1.6rem;text-align:center;}
+  header h1{margin:0 0 .3rem;font-size:1.5rem;font-weight:600;}
+  header p{margin:0;color:#c7cfe0;font-size:.92rem;}
+  nav{background:#22314f;display:flex;flex-wrap:wrap;justify-content:center;padding:.4rem 0;position:sticky;top:0;z-index:50;}
+  nav a{color:#dbe2f0;text-decoration:none;font-size:.78rem;font-family:Arial,sans-serif;padding:.5rem .8rem;border-radius:4px;}
+  nav a:hover{background:#324875;}
+  main{max-width:840px;margin:0 auto;padding:1.8rem 1.2rem 4rem;}
+  .chapter-title{margin-top:3rem;padding-bottom:.4rem;border-bottom:3px solid var(--navy);color:var(--navy);font-size:1.45rem;}
+  .chapter-title small{display:block;font-family:Arial,sans-serif;font-size:.78rem;font-weight:normal;color:var(--muted);margin-top:.2rem;}
+  .intro{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:1rem 1.3rem;font-family:Arial,sans-serif;font-size:.88rem;}
+  .intro ul{margin:.3rem 0;}
+  .controls{margin:1rem 0;display:flex;gap:.6rem;flex-wrap:wrap;}
+  .controls button{font-family:Arial,sans-serif;font-size:.82rem;background:var(--blue);color:#fff;border:none;padding:.45rem .9rem;border-radius:5px;cursor:pointer;}
+  .controls button:hover{background:var(--navy);}
+  .qcard{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:1.1rem 1.4rem;margin:1.1rem 0;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .qhead{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin-bottom:.4rem;}
+  .qnum{font-family:Arial,sans-serif;font-size:.74rem;font-weight:bold;background:var(--navy);color:#fff;border-radius:4px;padding:.15rem .55rem;}
+  .qtitle{font-weight:bold;color:var(--blue);font-size:1.05rem;}
+  .case{background:#f7f5ef;border-left:4px solid #b9b19f;padding:.6rem .9rem;border-radius:0 6px 6px 0;font-size:.9rem;margin:.5rem 0;}
+  .qparts{margin:.4rem 0;padding-left:1.3rem;font-size:.95rem;}
+  details.ans{margin-top:.8rem;border:1px solid #cfdcc3;background:#f7faf3;border-radius:8px;}
+  details.ans > summary{cursor:pointer;font-family:Arial,sans-serif;font-size:.84rem;font-weight:bold;color:#fff;background:var(--blue);padding:.45rem .9rem;border-radius:7px;list-style:none;}
+  details.ans > summary::-webkit-details-marker{display:none;}
+  details.ans[open] > summary{border-radius:7px 7px 0 0;background:var(--navy);}
+  .ans-body{padding:.8rem 1.1rem 1rem;font-size:.94rem;}
+  .ans-body h4{font-family:Arial,sans-serif;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:1rem 0 .3rem;}
+  .ans-body h4:first-child{margin-top:0;}
+  ul,ol{padding-left:1.3rem;} li{margin-bottom:.28rem;}
+  table{width:100%;border-collapse:collapse;margin:.5rem 0;font-size:.88rem;}
+  th,td{border:1px solid var(--line);padding:.45rem .55rem;text-align:left;vertical-align:top;}
+  th{background:#f0ede4;font-family:Arial,sans-serif;font-size:.8rem;}
+  .exam-note{background:var(--exam);border:1px solid var(--exam-border);border-radius:6px;padding:.55rem .85rem;margin-top:.7rem;font-size:.88rem;font-family:Arial,sans-serif;}
+  .exam-note b{color:#8a5a12;}
+  .flag-note{background:var(--gap);border:1px solid var(--gap-border);border-radius:6px;padding:.55rem .85rem;margin-top:.7rem;font-size:.88rem;font-family:Arial,sans-serif;}
+  .flag-note b{color:#8a2a3a;}
+  .beyond{display:inline-block;background:#e9f0fb;border:1px solid #9bb6e0;color:#244a86;font-family:Arial,sans-serif;font-size:.66rem;font-weight:bold;text-transform:uppercase;letter-spacing:.03em;padding:.08rem .45rem;border-radius:20px;margin-left:.3rem;vertical-align:middle;}
+  .xref{font-family:Arial,sans-serif;font-size:.86rem;background:#eef2f8;border:1px solid #c7d3e5;border-radius:6px;padding:.5rem .8rem;margin-top:.6rem;}
+  .xref a{color:var(--blue);}
+  footer{text-align:center;color:var(--muted);font-family:Arial,sans-serif;font-size:.78rem;padding:1.5rem;}
+
+  .marks{display:inline-block;background:#eef2f8;border:1px solid #c7d3e5;color:#244a86;font-family:Arial,sans-serif;font-size:.72rem;font-weight:bold;padding:.12rem .55rem;border-radius:20px;}
+  .skeleton{background:#f7f5ef;border:1px dashed #b9b19f;border-radius:6px;padding:.55rem .85rem;margin:.4rem 0 .8rem;font-size:.9rem;font-family:Arial,sans-serif;}
+  .skeleton b{color:var(--navy);}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>PSY265 · July 2025 Proctored Online Exam</h1>
+  <p>Past paper (Wednesday 12 November 2025): questions and model answers, built from your seminar slides and Study Units 1–3</p>
+</header>
+
+<nav>
+  <a href="#overview">Overview &amp; time plan</a>
+  <a href="#q1a">Q1a</a>
+  <a href="#q1b">Q1b</a>
+  <a href="#q1c">Q1c</a>
+  <a href="#q1d">Q1d</a>
+  <a href="#q2a">Q2a</a>
+  <a href="#q2b">Q2b</a>
+  <a href="#q3">Q3</a>
+  <a href="#tips">Exam tips</a>
+</nav>
+
+<main>
+
+<div class="intro" id="overview">
+  <b>Paper format</b>
+  <ul>
+    <li>2 hours, <b>closed-book</b>, typed answers submitted in Examena, 100 marks. All three questions are compulsory.</li>
+    <li>Q1 (40 marks): four 10-mark parts, each to be applied to an <b>original real-life example of your own</b>. Q2 (30 marks): a case on Molly (a 10-mark part and a 20-mark part). Q3 (30 marks): a CAM discussion and appraisal.</li>
+  </ul>
+  <b>Read this before using the model answers</b>
+  <ul>
+    <li><b>Turnitin and originality.</b> The paper warns that copied content, and non-original examples, will be penalised or not marked. The examples below are <i>models of how to build one</i>. In the exam, use an example from your own life or observation, and write the answer in your own words. Do not memorise these answers word for word.</li>
+    <li><b>The preamble to Q1 applies to all four parts.</b> It says "apply each concept to a real-life original example", so parts (c) and (d) also need an example, even though only (a) and (b) spell it out. The model answers include one for each.</li>
+    <li><b>These answers are longer than you can type in the time.</b> They show the full set of points available. The "answer skeleton" at the top of each one shows what a tight exam-length answer should contain. My word-count guidance is an estimate, not an official one.</li>
+    <li><b>Indicative mark splits are my estimates.</b> I do not have the marking scheme. They show how a marker would plausibly divide the marks between knowledge, application and evaluation.</li>
+    <li><span class="beyond">Beyond course materials</span> marks points that are not in your slides or Study Units. Check them against your textbook.</li>
+  </ul>
+</div>
+
+<h2 class="chapter-title">Suggested time plan (120 minutes)</h2>
+<table>
+  <tr><th>Part</th><th>Marks</th><th>Time</th><th>Rough length (estimate)</th></tr>
+  <tr><td>Q1a SDT and example</td><td>10</td><td>10 min</td><td>150-200 words</td></tr>
+  <tr><td>Q1b Stages of change (BMI 30 case)</td><td>10</td><td>10 min</td><td>150-200 words</td></tr>
+  <tr><td>Q1c Sedentary lifestyle and chronic disease</td><td>10</td><td>10 min</td><td>150-200 words</td></tr>
+  <tr><td>Q1d Social support appraisal</td><td>10</td><td>10 min</td><td>150-200 words</td></tr>
+  <tr><td>Q2a Molly's psychological issues</td><td>10</td><td>10 min</td><td>150-200 words</td></tr>
+  <tr><td>Q2b Family intervention (Kübler-Ross)</td><td>20</td><td>20 min</td><td>300-400 words</td></tr>
+  <tr><td>Q3 CAM discussion and appraisal</td><td>30</td><td>30 min</td><td>450-550 words</td></tr>
+  <tr><td><b>Total writing</b></td><td><b>100</b></td><td><b>100 min</b></td><td></td></tr>
+  <tr><td>Planning and review</td><td></td><td>20 min</td><td>Read all questions first; jot skeletons; leave time to check examples are original</td></tr>
+</table>
+
+<div class="controls">
+  <button onclick="setAll(true)">Expand all answers</button>
+  <button onclick="setAll(false)">Collapse all answers</button>
+</div>
+
+<!-- ============== QUESTION 1 ============== -->
+<h2 class="chapter-title">Question 1 <span class="marks">40 marks</span><small>Apply each concept to a real-life original example of your own</small></h2>
+
+<div class="qcard" id="q1a">
+  <div class="qhead"><span class="qnum">Q1a</span><span class="marks">10 marks</span><span class="qtitle">Self-Determination Theory and a lifestyle intervention</span></div>
+  <div class="case">Examine the Self-Determination Theory and its components. Apply the model to a real-life example to illustrate how it can be used in a lifestyle intervention. Keep your examples within these categories: exercise, diet, medication adherence.</div>
+  <details class="ans"><summary>Show model answer</summary><div class="ans-body">
+    <div class="skeleton"><b>Answer skeleton (indicative split):</b> define SDT and autonomous versus controlled motivation (about 3 marks) · name and explain the components (about 3) · one worked example that applies each component to an intervention (about 4).</div>
+    <h4>What SDT says</h4>
+    <p>People change behaviour more reliably when they are <b>autonomously motivated</b>: they experience free will and choice in acting, and the change is personally important and tied to values they hold. Motivation that comes from pressure, reward or punishment is <i>controlled</i> and tends to be less durable. In health psychology, SDT is used to design interventions that support the person's own reasons for changing, instead of imposing them.</p>
+    <h4>Components</h4>
+    <ul>
+      <li><b>Autonomy:</b> the sense of choice and ownership over the behaviour. Supported by offering options, explaining the reasons, acknowledging the person's feelings, and using non-controlling language.</li>
+      <li><b>Competence:</b> feeling able to carry out the behaviour and achieve the outcome (your slides use "perceived competence" when discussing adolescent smoking). Supported by small, achievable steps, skills training and feedback.</li>
+      <li><b>Relatedness:</b> feeling connected to and supported by others. Supported by group programmes, family involvement and a respectful relationship with the practitioner. <span class="beyond">Beyond course materials</span> Your slides emphasise autonomy and personal importance, and mention competence. Relatedness as the third basic need comes from the standard SDT formulation, so check your textbook wording.</li>
+    </ul>
+    <h4>Original example (exercise): a taxi driver told to move more</h4>
+    <p>Mr Tan, 52, drives a taxi 10 hours a day. His GP says his blood pressure and weight are rising. His wife nags him to "go and exercise", and he resists and sits more.</p>
+    <ul>
+      <li><b>The controlled approach and why it fails:</b> instructions and nagging give external pressure, so he complies at most while watched.</li>
+      <li><b>Autonomy:</b> the health coach lists options (brisk walks along the park connector, swimming, cycling), lets him choose the times and set his own goal, and links exercise to something <i>he</i> values: staying fit enough to keep driving and to walk his daughter down the aisle. The coach acknowledges that long shifts make it hard and avoids "you must".</li>
+      <li><b>Competence:</b> start with 10-minute walks during his break; a step tracker gives him feedback; increase gradually so he experiences success and sees progress.</li>
+      <li><b>Relatedness:</b> he joins a morning walking group of other drivers, and his wife changes from nagging to walking with him once a week.</li>
+      <li><b>Outcome:</b> exercise becomes something he chooses and enjoys, so it is more likely to continue after the programme ends.</li>
+    </ul>
+    <p>The same logic applies in the other two categories: for <b>diet</b>, let the person choose their own swaps and tie them to their values; for <b>medication adherence</b>, let the patient choose the routine (timing, reminders), explain how the drug supports a goal they care about, and involve family as support, not as monitors.</p>
+    <div class="exam-note"><b>Tip:</b> examiners want the example to do the work. Name each component explicitly inside the example, as above, and show the contrast between a controlled and an autonomy-supportive approach.</div>
+  </div></details>
+</div>
+
+<div class="qcard" id="q1b">
+  <div class="qhead"><span class="qnum">Q1b</span><span class="marks">10 marks</span><span class="qtitle">Stages of change: BMI 30 to under 23</span></div>
+  <div class="case">Explain the stages of change. Use the example of someone who has a BMI of 30 and has been told to bring it down to under 23 as a case study to explain the stages of change.</div>
+  <details class="ans"><summary>Show model answer</summary><div class="ans-body">
+    <div class="skeleton"><b>Answer skeleton:</b> one line on the model (Transtheoretical Model, Prochaska) · all five stages, each with the person's thoughts and behaviours <i>and</i> what the practitioner does (about 7-8 marks) · one line on relapse and non-linearity, and a realistic-goal point (about 2).</div>
+    <h4>The case</h4>
+    <p>Daniel, 40, is 1.70 m and 87 kg, so his BMI is 87 ÷ (1.70 × 1.70) = about 30. To reach a BMI under 23 he would need to be about 66.5 kg or less, a loss of roughly <b>20 kg</b>. His doctor has told him to do this.</p>
+    <table>
+      <tr><th>Stage</th><th>What it means</th><th>Daniel</th><th>Intervention</th></tr>
+      <tr><td><b>1. Pre-contemplation</b></td><td>Unaware of the problem or no intention to change; may attend only because others press.</td><td>"My weight is fine, the doctor exaggerates." He sees no problem and keeps late-night supper.</td><td>Information on the benefits and risks of his weight, delivered without pressure; personalised results (blood pressure, glucose).</td></tr>
+      <tr><td><b>2. Contemplation</b></td><td>Aware of the problem and thinking about it, but no commitment.</td><td>He accepts that his weight is risky but weighs it against his enjoyment of food and his long working hours. "Maybe next month."</td><td>Pros-and-cons discussion; address barriers; motivational interviewing; build belief that he can do it.</td></tr>
+      <tr><td><b>3. Preparation</b></td><td>Committed to change and planning, but not yet acting.</td><td>He sets a start date, joins a gym, tells his family, buys food-tracking app.</td><td>Concrete action plan, realistic targets, self-monitoring tools, social support.</td></tr>
+      <tr><td><b>4. Action</b></td><td>Actively modifying behaviour and environment (up to about 6 months).</td><td>He cuts supper, swaps sugary drinks, walks 30 minutes, logs food.</td><td>Stimulus control, self-reinforcement, contingency contracting, relaxation for stress eating.</td></tr>
+      <tr><td><b>5. Maintenance</b></td><td>Sustaining the change (about 6 months or more) and preventing relapse.</td><td>After 6 months he keeps the habits, but festive season and work stress threaten them.</td><td>Relapse prevention: plan for high-risk situations, treat a lapse as a lapse, keep social support.</td></tr>
+    </table>
+    <h4>Points that earn extra marks</h4>
+    <ul>
+      <li><b>The stages are a spiral, not a ladder.</b> People move back and forth. Relapse rates of 50-90% are common in habit change, especially in the first 3 months, so Daniel may return to an earlier stage and should be expected to restart the cycle.</li>
+      <li><b>The target is large, so break it down.</b> The seminar's benchmark is a loss of about 1 lb a week for 20 weeks, maintained over a year (Brownell, 1982). That is about 9 kg, well short of 20 kg. Use staged goals (for example 5 kg first) with short-term action plans, and expect a long programme.</li>
+      <li><b>Match the intervention to the stage.</b> Giving action-stage advice to someone in contemplation fails.</li>
+      <li><b>Honest limitation:</b> applications of the model to smoking, weight control and condom use have produced mixed results.</li>
+      <li><span class="beyond">Beyond course materials</span> The "under 23" target is the Asian BMI cut-off. Your course defines obesity by body fat (over 27% in women, 22% in men) and gives the BMI formula, but does not mention the 23 threshold.</li>
+    </ul>
+  </div></details>
+</div>
+
+<div class="qcard" id="q1c">
+  <div class="qhead"><span class="qnum">Q1c</span><span class="marks">10 marks</span><span class="qtitle">How a sedentary lifestyle raises chronic disease risk</span></div>
+  <div class="case">Describe how unhealthy lifestyle behaviour such as having a sedentary lifestyle increases the risk of chronic diseases. (Remember the Q1 preamble: use an original example.)</div>
+  <details class="ans"><summary>Show model answer</summary><div class="ans-body">
+    <div class="skeleton"><b>Answer skeleton:</b> a short framing (modern chronic disease, behavioural causes) · mechanisms for 3-4 specific diseases (about 6 marks) · psychological and social links, and the cycle (about 2) · your example (about 2).</div>
+    <h4>Framing</h4>
+    <p>Chronic illnesses such as heart disease, cancer, stroke and diabetes now cause most deaths, and behavioural factors such as inactivity, smoking and diet are implicated in their development. Coronary heart disease is called a "disease of modernisation" because of reduced activity (taking lifts, shopping online). Regular exercise protects, so its absence removes that protection.</p>
+    <h4>Mechanisms</h4>
+    <table>
+      <tr><th>Disease</th><th>How inactivity increases risk</th></tr>
+      <tr><td>Obesity</td><td>Low energy expenditure with unchanged intake leads to fat accumulation. Obesity is itself a precursor of hypertension, raised cholesterol, diabetes and heart failure, so inactivity acts both directly and through weight.</td></tr>
+      <tr><td>Type 2 diabetes</td><td>Little exercise and overweight are named risk factors. Active muscle cells become more sensitive to insulin and take up glucose, even without insulin, and the glucose-lowering effect can last 24 hours or more. Without activity, insulin resistance develops and glucose stays in the blood.</td></tr>
+      <tr><td>Hypertension</td><td>Aerobic exercise helps reduce blood pressure in mild hypertensives, and weight loss lowers it among the obese. Inactivity and weight gain remove these benefits.</td></tr>
+      <tr><td>Coronary heart disease and stroke</td><td>Low physical activity is a listed risk factor for CHD, alongside high blood pressure, diabetes, obesity and high cholesterol. Exercise raises HDL, lowers resting heart rate and strengthens the heart; inactivity loses these. Hypertension, heart disease and diabetes in turn raise stroke risk.</td></tr>
+      <tr><td>Cancer and immunity</td><td>Exercise reduces the risk of some cancers and improves immune function, so inactivity forfeits both.</td></tr>
+      <tr><td>Depression and stress</td><td>Sedentary behaviour is a risk factor for depression. Exercise delays activation of the HPA axis, which is largely responsible for stress's adverse bodily effects, so inactive people are more exposed to stress damage.</td></tr>
+    </table>
+    <h4>Psychological and social links, and the cycle</h4>
+    <ul>
+      <li>Inactivity lowers mood and exercise self-efficacy, so it becomes harder to start. Illness and pain then reduce activity further (a vicious circle).</li>
+      <li>Inactive habits cluster with other unhealthy ones (poor diet, smoking), and risk factors act together: e.g. smoking with high cholesterol raises mortality.</li>
+      <li>Social context matters: desk jobs, car dependence and screen leisure make inactivity the default.</li>
+    </ul>
+    <h4>Original example</h4>
+    <p>Hui Min, 34, works at a desk 9 hours, commutes by car, and orders delivery online. Over five years she gains 12 kg (obesity), her fasting glucose creeps up (insulin resistance), her blood pressure reads 135/88 (borderline hypertension, 130-139/80-89 in Singapore), and she feels flat and stressed (low mood, no exercise buffer). Each change raises her risk of diabetes and heart disease, and the low mood makes her less likely to move.</p>
+  </div></details>
+</div>
+
+<div class="qcard" id="q1d">
+  <div class="qhead"><span class="qnum">Q1d</span><span class="marks">10 marks</span><span class="qtitle">Appraise social support in a stress management intervention</span></div>
+  <div class="case">Appraise the effectiveness of social support in a stress management intervention. You may wish to consider the coping mechanisms of people. (Use an original example.)</div>
+  <details class="ans"><summary>Show model answer</summary><div class="ans-body">
+    <div class="skeleton"><b>Answer skeleton:</b> brief definition and types · strengths with evidence (about 3) · limitations and conditions (about 3) · link to coping mechanisms (about 2) · a reasoned conclusion (about 1-2). "Appraise" means weigh both sides and reach a judgement, so a list of benefits alone will not score well.</div>
+    <h4>What it is</h4>
+    <p>Social support is information from others that one is loved, cared for, valued and part of a network of mutual obligation. Types: <b>tangible</b> (money, services), <b>informational</b>, <b>emotional</b>, and invisible support (support received without awareness).</p>
+    <h4>Strengths</h4>
+    <ul>
+      <li><b>Reduces distress and physiological stress responses:</b> biological responses are more subdued when a supportive companion is present; warm contact releases oxytocin, linked to lower stress responses; lonely people sleep worse and show more cardiovascular activation.</li>
+      <li><b>Better health outcomes:</b> lower likelihood of illness, faster recovery, lower mortality, better adherence to medical regimens, lower cortisol responses, and a buffering effect on immune changes.</li>
+      <li><b>Strengthens coping.</b> Informational and tangible support help <b>problem-focused coping</b> (understanding the stressor, getting resources); emotional support helps <b>emotion-focused coping</b> (regulating feelings, maintaining self-esteem). It also helps people who would otherwise rely on avoidance.</li>
+      <li><b>Benefits providers too:</b> providing support benefits the physical and mental health of both parties.</li>
+      <li><b>Two routes:</b> the direct-effect hypothesis (helps in stressful and non-stressful times) and the buffering hypothesis (helps mainly under high stress). A stress management programme can exploit both.</li>
+    </ul>
+    <h4>Limitations and conditions</h4>
+    <ul>
+      <li><b>Mismatch:</b> effectiveness depends on a match between what a person needs and what is offered (a person needing a confidant gains little from material help), and on the right person giving it.</li>
+      <li><b>Costs of receiving support:</b> needing others can cause guilt and lower self-esteem; support that is intrusive or controlling can worsen distress. Perceived availability is sometimes enough.</li>
+      <li><b>Stress undermines support:</b> highly stressed people can drive others away, and cannot use available support effectively; providers can be strained or affected by the same event.</li>
+      <li><b>Personality and coping style:</b> people high in negative affectivity, or who use avoidance, may not seek or accept support; optimists tend to use more problem-focused coping and attract more support. A programme must therefore build the skills to ask for and use support.</li>
+      <li><b>Not sufficient alone:</b> it works best alongside skills (relaxation, cognitive restructuring, time management) within the three phases of stress management.</li>
+    </ul>
+    <h4>Original example</h4>
+    <p>Priya, 38, a call-centre team lead, joins a workplace stress management programme after retrenchments raise her workload. In the group she receives <b>informational support</b> (a colleague shows how to prioritise tasks), <b>emotional support</b> (peers normalise her anxiety), and a buddy covers her shift once (<b>tangible</b>). This supports both her problem-focused and emotion-focused coping and her stress eases. But her sister, who calls daily and tells her what to do, adds pressure (controlling support), and Priya, usually an avoider of asking for help, only attends because the programme made it routine.</p>
+    <h4>Conclusion</h4>
+    <p>Social support is among the most important protective resources, with good evidence for reducing distress and physiological stress, but its benefit depends on <b>fit, source, delivery and the person's coping style</b>. It is effective as a built-in component of a multi-part programme, and less so as a stand-alone.</p>
+  </div></details>
+</div>
+
+<!-- ============== QUESTION 2 ============== -->
+<h2 class="chapter-title" id="q2">Question 2 <span class="marks">30 marks</span><small>Molly: third-stage lung cancer</small></h2>
+
+<div class="case">Molly was diagnosed with third stage lung cancer last month. She is 58, has a BMI of 29, is a chronic smoker, and is a mother of two undergraduate girls. The news came as a shock as she never saw her health to have any issues. She knew she was overweight and that smoking was unhealthy, and although there is a family history of cancer she never thought she too would be diagnosed. Since her diagnosis she has been very stressed about going for chemotherapy and having to stop work.</div>
+
+<div class="qcard" id="q2a">
+  <div class="qhead"><span class="qnum">Q2a</span><span class="marks">10 marks</span><span class="qtitle">Molly's psychological issues</span></div>
+  <div class="case">What kind of psychological issues would Molly be faced with, given that she was told her prognosis will only allow her to live another three years?</div>
+  <details class="ans"><summary>Show model answer</summary><div class="ans-body">
+    <div class="skeleton"><b>Answer skeleton:</b> 5-6 distinct issues, each explained <i>and</i> tied to a detail of Molly's case. Marks go for application, not for a bare list.</div>
+    <table>
+      <tr><th>Issue</th><th>Why Molly is facing it</th></tr>
+      <tr><td><b>Shock, denial and disbelief</b></td><td>She "never thought she too would be diagnosed". Denial is a natural self-defence mechanism against an unpleasant reality, and may show up as minimising the illness or delaying decisions.</td></tr>
+      <tr><td><b>Anger, guilt and self-blame</b></td><td>She knew smoking and overweight were unhealthy, so she may blame herself ("why me", and "why didn't I stop"). Anger may be directed at herself, doctors or family.</td></tr>
+      <tr><td><b>Fear and anxiety</b></td><td>About chemotherapy and its side effects (nausea, vomiting, hair loss), pain, and dying. Uncertainty about what comes next is a major driver of anxiety, and the three-year prognosis gives a time limit to fear.</td></tr>
+      <tr><td><b>Depression and anticipatory grief</b></td><td>As she acknowledges the decline in her health she may mourn her future. Depression is strongly associated with cancer, and may itself affect progression through its impact on the immune system.</td></tr>
+      <tr><td><b>Threats to self-concept and role</b></td><td>Having to stop work removes a source of identity, income and routine; physical changes from treatment affect body image; her role as mother shifts from provider to someone cared for. Terminally ill patients struggle to maintain biological, cognitive and social functioning.</td></tr>
+      <tr><td><b>Bargaining and unfinished business</b></td><td>Wishing for time to see her daughters graduate or settle; wanting to resolve family matters, plan finances and say what needs saying.</td></tr>
+      <tr><td><b>Treatment decisions and the right to die</b></td><td>Whether to continue repeated treatment with new discomfort and uncertain benefit, and whether to prepare a living will (in Singapore, an Advance Medical Directive). These decisions should not be driven by depression, and may be hard to think through clearly.</td></tr>
+      <tr><td><b>Social withdrawal and communication breakdown</b></td><td>She may withdraw to avoid upsetting her family, and the family may avoid the subject of death, leaving her unsupported. Fear of knowing the answers can block honest conversation with staff and family.</td></tr>
+      <tr><td><b>Desperate search for non-traditional cures</b></td><td>A time-limited prognosis can push patients toward unproven treatments, risking money and sometimes delay. Patients should make an informed decision.</td></tr>
+      <tr><td><b>Stress and its effect on health</b></td><td>Psychological distress appears to impair natural killer cells' ability to destroy tumours, so unmanaged distress matters for the illness itself.</td></tr>
+    </table>
+    <p>You can map these to Kübler-Ross's stages (denial, anger, bargaining, depression, acceptance), noting that Molly may move between them, and that the theory does not emphasise anxiety. Some patients also show growth and greater life satisfaction after cancer, so emphasise that these issues are not inevitable or fixed.</p>
+  </div></details>
+</div>
+
+<div class="qcard" id="q2b">
+  <div class="qhead"><span class="qnum">Q2b</span><span class="marks">20 marks</span><span class="qtitle">Intervention for Molly's family (Kübler-Ross)</span></div>
+  <div class="case">Develop an intervention to manage the stress of Molly's children and husband at possibly losing their mother/wife in the next three years. You may wish to consider Kübler-Ross's theory to understand what can be done to help Molly's family.</div>
+  <details class="ans"><summary>Show model answer</summary><div class="ans-body">
+    <div class="skeleton"><b>Answer skeleton (20 marks is the biggest single part, so give it structure):</b> state the aim and principles, including a caveat on Kübler-Ross (about 2) · assessment (about 2) · stage-matched support (about 5) · stress management and coping skills (about 4) · social support and practical help (about 3) · end-of-life preparation and bereavement (about 3) · evaluation (about 1). Each component should say <i>who, what, and why</i>.</div>
+    <h4>1. Aim and principles</h4>
+    <p>Treat the <b>family as a unit</b> (husband, two daughters, and Molly herself) over three phases: treatment, decline, and bereavement. Use Kübler-Ross as a map of likely reactions, not a rigid script: patients and family members do not necessarily go through all five stages or in order, they may repeat stages, family members may be in different stages at the same time, and the theory does not emphasise anxiety or explain how to cope within each stage. <span class="beyond">Beyond course materials</span> The theory describes the dying person; your slides note that both patient and family go through anticipatory grief, so applying the stages to the family is an extension, and I flag it as one.</p>
+    <h4>2. Assessment</h4>
+    <p>Meet each member separately and together to assess the stage each is in, their stressors, coping styles and resources (including each person's social support), screen for depression and anxiety, and note practical pressures (the daughters' examinations, the husband's work and finances).</p>
+    <h4>3. Information and communication</h4>
+    <ul>
+      <li>Provide <b>informational support</b>: what lung cancer and chemotherapy involve, side effects, what the prognosis does and does not mean. Uncertainty drives stress and lack of knowledge heightens it.</li>
+      <li>Hold <b>family meetings</b> with the medical team so that communication does not break down when the prognosis is poor. Encourage honest talk about death, since avoidance leaves the patient isolated.</li>
+    </ul>
+    <h4>4. Stage-matched support</h4>
+    <table>
+      <tr><th>Stage</th><th>How it may look in the family</th><th>What to do</th></tr>
+      <tr><td>Denial</td><td>The husband insists "she will recover"; a daughter avoids discussing it.</td><td>Do not force acceptance; give information in manageable amounts; make sure denial does not delay decisions or prevent communication with Molly.</td></tr>
+      <tr><td>Anger</td><td>"Why us?"; resentment towards doctors, each other or Molly's smoking.</td><td>Acknowledge feelings without judgement; counselling to express anger safely; help the family not to take it personally; avoid blaming Molly.</td></tr>
+      <tr><td>Bargaining</td><td>Seeking miracle cures; promises to be "better" in exchange for time.</td><td>Gently provide realistic information; support informed decisions about any non-traditional treatment; help turn the wish for time into meaningful activity.</td></tr>
+      <tr><td>Depression (anticipatory grief)</td><td>Sadness, withdrawal, sleep and appetite change, poor study performance.</td><td>Normalise grief; individual counselling and CBT; screen for clinical depression; encourage expression through talking or writing.</td></tr>
+      <tr><td>Acceptance</td><td>Calm, preparing, wanting to spend time together.</td><td>Support planning and goodbyes, "unfinished business", time together; avoid pushing acceptance on those who are not there.</td></tr>
+    </table>
+    <h4>5. Stress management and coping skills</h4>
+    <ul>
+      <li><b>Phase 1, identify stressors:</b> an ABC diary of triggers (appointments, symptom flare-ups, test results).</li>
+      <li><b>Phase 2, acquire skills:</b> relaxation training (breathing, muscle relaxation, guided imagery), mindfulness-based stress reduction, cognitive restructuring of catastrophic thoughts, time management for the daughters' studies.</li>
+      <li><b>Phase 3, apply and monitor:</b> stress inoculation (a plan for each treatment milestone), positive self-talk, goal setting.</li>
+      <li>Teach <b>problem-focused coping</b> for what can change (care roster, finances, study arrangements) and <b>emotion-focused coping</b> for what cannot (the prognosis).</li>
+    </ul>
+    <h4>6. Social support and practical help</h4>
+    <ul>
+      <li><b>Tangible:</b> financial assistance, a care roster, respite, academic accommodations for the daughters.</li>
+      <li><b>Emotional:</b> family and friends, cancer support groups (in Singapore, the seminar names the Singapore Cancer Society, Children's Cancer Foundation, Tumour Patient Care Group, Breast Cancer Foundation and The Revival Connection).</li>
+      <li>Match support to need, and watch the support providers: the husband as main caregiver is at risk of burnout, since caregivers of terminally ill patients show lower T-cell levels and more health problems.</li>
+    </ul>
+    <h4>7. Disclosure and family therapy</h4>
+    <p>Confiding and writing about feelings reduce distress and bring support. In family therapy, the therapist helps each side express itself and ensures both are fully understood before death. Encourage letters, shared memories and resolving unfinished business.</p>
+    <h4>8. Preparing for end of life</h4>
+    <ul>
+      <li>Support an <b>appropriate death</b> for Molly: informed consent, safe conduct, significant survival (using remaining time well), anticipatory grief work, and a timely and dignified death.</li>
+      <li>Discuss care preferences early (Advance Medical Directive), and compare <b>hospice</b> (comfort-focused, family welcome) with <b>home care</b> (more control for Molly, but stressful and demanding for untrained family).</li>
+    </ul>
+    <h4>9. Bereavement support</h4>
+    <p>Survivors can face low immune functioning, disease, and alcohol or drug abuse if grief is unsupported. Offer individual or group counselling, grief-management activities (writing notes or letters to the person who died), and continued social support. Plan for financial and household-management strain.</p>
+    <h4>10. Protect the family's own health</h4>
+    <p>Stress can undo health habits, so use relapse-prevention planning for the family's smoking, drinking and eating, and discuss screening with the doctor given the family history of cancer.</p>
+    <h4>11. Evaluation</h4>
+    <p>Track stress and mood scores, caregiver strain, attendance and the quality of family communication at set points (after diagnosis, at treatment milestones, at end-of-life and after bereavement), and adjust.</p>
+  </div></details>
+</div>
+
+<!-- ============== QUESTION 3 ============== -->
+<h2 class="chapter-title" id="q3-title">Question 3 <span class="marks">30 marks</span><small>Complementary and alternative medicine</small></h2>
+
+<div class="qcard" id="q3">
+  <div class="qhead"><span class="qnum">Q3</span><span class="marks">30 marks</span><span class="qtitle">Why CAM is used; effectiveness for caregiver stress and patient outcomes</span></div>
+  <div class="case">Chronic conditions such as cancer, diabetes and Alzheimer's disease require long-term management and support, from healthcare professionals and from family caregivers. There is increasing interest in complementary and alternative therapies (CAM) to support both patients and caregivers. Discuss why CAM might be used by patients with chronic conditions. Appraise the effectiveness of CAM in reducing caregiver stress and improving patient outcomes. Support your discussion with relevant psychological theories where relevant.</div>
+  <details class="ans"><summary>Show model answer</summary><div class="ans-body">
+    <div class="skeleton"><b>Answer skeleton (30 marks, three jobs):</b> (1) <b>Why CAM is used</b>, with theory (about 10) · (2) <b>Appraisal of effectiveness</b> for patients and for caregivers, with evidence quality and a judgement (about 15) · (3) <b>Theories</b> woven through, and a conclusion (about 5). The key to the high marks is critical appraisal: the evidence is weak and mixed, so say so and explain why, instead of listing benefits.</div>
+    <h4>Opening position</h4>
+    <p>CAM is a diverse group of therapies, products and treatments not presently part of conventional medicine (herbal remedies, prayer, meditation, yoga, massage, acupuncture, hypnosis, guided imagery, chiropractic, osteopathy, dietary supplements). It is rooted in holistic traditions from Asia (Traditional Chinese Medicine, Ayurveda) and Europe (homeopathy, naturopathy) that treat the physical, psychological and spiritual needs of the whole person. My position: CAM is widely used for understandable psychological reasons, and some therapies plausibly help <i>wellbeing and coping</i>, but the evidence for effects on disease outcomes and for reducing caregiver stress specifically is limited, so CAM is best used as a complement to, not a replacement for, conventional care.</p>
+    <h4>Part 1: Why patients with chronic conditions use CAM</h4>
+    <ul>
+      <li><b>Conventional treatment has not worked or has costs.</b> People turn to CAM for conditions not successfully treated by traditional medicine: cancer, chronic fatigue syndrome, intractable pain, severe headaches, depression, anxiety, stress, insomnia, stomach and intestinal disorders. Chronic illness means long-term treatment, side effects (chemotherapy) and sometimes no cure.</li>
+      <li><b>Fit with the biopsychosocial model.</b> Chronic illness involves psychological and social consequences (depression, strained families, role loss) as well as biological ones. CAM's holistic framing speaks to these unmet emotional and spiritual needs.</li>
+      <li><b>Sense of control (psychological control and self-efficacy).</b> Perceived control is an important coping resource, and chronic illness removes it. CAM offers active things to do (meditating, practising yoga, choosing supplements), shifting patients from passive recipients to active agents.</li>
+      <li><b>Stress and coping theory.</b> Illness is appraised as threatening, with insufficient resources. CAM supplies <b>emotion-focused coping</b> (relaxation, acceptance), which is useful when the situation cannot be changed, and may add to external resources and social contact (groups, practitioners).</li>
+      <li><b>Placebo and expectation.</b> Treatments work partly through therapeutic intent, a warm, confident practitioner, the patient's belief, the setting, and social norms. CAM practitioners often spend more time and attention with patients, which increases these effects.</li>
+      <li><b>Social influence and norms</b> (Theory of Planned Behaviour): friends, family and culture recommend CAM, especially in Asian cultures where TCM is long established; and <b>Health Belief Model</b> beliefs that CAM is beneficial, with few perceived costs.</li>
+      <li><b>Desperation.</b> Terminally ill or distressed patients may seek non-traditional treatments in a frantic search for a cure.</li>
+      <li><b>Pattern of use.</b> Most users use only one form; multiple users typically combine supplements with prayer or meditation. Use is so widespread that more people treat themselves with self-care and CAM than use conventional medicine (Suzuki, 2004).</li>
+      <li><b>Caregivers</b> also face chronic stress: caregivers of seriously ill people show lower T-cell levels and more health problems, and home care is stressful for untrained family members. They may use CAM for the same reasons (relaxation, control, support).</li>
+    </ul>
+    <h4>Part 2: Appraisal of effectiveness</h4>
+    <h4>The general state of the evidence</h4>
+    <ul>
+      <li>CAM is largely <b>unevaluated</b> by formal health standards. This does not mean it does not work, only that it has not been formally tested.</li>
+      <li>Where studies exist they often have <b>small samples, poor controls and weak designs</b>; therapies are <b>highly individualised</b>, which makes standard trials hard; there is often a <b>placebo component</b>; and users self-select.</li>
+      <li>My overall judgement is therefore that the evidence is insufficient to establish effectiveness, and that continued rigorous evaluation of safety and effectiveness is needed.</li>
+    </ul>
+    <h4>Effectiveness for patient outcomes</h4>
+    <table>
+      <tr><th>Therapy</th><th>Possible benefit</th><th>Evidence status (from your course)</th></tr>
+      <tr><td>Hypnosis</td><td>Pain and distress, including cancer pain</td><td>Successful for acute pain (childbirth, dental, burns) and cancer pain, but benefit may come from relaxation, reinterpretation, distraction and accompanying drugs; not everyone is hypnotisable; use for other health problems not formally evaluated.</td></tr>
+      <tr><td>Meditation and mindfulness</td><td>Stress, pain, present-moment acceptance</td><td>May help pain management, but the quality of evidence is inconsistent.</td></tr>
+      <tr><td>Yoga</td><td>Stress, anxiety, depression, chronic pain, cancer-related fatigue</td><td>Used for these problems, but no strong evidence that it improves physical health.</td></tr>
+      <tr><td>Guided imagery</td><td>Discomfort, stress, relaxation (especially in cancer)</td><td>Claims of reduced pain and stress, but too few rigorous randomised trials.</td></tr>
+      <tr><td>Massage</td><td>Stress, pain, possibly immunity</td><td>Some studies support it for persistent back pain; limited by small samples and weak designs.</td></tr>
+      <tr><td>Acupuncture</td><td>Pain</td><td>May act as counter-irritation and release endorphins; effective for short-term pain, broad claims not scientifically proven, weak evidence for chronic pain.</td></tr>
+      <tr><td>Prayer</td><td>Calm, coping</td><td>Tied to better health practices and social support benefits, but does not reliably slow chronic illness or speed recovery.</td></tr>
+      <tr><td>Dietary supplements</td><td>Nutrition</td><td>Little evidence that high-dose vitamins prevent illness; iron supplements were linked to increased mortality in older women; clearer benefit only for symptomatic deficiency. <b>This shows CAM can carry risks.</b></td></tr>
+      <tr><td>Osteopathy, chiropractic</td><td>Pain</td><td>Little evidence beyond lower back pain (osteopathy); chiropractic evidence limited to small or modest studies.</td></tr>
+    </table>
+    <p><b>Pattern:</b> the best-supported benefits are <i>psychological and symptom-related</i> (relaxation, pain, coping, wellbeing), and not changes in the disease itself. Patients with chronic illness report feeling better psychologically, which matters for quality of life.</p>
+    <h4>Effectiveness for caregiver stress</h4>
+    <ul>
+      <li><b>Plausible mechanisms:</b> relaxation and stress management reduce physiological arousal and the adverse effect of stress on immunity (in the course example, relaxation training raised NK-cell activity in older adults); mindfulness teaches acceptance without distress; massage and yoga offer rest, renewal and social contact; shared classes add <b>social support</b>, which itself buffers stress.</li>
+      <li><b>Gap in evidence:</b> your course materials contain no studies of CAM specifically in caregivers. The appraisal therefore rests on mechanism and on the general quality of CAM evidence, and I would say this explicitly, because it is a legitimate evaluative point. Add any caregiver-specific study you know from the textbook.</li>
+      <li><b>Practical limits:</b> caregivers are time-poor and have little respite, cost can be a barrier, and relaxation alone does not remove the sources of caregiver stress (workload, finances), which need practical support.</li>
+    </ul>
+    <h4>Risks and cautions</h4>
+    <ul>
+      <li>Delay or replacement of effective treatment; cost, especially for desperate patients (risk of losing a lot of money on dubious treatments); supplements with harm potential; unregulated practitioners.</li>
+      <li>Patients should make an informed decision, and tell their medical team, so CAM can be used alongside conventional care.</li>
+    </ul>
+    <h4>Theory-based explanation of the benefits that do occur</h4>
+    <ul>
+      <li><b>Stress-coping and PNI:</b> relaxation lowers arousal and may moderate stress effects on the immune system (stress down-regulates immune functioning; coping resources and relaxation buffer it).</li>
+      <li><b>Control and self-efficacy:</b> active participation increases perceived control, which is linked to better coping and outcomes.</li>
+      <li><b>Social support:</b> group CAM brings contact and support.</li>
+      <li><b>Placebo effect:</b> expectation, provider warmth, the setting and norms produce real benefit in symptoms, which is genuine for the patient but is not evidence of the therapy's specific mechanism.</li>
+    </ul>
+    <h4>Conclusion</h4>
+    <p>Patients and caregivers use CAM because chronic illness leaves psychological, social and spiritual needs that conventional medicine often does not address, and because CAM restores a sense of control and offers relaxation and support. The evidence suggests <b>modest, mainly psychological and symptom-level benefits</b> for some therapies (relaxation-based ones, hypnosis for pain), but there is <b>insufficient rigorous evidence</b> that CAM changes disease outcomes or reliably reduces caregiver stress, and some products carry risks. Given its widespread use, CAM merits consideration in treatment as a <b>complement</b> to conventional care, with honest communication, informed choice, and continued rigorous evaluation.</p>
+  </div></details>
+</div>
+
+<div class="intro" id="tips">
+  <b>Exam-day tips drawn from this paper</b>
+  <ul>
+    <li><b>Command words matter.</b> "Examine", "explain" and "describe" need accurate content plus application; "appraise" (Q1d and Q3) needs strengths, limitations and a reasoned judgement; "develop an intervention" (Q2b) needs a structured plan with who, what and why.</li>
+    <li><b>Q1: every part needs its own original example.</b> Prepare two or three personal examples before the exam, one each for exercise, diet and medication adherence, and be ready to adapt them to stress and lifestyle questions. Name the theory's components inside the example.</li>
+    <li><b>Q2b is worth 20 marks.</b> A list of Kübler-Ross stages alone will not score well. Link each stage to the family and to an action, and add the stress management, social support and bereavement components.</li>
+    <li><b>Q3: criticise the evidence.</b> The high-scoring move is to explain <i>why</i> evidence is weak (small samples, poor controls, placebo, individualisation) and still reach a balanced conclusion.</li>
+    <li><b>Use specific facts from your course</b> where you can recall them (for example 50-90% relapse, 6 months for maintenance, the three stress-management phases, the types of social support). Specifics signal knowledge.</li>
+    <li><b>Watch Turnitin.</b> Paraphrase everything. If you type a definition from memory, put it in your own words.</li>
+  </ul>
+</div>
+
+</main>
+
+<footer>PSY265 July 2025 exam paper: personal study aid built from seminar slides and Study Units 1-3. Not an official SUSS document or marking scheme; verify against your textbook before relying on it.</footer>
+
+<script>
+function setAll(open) {
+  var items = document.querySelectorAll('details.ans');
+  for (var i = 0; i < items.length; i++) {
+    items[i].open = open;
+  }
+}
+</script>
+
+</body>
+</html>
