@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PSY265 – Professor's Exam Guidance: Approach, Question Types and Practice Questions</title>
+<style>
+  :root{
+    --navy:#1b2a4a; --blue:#2a5ca8; --bg:#fbfaf7; --card:#ffffff; --line:#e3ddd3;
+    --text:#26241f; --muted:#6b6558; --exam:#fff4e6; --exam-border:#e0a458;
+    --gap:#fdeef0; --gap-border:#d98a95;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Georgia","Iowan Old Style",serif;background:var(--bg);color:var(--text);line-height:1.55;}
+  header{background:var(--navy);color:#f4f1ea;padding:2.2rem 1.5rem 1.6rem;text-align:center;}
+  header h1{margin:0 0 .3rem;font-size:1.5rem;font-weight:600;}
+  header p{margin:0;color:#c7cfe0;font-size:.92rem;}
+  nav{background:#22314f;display:flex;flex-wrap:wrap;justify-content:center;padding:.4rem 0;position:sticky;top:0;z-index:50;}
+  nav a{color:#dbe2f0;text-decoration:none;font-size:.78rem;font-family:Arial,sans-serif;padding:.5rem .8rem;border-radius:4px;}
+  nav a:hover{background:#324875;}
+  main{max-width:840px;margin:0 auto;padding:1.8rem 1.2rem 4rem;}
+  .chapter-title{margin-top:3rem;padding-bottom:.4rem;border-bottom:3px solid var(--navy);color:var(--navy);font-size:1.45rem;}
+  .chapter-title small{display:block;font-family:Arial,sans-serif;font-size:.78rem;font-weight:normal;color:var(--muted);margin-top:.2rem;}
+  .intro{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:1rem 1.3rem;font-family:Arial,sans-serif;font-size:.88rem;}
+  .intro ul{margin:.3rem 0;}
+  .controls{margin:1rem 0;display:flex;gap:.6rem;flex-wrap:wrap;}
+  .controls button{font-family:Arial,sans-serif;font-size:.82rem;background:var(--blue);color:#fff;border:none;padding:.45rem .9rem;border-radius:5px;cursor:pointer;}
+  .controls button:hover{background:var(--navy);}
+  .qcard{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:1.1rem 1.4rem;margin:1.1rem 0;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .qhead{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin-bottom:.4rem;}
+  .qnum{font-family:Arial,sans-serif;font-size:.74rem;font-weight:bold;background:var(--navy);color:#fff;border-radius:4px;padding:.15rem .55rem;}
+  .qtitle{font-weight:bold;color:var(--blue);font-size:1.05rem;}
+  .case{background:#f7f5ef;border-left:4px solid #b9b19f;padding:.6rem .9rem;border-radius:0 6px 6px 0;font-size:.9rem;margin:.5rem 0;}
+  .qparts{margin:.4rem 0;padding-left:1.3rem;font-size:.95rem;}
+  details.ans{margin-top:.8rem;border:1px solid #cfdcc3;background:#f7faf3;border-radius:8px;}
+  details.ans > summary{cursor:pointer;font-family:Arial,sans-serif;font-size:.84rem;font-weight:bold;color:#fff;background:var(--blue);padding:.45rem .9rem;border-radius:7px;list-style:none;}
+  details.ans > summary::-webkit-details-marker{display:none;}
+  details.ans[open] > summary{border-radius:7px 7px 0 0;background:var(--navy);}
+  .ans-body{padding:.8rem 1.1rem 1rem;font-size:.94rem;}
+  .ans-body h4{font-family:Arial,sans-serif;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:1rem 0 .3rem;}
+  .ans-body h4:first-child{margin-top:0;}
+  ul,ol{padding-left:1.3rem;} li{margin-bottom:.28rem;}
+  table{width:100%;border-collapse:collapse;margin:.5rem 0;font-size:.88rem;}
+  th,td{border:1px solid var(--line);padding:.45rem .55rem;text-align:left;vertical-align:top;}
+  th{background:#f0ede4;font-family:Arial,sans-serif;font-size:.8rem;}
+  .exam-note{background:var(--exam);border:1px solid var(--exam-border);border-radius:6px;padding:.55rem .85rem;margin-top:.7rem;font-size:.88rem;font-family:Arial,sans-serif;}
+  .exam-note b{color:#8a5a12;}
+  .flag-note{background:var(--gap);border:1px solid var(--gap-border);border-radius:6px;padding:.55rem .85rem;margin-top:.7rem;font-size:.88rem;font-family:Arial,sans-serif;}
+  .flag-note b{color:#8a2a3a;}
+  .beyond{display:inline-block;background:#e9f0fb;border:1px solid #9bb6e0;color:#244a86;font-family:Arial,sans-serif;font-size:.66rem;font-weight:bold;text-transform:uppercase;letter-spacing:.03em;padding:.08rem .45rem;border-radius:20px;margin-left:.3rem;vertical-align:middle;}
+  .xref{font-family:Arial,sans-serif;font-size:.86rem;background:#eef2f8;border:1px solid #c7d3e5;border-radius:6px;padding:.5rem .8rem;margin-top:.6rem;}
+  .xref a{color:var(--blue);}
+  footer{text-align:center;color:var(--muted);font-family:Arial,sans-serif;font-size:.78rem;padding:1.5rem;}
+
+  .marks{display:inline-block;background:#eef2f8;border:1px solid #c7d3e5;color:#244a86;font-family:Arial,sans-serif;font-size:.72rem;font-weight:bold;padding:.12rem .55rem;border-radius:20px;}
+  .skeleton{background:#f7f5ef;border:1px dashed #b9b19f;border-radius:6px;padding:.55rem .85rem;margin:.4rem 0 .8rem;font-size:.9rem;font-family:Arial,sans-serif;}
+  .skeleton b{color:var(--navy);}
+
+  .steps{background:#f3f0fa;border:1px solid #c9bfe6;border-radius:6px;padding:.6rem .9rem;margin:.4rem 0 .8rem;font-size:.9rem;font-family:Arial,sans-serif;}
+  .steps p{margin:.3rem 0;}
+  .steps b{color:#4b2f8a;}
+  .tag{display:inline-block;font-family:Arial,sans-serif;font-size:.68rem;font-weight:bold;text-transform:uppercase;letter-spacing:.03em;padding:.12rem .5rem;border-radius:20px;}
+  .tag-given{background:#e8f4ea;border:1px solid #9cc8a4;color:#2f6b3b;}
+  .tag-pred{background:#fff4e6;border:1px solid #e0a458;color:#8a5a12;}
+  .tag-lo{background:#eef2f8;border:1px solid #c7d3e5;color:#244a86;}
+  .model p{margin:.5rem 0;}
+  .small{font-size:.84rem;color:var(--muted);font-family:Arial,sans-serif;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>PSY265 · Professor's Exam Guidance and Practice Questions</h1>
+  <p>The approach your professor recommends, a map of likely question types, a condition-by-condition revision grid, and worked answers</p>
+</header>
+
+<nav>
+  <a href="#guide">Professor's guidance</a>
+  <a href="#map">Question map</a>
+  <a href="#grid">Condition X grid</a>
+  <a href="#given">Questions from the professor</a>
+  <a href="#predicted">Predicted questions</a>
+</nav>
+
+<main>
+
+<div class="intro">
+  <b>What this page is</b>
+  <ul>
+    <li>Your professor's document is six slide images: the eight course learning outcomes, five question types, a "Condition X" framework, a three-step approach to answering, and three sample questions. I read all of them. This page turns that guidance into a working tool.</li>
+    <li><b>Four questions come straight from the professor's slides</b> (green tag). <b>Nine more are my predictions</b> (orange tag): I picked them by matching each learning outcome and question type to what is in your seminar slides and Study Units. <b>I cannot know the actual paper.</b> Treat the predictions as practice for the pattern, not as a forecast of the exact questions.</li>
+    <li>The model answers are written in the way you would type them in the exam box: labelled paragraphs, with no tables. They are fuller than a 10-20 minute answer, so cut to the marks available.</li>
+    <li>Write examples and wording in your own words. Turnitin is applied to the exam.</li>
+  </ul>
+</div>
+
+<div class="controls">
+  <button onclick="setAll(true)">Expand all answers</button>
+  <button onclick="setAll(false)">Collapse all answers</button>
+</div>
+
+<!-- ================ PROFESSOR'S GUIDANCE ================ -->
+<h2 class="chapter-title" id="guide">1. What the professor's slides say<small>Learning outcomes, question types, Condition X, and the three steps</small></h2>
+
+<div class="qcard">
+  <div class="qhead"><span class="qtitle">The eight learning outcomes (the scope of the exam)</span></div>
+  <ol>
+    <li>Appreciate the development and importance of Health Psychology.</li>
+    <li>Recognise the <b>importance</b> of health promotion and prevention in general and in accidents, cancer and obesity.</li>
+    <li>Identify the effects of alcoholism and smoking.</li>
+    <li>Recognise the consequences of stress and identify ways of coping with stress.</li>
+    <li>Describe pain behaviours and identify ways to manage pain.</li>
+    <li>Discuss the psychological issues faced by terminally ill patients (<i>all age groups</i>).</li>
+    <li>Discuss the four major chronic disorders and their treatment methods (hypertension, diabetes, stroke, CHD).</li>
+    <li>Discuss the different types of diseases that compromise our immune functioning.</li>
+  </ol>
+  <div class="exam-note"><b>Two details worth noticing:</b> "importance" is in bold in outcome 2, so expect a "why does prevention matter" angle. Outcome 6 says "<i>all age groups</i>" in italics, so expect terminal illness questions that vary the age of the patient.</div>
+</div>
+
+<div class="qcard">
+  <div class="qhead"><span class="qtitle">The five question types on the slide</span></div>
+  <p>The slide shows five boxes. Questions will probably draw on these:</p>
+  <ol>
+    <li><b>Biopsychosocial model:</b> explain a condition or behaviour through biological, psychological and social factors.</li>
+    <li><b>Interventions across all ages:</b> how you would intervene with children, adolescents, adults and the elderly.</li>
+    <li><b>Interventions for those at risk:</b> prevention aimed at people who are not yet ill but are vulnerable.</li>
+    <li><b>Psychological models to explain behaviour</b> (red on the slide): why people act as they do. In your course: Health Belief Model, Theory of Planned Behaviour, Self-Determination Theory, self-efficacy, stress appraisal and coping.</li>
+    <li><b>Psychological models to explain intervention</b> (green on the slide): how and why an intervention works. In your course: Transtheoretical Model, CBT strategies, relapse prevention, motivational interviewing, social engineering, Kübler-Ross for supporting the dying and their families.</li>
+  </ol>
+  <p class="small">The split of models between "behaviour" and "intervention" is my reading of the slide, not something the slide spells out. Many models do both (the Health Belief Model explains behaviour and also guides messages).</p>
+</div>
+
+<div class="qcard">
+  <div class="qhead"><span class="qtitle">"Condition X": the four-part frame for any illness</span></div>
+  <p>For any condition, the slide gives four prompts. Use them as a checklist so you do not leave a part out:</p>
+  <ul>
+    <li><b>What? Why?</b> What the condition is, and its causes and risks.</li>
+    <li><b>Who?</b> Who gets it: characteristics (age, sex, SES, personality, ethnicity).</li>
+    <li><b>Symptoms, treatment, coping:</b> medication and lifestyle.</li>
+    <li><b>Impact on self and on others:</b> biological, psychological and social consequences, including family and caregivers.</li>
+  </ul>
+  <p>A ready-filled grid for each condition in your course is in <a href="#grid">section 3</a>.</p>
+</div>
+
+<div class="qcard">
+  <div class="qhead"><span class="qtitle">The three-step approach to answering</span></div>
+  <div class="steps">
+    <p><b>1st: READ THE QUESTION.</b> The sample question is "Sally and her husband were shocked to find out Sally was suffering from late-stage lymph node cancer with six months to live. Examine how Kübler-Ross's Five Stage Theory can be applied to <b>Sally's husband</b>." The slide highlights "Sally was suffering" and "Sally's husband" in red: the trap is answering about Sally when the question asks about her husband.</p>
+    <p><b>2nd: CONTEXTUALISE.</b> Place the answer in the setting the question gives you (who, where, what age, what constraint). In the sun-protection question, that means primary school pupils, outdoor play in the afternoon, a school setting.</p>
+    <p><b>3rd: BREAK THE QUESTION DOWN AND GIVE EXAMPLES.</b> The sample is "Appraise the effectiveness of social support on the cardiovascular, endocrine and immune system of a person suffering from stress": three systems means three sub-answers, each with an example.</p>
+  </div>
+  <p><b>How the three steps map to writing:</b> underline the target person and command word (step 1); open with a sentence or two that uses the scenario's details (step 2); give each part of the question its own labelled paragraph with a concrete example (step 3); finish with a short conclusion.</p>
+</div>
+
+<!-- ================ QUESTION MAP ================ -->
+<h2 class="chapter-title" id="map">2. Question map<small>Learning outcome × question type × where it sits in your notes</small></h2>
+
+<table>
+  <tr><th>Learning outcome</th><th>Likely angle</th><th>Where in your notes</th><th>Practice question</th></tr>
+  <tr><td>1. Development and importance of Health Psychology</td><td>Biopsychosocial vs biomedical; apply to a case</td><td>Seminar 1; Seminar 4 (pain)</td><td><a href="#p1">P1</a></td></tr>
+  <tr><td>2. Promotion and prevention: accidents, cancer, obesity</td><td>Models explaining behaviour; interventions across ages; at-risk interventions; <i>why prevention matters</i></td><td>Seminars 2-3; SU2</td><td><a href="#p2">P2</a>, <a href="#p3">P3</a>, <a href="#g2">G2</a></td></tr>
+  <tr><td>3. Effects of alcoholism and smoking</td><td>Effects, risk factors, treatment, prevention in adolescents</td><td>Seminar 3; SU2</td><td><a href="#p4">P4</a>, <a href="#p5">P5</a></td></tr>
+  <tr><td>4. Consequences of stress and coping</td><td>Stress and health, moderators, social support, interventions</td><td>Seminar 3 (stress); SU3 ch.5</td><td><a href="#p6">P6</a>, <a href="#g3">G3</a></td></tr>
+  <tr><td>5. Pain behaviours and management</td><td>Biopsychosocial pain; control techniques</td><td>Seminar 4; SU3 ch.6</td><td><a href="#p1">P1</a></td></tr>
+  <tr><td>6. Terminally ill patients (all age groups)</td><td>Kübler-Ross; age differences; family and survivors</td><td>Seminar 5; SU3 ch.8</td><td><a href="#g1">G1</a>, <a href="#p7">P7</a></td></tr>
+  <tr><td>7. Four chronic disorders</td><td>Risk factors (SES, stress, personality), treatment, adherence</td><td>Seminars 6-7; SU3 ch.9</td><td><a href="#g4">G4</a>, <a href="#p8">P8</a></td></tr>
+  <tr><td>8. Diseases that compromise immunity</td><td>Stress and immunity; AIDS, cancer, arthritis</td><td>Seminar 8; SU3 ch.10</td><td><a href="#g3">G3</a>, <a href="#p9">P9</a></td></tr>
+</table>
+
+<div class="qcard">
+  <div class="qhead"><span class="qtitle">Outcome 2, "importance of prevention": key points to have ready</span></div>
+  <ul>
+    <li>Many leading causes of death (heart disease, cancer, stroke, accidental injury, chronic lung disease) involve <b>preventable behavioural factors</b>: obesity, smoking, excessive alcohol. Changing them reduces deaths, raises healthy life expectancy, and cuts medical costs.</li>
+    <li>Poor habits are enjoyable, automatic and unstable, and there is no immediate incentive to change them, so they are very hard to modify. Hence <b>primary prevention</b>, stopping the habit forming, is the preferred strategy.</li>
+    <li>Habits stabilise around age 11-12, and risky behaviours begin in the <b>window of vulnerability</b> (early adolescence), so children and adolescents are the priority group.</li>
+    <li>Accidents are a major preventable cause of death in children and adolescents; screening and self-examination give early detection in cancer; obesity is a precursor of hypertension, diabetes and heart failure.</li>
+  </ul>
+</div>
+
+<!-- ================ CONDITION X GRID ================ -->
+<h2 class="chapter-title" id="grid">3. Condition X revision grid<small>The professor's four prompts, filled in for every condition in your course</small></h2>
+<p class="small">Use this to revise, and to check you have covered all four parts when a question asks about a named condition. It is a summary of the seminar and Study Unit content in your earlier notes.</p>
+<table>
+  <tr><th>Condition</th><th>What? Why? (causes, risks)</th><th>Who?</th><th>Symptoms, treatment, coping</th><th>Impact on self and others</th></tr>
+  <tr><td><b>Coronary heart disease</b></td><td>Atherosclerosis narrows coronary arteries; angina, then heart attack. Risks: inflammation (IL-6, CRP), BP, diabetes, smoking, obesity, cholesterol, inactivity; stress reactivity, hostility, depression, anxiety.</td><td>#1 US, #2 Singapore; low SES; job strain; hostile people; women about 10 years later, risk rises after menopause.</td><td>Chest pain radiating, vomiting, collapse. CABG, cardiac rehabilitation, drugs (clot-dissolving, beta-blockers, aspirin, statins), diet, exercise, stress management. Delay in seeking treatment drives mortality.</td><td>Lower self-esteem, anxiety, depression; lifestyle change; cardiac invalidism; caregiver strain and isolation.</td></tr>
+  <tr><td><b>Hypertension</b></td><td>High BP; about 95% essential, about 5% kidney. Risks: genetics (45% if one parent, 90% if both), stress reactivity, anger and hostility, job strain, obesity, sodium, caffeine, alcohol.</td><td>Men before 50; family history; emotionally excitable children; low SES.</td><td>Symptomless; found on routine checks. Normal 120/80, high 140/90+. Low-sodium diet, weight loss, diuretics and other drugs; CBT (relaxation, biofeedback, anger and stress management) best combined with medication.</td><td>Untreated: impaired learning, memory, attention; heart disease and stroke risk; adherence problems.</td></tr>
+  <tr><td><b>Stroke</b></td><td>Interrupted blood flow to the brain (haemorrhage or plaque). Risks: high BP, heart disease, smoking, high red cell count, TIAs, family history, diabetes; anger, anxiety, depression.</td><td>Older adults; those with hypertension, diabetes or heart disease.</td><td>Aspirin for prevention; psychotherapy, cognitive remedial training, movement therapy, structured stimulating environment.</td><td>Motor and cognitive problems; left-brain: anxiety, depression; right-brain: alexithymia; relationship problems; multi-infarct dementia; caregivers affected.</td></tr>
+  <tr><td><b>Diabetes</b></td><td>Insufficient insulin or insulin resistance; glucose stays in the blood. Type 1 autoimmune; Type 2 insulin resistance, obesity. Stress hormones (cortisol) reduce insulin effectiveness.</td><td>Type 1 childhood; Type 2 usually after 40. Singapore: about 1 in 9 adults; Indians 17.2%, Malays 16.6%, Chinese 9.7%.</td><td>Frequent urination, thirst, fatigue. Insulin, diet, exercise, glucose monitoring, education, CBT (self-efficacy, problem-solving), screening of eyes and feet.</td><td>Blindness, nerve damage, CHD, foot ulcers and amputation; depression common; adolescents' stigma and poor adherence; family involvement.</td></tr>
+  <tr><td><b>Cancer</b></td><td>Malfunctioning DNA causes rapid cell growth; 100+ diseases. Risks: genetics, infection (HPV), lifestyle, diet, SES. Depression and distress linked with progression via the immune system.</td><td>#1 killer in Singapore; about 1 in 4 people.</td><td>Surgery, chemotherapy (nausea, hair loss), radiotherapy; CBT, individual and family therapy, support groups.</td><td>Infections, treatment side effects, depression, social avoidance, strained relationships, job discrimination; some report growth.</td></tr>
+  <tr><td><b>HIV / AIDS</b></td><td>Retrovirus destroys helper T cells and macrophages. Transmission: bodily fluids, needle sharing, unprotected sex.</td><td>Women more at risk through vaginal intercourse. Singapore: men mostly via casual partners, women mostly via husbands or boyfriends.</td><td>HAART (expensive); CBT for distress and adherence; self-efficacy and negotiation skills for prevention.</td><td>Psychological and social issues; coping skills and social support improve quality of life.</td></tr>
+  <tr><td><b>Arthritis</b></td><td>RA is autoimmune; osteoarthritis is cartilage wear. Stress can aggravate RA. Gout: uric acid crystals. Lupus: inflammatory rash.</td><td>RA mainly 40-60; osteoarthritis women 45+.</td><td>Medication, supervised exercise, rest, surgery; CBT for stress, pain, self-management (modest success); weight control.</td><td>Pain, disability, dependence, depression.</td></tr>
+  <tr><td><b>Obesity</b></td><td>Body fat over 27% (women) or 22% (men); BMI = kg ÷ m². Risks: family history, yo-yo dieting, stress, low SES, food availability and portions.</td><td>Children (sedentary, poor eating, lack of family support); about 1 in 4 over age 50.</td><td>Multimodal: diet, exercise, positive self-talk, family support, relapse prevention; surgery and drugs possible. Realistic target about 1 lb a week.</td><td>Hypertension, diabetes, gallbladder disease, heart failure; psychological effects worsened by others' perceptions.</td></tr>
+  <tr><td><b>Eating disorders</b></td><td>Anorexia: self-starvation. Bulimia: binge-purge. Risks: genes (serotonin, dopamine), perfectionism, low self-esteem, family patterns.</td><td>Mostly young women; also gay and bisexual men (anorexia).</td><td>Anorexia: weight restoration in hospital, CBT, motivation, family therapy. Bulimia: medication plus CBT, self-monitoring.</td><td>Depression, anxiety, suicide attempts; can be fatal.</td></tr>
+  <tr><td><b>Alcoholism</b></td><td>Genetics, family, peers, stress, low SES, window of vulnerability (about 12-21), depression, isolation.</td><td>Adolescents and young adults at risk; low-SES drinkers do worse in treatment.</td><td>Detoxification, CBT, naltrexone and acamprosate, AA. Relapse about 50% in 3 months. Success 68% (stable environment) vs 18% or less (low SES).</td><td>Cirrhosis, cancer, fetal alcohol syndrome, drink-driving, aggression, brain damage, family and financial strain.</td></tr>
+  <tr><td><b>Smoking</b></td><td>Peers, family, low self-esteem, stress; nicotine regulation theory; dopamine genes.</td><td>Adolescents; "chippers" (light smokers) have protective factors.</td><td>Nicotine patch (steadier, better compliance than gum), multimodal CBT, relapse prevention, brief physician advice; prevention by social approach, inoculation, life skills.</td><td>Heart disease, cancer, lung disorders; secondhand smoke harms family.</td></tr>
+  <tr><td><b>Chronic pain</b></td><td>Starts as acute pain, persists. Types: benign, recurrent acute, progressive. Anxiety and depression worsen pain.</td><td>Previously acute patients; correlated with neuroticism, introversion, passive coping.</td><td>CBT, coping skills, relaxation, hypnosis, biofeedback; counter-irritation and distraction suit acute pain. Programme: evaluate, individualise, educate, family, relapse prevention.</td><td>Leaving work, social withdrawal, strained marriage, depression; relapse 30-60%.</td></tr>
+</table>
+
+<!-- ================ QUESTIONS FROM THE PROFESSOR ================ -->
+<h2 class="chapter-title" id="given">4. Questions from the professor's slides<small>Worked in the three-step way</small></h2>
+
+<div class="qcard" id="g1">
+  <div class="qhead"><span class="qnum">G1</span><span class="tag tag-given">From the professor</span><span class="tag tag-lo">LO6 · intervention model</span><span class="marks">30 marks</span></div>
+  <div class="case">Sally and her husband were shocked to find out from the doctor that Sally was suffering from late-stage lymph node cancer and had only six months or less to live. Examine how Kübler-Ross's Five Stage Theory can be applied to Sally's husband upon hearing this news.</div>
+  <details class="ans"><summary>Show how to approach it and a model answer</summary><div class="ans-body">
+    <div class="steps">
+      <p><b>1. Read:</b> the target is <b>Sally's husband</b>, not Sally. The command word is "examine how the theory can be applied", so you must describe each stage <i>as it would appear in him</i>, and also examine the theory's fit and limits.</p>
+      <p><b>2. Contextualise:</b> he has just been told his wife has six months or less. He is a spouse and probable caregiver, grieving in advance. Six months is a short time frame, and he and Sally were shocked together, so their reactions may clash.</p>
+      <p><b>3. Break down + examples:</b> five stages, each with a concrete behaviour from him and what helps; then limitations; then a conclusion. 30 marks suggests roughly 5 marks per stage plus 5 for evaluation.</p>
+    </div>
+    <div class="model">
+    <p><b>Introduction.</b> Kübler-Ross proposed that people facing death move through five stages: denial, anger, bargaining, depression and acceptance. The theory was written for the dying person. Sally's husband is not the patient, but he faces an impending loss and will go through <b>anticipatory grief</b>, so I apply the stages to him as an extension of the theory, on the view that both patient and family adjust to the news.</p>
+    <p><b>Denial.</b> His first reaction is likely to be disbelief and minimising: "the scan must be wrong", asking for second opinions, talking about holidays next year, or avoiding the subject with Sally. This is a natural self-defence against an unpleasant reality. It matters because it can delay decisions (hospice, care preferences) and cause communication to break down, since Sally may want to talk. Support: give information gradually and accurately, do not confront him, but encourage honest conversation within the family.</p>
+    <p><b>Anger.</b> He may ask "why her, why us?", and direct anger at the doctors ("they should have found it earlier"), at himself, at Sally or at God. He may become irritable with staff and relatives, creating unpleasantness. Support: let him express it, counselling to help him not to take it out on others, and recognise it as part of grief and not a character flaw.</p>
+    <p><b>Bargaining.</b> He may pray to give Sally more time in return for good behaviour, promise to give up a habit, take on charitable work, or push for unproven cures. The risk is losing money on dubious treatments. Support: help him make informed decisions about any non-traditional options, and redirect the wish for more time into meaningful time together.</p>
+    <p><b>Depression.</b> As Sally's condition visibly deteriorates, he is likely to feel sadness, withdrawal, poor sleep and appetite, and mourning for the life they planned. This stage lets him begin preparing for the loss. Support: counselling and social support, and screening for clinical depression, since grief can shade into it and bereavement can lower immune functioning and lead to alcohol misuse.</p>
+    <p><b>Acceptance.</b> He comes to terms with the loss, tires of fighting, and uses the remaining time to prepare: discussing care preferences (hospice or home care, the Advance Medical Directive), resolving unfinished business, saying goodbye. This allows him to help Sally die with dignity and to prepare practically for life afterwards (widowed men often struggle with household management).</p>
+    <p><b>Evaluation of the theory in his case.</b> A strength is that it gives insight into the range of responses and guides counselling to his psychological needs. Limitations: he may not pass through all stages or in order; he may revisit a stage; he and Sally may be at different stages at the same time, which can cause conflict and may need family therapy; the theory does not emphasise anxiety, and does not explain how to cope within each stage; and applying a dying-patient theory to a spouse is an extension. His stress is also practical (caregiving, finances), which the stages do not capture.</p>
+    <p><b>Conclusion.</b> Kübler-Ross is useful as a map of likely reactions in the husband, helping staff match support to the stage he seems to be in, but it should be used flexibly alongside stress management, social support and bereavement planning.</p>
+    </div>
+  </div></details>
+</div>
+
+<div class="qcard" id="g2">
+  <div class="qhead"><span class="qnum">G2</span><span class="tag tag-given">From the professor</span><span class="tag tag-lo">LO2 · intervention model · across ages</span></div>
+  <div class="case">As a health psychologist attached to a primary school, you notice that there are many pupils who play under the blazing afternoon sun without using any sunscreen. Explain how you would apply the transtheoretical model of behaviour change on these pupils to get them to adopt sun protection behaviours.</div>
+  <details class="ans"><summary>Show how to approach it and a model answer</summary><div class="ans-body">
+    <div class="steps">
+      <p><b>1. Read:</b> the model to use is the Transtheoretical Model, so the answer must be organised by stage. The goal is to get pupils to <i>adopt</i> the behaviour, so each stage needs an action.</p>
+      <p><b>2. Contextualise:</b> pupils are children, so parents and teachers matter; the setting is a school with outdoor play at recess and PE; the sun is strong in Singapore; sunscreen can seem sticky or "uncool".</p>
+      <p><b>3. Break down + examples:</b> five stages, each with a pupil mindset and a school action; then a short note on limits.</p>
+    </div>
+    <div class="model">
+    <p><b>Introduction.</b> Skin cancer is preventable through sun protection, yet its incidence has risen. The Transtheoretical Model says people move through pre-contemplation, contemplation, preparation, action and maintenance, and that interventions work better when matched to the stage. Children copy their parents and peers, and messages that stress the <i>advantages</i> of sunscreen work better than messages about risk, so I use these in the school.</p>
+    <p><b>Pre-contemplation.</b> These pupils do not see sun exposure as a problem and have no intention of using sunscreen. I give age-appropriate information focused on benefits (avoiding painful sunburn, healthy skin), through a short assembly talk, posters and a classroom activity. I also inform teachers and parents, as they model the behaviour.</p>
+    <p><b>Contemplation.</b> Pupils know the sun can burn but are ambivalent: sunscreen is sticky or "not cool". I help them weigh pros and cons and shift peer norms: popular older pupils and teachers visibly apply sunscreen before recess, and I challenge the belief that a tan looks attractive.</p>
+    <p><b>Preparation.</b> Pupils intend to start. I build skills and commitment: a short lesson on how and when to apply sunscreen, a note to parents asking them to supply child-friendly sunscreen in the school bag, and a pledge to start on a chosen day.</p>
+    <p><b>Action.</b> Pupils are applying sunscreen, for under about six months. I use stimulus control and reinforcement: a sunscreen station beside the field exit, a reminder before recess, and stickers or praise for those who use it. Passive measures such as shaded play areas and scheduling outdoor time away from peak sun help regardless of motivation.</p>
+    <p><b>Maintenance.</b> Pupils have used sunscreen for about six months or more. I prevent relapse (for example after holidays) with ongoing reminders, parent involvement, and older pupils as sun-safety ambassadors, and I treat a lapse as normal and not failure.</p>
+    <p><b>Limitation.</b> Applications of the stage model have produced mixed results (for example in smoking), and not every pupil will move forward in sequence, so I would monitor each pupil's stage and adjust.</p>
+    </div>
+  </div></details>
+</div>
+
+<div class="qcard" id="g3">
+  <div class="qhead"><span class="qnum">G3</span><span class="tag tag-given">From the professor</span><span class="tag tag-lo">LO4, LO8 · behaviour model</span></div>
+  <div class="case">Appraise the effectiveness of social support on the cardiovascular, endocrine, and immune system of a person who is suffering from stress.</div>
+  <details class="ans"><summary>Show how to approach it and a model answer</summary><div class="ans-body">
+    <div class="steps">
+      <p><b>1. Read:</b> "appraise" means weigh strengths and limitations and reach a judgement. The target is <i>one person suffering from stress</i>, and the effect must be examined on <b>three systems</b>.</p>
+      <p><b>2. Contextualise:</b> choose a person to anchor the answer, for example a woman caring for an ill parent while working full-time.</p>
+      <p><b>3. Break down + examples:</b> cardiovascular, endocrine, immune, each with: how stress affects it, how support helps, an example. Then limitations, then a verdict.</p>
+    </div>
+    <div class="model">
+    <p><b>Introduction.</b> Social support is information from others that one is loved, cared for, valued and part of a network. Its types are tangible (money, services), informational and emotional. Two hypotheses describe how it works: the <b>direct-effect hypothesis</b> (helpful at all times) and the <b>buffering hypothesis</b> (helpful mainly when stress is high). I use as an example Mdm Lim, who works full-time and cares for her mother after a stroke.</p>
+    <p><b>Cardiovascular system.</b> Stress causes cardiovascular reactivity: sympathetic activation releases catecholamines, raising heart rate and blood pressure, and repeated surges damage artery walls and promote atherosclerosis. Support appears to dampen this: stress responses are more subdued when a supportive companion is present, lonely people show more cardiovascular activation, and supportive relationships are linked to lower systolic blood pressure in women. Good support also aids recovery in heart disease patients by preventing depressive symptoms. If Mdm Lim's sister takes over care two evenings a week, her blood pressure surges should be fewer and shorter.</p>
+    <p><b>Endocrine system.</b> Stress activates the HPA axis and raises cortisol, and the sympathetic-adrenal system releases catecholamines. Support is linked to reduced cortisol stress responses and more subdued neuroendocrine responses, and warm social contact releases oxytocin, which is associated with a lower stress response. Emotional support from a friend who listens to Mdm Lim could therefore reduce her cortisol reactivity.</p>
+    <p><b>Immune system.</b> Prolonged stress raises cortisol, which reduces white blood cell counts, cytokine release and communication between immune components, and chronic stress lowers both humoral and cell-mediated immunity; caregivers show lower T-cell levels and more illness. Poor relationships (loneliness, bereavement, marital conflict) are linked to lower immunity, while social support, optimism and self-efficacy moderate stress effects on immune function. With support, Mdm Lim is less likely to catch every cold or to recover slowly.</p>
+    <p><b>Limitations.</b> Support works best when it <b>matches the need</b> (a friend who offers money when she needs someone to confide in helps little), and when it comes from the right person. Receiving support can increase distress through guilt and lowered self-esteem; intrusive or controlling support can add stress; stress can drive supporters away or prevent a person from using help; and providers can be strained themselves. Perceived availability is sometimes enough. Personality and coping style matter: a person high in negative affectivity or who avoids asking for help may gain less. The evidence in my course notes is mostly associations across the three systems, and does not show whether support causes the changes.</p>
+    <p><b>Conclusion.</b> Social support is among the most important protective resources and appears beneficial across all three systems, but its effect depends on fit, source and the person's coping style. It is effective as part of a wider stress management programme, not as a stand-alone cure.</p>
+    </div>
+  </div></details>
+</div>
+
+<div class="qcard" id="g4">
+  <div class="qhead"><span class="qnum">G4</span><span class="tag tag-given">From the professor</span><span class="tag tag-lo">LO7 · behaviour model</span></div>
+  <div class="case">Heart Disease: How do factors like socioeconomic status, stress and personality affect the risk of heart disease?</div>
+  <details class="ans"><summary>Show how to approach it and a model answer</summary><div class="ans-body">
+    <div class="steps">
+      <p><b>1. Read:</b> three named factors (SES, stress, personality), and the outcome is <i>risk of heart disease</i>. You need how each affects risk, not a general discussion of CHD.</p>
+      <p><b>2. Contextualise:</b> define CHD first (atherosclerosis of the coronary arteries; #2 killer in Singapore), then keep the three factors as your headings.</p>
+      <p><b>3. Break down + examples:</b> mechanism for each factor, an example, then how they interact.</p>
+    </div>
+    <div class="model">
+    <p><b>Background.</b> Coronary heart disease results from atherosclerosis, narrowing the coronary arteries and restricting oxygen to the heart, causing angina or a heart attack. Biological risks include inflammation, high blood pressure, diabetes, smoking, obesity, cholesterol and inactivity, but psychosocial factors act on these.</p>
+    <p><b>Socioeconomic status.</b> CHD is more common in lower-SES individuals, especially men. It works through <b>job strain</b> (high demands with little control), a mismatch between education and occupation, low job security, low workplace social support and high work pressure. Low SES also means poorer access to health care, more exposure to risky behaviours (smoking, poor diet), and fewer coping resources. Example: a delivery driver on contract work with high targets, little control and no support smokes to cope, raising his risk.</p>
+    <p><b>Stress.</b> Stress produces <b>cardiovascular reactivity</b>: sympathetic-adrenal activation releases catecholamines (norepinephrine, epinephrine), raising heart rate and blood pressure. Repeated surges damage the endothelium so lipids deposit, increase inflammation and promote atherosclerotic lesions. Acute emotional stress (anger, sudden exertion) can trigger a heart attack through effects on platelets and clotting. Occupational stress is linked to higher risk in jobs such as firefighting and law enforcement. Example: a trader's constant pressure repeatedly spikes his blood pressure.</p>
+    <p><b>Personality.</b> <b>Cynical hostility</b> (suspicion, resentment, frequent anger, distrust) raises risk. Hostile people react with greater and longer physiological reactivity, have more conflict and less social support, and more often smoke, drink, and have higher weight and LDL cholesterol. Expressing hostility is more consistently linked to reactivity than harbouring it, though in women both suppression and hostile attitudes are linked to atherosclerosis. Depression raises risk independently (it increases C-reactive protein and inflammation), as do anxiety, vigilant coping and helplessness. Example: a man who is quick to anger and distrusts others, has few friends and smokes.</p>
+    <p><b>How they interact.</b> The factors are linked: low SES brings stress; stress and hostility push people toward smoking, alcohol and poor diet; hostility erodes the social support that would buffer stress. This is the biopsychosocial model in action. Women's risk is lower before menopause due to oestrogen and HDL, rising afterwards.</p>
+    <p><b>Conclusion.</b> SES, stress and personality raise CHD risk by shaping physiological reactivity, inflammation and health behaviours, and by reducing support, so prevention should address both the individual (stress and anger management, risk behaviours) and the structure (work conditions).</p>
+    </div>
+  </div></details>
+</div>
+
+<!-- ================ PREDICTED QUESTIONS ================ -->
+<h2 class="chapter-title" id="predicted">5. Predicted questions<small>My inference from the learning outcomes, the five question types and your notes. Not the actual paper.</small></h2>
+
+<div class="qcard" id="p1">
+  <div class="qhead"><span class="qnum">P1</span><span class="tag tag-pred">Predicted</span><span class="tag tag-lo">LO1, LO5 · biopsychosocial</span><span class="marks">20 marks</span></div>
+  <div class="case">Mdm Chen, 62, has had lower back pain for two years. She has stopped her volunteer work, her husband says she complains constantly, and she often feels low. Using the biopsychosocial model, explain how her pain may be maintained, and how it should be managed.</div>
+  <details class="ans"><summary>Show how to approach it and a model answer</summary><div class="ans-body">
+    <div class="steps">
+      <p><b>1. Read:</b> two tasks: <i>explain maintenance</i> (three domains) and <i>how to manage</i>. The model named is biopsychosocial.</p>
+      <p><b>2. Contextualise:</b> 62, chronic (two years), already withdrawn from activity, strained marriage, low mood.</p>
+      <p><b>3. Break down:</b> biological, psychological, social; then a management programme; then why this model beats a biomedical view.</p>
+    </div>
+    <div class="model">
+    <p><b>Introduction.</b> Pain is a complex interaction of physiological, behavioural and psychological components, so a purely biomedical view that looks for tissue damage alone will miss much of what keeps her pain going. Her pain has lasted over six months and is probably a chronic benign pain.</p>
+    <p><b>Biological.</b> Nociceptors send signals through the spinal cord to the thalamus and cortex; A-delta fibres carry sharp pain and C-fibres dull, aching pain. Chronic pain begins as an acute episode that does not resolve. Reduced activity and deconditioning can add physical problems.</p>
+    <p><b>Psychological.</b> Anxiety and depression aggravate pain. If she catastrophises (exaggerates its threat), feels little control, and uses passive coping, her distress rises. Chronic pain correlates with neuroticism, introversion and passive coping. Her low mood suggests depression, which both results from and worsens pain.</p>
+    <p><b>Social.</b> People with chronic pain often build a lifestyle around the pain: she has left volunteer work and withdrawn, and her marriage is strained as she becomes preoccupied with her pain behaviours. Culture and family reactions shape how pain is expressed. The withdrawal reduces both reinforcement and social support.</p>
+    <p><b>Management.</b> A pain management programme: (1) <b>initial evaluation</b> of onset, location, severity, duration, previous coping, emotional functioning, using a pain questionnaire and observed pain behaviours; (2) <b>individualised goals</b> (reduce intensity, increase activity, self-management); (3) <b>education and coping strategies</b>: relaxation and deep breathing, coping skills, and <b>CBT</b> to reframe pain as manageable and modify distorted thoughts; (4) <b>family involvement</b> to improve support and communication; (5) <b>treat depression</b>; (6) <b>relapse prevention</b>, noting that relapse in successful programmes is about 30-60%. Medication under supervision, bearing in mind addiction concerns. Counter-irritation and distraction suit acute pain and are less useful here.</p>
+    <p><b>Why biopsychosocial is better.</b> It accounts for why two people with the same injury differ, treats pain as more than tissue damage, and supports an interdisciplinary team and patient-practitioner relationship.</p>
+    </div>
+  </div></details>
+</div>
+
+<div class="qcard" id="p2">
+  <div class="qhead"><span class="qnum">P2</span><span class="tag tag-pred">Predicted</span><span class="tag tag-lo">LO2 · behaviour model + at-risk</span><span class="marks">25 marks</span></div>
+  <div class="case">Ms Lee, 45, has a mother who had breast cancer, but she has never had a mammogram and does not practise breast self-examination. (a) Explain her behaviour using two psychological models. (b) Design an intervention for at-risk women like her.</div>
+  <details class="ans"><summary>Show how to approach it and a model answer</summary><div class="ans-body">
+    <div class="steps">
+      <p><b>1. Read:</b> (a) two models <i>to explain behaviour</i>; (b) an <i>at-risk</i> intervention. Name two models and use both.</p>
+      <p><b>2. Contextualise:</b> she is at higher risk because of family history, and her behaviour is avoidance of screening.</p>
+      <p><b>3. Break down:</b> HBM, TPB, then intervention components with reasons.</p>
+    </div>
+    <div class="model">
+    <p><b>(a) Health Belief Model.</b> Behaviour depends on <b>perceived threat</b> (health values, vulnerability, severity) and <b>perceived threat reduction</b> (the measure works, benefits outweigh costs). Ms Lee may believe "if I haven't noticed anything, I'm fine" (low perceived vulnerability), or fear of cancer may lead to defensive avoidance. She may doubt the benefit, or see costs: fear of radiation, anticipated pain, embarrassment and expense, which are the barriers reported for mammograms. The model also lacks self-efficacy: she may not feel confident doing BSE correctly.</p>
+    <p><b>(a) Theory of Planned Behaviour.</b> Behaviour follows intention, built from <b>attitude</b> (her beliefs and evaluations about screening), <b>subjective norms</b> (what others think and her wish to comply, e.g. friends who do not screen) and <b>perceived behavioural control</b> (can she get time, afford it, do it). If she holds a negative attitude, sees no social expectation, and feels little control, her intention is weak.</p>
+    <p><b>(b) Intervention.</b> (1) <b>Raise perceived benefit and personal risk:</b> brochures with tear-off referral forms, counselling and mailed material on the benefits of mammography, framed around the cost of <i>not</i> acting, as that works better for detection behaviours. (2) <b>Credible communicator:</b> her doctor's recommendation, strong arguments at the start and end of the message. (3) <b>Reduce barriers:</b> accessible, affordable services, especially for low-income women; address radiation and pain fears with facts. (4) <b>Social support and norms:</b> encourage screening with a friend or relative. (5) <b>Routine referral</b> of older women to mammography centres. (6) <b>Teach BSE correctly</b> (monthly, about a week after the period; all breast tissue, nipples and armpits) while being honest that BSE supplements and does not replace screening. (7) Match to her stage (TTM) and follow up. Discuss her family history with a doctor to personalise the screening plan.</p>
+    </div>
+  </div></details>
+</div>
+
+<div class="qcard" id="p3">
+  <div class="qhead"><span class="qnum">P3</span><span class="tag tag-pred">Predicted</span><span class="tag tag-lo">LO2 · across all ages</span><span class="marks">25 marks</span></div>
+  <div class="case">Accidents are a leading cause of preventable death. Describe interventions to reduce accidents across the lifespan (young children, workers, older adults, and road users), and explain why a combination of approaches is needed.</div>
+  <details class="ans"><summary>Show how to approach it and a model answer</summary><div class="ans-body">
+    <div class="steps">
+      <p><b>1. Read:</b> four groups are named; you must also explain <i>why combination</i>.</p>
+      <p><b>2. Contextualise:</b> prevention is the preferred strategy because accidents are preventable deaths, especially in children and adolescents.</p>
+      <p><b>3. Break down:</b> one paragraph per group, then the combination argument.</p>
+    </div>
+    <div class="model">
+    <p><b>Young children (home).</b> Poisonings and falls are common causes of death and disability under age 5. Teach parents to identify common poisons and childproof the home, which has been effective in reducing home accidents. Parents' role modelling and teachable moments reinforce safe habits.</p>
+    <p><b>Workers.</b> Social engineering works well: safety-cap medications, smoke detectors, and strict occupational safety guidelines have reduced deaths; in Singapore, the Ministry of Manpower sets rules for safe workplaces.</p>
+    <p><b>Older adults.</b> Falls remain a significant problem. Interventions: dietary and medication review, physical activity to improve balance and mobility, and home changes such as non-slip bathmats and handrails.</p>
+    <p><b>Road users.</b> Roadway maintenance, vehicle safety standards, speed limits and mandatory seat belts. A local study found more than half of children up to 16 were not buckled up in accidents and two-thirds of infants were unrestrained, showing that rules alone do not secure compliance.</p>
+    <p><b>Why a combination.</b> Social engineering (laws, design) is passive and works whatever people intend, but compliance needs <b>health education</b> to build knowledge and <b>psychological intervention</b> to change beliefs and norms (for example the Health Belief Model: people must see their risk and believe the measure works). Different ages need different channels: parents for infants, regulation for workers, environment for older adults.</p>
+    </div>
+  </div></details>
+</div>
+
+<div class="qcard" id="p4">
+  <div class="qhead"><span class="qnum">P4</span><span class="tag tag-pred">Predicted</span><span class="tag tag-lo">LO3 · Condition X</span><span class="marks">25 marks</span></div>
+  <div class="case">Discuss the effects of alcoholism on the individual and on others, and appraise the treatments available.</div>
+  <details class="ans"><summary>Show how to approach it and a model answer</summary><div class="ans-body">
+    <div class="steps">
+      <p><b>1. Read:</b> "effects" (individual <i>and</i> others) plus "appraise" (judge the treatments).</p>
+      <p><b>2. Contextualise:</b> use Condition X: causes briefly, then effects, then treatment.</p>
+      <p><b>3. Break down:</b> individual effects; effects on others; each treatment with a strength and a limitation; conclusion.</p>
+    </div>
+    <div class="model">
+    <p><b>Causes in brief.</b> Genetic factors, family and peer influence, stress, low SES, depression, social isolation and unemployment, with a window of vulnerability around ages 12-21.</p>
+    <p><b>Effects on the individual.</b> Cirrhosis, cancer, deterioration of brain functioning, impulsive sexual behaviour and aggression; physical dependence with tolerance, craving, addiction and withdrawal; inability to function socially and at work.</p>
+    <p><b>Effects on others.</b> Fetal alcohol syndrome, deaths and injuries from drink-driving, aggression towards family, financial strain from lost earnings, and economic costs to society.</p>
+    <p><b>Treatment and appraisal.</b> <b>Detoxification</b> (an intensive inpatient programme of about 28 days) is a necessary first step for severe cases but does not address the causes. <b>CBT</b> (self-monitoring, contingency contracting, coping and stress skills, relaxation, assertiveness, drink-refusal skills) targets the maintaining factors, though it needs sustained effort. <b>Medication</b> (naltrexone, acamprosate) helps prevent relapse alongside CBT. <b>Alcoholics Anonymous</b> gives group support. The key problem is <b>relapse</b>: about 50% within the first 3 months. Outcome depends on severity, SES and environment: up to 68% success in a stable social environment against 18% or less for low-SES drinkers, so treatment must also address social conditions.</p>
+    <p><b>Conclusion.</b> Treatment can work, especially multimodal approaches combining CBT, medication and support with relapse prevention, but results vary with social circumstances, so social and economic support is part of effective treatment.</p>
+    </div>
+  </div></details>
+</div>
+
+<div class="qcard" id="p5">
+  <div class="qhead"><span class="qnum">P5</span><span class="tag tag-pred">Predicted</span><span class="tag tag-lo">LO3 · behaviour + intervention models</span><span class="marks">25 marks</span></div>
+  <div class="case">Explain why adolescents start smoking and appraise the approaches used to prevent it.</div>
+  <details class="ans"><summary>Show how to approach it and a model answer</summary><div class="ans-body">
+    <div class="steps">
+      <p><b>1. Read:</b> two jobs: <i>why they start</i> (behaviour) and <i>appraise prevention</i> (intervention).</p>
+      <p><b>2. Contextualise:</b> adolescents, window of vulnerability, peers.</p>
+      <p><b>3. Break down:</b> reasons by domain; each prevention approach with a strength and limit.</p>
+    </div>
+    <div class="model">
+    <p><b>Why they start.</b> Risky behaviours begin in the window of vulnerability and develop gradually: exposure, experimentation, then frequent use. <b>Peers:</b> adolescents imitate friends to look cool or sophisticated. <b>Family:</b> they are more likely to start if parents smoke or there are family problems. <b>Self-esteem and temperament:</b> smoking to appear tough, or to cope with stress and poor relationships; lower social class adds exposure. <b>Pleasure and autonomy:</b> the thrill, and Self-Determination Theory suggests adolescents smoke to establish a sense of autonomy and control. <b>Biology:</b> nicotine regulation theory (smoking to maintain nicotine and avoid withdrawal) and dopamine-related genetic influences make quitting hard.</p>
+    <p><b>Prevention approaches.</b> Because smoking is highly resistant to change and relapse is common, the "war on smoking" has moved to prevention. (1) <b>Social approach:</b> teaches how to resist peer pressure; strong because it targets the main driver, but depends on practice and peer norms. (2) <b>Behavioural inoculation:</b> exposing teens to weak pro-smoking messages so they build counterarguments; builds resilience but needs follow-up. (3) <b>Life-skills training:</b> improves social skills and self-image, addressing the underlying risk factors, though it is time-intensive. (4) <b>Social engineering:</b> liability litigation, restricted access, heavy taxation and restricted venues; passive and effective at the population level, justified by second-hand smoke, but does not build skills. (5) <b>Mass media</b> campaigns shift attitudes and have prevented some from starting, though they change attitudes more than long-term behaviour.</p>
+    <p><b>Conclusion.</b> No single approach is enough: combine skills-based programmes with environmental controls and family involvement, and frame messages to support adolescents' sense of autonomy.</p>
+    </div>
+  </div></details>
+</div>
+
+<div class="qcard" id="p6">
+  <div class="qhead"><span class="qnum">P6</span><span class="tag tag-pred">Predicted</span><span class="tag tag-lo">LO4 · behaviour + intervention</span><span class="marks">30 marks</span></div>
+  <div class="case">A middle manager faces repeated restructuring at work and is overwhelmed. (a) Explain how stress can affect his health. (b) Evaluate how personality, coping style and coping resources influence his response. (c) Propose a stress management programme.</div>
+  <details class="ans"><summary>Show how to approach it and a model answer</summary><div class="ans-body">
+    <div class="steps">
+      <p><b>1. Read:</b> three parts (a), (b), (c) with different command words.</p>
+      <p><b>2. Contextualise:</b> adult, chronic work stress, possibly with family responsibilities.</p>
+      <p><b>3. Break down:</b> health effects by system; moderators with strengths and limits; programme in phases.</p>
+    </div>
+    <div class="model">
+    <p><b>(a) Effects on health.</b> He appraises the situation as threatening (primary appraisal) and doubts his resources (secondary appraisal). Physiologically, stress raises catecholamines and cortisol: heart rate and blood pressure rise (heart disease and hypertension risk), blood sugar control worsens (cortisol reduces insulin effectiveness), and immune function is lowered by chronic stress, so he gets ill more easily. Psychologically it produces anxiety and depression, and behaviourally he may smoke, drink or overeat to cope.</p>
+    <p><b>(b) Moderators.</b> <b>Personality:</b> high negative affectivity (neuroticism) means distress, symptoms and illness behaviour, with higher cortisol; optimism leads to more problem-focused coping and better outcomes, though unmet expectations can backfire. <b>Control:</b> a sense of control reduces stress, but too much responsibility can be aversive. <b>Coping style:</b> approach coping suits long-term stressors, while avoidance may work for short-term threats but fails if the stress persists. <b>Focus:</b> problem-focused coping fits what he can change (workload planning), emotion-focused coping what he cannot (the restructuring decision itself); neither is better in general. <b>Resources:</b> money, education, employment and social support; support has direct-effect and buffering routes, but must fit his need. Evaluation: these factors interact, so people with similar stressors differ greatly in outcome.</p>
+    <p><b>(c) Programme.</b> <b>Phase 1:</b> identify stressors and record reactions with an ABC diary. <b>Phase 2:</b> acquire skills: relaxation training (breathing, muscle relaxation, guided imagery), mindfulness, cognitive restructuring of catastrophic thoughts, time management and assertiveness, plus healthy habits and exercise. <b>Phase 3:</b> apply and monitor: stress inoculation (a coping plan before known stress points), positive self-talk, goals, and social support at work and home. Coping effectiveness training (classifying the stressor as specific or global) can sharpen the choice of technique.</p>
+    </div>
+  </div></details>
+</div>
+
+<div class="qcard" id="p7">
+  <div class="qhead"><span class="qnum">P7</span><span class="tag tag-pred">Predicted</span><span class="tag tag-lo">LO6 · all age groups</span><span class="marks">25 marks</span></div>
+  <div class="case">Discuss how the psychological issues faced by terminally ill patients, and by the people around them, differ across age groups.</div>
+  <details class="ans"><summary>Show how to approach it and a model answer</summary><div class="ans-body">
+    <div class="flag-note"><b>Gap in your materials:</b> the professor stresses "all age groups", but your slides and Study Unit 3 give only limited age-specific content (causes of death by age, children's understanding of death, terminally ill children, child survivors, the elderly coming to terms with death). Where I go beyond this I say so. Add textbook content on adolescents and older adults before the exam.</div>
+    <div class="steps">
+      <p><b>1. Read:</b> "differ across age groups" means compare, not list. Include the people around the patient.</p>
+      <p><b>2. Contextualise:</b> pick groups: children, young adults, middle age, older adults.</p>
+      <p><b>3. Break down:</b> what dying means at each age, main issues, how to help.</p>
+    </div>
+    <div class="model">
+    <p><b>Children.</b> Children develop an understanding of death between about 5 and 9, so younger children may not grasp its permanence. Therapists let the child lead on what to talk about and use methods such as drawing to reach feelings, and help both child and parents develop coping strategies for their fears. Children are also vulnerable as survivors: they may believe they caused a parent's or sibling's death, or that a parent died because they were "bad"; counselling corrects these thoughts, and preparing the child before the death is more helpful than waiting.</p>
+    <p><b>Young adults.</b> Deaths in young adulthood come from accidents, homicide, suicide and cancer, often unexpectedly, and acceptance may be harder for younger people. Threats to self-concept, social functioning and plans are severe. <span class="beyond">Beyond course materials</span> I have no course detail on adolescents specifically; add textbook content.</p>
+    <p><b>Middle age.</b> Premature death (before about 77) is often from heart attack or stroke. Patients carry family responsibilities, financial worries and role loss; the family needs support with anticipatory grief, communication, and practical concerns. Medical staff help patients use remaining time meaningfully and resolve unfinished business.</p>
+    <p><b>Older adults.</b> The elderly often die of degenerative diseases (heart failure, cancer, stroke) and may have already come to terms with death, so acceptance can be easier, but issues remain: withdrawal from social contact for fear of upsetting others, decisions about continuing treatment, living wills and the right to die, and choosing hospice or home care.</p>
+    <p><b>Across ages.</b> Kübler-Ross's stages (denial, anger, bargaining, depression, acceptance) offer a map but not a rule. Common to all: communication breakdown, the need for informed consent, and survivor grief, which in adults can lower immune function and lead to alcohol and drug abuse, with widowed women often burdened financially and widowed men by household management.</p>
+    </div>
+  </div></details>
+</div>
+
+<div class="qcard" id="p8">
+  <div class="qhead"><span class="qnum">P8</span><span class="tag tag-pred">Predicted</span><span class="tag tag-lo">LO7 · Condition X + models</span><span class="marks">30 marks</span></div>
+  <div class="case">Mr Ismail, 52, has been diagnosed with Type 2 diabetes. He misses medication, eats sweets and does not exercise. (a) Using the Condition X framework, discuss Type 2 diabetes. (b) Explain his non-adherence using a psychological model, and design an intervention.</div>
+  <details class="ans"><summary>Show how to approach it and a model answer</summary><div class="ans-body">
+    <div class="steps">
+      <p><b>1. Read:</b> (a) four parts of Condition X; (b) <i>explain behaviour</i> with a model, then <i>design</i> an intervention.</p>
+      <p><b>2. Contextualise:</b> 52, Type 2, lifestyle-related, poor adherence.</p>
+      <p><b>3. Break down:</b> the four prompts as headings; then HBM; then intervention.</p>
+    </div>
+    <div class="model">
+    <p><b>What and why.</b> In Type 2 diabetes the body becomes resistant to insulin, so glucose stays in the blood (hyperglycaemia). It typically appears after 40 and is strongly linked to obesity, inactivity, high blood pressure and family history. Stress hormones such as cortisol reduce insulin effectiveness.</p>
+    <p><b>Who.</b> Middle-aged and older adults, overweight and inactive people. In Singapore about 1 in 9 adults has diabetes, with higher rates among Indians and Malays than Chinese.</p>
+    <p><b>Symptoms, treatment, coping.</b> Frequent urination, thirst, fatigue, slow wound healing, infections. Management: patient education, reducing sugar and carbohydrate intake, weight control, exercise, medication and glucose monitoring, with annual eye and foot screening. Over-control can cause hypoglycaemia.</p>
+    <p><b>Impact.</b> Complications include blindness, nerve damage, heart disease, foot ulcers and amputation; depression is common; his family is affected by diet changes, caregiving and worry.</p>
+    <p><b>(b) Explaining non-adherence (Health Belief Model).</b> He may perceive a low threat: diabetes is often unnoticed, and complications take years to appear, so there is little immediate incentive. He may doubt that changes help, or find costs (giving up sweets, fatigue, medication burden) too high. Poor adherence is also linked to stress and social pressure to eat, and the model lacks self-efficacy, which research shows is important in diabetes self-management.</p>
+    <p><b>Intervention.</b> <b>Education</b> on how glucose and insulin work and what complications mean for him; <b>CBT</b> focused on self-efficacy, active self-management, problem-solving and stress management, which improve adherence; self-monitoring of food and glucose, stimulus control (sweets out of the home), contingency contracting and self-reinforcement; <b>family and social support</b>; a stage-matched approach (TTM) and motivational interviewing; relapse prevention (a slip is a lapse); screen for depression. Exercise improves insulin sensitivity and lowers glucose for 24 hours or more afterwards.</p>
+    </div>
+  </div></details>
+</div>
+
+<div class="qcard" id="p9">
+  <div class="qhead"><span class="qnum">P9</span><span class="tag tag-pred">Predicted</span><span class="tag tag-lo">LO8 · behaviour + intervention</span><span class="marks">30 marks</span></div>
+  <div class="case">Explain how stress affects immune functioning, discuss factors that moderate this relationship, and describe how psychological interventions can help people living with HIV or cancer.</div>
+  <details class="ans"><summary>Show how to approach it and a model answer</summary><div class="ans-body">
+    <div class="steps">
+      <p><b>1. Read:</b> three parts; the last part allows you to choose HIV <i>or</i> cancer. Pick one and do it well (or both briefly).</p>
+      <p><b>2. Contextualise:</b> psychoneuroimmunology links behavioural, neuroendocrine and immune processes.</p>
+      <p><b>3. Break down:</b> immune basics; stress duration; moderators; chosen condition.</p>
+    </div>
+    <div class="model">
+    <p><b>Immunity and stress.</b> Psychoneuroimmunology studies interactions among behavioural, neuroendocrine and immune processes. <b>Natural immunity</b> (neutrophils, macrophages, natural killer cells) acts quickly; <b>specific immunity</b> is slower, humoral (B cells, against bacteria) and cell-mediated (T cells, against infected cells). <b>Short-term stress</b> (minutes) mobilises natural immunity; a few days of stress such as exam preparation shifts away from cellular towards humoral immunity; <b>chronic stress</b> (for example unemployment) lowers both. The mechanism: stress activates the sympathetic system and the HPA axis, raising cortisol, which reduces white blood cell counts, cytokines and communication within the immune system, and can trigger apoptosis of white blood cells. Depression, bereavement, loneliness, marital conflict and caregiving are all linked to lower immunity.</p>
+    <p><b>Moderators.</b> Social support, optimism and self-efficacy moderate the stress-immune relationship, and relaxation and stress management reduce the adverse effect (elderly adults trained in relaxation showed higher natural killer cell activity). Vulnerable people (older, already ill) are affected more.</p>
+    <p><b>Cancer (chosen condition).</b> Depression is strongly associated with cancer, and distress may impair natural killer cells' ability to destroy tumours, so psychological care matters biologically as well as for comfort. Patients face infections, chemotherapy side effects, depression, social avoidance and strained relationships. Coping through seeking social support, optimism and distancing predicts less distress, and problem- and emotion-focused coping both help. Interventions: <b>CBT</b> for depression, stress, pain and chemotherapy side effects; <b>individual and family therapy</b>; <b>group interventions and support groups</b> that share emotional concerns. Some patients report personal growth.</p>
+    <p><b>If HIV instead.</b> HIV destroys helper T cells and macrophages. Prevention needs more than education (not effective as primary prevention for the uninfected): build self-efficacy, change norms, improve sexual negotiation skills, and use CBT with a motivational component. For those infected, CBT helps with distress and adherence to HAART, and coping skills and social support improve quality of life.</p>
+    </div>
+  </div></details>
+</div>
+
+</main>
+
+<footer>PSY265 professor's guidance and practice questions: a personal study aid built from your professor's slides, seminar slides and Study Units 1-3. The predicted questions are inferences, not the actual paper. Not an official SUSS document.</footer>
+
+<script>
+function setAll(open) {
+  var items = document.querySelectorAll('details.ans');
+  for (var i = 0; i < items.length; i++) {
+    items[i].open = open;
+  }
+}
+</script>
+
+</body>
+</html>
